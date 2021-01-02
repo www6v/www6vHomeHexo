@@ -89,7 +89,7 @@
 <meta property="og:image" content="https://user-images.githubusercontent.com/5608425/66014512-ca1ae900-e501-11e9-93d7-840409a862c5.png">
 <meta property="og:image" content="https://user-images.githubusercontent.com/5608425/66014514-cab37f80-e501-11e9-9be8-a247690b5f9f.png">
 <meta property="article:published_time" content="2016-11-12T15:29:16.000Z">
-<meta property="article:modified_time" content="2020-10-03T11:03:37.540Z">
+<meta property="article:modified_time" content="2021-01-02T13:56:47.617Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="中间件">
 <meta property="article:tag" content="存储">
@@ -431,7 +431,45 @@
 <p><strong>网络抖动</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 表示当某个节点持续 timeout 的时间失联时，才可以认定该节点出现故障</span><br><span class="line">cluster-node-timeout </span><br></pre></td></tr></table></figure>
 <p><strong>槽位迁移感知</strong><br>2个error指令<br>1.<strong>MOVED错误</strong>：  用来纠正槽位<br>  槽的负责权已经从一个节点转移到了另一节点<br>2. <strong>ASK错误， ASKING命令</strong>： 用来临时纠正槽位<br>  只是两个节点在迁移槽的过程中使用的一种临时措施</p>
-<h2 id="二-事务"><a href="#二-事务" class="headerlink" title="二. 事务"></a>二. 事务</h2><p> | 原子性  |    一致性 | 隔离性  | 持久性<br> :-: | :-:     | :-:      | :-:     | :-:<br>redis |一定的原子性，但不支持回滚   | × | √  | 通过一定策略可以保证持久性<br>       |没有进行回滚，不具备原子性.<br>操作之后写AOF日志|aof可以保证，但从应用层看没有回滚和原子性，所以并不能保证一致性| 单线程天然隔离|纯内存(×)<br>RDB Bgsave(√) <br> RDB 异步执行(×)<br>mysql  |√       |√    |√    | √<br>       |undo log|锁   |锁    | redo log</p>
+<h2 id="二-事务"><a href="#二-事务" class="headerlink" title="二. 事务"></a>二. 事务</h2><table>
+<thead>
+<tr>
+<th align="center">-</th>
+<th align="center">原子性</th>
+<th align="center">一致性</th>
+<th align="center">隔离性</th>
+<th align="center">持久性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">redis</td>
+<td align="center">一定的原子性，但不支持回滚</td>
+<td align="center">×</td>
+<td align="center">√</td>
+<td align="center">通过一定策略可以保证持久性</td>
+</tr>
+<tr>
+<td align="center">redis</td>
+<td align="center">没有进行回滚，不具备原子性.<br>操作之后写AOF日志</td>
+<td align="center">aof可以保证，但从应用层看没有回滚和原子性，所以并不能保证一致性</td>
+<td align="center">单线程天然隔离</td>
+<td align="center">纯内存(×)<br>RDB Bgsave(√) <br> RDB 异步执行(×)</td>
+</tr>
+<tr>
+<td align="center">mysql</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="center">mysql</td>
+<td align="center">undo log</td>
+<td align="center">锁</td>
+<td align="center">锁</td>
+<td align="center">redo log</td>
+</tr>
+</tbody></table>
 <h2 id="三-回收策略"><a href="#三-回收策略" class="headerlink" title="三. 回收策略"></a>三. 回收策略</h2><table>
 <thead>
 <tr>
@@ -638,7 +676,7 @@
               
                 <a href="/www6vHomeHexo/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-count">167</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -729,7 +767,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

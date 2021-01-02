@@ -141,6 +141,34 @@
       </tags>
   </entry>
   <entry>
+    <title>Redis可靠性</title>
+    <url>/www6vHomeHexo/2021/01/02/redisReliability/</url>
+    <content><![CDATA[<p></p>
+<a id="more"></a>
+
+<h2 id="一-AOF"><a href="#一-AOF" class="headerlink" title="一. AOF"></a>一. AOF</h2><p>[AOF不是WAL，是先操作，后记录日志。]<br>传统数据库的日志，例如 redo log(重做日志)，记录的是修改后的数据，而AOF里记录的是Redis收到的每一条命令，这些命令是以文本形式保存的。</p>
+<h4 id="两个潜在的风险"><a href="#两个潜在的风险" class="headerlink" title="两个潜在的风险"></a>两个潜在的风险</h4><ol>
+<li>如果刚执行完一个命令，还没有来得及记日志就宕机了，那么这个命令和相应的数 据就有丢失的风险.</li>
+<li>AOF 日志也是在主线程中执行的，如果在把日志文件写入磁盘时，磁盘写压力大，就 会导致写盘很慢，进而导致后续的操作也无法执行了.</li>
+</ol>
+<h4 id="AOF-配置项-appendfsync-的三个可选值。"><a href="#AOF-配置项-appendfsync-的三个可选值。" class="headerlink" title="AOF 配置项 appendfsync 的三个可选值。"></a>AOF 配置项 appendfsync 的三个可选值。</h4><p>Always，同步写回: 每个写命令执行完，立马同步地将日志写回磁盘;<br>Everysec，每秒写回: 每个写命令执行完，只是先把日志写到 AOF 文件的内存缓冲区，每隔一秒把缓冲区中的内容写入磁盘;<br>No，操作系统控制的写回: 每个写命令执行完，只是先把日志写到 AOF 文件的内存缓 冲区，由操作系统决定何时将缓冲区内容写回磁盘。</p>
+<h4 id="AOF-重写Rewrite"><a href="#AOF-重写Rewrite" class="headerlink" title="AOF 重写Rewrite"></a>AOF 重写Rewrite</h4><p>一个拷贝，两处日志</p>
+<img src="/www6vHomeHexo/2021/01/02/redisReliability/redisRewrite.png" class="" title="AOF非阻塞的重写过程">
+
+<h2 id="二-RDB"><a href="#二-RDB" class="headerlink" title="二. RDB"></a>二. RDB</h2><h2 id="三-AOF-RDB混合"><a href="#三-AOF-RDB混合" class="headerlink" title="三. AOF+RDB混合"></a>三. AOF+RDB混合</h2><h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p>《Redis核心技术与实战》 蒋德钧<br>04 | AOF日志:宕机了，Redis如何避免数据丢失?</p>
+]]></content>
+      <categories>
+        <category>分布式</category>
+        <category>存储</category>
+        <category>Redis</category>
+      </categories>
+      <tags>
+        <tag>中间件</tag>
+        <tag>存储</tag>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vim</title>
     <url>/www6vHomeHexo/2020/12/20/vim/</url>
     <content><![CDATA[<p hidden>vim</p>
@@ -6395,7 +6423,45 @@ Linux性能观测工具
 <p><strong>网络抖动</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 表示当某个节点持续 timeout 的时间失联时，才可以认定该节点出现故障</span><br><span class="line">cluster-node-timeout </span><br></pre></td></tr></table></figure>
 <p><strong>槽位迁移感知</strong><br>2个error指令<br>1.<strong>MOVED错误</strong>：  用来纠正槽位<br>  槽的负责权已经从一个节点转移到了另一节点<br>2. <strong>ASK错误， ASKING命令</strong>： 用来临时纠正槽位<br>  只是两个节点在迁移槽的过程中使用的一种临时措施</p>
-<h2 id="二-事务"><a href="#二-事务" class="headerlink" title="二. 事务"></a>二. 事务</h2><p> | 原子性  |    一致性 | 隔离性  | 持久性<br> :-: | :-:     | :-:      | :-:     | :-:<br>redis |一定的原子性，但不支持回滚   | × | √  | 通过一定策略可以保证持久性<br>       |没有进行回滚，不具备原子性.<br>操作之后写AOF日志|aof可以保证，但从应用层看没有回滚和原子性，所以并不能保证一致性| 单线程天然隔离|纯内存(×)<br>RDB Bgsave(√) <br> RDB 异步执行(×)<br>mysql  |√       |√    |√    | √<br>       |undo log|锁   |锁    | redo log</p>
+<h2 id="二-事务"><a href="#二-事务" class="headerlink" title="二. 事务"></a>二. 事务</h2><table>
+<thead>
+<tr>
+<th align="center">-</th>
+<th align="center">原子性</th>
+<th align="center">一致性</th>
+<th align="center">隔离性</th>
+<th align="center">持久性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">redis</td>
+<td align="center">一定的原子性，但不支持回滚</td>
+<td align="center">×</td>
+<td align="center">√</td>
+<td align="center">通过一定策略可以保证持久性</td>
+</tr>
+<tr>
+<td align="center">redis</td>
+<td align="center">没有进行回滚，不具备原子性.<br>操作之后写AOF日志</td>
+<td align="center">aof可以保证，但从应用层看没有回滚和原子性，所以并不能保证一致性</td>
+<td align="center">单线程天然隔离</td>
+<td align="center">纯内存(×)<br>RDB Bgsave(√) <br> RDB 异步执行(×)</td>
+</tr>
+<tr>
+<td align="center">mysql</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="center">mysql</td>
+<td align="center">undo log</td>
+<td align="center">锁</td>
+<td align="center">锁</td>
+<td align="center">redo log</td>
+</tr>
+</tbody></table>
 <h2 id="三-回收策略"><a href="#三-回收策略" class="headerlink" title="三. 回收策略"></a>三. 回收策略</h2><table>
 <thead>
 <tr>
