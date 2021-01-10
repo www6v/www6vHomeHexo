@@ -2230,7 +2230,52 @@ serverless和serverful的对比
     <content><![CDATA[<p></p>
 <a id="more"></a>
 
-<p>| 块存储| 文件存储 |对象存储<br>:-:|:-:|:-:|:-:<br>概念|本地存储| 有目录树结构| 将数据和元数据当做一个对象<br>分布式| ×| √ | √<br>文件大小| 大小都可以| 适合大文件| 适合各种大小<br>接口| Diver，kernel module| POSIX<br> NFS/SMB协议 | Restful API<br>典型技术 | SAN | HDFS、GFS<br>  NAS存储  | Swift， Amazion S3， 阿里OSS<br>场景|  云主机本地存储 | 共享存储 | 音频，视频，图片。 <br> 网站资源动静分离; 网盘</p>
+<table>
+<thead>
+<tr>
+<th align="center">/</th>
+<th align="center">块存储</th>
+<th align="center">文件存储</th>
+<th align="center">对象存储</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">概念</td>
+<td align="center">本地存储</td>
+<td align="center">有目录树结构</td>
+<td align="center">将数据和元数据当做一个对象</td>
+</tr>
+<tr>
+<td align="center">分布式</td>
+<td align="center">×</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="center">文件大小</td>
+<td align="center">大小都可以</td>
+<td align="center">适合大文件</td>
+<td align="center">适合各种大小</td>
+</tr>
+<tr>
+<td align="center">接口</td>
+<td align="center">Diver，kernel module</td>
+<td align="center">POSIX<br> NFS/SMB协议</td>
+<td align="center">Restful API</td>
+</tr>
+<tr>
+<td align="center">典型技术</td>
+<td align="center">SAN</td>
+<td align="center">HDFS、GFS<br>  NAS存储</td>
+<td align="center">Swift， Amazion S3， 阿里OSS</td>
+</tr>
+<tr>
+<td align="center">场景</td>
+<td align="center">云主机本地存储</td>
+<td align="center">共享存储</td>
+<td align="center">音频，视频，图片。 <br> 网站资源动静分离; 网盘</td>
+</tr>
+</tbody></table>
 <h2 id="块存储"><a href="#块存储" class="headerlink" title="块存储"></a>块存储</h2><p>必须连接到相关的虚拟机，才能访问它里面的数据。</p>
 <h2 id="对象存储"><a href="#对象存储" class="headerlink" title="对象存储"></a>对象存储</h2><ul>
 <li>通过高层的 API 和 SDK 来和它进行交互</li>
