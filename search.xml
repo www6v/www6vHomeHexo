@@ -141,6 +141,71 @@
       </tags>
   </entry>
   <entry>
+    <title>Redis数据结构</title>
+    <url>/www6vHomeHexo/2021/05/05/redisDataStructure/</url>
+    <content><![CDATA[<p></p>
+<a id="more"></a>
+
+
+<h2 id="数据结构和实现"><a href="#数据结构和实现" class="headerlink" title="数据结构和实现"></a>数据结构和实现</h2><p><img src="redisDataStructure.png" alt="redis 数据结构"></p>
+<hr>
+<table>
+<thead>
+<tr>
+<th align="center">数据结构</th>
+<th align="center">基础</th>
+<th align="center">优化</th>
+<th align="center">特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">String</td>
+<td align="center">SDS</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">List</td>
+<td align="center">双向列表</td>
+<td align="center">压缩列表</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Hash</td>
+<td align="center">hash表</td>
+<td align="center">压缩列表</td>
+<td align="center">渐进式rehash</td>
+</tr>
+<tr>
+<td align="center">SortedSet</td>
+<td align="center">跳表</td>
+<td align="center">压缩列表</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Set</td>
+<td align="center">整数数组</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<hr>
+<p><img src="Complex.png" alt="数据结构的时间复杂度"></p>
+<h2 id="全局hash表-amp-amp-渐进式-rehash"><a href="#全局hash表-amp-amp-渐进式-rehash" class="headerlink" title="全局hash表 &amp;&amp; 渐进式 rehash"></a>全局hash表 &amp;&amp; 渐进式 rehash</h2><p><img src="globalHash.png" alt="全局Hash表"></p>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p>02 | 数据结构:快速的Redis有哪些慢操作?</p>
+]]></content>
+      <categories>
+        <category>分布式</category>
+        <category>存储</category>
+        <category>Redis</category>
+      </categories>
+      <tags>
+        <tag>中间件</tag>
+        <tag>存储</tag>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Redis可靠性</title>
     <url>/www6vHomeHexo/2021/01/02/redisReliability/</url>
     <content><![CDATA[<p></p>
