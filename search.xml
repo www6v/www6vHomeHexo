@@ -141,6 +141,43 @@
       </tags>
   </entry>
   <entry>
+    <title>K8S 弃用Docker</title>
+    <url>/www6vHomeHexo/2021/06/01/k8sAbandonDocker/</url>
+    <content><![CDATA[<p></p>
+<a id="more"></a>
+
+<h3 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h3><img src="/www6vHomeHexo/2021/06/01/k8sAbandonDocker/img1.png" class="" title="CRI">
+
+
+<p>如果以 kubelet 调用 CRI 为起点，OCI 的 runC 调用为终点，三种模式经历的可执行程序分别是：</p>
+<ul>
+<li>dockershim 模式：dockershim(*)-&gt;dockd-&gt;containerd-&gt;containerd-shim</li>
+<li>cri-containerd 模式：cri-containerd(*)-&gt; containerd-&gt;containerd-shim</li>
+<li>cri-o 模式：cri-o</li>
+</ul>
+<p>RedHat 推崇的 cri-o  → Podman</p>
+<h3 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h3><img src="/www6vHomeHexo/2021/06/01/k8sAbandonDocker/img2.jpeg" class="" title="CRI">
+
+<p>容器引擎可选的替代方案大概有以下几种：</p>
+<ul>
+<li>containerd </li>
+<li>CRI-O  → Podman, Red Hat</li>
+<li>gVisor  → “guest 内核”层</li>
+<li>kata-containers  →  安全</li>
+<li>Nabla</li>
+</ul>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p><a href="https://www.infoq.cn/article/VasFWOChD6JoL5avhfAz">https://www.infoq.cn/article/VasFWOChD6JoL5avhfAz</a><br><a href="https://www.zhihu.com/question/433184969">https://www.zhihu.com/question/433184969</a></p>
+]]></content>
+      <categories>
+        <category>分布式</category>
+        <category>云原生</category>
+        <category>Kubernetes</category>
+      </categories>
+      <tags>
+        <tag>Kubenetes</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Redis数据结构</title>
     <url>/www6vHomeHexo/2021/05/05/redisDataStructure/</url>
     <content><![CDATA[<p></p>
