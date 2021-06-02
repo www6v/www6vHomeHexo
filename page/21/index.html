@@ -283,6 +283,185 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/www6vHomeHexo/2017/10/17/slowRT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/www6vHomeHexo/2017/10/17/slowRT/" itemprop="url">服务慢响应超时排查</a></h1>
+        
+
+        <div class="post-meta">
+
+
+ 
+
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-17T23:36:34+08:00">
+                2017-10-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">分布式</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E5%88%86%E5%B8%83%E5%BC%8F/%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86/" itemprop="url" rel="index">
+                    <span itemprop="name">服务治理</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E5%88%86%E5%B8%83%E5%BC%8F/%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86/%E6%85%A2%E5%93%8D%E5%BA%94%E8%B6%85%E6%97%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">慢响应超时</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <img src="/www6vHomeHexo/2017/10/17/slowRT/slowRT.jpg" class="" title="服务慢响应排查">
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h2><ol>
+<li> <a target="_blank" rel="noopener" href="http://calvin1978.blogcn.com/?p=1661">在你的代码之外，服务时延过长的三个追查方向(上) (下)</a> 江南白衣</li>
+<li>《Release It!: Design and Deploy Production-Ready Software》 Michael Nygard</li>
+<li>关于TCP 半连接队列和全连接队列 阿里中间件博客</li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/uUsGwEaK4bomtXfJnW1TTQ">下次遇到嚣张的候选人就先这么问：系统变慢了你怎么搞？</a><br>fullgc， cpu，线程进入WAITING状态（压测）</li>
+<li><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/705634?spm=a2c6h.12873622.0.0.40826ec89ETaDy">时延敏感业务低概率超时问题分析</a> 阿里月宾  good<br>网络原因； 排查方式， 循环抓包； 观察是否有丢包重传</li>
+<li><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/697773">记一次对网络抖动经典案例的分析</a> 阿里云-江冉 good<br>根因： dentry在slab中的占用量高  解决方案：释放缓存</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/www6vHomeHexo/2017/09/25/mybatisBug/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1116,180 +1295,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/www6vHomeHexo/2017/04/23/fileIO/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="www6v的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/www6vHomeHexo/2017/04/23/fileIO/" itemprop="url">文件IO总结</a></h1>
-        
-
-        <div class="post-meta">
-
-
- 
-
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-23T22:29:52+08:00">
-                2017-04-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/www6vHomeHexo/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" itemprop="url" rel="index">
-                    <span itemprop="name">分布式</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/www6vHomeHexo/categories/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%AD%98%E5%82%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">存储</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/www6vHomeHexo/categories/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%AD%98%E5%82%A8/%E6%96%87%E4%BB%B6IO/" itemprop="url" rel="index">
-                    <span itemprop="name">文件IO</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <img src="/www6vHomeHexo/2017/04/23/fileIO/fileIO.jpg" class="" title="文件IO总结">
-
-
-<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ol>
-<li>文件IO操作的最佳实践 kirito-moe</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1340,7 +1345,7 @@
               
                 <a href="/www6vHomeHexo/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">169</span>
+                  <span class="site-state-item-count">170</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

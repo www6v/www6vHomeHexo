@@ -283,6 +283,171 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/www6vHomeHexo/2018/04/07/EAI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/www6vHomeHexo/2018/04/07/EAI/" itemprop="url">应用集成方式</a></h1>
+        
+
+        <div class="post-meta">
+
+
+ 
+
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-07T10:01:24+08:00">
+                2018-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">架构</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E6%9E%B6%E6%9E%84/%E5%BA%94%E7%94%A8%E9%9B%86%E6%88%90/" itemprop="url" rel="index">
+                    <span itemprop="name">应用集成</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="一-企业应用之间主要有4中集成方式"><a href="#一-企业应用之间主要有4中集成方式" class="headerlink" title="一. 企业应用之间主要有4中集成方式:"></a>一. 企业应用之间主要有4中集成方式:</h2><h3 id="1-文件传输-由各个应用产生文件-其中包含提供其它应用使用的信息"><a href="#1-文件传输-由各个应用产生文件-其中包含提供其它应用使用的信息" class="headerlink" title="1. 文件传输: 由各个应用产生文件, 其中包含提供其它应用使用的信息."></a>1. 文件传输: 由各个应用产生文件, 其中包含提供其它应用使用的信息.</h3><p>特征:　内部数据模式自由(schema free)<br>优势: 1. 内部细节透明 2. 松耦合 3. 标准文件格式支持,如xml, json等.<br>劣势: 1. 更新慢, 数据不同步,  数据过时 2. 数据不完整, 数据不完全正确时, 数据不一致问题解决困难.3. 产生大量小文件时, 昂贵且不可靠. 4. 语义不一致<br>适用于批处理.</p>
+<h3 id="2-共享数据库-把应用的数据存储在一个共享数据库中来集成应用-并定制数据库模式来处理不同应用的各种需求"><a href="#2-共享数据库-把应用的数据存储在一个共享数据库中来集成应用-并定制数据库模式来处理不同应用的各种需求" class="headerlink" title="2. 共享数据库:　把应用的数据存储在一个共享数据库中来集成应用,　并定制数据库模式来处理不同应用的各种需求."></a>2. 共享数据库:　把应用的数据存储在一个共享数据库中来集成应用,　并定制数据库模式来处理不同应用的各种需求.</h3><p>特征:　数据有模式(schema)<br>优势:  1. 提供模型一致性 2. 通过事务管理数据一致性 3. 共享数据, 避免语义不一致问题.<br>劣势:  1. 统一的数据库模式难设计. 模式改变,　应用也要改变. 2. 遗留系统很难提供一个可扩展的数据库模式供新的应用使用.  3.　性能瓶颈(单点访问)  4. 数据分布迁移困难. 5.应用和数据库紧耦合.<br>可作为新老系统的集成和改造的候选方案</p>
+<h3 id="3-远程调用-应用公开提供过程-并能够被远程调用-应用通过调用这些过程来执行操作并交换数据"><a href="#3-远程调用-应用公开提供过程-并能够被远程调用-应用通过调用这些过程来执行操作并交换数据" class="headerlink" title="3. 远程调用:　应用公开提供过程, 并能够被远程调用, 应用通过调用这些过程来执行操作并交换数据."></a>3. 远程调用:　应用公开提供过程, 并能够被远程调用, 应用通过调用这些过程来执行操作并交换数据.</h3><p>特征:　公开外部接口<br>优势:　1. 提供语义一致性 2. 接口多样化, 有可兼容性并能扩展 3. 技术实现广泛, 如Java, .Net, CORBA, Web Services  4. 接口内部数据完整性和透明性.<br>劣势:　１.　性能瓶颈,　不可靠(与本地访问相比)　２.　应用之间紧耦合, 可能会有时序上的耦合</p>
+<h3 id="4-消息传递-应用连接到一个公共的消息传递系统上-并通过消息来交换数据和调用行为"><a href="#4-消息传递-应用连接到一个公共的消息传递系统上-并通过消息来交换数据和调用行为" class="headerlink" title="4. 消息传递:　应用连接到一个公共的消息传递系统上,　并通过消息来交换数据和调用行为."></a>4. 消息传递:　应用连接到一个公共的消息传递系统上,　并通过消息来交换数据和调用行为.</h3><p>特征:　隐式调用, 完全隐藏接口<br>优势:　1. 松耦合  2. 快速响应 3. 可靠  3. 通过消息转换解决语义不一致(实现方式: DDD 防腐层, ESB提供消息转换功能 )<br>劣势:  1. 设计, 开发复杂(消息消费能力不够, 会引起消息的大量堆叠); 测试, 调试困难(可通过同步方式来测试) 2. 数据不完全同步  3. 有学习曲线</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/www6vHomeHexo/2018/04/07/EAI/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/www6vHomeHexo/2018/03/17/DomainLogicAndSQL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1115,185 +1280,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/www6vHomeHexo/2017/10/17/slowRT/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="www6v的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/www6vHomeHexo/2017/10/17/slowRT/" itemprop="url">服务慢响应超时排查</a></h1>
-        
-
-        <div class="post-meta">
-
-
- 
-
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-17T23:36:34+08:00">
-                2017-10-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/www6vHomeHexo/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" itemprop="url" rel="index">
-                    <span itemprop="name">分布式</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/www6vHomeHexo/categories/%E5%88%86%E5%B8%83%E5%BC%8F/%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86/" itemprop="url" rel="index">
-                    <span itemprop="name">服务治理</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/www6vHomeHexo/categories/%E5%88%86%E5%B8%83%E5%BC%8F/%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86/%E6%85%A2%E5%93%8D%E5%BA%94%E8%B6%85%E6%97%B6/" itemprop="url" rel="index">
-                    <span itemprop="name">慢响应超时</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <img src="/www6vHomeHexo/2017/10/17/slowRT/slowRT.jpg" class="" title="服务慢响应排查">
-
-
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h2><ol>
-<li> <a target="_blank" rel="noopener" href="http://calvin1978.blogcn.com/?p=1661">在你的代码之外，服务时延过长的三个追查方向(上) (下)</a> 江南白衣</li>
-<li>《Release It!: Design and Deploy Production-Ready Software》 Michael Nygard</li>
-<li>关于TCP 半连接队列和全连接队列 阿里中间件博客</li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/uUsGwEaK4bomtXfJnW1TTQ">下次遇到嚣张的候选人就先这么问：系统变慢了你怎么搞？</a><br>fullgc， cpu，线程进入WAITING状态（压测）</li>
-<li><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/705634?spm=a2c6h.12873622.0.0.40826ec89ETaDy">时延敏感业务低概率超时问题分析</a> 阿里月宾  good<br>网络原因； 排查方式， 循环抓包； 观察是否有丢包重传</li>
-<li><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/697773">记一次对网络抖动经典案例的分析</a> 阿里云-江冉 good<br>根因： dentry在slab中的占用量高  解决方案：释放缓存</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1344,7 +1330,7 @@
               
                 <a href="/www6vHomeHexo/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">169</span>
+                  <span class="site-state-item-count">170</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -141,6 +141,58 @@
       </tags>
   </entry>
   <entry>
+    <title>Kubernetes安装</title>
+    <url>/www6vHomeHexo/2021/06/02/k8sDeploy/</url>
+    <content><![CDATA[<p></p>
+<a id="more"></a>
+
+
+<table>
+<thead>
+<tr>
+<th align="center">安装方式</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ansible安装</td>
+<td align="center"><a href="https://github.com/easzlab/kubeasz">https://github.com/easzlab/kubeasz</a><br><a href="https://github.com/easzlab/kubeasz/blob/master/docs/setup/quickStart.md">https://github.com/easzlab/kubeasz/blob/master/docs/setup/quickStart.md</a></td>
+</tr>
+<tr>
+<td align="center">kubeadm安装</td>
+<td align="center"><a href="https://github.com/opsnull/follow-me-install-kubernetes-cluster">https://github.com/opsnull/follow-me-install-kubernetes-cluster</a></td>
+</tr>
+<tr>
+<td align="center">minikube安装</td>
+<td align="center"><a href="https://minikube.sigs.k8s.io/docs/start/">https://minikube.sigs.k8s.io/docs/start/</a></td>
+</tr>
+</tbody></table>
+<code>
+(ansible control machine)  
+st-arch-renault-redis-1  
+
+<p>-集群<br>work-arch-renault-portal-1    10.100.140.227   master<br>work-arch-renault-portal-2    10.100.140.228.  master<br>work-arch-renault-redis-1     10.100.140.229   node<br>work-arch-renault-redis-2     10.100.140.230.  node<br>work-arch-renault-redis-3     10.100.140.231.  node<br>work-arch-renault-redis-4     10.100.140.232.  node<br>work-arch-kv-redis-1          172.16.28.92     append<br>work-arch-kv-redis-2          172.16.28.93     append<br>work-arch-kv-redis-3          172.16.28.94     append<br></code></p>
+<h3 id="一-新建集群-参考2"><a href="#一-新建集群-参考2" class="headerlink" title="一.  新建集群 - 参考2"></a>一.  新建集群 - 参考2</h3><h3 id="安装k8s包到本地目录-bin-down"><a href="#安装k8s包到本地目录-bin-down" class="headerlink" title="安装k8s包到本地目录 /bin /down"></a>安装k8s包到本地目录 /bin /down</h3><code>
+export release=2.2.4  
+
+<p>curl -C- -fLO –retry 3 <a href="https://github.com/easzlab/kubeasz/releases/">https://github.com/easzlab/kubeasz/releases/</a><br>download/$&#123;release&#125;/easzup<br>chmod +x ./easzup  </p>
+<p>./easzup -D<br>./easzup -S<br></code></p>
+<h3 id="step1"><a href="#step1" class="headerlink" title="step1"></a>step1</h3><code>
+(CentOS7)   
+$ yum install git python-pip -y    
+
+<p>-pip安装ansible(国内如果安装太慢可以直接用pip阿里云加速)<br>$ pip install pip –upgrade -i <a href="https://mirrors.aliyun.com/pypi/simple/">https://mirrors.aliyun.com/pypi/simple/</a><br>$ pip install ansible==2.6.18 netaddr==0.7.19 -i <a href="https://mirrors.aliyun.com/pypi/simple/">https://mirrors.aliyun.com/pypi/simple/</a><br></code></p>
+]]></content>
+      <categories>
+        <category>分布式</category>
+        <category>云原生</category>
+        <category>Kubernetes</category>
+      </categories>
+      <tags>
+        <tag>Kubenetes</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>K8S 弃用Docker</title>
     <url>/www6vHomeHexo/2021/06/01/k8sAbandonDocker/</url>
     <content><![CDATA[<p></p>
