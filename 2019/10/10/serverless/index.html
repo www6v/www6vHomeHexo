@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Serverless">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2019/10/10/serverless/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/66545940-5fefed00-eb6e-11e9-85d8-3279f6db2d61.jpg">
+<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/66544428-af341e80-eb6a-11e9-9a82-527cb0268300.jpg">
+<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/66989009-1d8e5900-f0f6-11e9-9902-2efb75d27da7.png">
+<meta property="article:published_time" content="2019-10-10T02:50:53.000Z">
+<meta property="article:modified_time" content="2023-02-25T02:57:47.654Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="serverless">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/5608425/66545940-5fefed00-eb6e-11e9-85d8-3279f6db2d61.jpg">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2019/10/10/serverless/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Serverless | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2019/10/10/serverless/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Serverless
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-10 10:50:53" itemprop="dateCreated datePublished" datetime="2019-10-10T10:50:53+08:00">2019-10-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-25 10:57:47" itemprop="dateModified" datetime="2023-02-25T10:57:47+08:00">2023-02-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">云原生</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/serverless/" itemprop="url" rel="index"><span itemprop="name">serverless</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p></p>
+<span id="more"></span>
+
+<h2><span id="serverless定义">Serverless定义</span><a href="#serverless定义" class="header-anchor">#</a></h2><p>Serverless &#x3D; Faas + Baas[5]</p>
+<blockquote>
+<p>Faas: 相对通用的形式表示无服务计算<br>Faas例子: Cloud Functions</p>
+</blockquote>
+<blockquote>
+<p>Baas:特定领域的、高度优化的无服务计算实现<br>Baas例子: S3(Object Storage), DynamoDB（Key-Value Database），Cloud Pub&#x2F;Sub (Messaging) </p>
+</blockquote>
+<div style="text-align: center; width: 70%; height: 70%"> 
+
+<p><img src="https://user-images.githubusercontent.com/5608425/66545940-5fefed00-eb6e-11e9-85d8-3279f6db2d61.jpg" alt="serverless"><br>Serverless</p>
+</div>
+
+
+
+<h2><span id="serverless和serverful的对比">Serverless和Serverful的对比</span><a href="#serverless和serverful的对比" class="header-anchor">#</a></h2><div style="text-align: center;">
+
+<p><img src="https://user-images.githubusercontent.com/5608425/66544428-af341e80-eb6a-11e9-9a82-527cb0268300.jpg" alt="serverless-serverful"><br>serverless和serverful的对比</p>
+</div>
+
+<h5><span id="serverless">Serverless</span><a href="#serverless" class="header-anchor">#</a></h5><ol>
+<li>事件驱动的</li>
+<li><strong>计算与存储解耦</strong><br>状态存储在外部（Baas） </li>
+<li>资源受限的</li>
+<li><strong>以实际使用的资源量付费，而不是根据分配的资源数</strong></li>
+<li><strong>执行代码而不需要管理资源分配</strong><br>自动提供如下服务:<br>选择实例、扩缩容、部署、容错、监控、日志、安全补丁</li>
+<li><strong>自动扩缩容</strong><br>有负载时自动<strong>扩容</strong>;<br>没有负载的情况下将资源一直<strong>缩容</strong>到零;</li>
+<li>多租户，安全隔离</li>
+</ol>
+<h2><span id="使用的场景">使用的场景</span><a href="#使用的场景" class="header-anchor">#</a></h2><p><a target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/65565.html">Serverless应用场景</a> 阿里云文档 未</p>
+<h5><span id="事件驱动以及响应式架构">事件驱动以及响应式架构</span><a href="#事件驱动以及响应式架构" class="header-anchor">#</a></h5><ul>
+<li>IoT物联网,低频请求;      </li>
+<li>视频转码;</li>
+<li>定制图片;</li>
+<li>抽取数据  ETL 大数据;</li>
+<li>人脸识别;</li>
+<li><strong>固定时间触发</strong>计算资源利用低的业务;<br>夜间或者服务空闲时间来处理繁忙时候的交易数据(大数据)<br>运行批量数据，来生成数据报表(大数据)</li>
+<li>定制事件<br>用户注册时发邮件验证邮箱地址</li>
+</ul>
+<h5><span id="流量突发场景">流量突发场景</span><a href="#流量突发场景" class="header-anchor">#</a></h5><ul>
+<li>短周期内的<strong>流量峰值</strong><br>外卖企业的用餐时期负载高峰，<br>安防行业的负载高峰是夜间</li>
+</ul>
+<h5><span id="大数据处理">大数据处理</span><a href="#大数据处理" class="header-anchor">#</a></h5><h2><span id="产品-hosted-platform-0">产品- Hosted Platform [0]</span><a href="#产品-hosted-platform-0" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th>Serverless , Function as a Service(Faas)</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AWS Lambda</td>
+<td></td>
+</tr>
+<tr>
+<td>Google Cloud Functions</td>
+<td></td>
+</tr>
+<tr>
+<td>阿里 Function Compute 2.0</td>
+<td><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/719694">函数计算 2.0 重磅发布，Serverless Computing 开启新篇章</a><br>  开发工具 fun，vscode插件</td>
+</tr>
+<tr>
+<td>Azure Funcions</td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Serverless Container[6] , Container as a Service(Caas)</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AWS Fargate</td>
+<td></td>
+</tr>
+<tr>
+<td>Azure ACI</td>
+<td></td>
+</tr>
+<tr>
+<td>华为CCI</td>
+<td></td>
+</tr>
+<tr>
+<td>阿里 Serverless Kubernetes、本身是Kubernetes集群</td>
+<td></td>
+</tr>
+<tr>
+<td>容器服务 ACS</td>
+<td><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/59483">大道至简 - 基于Docker的Serverless探索之旅</a> 产品</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>面向应用的 Serverless 服务, Paas</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://tech.antfin.com/products/SAS">Serverless 应用服务(蚂蚁金服)</a></td>
+<td><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/713292">Serverless 落地挑战与蚂蚁金服实践</a> 产品 <br>SAS , 兼容标准Knative， toB不toC</td>
+</tr>
+<tr>
+<td>Serverless 应用引擎（阿里云） <br> SAE是DevOps最佳实践</td>
+<td><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/782846?utm_content=g_1000253942">Serverless 时代 DevOps 的最佳打开方式</a>  未<br>   Serverless 应用引擎（SAE）是阿里云 Serverless 产品矩阵中提供的 DevOps 最佳实践。<br>   SAE 是一款面向应用 Serverless PaaS 平台，支持 Spring Cloud、Dubbo、HSF 等主流的应用开发框架。</td>
+</tr>
+<tr>
+<td>EDAS Serverless , Rpc产品</td>
+<td><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/683675">0基础快速入门运维-EDAS Serverless(FAAS) 产品评测</a></td>
+</tr>
+</tbody></table>
+<h2><span id="产品-开源产品-0">产品- 开源产品 [0]</span><a href="#产品-开源产品-0" class="header-anchor">#</a></h2><ul>
+<li>Installable Platform<ul>
+<li>Apache OpenWhisk [IBM]</li>
+<li>Knative[Faas + Caas] ***   </li>
+<li>kubeless</li>
+<li>Fission</li>
+<li>OpenFaaS</li>
+<li>OpenFunction[Kubesphere]</li>
+</ul>
+</li>
+<li>Framework<ul>
+<li>dapr ***</li>
+<li>EventMesh</li>
+<li>serverless</li>
+<li>AWS SAM</li>
+<li>Spring Cloud Function</li>
+</ul>
+</li>
+<li>Tool<ul>
+<li>Serverless Devs [99]<br>[Ali Serverless工具链项目-多云,所见即所得]</li>
+</ul>
+</li>
+</ul>
+<div style="text-align: center; width: 80%; height: 80%">
+
+<p><img src="https://user-images.githubusercontent.com/5608425/66989009-1d8e5900-f0f6-11e9-9902-2efb75d27da7.png" alt="caas-faas"></p>
+</div>
+
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ul>
+<li>0.<a target="_blank" rel="noopener" href="https://landscape.cncf.io/serverless">CNCF Cloud Native Interactive Landscape</a></li>
+<li>99.<a target="_blank" rel="noopener" href="https://developer.aliyun.com/live/245624">Serverless Devs-让你像使用手机一样玩转 Serverless</a>   v </li>
+<li>5.<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/7qJUzf8xrGihPPLsvwPEig">无服务计算的未来和挑战: A Berkeley View on Serverless Computing</a>  ***</li>
+<li>6.<a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/574222">当我们在聊Serverless时你应该知道这些</a>  阿里 竹涧， 场景 产品 架构</li>
+<li>8.<a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/717318">Serverless 与容器决战在即？有了弹性伸缩就不一样了</a>  阿里 莫源 未   </li>
+<li>16.<a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/78172">15+文章详细讲述Serverless：开启函数计算时代！（含PDF下载）</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2019/10/10/serverless/" title="Serverless">https://www6v.github.io/www6vHomeHexo/2019/10/10/serverless/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/serverless/" rel="tag"># serverless</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2019/10/08/storage/" rel="prev" title="存储">
+      <i class="fa fa-chevron-left"></i> 存储
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2019/10/12/crashDetect/" rel="next" title="宕机检测-Lease、心跳">
+      宕机检测-Lease、心跳 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">355</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">226</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">121</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

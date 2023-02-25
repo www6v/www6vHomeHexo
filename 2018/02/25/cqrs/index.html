@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="CQRS全称是指Command Query ResponsibilitySeparation.CQRS的核心是一个简单的概念, 使用一个模型来读信息, 使用另一个模型来更新信息. 它是CQS原理在各个软件领域中的应用而产生的一种模式. CQRS把整个系统分成两个部分: 命令部分和查询部分. Command部分关注更新,  Query部分关注读取.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CQRS 简介和案例分析">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2018/02/25/cqrs/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:description" content="CQRS全称是指Command Query ResponsibilitySeparation.CQRS的核心是一个简单的概念, 使用一个模型来读信息, 使用另一个模型来更新信息. 它是CQS原理在各个软件领域中的应用而产生的一种模式. CQRS把整个系统分成两个部分: 命令部分和查询部分. Command部分关注更新,  Query部分关注读取.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www6v.github.io/www6vHome/cqrs.files/image001.jpg">
+<meta property="og:image" content="http://www6v.github.io/www6vHome/cqrs.files/image002.jpg">
+<meta property="og:image" content="http://www6v.github.io/www6vHome/cqrs.files/image003.jpg">
+<meta property="og:image" content="http://www6v.github.io/www6vHome/cqrs.files/image004.png">
+<meta property="og:image" content="http://www6v.github.io/www6vHome/cqrs.files/image005.jpg">
+<meta property="og:image" content="http://www6v.github.io/www6vHome/cqrs.files/image006.jpg">
+<meta property="article:published_time" content="2018-02-25T02:00:12.000Z">
+<meta property="article:modified_time" content="2023-02-25T02:57:45.801Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="CQRS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www6v.github.io/www6vHome/cqrs.files/image001.jpg">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2018/02/25/cqrs/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CQRS 简介和案例分析 | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2018/02/25/cqrs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CQRS 简介和案例分析
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-25 10:00:12" itemprop="dateCreated datePublished" datetime="2018-02-25T10:00:12+08:00">2018-02-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-25 10:57:45" itemprop="dateModified" datetime="2023-02-25T10:57:45+08:00">2023-02-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">架构</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E6%9E%B6%E6%9E%84/%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">应用架构</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E6%9E%B6%E6%9E%84/%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/CQRS/" itemprop="url" rel="index"><span itemprop="name">CQRS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>CQRS全称是指Command Query ResponsibilitySeparation.CQRS的核心是一个简单的概念, 使用一个模型来读信息, 使用另一个模型来更新信息. 它是CQS原理在各个软件领域中的应用而产生的一种模式. CQRS把整个系统分成两个部分: 命令部分和查询部分. Command部分关注更新,  Query部分关注读取.</p>
+<span id="more"></span> 
+
+<p>其实你可能早就接触过CQRS相关的概念,熟悉数据库的读者不会对索引陌生.<br>Query部分:如果数据表有索引,  读数据表更加的快速.<br>Command部分:如果数据表有index,update表时需要更新index, 所以update更加的慢.</p>
+<p>本文主要从CQRS在高伸缩性系统和领域驱动设计(DDD)两方面的应用阐述其优势。</p>
+<p>   CQRS的出现有以下两种驱动力</p>
+<ol>
+<li>多参与者协作的环境<br>多个参与者会使用和修改相同的数据集.  参与者可以是行为人用户, 或者是软件.</li>
+<li>数据总是过时的<br>在多协作的环境中, 数据一旦显示给了一个用户, 相同的数据可能已经被其它的参与者修改了, 说明数据已经过时了.<br>在哲学领域有一个命题, 你是否能踏进同一条河两次? 在多协作的环境中也有类似的问题, 你看到的数据总是过时的.</li>
+</ol>
+<p><em><strong>案例</strong></em>:<br>在查询出还有电影场次后,  你开始填自己的记录信息, 这时可能别人已经订购了你已经选择的座位, 或者这个时候, 一个事件到达银行说你信用卡有拖欠, 但最后你提交了这次订购，结果订购失败。</p>
+<h2><span id="cqrs与模型">CQRS与模型</span><a href="#cqrs与模型" class="header-anchor">#</a></h2><p>在与command模型的交互中产生了事件,  顺序事件的累积可以捕获状态的所有变化, 这种交互模式称为事件源(Event Sourcing) .</p>
+<p>事件源(Event Sourcing)使得系统有了审计的功能, 回放事件可以使系统恢复到某个时间点的状态. 事件源(Event Sourcing)使command部分引入了异步的机制, 队列中的消息不需要马上处理, event handler可以异步的消费事件.当commands部分产生错误后, 直接向客户端回个错误并不友好, 这时可以引入回滚和重试机制.  在系统恢复正常之后, 队列中的消息重新发送并且用户接受到确认.</p>
+<p><img src="http://www6v.github.io/www6vHome/cqrs.files/image001.jpg" alt="单一模型(图1)，模型的分离(图2)，模型的融合(图3)" title="单一模型(图1)，模型的分离(图2)，模型的融合(图3)"></p>
+<p>  Query与Command两种行为的分离使得两个服务公用模型的分离也成为自然(图2)。单一模型(图1)分离成了两个模型:查询模型和命令模型.接口相应也分离成查询接口和命令接口. 客户端通过命令接口路由变化信息到命令模型. 查询模型和命令模型之间往往通过异步方式同步数据. 客户端通过查询接口读取查询模型以得到更新后的数据.</p>
+<p>但是模型在上下文中孤立的存在并不多见，更多模型之间会有相互的渗透，融合(图3)。共享内核表示了命令模型和查询模型之间重合的部分. (DDD)<br>在DDD领域中, 通用子系统可以代表更通用的服务. 在存储系统中, 通用子系统代表了在存储介质上的数据结构的融合, 公用.</p>
+<p>结合Event Souring 和模型共享内核来了解一下通用存储引擎的设计思路</p>
+<p><em><strong>案例: BigTable和Cassandra的通用存储引擎</strong></em></p>
+<p><img src="http://www6v.github.io/www6vHome/cqrs.files/image002.jpg" alt="通用存储引擎图4" title="通用存储引擎图4"></p>
+<p>数据写入时需要先写操作日志, 操作日志可以看成是Event Souring的持久化保存.成功后应用到内存中的MemTable中. 当内存中的MemTable达到一定大小, 需要将MemTable dump到磁盘中生成SSTable.由于数据同时存在MemTable和可能多个SSTable中, 读取操作需要按老到新合并SSTable和内存中的MemTable数据. 可以看到写操作对应的命令模型是MemTable, 读操作对应的查询模型是MemTable和多个SSTable,MemTable在读写时成为了共享模型, 以达到’提高写性能,  亦不降低读性能’的目的.</p>
+<h2><span id="cqrs与restful">CQRS与RESTFUL</span><a href="#cqrs与restful" class="header-anchor">#</a></h2><p>在REST风格的系统中, 资源动词, 名词, 表现三个维度上的分离, 形成了资源行为(统一接口),  资源状态,  资源表现形式.<br>REST的6个约束中包括统一接口, 能够使客户端和服务端独立的演化。统一接口包括PUT, GET, POST等Http方法.  PUT,  POST类的接口可以归为command部分, GET 类的接口可以归为query部分.<br>CQRS使得资源行为维度能够再分, 形成对服务层, 模型层, 数据存取层(DAO), 数据源层的纵向切分,  形成command和query两个子系统.REST统一接口是系统的水平接口，CQRS可以看成是系统的垂直接口。<br>在系统中, C和Q的分离可以看成是对系统中最粗粒度层次的划分.</p>
+<p><em><strong>案例:Facebook缓存架构</strong></em></p>
+<p><img src="http://www6v.github.io/www6vHome/cqrs.files/image003.jpg" alt="Facebook缓存架构图5" title="Facebook缓存架构图5"></p>
+<p>•  整体REST架构分成PUT(Query部分), POST(Command部分)两个部分.<br>•  Cache分Page cache, fragment cache, row cache, vector Cache, cache命中率见图。<br>•  Page Cache和Fragment cache存放了API各种请求格式的数据，包括4种资源表现形式 XML, JSON, RSS, ATOM。<br>•  发表Tweets是先放入Kestrel, 再异步处理，Kestrel用的也是memcached协议。Kestrel可以看成Event Souring, Vector Cache是Command部分和Query部分之间的共享模型. </p>
+<h2><span id="cqrs与一致性">CQRS与一致性</span><a href="#cqrs与一致性" class="header-anchor">#</a></h2><p>根据弱CAP原理，在分布式系统中，往往需要达到(一致性, 可用性,分区容忍性)三者的平衡，增强其中的一方就会削弱另外两方。在分布式系统中, P总是需要保证的, 所以需要在C和A之间做取舍.  CQRS中的S(分离)隐喻了P, 即分区容忍性.</p>
+<p>贯彻CQRS的系统通过多种方式来实现各种级别的一致性，其中包括MS, MM(MMS, MMM), 两阶段提交, Paxos</p>
+<p>强一致性：假如A 先写入了一个值到存储系统，存储系统保证后续A，B,C的读取操作都将返回最新值。<br>弱一致性：假如A先写入了一个值到存储系统，存储系统不能保证后续A，B，C的读取操作能读取到最新值。<br>最终一致性：最终一致性是弱一致性的一种特例。假如A首先write了一个值到存储系统，存储系统保证如果在A，B，C后续读取之前没有其它写操作更新同样的值的话，最终所有的读取操作都会读取到A写入的最新值。</p>
+<h5><span id="ms">MS</span><a href="#ms" class="header-anchor">#</a></h5><p>在分布式系统中，通过读写多个数据副本来做到读写分离。<br>MS方式中, Master会承担起写请求(Command部分)的负载, Slave会承担起读请求(Query部分)的负载.<br>多个slave副本通过同步, 异步, 半同步的方式达到与Master数据的一致性.异步同步对延时和吞吐量这两个性能指标有好处.<br>在读多写少的系统中, 增加读的副本可以相对廉价的提高Query部分(读请求端)的水平可伸缩性.  如果有大量突增请求, 可以相应调高读的副本数.–query部分的可伸缩性</p>
+<h5><span id="mm">MM</span><a href="#mm" class="header-anchor">#</a></h5><p>Multi-master指一个系统存在多个master, 每个master都具有read-write能力，可以根据时间戳或业务逻辑合并版本。具备最终一致性。</p>
+<p><em><strong>案例</strong></em><br>BigTable: 同一个时刻同一个tablet只能被一台Tablet Server服务. 强一致性的分布式索引.<br>   GFS:  MS实现的弱一致性分布式存储系统.<br>   Dynamo和Cassandra: MM实现的具备最终一致性的存储系统. 可能出现同一个key被多台机器操作的情况.多台机器上执行的顺序是无法保证的. 需要依赖基于vector lock的冲突合并方法解决冲突. 默认的解决方案是”last write wins”, 即在读的时候合并多个写者产生的多个版本的数据.</p>
+<p>–To do</p>
+<h2><span id="cqrs与数据存储">CQRS与数据存储</span><a href="#cqrs与数据存储" class="header-anchor">#</a></h2><p>  Command部分:　相对关注事务处理,持久化为关系结构数据. 在数据库中, 使用第3范式.<br>  Query部分: 相对关注性能. 使用反范式的方式来最小化数据的级联.  在数据库中, 可以使用第一范式, 也可以结合使用nosql技术.</p>
+<p><em><strong>案例:　Mysql + Redies混合存储(sql + nosql混合存储)</strong></em></p>
+<p><img src="http://www6v.github.io/www6vHome/cqrs.files/image004.png" alt="Mysql + Redies混合存储图6" title="Mysql + Redies混合存储图6"></p>
+<p>MySQL把数据同步到NoSQL中,这种架构适用于需要把数据同步到多种类型的存储中。<br>Nosql通过装做是mysql的slave, 从mysql同步数据.MySQL到NoSQL同步的实现可以使用MySQL UDF函数，MySQL binlog的解析来实现。</p>
+<h2><span id="cqrs与分布式事务">CQRS与分布式事务</span><a href="#cqrs与分布式事务" class="header-anchor">#</a></h2><p>两阶段提交是实现分布式事务的常用方式, 协议比较通用. 但两阶段提交中所有事务序列化的通过master coordinator, 是吞吐率和延迟的杀手.</p>
+<p>CQRS是完全建立在BASE(Basic Availability, Soft-state, Eventual consistency)事务基础上的. 在CQRS实现中, 通过降低对写端的压力, 减少锁的竞争和死锁的可能, 来增加写端的性能.各种实现方式会有自定义的协议, 相对于两阶段提交灵活但不够通用.</p>
+<p>在对性能要求不高的系统中, 应该采用两阶段提交加快开发. 在对性能要求不是很高系统中,  应该考虑采用消息队列.</p>
+<p><em><strong>案例1:　ebay分布式事务</strong></em><br>消息队列上的CQRS + 消息应用状态表</p>
+<ol>
+<li><p>更新业务表A</p>
+</li>
+<li><p>更新业务表B的事件放入消息队列</p>
+</li>
+<li><p>提交事务1(包括步骤1, 2)</p>
+</li>
+<li><p>查询队列中的消息,  更新业务表B.</p>
+</li>
+<li><p>插入消息应用状态表message_applied</p>
+</li>
+<li><p>提交事务2(包括步骤5, 6)</p>
+</li>
+<li><p>如果上述事务成功之后, dequeue message</p>
+</li>
+<li><p>删除消息应用状态表中的事件</p>
+</li>
+</ol>
+<p>在关注第2点和第4点之后, 可以看到队列的插入(command)和查询(query) 放在了两个事务中.</p>
+<p><em><strong>案例2:  淘宝分布式事务</strong></em><br>日志表上的CQRS + 去重表</p>
+<ol>
+<li><p>更新业务表A</p>
+</li>
+<li><p>更新业务表B的事件放入日志表, 并自动生成一个唯一的transactionID。</p>
+</li>
+<li><p>提交事务1(包括步骤1, 2)</p>
+</li>
+<li><p>消息中间件保证从主机1上读取更新业务表B的事件和transactionID, 并且这个消息路由到主机2.</p>
+</li>
+<li><p>更新业务表B</p>
+</li>
+<li><p>将transactionID插入去重表</p>
+</li>
+<li><p>提交事务2(包括步骤5, 6)</p>
+</li>
+</ol>
+<p><img src="http://www6v.github.io/www6vHome/cqrs.files/image005.jpg" alt="ebay分布式事务图7, 淘宝分布式事务图8" title="ebay分布式事务图7, 淘宝分布式事务图8"></p>
+<p>这两个实现方式, 它们有之间的共性, 就是有一个元素被分步骤的使用了CQRS.在案例1中是消息队列，案例2中是日志表. 从CQRS的角度看, 这两种实现方式没有本质的区别, 方式2可以看成是方式1的变体.</p>
+<p>案例2中的去重表等价于案例1中的消息应用状态表.<br>案例2看似复杂, 多了步骤4, 实际是保持事务1,2同步临界区的最小化, 等于是把案例1中查询队列中的消息(步骤4)剥离出事务, 防止不必要的查询错误导致回滚整个事务.<br>案例1的事务1牵涉到了业务表A和队列的混合型业务事务,实现复杂。案例2的两个事务都是数据库的系统事务, 可以使用两阶段提交, 相对通用.<br>案例2的去重表没有删除过, 能保证最终的消息都是已经成功的事务.案例1 有dequeue message步骤, 并在事务外, 在出现故障后, message_applied会留下一些垃圾内容. –</p>
+<h2><span id="cqrs与cdn">CQRS与CDN</span><a href="#cqrs与cdn" class="header-anchor">#</a></h2><p>在大规模web站点中, 动态数据和静态数据(图片)的分离是优化的通用策略.<br>   CQRS能够在Query端做到极致的优化, 例如缓存, 分区, 备份(replication), 分布式的CDN. CDN是一种离用户相对近的边缘缓存, 能提高用户体验.</p>
+<p>***案例:   ***<br>淘宝CDN</p>
+<p><img src="http://www6v.github.io/www6vHome/cqrs.files/image006.jpg"></p>
+<h2><span id="cqrs原理">CQRS原理</span><a href="#cqrs原理" class="header-anchor">#</a></h2><p>CQRS来源于Bertrand Meyer提出的CQS原理。CQS原理从OOP中推导出来，大致是说如果你返回一个值你就不能改变状态。如果你改变了状态，你的返回值必须是void类型的。</p>
+<p>CQS原理其实在很多领域都有应用, 包括OOP中字段的的setter&#x2F;getter,Java String(copy-on-write), Java thread(ConcurrentHashMap<br>读写分离锁), snapshot(copy-on-write), 数据库索引, 数据库sql(DML, DDL)中都可以看到CQS原理的影子.</p>
+<h2><span id="小结">小结:</span><a href="#小结" class="header-anchor">#</a></h2><p>CQS中的分离(S)粒度,小到对象状态的setter和getter方法, 大到子系统的形成.<br>就如Greg谈到的， CQRS本身是个简单的小模式，有趣的是在结合两个服务时所要考虑的架构属性。<br>CQRS在复杂性管理和提高系统伸缩性有着独特的优势。</p>
+<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li><a target="_blank" rel="noopener" href="http://wenku.baidu.com/view/002c419851e79b896802265e.html">clarified CQRS</a></li>
+<li><a target="_blank" rel="noopener" href="http://martinfowler.com/bliki/CQRS.html">CQRS</a> </li>
+<li><a target="_blank" rel="noopener" href="http://wenku.baidu.com/view/6aaa6c0690c69ec3d5bb751e.html">CQRS Documents by Greg Young</a>  </li>
+<li><a target="_blank" rel="noopener" href="http://www.infoq.com/cn/news/2011/02/nosql-architecture-practice/">NoSQL架构实践（一）——以NoSQL为辅</a> </li>
+<li>DDD – domain driven design (共享内存)  –  Even Eric </li>
+<li><a target="_blank" rel="noopener" href="http://oojdon.iteye.com/blog/903203">Rethinking architecture with CQRS</a>  </li>
+<li><a target="_blank" rel="noopener" href="http://timyang.net/architecture/twitter-cache-architecture/">Twitter架构图(cache篇)</a> </li>
+<li>Event Sourcing – Martin fowler</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2018/02/25/cqrs/" title="CQRS 简介和案例分析">https://www6v.github.io/www6vHomeHexo/2018/02/25/cqrs/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/CQRS/" rel="tag"># CQRS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2018/01/21/cacheSummary/" rel="prev" title="缓存(cache)总结">
+      <i class="fa fa-chevron-left"></i> 缓存(cache)总结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2018/03/17/DomainLogicAndSQL/" rel="next" title="领域逻辑和SQL">
+      领域逻辑和SQL <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">355</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">226</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">121</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

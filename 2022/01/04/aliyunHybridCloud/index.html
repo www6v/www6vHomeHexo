@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="阿里云-混合云HybridCloud">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/01/04/aliyunHybridCloud/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/01/04/aliyunHybridCloud/aliyunHydridCloud.png">
+<meta property="article:published_time" content="2022-01-04T13:35:46.000Z">
+<meta property="article:modified_time" content="2023-02-25T02:57:45.420Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="云计算">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2022/01/04/aliyunHybridCloud/aliyunHydridCloud.png">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/01/04/aliyunHybridCloud/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>阿里云-混合云HybridCloud | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2022/01/04/aliyunHybridCloud/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          阿里云-混合云HybridCloud
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-01-04 21:35:46" itemprop="dateCreated datePublished" datetime="2022-01-04T21:35:46+08:00">2022-01-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-25 10:57:45" itemprop="dateModified" datetime="2023-02-25T10:57:45+08:00">2023-02-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">云计算</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/%E9%98%BF%E9%87%8C%E4%BA%91/" itemprop="url" rel="index"><span itemprop="name">阿里云</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p></p>
+<span id="more"></span>
+
+
+<h2><span id="混合云">混合云</span><a href="#混合云" class="header-anchor">#</a></h2><p>定义: 多个云之间互联的IT架构</p>
+<h2><span id="分类">分类</span><a href="#分类" class="header-anchor">#</a></h2><h5><span id="按形态分类">按形态分类</span><a href="#按形态分类" class="header-anchor">#</a></h5><ul>
+<li>公有云之间的混合<ul>
+<li>同构公有云混合<br>阿里云上海 + 阿里云北京（专线） </li>
+<li>异构公有云混合<br>阿里云上海 + 腾讯云新加坡(专线&#x2F;VNP)</li>
+</ul>
+</li>
+<li>私有云之间的混合</li>
+<li>公有云和私有云的混合(主流)<ul>
+<li>优点：<br>  私有云的数据安全性 + 公有云的丰富产品</li>
+<li>缺点：<br>  性能<br>  复杂性</li>
+</ul>
+</li>
+<li>公有云和传统IT的混合</li>
+</ul>
+<h5><span id="按技术平台分类">按技术平台分类</span><a href="#按技术平台分类" class="header-anchor">#</a></h5><ul>
+<li>同构混合云: 技术架构平台一致(首选)<br>最佳的混合云方案</li>
+<li>异构混合云: 技术架构平台不同<ul>
+<li>首选同构混合云</li>
+<li>如果要异构<br> 兼容方案：<br>   在公有云上部署相同的PasS应用(VMware)<br>   企业容灾</li>
+</ul>
+</li>
+</ul>
+<h5><span id="按架构层分类">按架构层分类</span><a href="#按架构层分类" class="header-anchor">#</a></h5><ul>
+<li>IaaS层混合<br>IaaS整合在同构混合云里相对容易<br>IaaS整合在异构混合云里相对困难 </li>
+<li>PaaS层混合(未来趋势)<br>K8S混合， Redis混合</li>
+</ul>
+<h5><span id="按运维主体分类">按运维主体分类</span><a href="#按运维主体分类" class="header-anchor">#</a></h5><ul>
+<li>专有云主营(主流)</li>
+<li>公有云托管</li>
+</ul>
+<h2><span id="场景">场景</span><a href="#场景" class="header-anchor">#</a></h2><ul>
+<li>业务呈峰谷交错， 需要利用云上资源， 进行弹性伸缩  [弹性]</li>
+<li>面向互联网的业务在云上， 有更好的访问体验和网络资源， 云下部署企业核心系统或数据库</li>
+<li>影音、照片、文件， 云上存储或备份 [大网盘] </li>
+<li>多分支机构就近接入阿里云， 网络打通互访， 共享云上资源  [公司分支之间vpn互联]</li>
+<li>云下、云上数据融合(物联网、智慧生活), 进行大数据分析  </li>
+<li>第三方公有云平台与阿里云混合，能力互补， 联合运营</li>
+<li>数据备份， 应用容灾  [容灾备份]</li>
+</ul>
+<h2><span id="阿里云混合云整体解决方案">阿里云混合云整体解决方案</span><a href="#阿里云混合云整体解决方案" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/01/04/aliyunHybridCloud/aliyunHydridCloud.png" class title="阿里云混合云整体解决方案">
+
+<h2><span id="混合云产品阿里">混合云产品(阿里)</span><a href="#混合云产品阿里" class="header-anchor">#</a></h2><h5><span id="网络通">网络通</span><a href="#网络通" class="header-anchor">#</a></h5><table>
+<thead>
+<tr>
+<th align="center">&#x2F;</th>
+<th align="center">场景</th>
+<th align="center">优势</th>
+<th align="center">带宽</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">高速通道-物理专线</td>
+<td align="center">大中型企业, 多地容灾, 高可用, 高弹性</td>
+<td align="center">直连，不需要绕行公网<br> 支持BGP路由</td>
+<td align="center">100M, 10G - 100G</td>
+</tr>
+<tr>
+<td align="center">VPN网关</td>
+<td align="center">本地IDC上云， 移动客户端上云</td>
+<td align="center">安全IPSec, SSL-VPN <br> 成本低 <br> 配置简单 <br> 网络质量受限于公网</td>
+<td align="center">最高100M</td>
+</tr>
+</tbody></table>
+<h5><span id="数据通">数据通</span><a href="#数据通" class="header-anchor">#</a></h5><ul>
+<li>混合云备份(HBR)</li>
+<li>数据传输服务(DTS)</li>
+</ul>
+<h5><span id="业务通">业务通</span><a href="#业务通" class="header-anchor">#</a></h5><ul>
+<li>DevOps平台</li>
+<li>容器服务</li>
+</ul>
+<h2><span id="混合云-vs-多云">混合云 vs. 多云</span><a href="#混合云-vs-多云" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th align="center">&#x2F;</th>
+<th align="center">关注点</th>
+<th align="center">细节</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">混合云(连)</td>
+<td align="center">关注资源互联</td>
+<td align="center">通过专线或VPN来连接</td>
+</tr>
+<tr>
+<td align="center">多云(管)</td>
+<td align="center">关注云资源的管理</td>
+<td align="center">通过CMP云管平台、OpenAPI来管理多个云</td>
+</tr>
+</tbody></table>
+<h2><span id="阿里云混合云解决方案2">阿里云混合云解决方案[2]</span><a href="#阿里云混合云解决方案2" class="header-anchor">#</a></h2><ul>
+<li>本地存储容量无限扩展<ul>
+<li>相关产品<br>-  使用存储网关， 小成本网关<br>-  使用混合云存储阵列， 专业存储</li>
+</ul>
+</li>
+<li>线下数据海量迁移上云   <ul>
+<li>相关产品<br>-  闪电立方</li>
+</ul>
+</li>
+<li>云上云下数据库同步、 灾备<ul>
+<li>相关产品    <ul>
+<li>DTS</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据云下采集, 云上加工<ul>
+<li>相关产品<ul>
+<li>MaxCompute , RDS, 数据迁移, 数据集成, QuickBI</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>云上灾备中心<ul>
+<li>相关产品<ul>
+<li>ECS, OSS, 高速通道，容灾网关(关键)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>云上云下双活互备<ul>
+<li>相关产品<ul>
+<li>云解析DNS, ECS, VPC，高速通道(时延)， DTS</li>
+</ul>
+</li>
+<li>问题<br> 应用要进行改造</li>
+</ul>
+</li>
+<li>云上云下统一的安全管理<ul>
+<li>相关产品<br>- 安骑士 ， Web防火墙， DDoS高防</li>
+</ul>
+</li>
+<li>多云平台， 统一管理</li>
+</ul>
+<h2><span id="解决方案架构">解决方案架构</span><a href="#解决方案架构" class="header-anchor">#</a></h2><h5><span id="弹性架构">弹性架构</span><a href="#弹性架构" class="header-anchor">#</a></h5><ol>
+<li>弹性架构实现</li>
+</ol>
+<ul>
+<li>ECS弹性架构</li>
+<li>容器弹性架构<ul>
+<li>k8s弹性伸缩：<br>hpa， vpa， ca</li>
+<li>rancher弹性伸缩：<br> webhook微服务的方式 服务和主机的弹性伸缩</li>
+<li>ACK</li>
+<li>ASK</li>
+<li>ECI</li>
+</ul>
+</li>
+<li>数据库弹性架构</li>
+<li>网络弹性架构</li>
+</ul>
+<ol start="2">
+<li>架构方案</li>
+</ol>
+<ul>
+<li>弹性组网</li>
+<li>弹性架构设计<ul>
+<li>单一入口的混合云弹性伸缩</li>
+<li>多入口的混合云弹性伸缩</li>
+<li>基于K8s实现混合云弹性伸缩<br>负载均衡的方式路由到2个集群<br>virtual kubelet<br>Kubernetes Cluster Federation</li>
+</ul>
+</li>
+</ul>
+<h5><span id="容灾备份架构">容灾备份架构</span><a href="#容灾备份架构" class="header-anchor">#</a></h5><p><a href="../../../../2022/06/26/cloudDisasterRecovery/">云计算 容灾恢复DisasterRecovery</a></p>
+<h5><span id="安全防护架构">安全防护架构</span><a href="#安全防护架构" class="header-anchor">#</a></h5><h5><span id="多云管控架构">多云管控架构</span><a href="#多云管控架构" class="header-anchor">#</a></h5><h5><span id="混合云组网架构">混合云组网架构</span><a href="#混合云组网架构" class="header-anchor">#</a></h5><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>1.《混合云架构》<br>2. <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1uy4y1a7Ba?vd_source=f6e8c1128f9f264c5ab8d9411a644036">阿里云云上常见架构设计及优化-课时9：混合云架构及解决方案</a> bilibili</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2022/01/04/aliyunHybridCloud/" title="阿里云-混合云HybridCloud">https://www6v.github.io/www6vHomeHexo/2022/01/04/aliyunHybridCloud/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" rel="tag"># 云计算</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2022/01/02/k8sHA/" rel="prev" title="K8S高可用-控制面">
+      <i class="fa fa-chevron-left"></i> K8S高可用-控制面
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2022/01/05/k8sOpenShift/" rel="next" title="Kubernetes OpenShift">
+      Kubernetes OpenShift <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">355</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">226</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">121</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

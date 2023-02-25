@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="AWS 所有的Services">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/10/01/awsAllServices/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-01T10:51:04.000Z">
+<meta property="article:modified_time" content="2023-02-25T02:57:45.510Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="云计算">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/10/01/awsAllServices/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>AWS 所有的Services | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2022/10/01/awsAllServices/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AWS 所有的Services
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-01 18:51:04" itemprop="dateCreated datePublished" datetime="2022-10-01T18:51:04+08:00">2022-10-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-25 10:57:45" itemprop="dateModified" datetime="2023-02-25T10:57:45+08:00">2023-02-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">云计算</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/AWS/" itemprop="url" rel="index"><span itemprop="name">AWS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p></p>
+<span id="more"></span>
+
+
+<h2><span id="analytics">Analytics:</span><a href="#analytics" class="header-anchor">#</a></h2><p>• Amazon Athena<br> Amazon Athena is a serverless, interactive analytics service built on open-source frameworks, supporting open-table and file formats.<br>• AWS Data Exchange<br>• AWS Data Pipeline<br>• Amazon EMR<br>• AWS Glue<br>AWS Glue is a serverless data integration service that makes it easier to discover, prepare, move, and integrate data from multiple sources for analytics, machine learning (ML), and application development.<br>[ETL]<br>• Amazon Kinesis Data Analytics<br>• Amazon Kinesis Data Firehose<br>• Amazon Kinesis Data Streams<br>• AWS Lake Formation<br>• Amazon Managed Streaming for Apache Kafka (Amazon MSK)<br>• Amazon OpenSearch Service<br>• Amazon QuickSight<br> BI tool</p>
+<h2><span id="application-integration">Application Integration:</span><a href="#application-integration" class="header-anchor">#</a></h2><p>• Amazon AppFlow<br>• AWS AppSync<br>• Amazon EventBridge (Amazon CloudWatch Events)  @<br>• Amazon MQ  @<br>• Amazon Simple Notification Service (Amazon SNS)  @<br>• Amazon Simple Queue Service (Amazon SQS)  @<br>• AWS Step Functions  @</p>
+<h2><span id="business-applications">Business Applications:</span><a href="#business-applications" class="header-anchor">#</a></h2><p>• Alexa for Business<br>• Amazon Simple Email Service (Amazon SES)</p>
+<h2><span id="blockchain">Blockchain:</span><a href="#blockchain" class="header-anchor">#</a></h2><p>• Amazon Managed Blockchain</p>
+<h2><span id="cloud-financial-management">Cloud Financial Management:</span><a href="#cloud-financial-management" class="header-anchor">#</a></h2><p>• AWS Budgets<br>• AWS Cost and Usage Report<br>• AWS Cost Explorer<br>• Savings Plans</p>
+<h2><span id="compute">Compute:</span><a href="#compute" class="header-anchor">#</a></h2><p>• AWS App Runner<br>• AWS Auto Scaling<br>• AWS Batch  @<br>  AWS Batch enables you to easily and efficiently run batch computing workloads of any scale on AWS using Amazon EC2 and Amazon EC2 Spot.<br>• Amazon EC2  @<br>• Amazon EC2 Auto Scaling  @<br>• AWS Elastic Beanstalk<br>  Amazon Elastic Beanstalk is an easy-to-use service for deploying and scaling web applications and services developed with Java, .NET, PHP, Node.js, Python, Ruby, Go, and Docker on familiar servers such as Apache, Nginx, Passenger, and IIS.<br>• Amazon Elastic Kubernetes Service (Amazon EKS)<br>• Elastic Load Balancing  @<br>• AWS Fargate  @<br>  AWS Fargate 是一种无服务器、随用随付的计算引擎，可让您专注于构建应用程序，而无需管理服务器。AWS Fargate 与 Amazon Elastic Container Service (ECS) 和 Amazon Elastic Kubernetes Service (EKS) 兼容。<br>• AWS Lambda  @<br>• Amazon Lightsail<br>  Amazon Lightsail 以经济实惠的月度价格提供易于使用的虚拟专用服务器 (VPS) 实例、容器、存储、数据库等。<br>  Lightsail 是由 AWS 推出的面向开发人员、小型企业、学生等人员的轻量级 VPS 云计算服务。(非官方)<br>• AWS Outposts  @<br>  AWS Outposts brings native AWS services, infrastructure, and operating models to virtually any data center, co-location space, or on-premises facility.<br>• AWS Wavelength</p>
+<h2><span id="containers">Containers:</span><a href="#containers" class="header-anchor">#</a></h2><p>• Amazon Elastic Container Registry (Amazon ECR)<br>• Amazon Elastic Container Service (Amazon ECS)  @<br>  Amazon ECS is a fully managed container orchestration service that helps you easily deploy, manage, and scale containerized applications. It deeply integrates with the rest of the AWS platform to provide a secure and easy-to-use solution for running container workloads in the cloud and now on your infrastructure with Amazon ECS Anywhere.<br>• Amazon ECS Anywhere<br>• Amazon Elastic Kubernetes Service (Amazon EKS)  @<br>  Amazon EKS is a managed service that makes it easy for you to use Kubernetes on AWS without needing to install and operate your own Kubernetes control plane.<br>• Amazon EKS Anywhere<br>• Amazon EKS Distro</p>
+<h2><span id="database">Database:</span><a href="#database" class="header-anchor">#</a></h2><p>• Amazon Aurora  @<br>  Designed for unparalleled high performance and availability at global scale with full MySQL and PostgreSQL compatibility<br>  Amazon Aurora provides built-in security, continuous backups, serverless compute, up to 15 read replicas, automated multi-Region replication, and integrations with other AWS services.<br>• Amazon Aurora Serverless  @<br>• Amazon DocumentDB (with MongoDB compatibility)<br>  Scale JSON workloads with ease using a fully managed document database service<br>  (with MongoDB compatibility)<br>  [Free]<br>• Amazon DynamoDB  @<br>  Fast, flexible NoSQL database service for single-digit millisecond performance at any scale<br>  [Free]<br>• Amazon ElastiCache  @<br>  Unlock microsecond latency and scale with in-memory caching<br>  [Free]<br>• Amazon Keyspaces (for Apache Cassandra)<br>• Amazon Neptune<br>  Amazon Neptune is a fast, reliable, fully-managed graph database service that makes it easy to build and run applications that work with highly connected datasets.<br>• Amazon RDS  @<br>• Amazon Redshift<br>• Amazon Timestream</p>
+<h2><span id="developer-tools">Developer Tools:</span><a href="#developer-tools" class="header-anchor">#</a></h2><p>• AWS Cloud9<br>• AWS CodeArtifact<br>• AWS CodeBuild<br>• AWS CodeCommit<br>• AWS CodeDeploy<br>• Amazon CodeGuru<br>• AWS CodePipeline<br>• AWS CodeStar<br>• AWS X-Ray</p>
+<h2><span id="end-user-computing">End User Computing:</span><a href="#end-user-computing" class="header-anchor">#</a></h2><p>• Amazon AppStream 2.0<br>• Amazon WorkSpaces</p>
+<h2><span id="frontend-web-and-mobile">Frontend Web and Mobile:</span><a href="#frontend-web-and-mobile" class="header-anchor">#</a></h2><p>• AWS Amplify<br>• Amazon API Gateway<br>• AWS Device Farm<br>• Amazon Pinpoint</p>
+<h2><span id="internet-of-things">Internet of Things:</span><a href="#internet-of-things" class="header-anchor">#</a></h2><p>• AWS IoT Analytics<br>• AWS IoT Core<br>• AWS IoT Device Defender<br>• AWS IoT Device Management<br>• AWS IoT Events<br>• AWS IoT Greengrass<br>• AWS IoT SiteWise<br>• AWS IoT Things Graph<br>• AWS IoT 1-Click</p>
+<h2><span id="machine-learning">Machine Learning:</span><a href="#machine-learning" class="header-anchor">#</a></h2><p>• Amazon Comprehend<br>• Amazon Forecast<br>• Amazon Fraud Detector<br>• Amazon Kendra<br>• Amazon Lex<br>  Build chatbots with conversational AI<br>• Amazon Personalize<br>• Amazon Polly<br>  Amazon Polly uses deep learning technologies to synthesize natural-sounding human speech, so you can convert articles to speech.<br>• Amazon Rekognition<br>  Automate your image and video analysis with machine learning<br>• Amazon SageMaker<br>  Build, train, and deploy machine learning (ML) models for any use case with fully managed infrastructure, tools, and workflows<br>• Amazon Textract<br>• Amazon Transcribe<br>• Amazon Translate</p>
+<h2><span id="management-and-governance">Management and Governance:</span><a href="#management-and-governance" class="header-anchor">#</a></h2><p>• AWS CloudFormation  @<br>• AWS CloudTrail<br>  AWS CloudTrail monitors and records account activity across your AWS infrastructure, giving you control over storage, analysis, and remediation actions.<br>• Amazon CloudWatch  @<br>• Amazon CloudWatch Logs  @<br>• AWS Command Line Interface (AWS CLI)<br>• AWS Compute Optimizer<br>• AWS Config<br>• AWS Control Tower<br>• AWS License Manager<br>• Amazon Managed Grafana<br>• Amazon Managed Service for Prometheus<br>• AWS Management Console<br>• AWS Organizations  @<br>• AWS Personal Health Dashboard<br>• AWS Proton<br>• AWS Service Catalog<br>• Service Quotas<br>• AWS Systems Manager<br>• AWS Trusted Advisor<br>• AWS Well-Architected Tool</p>
+<h2><span id="media-services">Media Services:</span><a href="#media-services" class="header-anchor">#</a></h2><p>• Amazon Elastic Transcoder<br>• Amazon Kinesis Video Streams</p>
+<h2><span id="migration-and-transfer">Migration and Transfer:</span><a href="#migration-and-transfer" class="header-anchor">#</a></h2><p>• AWS Application Discovery Service<br>• AWS Application Migration Service (CloudEndure Migration)<br>• AWS Database Migration Service (AWS DMS)<br>  Homogeneous Database Migrations<br>  Heterogeneous Database Migrations<br>• AWS DataSync<br>  Simplify and accelerate secure data migrations<br>• AWS Migration Hub<br>  Discover the tools that you need to simplify your migration and modernization<br>  AWS Migration Hub provides a central location to collect server and application inventory data for the assessment, planning, and tracking of migrations to AWS. Migration Hub can also help accelerate application modernization following migration.<br>• AWS Schema Conversion Tool (AWS SCT)<br>• AWS Snow Family  @<br>• AWS Transfer Family<br>  AWS Transfer Family securely scales your recurring business-to-business file transfers to AWS Storage services using SFTP, FTPS, FTP, and AS2 protocols. </p>
+<h2><span id="networking-and-content-delivery">Networking and Content Delivery:</span><a href="#networking-and-content-delivery" class="header-anchor">#</a></h2><p>• Amazon CloudFront  @<br>• AWS Direct Connect  @<br>• Elastic Load Balancing (ELB)  @<br>• AWS Global Accelerator  @<br>  <a target="_blank" rel="noopener" href="https://kebingzao.com/2020/08/13/aws-ga/">使用 AWS Global Accelerator 加速你的服务</a><br>• AWS PrivateLink  @<br>• Amazon Route 53  @<br>• AWS Transit Gateway  @<br>• Amazon VPC  @<br>• AWS VPN  @</p>
+<h2><span id="security-identity-and-compliance">Security, Identity, and Compliance:</span><a href="#security-identity-and-compliance" class="header-anchor">#</a></h2><p>• AWS Artifact<br>• AWS Audit Manager<br>• AWS Certificate Manager (ACM)<br> Provision and manage SSL&#x2F;TLS certificates with AWS services and connected resources<br>• AWS CloudHSM<br> Manage single-tenant hardware security modules (HSMs) on AWS<br>• Amazon Cognito<br>• Amazon Detective<br>• AWS Directory Service<br>• AWS Firewall Manager @<br> Centrally configure and manage firewall rules across your accounts<br>• Amazon GuardDuty<br>• AWS Identity and Access Management (IAM)  @<br>• Amazon Inspector<br>• AWS Key Management Service (AWS KMS)  @<br>• Amazon Macie<br>• AWS Network Firewall  @<br>• AWS Resource Access Manager (AWS RAM)<br>• AWS Secrets Manager<br>• AWS Security Hub<br>• AWS Security Token Service (AWS STS)<br>• AWS Shield<br>• AWS Single Sign-On  @<br>• AWS WAF  @</p>
+<h2><span id="storage">Storage:</span><a href="#storage" class="header-anchor">#</a></h2><p>• AWS Backup<br>  Centrally manage and automate data protection<br>• Amazon Elastic Block Store (Amazon EBS)  @<br>  Easy to use, high performance block storage at any scale<br>• AWS Elastic Disaster Recovery (CloudEndure Disaster Recovery)<br>• Amazon Elastic File System (Amazon EFS)  @<br>  Simple, serverless, set-and-forget, elastic file system<br>• Amazon FSx (for all types)<br>  Launch, run, and scale feature-rich and highly-performant file systems with just a few clicks<br>• Amazon S3  @<br>• Amazon S3 Glacier  @<br>  Long-term, secure, durable storage classes for data archiving at the lowest cost and milliseconds access<br>• AWS Storage Gateway  @<br>  Provide on-premises applications with access to virtually unlimited cloud storage</p>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p><a target="_blank" rel="noopener" href="https://us-east-1.console.aws.amazon.com/console/services?region=us-east-1">AWS所有服务</a></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2022/10/01/awsAllServices/" title="AWS 所有的Services">https://www6v.github.io/www6vHomeHexo/2022/10/01/awsAllServices/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" rel="tag"># 云计算</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2022/10/01/awsStorageS3/" rel="prev" title="AWS Storage-S3">
+      <i class="fa fa-chevron-left"></i> AWS Storage-S3
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2022/10/01/awsStudyResource/" rel="next" title="AWS 学习资源">
+      AWS 学习资源 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">355</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">226</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">121</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

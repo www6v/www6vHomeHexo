@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Kubernetes网络">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2019/08/23/k8sNetwork/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2019/08/23/k8sNetwork/k8sNetwork.jpg">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2019/08/23/k8sNetwork/k8sNetworkAll.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/68114098-31c4b980-ff30-11e9-9dbd-163452ec51bc.jpg">
+<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/65022322-50acc380-d963-11e9-8476-5e5ab22c8b4c.JPG">
+<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/68364150-16dc8a00-0168-11ea-8281-272b274fdfae.jpg">
+<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/65022323-51455a00-d963-11e9-9442-d4f1b84ecce5.JPG">
+<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/68364151-16dc8a00-0168-11ea-8935-445ad9c6b456.jpg">
+<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/68364149-1643f380-0168-11ea-80ef-c0b218278dec.jpg">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2019/08/23/k8sNetwork/internet-access.jpg">
+<meta property="article:published_time" content="2019-08-23T11:04:40.000Z">
+<meta property="article:modified_time" content="2023-02-25T02:57:46.767Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="Kubernetes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2019/08/23/k8sNetwork/k8sNetwork.jpg">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2019/08/23/k8sNetwork/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Kubernetes网络 | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2019/08/23/k8sNetwork/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kubernetes网络
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-23 19:04:40" itemprop="dateCreated datePublished" datetime="2019-08-23T19:04:40+08:00">2019-08-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-25 10:57:46" itemprop="dateModified" datetime="2023-02-25T10:57:46+08:00">2023-02-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">云原生</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/" itemprop="url" rel="index"><span itemprop="name">Kubernetes</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p></p>
+<span id="more"></span>
+
+<img src="/www6vHomeHexo/2019/08/23/k8sNetwork/k8sNetwork.jpg" class title="图1.Kubenetes网络">
+
+<h1><span id="一-容器和容器之间的网络">一. 容器和容器之间的网络</span><a href="#一-容器和容器之间的网络" class="header-anchor">#</a></h1><ul>
+<li>使用Docker的一种网络模型：–net&#x3D;container</li>
+<li>每个Pod容器有有一个pause容器<br> <a target="_blank" rel="noopener" href="https://jimmysong.io/kubernetes-handbook/concepts/pause-container.html">Pause容器</a> 例子<br> <a target="_blank" rel="noopener" href="https://o-my-chenjian.com/2017/10/17/The-Pause-Container-Of-Kubernetes/">Kubernetes之Pause容器</a><br> <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg5Mjc3MjIyMA==&mid=2247542987&idx=1&sn=dad6c7723576cf1fb86486f2855b0efd&source=41#wechat_redirect">Kubernetes之“暂停”容器</a></li>
+</ul>
+<h1><span id="二-pod与pod之间的网络">二.  Pod与Pod之间的网络</span><a href="#二-pod与pod之间的网络" class="header-anchor">#</a></h1><h3><span id="20-overview">2.0   Overview</span><a href="#20-overview" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2019/08/23/k8sNetwork/k8sNetworkAll.png" class title="K8S 网络"> 
+
+<h3><span id="21-同节点pod通信">2.1  同节点pod通信</span><a href="#21-同节点pod通信" class="header-anchor">#</a></h3><p>基础: 网桥 bridge<br>通过<strong>网桥</strong>通信</p>
+<div style="text-align: center; width:60%; height: 60%">
+
+<p><img src="https://user-images.githubusercontent.com/5608425/68114098-31c4b980-ff30-11e9-9dbd-163452ec51bc.jpg" alt="pod-to-pod-in-node"><br>图2. 同节点pod通信</p>
+</div>
+
+<h3><span id="22-不同节点中的pod通信跨主机网络通讯">2.2  不同节点中的Pod通信（跨主机网络通讯）</span><a href="#22-不同节点中的pod通信跨主机网络通讯" class="header-anchor">#</a></h3><h5><span id="221-overlay-flannel方案">2.2.1  Overlay (Flannel方案)</span><a href="#221-overlay-flannel方案" class="header-anchor">#</a></h5><ol>
+<li><strong>flannel-UDP模式(三层overlay)</strong></li>
+</ol>
+<ul>
+<li>原理：<br>  fannelId进程封装&#x2F;解开虚拟网卡docker0,fannel0的数据;<br>  三层的overlay网络;</li>
+<li>组件： TUN设备是<strong>3层</strong>的虚拟网络设备 ; fannel0</li>
+<li>劣势:  三次用户态和内核态切换 ; 性能差， 已弃用 <div style="text-align: center;"></div></li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/5608425/65022322-50acc380-d963-11e9-8476-5e5ab22c8b4c.JPG" alt="flannel-udp">  图3. flannel-UDP模式</p>
+<p><img src="https://user-images.githubusercontent.com/5608425/68364150-16dc8a00-0168-11ea-8281-272b274fdfae.jpg" alt="flannel-udp">  图4. flannel-UDP模式</p>
+
+
+<ol start="2">
+<li><strong>flannel-vxlan模式(两层虚拟网络)</strong></li>
+</ol>
+<ul>
+<li>VXLAN 的覆盖网络的设计思想是：在现有的三层网络之上，“覆盖”一层虚拟的、由内核 VXLAN<br>模块负责维护的二层网络，使得连接在这个 VXLAN 二层网络上的“主机”（虚拟机或者容器都可<br>以）之间，可以像在同一个局域网（LAN）里那样自由通信</li>
+<li>组件：<br>  VTEP（VXLAN Tunnel End Point）设备; fannel.1;<br>  组成一个虚拟的<strong>两层</strong>网络</li>
+<li>优势：<br>  进行封装和解封装的对象，是二层数据帧（Ethernet frame）;<br>  而且这个工作的执行流程，全部是在内核里完成的（因为VXLAN本身就是内核中的一个模块）;<br>  主流的网络容器方案。<div style="text-align: center;"></div></li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/5608425/65022323-51455a00-d963-11e9-9442-d4f1b84ecce5.JPG" alt="flannel-vxlan">   图5. flannel-vxlan模式</p>
+<p><img src="https://user-images.githubusercontent.com/5608425/68364151-16dc8a00-0168-11ea-8935-445ad9c6b456.jpg" alt="flannel-vxlan"> 图6. flannel-vxlan模式</p>
+
+
+<h5><span id="222-纯3层网络方案">2.2.2 纯3层网络方案</span><a href="#222-纯3层网络方案" class="header-anchor">#</a></h5><ol>
+<li><strong>Flannel host-gw模式</strong></li>
+</ol>
+<p><img src="https://user-images.githubusercontent.com/5608425/68364149-1643f380-0168-11ea-80ef-c0b218278dec.jpg" alt="flannel-host-gw"></p>
+<ul>
+<li><p>host-gw 模式工作原理：<br>其实就是将每个 Flannel 子网（Flannel Subnet，比如：10.244.1.0&#x2F;24）的“下一跳”，设置成了该子网对应的宿主机的 IP 地址。<br>也就是说，这台“主机”（Host）会充当这条容器通信路径里的“网关”（Gateway）。这也正是“host-gw”的含义。</p>
+</li>
+<li><p>核心<br>路由规则：<br>&lt;目的容器 IP 地址段&gt; via &lt;网关的 IP 地址&gt; dev eth0</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ip route</span><br><span class="line">...</span><br><span class="line">10.244.1.0/24 via 10.168.0.3 dev eth0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>优势：<br>根据实际的测试，host-gw 的性能损失大约在 10% 左右，而其他所有基于 VXLAN“隧道”机制的网络方案，性能损失都在 20%~30% 左右。</p>
+</li>
+</ul>
+<ol start="2">
+<li><strong>Calico</strong></li>
+</ol>
+<ul>
+<li><p>原理:<br>基于iptable&#x2F;linux kernel包转发;<br>根据iptables规则进行路由转发;<br>非overlay, Calico 没有使用 CNI 的网桥模式;</p>
+</li>
+<li><p>核心<br>路由规则：<br>&lt;目的容器 IP 地址段&gt; via &lt;网关的 IP 地址&gt; dev eth0</p>
+</li>
+<li><p>组件:<br>路由规则; iptables的配置组件Felix;<br>路由广播组件BGP Speaker;</p>
+</li>
+</ul>
+<ol start="3">
+<li><strong>Host Network模式</strong><br>容器的网络和宿主机的网络打平，在同一层;<br>underlay方案;</li>
+</ol>
+<h5><span id="223-总结">2.2.3 总结:</span><a href="#223-总结" class="header-anchor">#</a></h5><ul>
+<li>flannel-UDP模式和flannel-vxlan模式都可以称作”隧道”机制；都是是overlay的。</li>
+<li>普适性最强 flannel-VxLan (OpenShift使用)</li>
+<li>二层可直连可选用Calico &#x2F; Flannel host-gw</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">&#x2F;</th>
+<th align="center">overlay（隧道）</th>
+<th align="center">underlay（路由）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">L2</td>
+<td align="center">Vxlan(大二层 通讯双方在同一逻辑网段内)</td>
+<td align="center">IPvlan L2模式<br> Macvlan <a target="_blank" rel="noopener" href="https://larioy.gst.monster/2021/09/06/k8s-ji-chong-cni-fang-an-jie-xi/macvlan-yu-ipvlan/macvlan-he-ipvlan-jie-shao/">9</a></td>
+</tr>
+<tr>
+<td align="center">L3</td>
+<td align="center">flannel-UDP（类似L2 overlay， 在节点上增加一个网关）</td>
+<td align="center">IPvlan L3模式<br> flannel host-gw（不能跨两层网络） <br> Calico BGP组网方式（大三层）</td>
+</tr>
+</tbody></table>
+<h1><span id="三-pod与service之间的网络">三. Pod与Service之间的网络</span><a href="#三-pod与service之间的网络" class="header-anchor">#</a></h1><p><a href="../../../../2019/11/04/k8sService/">Kubernetes服务</a></p>
+<h1><span id="四-internet与service之间的网络">四. Internet与Service之间的网络</span><a href="#四-internet与service之间的网络" class="header-anchor">#</a></h1><h3><span id="41-service到internet">4.1 Service到Internet</span><a href="#41-service到internet" class="header-anchor">#</a></h3><p>iptables执行源NAT( SNAT )</p>
+<h3><span id="42-internet到service">4.2 Internet到Service</span><a href="#42-internet到service" class="header-anchor">#</a></h3><p><a href="../../../../2019/11/04/k8sService/">Kubernetes服务</a></p>
+<h1><span id="五-网络隔离-多租户">五. 网络隔离 多租户</span><a href="#五-网络隔离-多租户" class="header-anchor">#</a></h1><p>NetworkPolicy</p>
+<h1><span id="六-访问公网99">六. 访问公网[99]</span><a href="#六-访问公网99" class="header-anchor">#</a></h1><h3><span id="通过nat访问公网">通过NAT访问公网</span><a href="#通过nat访问公网" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2019/08/23/k8sNetwork/internet-access.jpg" class title="通过NAT访问公网">
+
+<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ul>
+<li><p>1.<a target="_blank" rel="noopener" href="https://edu.aliyun.com/lesson_1651_13087#_13087">第13 章 ： Kubernetes网络概念及策略控制</a>  CNCF × Alibaba 云原生技术公开课</p>
+</li>
+<li><p>2.<a target="_blank" rel="noopener" href="https://blog.csdn.net/hxpjava1/article/details/79566192">calico网络原理及与flannel对比</a></p>
+</li>
+<li><p>3.<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/GQc8XPV4MaCWiTcN2wVzbw">Kubernetes CNI网络最强对比：Flannel、Calico、Canal和Weave</a></p>
+</li>
+<li><p>8.<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/spw8fHkIjiyf4kg5RQIL_w">K8s网络模型</a>  阿里 加多  ***</p>
+</li>
+<li><p>9.<a target="_blank" rel="noopener" href="https://larioy.gst.monster/2021/09/06/k8s-ji-chong-cni-fang-an-jie-xi/macvlan-yu-ipvlan/macvlan-he-ipvlan-jie-shao/">macvlan和ipvlan介绍及在k8s中的使用</a></p>
+</li>
+<li><p>趣谈网络协议  刘超<br>+《30容器网络之Flannel：每人一亩三分地》<br>+《31容器网络之Calico：为高效说出善意的谎言》</p>
+</li>
+<li><p>深入剖析Kubernetes  张磊<br>+《32  浅谈容器网络》<br>+《33  深入解析容器跨主机网络》<br>+《34  Kubernetes网络模型与CNI网络插件》<br>+《35  解读Kubernetes三层网络方案》</p>
+</li>
+<li><p>99.<a target="_blank" rel="noopener" href="https://www.aliyundrive.com/s/dXxngxjTkZE">K8S在UCloud内部的应用-高鹏</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2019/08/23/k8sNetwork/" title="Kubernetes网络">https://www6v.github.io/www6vHomeHexo/2019/08/23/k8sNetwork/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/Kubernetes/" rel="tag"># Kubernetes</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2019/08/23/linuxMemory/" rel="prev" title="Linux内存管理">
+      <i class="fa fa-chevron-left"></i> Linux内存管理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2019/08/24/linuxFile/" rel="next" title="Linux文件系统">
+      Linux文件系统 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">355</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">226</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">121</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

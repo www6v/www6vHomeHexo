@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="HDFS NameNode是可靠和高效的, 简单的架构使HDFS能够在上千个节点可靠的存放生产级的数据. 但是, HDFS NameNode也是一个集群中的单点(SPOF). 开源社区也提供了几个HA的解决方案.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HDFS NameNode HA 解决方案">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2018/06/07/hdfs/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:description" content="HDFS NameNode是可靠和高效的, 简单的架构使HDFS能够在上千个节点可靠的存放生产级的数据. 但是, HDFS NameNode也是一个集群中的单点(SPOF). 开源社区也提供了几个HA的解决方案.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www6v.github.io/www6vHome/hdfs.files/image001.jpg">
+<meta property="og:image" content="http://www6v.github.io/www6vHome/hdfs.files/image002.jpg">
+<meta property="og:image" content="http://www6v.github.io/www6vHome/hdfs.files/image003.jpg">
+<meta property="og:image" content="http://www6v.github.io/www6vHome/hdfs.files/image004.jpg">
+<meta property="og:image" content="http://www6v.github.io/www6vHome/hdfs.files/image005.gif">
+<meta property="article:published_time" content="2018-06-07T02:29:55.000Z">
+<meta property="article:modified_time" content="2023-02-25T02:57:46.275Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="可用性">
+<meta property="article:tag" content="HDFS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www6v.github.io/www6vHome/hdfs.files/image001.jpg">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2018/06/07/hdfs/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>HDFS NameNode HA 解决方案 | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2018/06/07/hdfs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HDFS NameNode HA 解决方案
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-06-07 10:29:55" itemprop="dateCreated datePublished" datetime="2018-06-07T10:29:55+08:00">2018-06-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-25 10:57:46" itemprop="dateModified" datetime="2023-02-25T10:57:46+08:00">2023-02-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%AD%98%E5%82%A8/" itemprop="url" rel="index"><span itemprop="name">存储</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%AD%98%E5%82%A8/HDFS/" itemprop="url" rel="index"><span itemprop="name">HDFS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>HDFS NameNode是可靠和高效的, 简单的架构使HDFS能够在上千个节点可靠的存放生产级的数据. 但是, HDFS NameNode也是一个集群中的单点(SPOF). 开源社区也提供了几个HA的解决方案.</p>
+<span id="more"></span>    
+<p>HDFS Namenode 宕机后启动时构建状态的两个相对长的阶段包括:　 I. 加载fsimage,并回放editlog.    II. datanode块的汇报, blockMap的构建. HDFS Namenode HA主要是指Ediglog的HA,  不包括FSImage</p>
+<h2><span id="1-hdfs-ha-解决方案">1   HDFS  HA 解决方案</span><a href="#1-hdfs-ha-解决方案" class="header-anchor">#</a></h2><h3><span id="secondary-namenodesnn">Secondary NameNode(SNN)</span><a href="#secondary-namenodesnn" class="header-anchor">#</a></h3><p>Secondary NameNode 周期的合并edits和fsimage，能减少集群重启的时间。SNN会周期的做检查点(默认一个小时). 如果ＮＮ宕机, 宕机前和上一次checkpoint这个时间段的状态变更会丢失, 所以元数据并不是最新.　</p>
+<p>当NameNode(NN)失效的时 候，Secondary NN并无法立刻提供服务.</p>
+<h3><span id="backupnodebn">BackupNode(BN):</span><a href="#backupnodebn" class="header-anchor">#</a></h3><p>BackupNode是社区版Hadoop 0.21提供的一种高可用方案。它不仅实现了SecondaryNameNode的功能，还实现了复写功能，即同时向Active Namenode和Standby Namenode写入EditLog，这样也避免了共享存储会遇到的“IO Fencing”问题。 SNN  是每隔一段时间去  NN  下载  fsimage  和  edits  文件，而NN  可以实时的将日志传送给  BN ，然后将操作合并到  fsimage  里。</p>
+<p><img src="http://www6v.github.io/www6vHome/hdfs.files/image001.jpg"></p>
+<p>BackupNode 很便宜, 简易, 也考虑到了以下的用例: 主节点在运行, Standby 在线下维护. 主节点宕机并且不能重启.  Standby需要启动并接管主节点.   如果Standby不可用，Active Namenode会把EditLog备份到其他的地方。</p>
+<p>BackupNode只能算主从温备，因为Datanode只会向Active Namenode汇报和保持心跳，一旦Active Namenode发生故障，需要人工切换到BackupNode上，并且需要在BackupNode上把BlocksMap状态完全构建起来，这样的切换 时间在分钟~小时级别。</p>
+<h3><span id="avatarnode">AvatarNode:</span><a href="#avatarnode" class="header-anchor">#</a></h3><p>Facebook的AvatarNode是业界较早的Namenode HA方案，它是基于HDFS 0.20实现的，如下图所示。由于采用的是人工切换，所以实现相对简单。AvatarNode对Namenode进行了封装，处于工作状态的叫 Primary Avatar，处于热备状态的叫Standby Avatar(封装了Namenode和SecondaryNameNode)，两者通过NFS共享EditLog所在目录。在工作状态 下，Primary Avatar中的Namenode实例接收Client的请求并进行处理，Datanode会向Primary和Standby两个同时发送 blockReport和心跳，Standby Avatar不断地从共享的EditLog中持续写入的新事务，并推送给它的Namenode实例，此时Standby Avatar内部的Namenode处于安全模式状态，不对外提供服务，但是状态与Primary Avatar中的保持一致。一旦Primary发生故障，管理员进行Failover切换：首先将原来的Primary进程杀死(避免了“Split Brain”和“IO Fencing”问题)，然后将原来的Standby设置为Primary，新的Primary会保证回放完成所有的EditLog事务，然后退出安全模 式，对外接收服务请求。为了实现对客户端透明，AvatarNode主从采用相同的虚拟IP，切换时将新的Primary设置为该虚拟IP即可。整个流程 可在秒~分钟级别完成。</p>
+<p><img src="http://www6v.github.io/www6vHome/hdfs.files/image002.jpg"></p>
+<p><img src="http://www6v.github.io/www6vHome/hdfs.files/image003.jpg"> </p>
+<h3><span id="hadoop-20-ha">Hadoop 2.0  HA</span><a href="#hadoop-20-ha" class="header-anchor">#</a></h3><p>Hadoop 2.0 HA 在很多地方借鉴了 AvatarNode:</p>
+<p><img src="http://www6v.github.io/www6vHome/hdfs.files/image004.jpg"></p>
+<p> I. 同步edits信息<br> NN active和NN standby之间共享存储(share storage) edits信息, 通常用NFS. 这相当于单点故障的位置转移到了中高端的存储设备内部, 依赖外部存储的可靠性.  NN内部每次元数据变动后的flush操作，加上NFS的close-to-open，数据的一致性得到了保证。在使用了NFS做editLog的standby这个阶段后, 社区下个阶段更推崇使用BookKeeper做EditLog的存储. 并且这些功能是实现为可插拔的.</p>
+<p>   II. FailoverController作为NN进程的WatchDog<br>   FailoverController是一种协调器(coordination), 作为ZooKeeper的客户端, 主要的指责是领导者选举(leader election),  在NN宕机之后, 自动化的选举出领导者, 并透明的切换到standby上.<br>     错误检测机制通过ZK的临时节点(ephemeral nodes)来实现的, 用心跳和现在的系统集成在一起. 在NN full gc时, 会stop the world, 对这类GC有特殊的管理, 防止误认为NN active已宕机, 剥离出来的FailoverController能解决这个问题.</p>
+<p>III. fail-over选择<br>用户想要对fail-over做手工或者自动的热备份, Hadoop 2.0  HA提供了这两种选择.</p>
+<p>IV. DN block reports<br>向standby回报块(block reports)的逻辑重用了AvatarNode部分的代码.</p>
+<h3><span id="quorum-journal-manager-x2fpaxos-ha">Quorum Journal Manager &#x2F;Paxos HA</span><a href="#quorum-journal-manager-x2fpaxos-ha" class="header-anchor">#</a></h3><p>目前采用最多的就是用共享存储NAS+NFS, 但这些存储设备要求是HA的. 可以使用RAID技术, 利用磁盘阵列的手段,  提升数据的安全性. 但RAID也有缺陷, 这个机器的磁盘不可能无限的增加. 单机容量受到磁盘架个数的限制.<br>   换一个思路, 可以通过集群, 将多台pc server联系到一起, 使用软件逻辑而非硬件逻辑来进行数据的多磁盘备份.由此产生了Quorum-based Journaling这个HA解决方案.</p>
+<p><img src="http://www6v.github.io/www6vHome/hdfs.files/image005.gif">  </p>
+<p>概述一下Quorum-based Journaling: 多个后台进程的Quorum commits，把这样的后台进程表示为JournalNodes。每一个JournalNode暴露一个简单的RPC接口，允许NameNode读 写edit log，这个log是存在本地磁盘上。当NameNode要写一个edit时，它发送这个edit给集群中所有的JournalNodes，等待大多数节 点的回复。一旦大多数回复成功，这个edit就被认为提交了。</p>
+<p>Quorum-based相对于两阶段提交更轻量级, 但延迟也比较厉害. QJM有相应的对策,  QJM中存储日志的JournalNode不会因为其中一台的延迟而影响整体的延迟，而且也不会因为JournalNode的数量增多而影响性能（因为NN向JournalNode发送日志是并行的）</p>
+<h2><span id="2-机制">2.     机制</span><a href="#2-机制" class="header-anchor">#</a></h2><p>在看了些解决方案之后, 再看一下各个HA解决方案之后的实现机制</p>
+<p>   I. 表决: 相同的组件输入相同的输入, 他们的计算后的简单输出发送给表决者. 如果表决者检测到异常行为, 就终止这个组件的行为. 表决算法可以是”多数规则”等算法.<br>  也叫协调器 coordination, eg. 两阶段的deterministic coordinator, PAXOS&#x2F;Qurumn coordinator .  </p>
+<p>  II. 主动冗余:　系统中的组件以并行的方式接受请求, 仅仅使用一个组件的响应.　异常发生时,　系统的停机时间是通常是秒级,　因为备份组件的状态是最新的,　如果是自动切换,　停机时间会缩的更短.<br>  Eg. Hadoop 2.0 HA中DN同时向NN Active和NN Standby发送block report.</p>
+<p>  扩展: mapreduce的推测执行 (speculative execution)</p>
+<p>  III. 被动冗余:　系统中的一个组件接受请求,　然后通知备用组件进行状态的更新.　何时接管主组件的工作可以由备用组件或其它组件决定.　主组件会发出状态同步的命令.　<br>   Eg. AvatarNode 和 Hadoop 2.0 HA中, NN Active 同步EditLog到NN Standby中.<br>   扩展:　Datanode一备三<br>　　　<br>  IV. Checkpoint还原点: 可以看成是对组件健康状态的一次快照.<br>  Eg. SNN<br>  扩展: Oracle checkpoint, VM snapshot</p>
+<p>  V. 状态同步(状态外移): 备用组件在提供服务之前需要和主组件的状态一致. 恢复组件重新提供服务前要同步到失效之前正常的状态.　<br>  Eg.  Hadoop 2.0 HA中, 通过被动冗余的editlog和主动冗余的block report, NN Standby回放editlog与fsimage合并来实时和NN Active的状态保持一致.<br>  扩展:  Mysql slave 的binlog同步, Redis slave RDD 文件同步</p>
+<p>  VI. 命令&#x2F;响应(主动) :　一个组件发出一个命令,　并希望在预定义的时间内收到一个来自对方组件的响应.<br>Eg,  FailoverController发送命令给NN active, 如果NN active宕机, 就不能返回相应.<br>　<br>　VII. 心跳:　一个组件定期发出一个消息(心跳),　另一个组件收听这个消息,　知道组件是否健康.　<br>  Eg: FailoverController通过检测到NN active不健康,  会停止发心跳给zookeeper,  zookeeper知道NN acive已宕机, 会做领导者的选举.</p>
+<p>  VII. 影子服务: 备用组件和主组件的状态一致, 但主组件不宕机的情况下不对外提供服务.<br>  Eg. AvatarNode 和 Hadoop 2.0 HA中的standby</p>
+<p>VIII. 冷备份: standby没有运行, standby能通过读fsimage和editlog, 等待block report来建立需要的状态.</p>
+<p>VIIII. 温备份: standby装载了fsimage和editlog, 但没有最近的block report.</p>
+<p>X. 热备份: standby有足够的驻内存的状态来取代active.</p>
+<h2><span id="3-权衡">3.  权衡</span><a href="#3-权衡" class="header-anchor">#</a></h2><p>Backup node异步写有丢失小部分数据的可能,但吞吐量好,　延迟低, 能达到最终一致性. BackupNode 在宕机时, 还是需要把状态的远端外部存储拿回, 这又成了共享存储.</p>
+<p>如果对数据完整性要求比较高, 可以使用两阶段提交和PAXOS. 两阶段提交在没有timeout的机制时, 强依赖备用组件.  实现相对重量级, 由于要同步提交或者回滚, 所以延迟高, 并且吞吐量低.</p>
+<p>Quorum尝试复制多份数据,　只要有过半的节点成功,　即整个备份过程成功. PAXOS的多个变体通过合理的放弃一些性能与一致性，集群可以容忍几乎多达n&#x2F;2个数的节点失效。这种折中在两阶段提交与 PAXOS 协议的区别里体现得很明显。所以社区并未出现基于两阶段提交的HA方案, 而是出现了Quorum-based Journaling in CDH4.1</p>
+<p>   在failover后的客户端重定向, 生产中的解决方案, 往往通过virtual IP address提供namenode服务,  standby接管为acitive后会也使用这个虚拟ip</p>
+<p>   下图从几个维度给出各种HA解决方案的比较</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>备份方式</th>
+<th>协议</th>
+<th>是否丢数据</th>
+<th>可用性</th>
+<th>切换时间</th>
+<th>机制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Backup node</td>
+<td>温备</td>
+<td>Master-Slave</td>
+<td>丢数据</td>
+<td>基本可用</td>
+<td>分钟~小时级</td>
+<td>Checkpoint + EditLog被动冗余</td>
+</tr>
+<tr>
+<td>AvatarNode</td>
+<td>热备</td>
+<td>数据安全的Master-Slave</td>
+<td>不会丢数据</td>
+<td>高可用&#x2F;依赖外部可用性</td>
+<td>秒~分钟级别</td>
+<td>blockmap 主动冗余 +  EditLog被动冗余 + 影子服务</td>
+</tr>
+<tr>
+<td>HDFS HA 2.0(NFS)</td>
+<td>热备</td>
+<td>数据安全的Master-Slave</td>
+<td>不会丢数据</td>
+<td>依赖外部可用性&#x2F;依赖外部可用性</td>
+<td>5-20s</td>
+<td>blockmap 主动冗余 +  EditLog被动冗余 + 影子服务</td>
+</tr>
+<tr>
+<td>QJM&#x2F;Qurom Journal Manager</td>
+<td>热备</td>
+<td>PAXOS</td>
+<td>不会丢数据</td>
+<td>高可用</td>
+<td>小于1分钟</td>
+<td>EditLog被动冗余(Quorum-based)</td>
+</tr>
+</tbody></table>
+<p>CAP理论是一个相对论,  说明在分布式系统中提供的是相对的可用性, 一致性.  Hadoop namenode 的可用性也是相对的可用, 以下是一些小结:</p>
+<p>Backup Node:  延迟比较低, 吞吐量比较高, 并能容忍少量的数据丢失.   </p>
+<p>Hadoop HA 2.0: 要求数据不能丢失.  即可以使用NFS, 也可以使用Bookkeeper, 既可以手动切换,也可以自动切换Standby NN. 切换时间短. </p>
+<p>Quorum-based journaling: 要求数据不能丢失, 并且对延迟要求不高的情况, 也不希望使用昂贵的外部存储. </p>
+<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li><a target="_blank" rel="noopener" href="https://issues.apache.org/jira/browse/HDFS-1623"> High Availability Framework for HDFS NN</a>  </li>
+<li><a target="_blank" rel="noopener" href="http://www.docin.com/p-532877866.html">海量存储系列1-15</a> </li>
+<li><a target="_blank" rel="noopener" href="http://www.infoq.com/cn/articles/hadoop-2-0-namenode-ha-federation-practice-zh">Hadoop 2.0 NameNode HA和Federation实践</a> </li>
+<li><a target="_blank" rel="noopener" href="http://yanbohappy.sinaapp.com/?p=205">基于QJM&#x2F;Qurom Journal Manager&#x2F;Paxos的HDFS HA原理及代码分析</a> </li>
+<li><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/EZnE7v">Quorum-based Journaling in CDH4.1</a> </li>
+<li><a target="_blank" rel="noopener" href="http://www.infoq.com/cn/news/2012/08/facebook-avatarnode">Facebook如何使用Avartarnode提升HDFS可靠性</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.itinit.net/thread-2468-1-1.html">hadoop HA使用Quorum Journal的设计</a> </li>
+<li><a href="NoSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E7%AE%97%E6%B3%95">http://blog.nosqlfan.com/html/4139.html</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2018/06/07/hdfs/" title="HDFS NameNode HA 解决方案">https://www6v.github.io/www6vHomeHexo/2018/06/07/hdfs/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/%E5%8F%AF%E7%94%A8%E6%80%A7/" rel="tag"># 可用性</a>
+              <a href="/www6vHomeHexo/tags/HDFS/" rel="tag"># HDFS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2018/05/21/secKillSummary/" rel="prev" title="秒杀系统总结">
+      <i class="fa fa-chevron-left"></i> 秒杀系统总结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2018/07/19/NoSQL/" rel="next" title="NoSQL总结">
+      NoSQL总结 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">355</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">226</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">121</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

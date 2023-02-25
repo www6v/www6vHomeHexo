@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Kubernetes StatefulSet原理和源码">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2019/11/11/k8sStatefulSet/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2019/11/11/k8sStatefulSet/statefulSet.jpg">
+<meta property="article:published_time" content="2019-11-11T07:20:39.000Z">
+<meta property="article:modified_time" content="2023-02-25T02:57:47.028Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="Kubernetes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2019/11/11/k8sStatefulSet/statefulSet.jpg">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2019/11/11/k8sStatefulSet/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Kubernetes StatefulSet原理和源码 | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2019/11/11/k8sStatefulSet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kubernetes StatefulSet原理和源码
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-11 15:20:39" itemprop="dateCreated datePublished" datetime="2019-11-11T15:20:39+08:00">2019-11-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-25 10:57:47" itemprop="dateModified" datetime="2023-02-25T10:57:47+08:00">2023-02-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">云原生</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/" itemprop="url" rel="index"><span itemprop="name">Kubernetes</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p></p>
+<span id="more"></span>
+
+<img src="/www6vHomeHexo/2019/11/11/k8sStatefulSet/statefulSet.jpg" class title="StatefulSet">
+
+
+<h2><span id="源码分析">源码分析</span><a href="#源码分析" class="header-anchor">#</a></h2><h2><span id="1-statefulset资源定义">1. StatefulSet资源定义</span><a href="#1-statefulset资源定义" class="header-anchor">#</a></h2><h3><span id="11-statefulset定义">1.1 StatefulSet定义</span><a href="#11-statefulset定义" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">staging/src/k8s.io/api/apps/v1beta2/types.go</span><br><span class="line"></span><br><span class="line">type StatefulSet struct &#123;</span><br><span class="line">  metal.TypeMeta</span><br><span class="line">  metal.ObjectMeta</span><br><span class="line">  Spec StatefulSetspec #1</span><br><span class="line">  Status StatefulSetStatus #2</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3><span id="12-statefulsetspec定义">1.2 StatefulSetspec定义</span><a href="#12-statefulsetspec定义" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#1</span><br><span class="line">staging/src/k8s.io/api/apps/v1beta2/types.go</span><br><span class="line"></span><br><span class="line">type StatefulSetspec struct &#123;</span><br><span class="line">  /// Pod副本数控制	</span><br><span class="line">  Replicas *int32</span><br><span class="line"></span><br><span class="line">  /// Pod创建或者删除</span><br><span class="line">  Selector *metav1.LabelSelector</span><br><span class="line">  Template v1.PodTemplateSpec</span><br><span class="line">  VolumeClaimTemplates []v1.PersistentVolumeClaim  # 存储状态【2】</span><br><span class="line">  ServiceName string</span><br><span class="line">  PodManagementPolicy PodManagementPolicyType      # 2.2节 </span><br><span class="line"></span><br><span class="line">  /// Pod升级和回滚</span><br><span class="line">  UpdateStrategy StatefulSetUpdateStrategy         # 2.4节</span><br><span class="line">  RevisionHistoryLimit *int32</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3><span id="13-statefulsetstatus定义">1.3 StatefulSetStatus定义</span><a href="#13-statefulsetstatus定义" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#2</span><br><span class="line">staging/src/k8s.io/api/apps/v1beta2/types.go</span><br><span class="line"></span><br><span class="line">type StatefulSetStatus struct &#123;</span><br><span class="line">  ObservedGeneration *int64</span><br><span class="line">  Replicas int32              # 所有属于该 StatefulSet的Pod数量</span><br><span class="line">  ReadyReplicas int32         # 所有属于该 Statefulset的Pod且状态为ready的数量</span><br><span class="line">  CurrentReplicas int32       # 所有属于该 StatefulSet当前版本的Pod数量(升级完成时会等于UpdatedReplicas)</span><br><span class="line">  UpdatedReplicas int32       # 所有属于该 StatefulSet升级版本的Pod数量</span><br><span class="line">  CurrentRevision string      # Statefulset当前版本的 set.Name+hash</span><br><span class="line">  UpdateRevision string       # Stateful|Set升级版本的 set.Name+hash</span><br><span class="line">  CollisionCount *int32</span><br><span class="line">  Conditions []StatefulSetCondition</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3><span id="14-statefulset例子">1.4 StatefulSet例子</span><a href="#14-statefulset例子" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">  name: nginx</span><br><span class="line">  labels:</span><br><span class="line">    app: nginx</span><br><span class="line">spec:</span><br><span class="line">  ports:</span><br><span class="line">  - port: 80</span><br><span class="line">    name: web</span><br><span class="line">  clusterIP: None</span><br><span class="line">  selector:</span><br><span class="line">    app: nginx</span><br><span class="line">---</span><br><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: StatefulSet</span><br><span class="line">metadata:</span><br><span class="line">  name: web</span><br><span class="line">spec:                    ## 对应StatefulSetspec</span><br><span class="line">  serviceName: &quot;nginx&quot;</span><br><span class="line">  replicas: 2</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: nginx</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: nginx</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">      - name: nginx</span><br><span class="line">        image: k8s.gcr.io/nginx-slim:0.8</span><br><span class="line">        ports:</span><br><span class="line">        - containerPort: 80</span><br><span class="line">          name: web</span><br><span class="line">        volumeMounts:</span><br><span class="line">        - name: www</span><br><span class="line">          mountPath: /usr/share/nginx/html</span><br><span class="line">  volumeClaimTemplates:       ## 存储状态</span><br><span class="line">  - metadata:</span><br><span class="line">      name: www</span><br><span class="line">    spec:</span><br><span class="line">      accessModes: [ &quot;ReadWriteOnce&quot; ]</span><br><span class="line">      resources:</span><br><span class="line">        requests:</span><br><span class="line">          storage: 1Gi         </span><br></pre></td></tr></table></figure>
+
+
+<h2><span id="2-statefulset-controller详细说明">2. StatefulSet Controller详细说明</span><a href="#2-statefulset-controller详细说明" class="header-anchor">#</a></h2><p>前提: 应用的各实例启动需要遵循一定的<strong>顺序</strong>， 顺序需要唯一的<strong>标识和编号</strong>. </p>
+<h3><span id="21-pod固定身份标识编号-gt-拓扑状态1">2.1 Pod固定身份标识（编号） -&gt; 拓扑状态【1】</span><a href="#21-pod固定身份标识编号-gt-拓扑状态1" class="header-anchor">#</a></h3><ul>
+<li>名称维度</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># pkg/controller/statefulset/stateful_set_utils.go</span><br><span class="line"></span><br><span class="line">// getPodName gets the name of set&#x27;s child Pod with an ordinal index of ordinal</span><br><span class="line">func getPodName(set *apps.StatefulSet, ordinal int) string &#123;</span><br><span class="line">	return fmt.Sprintf(&quot;%s-%d&quot;, set.Name, ordinal)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>索引号 ordinal&#x3D;{0~ StatefulSetSpec.Replicas - 1}</p>
+<ul>
+<li>网络地址维度</li>
+</ul>
+<p>headless service对应pod的网络地址(完整<strong>域名</strong>)为: <code>&lt;hostname&gt;.&lt;subdomain&gt;.&lt;ns&gt;.svc.cluster.local</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># pkg/controller/statefulset/stateful_set_utils.go</span><br><span class="line"></span><br><span class="line">func initIdentity(set *apps.StatefulSet, pod *v1.Pod) &#123;</span><br><span class="line">	updateIdentity(set, pod)</span><br><span class="line">	// Set these immutable fields only on initial Pod creation, not updates.</span><br><span class="line">	pod.Spec.Hostname = pod.Name</span><br><span class="line">	pod.Spec.Subdomain = set.Spec.ServiceName</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从名称维度可知，podName是固定的，所以pod的网络地址也是固定的。</p>
+<ul>
+<li>存储维度 -&gt;  存储状态</li>
+</ul>
+<p>Pod的各个 volume是通过PVC来管理的，所以只要 Volume对应的PVC能保持不变，那就可以保证存储不变。那么顺其自然一定会想到，只要PVC的名称也和Pod的索引位置绑定，那问题就解决了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># pkg/controller/statefulset/stateful_set_utils.go</span><br><span class="line"></span><br><span class="line">// getPersistentVolumeClaimName gets the name of PersistentVolumeClaim for a Pod with an ordinal index of ordinal. claim</span><br><span class="line">// must be a PersistentVolumeClaim from set&#x27;s VolumeClaims template.</span><br><span class="line">func getPersistentVolumeClaimName(set *apps.StatefulSet, claim *v1.PersistentVolumeClaim, ordinal int) string &#123;</span><br><span class="line">	// NOTE: This name format is used by the heuristics for zone spreading in ChooseZoneForVolume</span><br><span class="line">	return fmt.Sprintf(&quot;%s-%s-%d&quot;, claim.Name, set.Name, ordinal)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>pod的名字和pvc的名字一一对应。</p>
+<p><strong>总结</strong>: 可以看到3个维度的固定，本质都是依赖Pod的<strong>索引位置</strong>(ordinal)来固定的。</p>
+<h3><span id="22-statefulset-pod创建和删除">2.2 StatefulSet Pod创建和删除</span><a href="#22-statefulset-pod创建和删除" class="header-anchor">#</a></h3><p>根据<code>StatefulSetSpec.PodManagementPolicy</code>的设置，Pod创建分为<code>OrderedReady</code>和 <code>Parallel</code>两种模式。</p>
+<p><code>OrderedReady模式</code>: 按索引号<code>0 ~ replicas-1</code>的顺序，前序Pod创建成功后，才会接下来创建下一个Pod。<br><code>Parallel模式</code>:并发创建各个Pod。</p>
+<p>而对于Pod<strong>删除</strong>，用户直接删除StatefulSet的Pod是无效的，因为 StatefulSet马上就会重建。<br>如果要删除Pod,必须通过调整 StatefulSet的 Spec.Replicas来达到删除目的。即为Pod扩缩容处理。</p>
+<h3><span id="23-pod扩缩容">2.3 Pod扩缩容</span><a href="#23-pod扩缩容" class="header-anchor">#</a></h3><p>扩容处理: Replicas增大的情况，则直接是Pod创建的逻辑。<br>缩容处理: 因为需要减少Pod，为了不和Pod创建过程冲突，缩容是从最大索引号开始删除Pod。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"># pkg/controller/statefulset/stateful_set_control.go</span><br><span class="line"></span><br><span class="line">if ord := getOrdinal(pods[i]); 0 &lt;= ord &amp;&amp; ord &lt; replicaCount &#123;</span><br><span class="line">    replicas[ord] = pods[i]</span><br><span class="line">&#125; else if ord &gt;= replicaCount &#123;</span><br><span class="line">    //pod索引号大于最新的Spec.Replicas,说明Replicas减小了，这些Pod需要被缩容掉</span><br><span class="line">    condemned = append(condemned, pods[i])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 从最大索引号开始缩容</span><br><span class="line">for target := len(condemned) - 1; target &gt;= 0; target-- &#123;</span><br><span class="line">    // 如果该Pod正在被删除,则等待被删除完成即可</span><br><span class="line">    if isTerminating(condemned[target]) &#123;</span><br><span class="line">        if monotonic &#123;</span><br><span class="line">            return &amp;status, nil</span><br><span class="line">        &#125;</span><br><span class="line">        continue</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 如果被删除pod的前序pod中有不健康的,那么需要等待前序pod恢复为正常状态后才能继续缩容</span><br><span class="line">    if !isRunningAndReady(condemned[target]) &amp;&amp; monotonic &amp;&amp; condemned[target] != firstUnhealthyPod &#123;</span><br><span class="line">        return &amp;status, nil</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 到这里可以执行pod缩容删除了</span><br><span class="line">    if err := ssc.podControl.DeleteStatefulPod(set, condemned[target]); err != nil &#123;</span><br><span class="line">        return &amp;status, err</span><br><span class="line">    &#125;</span><br><span class="line">    // 更新StatefulSet.Status</span><br><span class="line">    if getPodRevision(condemned[target]) == currentRevision.Name &#123;</span><br><span class="line">        status.CurrentReplicas--</span><br><span class="line">    &#125; else if getPodRevision(condemned[target]) == updateRevision.Name &#123;</span><br><span class="line">        status.UpdatedReplicas--</span><br><span class="line">    &#125;</span><br><span class="line">    if monotonic &#123;</span><br><span class="line">        return &amp;status, nil</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3><span id="24-pod的升级">2.4 Pod的升级</span><a href="#24-pod的升级" class="header-anchor">#</a></h3><p>Pod升级策略由<code>Spec.Update.Strategy</code>字段指定，目前支持<code>OnDelete</code>和<code>RollingUpdate</code>两种模式。</p>
+<h5><span id="241-ondelete-模式">2.4.1 OnDelete 模式</span><a href="#241-ondelete-模式" class="header-anchor">#</a></h5><p><code>Spec.UpdateStrategy.Type=OnDelete</code>: <code>Spec.Template</code>更新后，需要用户手动删除旧Pod，然后StatefulSet Controller会利用新的<code>Spec.Template</code>创建新Pod。代码中处理如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if set.Spec.UpdateStrategy.Type == apps.OnDeleteStatefulSetStrategyType &#123;</span><br><span class="line">    return &amp;status, nil</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当升级策略为OnDelete时，执行直接返回，等待用户手动删除pod。</p>
+<h5><span id="242-rollingupdate-模式">2.4.2 RollingUpdate 模式</span><a href="#242-rollingupdate-模式" class="header-anchor">#</a></h5><p><code>Spec.UpdateStrategy.Type=RollingUpdate</code>: <code>Spec.Template</code>更新后，StatefulSet Controller会从最大索引号开始逐个升级Pod。即先删除pod，然后等到删除的pod被创建好后再进行下一个索引号的Pod升级。</p>
+<p>RollingUpdate模式的Pod升级，可以只升级部分Pod。新旧Pod分水岭的索引号由<code>Spec.UpdateStrategy.RollingUpdate.Partition</code>指定。其中<code>[0 ~ partition-1]</code>索引号的Pod为旧版本，而<code>[partition ~ replicas-1]</code>索引号的Pod为新版本。当然如果 <code>partition &gt; Spec.Replicas</code>，则不会升级任何Pod。</p>
+<p>RollingUpdate模式的代码如下(下面主要为删除旧Pod)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">updateMin := 0</span><br><span class="line">if set.Spec.UpdateStrategy.RollingUpdate != nil &#123;</span><br><span class="line">    updateMin = int(*set.Spec.UpdateStrategy.RollingUpdate.Partition)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 从最大索引号开始执行Pod升级处理(此处为旧Pod删除)</span><br><span class="line">for target := len(replicas) - 1; target &gt;= updateMin; target-- &#123;</span><br><span class="line">    // 如果pod为旧版本并且不在被删除状态，则执行Pod删除</span><br><span class="line">    if getPodRevision(replicas[target]) != updateRevision.Name &amp;&amp; !isTerminating(replicas[target]) &#123;</span><br><span class="line">        err := ssc.podControl.DeleteStatefulPod(set, replicas[target])</span><br><span class="line">        status.CurrentReplicas--</span><br><span class="line">        return &amp;status, err // 直接退出,等待被删除Pod被创建</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 等待到被删除pod创建且ready，才进行下一个pod的升级。否则就退出for循环</span><br><span class="line">    if !isHealthy(replicas[target]) &#123;</span><br><span class="line">        return &amp;status, nil</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2><span id="3-statefulset的控制流程">3. Statefulset的控制流程</span><a href="#3-statefulset的控制流程" class="header-anchor">#</a></h2><p>经过上面代码级别的细节说明，下面大致梳理一下 StatefulSet Controller的控制流程。具体如下:</p>
+<ul>
+<li>获取 StatefulSet: 由key从<code>set.Lister</code>(本地缓存)中获取到需要处理的 StatefulSet实例</li>
+<li>获取 Statefulset所有Pod: 由<code>StatefulSet.Spec.Selector</code>从 pod.Lister(本地缓存)中过滤所有符合条件的Pod(且podName和 set.Name匹配) （1.2节）</li>
+<li>获取当前版本和升级版本的 Controller Revision: 如果升级版本的 Controller Revision不存在，就新创建一个。(StatefulSet创建时，当前版本和升级版本相同。当前升级完成后,他们也相同)</li>
+<li>从<code>0 ~ Spec.Replicas-1</code>逐个索引，创建StatefulSet Pod。 (2.2节)</li>
+<li>所有pod创建完成后，进入扩缩容逻辑处理(如果需要扩缩容操作的话)  （2.3节）</li>
+<li>扩缩容操作完成后，进入Pod升级逻辑(如果需要Pod升级操作的话) （2.4节）</li>
+<li>更新 StatefulSet的 Status （1.3节）</li>
+</ul>
+<h2><span id="draft-here">Draft Here</span><a href="#draft-here" class="header-anchor">#</a></h2>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2019/11/11/k8sStatefulSet/" title="Kubernetes StatefulSet原理和源码">https://www6v.github.io/www6vHomeHexo/2019/11/11/k8sStatefulSet/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/Kubernetes/" rel="tag"># Kubernetes</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2019/11/04/k8sService/" rel="prev" title="Kubernetes服务">
+      <i class="fa fa-chevron-left"></i> Kubernetes服务
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2019/11/13/k8sPattern/" rel="next" title="Kubernetes模式">
+      Kubernetes模式 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">355</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">226</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">121</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

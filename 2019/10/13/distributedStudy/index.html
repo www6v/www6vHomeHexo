@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="分布式系统学习资源-个人">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2019/10/13/distributedStudy/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-10-12T22:51:35.000Z">
+<meta property="article:modified_time" content="2023-02-25T02:57:46.021Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="分布式">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2019/10/13/distributedStudy/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>分布式系统学习资源-个人 | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2019/10/13/distributedStudy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          分布式系统学习资源-个人
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-13 06:51:35" itemprop="dateCreated datePublished" datetime="2019-10-13T06:51:35+08:00">2019-10-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-25 10:57:46" itemprop="dateModified" datetime="2023-02-25T10:57:46+08:00">2023-02-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/" itemprop="url" rel="index"><span itemprop="name">学习资源</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p></p>
+<span id="more"></span>
+
+<h3><span id="book">Book</span><a href="#book" class="header-anchor">#</a></h3><ol>
+<li><a target="_blank" rel="noopener" href="https://item.jd.com/10079452.html">《世界著名计算机教材精选：分布式系统原理与范型》</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.antonfagerberg.com/files/intensive.pdf">《Designing Data‑Intensive Applications》</a></li>
+</ol>
+<h2><span id="个人博客-阿里">个人博客 - 阿里</span><a href="#个人博客-阿里" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th align="center">内容</th>
+<th align="center">注释-最后更新时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><a target="_blank" rel="noopener" href="http://leaver.me/">碧远 蚂蚁金服中间件</a></td>
+<td align="center">已失效</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="http://monkeyhorse.cn/">蚂蚁财富研发工程师</a></td>
+<td align="center">已失效</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="http://blog.lichengwu.cn/">李小武，coding@alibaba。</a></td>
+<td align="center">已失效</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="http://www.blogjava.net/BlueDavy/">阿里人</a></td>
+<td align="center">2009停更</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="http://blog.zephyrleaves.net/">黄若慧 高级技术专家 淘宝文通</a></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://www.sczyh30.com/">Software Engineer @ Alibaba Middleware Team</a></td>
+<td align="center">2017停更</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="http://blog.yufeng.info/">系统技术非业余研究</a></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="http://arebya.com/">arebya</a> 质量不高</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://agapple.iteye.com/">canal作者 agapple</a></td>
+<td align="center">2016停更</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://www.jianshu.com/u/b230a86fb7ad">阿里加多</a></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://yq.aliyun.com/users/6bmpl5rdwpqu4">乒乓狂魔</a></td>
+<td align="center">已失效</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://yq.aliyun.com/users/ejn34jbxf5evs">冯嘉 rocketmq</a></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://yq.aliyun.com/users/jwbhxydfk6qyi/article">木洛 阿里云技术专家，表格存储</a></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://yq.aliyun.com/users/u3vivzisyg2pc/">成喆 阿里云存储服务</a></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://yq.aliyun.com/users/zh5kxxfngqw2m">文意 阿里云存储服务产品</a>  serverless 场景</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://yq.aliyun.com/users/fbt6ovijrs2zi">scorpion 阿里云函数计算研发经理</a> 函数计算</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://www.cnblogs.com/bodhitree/default.html">Freewill 阿里云的人 SDN ceph</a></td>
+<td align="center">2020 停更</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="http://www.seflerzhou.net/">阿里  周遥（玄胤）</a></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">入境繁华  蚂蚁金服中间件团队 <br> <a target="_blank" rel="noopener" href="http://zhengjianglong.cn/">http://zhengjianglong.cn</a> <br> <a target="_blank" rel="noopener" href="http://blog.leanote.com/along">http://blog.leanote.com/along</a></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">阿里人的博客 canel <br> <a target="_blank" rel="noopener" href="http://agapple.iteye.com/">http://agapple.iteye.com/</a> <br>  <a target="_blank" rel="noopener" href="https://github.com/agapple">https://github.com/agapple</a></td>
+<td align="center">2016 停更</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="http://bluedavy.me/">阿里 林昊</a></td>
+<td align="center">失效</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://dinglin.iteye.com/">阿里 丁奇 dba mysql</a></td>
+<td align="center">2016 停更</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="http://www.cnblogs.com/LBSer/">占利军   后端架构、算法  阿里巴巴 美团；</a></td>
+<td align="center">2019 停更</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="http://hengyunabc.github.io/">横云断岭&#x2F;hengyunabc hexo</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/hengyunabc">横云断岭&#x2F;hengyunabc csdn</a></td>
+<td align="center">2019 停更</td>
+</tr>
+</tbody></table>
+<p>taobao   毕玄博客   做服务化的<br><a target="_blank" rel="noopener" href="http://hellojava.info/">http://hellojava.info/</a><br>hellojavacases微信公众号网站  加过  </p>
+<h2><span id="个人博客-其他">个人博客 - 其他</span><a href="#个人博客-其他" class="header-anchor">#</a></h2><p><a target="_blank" rel="noopener" href="https://coolshell.cn/">陈皓 左耳耗子</a> ***<br><a target="_blank" rel="noopener" href="https://www.helight.cn/">黑光技术</a>  *** linux 云原生<br><a target="_blank" rel="noopener" href="https://crossoverjie.top/">crossoverjie</a><br><a target="_blank" rel="noopener" href="http://abloz.com/">瀚海星空</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/yinwenjie/article/list/1">银文杰 &lt;&lt;高性能服务系统构建与实战&gt;&gt;</a></p>
+<h5><span id="停更">停更</span><a href="#停更" class="header-anchor">#</a></h5><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/java-zhao/">水寒  网易研发工程师</a>  2018停更<br><a target="_blank" rel="noopener" href="http://www.jianshu.com/u/90ab66c248e6">占小狼 – 点评</a>  2020停更 jvm<br><a target="_blank" rel="noopener" href="http://blog.csdn.net/mindfloating/article/details/51221780">Microservice 微服务的理论模型和现实路径 – 京东的人</a>  2019停更<br><a target="_blank" rel="noopener" href="https://jinnianshilongnian.iteye.com/">京东 张开涛</a>  2016停更<br><a target="_blank" rel="noopener" href="http://icyfenix.iteye.com/">周志明 的博客 </a>  《java虚拟机》 作者 2013停更<br><a target="_blank" rel="noopener" href="http://my.oschina.net/andylucc/home">Float_Luuu  大众点评网 - 高级程序员</a>  失效<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wayfarer/default.html">张逸的博客</a> * 2018停更<br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/netfocus/">汤雪华，DDD&#x2F;CQRS</a> 2019停更<br><a target="_blank" rel="noopener" href="http://mingxinglai.com/">赖明星  网易</a>  2016停更</p>
+<h5><span id="其他">其他</span><a href="#其他" class="header-anchor">#</a></h5><p><a href>花钱的年华 江南白衣</a>  基础架构<br>零度 jvm<br>朱小厮 朱忠华 kafka rabbitmq 唯品会<br>闪电侠 netty<br>老钱 redis 阅文集团<br>程序猿DD springCloud</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2019/10/13/distributedStudy/" title="分布式系统学习资源-个人">https://www6v.github.io/www6vHomeHexo/2019/10/13/distributedStudy/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag"># 分布式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2019/10/12/crashDetect/" rel="prev" title="宕机检测-Lease、心跳">
+      <i class="fa fa-chevron-left"></i> 宕机检测-Lease、心跳
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2019/10/23/distributedSystemHandbook/" rel="next" title="分布式系统 Handbook">
+      分布式系统 Handbook <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">355</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">226</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">121</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

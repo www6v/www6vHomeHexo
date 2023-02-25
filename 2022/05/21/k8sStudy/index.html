@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Kubernetes 学习资源">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/05/21/k8sStudy/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-21T08:57:14.000Z">
+<meta property="article:modified_time" content="2023-02-25T02:57:47.044Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="Kubernetes">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/05/21/k8sStudy/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Kubernetes 学习资源 | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2022/05/21/k8sStudy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kubernetes 学习资源
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-05-21 16:57:14" itemprop="dateCreated datePublished" datetime="2022-05-21T16:57:14+08:00">2022-05-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-25 10:57:47" itemprop="dateModified" datetime="2023-02-25T10:57:47+08:00">2023-02-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">云原生</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/" itemprop="url" rel="index"><span itemprop="name">Kubernetes</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/" itemprop="url" rel="index"><span itemprop="name">学习资源</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p></p>
+<span id="more"></span>
+
+<h2><span id="个人">个人</span><a href="#个人" class="header-anchor">#</a></h2><h5><span id="倪朋飞">倪朋飞</span><a href="#倪朋飞" class="header-anchor">#</a></h5><p><a target="_blank" rel="noopener" href="https://feisky.xyz/kubernetes-handbook/">Kubernetes 指南</a>   ***<br><a target="_blank" rel="noopener" href="https://sdn.feisky.xyz/">SDN</a> ***</p>
+<p><a target="_blank" rel="noopener" href="https://feisky.xyz/">倪朋飞 微软</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/people/feisky/posts">倪朋飞@知乎 微软</a>  </p>
+<h5><span id="宋净超-jimmy-song">宋净超-Jimmy Song</span><a href="#宋净超-jimmy-song" class="header-anchor">#</a></h5><p><a target="_blank" rel="noopener" href="https://jimmysong.io/kubernetes-handbook/">Kubernetes Handbook——Kubernetes 中文指南&#x2F;云原生应用架构实战手册</a>    ***<br><a target="_blank" rel="noopener" href="https://jimmysong.io/docs/istio-handbook/">Istio 基础教程</a>     ***<br><a target="_blank" rel="noopener" href="https://jimmysong.io/docs/kubernetes-hardening-guidance/">Kubernetes 加固指南</a>    ***<br><a target="_blank" rel="noopener" href="https://jimmysong.io/docker-handbook/">Docker Handbook</a><br><a target="_blank" rel="noopener" href="https://jimmysong.io/serverless-handbook/">Serverless Handbook——无服务架构实践手册</a>  </p>
+<h5><span id="others">others</span><a href="#others" class="header-anchor">#</a></h5><p><a target="_blank" rel="noopener" href="http://arthurchiao.art/categories/">ArthurChiao’s Blog</a> cliumn , bpf, network  ***<br><a target="_blank" rel="noopener" href="https://www.yuque.com/wei.luo/cni">wei.luo</a>  network  ***<br><a target="_blank" rel="noopener" href="https://icloudnative.io/">云原生实验室</a>   米开朗基杨 @知乎 ，腾讯云开发者社区， ***<br><a target="_blank" rel="noopener" href="https://skyao.io/#posts">傲小剑  service mesh</a>  service mesh ***<br><a target="_blank" rel="noopener" href="https://zhaohuabing.com/">赵化冰@ZTE</a>  service mesh ***<br><a target="_blank" rel="noopener" href="https://draveness.me/">draveness</a>   golang, k8s  ***<br><a target="_blank" rel="noopener" href="http://www.xuyasong.com/?page_id=1827">Vermouth</a> Prometheus, Kubernetes, ETCD *** 2020 停更<br><a target="_blank" rel="noopener" href="https://blog.fleeto.us/">崔秀龙</a> service mesh **<br><a target="_blank" rel="noopener" href="https://morven.life/">morven</a> Kubernetes, go **<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/popsuper1982/">刘超的通俗云计算  网易云首席架构</a> *<br><a target="_blank" rel="noopener" href="https://imroc.io/">陈鹏</a> 腾讯云工程师 k8s  失效<br><a target="_blank" rel="noopener" href="https://imfox.io/">钟华 腾讯云</a>  失效<br><a target="_blank" rel="noopener" href="https://cizixs.com/">cizixs@蚂蚁金服</a>  2018 停更<br><a target="_blank" rel="noopener" href="https://www.huweihuang.com/kubernetes-notes/">Kubernetes 学习笔记</a> 胡伟煌  2018 停更</p>
+<h2><span id="公司">公司</span><a href="#公司" class="header-anchor">#</a></h2><h5><span id="团队分享">团队分享</span><a href="#团队分享" class="header-anchor">#</a></h5><p><a target="_blank" rel="noopener" href="https://tencentcloudcontainerteam.github.io/">腾讯云容器团队</a>  k8s  2020停更<br><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/column/1075/tag-0">腾讯云容器服务团队的专栏</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/qingcloud">青云QingCloud 知乎</a>  知乎 干货少<br><a target="_blank" rel="noopener" href="https://www.zhihu.com/org/daocloud-3">DaoCloud 道客</a>  知乎 干货多</p>
+<h5><span id="公司落地">公司落地</span><a href="#公司落地" class="header-anchor">#</a></h5><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/hV8oT13J4DFtpe7JsxSONA">唯品会Noah云平台实现内幕披露</a><br>[点评]</p>
+<h2><span id="公开课">公开课</span><a href="#公开课" class="header-anchor">#</a></h2><h5><span id="cncf-alibaba-云原生技术公开课">CNCF × Alibaba 云原生技术公开课</span><a href="#cncf-alibaba-云原生技术公开课" class="header-anchor">#</a></h5><p><a target="_blank" rel="noopener" href="https://edu.aliyun.com/course/1651">CNCF × Alibaba 云原生技术公开课</a>  video+text+ppt  seen (30章节)<br><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/765059?utm_content=g_1000142140">阿里云-K8s 资源全汇总 | K8s 大咖带你 31 堂课从零入门 K8s</a><br><a target="_blank" rel="noopener" href="https://edu.aliyun.com/roadmap/cloudnative?spm=a2c6h.12873581.1367615.1.e9cf115eVcBAsC">阿里云-云原生技术公开课</a><br><a target="_blank" rel="noopener" href="https://edu.aliyun.com/course/1651/lesson/list?spm=a2c6h.12873581.1367615.2.e9cf115eVcBAsC">阿里云-云原生技术公开课（备用地址）</a>  </p>
+<ul>
+<li>第9 章 ： 应用存储和持久化数据卷：核心知识 - seen</li>
+<li>第10 章 ： 应用存储和持久化数据卷：存储快照与拓扑调度 </li>
+<li>第11 章 ： 可观测性：你的应用健康吗 - seen<br>readiness， liveness， 应用故障排查</li>
+<li>第12 章 ： 可观测性：监控与日志<br>prometheus， 监控大图</li>
+<li>第13 章 ： Kubernetes网络概念及策略控制 -seen<br>约法三章</li>
+<li>第14 章 ： Kubernetes Services - seen<br>架构图</li>
+<li>第15 章 ： 深入剖析 Linux 容器<br> cgroup ，overlay， dockershim, containerd</li>
+<li>第16 章 ： 深入理解 etcd - 基本原理解析 </li>
+<li>第17 章 ： 深入理解etcd：etcd性能优化实践 </li>
+<li>第18 章 ： Kubernetesdi调度和资源管理<br>QoS(requests,limits) , 亲和， taint&#x2F;toleration, 优先级调度</li>
+<li>第19 章 ： 调度器的调度流程和算法介绍 </li>
+<li>第21 章 ： Kubernetes 存储架构及插件使用<br>  第一部分讲述了Kubernetes存储架构，主要包括存储卷概念、挂载流程、系统组件等相关知识；<br>  第二部分讲述了Flexvolume插件的实现原理、部署架构、使用示例等；<br>  第三部分讲述了CSI插件的实现原理、资源对象、功能组件、使用示例等；</li>
+<li>第22 章 ： 有状态应用编排：StatefulSet </li>
+<li>第23 章 ： KubernetesAPI编程范式 </li>
+<li>第24 章 ： KubernetesAPI编程利器：Operator和OperatorFramework<br>kubebuilder 和 operator-sdk</li>
+<li>第25 章 ： Kubernetes网络模型进阶 – seen<br>架构图（重要）</li>
+<li>第26 章 ： 理解CNI和CNI插件 – seen</li>
+<li>第27 章 ： Kubernetes安全之访问控制 – seen</li>
+<li>第28 章 ： 理解容器运行时接口CRI – seen </li>
+<li>第29 章 ： 安全容器技术 – seen<br>Kata Containers， gVisor</li>
+<li>第30 章 ： 理解RuntimeClass与使用多容器运行时</li>
+</ul>
+<h5><span id="华为云云原生王者课程集训营黄金gt钻石gt王者">华为云云原生王者课程集训营（黄金–&gt;钻石–&gt;王者）</span><a href="#华为云云原生王者课程集训营黄金gt钻石gt王者" class="header-anchor">#</a></h5><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzIzNzU5NTYzMA==&action=getalbum&album_id=2082025559781376005&scene=173&from_msgid=2247494514&from_itemidx=1&count=3&nolastread=1#wechat_redirect">华为云云原生王者课程集训营</a> - (黄金+钻石)  文字稿<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/400092006">华为云云原生王者之路钻石集训营–学习笔记</a> good<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ZR4y1E7rb/?spm_id_from=333.788.recommend_more_video.2">华为云云原生王者之路_钻石</a> bilibili视频课<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Qr4y1278d/?spm_id_from=333.788.recommend_more_video.5">华为云云原生王者之路集训营_黄金课程</a> bilibili视频课<br><a target="_blank" rel="noopener" href="https://edu.huaweicloud.com/activity/Cloud-native3.html?utm_source=hwynewbanner&utm_medium=sm-huaweiyun&utm_campaign=edu&utm_content=activity&utm_term=2">华为云云原生王者课程集训营</a>  视频课<br><a target="_blank" rel="noopener" href="https://education.huaweicloud.com/programs/63384278-52ab-42e9-8e67-5dff5a9f37fd/about?utm_source=zhihu&utm_medium=bbs-ex&utm_campaign=edu&utm_content=courses&utm_term=16">华为云云原生王者课程集训营</a> 视频课</p>
+<h5><span id="华为云-cloud-native-lives">华为云-Cloud Native Lives</span><a href="#华为云-cloud-native-lives" class="header-anchor">#</a></h5><p><a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/webinar/100009">华为云-Cloud Native Lives</a>  </p>
+<h5><span id="腾讯云-云原生正发声">腾讯云-云原生正发声</span><a href="#腾讯云-云原生正发声" class="header-anchor">#</a></h5><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/7RoYOX9PBp79bwsLmTiOsQ">云原生技术实践 | 16位专家视频讲解合集（抢新年限定红包封面）</a><br><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/special/cloudnative">云原生正发声</a><br><a target="_blank" rel="noopener" href="https://docs.qq.com/doc/DRmtFZkFNRlpqeVdR">【云原生正发声】直播PPT汇总</a></p>
+<h2><span id="kube-study-platform">kube-study platform</span><a href="#kube-study-platform" class="header-anchor">#</a></h2><p><a target="_blank" rel="noopener" href="https://www.katacoda.com/courses/kubernetes">Learn Kubernetes using Interactive Browser-Based Scenarios</a><br><a target="_blank" rel="noopener" href="https://labs.play-with-k8s.com/">Play with Kubernetes</a></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2022/05/21/k8sStudy/" title="Kubernetes 学习资源">https://www6v.github.io/www6vHomeHexo/2022/05/21/k8sStudy/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/Kubernetes/" rel="tag"># Kubernetes</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2022/05/19/sparkPerformance/" rel="prev" title="Spark 性能优化">
+      <i class="fa fa-chevron-left"></i> Spark 性能优化
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2022/05/21/cloudComputingBilling/" rel="next" title="云计算计费">
+      云计算计费 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">355</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">226</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">121</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

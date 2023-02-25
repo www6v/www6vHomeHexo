@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Elasticsearch 分布式集群">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2019/08/03/elasticsearchDistributed/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/65385405-d7491280-dd60-11e9-9a73-895afca03bb8.png">
+<meta property="article:published_time" content="2019-08-03T14:38:59.000Z">
+<meta property="article:modified_time" content="2023-02-25T02:57:46.050Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="Elasticsearch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/5608425/65385405-d7491280-dd60-11e9-9a73-895afca03bb8.png">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2019/08/03/elasticsearchDistributed/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Elasticsearch 分布式集群 | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2019/08/03/elasticsearchDistributed/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Elasticsearch 分布式集群
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-03 22:38:59" itemprop="dateCreated datePublished" datetime="2019-08-03T22:38:59+08:00">2019-08-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-25 10:57:46" itemprop="dateModified" datetime="2023-02-25T10:57:46+08:00">2023-02-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%AD%98%E5%82%A8/" itemprop="url" rel="index"><span itemprop="name">存储</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%AD%98%E5%82%A8/Elasticsearch/" itemprop="url" rel="index"><span itemprop="name">Elasticsearch</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p></p>
+<span id="more"></span>
+
+<h2><span id="es的集群">ES的集群</span><a href="#es的集群" class="header-anchor">#</a></h2><h5><span id="分片-shard-1">分片 shard [1]</span><a href="#分片-shard-1" class="header-anchor">#</a></h5><ul>
+<li>分片 shard<br>最小的工作单元<br>是一个lucene的index。<br>在lucene中，单个倒排索引文件称为segment，多个segments汇总在一起称为lucence的index</li>
+<li>主分片（Primary Shard）<br>主分片数设置好后不能变更，如要修改, 需要重建索引。</li>
+<li>副本分片（Replica Shard）<br>数据可用性<br>副本数可以动态调整， 提高读取的吞吐量</li>
+</ul>
+<h5><span id="节点类型2">节点类型[2]</span><a href="#节点类型2" class="header-anchor">#</a></h5><table>
+<thead>
+<tr>
+<th align="center">节点类型</th>
+<th align="center">配置参数</th>
+<th align="center">默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">master <br> 要部署多个master节点</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">master eligible <br> master的候选节点</td>
+<td align="center">node.master</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">data <br> 保存分片数据</td>
+<td align="center">node.data</td>
+<td align="center">true <br> 默认是数据节点，可以禁止掉</td>
+</tr>
+<tr>
+<td align="center">ingest</td>
+<td align="center">node.ingest</td>
+<td align="center">true</td>
+</tr>
+<tr>
+<td align="center">coordinating only</td>
+<td align="center">无</td>
+<td align="center">每个节点默认都是coordinating节点。设置其他类型全部为false。</td>
+</tr>
+<tr>
+<td align="center">machine learning</td>
+<td align="center">node.ml</td>
+<td align="center">true（需enable x-pack）</td>
+</tr>
+</tbody></table>
+<ul>
+<li>一个节点默认情况下是Master eligible, data, ingest的node</li>
+</ul>
+<h5><span id="集群健康状态-1">集群健康状态 [1]</span><a href="#集群健康状态-1" class="header-anchor">#</a></h5><ul>
+<li>三种颜色<ul>
+<li>绿色： 主分片和副本分片都可用</li>
+<li>黄色： 主分片可用， 部分副本分片不可用 </li>
+<li>红色： 部分主分片不可用</li>
+</ul>
+</li>
+</ul>
+<h5><span id="脑裂问题-2">脑裂问题 [2]</span><a href="#脑裂问题-2" class="header-anchor">#</a></h5><ul>
+<li>7.0之前的版本<ul>
+<li>只有在Master eligible节点数大于quorum时, 才能进行选举</li>
+<li>quorum &#x3D; master&#x2F;2 + 1</li>
+<li>3个Master eligible时, 设置discovery.zen.minimum_master_nodes为2, 可以避免脑裂</li>
+</ul>
+</li>
+<li>7.0开始<ul>
+<li>无需配置minimum_master_nodes</li>
+</ul>
+</li>
+</ul>
+<h5><span id="doc到shard的路由算法-3">doc到shard的路由算法 [3]</span><a href="#doc到shard的路由算法-3" class="header-anchor">#</a></h5><ul>
+<li>shard &#x3D; hash(_ routing) + number_of_primary_shards<br>primary数, 不能随意修改的根本原因</li>
+</ul>
+<h2><span id="写流程-45">写流程 [4][5]</span><a href="#写流程-45" class="header-anchor">#</a></h2><div style="text-align: center; width: 70%; height: 70%">
+
+<p><img src="https://user-images.githubusercontent.com/5608425/65385405-d7491280-dd60-11e9-9a73-895afca03bb8.png" alt="Elasticsearch 数据写入"><br>Elasticsearch 数据写入</p>
+</div>
+
+<ul>
+<li><p>write：文档数据到内存缓存，并存到 translog</p>
+<ul>
+<li>translog<br>高版本， tanslog默认落盘.<br>每个shard有一个translog</li>
+</ul>
+</li>
+<li><p>refresh<br>内存缓存中的文档数据，到文件缓存中的segment<br><strong>此时可以被搜到</strong></p>
+</li>
+<li><p>flush </p>
+<ul>
+<li>缓存中的 segment 文档数据写入到磁盘</li>
+<li>触发条件<br>默认30min调用一次<br>或者  tanlogs写满(512MB)       </li>
+<li>过程<ol>
+<li>调用refresh</li>
+<li>调用fsync， segments写入磁盘</li>
+<li>清空translog</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>merge</p>
+<ul>
+<li>segments 定期合并<br>自动进行merge操作</li>
+<li>真正删除已经惰性删除的文档</li>
+</ul>
+</li>
+<li><p>refresh过程	</p>
+<ul>
+<li>index buffer 写入segment的过程<br>index buffer会被清空, translog不会清空。<br>断电后, 可以从tanslog中做索引的recover</li>
+<li>不会执行fsync操作</li>
+<li>一秒一次</li>
+<li><strong>refresh之后， 数据就可以被搜索到</strong></li>
+</ul>
+</li>
+</ul>
+<h5><span id="倒排索引的不可变性">倒排索引的不可变性</span><a href="#倒排索引的不可变性" class="header-anchor">#</a></h5><ul>
+<li>不可变性 <ul>
+<li>不可变，一旦生产， 不可变更</li>
+<li>好处<br>无需考虑并发写文件的问题<br>一旦读入内核的文件系统缓存，便流在那里<br>容易缓存、 数据可被压缩</li>
+<li>坏处<br>让一个新的文档可以被搜索，需要重建整个索引</li>
+</ul>
+</li>
+</ul>
+<h2><span id="读流程-6">读流程 [6]</span><a href="#读流程-6" class="header-anchor">#</a></h2><h5><span id="两个阶段">两个阶段</span><a href="#两个阶段" class="header-anchor">#</a></h5><ul>
+<li>Query</li>
+<li>Fetch</li>
+</ul>
+<h5><span id="问题">问题</span><a href="#问题" class="header-anchor">#</a></h5><ul>
+<li><p>性能问题<br>深度分页</p>
+</li>
+<li><p>相关性算分</p>
+<ul>
+<li>问题<br>数据量小，打分偏离</li>
+<li>解决方案<ul>
+<li>数据量小时， 主分片设置为1[有例子]</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2><span id="排序-7">排序 [7]</span><a href="#排序-7" class="header-anchor">#</a></h2><ul>
+<li>默认采用<strong>相关性算分</strong>对结果进行<strong>降序排序</strong></li>
+<li>自定义排序<br>sorting参数</li>
+<li>排序过程<ul>
+<li>针对字段原始内容进行的<br><strong>倒排索引无法发挥作用</strong></li>
+<li>需要正排索引<ul>
+<li>DocValue<br>列式存储，对Text类型无效<br>默认开启，可以通过mapping设置关闭<br>如果重新打开，要重建索引<br><strong>明确不需要做排序及聚合分析</strong>           </li>
+<li>Fielddata</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2><span id="并发读写乐观锁并发控制">并发读写(乐观锁并发控制)</span><a href="#并发读写乐观锁并发控制" class="header-anchor">#</a></h2><ul>
+<li>doc不可变<br>更新文档时, doc标记为删除, 同时增加一个全新的doc<br>同时doc的version字段加1</li>
+<li>内部版本控制<br>if_seq_no + if_primary_term</li>
+<li>使用外部文档<br>version_type(external) + version</li>
+</ul>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li>38丨分片与集群的故障转移</li>
+<li>37丨集群分布式模型及选主与脑裂问题</li>
+<li>39丨文档分布式存储</li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/BSjA_TBuapPHrE4COCp9VA">Elasticsearch 数据写入原理</a> </li>
+<li>40丨分片及其生命周期</li>
+<li>41丨剖析分布式查询及相关性算分</li>
+<li>42丨排序及DocValues&amp;Fielddata</li>
+<li>44丨处理并发读写操作</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2019/08/03/elasticsearchDistributed/" title="Elasticsearch 分布式集群">https://www6v.github.io/www6vHomeHexo/2019/08/03/elasticsearchDistributed/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/Elasticsearch/" rel="tag"># Elasticsearch</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2019/08/02/elasticsearch/" rel="prev" title="Elasticsearch基础(ES)">
+      <i class="fa fa-chevron-left"></i> Elasticsearch基础(ES)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2019/08/04/dockerNetwork/" rel="next" title="Docker网络">
+      Docker网络 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">355</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">226</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">121</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

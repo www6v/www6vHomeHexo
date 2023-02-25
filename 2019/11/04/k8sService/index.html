@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Kubernetes服务">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2019/11/04/k8sService/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/68105556-d4257280-ff19-11e9-9d19-f18f5c454f34.jpg">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2019/11/04/k8sService/k8sService.jpg">
+<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/68234082-7d17be80-003b-11ea-891f-90a9e174bbc8.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/68290997-e216f700-00c3-11ea-82d3-b5e3f4c565a1.jpg">
+<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/68234079-7c7f2800-003b-11ea-8ada-2c034db8b25a.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/68234081-7c7f2800-003b-11ea-804c-1c5d87164d06.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/68077955-2b3b2280-fe08-11e9-8672-3210219a7372.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/68077954-2b3b2280-fe08-11e9-8231-cb9bc177ba21.png">
+<meta property="article:published_time" content="2019-11-04T03:56:32.000Z">
+<meta property="article:modified_time" content="2023-02-25T02:57:47.006Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="Kubernetes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/5608425/68105556-d4257280-ff19-11e9-9d19-f18f5c454f34.jpg">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2019/11/04/k8sService/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Kubernetes服务 | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2019/11/04/k8sService/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kubernetes服务
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-04 11:56:32" itemprop="dateCreated datePublished" datetime="2019-11-04T11:56:32+08:00">2019-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-25 10:57:47" itemprop="dateModified" datetime="2023-02-25T10:57:47+08:00">2023-02-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">云原生</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/" itemprop="url" rel="index"><span itemprop="name">Kubernetes</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p></p>
+<span id="more"></span>
+
+<h2><span id="一-kubenetes服务">一. Kubenetes服务</span><a href="#一-kubenetes服务" class="header-anchor">#</a></h2><div style="text-align: center;">
+
+<p><img src="https://user-images.githubusercontent.com/5608425/68105556-d4257280-ff19-11e9-9d19-f18f5c454f34.jpg" alt="Kubernetes服务发现架构"><br>Kubernetes服务发现架构</p>
+</div>
+
+<img src="/www6vHomeHexo/2019/11/04/k8sService/k8sService.jpg" class title="Kubernetes服务"> 
+
+<ul>
+<li>ClusterIP 模式的 Service: <strong>稳定的 IP 地址</strong>，即 VIP.  ClusterIP是VIP, 虚拟IP.    </li>
+<li>Headless Service: <strong>稳定的 DNS 名字</strong>, 名字是通过 Pod 名字和 Service 名字拼接出来.</li>
+</ul>
+<h3><span id="11-服务对外暴露方式">1.1  服务对外暴露方式</span><a href="#11-服务对外暴露方式" class="header-anchor">#</a></h3><ol>
+<li>NodePort  四层<div style="text-align: center; width:60%; height: 60%"></div></li>
+</ol>
+<p><img src="https://user-images.githubusercontent.com/5608425/68234082-7d17be80-003b-11ea-891f-90a9e174bbc8.png" alt="node-port"></p>
+
+
+<ul>
+<li>一定要对流出的包做 SNAT操作[2][6]</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">          client</span><br><span class="line">            \ ^</span><br><span class="line">             \ \</span><br><span class="line">              v \</span><br><span class="line">  node 1 &lt;--- node 2</span><br><span class="line">  | ^    SNAT</span><br><span class="line">  | |    ---&gt;</span><br><span class="line">  v |</span><br><span class="line">endpoint</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取真实客户端IP, 设置Service 的 spec.externalTrafficPolicy 字段设置为 local，[2][6]</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    client</span><br><span class="line">    ^ / \</span><br><span class="line">   / /   \</span><br><span class="line">  / v     X</span><br><span class="line">node 1   node 2</span><br><span class="line">  ^ |</span><br><span class="line">  | |</span><br><span class="line">  | v</span><br><span class="line">endpoint</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Service LoadBalancer  四层<div style="text-align: center; width:60%; height: 60%"></div></li>
+</ol>
+<p><img src="https://user-images.githubusercontent.com/5608425/68290997-e216f700-00c3-11ea-82d3-b5e3f4c565a1.jpg" alt="loadbalancer"></p>
+
+
+<p><strong>LoadBalancer</strong>类型的Service被提交后，Kubernetes就会调用<strong>CloudProvider</strong>[5]在公有云上为你创建一个负载均衡服务，并且把被代理的 Pod 的 IP地址配置给负载均衡服务做后端.</p>
+<ol start="3">
+<li><p>ExternalName<br>ExternalName 类型的 Service，其实是在 kubedns里为你添加了一条 CNAME 记录.<br>1.7 之后支持的一个新特性.</p>
+</li>
+<li><p>Ingress Controller  七层</p>
+<div style="text-align: center; width:60%; height: 60%"></div></li>
+</ol>
+<p><img src="https://user-images.githubusercontent.com/5608425/68234079-7c7f2800-003b-11ea-8ada-2c034db8b25a.png" alt="ingress-1"><br><img src="https://user-images.githubusercontent.com/5608425/68234081-7c7f2800-003b-11ea-804c-1c5d87164d06.png" alt="ingress-2">   </p>
+
+
+<ul>
+<li>Ingress 服务: 全局的、为了代理不同后端 Service 而设置的负载均衡服务.</li>
+<li>Ingress 对象，其实就是 Kubernetes 项目对“反向代理”的一种抽象。</li>
+<li>Ingress Controller: Nginx、HAProxy、Envoy、Traefik</li>
+</ul>
+<p><strong>Ingress controller</strong></p>
+<p>为了使 Ingress 正常工作，集群中必须运行 Ingress controller。 这与其他类型的控制器不同，其他类型的控制器通常作为 kube-controller-manager 二进制文件的一部分运行，在集群启动时自动启动。 你需要选择最适合自己集群的 Ingress controller 或者自己实现一个。</p>
+<ul>
+<li>Kubernetes 当前支持并维护 GCE 和 nginx 两种 controller</li>
+<li>F5（公司）支持并维护 F5 BIG-IP Controller for Kubernetes</li>
+<li>Kong 同时支持并维护 社区版 与 企业版 的 Kong Ingress Controller for Kubernetes</li>
+<li>Traefik 是功能齐全的 ingress controller（Let’s Encrypt, secrets, http2, websocket…）, Containous 也对其提供商业支持。</li>
+<li>Istio 使用 CRD Gateway 来 控制 Ingress 流量。</li>
+</ul>
+<h3><span id="12-通过dns发现服务">1.2 通过DNS发现服务</span><a href="#12-通过dns发现服务" class="header-anchor">#</a></h3><blockquote>
+<p>每个Service对象相关的DNS记录有两个：<br>{SVCNAME}.{NAMESPACE}.{CLUSTER_DOMAIN}<br>{SVCNAME}.{NAMESPACE}.svc.{CLUSTER_DOMAIN}</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@kubia-9nvx7:/# cat /etc/resolv.conf</span><br><span class="line">nameserver 172.17.0.2</span><br><span class="line">search default.svc.cluster.local svc.cluster.local cluster.local</span><br><span class="line">options ndots:5</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">（1）拥有ClusterIP的Service资源，要具有以下类型的资源记录</span><br><span class="line">A记录：&lt;service&gt;.&lt;ns&gt;.svc.&lt;zone&gt;. &lt;ttl&gt;  IN  A  &lt;cluster-ip&gt;</span><br><span class="line"></span><br><span class="line">（2）Headless类型的Service资源，要具有以下类型的资源记录</span><br><span class="line">A记录：&lt;service&gt;.&lt;ns&gt;.svc.&lt;zone&gt;. &lt;ttl&gt; IN A &lt;endpoint-ip&gt;</span><br><span class="line"></span><br><span class="line">（3）ExternalName类型的Service资源，要具有CNAME类型的资源记录</span><br><span class="line">CNAME记录：&lt;service&gt;.&lt;ns&gt;.svc.&lt;zone&gt;. &lt;ttl&gt; IN CNAME &lt;extname&gt;.</span><br></pre></td></tr></table></figure>
+
+<h3><span id="13-clusterip模式的yaml配置">1.3 ClusterIP模式的yaml配置</span><a href="#13-clusterip模式的yaml配置" class="header-anchor">#</a></h3><p>Service（接口声明） + Deployment（ endpoint 接口实现）</p>
+<h2><span id="二-kubenetes服务工作原理">二. Kubenetes服务工作原理</span><a href="#二-kubenetes服务工作原理" class="header-anchor">#</a></h2><ul>
+<li>Service是由<strong>kube-proxy</strong>组件，加上<strong>iptables</strong>来共同实现的。</li>
+<li>kube-proxy的作用: 网络配置</li>
+</ul>
+<h5><span id="21-kube-proxy">2.1 kube-proxy</span><a href="#21-kube-proxy" class="header-anchor">#</a></h5><h5><span id="userspace-代理模式">userspace 代理模式</span><a href="#userspace-代理模式" class="header-anchor">#</a></h5><div style="text-align: center;">
+<img width="450" alt="user-space-proxy" src="https://user-images.githubusercontent.com/5608425/68077955-2b3b2280-fe08-11e9-8672-3210219a7372.png">
+userspace 代理模式
+</div>
+
+<h5><span id="iptables-proxy-mode">iptables Proxy Mode</span><a href="#iptables-proxy-mode" class="header-anchor">#</a></h5><div style="text-align: center;">
+<img width="450" alt="iptables-proxy" src="https://user-images.githubusercontent.com/5608425/68077954-2b3b2280-fe08-11e9-8231-cb9bc177ba21.png">
+ Iptables Proxy Mode
+</div>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-A OUTPUT -m comment --comment &quot;kubernetes service portals&quot; -j KUBE-SERVICES</span><br><span class="line"></span><br><span class="line"># 访问10.107.54.95后跳转到KUBE-SVC-4N57TFCL4MD7ZTDA链</span><br><span class="line">-A KUBE-SERVICES -d 10.107.54.95/32 -p tcp -m comment --comment &quot;default/nginx: cluster IP&quot; -m tcp --dport 80 -j KUBE-SVC-4N57TFCL4MD7ZTDA</span><br><span class="line"></span><br><span class="line"># 随机转发的目的地，分别是 KUBE-SEP-UZXILYFQQ2IZUWN5 和 KUBE-SEP-43IWXJI557JKCKCF</span><br><span class="line">-N KUBE-SVC-4N57TFCL4MD7ZTDA</span><br><span class="line">-A KUBE-SVC-4N57TFCL4MD7ZTDA -m statistic --mode random --probability 0.50000000000 -j KUBE-SEP-UZXILYFQQ2IZUWN5</span><br><span class="line">-A KUBE-SVC-4N57TFCL4MD7ZTDA -j KUBE-SEP-43IWXJI557JKCKCF</span><br><span class="line"></span><br><span class="line">## DNAT到pod的ip和端口</span><br><span class="line">-A KUBE-SEP-UZXILYFQQ2IZUWN5 -p tcp -m tcp -j DNAT --to-destination 172.17.0.4:80</span><br><span class="line">-A KUBE-SEP-43IWXJI557JKCKCF -p tcp -m tcp -j DNAT --to-destination 172.17.0.5:80</span><br></pre></td></tr></table></figure>
+
+<h5><span id="ipvs-proxy-mode">IPVS proxy mode</span><a href="#ipvs-proxy-mode" class="header-anchor">#</a></h5><blockquote>
+<p>IPVS是LVS一个组件，提供高性能、高可靠性的四层负载均衡器。IPVS 是IP Virtual Server的简写。IPVS构建在netfilter上，作为Linux 内核的一部分，从传输层实现了负载均衡。</p>
+</blockquote>
+<p>与iptables类似，ipvs基于netfilter 的 hook 功能，但使用哈希表作为底层数据结构并在内核空间中工作。这意味着ipvs可以更快地重定向流量，并且在同步代理规则时具有更好的性能。此外，ipvs为负载均衡算法提供了更多选项，例如：</p>
+<pre><code>rr：轮询调度
+lc：最小连接数
+dh：目标哈希
+sh：源哈希
+sed：最短期望延迟
+nq： 不排队调度
+</code></pre>
+<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li><a target="_blank" rel="noopener" href="https://www.kubernetes.org.cn/5992.html">深入理解 Kubernetes之：Service</a> good</li>
+<li><a target="_blank" rel="noopener" href="https://edu.aliyun.com/lesson_1651_17064#_17064">第14 章 ： Kubernetes Services</a>  阿里</li>
+<li><a target="_blank" rel="noopener" href="http://product.dangdang.com/26439199.html?ref=book-65152-9168_1-529800-3">《Kubenetes in Action》</a>  七牛容器云团队</li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/3THiWFt52tZckFGxg3Cx-g">Kubernetes中的服务发现机制与方式</a> 马永亮 </li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/a_540yJ1EGVroJ9TpvYtPw">从 K8S 的 Cloud Provider 到 CCM 的演进之路</a>  毛宏斌 百度</li>
+<li><a target="_blank" rel="noopener" href="https://docs.ucloud.cn/compute/uk8s/service/getresourceip">获取真实客户端IP</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU1OTAzNzc5MQ==&mid=2247485610&idx=1&sn=e092e55c848af62368835d530c57da15&chksm=fc1c249acb6bad8c940c587e59e0dc63ba4863c7063f0a0e322dcbd6ad5f610cd2ad1b4ba87d&scene=21#wechat_redirect">华为云在 K8S 大规模场景下的 Service 性能优化实践</a> 未</li>
+<li><a target="_blank" rel="noopener" href="https://jimmysong.io/kubernetes-handbook/concepts/service.html">Service</a>  jimmysong</li>
+<li><a target="_blank" rel="noopener" href="https://jimmysong.io/kubernetes-handbook/concepts/ingress.html">Ingress</a> jimmysong</li>
+</ol>
+<hr>
+<p>《深入剖析Kubernetes》  张磊</p>
+<ol>
+<li><a href>《37  找到容器不容易：Service、DNS与服务发现》</a> </li>
+<li><a href>《38  从外界连通Service与Service调试“三板斧”》</a></li>
+<li><a href>《39  谈谈Service与Ingress》</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2019/11/04/k8sService/" title="Kubernetes服务">https://www6v.github.io/www6vHomeHexo/2019/11/04/k8sService/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/Kubernetes/" rel="tag"># Kubernetes</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2019/11/03/k8sSkill/" rel="prev" title="Kubernetes技能图谱">
+      <i class="fa fa-chevron-left"></i> Kubernetes技能图谱
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2019/11/11/k8sStatefulSet/" rel="next" title="Kubernetes StatefulSet原理和源码">
+      Kubernetes StatefulSet原理和源码 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">355</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">226</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">121</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="云计算产品-计算">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/04/30/cloudProduct/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/04/30/cloudProduct/product.jpg">
+<meta property="article:published_time" content="2022-04-30T10:00:03.000Z">
+<meta property="article:modified_time" content="2023-02-25T02:57:45.719Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="云计算">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2022/04/30/cloudProduct/product.jpg">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/04/30/cloudProduct/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>云计算产品-计算 | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2022/04/30/cloudProduct/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          云计算产品-计算
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-30 18:00:03" itemprop="dateCreated datePublished" datetime="2022-04-30T18:00:03+08:00">2022-04-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-25 10:57:45" itemprop="dateModified" datetime="2023-02-25T10:57:45+08:00">2023-02-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">云计算</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/%E4%BA%A7%E5%93%81/" itemprop="url" rel="index"><span itemprop="name">产品</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p></p>
+<span id="more"></span>
+
+
+<h2><span id="计算-15">计算 [1][5]</span><a href="#计算-15" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th align="center">&#x2F;</th>
+<th align="center">AWS service</th>
+<th align="center">Azure service</th>
+<th align="center">阿里云</th>
+<th>腾讯云</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">VM</td>
+<td align="center"><a target="_blank" rel="noopener" href="https://aws.amazon.com/ec2/instance-types">Amazon EC2 Instance Types</a></td>
+<td align="center"><a target="_blank" rel="noopener" href="https://azure.microsoft.com/services/virtual-machines">Azure Virtual Machines</a></td>
+<td align="center">ECS</td>
+<td>CVM</td>
+</tr>
+<tr>
+<td align="center">Autoscaling</td>
+<td align="center"><a target="_blank" rel="noopener" href="https://aws.amazon.com/autoscaling">AWS Auto Scaling</a></td>
+<td align="center"><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview">Virtual machine scale sets</a>, <a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/azure/app-service/web-sites-scale">App Service autoscale</a></td>
+<td align="center">Auto Scaling</td>
+<td>Auto Scaling</td>
+</tr>
+<tr>
+<td align="center">Batch processing</td>
+<td align="center"><a target="_blank" rel="noopener" href="https://aws.amazon.com/batch">AWS Batch</a></td>
+<td align="center"><a target="_blank" rel="noopener" href="https://azure.microsoft.com/services/batch">Azure Batch</a></td>
+<td align="center"></td>
+<td></td>
+</tr>
+<tr>
+<td align="center">Serverless</td>
+<td align="center"><a target="_blank" rel="noopener" href="https://aws.amazon.com/lambda">AWS Lambda</a></td>
+<td align="center"><a target="_blank" rel="noopener" href="https://azure.microsoft.com/services/functions">Azure Functions</a>, <a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/azure/app-service/web-sites-create-web-jobs">WebJobs</a> in Azure App Service</td>
+<td align="center">Function Compute</td>
+<td>云函数 SCF</td>
+</tr>
+</tbody></table>
+<h3><span id="storage">Storage</span><a href="#storage" class="header-anchor">#</a></h3><table>
+<thead>
+<tr>
+<th>AWS service</th>
+<th>Azure service</th>
+<th>阿里云</th>
+<th>腾讯云</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Disk volumes on <a target="_blank" rel="noopener" href="https://aws.amazon.com/ebs">Amazon Elastic Block Store (EBS)</a></td>
+<td>Data disks in <a target="_blank" rel="noopener" href="https://azure.microsoft.com/services/storage/blobs">Azure Blob Storage</a>.</td>
+<td>todo</td>
+<td>todo</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html">Amazon EC2 instance store</a></td>
+<td><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/archive/blogs/mast/understanding-the-temporary-drive-on-windows-azure-virtual-machines">Azure temporary storage</a></td>
+<td>todo</td>
+<td>todo</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://aws.amazon.com/ebs/provisioned-iops">Amazon EBS Provisioned IOPS Volume</a></td>
+<td><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/azure/virtual-machines/premium-storage-performance">Azure premium storage</a></td>
+<td>todo</td>
+<td>todo</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://aws.amazon.com/efs">Amazon Elastic File System (EFS)</a></td>
+<td><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/azure/storage/files/storage-files-introduction">Azure Files</a></td>
+<td>todo</td>
+<td>todo</td>
+</tr>
+</tbody></table>
+<h3><span id="containers-and-container-orchestrators">Containers and container orchestrators</span><a href="#containers-and-container-orchestrators" class="header-anchor">#</a></h3><table>
+<thead>
+<tr>
+<th></th>
+<th>AWS service</th>
+<th>Azure service</th>
+<th>阿里云</th>
+<th>腾讯云</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>容器（托管）</td>
+<td><a target="_blank" rel="noopener" href="https://aws.amazon.com/eks">Amazon Elastic Kubernetes Service (EKS)</a></td>
+<td><a target="_blank" rel="noopener" href="https://azure.microsoft.com/services/kubernetes-service">Azure Kubernetes Service (AKS)</a></td>
+<td>ACK</td>
+<td>TKE</td>
+</tr>
+<tr>
+<td>容器（serverless）</td>
+<td><a target="_blank" rel="noopener" href="https://aws.amazon.com/ecs">Amazon Elastic Container Service (Amazon ECS)</a>, <a target="_blank" rel="noopener" href="https://aws.amazon.com/fargate">AWS Fargate</a></td>
+<td><a target="_blank" rel="noopener" href="https://azure.microsoft.com/products/container-apps/">Azure Container Apps</a></td>
+<td>ECI（Container Instance）&#x2F;ASK</td>
+<td>EKS(Kubernetes Service)</td>
+</tr>
+<tr>
+<td>service mesh</td>
+<td><a target="_blank" rel="noopener" href="https://aws.amazon.com/app-mesh">AWS App Mesh</a></td>
+<td><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/azure/aks/open-service-mesh-integrations">Open Service Mesh on AKS</a></td>
+<td>ASM</td>
+<td></td>
+</tr>
+<tr>
+<td>边缘托管</td>
+<td></td>
+<td></td>
+<td>ACK@Edge[OpenYurt]</td>
+<td>TKE for Edge<br></td>
+</tr>
+</tbody></table>
+<img src="/www6vHomeHexo/2022/04/30/cloudProduct/product.jpg" class title="Kubernetes产品形态[2]">
+
+<h2><span id="edge-边缘容器-3">Edge-边缘容器 [3]</span><a href="#edge-边缘容器-3" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th>平台</th>
+<th>开源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>百度云</td>
+<td>OpenEdge[BAETYL]- Linux Foundation Edge</td>
+</tr>
+<tr>
+<td>华为   华为</td>
+<td>kubeedge-  CNCF</td>
+</tr>
+<tr>
+<td>腾讯</td>
+<td>SuperEdge- CNCF</td>
+</tr>
+<tr>
+<td>阿里云</td>
+<td>OpenYurt  - CNCF</td>
+</tr>
+</tbody></table>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/158035354">从AWS到阿里云： 产品体系差异分析</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/o_dPKP_6dL92Q4jiG4097A">Serverless Kubernetes：理想，现实与未来</a>  易立、张维</li>
+<li><a target="_blank" rel="noopener" href="https://www.easemob.com/news/7832">盘点：2022年值得关注的十大边缘计算开源项目</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1tD4y1977x?spm_id_from=333.1007.top_right_bar_window_history.content.click&vd_source=f6e8c1128f9f264c5ab8d9411a644036">阿里云系列课程</a> *** 有ppt链接</li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/azure/architecture/aws-professional/compute">Compute services on Azure and AWS</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2022/04/30/cloudProduct/" title="云计算产品-计算">https://www6v.github.io/www6vHomeHexo/2022/04/30/cloudProduct/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" rel="tag"># 云计算</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2022/04/11/dbMigrate/" rel="prev" title="数据库迁移">
+      <i class="fa fa-chevron-left"></i> 数据库迁移
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2022/05/01/awsArch/" rel="next" title="AWS 三层架构">
+      AWS 三层架构 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">355</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">226</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">121</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

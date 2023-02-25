@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Kubernetes调度器">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2019/06/09/k8sScheduler/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/65023010-96b65700-d964-11e9-9acd-7cc8edbbde85.JPG">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2019/06/09/k8sScheduler/k8sScheduler.jpg">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2019/06/09/k8sScheduler/predicates-and-priorities-scheduling.png">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2019/06/09/k8sScheduler/kubernetes-scheduling-queue.png">
+<meta property="article:published_time" content="2019-06-09T04:27:44.000Z">
+<meta property="article:modified_time" content="2023-02-25T02:57:46.971Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="Kubernetes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/5608425/65023010-96b65700-d964-11e9-9acd-7cc8edbbde85.JPG">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2019/06/09/k8sScheduler/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Kubernetes调度器 | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2019/06/09/k8sScheduler/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kubernetes调度器
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-09 12:27:44" itemprop="dateCreated datePublished" datetime="2019-06-09T12:27:44+08:00">2019-06-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-25 10:57:46" itemprop="dateModified" datetime="2023-02-25T10:57:46+08:00">2023-02-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">云原生</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/Kubernetes/" itemprop="url" rel="index"><span itemprop="name">Kubernetes</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p></p>
+<span id="more"></span>
+
+
+
+<h2><span id="资源调度泛型-1">资源调度泛型 [1]</span><a href="#资源调度泛型-1" class="header-anchor">#</a></h2><div style="text-align: center;">
+
+<p><img src="https://user-images.githubusercontent.com/5608425/65023010-96b65700-d964-11e9-9acd-7cc8edbbde85.JPG" alt="调度系统泛型"><br>调度系统泛型</p>
+</div>
+
+
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>资源选择</th>
+<th>排他性</th>
+<th>分配粒度</th>
+<th>集群策略</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>中央调度器</td>
+<td>全局</td>
+<td>无，时序</td>
+<td>全局策略</td>
+<td>严格的优先级(抢占式)</td>
+</tr>
+<tr>
+<td>两层调度调度器</td>
+<td>动态资源集</td>
+<td>悲观锁</td>
+<td>增量囤积</td>
+<td>严格公正</td>
+</tr>
+<tr>
+<td>共享状态</td>
+<td>全局</td>
+<td>乐观锁</td>
+<td>调度器策略</td>
+<td>优先级抢占</td>
+</tr>
+</tbody></table>
+<p>表1. 常见调度器的比较</p>
+<h2><span id="kubernetes-资源调度2">Kubernetes 资源调度[2]</span><a href="#kubernetes-资源调度2" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2019/06/09/k8sScheduler/k8sScheduler.jpg" class title="k8s调度器"> 
+
+
+<h2><span id="kubernetes-调度的两个阶段45">Kubernetes 调度的两个阶段[4][5]</span><a href="#kubernetes-调度的两个阶段45" class="header-anchor">#</a></h2><h5><span id="基于谓词和优先级的调度器predicates-and-priorities-v100-~-v1140">基于谓词和优先级的调度器（Predicates and Priorities） · v1.0.0 ~ v1.14.0</span><a href="#基于谓词和优先级的调度器predicates-and-priorities-v100-~-v1140" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2019/06/09/k8sScheduler/predicates-and-priorities-scheduling.png" class title="基于谓词和优先级的调度器">
+
+<ul>
+<li><p>调度器扩展（Scheduler Extender） · v1.2.0 - Scheduler extension</p>
+<p>  通过调用外部调度器扩展的方式改变调度器的决策；</p>
+</li>
+<li><p>Map-Reduce 优先级算法 · v1.5.0 - MapReduce-like scheduler priority functions</p>
+<p>  为调度器的优先级算法支持 Map-Reduce 的计算方式，通过引入可并行的 Map 阶段优化调度器的计算性能；</p>
+</li>
+</ul>
+<h5><span id="基于调度框架的调度器scheduling-framework-v1150-~-至今">基于调度框架的调度器（Scheduling Framework） · v1.15.0 ~ 至今</span><a href="#基于调度框架的调度器scheduling-framework-v1150-~-至今" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2019/06/09/k8sScheduler/kubernetes-scheduling-queue.png" class title="基于调度框架的调度器">
+
+<ul>
+<li><p>调度框架认为 Kubernetes 中目前存在调度（Scheduling）和绑定（Binding）两个循环：<br>  调度循环在多个 Node 中为 Pod 选择最合适的 Node；<br>  绑定循环将调度决策应用到集群中，包括绑定 Pod 和 Node、绑定持久存储等工作；</p>
+</li>
+<li><p>除了两个大循环之外，调度框架中还包含 QueueSort、PreFilter、Filter、PostFilter、Score、Reserve、Permit、PreBind、Bind、PostBind 和 Unreserve 11 个扩展点（Extension Point），这些扩展点会在调度的过程中触发。</p>
+</li>
+</ul>
+<h2><span id="批量计算3">批量计算[3]</span><a href="#批量计算3" class="header-anchor">#</a></h2><ul>
+<li><p>K8s自带的的资源调度器，有一个明显的特点是：依次调度每个容器。</p>
+</li>
+<li><p>Volcano  </p>
+<ul>
+<li>DRF（dominant resource fairness）: Yarn和Mesos都有<br>DRF意为：“谁要的资源少，谁的优先级高”</li>
+<li>Queue: Yarn调度器的功能</li>
+</ul>
+</li>
+</ul>
+<h2><span id="实战11">实战[11]</span><a href="#实战11" class="header-anchor">#</a></h2><ul>
+<li>服务资源智能推算: crane+Victoria Metrics  </li>
+<li>二次调度:  descheduler [12][13]</li>
+<li>弹性调度：  OpenKruise-WorkloadSpread + Virtual Kubelet</li>
+</ul>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li><a href>《大数据日知录：架构与算法</a>  第4章  张俊林</li>
+<li><a target="_blank" rel="noopener" href="http://product.dangdang.com/26439199.html?ref=book-65152-9168_1-529800-3">《Kubenetes in Action》 第11章-机理 第16章-高级调度  七牛容器云团队</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/_6WCgqxjTR1rAv8gQqNdWw">为什么K8s需要Volcano？</a> 华为</li>
+</ol>
+<h5><span id="scheduling-framework调度器-ampamp-谓词">scheduling framework调度器 &amp;&amp; 谓词</span><a href="#scheduling-framework调度器-ampamp-谓词" class="header-anchor">#</a></h5><ol start="4">
+<li><a target="_blank" rel="noopener" href="https://draveness.me/system-design-scheduler/">调度系统设计精要</a> linux 调度器， go调度器， k8s调度器</li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1N7411w7M9">Kubernetes Scheduler 设计与实现</a> bili<br><a target="_blank" rel="noopener" href="https://github.com/talkgo/night/issues/535">第 76 期 Kubernetes Scheduler 设计与实现</a>  ***<br><a target="_blank" rel="noopener" href="https://github.com/kubernetes/enhancements/issues/895">https://github.com/kubernetes/enhancements/issues/895</a> even pod, 多个region调度</li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/UkVXuZU0E0LT3LaDdZG4Xg">进击的 Kubernetes 调度系统（一）：Kubernetes scheduling framework</a>  未</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/alisystemsoftware/article/details/107359341">进击的 Kubernetes 调度系统（二）：支持批任务的 Coscheduling&#x2F;Gang scheduling</a> 未</li>
+</ol>
+<h5><span id="基于谓词的调度器">基于谓词的调度器</span><a href="#基于谓词的调度器" class="header-anchor">#</a></h5><ol start="8">
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/gfq1qghLW7g4gKZBBP17IA">Kubernetes集群调度器原理剖析及思考</a> - v1.11版本 2019</li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1475940">深度解析Kubernetes核心原理之Scheduler</a> 未 - KubeCon 2018   *** </li>
+<li><a target="_blank" rel="noopener" href="http://dockone.io/article/2885">DockOne微信分享（一四九）：Kubernetes调度详解 </a>  FreeWheel 主任工程师-2017年-***未</li>
+</ol>
+<h5><span id="实战">实战</span><a href="#实战" class="header-anchor">#</a></h5><ol start="11">
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1iD4y117JL?spm_id_from=333.880.my_history.page.click">容器云调度优化及实践</a> </li>
+<li><a target="_blank" rel="noopener" href="https://www.chenshaowen.com/blog/descheduler-makes-kubernetes-load-more-balanced.html">descheduler 二次调度让 Kubernetes 负载更均衡</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.tianfeiyu.com/2022/06/30/kubernetes_descheduler/">Kubernetes 中 Descheduler 组件的使用与扩展</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2019/06/09/k8sScheduler/" title="Kubernetes调度器">https://www6v.github.io/www6vHomeHexo/2019/06/09/k8sScheduler/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/Kubernetes/" rel="tag"># Kubernetes</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2019/06/09/k8sCommand/" rel="prev" title="Kubernetes命令">
+      <i class="fa fa-chevron-left"></i> Kubernetes命令
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2019/06/09/k8sResource/" rel="next" title="Kubernetes Workload">
+      Kubernetes Workload <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">355</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">226</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">121</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

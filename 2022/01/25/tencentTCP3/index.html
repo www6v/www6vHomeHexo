@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="腾讯云TCP3-构建腾讯云上高可用架构">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/01/25/tencentTCP3/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/01/25/tencentTCP3/layer-analysis.png">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/01/25/tencentTCP3/error1.png">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/01/25/tencentTCP3/error2.png">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/01/25/tencentTCP3/dns-error-solution.png">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/01/25/tencentTCP3/slow-response-solution.png">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/01/25/tencentTCP3/access-solution.png">
+<meta property="article:published_time" content="2022-01-25T14:02:45.000Z">
+<meta property="article:modified_time" content="2023-02-25T02:57:47.871Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="认证">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2022/01/25/tencentTCP3/layer-analysis.png">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/01/25/tencentTCP3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>腾讯云TCP3-构建腾讯云上高可用架构 | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2022/01/25/tencentTCP3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          腾讯云TCP3-构建腾讯云上高可用架构
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-01-25 22:02:45" itemprop="dateCreated datePublished" datetime="2022-01-25T22:02:45+08:00">2022-01-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-25 10:57:47" itemprop="dateModified" datetime="2023-02-25T10:57:47+08:00">2023-02-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">云计算</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/%E8%85%BE%E8%AE%AF%E4%BA%91/" itemprop="url" rel="index"><span itemprop="name">腾讯云</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p></p>
+<span id="more"></span>
+
+
+<h2><span id="三-构建腾讯云上高可用架构15">三、构建腾讯云上高可用架构(15%)</span><a href="#三-构建腾讯云上高可用架构15" class="header-anchor">#</a></h2><h3><span id="1云上高可用概述">1.云上高可用概述</span><a href="#1云上高可用概述" class="header-anchor">#</a></h3><h5><span id="11-构建腾讯云上高可用架构相关概念">1.1 构建腾讯云上高可用架构相关概念</span><a href="#11-构建腾讯云上高可用架构相关概念" class="header-anchor">#</a></h5><p>可用性的含义，可用性的计算方法	☆☆<br>同城灾备、异地灾备，消息队列：MQ、Kafka	☆☆</p>
+<h5><span id="12-面临的挑战">1.2 面临的挑战</span><a href="#12-面临的挑战" class="header-anchor">#</a></h5><p>高可用面临的挑战	☆</p>
+<ul>
+<li>高可用面临的挑战<ul>
+<li>高可用的目标<br>99.99%系统可用性年不可用时间-0.876小时<br>基本可用: 99%<br>较高可用性: 99.9%<br>高可用性: 99.99%<br>极高可用性: 99.999%</li>
+<li>事故及问题归类<ul>
+<li>内部<br>代码问题<br>配置问题<br>性能问题  </li>
+<li>供应商<br>通道&#x2F;专线抖动<br>运营商故障<br>机房整体故障</li>
+<li>外部威胁<br>攻击<br>劫持</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5><span id="13-构建高可用的架构目的">1.3 构建高可用的架构目的</span><a href="#13-构建高可用的架构目的" class="header-anchor">#</a></h5><p>为什么需要高可用架构？	☆☆</p>
+<ul>
+<li>高可用的整体规划<ul>
+<li>成本曲线 反比 业务中断影响(损失)</li>
+<li>不同阶段客户推荐容灾方案<ul>
+<li>初创期<ol>
+<li>数据容灾</li>
+<li>环境容灾</li>
+<li>安全保障</li>
+</ol>
+</li>
+<li>成长期<ol>
+<li>数据&#x2F;环境容灾</li>
+<li>安全保障</li>
+<li>同机房多集群</li>
+<li>同区域多机房</li>
+</ol>
+</li>
+<li>稳定器<ol>
+<li>数据&#x2F;环境容灾</li>
+<li>安全保障</li>
+<li>同机房多集群</li>
+<li>同区域多机房</li>
+<li>跨区域多机房</li>
+</ol>
+</li>
+<li>总体规划<ul>
+<li>分层设计思路<br>接入和服务分层解耦<br>服务和数据分层解耦<br>分层高内聚 低耦合<br>分层支持灵活扩展<br>分层支持冗余容灾部署<br>分层支持set化部署</li>
+</ul>
+</li>
+<li>分层解析<img src="/www6vHomeHexo/2022/01/25/tencentTCP3/layer-analysis.png" class title="分层解析"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3><span id="2构建外层高可用架构">2.构建外层高可用架构</span><a href="#2构建外层高可用架构" class="header-anchor">#</a></h3><h5><span id="21-外层高可用架构的设计原则">2.1 外层高可用架构的设计原则</span><a href="#21-外层高可用架构的设计原则" class="header-anchor">#</a></h5><p>外层网络面临的问题	☆<br>外层高可用的设计思路：DNS的解析过程、出现解析问题如何解决？为什么会出现访问慢的问题？应该如何解决？	☆</p>
+<ul>
+<li><p>外层网络面临的问题</p>
+<ul>
+<li>外层网络<br>从用户发起请求到服务接入之间的网络</li>
+<li>用户外层访问, 面临的问题<ul>
+<li>域名解析异常<img src="/www6vHomeHexo/2022/01/25/tencentTCP3/error1.png" class></li>
+<li>访问速度慢  <img src="/www6vHomeHexo/2022/01/25/tencentTCP3/error2.png" class></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>外层高可用的设计思路</p>
+<ul>
+<li>域名解析问题的解决方法<img src="/www6vHomeHexo/2022/01/25/tencentTCP3/dns-error-solution.png" class></li>
+<li>针对访问速度慢的问题<img src="/www6vHomeHexo/2022/01/25/tencentTCP3/slow-response-solution.png" class></li>
+</ul>
+</li>
+</ul>
+<h5><span id="22-设计外层的高可用架构">2.2 设计外层的高可用架构</span><a href="#22-设计外层的高可用架构" class="header-anchor">#</a></h5><p>外层设计相关产品	☆☆<br>云解析、HttpDNS和CDN架构	☆☆☆</p>
+<h3><span id="3-构建接入层高可用架构">3. 构建接入层高可用架构</span><a href="#3-构建接入层高可用架构" class="header-anchor">#</a></h3><h5><span id="31-接入层高可用架构的设计原则">3.1 接入层高可用架构的设计原则</span><a href="#31-接入层高可用架构的设计原则" class="header-anchor">#</a></h5><p>接入层面临的问题、接入层高可用设计思路	☆☆</p>
+<ul>
+<li><p>接入层面临的问题</p>
+<ul>
+<li>接入层<br>指的是提供服务的负载均衡层</li>
+<li>接入层要考虑的问题<br>负载均衡冗余<br>负载均衡的安全问题</li>
+</ul>
+</li>
+<li><p>接入层高可用设计思路</p>
+<ul>
+<li>2个解决方案<br><img src="/www6vHomeHexo/2022/01/25/tencentTCP3/access-solution.png" class></li>
+</ul>
+</li>
+</ul>
+<h5><span id="32-设计接入层的高可用架构">3.2 设计接入层的高可用架构</span><a href="#32-设计接入层的高可用架构" class="header-anchor">#</a></h5><p>接入层设计相关产品	☆☆<br>云解析与CLB构建接入层高可用架构	☆☆☆<br>CLB与Anycast IP构建接入层高可用架构	☆☆<br>使用Anycast IP解决CLB冗余、接入层安全架构和BGP高防架构 ☆☆</p>
+<ul>
+<li>基于腾讯云产品的接入层设计<ul>
+<li>接入层产品清单<br>CLB， Anycast CLB， 云解析， BGP高防</li>
+<li>云解析<br>云解析提高CLB的冗余[pic]</li>
+<li>Anycast<br>使用Anycast IP提高用户接入可用性[pic]<br>使用Anycast IP解决CLB冗余[pic]</li>
+<li>BGP高防<ul>
+<li>BGP高防使用建议<ul>
+<li>平滑切换线上业务到BGP高防IP<br>技术维度<br>业务维度</li>
+<li>源站IP暴露的解决方法<br><strong>防止出现攻击绕过高防直接攻击源站IP的情况，强烈建议参考以下方法</strong></li>
+<li>BGP高防IP+源站[pic]</li>
+<li>业务系统压力测试</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3><span id="4-构建应用层高可用架构">4. 构建应用层高可用架构</span><a href="#4-构建应用层高可用架构" class="header-anchor">#</a></h3><h5><span id="41-应用层高可用架构的设计原则">4.1 应用层高可用架构的设计原则</span><a href="#41-应用层高可用架构的设计原则" class="header-anchor">#</a></h5><p>应用层设计面临的问题	☆<br>应用层高可用设计思路	☆☆☆</p>
+<ul>
+<li><p>应用层设计面临的问题</p>
+<ul>
+<li>软件架构如何选择</li>
+<li>应用部署容量如何规划</li>
+<li>应用部署落地平台如何选择</li>
+<li>如何考虑应用层的容灾</li>
+<li>应用层的安全如何保障</li>
+</ul>
+</li>
+<li><p>应用层高可用设计思路</p>
+<ul>
+<li>软件架构选择<br>传统应用和云原生应用</li>
+<li>应用扩展和容量规划<br>传统应用: 云主机+负载均衡+弹性伸缩, 配置伸缩策略实现资源池容量的弹性<br>云原生应用可考虑微服务+容器化部署</li>
+<li>应用的容灾问题<br>多可用区 多地域容灾部署<br>应用set化部署</li>
+<li>安全设计<br>结合应用层安全防护产品， 加固应用层防护</li>
+</ul>
+</li>
+</ul>
+<h5><span id="42-设计应用层高可用架构">4.2 设计应用层高可用架构</span><a href="#42-设计应用层高可用架构" class="header-anchor">#</a></h5><p>应用层设计相关产品	☆☆<br>传统应用高可用	☆☆<br>云原生应用部署、应用的容灾设计	☆☆</p>
+<ul>
+<li><p>应用层设计相关产品</p>
+</li>
+<li><p>传统应用高可用</p>
+<ul>
+<li>CLB+CVM+AS  <ul>
+<li>架构图 [pic]</li>
+<li>应用实践</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>云原生应用部署</p>
+<ul>
+<li>涉及的产品<ul>
+<li>微服务平台 TSF</li>
+<li>API网关</li>
+<li>TKE容器服务</li>
+</ul>
+</li>
+<li>云原生应用部署方案[pic]</li>
+</ul>
+</li>
+<li><p>应用的容灾设计[pic 要重新看]</p>
+<ul>
+<li>单区域容灾   </li>
+<li>跨地域容灾</li>
+<li>跨地域多活<br>业务拆分, 单元化部署</li>
+<li>混合云部署<br>云上和IDC各部署一套完整的业务系统</li>
+<li>异地多活set化部署<br>Unit由多个set组成<br>建议单写多读的架构<br>set不一定限制在一个机房，可跨机房、跨地域部署</li>
+</ul>
+</li>
+<li><p>应用安全设计  </p>
+<ul>
+<li>web应用防火墙</li>
+<li>漏洞扫描<br>saas服务</li>
+<li>移动应用安全</li>
+<li>应用级智能网关</li>
+</ul>
+</li>
+</ul>
+<h3><span id="5构建中间件层的高可用架构">5.构建中间件层的高可用架构</span><a href="#5构建中间件层的高可用架构" class="header-anchor">#</a></h3><h5><span id="51-中间件层高可用架构的设计原则">5.1 中间件层高可用架构的设计原则</span><a href="#51-中间件层高可用架构的设计原则" class="header-anchor">#</a></h5><p>中间件层面临的问题	☆<br>中间件层高可用设计思路	☆☆☆</p>
+<h5><span id="52-设计中间件层高可用架构">5.2 设计中间件层高可用架构</span><a href="#52-设计中间件层高可用架构" class="header-anchor">#</a></h5><p>中间层设计相关产品	☆☆<br>CMQ实现中间层高可用架构、Ckafka实现中间层高可用架构	☆☆</p>
+<h3><span id="6构建数据层高可用架构">6.构建数据层高可用架构</span><a href="#6构建数据层高可用架构" class="header-anchor">#</a></h3><h5><span id="61-数据层高可用架构的设计原则">6.1 数据层高可用架构的设计原则</span><a href="#61-数据层高可用架构的设计原则" class="header-anchor">#</a></h5><p>数据层高可用面临的问题	☆☆<br>数据高可用的设计思路	☆☆☆</p>
+<h5><span id="62-设计数据层高可用架构">6.2 设计数据层高可用架构</span><a href="#62-设计数据层高可用架构" class="header-anchor">#</a></h5><p>数据层设计相关产品	☆☆<br>CBS实现数据层高可用架构、CFS实现数据层高可用架构、 COS实现数据层高可用架构、CDB实现数据库层高可用架构	☆☆☆</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2022/01/25/tencentTCP3/" title="腾讯云TCP3-构建腾讯云上高可用架构">https://www6v.github.io/www6vHomeHexo/2022/01/25/tencentTCP3/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/%E8%AE%A4%E8%AF%81/" rel="tag"># 认证</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2022/01/23/k8sBestPractice/" rel="prev" title="Kubernetes最佳实践-BestPractice">
+      <i class="fa fa-chevron-left"></i> Kubernetes最佳实践-BestPractice
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2022/01/25/linuxDPDK/" rel="next" title="DPDK">
+      DPDK <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">355</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">226</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">121</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
