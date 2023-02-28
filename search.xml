@@ -6752,9 +6752,10 @@ func new(Type) *Type
 <h2><span id="community">community</span><a href="#community" class="header-anchor">#</a></h2><p><a href="https://github.com/www6v/talkgo-night">talkgo-night</a>    Go 夜读 ***</p>
 <p><a href="https://github.com/www6v/conference">gopherchina  conference</a>  conference-ppt ***</p>
 <p><a href="https://github.com/www6v/academy">academy</a>  云原生学院|直播|活动 ***</p>
-<h2><span id="综合">综合</span><a href="#综合" class="header-anchor">#</a></h2><p><a href="https://github.com/www6v/cloud-atlas">cloud-atlas</a>   云计算指南</p>
-<p><a href="https://github.com/www6v/open_source_team">open_source_team</a>     国内顶尖团队的开源地址  </p>
+<h2><span id="综合">综合</span><a href="#综合" class="header-anchor">#</a></h2><p><a href="https://github.com/www6v/patterns-of-distributed-systems">patterns-of-distributed-systems</a>  分布式设计模式 *** </p>
 <p><a href="https://github.com/www6v/blog_demos">blog_demos</a>    all demos for my blogs : <a href="http://blog.csdn.net/boling_cavalry">http://blog.csdn.net/boling_cavalry</a>    ***</p>
+<p><a href="https://github.com/www6v/cloud-atlas">cloud-atlas</a>   云计算指南</p>
+<p><a href="https://github.com/www6v/open_source_team">open_source_team</a>     国内顶尖团队的开源地址  </p>
 <p><a href="https://github.com/www6v/issue-case">issue-case</a>   问题&#x2F;故障案例总结与整理</p>
 <p><a href="https://github.com/www6v/Qix">Qix</a> Machine Learning、Deep Learning、PostgreSQL、Distributed System、Node.Js、Golang  </p>
 <h2><span id="speciality">speciality</span><a href="#speciality" class="header-anchor">#</a></h2><p><a href="https://github.com/www6v/ddd-starter-modelling-process">ddd-starter-modelling-process</a>   DDD </p>
