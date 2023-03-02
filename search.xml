@@ -2777,7 +2777,7 @@
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>基础</category>
+        <category>存储引擎</category>
       </categories>
       <tags>
         <tag>LSM-Tree</tag>
@@ -9082,7 +9082,7 @@ func new(Type) *Type
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>基础</category>
+        <category>存储引擎</category>
       </categories>
       <tags>
         <tag>LSM-Tree</tag>
@@ -11192,7 +11192,6 @@ func new(Type) *Type
 <h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><p><a href="https://www.iteye.com/blog/onlyor-1689344">tomcat 组件 Top level view</a><br><a href>深入拆解Tomcat &amp; Jetty - 06 | Tomcat系统架构（下）：聊聊多层容器的设计</a> 李号双<br><a href>深入拆解Tomcat &amp; Jetty - 26 | Context容器（下）：Tomcat如何实现Servlet规范？</a> 李号双</p>
 ]]></content>
       <categories>
-        <category>分布式</category>
         <category>中间件</category>
         <category>Tomcat</category>
       </categories>
@@ -11810,7 +11809,6 @@ func new(Type) *Type
 <p>result：<br>链接数 30000+，<br>tps 4000+ ，<br>avg 200ms+</p>
 ]]></content>
       <categories>
-        <category>分布式</category>
         <category>中间件</category>
         <category>nginx</category>
       </categories>
@@ -13504,7 +13502,7 @@ nq： 不排队调度
       </tags>
   </entry>
   <entry>
-    <title>Feed</title>
+    <title>Feed流</title>
     <url>/www6vHomeHexo/2019/09/13/feed/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -13602,7 +13600,7 @@ nq： 不排队调度
 ]]></content>
       <categories>
         <category>架构</category>
-        <category>应用架构</category>
+        <category>系统架构</category>
         <category>feed</category>
       </categories>
       <tags>
@@ -14860,7 +14858,6 @@ nq： 不排队调度
 </ol>
 ]]></content>
       <categories>
-        <category>分布式</category>
         <category>中间件</category>
         <category>nginx</category>
       </categories>
@@ -17641,7 +17638,6 @@ nq： 不排队调度
 </ol>
 ]]></content>
       <categories>
-        <category>分布式</category>
         <category>中间件</category>
         <category>缓存</category>
       </categories>
@@ -17656,8 +17652,8 @@ nq： 不排队调度
     <url>/www6vHomeHexo/2017/12/07/cache/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
- 
-                               
+
+
 <h2><span id="缓存数据分布模式">缓存数据分布模式</span><a href="#缓存数据分布模式" class="header-anchor">#</a></h2><h5><span id="1-分片模式-sharding">1. 分片模式 （sharding）</span><a href="#1-分片模式-sharding" class="header-anchor">#</a></h5><p>数据正交分散到大量机器， 可以做到线性的可伸缩性， 但是实现可用性比较困难。还有一个好处是可以通过集群做负载均衡来实现数据的管理。<br>根据CAP理论， 在高可用的场景下， 数据分区的容忍性需要牺牲一定的一致性。 相应各个副本的同步策略也有不同， 主要可分为同步和异步方式。由客户端做一致性hash把数据分片存放到服务端。</p>
 <h5><span id="2-复制模式">2. 复制模式</span><a href="#2-复制模式" class="header-anchor">#</a></h5><p>数据在集群中存在多个副本。 在本地缓存的集群中，数据会复制到所有的节点中，没有网络延迟和等待时间的集群成员都是可用的。 多副本通过低延迟访问来提供高性能。<br>在修改数据时需要复制新的版本数据到所有的副本， 在高并发修改的场景下会限制系统的可伸缩性， 副本数不会调的太高。</p>
 <h2><span id="本地缓存">本地缓存</span><a href="#本地缓存" class="header-anchor">#</a></h2><p>   在同一机房内的， 需要适量考虑本地cache， 数据压缩传输等以节省内网数据传输量 。<br>跨机房的缓存有地域区分，用户往往访问同一机房， 这样可以做本地的cache。 机房之间通过队列的方式进行异步和压缩传输，以提高用户请求的相应度。</p>
@@ -17713,7 +17709,6 @@ nq： 不排队调度
 </ol>
 ]]></content>
       <categories>
-        <category>分布式</category>
         <category>中间件</category>
         <category>缓存</category>
       </categories>
@@ -17954,10 +17949,9 @@ nq： 不排队调度
         <category>分布式</category>
         <category>一致性</category>
         <category>幂等</category>
-        <category>总结</category>
       </categories>
       <tags>
-        <tag>一致性</tag>
+        <tag>幂等</tag>
       </tags>
   </entry>
   <entry>
@@ -18048,7 +18042,7 @@ nq： 不排队调度
 </ol>
 ]]></content>
       <categories>
-        <category>分布式</category>
+        <category>中间件</category>
         <category>定时调度</category>
       </categories>
       <tags>
@@ -18094,13 +18088,11 @@ nq： 不排队调度
 </ol>
 ]]></content>
       <categories>
-        <category>分布式</category>
-        <category>一致性</category>
+        <category>中间件</category>
         <category>分布式锁</category>
       </categories>
       <tags>
         <tag>中间件</tag>
-        <tag>锁</tag>
       </tags>
   </entry>
   <entry>
@@ -18397,9 +18389,7 @@ nq： 不排队调度
 </ol>
 ]]></content>
       <categories>
-        <category>分布式</category>
-        <category>一致性</category>
-        <category>幂等</category>
+        <category>中间件</category>
         <category>id生成</category>
       </categories>
       <tags>
@@ -18616,7 +18606,7 @@ nq： 不排队调度
       </tags>
   </entry>
   <entry>
-    <title>分布式一致性总结</title>
+    <title>分布式一致性 总结</title>
     <url>/www6vHomeHexo/2016/02/09/consistent/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -18798,6 +18788,8 @@ nq： 不排队调度
 </tr>
 </tbody></table>
 <img src="/www6vHomeHexo/2016/02/09/consistent/saga.jpg" class title="saga流程">
+
+
 <h2><span id="三-柔性事务">三. 柔性事务</span><a href="#三-柔性事务" class="header-anchor">#</a></h2><ol>
 <li>基于事务消息的分布式事务<br><img src="https://user-images.githubusercontent.com/5608425/66023796-d2d0e680-e524-11e9-8748-1a26f3d0f157.JPG" alt="mq-normal"><br><img src="https://user-images.githubusercontent.com/5608425/66023797-d2d0e680-e524-11e9-85e6-f845863fe4a8.JPG" alt="mq-reverse"></li>
 </ol>
@@ -18821,7 +18813,7 @@ table th:first-of-type {
 </div>
 
 <h2><span id="五-state-machine-ampamp-primary-copy">五.  state machine &amp;&amp; primary-copy</span><a href="#五-state-machine-ampamp-primary-copy" class="header-anchor">#</a></h2><div style="text-align: center;">
-  
+
 <p><img src="https://user-images.githubusercontent.com/5608425/67629999-09e3af00-f8bb-11e9-88fb-10142745bfdd.png" alt="state-machine-primary-back"><br>state machine replication &amp;&amp; primary-copy</p>
 </div>
 
@@ -18866,11 +18858,10 @@ table th:first-of-type {
       <categories>
         <category>分布式</category>
         <category>一致性</category>
-        <category>事务</category>
+        <category>总结</category>
       </categories>
       <tags>
         <tag>一致性</tag>
-        <tag>分布式</tag>
         <tag>事务</tag>
       </tags>
   </entry>
@@ -19008,7 +18999,6 @@ table th:first-of-type {
 </ol>
 ]]></content>
       <categories>
-        <category>分布式</category>
         <category>中间件</category>
         <category>Zookeeper</category>
       </categories>
@@ -19325,8 +19315,7 @@ table th:first-of-type {
 </ol>
 ]]></content>
       <categories>
-        <category>分布式</category>
-        <category>一致性</category>
+        <category>Java基础</category>
         <category>事务</category>
       </categories>
       <tags>
