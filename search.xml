@@ -5784,6 +5784,58 @@ func new(Type) *Type
       </tags>
   </entry>
   <entry>
+    <title>系统设计 总结</title>
+    <url>/www6vHomeHexo/2022/03/02/systemDesign/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>特点</th>
+<th>设计</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Feed流</td>
+<td>读写比例100:1<br> 消息必达性要求高<br> 非稳定的账号关系</td>
+<td><a href="/www6vHomeHexo/2019/09/13/feed/" title="Feed流">Feed流</a></td>
+</tr>
+<tr>
+<td>秒杀系统</td>
+<td></td>
+<td><a href="/www6vHomeHexo/2018/05/21/secKillSummary/" title="秒杀系统总结">秒杀系统总结</a>  <br>  <a href="/www6vHomeHexo/2018/05/06/seckill/" title="秒杀系统和商品详情页系统(培训讲义)">秒杀系统和商品详情页系统(培训讲义)</a></td>
+</tr>
+<tr>
+<td>计数系统</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>排行榜系统</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>抢红包系统</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>架构</category>
+        <category>系统设计</category>
+        <category>总结</category>
+      </categories>
+      <tags>
+        <tag>feed</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>分布式系统 模式</title>
     <url>/www6vHomeHexo/2022/03/01/distributedSystemPattern/</url>
     <content><![CDATA[<p></p>
@@ -13600,7 +13652,7 @@ nq： 不排队调度
 ]]></content>
       <categories>
         <category>架构</category>
-        <category>系统架构</category>
+        <category>系统设计</category>
         <category>feed</category>
       </categories>
       <tags>
@@ -17407,7 +17459,7 @@ nq： 不排队调度
 ]]></content>
       <categories>
         <category>架构</category>
-        <category>系统架构</category>
+        <category>系统设计</category>
         <category>秒杀系统</category>
       </categories>
       <tags>
@@ -17421,7 +17473,7 @@ nq： 不排队调度
 ]]></content>
       <categories>
         <category>架构</category>
-        <category>系统架构</category>
+        <category>系统设计</category>
         <category>秒杀系统</category>
       </categories>
       <tags>
