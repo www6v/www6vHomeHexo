@@ -6338,7 +6338,7 @@ func new(Type) *Type
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h2><span id="kubernetes-nginx-ingress">Kubernetes Nginx Ingress</span><a href="#kubernetes-nginx-ingress" class="header-anchor">#</a></h2><h5><span id="k8s官方维护-12">K8s官方维护 [1][2]</span><a href="#k8s官方维护-12" class="header-anchor">#</a></h5><ul>
+<h2><span id="kubernetes-nginx-ingress">Kubernetes Nginx Ingress</span><a href="#kubernetes-nginx-ingress" class="header-anchor">#</a></h2><h5><span id="版本1-k8s官方维护-12">版本1-K8s官方维护 [1][2]</span><a href="#版本1-k8s官方维护-12" class="header-anchor">#</a></h5><ul>
 <li>There are three ways to customize NGINX:<ul>
 <li><strong>ConfigMap</strong>: using a Configmap to set global configurations in NGINX.<br>[滚动更新后生效， 针对全局的配置]</li>
 <li><strong>Annotations</strong>: use this if you want a specific configuration for a particular Ingress rule. [立即生效，针对某个域名location进行配置]</li>
@@ -6346,25 +6346,54 @@ func new(Type) *Type
 </ul>
 </li>
 </ul>
-<h5><span id="nginx官方维护-34">Nginx官方维护 [3][4]</span><a href="#nginx官方维护-34" class="header-anchor">#</a></h5><h5><span id="比较-5">比较 [5]</span><a href="#比较-5" class="header-anchor">#</a></h5><h2><span id="实践">实践</span><a href="#实践" class="header-anchor">#</a></h2><ul>
-<li><p>域名重定向 ***<br><code>redirect</code> ，  http 重定向到https， 新旧域名替换</p>
-</li>
-<li><p>前后端分离 ***<br><code>rewrite</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ www.a.com /    --&gt; 前端服务</span><br><span class="line">+ www.a.com /api --&gt; 后端服务 /api  </span><br><span class="line">  www.a.com/api rewrite到  www.a.com </span><br></pre></td></tr></table></figure></li>
-<li><p>SSL配置  [p]<br>验证  自签名证书</p>
-</li>
-<li><p>匹配请求头<br>Mobile 和 PC 的请求头不同，路由到不同的后端服务</p>
-</li>
-<li><p>实现灰度金丝雀发布</p>
-</li>
-<li><p>速率限制</p>
-</li>
-<li><p>黑白名单<br>allow deny</p>
-</li>
-<li><p>自定义错误页面</p>
-</li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h5><span id="版本2-nginx官方维护-34">版本2-Nginx官方维护 [3][4]</span><a href="#版本2-nginx官方维护-34" class="header-anchor">#</a></h5><h5><span id="版本1-vs-版本2-5">版本1 vs.  版本2 [5]</span><a href="#版本1-vs-版本2-5" class="header-anchor">#</a></h5><h2><span id="实践-last">实践 [last]</span><a href="#实践-last" class="header-anchor">#</a></h2><h5><span id="域名重定向">域名重定向 ***</span><a href="#域名重定向" class="header-anchor">#</a></h5><p>  <code>redirect</code> ，  http 重定向到https， 新旧域名替换</p>
+<h5><span id="前后端分离">前后端分离 ***</span><a href="#前后端分离" class="header-anchor">#</a></h5><p><code>rewrite</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ www.a.com /    --&gt; 前端服务</span><br><span class="line">+ www.a.com /api --&gt; 后端服务 /api  </span><br><span class="line">  www.a.com/api rewrite到  www.a.com </span><br></pre></td></tr></table></figure>
+<h5><span id="ssl配置-p">SSL配置  [p]</span><a href="#ssl配置-p" class="header-anchor">#</a></h5><p>  验证  自签名证书</p>
+<h5><span id="匹配请求头">匹配请求头</span><a href="#匹配请求头" class="header-anchor">#</a></h5><p>  Mobile 和 PC 的请求头不同，路由到不同的后端服务</p>
+<h5><span id="实现灰度金丝雀发布6">实现灰度金丝雀发布[6]</span><a href="#实现灰度金丝雀发布6" class="header-anchor">#</a></h5><p>不同灰度方式的优先级由高到低为：<br>canary-by-header<code>&gt;</code>canary-by-cookie<code>&gt;</code>canary-weight</p>
+<table>
+<thead>
+<tr>
+<th>Annotation</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>nginx.ingress.kubernetes.io&#x2F;canary</td>
+<td>必须设置该Annotation值为<code>true</code>，否则其它规则将不会生效。</td>
+</tr>
+<tr>
+<td>nginx.ingress.kubernetes.io&#x2F;canary-by-header</td>
+<td>表示基于请求头的名称进行灰度发布。</td>
+</tr>
+<tr>
+<td>nginx.ingress.kubernetes.io&#x2F;canary-by-header-value</td>
+<td>表示基于请求头的值进行灰度发布。</td>
+</tr>
+<tr>
+<td>nginx.ingress.kubernetes.io&#x2F;canary-by-header-pattern</td>
+<td>表示基于请求头的值进行灰度发布，并对请求头的值进行正则匹配。</td>
+</tr>
+<tr>
+<td>nginx.ingress.kubernetes.io&#x2F;canary-by-cookie</td>
+<td>表示基于Cookie进行灰度发布。</td>
+</tr>
+<tr>
+<td>nginx.ingress.kubernetes.io&#x2F;canary-weight</td>
+<td>表示基于权重进行灰度发布。</td>
+</tr>
+<tr>
+<td>nginx.ingress.kubernetes.io&#x2F;canary-weight-total</td>
+<td>表示设定的权重总值。</td>
+</tr>
+</tbody></table>
+<details><summary>灰度发布 示例</summary><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ 基于Header灰度（自定义header值）：当请求Header为ack: alibaba时将访问灰度服务；其它Header将根据灰度权重将流量分配给灰度服务。</span><br><span class="line">+ 基于Cookie灰度：当Header不匹配时，请求的Cookie为hangzhou_region=always时将访问灰度服务。 </span><br><span class="line"></span><br><span class="line">apiVersion: networking.k8s.io/v1</span><br><span class="line">kind: Ingress</span><br><span class="line">metadata:</span><br><span class="line">  annotations:</span><br><span class="line">    kubernetes.io/ingress.class: nginx</span><br><span class="line">    nginx.ingress.kubernetes.io/canary: &quot;true&quot;</span><br><span class="line">    nginx.ingress.kubernetes.io/canary-weight: &quot;20&quot;</span><br><span class="line">    nginx.ingress.kubernetes.io/canary-by-header: &quot;ack&quot;</span><br><span class="line">    nginx.ingress.kubernetes.io/canary-by-header-value: &quot;alibaba&quot;</span><br><span class="line">    nginx.ingress.kubernetes.io/canary-by-cookie: &quot;hangzhou_region&quot;</span><br></pre></td></tr></table></figure></details>
+
+
+
+<h5><span id="速率限制">速率限制</span><a href="#速率限制" class="header-anchor">#</a></h5><h5><span id="黑白名单">黑白名单</span><a href="#黑白名单" class="header-anchor">#</a></h5><p>  allow deny</p>
+<h5><span id="自定义错误页面">自定义错误页面</span><a href="#自定义错误页面" class="header-anchor">#</a></h5><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><p><a href="https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/">Ingress-Nginx Doc</a></p>
 </li>
 <li><p><a href="https://github.com/kubernetes/ingress-nginx">Ingress-Nginx Github</a></p>
@@ -6374,6 +6403,8 @@ func new(Type) *Type
 <li><p><a href="https://github.com/nginxinc/kubernetes-ingress">Nginx-ingress GitHub</a></p>
 </li>
 <li><p><a href="https://github.com/nginxinc/kubernetes-ingress/blob/main/docs/content/intro/nginx-ingress-controllers.md">nginx-ingress-controllers.md</a>    表格 </p>
+</li>
+<li><p><a href="https://help.aliyun.com/document_detail/86533.html#section-gjm-dw6-hkn">Nginx Ingress高级用法</a></p>
 </li>
 <li><p><a href="https://www.bilibili.com/video/BV16t4y1w7r6?p=162">kubernetes架构师课程</a></p>
 </li>
@@ -7542,9 +7573,10 @@ func new(Type) *Type
 <li>k8s ingress controller</li>
 </ul>
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ul>
-<li><a href="https://www.bilibili.com/video/BV1Gt4y1q7qC?vd_source=f6e8c1128f9f264c5ab8d9411a644036">【云原生学院 #3】基于 Apache APISIX 的全流量 API 网关</a> good</li>
+<li><a href="https://www.bilibili.com/video/BV1Gt4y1q7qC?vd_source=f6e8c1128f9f264c5ab8d9411a644036">【云原生学院 #3】基于 Apache APISIX 的全流量 API 网关</a> ***</li>
 <li><a href="https://www.infoq.cn/article/construct-micro-service-using-api-gateway/">使用 API 网关构建微服务</a></li>
 <li><a href="https://tech.meituan.com/2021/05/20/shepherd-api-gateway.html">百亿规模API网关服务Shepherd的设计与实现</a> 点评 未</li>
+<li><a href="/www6vHomeHexo/2022/02/10/k8sIngressNginx/" title="Kubernetes Nginx Ingress">Kubernetes Nginx Ingress</a> self</li>
 </ul>
 ]]></content>
       <categories>
@@ -12360,14 +12392,17 @@ func new(Type) *Type
 <h2><span id="一-基础模式">一. 基础模式</span><a href="#一-基础模式" class="header-anchor">#</a></h2><h3><span id="1-声明式的deployment">1. 声明式的Deployment</span><a href="#1-声明式的deployment" class="header-anchor">#</a></h3><p>   Rolling deployment， 滚动发布<br>   Fixed deployment<br>   Blue-green release， 蓝绿部署<br>   Canary release, 灰度发布</p>
 <h3><span id="2-受管理的声明周期">2. 受管理的声明周期</span><a href="#2-受管理的声明周期" class="header-anchor">#</a></h3><p>   SIGTERM Signal：  SIGTERM 是通知进程优雅退出的信号<br>   SIGKILL Signal： SIGKILL 是硬终止的信号<br>   Poststart Hook<br>   Prestop Hook</p>
 <p>   <a href="https://aleiwu.com/post/tidb-opeartor-webhook">Kubernetes 中如何保证优雅地停止 Pod</a><br>   <a href="https://mp.weixin.qq.com/s/wvg2AqOZd-WtjehGWNWFXg">Kubernetes 中如何保证优雅地停止 Pod</a><br>   PingCAP 吴叶磊</p>
-<h2><span id="二-行为模式">二. 行为模式</span><a href="#二-行为模式" class="header-anchor">#</a></h2><h3><span id="1-batch-job">1. Batch Job</span><a href="#1-batch-job" class="header-anchor">#</a></h3><p>参考:<br><a href="https://github.com/kubernetes-sigs/kube-batch">kube-batch</a>   git<br>A batch scheduler of kubernetes for high performance workload, e.g. AI&#x2F;ML, BigData, HPC  </p>
+<h2><span id="二-行为模式">二. 行为模式</span><a href="#二-行为模式" class="header-anchor">#</a></h2><h3><span id="1-batch-job">1. Batch Job</span><a href="#1-batch-job" class="header-anchor">#</a></h3><p>参考:<br><a href="https://github.com/kubernetes-sigs/kube-batch">kube-batch</a>     </p>
 <h3><span id="2-singleton-service">2. Singleton Service</span><a href="#2-singleton-service" class="header-anchor">#</a></h3><ul>
 <li><p>Out-of-application locking mechanism<br>replicas &#x3D;1</p>
 </li>
 <li><p>In-application locking mechanism:<br>replicas&gt;1  + 分布式锁</p>
 </li>
 </ul>
-<h3><span id="3stateful-service">3.Stateful Service</span><a href="#3stateful-service" class="header-anchor">#</a></h3><p>参考:<br><a href="../../../../2019/11/11/k8sStatefulSet/">Kubernetes资源对象 - StatefulSet</a> self</p>
+<h3><span id="3stateful-service">3.Stateful Service</span><a href="#3stateful-service" class="header-anchor">#</a></h3><p>参考:</p>
+<ul>
+<li><a href="/www6vHomeHexo/2019/11/11/k8sStatefulSet/" title="Kubernetes StatefulSet原理和源码">Kubernetes StatefulSet原理和源码</a>  self</li>
+</ul>
 <h3><span id="4service-discovery">4.Service Discovery</span><a href="#4service-discovery" class="header-anchor">#</a></h3><table>
 <thead>
 <tr>
@@ -12420,14 +12455,19 @@ func new(Type) *Type
 <td align="center">L7&#x2F;HTTP-based smart routing mechanism</td>
 </tr>
 </tbody></table>
-<p>参考:<br><a href="../../../../2019/11/04/k8sService/">Kubernetes服务</a> self</p>
+<p>参考:</p>
+<ul>
+<li><a href="/www6vHomeHexo/2019/11/04/k8sService/" title="Kubernetes服务">Kubernetes服务</a> self</li>
+</ul>
 <h2><span id="三-结构模式">三. 结构模式</span><a href="#三-结构模式" class="header-anchor">#</a></h2><h3><span id="1-init-container">1. Init Container</span><a href="#1-init-container" class="header-anchor">#</a></h3><h3><span id="2-sidecar">2. Sidecar</span><a href="#2-sidecar" class="header-anchor">#</a></h3><p>场景:</p>
 <ul>
 <li>跨多语言; istio </li>
 <li><a href="https://yq.aliyun.com/articles/674327">容器日志采集利器Log-Pilot</a></li>
 </ul>
 <h2><span id="四-高级模式">四. 高级模式</span><a href="#四-高级模式" class="header-anchor">#</a></h2><h3><span id="1-控制器模式">1. 控制器模式</span><a href="#1-控制器模式" class="header-anchor">#</a></h3><p>参考:<br><a href="https://github.com/kubernetes/sample-controller">sample-controller 官方控制器的例子</a> git<br><a href="https://github.com/kubernetes-sigs/kubebuilder">kubebuilder</a> git</p>
-<h3><span id="2-operator">2. Operator</span><a href="#2-operator" class="header-anchor">#</a></h3><p><a href="../../../../2019/11/19/k8sOperator/">Kubernetes Operator</a> self</p>
+<h3><span id="2-operator">2. Operator</span><a href="#2-operator" class="header-anchor">#</a></h3><ul>
+<li><a href="/www6vHomeHexo/2019/11/19/k8sOperator/" title="Kubernetes Operator-Etcd">Kubernetes Operator-Etcd</a> self</li>
+</ul>
 <h3><span id="3-elastic-scale">3. Elastic Scale</span><a href="#3-elastic-scale" class="header-anchor">#</a></h3><h5><span id="类型">类型</span><a href="#类型" class="header-anchor">#</a></h5><ul>
 <li>VPA</li>
 <li>HPA</li>
@@ -12437,9 +12477,18 @@ func new(Type) *Type
 <li>QoS</li>
 <li>requests, limits</li>
 </ul>
-<p>参考:<br><a href="../../../../2019/11/14/k8sResouceModel/">Kubenetes资源模型</a> self<br><a href="../../../../2019/11/16/k8sAutoScale/">Kubernetes自动伸缩和HPA</a>  self</p>
+<p>参考:</p>
+<ul>
+<li><a href="/www6vHomeHexo/2019/11/14/k8sResouceModel/" title="Kubenetes资源模型">Kubenetes资源模型</a> self</li>
+<li><a href="/www6vHomeHexo/2019/11/16/k8sAutoScale/" title="Kubernetes自动伸缩和HPA">Kubernetes自动伸缩和HPA</a>  self</li>
+</ul>
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href>《Kubernetes Patterns - Reusable Elements for Designing Cloud-Native Applications》</a>  Bilgin Ibryam@RedHat, Roland Huß@RedHat</li>
+<li><p><a href>《Kubernetes Patterns - Reusable Elements for Designing Cloud-Native Applications》</a>  Bilgin Ibryam@RedHat, Roland Huß@RedHat</p>
+</li>
+<li><p><a href="http://www.xuyasong.com/?p=2056">K8S 中的设计模式- 读《Kubernetes Patterns》</a> </p>
+</li>
+<li><p><a href="https://github.com/k8spatterns">Kubernetes Patterns</a></p>
+</li>
 </ol>
 ]]></content>
       <categories>
