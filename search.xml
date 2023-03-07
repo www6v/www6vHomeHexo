@@ -6351,7 +6351,7 @@ func new(Type) *Type
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ www.a.com /    --&gt; 前端服务</span><br><span class="line">+ www.a.com /api --&gt; 后端服务 /api  </span><br><span class="line">  www.a.com/api rewrite到  www.a.com </span><br></pre></td></tr></table></figure>
 <h5><span id="ssl配置-p">SSL配置  [p]</span><a href="#ssl配置-p" class="header-anchor">#</a></h5><p>  验证  自签名证书</p>
 <h5><span id="匹配请求头">匹配请求头</span><a href="#匹配请求头" class="header-anchor">#</a></h5><p>  Mobile 和 PC 的请求头不同，路由到不同的后端服务</p>
-<h5><span id="实现灰度金丝雀发布6">实现灰度金丝雀发布[6]</span><a href="#实现灰度金丝雀发布6" class="header-anchor">#</a></h5><p>不同灰度方式的优先级由高到低为：<br>canary-by-header<code>&gt;</code>canary-by-cookie<code>&gt;</code>canary-weight</p>
+<h5><span id="实现灰度金丝雀发布67">实现灰度金丝雀发布[6][7]</span><a href="#实现灰度金丝雀发布67" class="header-anchor">#</a></h5><p>不同灰度方式的优先级由高到低为：<br>canary-by-header<code>&gt;</code>canary-by-cookie<code>&gt;</code>canary-weight</p>
 <table>
 <thead>
 <tr>
@@ -6405,6 +6405,8 @@ func new(Type) *Type
 <li><p><a href="https://github.com/nginxinc/kubernetes-ingress/blob/main/docs/content/intro/nginx-ingress-controllers.md">nginx-ingress-controllers.md</a>    表格 </p>
 </li>
 <li><p><a href="https://help.aliyun.com/document_detail/86533.html#section-gjm-dw6-hkn">Nginx Ingress高级用法</a></p>
+</li>
+<li><p><a href="https://www.bilibili.com/video/BV15o4y1Y7Bq/">【IT老齐294】大厂如何基于K8S实现金丝雀发布</a></p>
 </li>
 <li><p><a href="https://www.bilibili.com/video/BV16t4y1w7r6?p=162">kubernetes架构师课程</a></p>
 </li>
