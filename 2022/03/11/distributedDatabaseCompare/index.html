@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-11T12:13:01.000Z">
-<meta property="article:modified_time" content="2023-03-11T12:19:24.616Z">
+<meta property="article:modified_time" content="2023-03-11T15:58:37.408Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="分布式数据库">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-11 20:19:24" itemprop="dateModified" datetime="2023-03-11T20:19:24+08:00">2023-03-11</time>
+                <time title="修改时间：2023-03-11 23:58:37" itemprop="dateModified" datetime="2023-03-11T23:58:37+08:00">2023-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -258,7 +258,9 @@
         <p></p>
 <span id="more"></span>
 
-<table>
+
+
+<h2><span id="分布式-数据库-比较-1">分布式 数据库 比较 [1]</span><a href="#分布式-数据库-比较-1" class="header-anchor">#</a></h2><table>
 <thead>
 <tr>
 <th></th>
@@ -266,90 +268,87 @@
 <th>TiDB</th>
 <th>CockroachDB</th>
 <th>Spanner</th>
-<th></th>
 </tr>
 </thead>
 <tbody><tr>
 <td>分布式事务</td>
 <td>MVCC+TSO</td>
-<td>MVCC+TSO</td>
-<td>MVCC+HLC</td>
+<td>MVCC+TSO [Percolator][5][6]</td>
+<td>MVCC+HLC[2][3][4]</td>
 <td>MVCC+TrueTime API</td>
-<td></td>
 </tr>
 <tr>
 <td>存储引擎</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>InnoDB&#x2F;x-engine<br> HEX2(列存)</td>
+<td>RocksDB<br>TiFlash(列存)</td>
+<td>RocksDB</td>
+<td>Colossus</td>
 </tr>
 <tr>
 <td>高可用</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>计算无状态集群<br>存储Multi-Paxos</td>
+<td>计算无状态集群<br>存储Raft</td>
+<td>计算存储一体化 集群化 <br>存储Raft</td>
+<td>计算存储一体化 集群化 <br>存储Multi-Paxos</td>
 </tr>
 <tr>
 <td>数据分区</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>Hash&#x2F;List&#x2F;Range</td>
+<td>Range&#x2F;Hash</td>
+<td>Range&#x2F;Hash</td>
+<td>Range&#x2F;Hash</td>
 </tr>
 <tr>
 <td>全局索引</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
 </tr>
 <tr>
 <td>HTAP</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>强隔离 强一致<br>MPP并行</td>
+<td>强隔离 强一致<br>Spark</td>
+<td>混合负载<br> MPP并行</td>
+<td>混合负载<br> MPP并行</td>
 </tr>
 <tr>
 <td>生态兼容性</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>基本兼容MySQL</td>
+<td>基本兼容MySQL</td>
+<td>基本兼容PGSQL</td>
+<td>非标准SQL</td>
 </tr>
 <tr>
 <td>元数据DDL</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>全局一致 + Online</td>
+<td>全局一致 + Online</td>
+<td>全局一致 + Online</td>
+<td>全局一致 + Online</td>
 </tr>
 <tr>
 <td>全局日志</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>√</td>
+<td>√</td>
+<td>√（企业版）</td>
+<td>×</td>
 </tr>
 <tr>
 <td>备份恢复</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
 </tr>
 </tbody></table>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li>《云数据库架构》 2.3.1</li>
+<li><a target="_blank" rel="noopener" href="https://www.modb.pro/db/84156">CockroachDB分布式事务解密(一)：CockroachDB &amp; HLC</a><br>CockroachDB使用了一个软件实现的基于NTP时钟同步的混合逻辑时钟算法(Hybrid Logic Clock)——HLC追踪系统中事务的的hb关系(happen before)。</li>
+<li><a target="_blank" rel="noopener" href="https://www.modb.pro/db/84153">CockroachDB事务解密(二)：事务模型</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/cockroachdb/cockroach/blob/master/pkg/util/hlc/hlc.go">Cockroach  HLC</a></li>
+<li>《云原生数据库 原理与实践》 8.1.3</li>
+<li><a target="_blank" rel="noopener" href="https://cn.pingcap.com/blog/pessimistic-transaction-the-new-features-of-tidb">TiDB 新特性漫谈：悲观事务</a></li>
+</ol>
 
     </div>
 
