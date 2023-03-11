@@ -430,7 +430,8 @@
 <li><a href="/www6vHomeHexo/2022/02/27/mysqlLog/" title="MySQL Logs">MySQL Logs</a></li>
 </ul>
 <h2><span id="分布式">分布式</span><a href="#分布式" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2022/02/09/distributedDatabase/" title="分布式 数据库">分布式 数据库</a></li>
+<li><a href="/www6vHomeHexo/2022/02/09/distributedDatabase/" title="分布式 数据库 总结">分布式 数据库 总结</a></li>
+<li><a href="/www6vHomeHexo/2022/03/11/distributedDatabaseCompare/" title="分布式 数据库 比较">分布式 数据库 比较</a></li>
 </ul>
 <h5><span id="存储引擎">存储引擎</span><a href="#存储引擎" class="header-anchor">#</a></h5><ul>
 <li><a href="/www6vHomeHexo/2022/06/05/lsmTreeKeyValueSeparation/" title="LSM-Tree  KV分离">LSM-Tree  KV分离</a></li>
@@ -3383,7 +3384,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <p>参考：</p>
 <ol>
 <li>CNCF × Alibaba 云原生技术公开课<br><a href="https://mp.weixin.qq.com/s/nPErpcghHih5-dGPQkStJA?spm=a2c6h.12873639.article-detail.60.67905225MCDpLx">第27 章 ： Kubernetes安全之访问控制</a><br>第29 章 ： 安全容器技术</li>
-<li><a href="https://jimmysong.io/docs/kubernetes-hardening-guidance/">Kubernetes 加固指南</a>    good</li>
+<li><a href="https://jimmysong.io/docs/kubernetes-hardening-guidance/">Kubernetes 加固指南</a>    ***</li>
 <li>Kubernetes in Action - 12章， 13章 （未）</li>
 <li><a href="https://corvo.myseu.cn/2021/03/23/2021-03-23-%E8%AE%B0%E4%B8%80%E6%AC%A1Kubernetes%E4%B8%AD%E4%B8%A5%E9%87%8D%E7%9A%84%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98/">记一次Kubernetes中严重的安全问题</a> 未</li>
 <li><a href="https://icloudnative.io/posts/security-best-practices-for-kubernetes-pods/">Kubernetes 最佳安全实践指南</a> 未</li>
@@ -5536,6 +5537,114 @@ BGP 协议传输的消息
       </tags>
   </entry>
   <entry>
+    <title>分布式 数据库 比较</title>
+    <url>/www6vHomeHexo/2022/03/11/distributedDatabaseCompare/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>PolarDB-X</th>
+<th>TiDB</th>
+<th>CockroachDB</th>
+<th>Spanner</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>分布式事务</td>
+<td>MVCC+TSO</td>
+<td>MVCC+TSO</td>
+<td>MVCC+HLC</td>
+<td>MVCC+TrueTime API</td>
+<td></td>
+</tr>
+<tr>
+<td>存储引擎</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>高可用</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>数据分区</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>全局索引</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>HTAP</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>生态兼容性</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>元数据DDL</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>全局日志</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>备份恢复</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>关系型</category>
+        <category>分布式</category>
+      </categories>
+      <tags>
+        <tag>分布式数据库</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Golang 基础</title>
     <url>/www6vHomeHexo/2022/03/08/golangBasic/</url>
     <content><![CDATA[<p></p>
@@ -6421,7 +6530,7 @@ func new(Type) *Type
       </tags>
   </entry>
   <entry>
-    <title>分布式 数据库</title>
+    <title>分布式 数据库 总结</title>
     <url>/www6vHomeHexo/2022/02/09/distributedDatabase/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -6429,6 +6538,7 @@ func new(Type) *Type
 <img src="/www6vHomeHexo/2022/02/09/distributedDatabase/dDatabase.jpg" class title="分布式数据库">
 
 <img src="/www6vHomeHexo/2022/02/09/distributedDatabase/dDatabase1.jpg" class title="分布式数据库">
+
 
 
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>&lt;&lt;分布式数据库30讲&gt;&gt;</p>
@@ -7894,7 +8004,7 @@ func new(Type) *Type
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><a href="https://www.microsoft.com/security/blog/2020/04/02/attack-matrix-kubernetes/">Threat matrix for Kubernetes</a>  overview</li>
 <li><a href="https://paper.seebug.org/1803/">云原生之 Kubernetes 安全</a> 深信服千里目安全实验室  overview</li>
-<li><a href="https://blog.wohin.me/posts/container-escape-overview/">容器逃逸技术概览</a> good</li>
+<li><a href="https://blog.wohin.me/posts/container-escape-overview/">容器逃逸技术概览</a> ***</li>
 <li><a href="https://www.bilibili.com/read/cv17136407">红队视角下的容器逃逸利用及分析</a> 未</li>
 <li><a href="https://cloud.tencent.com/developer/article/2000490">浅析K8S各种未授权攻击方法</a></li>
 <li><a href="https://www.bilibili.com/read/cv15722560/">k8s对外攻击面总结</a> 未</li>
