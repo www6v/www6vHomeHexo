@@ -21,12 +21,12 @@
   </script>
 
   <meta property="og:type" content="article">
-<meta property="og:title" content="Streaming System Chapter4">
+<meta property="og:title" content="Streaming System-Chapter4">
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2000/03/14/streamingSystemChapter4/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2000-03-14T06:36:25.000Z">
-<meta property="article:modified_time" content="2023-03-14T07:20:13.221Z">
+<meta property="article:modified_time" content="2023-03-14T12:09:22.694Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Streaming System">
 <meta name="twitter:card" content="summary">
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>Streaming System Chapter4 | www6v的博客</title>
+  <title>Streaming System-Chapter4 | www6v的博客</title>
   
 
 
@@ -201,7 +201,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Streaming System Chapter4
+          Streaming System-Chapter4
         </h1>
 
         <div class="post-meta">
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-14 15:20:13" itemprop="dateModified" datetime="2023-03-14T15:20:13+08:00">2023-03-14</time>
+                <time title="修改时间：2023-03-14 20:09:22" itemprop="dateModified" datetime="2023-03-14T20:09:22+08:00">2023-03-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -250,7 +250,7 @@
         <p></p>
 <span id="more"></span>
 
-<details><summary>点击</summary><h1><span id="whenx2fwhere-processing-time-windows">*<strong>When*&#x2F;*Where*: Processing-Time Windows</strong></span><a href="#whenx2fwhere-processing-time-windows" class="header-anchor">#</a></h1><p>Processing-time windowing is important for two reasons:</p>
+<details><summary>点击 原文</summary><h1><span id="whenx2fwhere-processing-time-windows">*<strong>When*&#x2F;*Where*: Processing-Time Windows</strong></span><a href="#whenx2fwhere-processing-time-windows" class="header-anchor">#</a></h1><p>Processing-time windowing is important for two reasons:</p>
 <ul>
 <li>For certain use cases, such as usage monitoring (e.g., web service</li>
 </ul>
@@ -312,19 +312,19 @@
 <li><p>对于时间事件很重要的用例（例如，分析用户行为趋势、计费、评分等），处理时间窗口绝对不是正确的方法，识别这些情况非常关键。</p>
 </li>
 </ul>
-<p>因此，值得深入了解处理时间窗口和事件时间窗口之间的区别，特别是考虑到许多流媒体系统中处理时间窗口的普遍性。——</p>
-<p>在像本书中所呈现的基于事件时间的窗口作为一级概念的模型中工作时，有两种方法可以使用以实现处理时间窗口：——</p>
+<p>因此，值得深入了解处理时间窗口和事件时间窗口之间的区别，特别是考虑到许多流媒体系统中处理时间窗口的普遍性。</p>
+<p>在像本书中所呈现的基于事件时间的窗口作为一级概念的模型中工作时，有两种方法可以使用以实现处理时间窗口：</p>
 <ul>
 <li>触发器 Triggers<br> 忽略事件时间（即使用跨越所有事件时间的全局窗口）并使用触发器在处理时间轴上提供该窗口的快照。</li>
 <li>进入时间 Ingress time<br> 将进入时间分配为数据的事件时间，随后使用常规事件时间窗口。这基本上就是Spark Streaming 1.x之类的东西所做的。</li>
 </ul>
-<p>请注意，这两种方法或多或少是等效的，尽管它们在多阶段流水线的情况下略有不同：在触发器版本中，多阶段流水线将独立地在每个阶段切片处理时间“窗口”，因此例如，一个阶段的窗口<em>N</em>中的数据可能会在下一个阶段中代替窗口<em>N</em>-1或<em>N</em>+1;在进入时间版本中，在将数据合并到窗口<em>N</em>后，由于通过水印（在Cloud Dataflow情况下）、微批边界（在Spark Streaming情况下）或其他协调因素在引擎级别涉及的进展同步，它将在整个流水线的持续时间内保留在窗口<em>N</em>中。——</p>
-<p>正如我一再指出的那样，处理时间窗口的一个重大缺点是当输入的观察顺序发生变化时，窗口的内容也会发生变化。为了更具体地说明这一点，我们将查看以下三种用例：<em>事件时间</em>窗口、通过触发器的<em>处理时间</em>窗口和通过进入时间的<em>处理时间</em>窗口。——</p>
-<p>每个将应用于两个不同的输入集（因此总共有六个变体）。两个输入集将是完全相同的事件（即相同的值，在相同的事件时间发生），但是观察顺序不同。第一个集将是我们一直看到的观察顺序，标为白色；第二个则将所有值在处理时间轴上向右移动，如图4-1所示，标为紫色。您可以简单地想象，如果风从东边吹而不是从西边吹（即底层的复杂分布式系统以稍微不同的顺序进行了处理），那么紫色示例就是另一种现实可能发生的方式。——</p>
+<p>请注意，这两种方法或多或少是等效的，尽管它们在多阶段流水线的情况下略有不同：在触发器版本中，多阶段流水线将独立地在每个阶段切片处理时间“窗口”，因此例如，一个阶段的窗口<em>N</em>中的数据可能会在下一个阶段中代替窗口<em>N</em>-1或<em>N</em>+1;在进入时间版本中，在将数据合并到窗口<em>N</em>后，由于通过水印（在Cloud Dataflow情况下）、微批边界（在Spark Streaming情况下）或其他协调因素在引擎级别涉及的进展同步，它将在整个流水线的持续时间内保留在窗口<em>N</em>中。</p>
+<p>正如我一再指出的那样，处理时间窗口的一个重大缺点是当输入的观察顺序发生变化时，窗口的内容也会发生变化。为了更具体地说明这一点，我们将查看以下三种用例：<em>事件时间</em>窗口、通过触发器的<em>处理时间</em>窗口和通过进入时间的<em>处理时间</em>窗口。</p>
+<p>每个将应用于两个不同的输入集（因此总共有六个变体）。两个输入集将是完全相同的事件（即相同的值，在相同的事件时间发生），但是观察顺序不同。第一个集将是我们一直看到的观察顺序，标为白色；第二个则将所有值在处理时间轴上向右移动，如图4-1所示，标为紫色。您可以简单地想象，如果风从东边吹而不是从西边吹（即底层的复杂分布式系统以稍微不同的顺序进行了处理），那么紫色示例就是另一种现实可能发生的方式。</p>
 <div id="dplayer0" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer0"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0401.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><em>图4-1。在处理时间中移动输入观察顺序，保持值和事件时间不变</em></p>
-<details><summary>点击</summary><h1><span id="event-time-windowing"><strong>Event-Time Windowing</strong></span><a href="#event-time-windowing" class="header-anchor">#</a></h1><p>To establish a baseline, let’s first compare fixed windowing in event time</p>
+<details><summary>点击 原文</summary><h1><span id="event-time-windowing"><strong>Event-Time Windowing</strong></span><a href="#event-time-windowing" class="header-anchor">#</a></h1><p>To establish a baseline, let’s first compare fixed windowing in event time</p>
 <p>with a heuristic watermark over these two observation orderings. We’ll reuse</p>
 <p>the early&#x2F;late code from Example 2-7&#x2F;Figure 2-10 to get the results shown in</p>
 <p>Figure 4-2. The lefthand side is essentially what we saw before; the righthand</p>
@@ -339,7 +339,177 @@
 <div id="dplayer1" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer1"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0402.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><em>图4-2. 对相同输入的两个不同处理时间顺序的事件时间窗口</em></p>
+<details><summary>点击 原文</summary><h1><span id="processing-time-windowing-via-triggers"><strong>Processing-Time Windowing via Triggers</strong></span><a href="#processing-time-windowing-via-triggers" class="header-anchor">#</a></h1><p>Let’s now compare this to the two processing-time methods just described.</p>
+<p>First, we’ll try the triggers method. There are three aspects to making</p>
+<p>processing-time “windowing” work in this manner:</p>
+<p><em>Windowing</em></p>
+<p>We use the global event-time window because we’re essentially emulating</p>
+<p>processing-time windows with event-time panes.</p>
+<p><em>Triggering</em></p>
+<p>We trigger periodically in the processing-time domain based on the</p>
+<p>desired size of the processing-time windows.</p>
+<p><em>Accumulation</em></p>
+<p>We use discarding mode to keep the panes independent from one another,</p>
+<p>thus letting each of them act like an independent processing-time</p>
+<p>“window.”</p>
+<p>The corresponding code looks something like Example 4-1; note that global</p>
+<p>windowing is the default in Beam, hence there is no specific override of the</p>
+<p>108windowing strategy.</p>
+<p><em>Example 4-1. Processing-time windowing via repeated, discarding panes of a</em></p>
+<p><em>global event-time window</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</span><br><span class="line">.apply(Window.triggering(Repeatedly(AlignedDelay(ONE_MINUTE)))</span><br><span class="line">             .discardingFiredPanes())</span><br><span class="line">.apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
+<p>When executed on a streaming runner against our two different orderings of</p>
+<p>the input data, the results look like Figure 4-3. Here are some interesting notes</p>
+<p>about this figure:</p>
+<ul>
+<li>Because we’re emulating processing-time windows via event-time</li>
+</ul>
+<p>panes, the “windows” are delineated in the processing-time axis,</p>
+<p>which means their effective width is measured on the y-axis instead</p>
+<p>of the x-axis.</p>
+<ul>
+<li>Because processing-time windowing is sensitive to the order that</li>
+</ul>
+<p>input data are encountered, the results for each of the “windows”</p>
+<p>differs for each of the two observation orders, even though the events</p>
+<p>themselves technically happened at the same times in each version.</p>
+<p>On the left we get 12, 18, 18, whereas on the right we get 7, 36, 5.</p>
+<p><em>Figure 4-3. Processing-time “windowing” via triggers, over two different processing-time orderings of</em></p>
+<p><em>the same inputs</em></p>
+</details>
 
+<h1><span id="触发器的处理时间窗口"><strong>触发器的处理时间窗口</strong></span><a href="#触发器的处理时间窗口" class="header-anchor">#</a></h1><p>现在，我们将此与刚刚描述的两种处理时间方法进行比较。首先，我们将尝试触发器方法。 实现处理时间“窗口化”的方式有三个方面：|</p>
+<ul>
+<li><p><em>窗口 Windowing</em><br> 我们使用全局事件时间窗口，因为我们基本上是在使用事件时间窗格模拟处理时间窗口。</p>
+</li>
+<li><p><em>触发 Triggering</em><br> 我们在处理时间域中定期触发，基于所需处理时间窗口的大小。</p>
+</li>
+<li><p><em>累积 Accumulation</em><br> 我们使用丢弃模式使窗格彼此独立，从而使每个窗格像一个独立的处理时间“窗口”。</p>
+</li>
+</ul>
+<p>相应的代码看起来像示例4-1；请注意，全局窗口是Beam的默认设置，因此没有特定的窗口策略覆盖。</p>
+<p><em>示例4-1。通过重复，丢弃全局事件时间窗格的处理时间窗口</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</span><br><span class="line">.apply(Window.triggering(Repeatedly(AlignedDelay(ONE_MINUTE)))</span><br><span class="line">             .discardingFiredPanes())</span><br><span class="line">.apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
+
+<p>在流处理运行器上针对输入数据的两种不同排序执行时，结果如图4-3所示。这里有一些有趣的注释：</p>
+<ul>
+<li>因为我们是通过事件时间窗格模拟处理时间窗口，所以“窗口”在处理时间轴上被划分，这意味着它们的有效宽度在y轴上测量而不是x轴。</li>
+<li>因为处理时间窗口对输入数据的遇到顺序很敏感，所以每个“窗口”的结果对于两个观察顺序中的每一个都不同，尽管事件本身在每个版本中都在技术上相同时发生。</li>
+</ul>
+<p>在左侧，我们得到12、18、18，而在右侧，我们得到7、36、5。</p>
+<div id="dplayer2" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer2"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0403.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+
+<p><em>图4-3. 通过触发器的处理时间“窗口”，针对相同输入数据的两种不同处理时间排序</em></p>
+<details><summary>点击 原文</summary><h1><span id="processing-time-windowing-via-ingress-time"><strong>Processing-Time Windowing via Ingress Time</strong></span><a href="#processing-time-windowing-via-ingress-time" class="header-anchor">#</a></h1><p>Lastly, let’s look at processing-time windowing achieved by mapping the</p>
+<p>event times of input data to be their ingress times. Code-wise, there are four</p>
+<p>aspects worth mentioning here:</p>
+<ul>
+<li><em>Time-shifting</em></li>
+</ul>
+<p>When elements arrive, their event times need to be overwritten with the</p>
+<p>time of ingress. We can do this in Beam by providing a new DoFn that sets</p>
+<p>the timestamp of the element to the current time via the</p>
+<p>outputWithTimestamp method.</p>
+<ul>
+<li><em>Windowing</em></li>
+</ul>
+<p>Return to using standard event-time fixed windowing.</p>
+<ul>
+<li><em>Triggering</em></li>
+</ul>
+<p>Because ingress time affords the ability to calculate a perfect watermark,</p>
+<p>we can use the default trigger, which in this case implicitly fires exactly</p>
+<p>once when the watermark passes the end of the window.</p>
+<ul>
+<li><em>Accumulation mode</em></li>
+</ul>
+<p>Because we only ever have one output per window, the accumulation</p>
+<p>mode is irrelevant.</p>
+<p>The actual code might thus look something like that in Example 4-2.</p>
+<p><em>Example 4-2. Processing-time windowing via repeated, discarding panes of a</em></p>
+<p><em>global event-time window</em></p>
+<p><code>PCollection&lt;String&gt; raw = IO.read().apply(ParDo.of(</code></p>
+<p><code>new DoFn&lt;String, String&gt;() {</code></p>
+<p><code>public void processElement(ProcessContext c) {</code></p>
+<p><code>c.outputWithTimestmap(new Instant());</code></p>
+<p><code>}</code></p>
+<p><code>});</code></p>
+<p><code>PCollection&lt;KV&lt;Team, Integer&gt;&gt; input =</code></p>
+<p><code>raw.apply(ParDo.of(new ParseFn());</code></p>
+<p><code>PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</code></p>
+<p><code>.apply(Window.info(FixedWindows.of(TWO_MINUTES))</code></p>
+<p><code>.apply(Sum.integersPerKey());</code></p>
+<p>Execution on a streaming engine would look like Figure 4-4. As data arrive,</p>
+<p>their event times are updated to match their ingress times (i.e., the processing</p>
+<p>times at arrival), resulting in a rightward horizontal shift onto the ideal</p>
+<p>watermark line. Here are some interesting notes about this figure:</p>
+<ul>
+<li>As with the other processing-time windowing example, we get</li>
+</ul>
+<p>different results when the ordering of inputs changes, even though</p>
+<p>the values and event times for the input stay constant.</p>
+<ul>
+<li>Unlike the other example, the windows are once again delineated in</li>
+</ul>
+<p>the event-time domain (and thus along the x-axis). Despite this, they</p>
+<p>aren’t bonafide event-time windows; we’ve simply mapped</p>
+<p>processing time onto the event-time domain, erasing the original</p>
+<p>record of occurrence for each input and replacing it with a new one</p>
+<p>that instead represents the time the datum was first observed by the</p>
+<p>pipeline.</p>
+<ul>
+<li>Despite this, thanks to the watermark, trigger firings still happen at</li>
+</ul>
+<p>exactly the same time as in the previous processing-time example.</p>
+<p>Furthermore, the output values produced are identical to that</p>
+<p>example, as predicted: 12, 18, 18 on the left, and 7, 36, 5 on the right.</p>
+<ul>
+<li>Because perfect watermarks are possible when using ingress time,</li>
+</ul>
+<p>the actual watermark matches the ideal watermark, ascending up and</p>
+<p>to the right with a slope of one.</p>
+<p><em>Figure 4-4. Processing-time windowing via the use of ingress time, over two different processing-time</em></p>
+<p><em>orderings of the same inputs</em></p>
+<p>Although it’s interesting to see the different ways you can implement</p>
+<p>processing-time windowing, the big takeaway here is the one I’ve been</p>
+<p>harping on since the first chapter: event-time windowing is order-agnostic, at</p>
+<p>least in the limit (actual panes along the way might differ until the input</p>
+<p>becomes complete); processing-time windowing is not. <em>If you care about the</em></p>
+<p><em>times at which your events actually happened, you must use event-time</em></p>
+<p><em>windowing or your results will be meaningless.</em> I will get off my soapbox</p>
+<p>now.</p>
+</details>
+
+
+
+<h1><span id="通过进入时间进行处理时间窗口化">通过进入时间进行处理时间窗口化 |</span><a href="#通过进入时间进行处理时间窗口化" class="header-anchor">#</a></h1><p>最后，让我们看一下通过将输入数据的事件时间映射为它们的进入时间来实现的处理时间窗口。在代码方面，这里有四个值得一提的方面：</p>
+<ul>
+<li><p>时间转移  Time-shifting<br>当元素到达时，它们的事件时间需要被覆盖为进入时间。我们可以通过提供一个新的DoFn来在Beam中实现这一点，该函数使用outputWithTimestamp方法将元素的时间戳设置为当前时间。</p>
+</li>
+<li><p>窗口化 Windowing<br>返回使用标准事件时间固定窗口。</p>
+</li>
+<li><p>触发器  Triggering<br>因为进入时间提供了计算完美水印的能力，所以我们可以使用默认的触发器，在这种情况下，当水印通过窗口的结束时隐式地触发一次。</p>
+</li>
+<li><p>累积模式 Accumulation mode<br>因为我们每个窗口只有一个输出，所以累积模式是无关紧要的。</p>
+</li>
+</ul>
+<p>实际代码可能看起来像Example 4-2中的代码。<br><em>Example 4-2. 通过重复、丢弃全局事件时间窗口的窗格来实现处理时间窗口</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">PCollection&lt;String&gt; raw = IO.read().apply(ParDo.of(</span><br><span class="line">    new DoFn&lt;String， String&gt;() &#123;</span><br><span class="line">        public void processElement(ProcessContext c) &#123;</span><br><span class="line">        c.outputWithTimestmap(new Instant());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">PCollection&lt;KV&lt;Team， Integer&gt;&gt; input =</span><br><span class="line">	raw.apply(ParDo.of(new ParseFn());</span><br><span class="line">PCollection&lt;KV&lt;Team， Integer&gt;&gt; totals = input</span><br><span class="line">	.apply(Window.info(FixedWindows.of(TWO_MINUTES))</span><br><span class="line">	.apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
+
+<p>在流引擎上执行的效果如图4-4所示。当数据到达时，它们的事件时间会更新以匹配它们的进入时间（即到达时的处理时间），从而向右水平偏移到理想的水印线上。这里有一些关于这个图的有趣注释：</p>
+<ul>
+<li>与其他处理时间窗口示例一样，当输入顺序改变时，我们会得到不同的结果，尽管输入的值和事件时间保持不变。</li>
+<li>与其他示例不同，窗口再次在事件时间域中（因此沿着x轴）划分。尽管如此，它们并不是真正的事件时间窗口；我们只是将处理时间映射到事件时间域中，抹掉了每个输入的原始出现记录，并用一个新记录替换它，该记录代表了数据被管道首次观察到的时间。</li>
+<li>尽管如此，由于水印的存在，触发器的触发仍然会在与先前处理时间示例完全相同的时间发生。</li>
+</ul>
+<p>此外，产生的输出值与该示例中的输出值相同，如预期的：左侧为12、18、18，右侧为7、36、5。</p>
+<ul>
+<li>由于在使用进入时间时可以获得完美的水印，因此实际水印与理想水印匹配，向右上方以1的斜率上升。</li>
+</ul>
+<div id="dplayer3" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer3"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0404.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<p><em>图4-4。通过使用进入时间进行处理时间窗口，在相同输入的两个不同处理时间顺序上</em></p>
+<p>虽然看到了不同实现处理时间窗口的方法是有趣的，但其中的重要教训自第一章以来一直是我一直在强调的：事件时间窗口是无序的，至少在极限情况下（在输入完成之前，实际窗格可能会有所不同）；处理时间窗口则不是。<strong>如果您关心事件实际发生的时间，您必须使用事件时间窗口，否则您的结果将毫无意义。</strong>现在我将结束我的演讲。</p>
+<h2><span id="draft-here">Draft Here</span><a href="#draft-here" class="header-anchor">#</a></h2>
     </div>
 
     
@@ -354,7 +524,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www6v.github.io/www6vHomeHexo/2000/03/14/streamingSystemChapter4/" title="Streaming System Chapter4">https://www6v.github.io/www6vHomeHexo/2000/03/14/streamingSystemChapter4/</a>
+    <a href="https://www6v.github.io/www6vHomeHexo/2000/03/14/streamingSystemChapter4/" title="Streaming System-Chapter4">https://www6v.github.io/www6vHomeHexo/2000/03/14/streamingSystemChapter4/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
