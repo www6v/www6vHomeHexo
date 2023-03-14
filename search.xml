@@ -20534,6 +20534,30 @@ table th:first-of-type {
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#whenwhere-processing-time-windows">*<strong>When*&#x2F;*Where*: Processing-Time Windows</strong></a></li>
+<li><a href="#%E4%BD%95%E6%97%B6%E4%BD%95%E5%9C%B0%E5%A4%84%E7%90%86%E6%97%B6%E9%97%B4%E7%AA%97%E5%8F%A3"><em><strong>何时&#x2F;何地</strong></em>：处理时间窗口**</a><ul>
+<li><a href="#event-time-windowing"><strong>Event-Time Windowing</strong></a></li>
+<li><a href="#%E4%BA%8B%E4%BB%B6%E6%97%B6%E9%97%B4%E7%AA%97%E5%8F%A3"><strong>事件时间窗口</strong></a></li>
+<li><a href="#processing-time-windowing-via-triggers"><strong>Processing-Time Windowing via Triggers</strong></a></li>
+<li><a href="#%E8%A7%A6%E5%8F%91%E5%99%A8%E7%9A%84%E5%A4%84%E7%90%86%E6%97%B6%E9%97%B4%E7%AA%97%E5%8F%A3"><strong>触发器的处理时间窗口</strong></a></li>
+<li><a href="#processing-time-windowing-via-ingress-time"><strong>Processing-Time Windowing via Ingress Time</strong></a></li>
+<li><a href="#%E9%80%9A%E8%BF%87%E8%BF%9B%E5%85%A5%E6%97%B6%E9%97%B4%E8%BF%9B%E8%A1%8C%E5%A4%84%E7%90%86%E6%97%B6%E9%97%B4%E7%AA%97%E5%8F%A3%E5%8C%96">通过进入时间进行处理时间窗口化 |</a></li>
+</ul>
+<ul>
+<li><a href="#draft-here">Draft Here</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+
 <details><summary>点击 原文</summary><h1><span id="whenx2fwhere-processing-time-windows">*<strong>When*&#x2F;*Where*: Processing-Time Windows</strong></span><a href="#whenx2fwhere-processing-time-windows" class="header-anchor">#</a></h1><p>Processing-time windowing is important for two reasons:</p>
 <ul>
 <li>For certain use cases, such as usage monitoring (e.g., web service</li>
@@ -20608,7 +20632,7 @@ table th:first-of-type {
 <div id="dplayer0" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer0"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0401.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><em>图4-1。在处理时间中移动输入观察顺序，保持值和事件时间不变</em></p>
-<details><summary>点击 原文</summary><h1><span id="event-time-windowing"><strong>Event-Time Windowing</strong></span><a href="#event-time-windowing" class="header-anchor">#</a></h1><p>To establish a baseline, let’s first compare fixed windowing in event time</p>
+<details><summary>点击 原文</summary><h3><span id="event-time-windowing"><strong>Event-Time Windowing</strong></span><a href="#event-time-windowing" class="header-anchor">#</a></h3><p>To establish a baseline, let’s first compare fixed windowing in event time</p>
 <p>with a heuristic watermark over these two observation orderings. We’ll reuse</p>
 <p>the early&#x2F;late code from Example 2-7&#x2F;Figure 2-10 to get the results shown in</p>
 <p>Figure 4-2. The lefthand side is essentially what we saw before; the righthand</p>
@@ -20619,11 +20643,11 @@ table th:first-of-type {
 <p><em>Figure 4-2. Event-time windowing over two different processing-time orderings of the same inputs</em></p>
 </details>
 
-<h1><span id="事件时间窗口"><strong>事件时间窗口</strong></span><a href="#事件时间窗口" class="header-anchor">#</a></h1><p>为了建立一个基准，让我们先比较事件时间中固定窗口和基于启发式水印的两种观察顺序。我们将重用示例2-7&#x2F;图2-10中的早期&#x2F;晚期代码，以获得图4-2中所示的结果。左边实质上是我们之前看到的；右边是第二个观察顺序的结果。这里需要注意的重要事情是，即使输出的总体形状不同（由于处理时间中的不同观察顺序），<em>四个窗口的最终结果仍然相同</em>：14、18、3和12。</p>
+<h3><span id="事件时间窗口"><strong>事件时间窗口</strong></span><a href="#事件时间窗口" class="header-anchor">#</a></h3><p>为了建立一个基准，让我们先比较事件时间中固定窗口和基于启发式水印的两种观察顺序。我们将重用示例2-7&#x2F;图2-10中的早期&#x2F;晚期代码，以获得图4-2中所示的结果。左边实质上是我们之前看到的；右边是第二个观察顺序的结果。这里需要注意的重要事情是，即使输出的总体形状不同（由于处理时间中的不同观察顺序），<em>四个窗口的最终结果仍然相同</em>：14、18、3和12。</p>
 <div id="dplayer1" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer1"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0402.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><em>图4-2. 对相同输入的两个不同处理时间顺序的事件时间窗口</em></p>
-<details><summary>点击 原文</summary><h1><span id="processing-time-windowing-via-triggers"><strong>Processing-Time Windowing via Triggers</strong></span><a href="#processing-time-windowing-via-triggers" class="header-anchor">#</a></h1><p>Let’s now compare this to the two processing-time methods just described.</p>
+<details><summary>点击 原文</summary><h3><span id="processing-time-windowing-via-triggers"><strong>Processing-Time Windowing via Triggers</strong></span><a href="#processing-time-windowing-via-triggers" class="header-anchor">#</a></h3><p>Let’s now compare this to the two processing-time methods just described.</p>
 <p>First, we’ll try the triggers method. There are three aspects to making</p>
 <p>processing-time “windowing” work in this manner:</p>
 <p><em>Windowing</em></p>
@@ -20662,7 +20686,7 @@ table th:first-of-type {
 <p><em>the same inputs</em></p>
 </details>
 
-<h1><span id="触发器的处理时间窗口"><strong>触发器的处理时间窗口</strong></span><a href="#触发器的处理时间窗口" class="header-anchor">#</a></h1><p>现在，我们将此与刚刚描述的两种处理时间方法进行比较。首先，我们将尝试触发器方法。 实现处理时间“窗口化”的方式有三个方面：|</p>
+<h3><span id="触发器的处理时间窗口"><strong>触发器的处理时间窗口</strong></span><a href="#触发器的处理时间窗口" class="header-anchor">#</a></h3><p>现在，我们将此与刚刚描述的两种处理时间方法进行比较。首先，我们将尝试触发器方法。 实现处理时间“窗口化”的方式有三个方面：|</p>
 <ul>
 <li><p><em>窗口 Windowing</em><br> 我们使用全局事件时间窗口，因为我们基本上是在使用事件时间窗格模拟处理时间窗口。</p>
 </li>
@@ -20684,7 +20708,7 @@ table th:first-of-type {
 <div id="dplayer2" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer2"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0403.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><em>图4-3. 通过触发器的处理时间“窗口”，针对相同输入数据的两种不同处理时间排序</em></p>
-<details><summary>点击 原文</summary><h1><span id="processing-time-windowing-via-ingress-time"><strong>Processing-Time Windowing via Ingress Time</strong></span><a href="#processing-time-windowing-via-ingress-time" class="header-anchor">#</a></h1><p>Lastly, let’s look at processing-time windowing achieved by mapping the</p>
+<details><summary>点击 原文</summary><h3><span id="processing-time-windowing-via-ingress-time"><strong>Processing-Time Windowing via Ingress Time</strong></span><a href="#processing-time-windowing-via-ingress-time" class="header-anchor">#</a></h3><p>Lastly, let’s look at processing-time windowing achieved by mapping the</p>
 <p>event times of input data to be their ingress times. Code-wise, there are four</p>
 <p>aspects worth mentioning here:</p>
 <ul>
@@ -20766,7 +20790,7 @@ table th:first-of-type {
 
 
 
-<h1><span id="通过进入时间进行处理时间窗口化">通过进入时间进行处理时间窗口化 |</span><a href="#通过进入时间进行处理时间窗口化" class="header-anchor">#</a></h1><p>最后，让我们看一下通过将输入数据的事件时间映射为它们的进入时间来实现的处理时间窗口。在代码方面，这里有四个值得一提的方面：</p>
+<h3><span id="通过进入时间进行处理时间窗口化">通过进入时间进行处理时间窗口化 |</span><a href="#通过进入时间进行处理时间窗口化" class="header-anchor">#</a></h3><p>最后，让我们看一下通过将输入数据的事件时间映射为它们的进入时间来实现的处理时间窗口。在代码方面，这里有四个值得一提的方面：</p>
 <ul>
 <li><p>时间转移  Time-shifting<br>当元素到达时，它们的事件时间需要被覆盖为进入时间。我们可以通过提供一个新的DoFn来在Beam中实现这一点，该函数使用outputWithTimestamp方法将元素的时间戳设置为当前时间。</p>
 </li>
