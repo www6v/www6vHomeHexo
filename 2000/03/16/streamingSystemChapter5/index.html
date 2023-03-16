@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="《Streaming System》-第五章：精确一次和副作用">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2000/03/16/streamingSystemChapter5/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2000-03-16T11:22:34.000Z">
+<meta property="article:modified_time" content="2023-03-16T11:30:08.946Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="Streaming System">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2000/03/16/streamingSystemChapter5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>《Streaming System》-第五章：精确一次和副作用 | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2000/03/16/streamingSystemChapter5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          《Streaming System》-第五章：精确一次和副作用
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2000-03-16 19:22:34" itemprop="dateCreated datePublished" datetime="2000-03-16T19:22:34+08:00">2000-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-16 19:30:08" itemprop="dateModified" datetime="2023-03-16T19:30:08+08:00">2023-03-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/Streaming-System/" itemprop="url" rel="index"><span itemprop="name">Streaming System</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p></p>
+<span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%85%E4%B8%80%E6%AC%A1%E5%BE%88%E9%87%8D%E8%A6%81">为什么“仅一次”很重要</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+
+<h1><span id="为什么仅一次很重要">为什么“仅一次”很重要</span><a href="#为什么仅一次很重要" class="header-anchor">#</a></h1><p>对于许多用户而言，数据处理管道中任何丢失记录或数据丢失的风险都是无法接受的。即使如此，历史上许多通用流处理系统也没有提供关于记录处理的任何保证——所有处理都只是“尽力而为”。其他系统提供了至少一次的保证，确保记录至少被处理一次，但记录可能会重复（从而导致不准确的聚合）；在实践中，许多此类至少一次的系统在内存中执行聚合，因此它们的聚合仍然可能会丢失，当机器崩溃时会出现这种情况。这些系统用于低延迟、推测性结果，但通常不能保证这些结果的准确性。</p>
+<p>正如第1章所指出的那样，这导致了一种被称为“Lambda架构”的策略——运行一个流处理系统以获得快速但不准确的结果。稍后（通常是在一天结束后），批处理系统运行以得出正确的答案。这仅在数据流是可重放的情况下才有效；然而，对于足够多的数据源来说，这种策略是可行的。尽管如此，许多尝试使用这种策略的人都遇到了一些问题：</p>
+<ul>
+<li>不准确</li>
+</ul>
+<p>用户往往低估失败的影响。他们通常假设只有少量的记录会丢失或重复（通常基于他们运行的实验），并且在那一天10%（甚至更多！）的记录丢失或重复时感到震惊。在某种意义上，这些系统只提供了“一半”保证——没有完全的保证，任何事情都有可能发生。</p>
+<ul>
+<li>不一致</li>
+</ul>
+<p>用于每日计算的批处理系统通常具有与流处理系统不同的数据语义。让这两个管道产生可比较的结果比最初想象的更困难。</p>
+<ul>
+<li>复杂</li>
+</ul>
+<p>根据定义，Lambda要求您编写和维护两个不同的代码库。您还必须运行和维护两个具有不同故障模式的复杂分布式系统。对于除了最简单的管道之外的任何东西，这很快就变得不可承受。</p>
+<ul>
+<li>不可预测性</li>
+</ul>
+<p>在许多用例中，最终用户将看到与每日结果相差不确定量的流处理结果，这可能会随机变化。在这些情况下，用户将停止信任流处理数据，并等待每日批处理结果，从而破坏了首次获得低延迟结果的价值。</p>
+<ul>
+<li>延迟</li>
+</ul>
+<p>某些业务用例<em>需要</em>低延迟的正确结果，而Lambda架构本质上不提供这种结果。</p>
+<p>幸运的是，许多Beam运行器可以做得更好。在本章中，我们将解释如何进行“仅一次”流处理，以帮助用户依赖单个代码库和API来保证准确的结果并避免数据丢失的风险。由于可能会影响管道输出的各种问题通常会错误地与“仅一次”保证混淆，因此我们首先解释了在Beam和数据处理的上下文中引用“仅一次”时，哪些问题是在范围内，哪些问题是在范围外。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2000/03/16/streamingSystemChapter5/" title="《Streaming System》-第五章：精确一次和副作用">https://www6v.github.io/www6vHomeHexo/2000/03/16/streamingSystemChapter5/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/Streaming-System/" rel="tag"># Streaming System</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2000/03/15/streamingSystemChapter3Original/" rel="prev" title="《Streaming System》-Chapter 3. Watermarks">
+      <i class="fa fa-chevron-left"></i> 《Streaming System》-Chapter 3. Watermarks
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2000/03/16/streamingSystemChapter5Original/" rel="next" title="《Streaming System》-Chapter 5. Exactly-Once and Side Effects">
+      《Streaming System》-Chapter 5. Exactly-Once and Side Effects <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">369</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">236</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">124</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
