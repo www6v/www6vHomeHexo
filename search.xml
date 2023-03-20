@@ -19104,15 +19104,49 @@ nq： 不排队调度
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E4%B8%80%E8%87%B4%E6%80%A7">一致性</a><ul>
+<li><a href="#%E5%BC%BA%E4%B8%80%E8%87%B4%E6%80%A7">强一致性</a></li>
+<li><a href="#%E5%BC%B1%E4%B8%80%E8%87%B4%E6%80%A7">弱一致性</a></li>
+<li><a href="#%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7-%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%BA%E4%B8%AD%E5%BF%83%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7client-centric-consistency">最终一致性 客户端为中心的一致性（Client-centric Consistency）</a></li>
+<li><a href="#%E5%8F%AF%E5%AE%9A%E5%88%B6%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7">可定制的一致性</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1-%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7">柔性事务 最终一致性</a></li>
+<li><a href="#%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1">柔性事务</a></li>
+<li><a href="#%E6%97%B6%E9%92%9F">时钟</a></li>
+<li><a href="#state-machine-primary-copy">State Machine &amp;&amp; Primary-copy</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
+<li><a href="#%E4%B8%80%E8%87%B4%E6%80%A7-1">一致性</a></li>
+<li><a href="#seata-tcc">Seata &amp;&amp; TCC</a></li>
+<li><a href="#%E5%BA%94%E7%94%A8">应用</a></li>
+</ul>
+<ul>
+<li><a href="#%E5%90%91%E9%87%8F%E6%97%B6%E9%92%9F">向量时钟</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+
+
 <img src="/www6vHomeHexo/2016/02/09/consistent/consistent.jpg" class title="分布式一致性总结">
 
 
-<h2><span id="一-一致性">一. 一致性</span><a href="#一-一致性" class="header-anchor">#</a></h2><div style="text-align: center;">
+<h1><span id="一致性">一致性</span><a href="#一致性" class="header-anchor">#</a></h1><div style="text-align: center;">
 
 <p><img src="https://user-images.githubusercontent.com/5608425/65506192-989c8f00-defd-11e9-8ce4-df9b2bd8a96f.jpg" alt="consistent-relationship"></p>
 </div>
 
-<h3><span id="11-强一致性">1.1 强一致性</span><a href="#11-强一致性" class="header-anchor">#</a></h3><table>
+<h3><span id="强一致性">强一致性</span><a href="#强一致性" class="header-anchor">#</a></h3><table>
 <thead>
 <tr>
 <th align="center">强一致性</th>
@@ -19156,7 +19190,7 @@ nq： 不排队调度
 <blockquote>
 <p><strong>顺序一致性</strong>虽然通过逻辑时钟保证所有进程保持一致的读写操作顺序，但这些读写操作的顺序跟实际上发生的顺序并不一定一致。而<strong>线性一致性</strong>是严格保证跟实际发生的顺序一致的。</p>
 </blockquote>
-<h3><span id="12-弱一致性">1.2 弱一致性</span><a href="#12-弱一致性" class="header-anchor">#</a></h3><table>
+<h3><span id="弱一致性">弱一致性</span><a href="#弱一致性" class="header-anchor">#</a></h3><table>
 <thead>
 <tr>
 <th align="center">弱一致性</th>
@@ -19202,11 +19236,11 @@ nq： 不排队调度
 <td align="center">Backups（备份）</td>
 </tr>
 </tbody></table>
-<h3><span id="13-最终一致性-客户端为中心的一致性client-centric-consistency">1.3 最终一致性 客户端为中心的一致性（Client-centric Consistency）</span><a href="#13-最终一致性-客户端为中心的一致性client-centric-consistency" class="header-anchor">#</a></h3><blockquote>
+<h3><span id="最终一致性-客户端为中心的一致性client-centric-consistency">最终一致性 客户端为中心的一致性（Client-centric Consistency）</span><a href="#最终一致性-客户端为中心的一致性client-centric-consistency" class="header-anchor">#</a></h3><blockquote>
 <p>以客户端为中心的一致性为单一客户端提供一致性保证，保证该客户端对数据存储的访问的一致性，但是它不为不同客户端的并发访问提供任何一致性保证.</p>
 </blockquote>
 <p>单调读一致性（Monotonic-read Consistency） <strong><a href="../../../../2016/05/11/kafka/">kafka的消费者的单调读</a></strong><br>单调写一致性（Monotonic-write Consistency）</p>
-<h3><span id="14-可定制的一致性">1.4 可定制的一致性</span><a href="#14-可定制的一致性" class="header-anchor">#</a></h3><table>
+<h3><span id="可定制的一致性">可定制的一致性</span><a href="#可定制的一致性" class="header-anchor">#</a></h3><table>
 <thead>
 <tr>
 <th align="center">可定制的一致性</th>
@@ -19222,7 +19256,7 @@ nq： 不排队调度
 <td align="center"><a href="../../../../2018/07/19/NoSQL/">Dynamo, Cassandra</a>  定制灵活</td>
 </tr>
 </tbody></table>
-<h2><span id="二-柔性事务-最终一致性">二. 柔性事务 最终一致性</span><a href="#二-柔性事务-最终一致性" class="header-anchor">#</a></h2><table>
+<h1><span id="柔性事务-最终一致性">柔性事务 最终一致性</span><a href="#柔性事务-最终一致性" class="header-anchor">#</a></h1><table>
 <thead>
 <tr>
 <th align="center">模式</th>
@@ -19283,7 +19317,7 @@ nq： 不排队调度
 <img src="/www6vHomeHexo/2016/02/09/consistent/saga.jpg" class title="saga流程">
 
 
-<h2><span id="三-柔性事务">三. 柔性事务</span><a href="#三-柔性事务" class="header-anchor">#</a></h2><ol>
+<h1><span id="柔性事务">柔性事务</span><a href="#柔性事务" class="header-anchor">#</a></h1><ol>
 <li>基于事务消息的分布式事务<br><img src="https://user-images.githubusercontent.com/5608425/66023796-d2d0e680-e524-11e9-8748-1a26f3d0f157.JPG" alt="mq-normal"><br><img src="https://user-images.githubusercontent.com/5608425/66023797-d2d0e680-e524-11e9-85e6-f845863fe4a8.JPG" alt="mq-reverse"></li>
 </ol>
 <style>
@@ -19299,13 +19333,13 @@ table th:first-of-type {
 </ol>
 <img src="/www6vHomeHexo/2016/02/09/consistent/localBaseTransaction.jpg" class title="基于本地消息的分布式事务">
 
-<h2><span id="四-时钟">四. 时钟</span><a href="#四-时钟" class="header-anchor">#</a></h2><div style="text-align: center;">
+<h1><span id="时钟">时钟</span><a href="#时钟" class="header-anchor">#</a></h1><div style="text-align: center;">
 
 <p><img src="https://user-images.githubusercontent.com/5608425/67629891-be300600-f8b8-11e9-931c-e0fa265f2f78.jpg" alt="vectorClock"><br>图1. 向量时钟 vector-clock</p>
 <p><img src="https://user-images.githubusercontent.com/5608425/67629944-a9a03d80-f8b9-11e9-820e-7bbf4fccea20.jpg" alt="logicClock"><br>图2. 逻辑时钟 logic-clock</p>
 </div>
 
-<h2><span id="五-state-machine-ampamp-primary-copy">五.  state machine &amp;&amp; primary-copy</span><a href="#五-state-machine-ampamp-primary-copy" class="header-anchor">#</a></h2><div style="text-align: center;">
+<h1><span id="state-machine-ampamp-primary-copy">State Machine &amp;&amp; Primary-copy</span><a href="#state-machine-ampamp-primary-copy" class="header-anchor">#</a></h1><div style="text-align: center;">
 
 <p><img src="https://user-images.githubusercontent.com/5608425/67629999-09e3af00-f8bb-11e9-88fb-10142745bfdd.png" alt="state-machine-primary-back"><br>state machine replication &amp;&amp; primary-copy</p>
 </div>
@@ -19319,7 +19353,7 @@ table th:first-of-type {
 <li><p><strong>primary-copy</strong>例子:<br>zookeeper的主从复制;<br>mysql主从复制 slave relay log, <strong>基于行的复制</strong>[9];<br>redis RDB 快照;</p>
 </li>
 </ul>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><h3><span id="一致性">一致性</span><a href="#一致性" class="header-anchor">#</a></h3><ol>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="一致性">一致性</span><a href="#一致性" class="header-anchor">#</a></h3><ol>
 <li><a href="https://weibo.com/ttarticle/p/show?id=2309403965965003062676">保证分布式系统数据一致性的6种方案</a>  高可用架构  good</li>
 <li><a href="https://www.csdn.net/article/2015-01-30/2823782">深入解析NoSQL数据库的分布式算法</a>   good</li>
 <li>ZooKeeper真不是最终一致性的，而是顺序一致性 陈东明</li>
