@@ -350,6 +350,43 @@
       </tags>
   </entry>
   <entry>
+    <title>架构 汇总</title>
+    <url>/www6vHomeHexo/2021/03/20/archSummary/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="应用架构">应用架构</span><a href="#应用架构" class="header-anchor">#</a></h2><ul>
+<li><a href="/www6vHomeHexo/2019/11/01/apiDesign/" title="OpenAPI 设计">OpenAPI 设计</a></li>
+<li><a href="/www6vHomeHexo/2018/02/25/cqrs/" title="CQRS 简介和案例分析">CQRS 简介和案例分析</a></li>
+<li><a href="/www6vHomeHexo/2020/05/22/DDD/" title="DDD  领域驱动设计">DDD  领域驱动设计</a></li>
+<li><a href="/www6vHomeHexo/2018/04/07/EAI/" title="应用集成方式">应用集成方式</a></li>
+<li><a href="/www6vHomeHexo/2018/03/17/DomainLogicAndSQL/" title="领域逻辑和SQL">领域逻辑和SQL</a></li>
+</ul>
+<h2><span id="系统架构">系统架构</span><a href="#系统架构" class="header-anchor">#</a></h2><ul>
+<li><a href="/www6vHomeHexo/2019/05/02/middleStage/" title="中台战略">中台战略</a></li>
+<li><a href="/www6vHomeHexo/2022/02/02/disaggregationOfComputeAndStorage/" title="存算分离-数据应用">存算分离-数据应用</a></li>
+<li><a href="/www6vHomeHexo/2017/06/17/multiLive/" title="异地多活总结">异地多活总结</a></li>
+<li><a href="/www6vHomeHexo/2022/06/26/available/" title="高可用 Available">高可用 Available</a></li>
+</ul>
+<h2><span id="系统设计">系统设计</span><a href="#系统设计" class="header-anchor">#</a></h2><ul>
+<li><a href="/www6vHomeHexo/2019/09/13/feed/" title="Feed流">Feed流</a></li>
+<li><a href="/www6vHomeHexo/2022/03/02/systemDesign/" title="系统设计 总结">系统设计 总结</a></li>
+<li><a href="/www6vHomeHexo/2018/05/21/secKillSummary/" title="秒杀系统总结">秒杀系统总结</a></li>
+<li><a href="/www6vHomeHexo/2018/05/06/seckill/" title="秒杀系统和商品详情页系统(培训讲义)">秒杀系统和商品详情页系统(培训讲义)</a></li>
+</ul>
+<h2><span id="设计原则">设计原则</span><a href="#设计原则" class="header-anchor">#</a></h2><ul>
+<li><a href="/www6vHomeHexo/2018/09/28/designPrinciple/" title="设计原则">设计原则</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>汇总</category>
+        <category>架构</category>
+      </categories>
+      <tags>
+        <tag>汇总</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>服务治理  汇总</title>
     <url>/www6vHomeHexo/2021/03/03/serviceGovernanceSummary/</url>
     <content><![CDATA[<p></p>
