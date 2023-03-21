@@ -14493,7 +14493,7 @@ nq： 不排队调度
   <entry>
     <title>微服务</title>
     <url>/www6vHomeHexo/2019/09/09/microservice/</url>
-    <content><![CDATA[<p hidden></p>
+    <content><![CDATA[<p></p>
 <span id="more"></span>
 
 <h2><span id="微服务-定义">微服务 定义</span><a href="#微服务-定义" class="header-anchor">#</a></h2><p>In short, the microservice architectural style [1] is an approach to developing a single application as a suite of <strong>small services</strong>, <strong>each running in its own process</strong> and <strong>communicating with lightweight mechanisms</strong>, often an HTTP resource API. These services are built around business capabilities and <strong>independently deployable</strong> by fully automated deployment machinery. There is a bare minimum of centralized management of these services, which may be written in different programming languages and use different data storage technologies.   –  [Martin Fowler]</p>
@@ -16307,18 +16307,18 @@ nq： 不排队调度
       </tags>
   </entry>
   <entry>
-    <title>流式计算 --- Flink vs. Spark</title>
+    <title>流式计算-Flink vs. Spark</title>
     <url>/www6vHomeHexo/2019/07/19/streamComputing/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
- 
+
 <table>
 <thead>
 <tr>
 <th>特性</th>
-<th>spark</th>
-<th>flink</th>
+<th>Spark</th>
+<th>Flink</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -17671,9 +17671,11 @@ nq： 不排队调度
   <entry>
     <title>设计原则</title>
     <url>/www6vHomeHexo/2018/09/28/designPrinciple/</url>
-    <content><![CDATA[<h5><span id="1-复杂度-简化本质复杂度消除偶发复杂性">1. 复杂度 简化本质复杂度，消除偶发复杂性.</span><a href="#1-复杂度-简化本质复杂度消除偶发复杂性" class="header-anchor">#</a></h5><p>   有三个问题可能会产生偶发复杂度。<br>      第一个：由于日程或其他外部压力而导致临时大量削减代码。<br>      第二个是复制。<br>      第三个诱因是不可逆性，您做出的无法逆转的所有决定都将最终导致某种程度的偶发复杂度。<br>   架构师： 去熵， 去复杂度。 </p>
-<span id="more"></span>   
+    <content><![CDATA[<p></p>
+<span id="more"></span> 
 
+
+<h5><span id="1-复杂度-简化本质复杂度消除偶发复杂性">1. 复杂度 简化本质复杂度，消除偶发复杂性.</span><a href="#1-复杂度-简化本质复杂度消除偶发复杂性" class="header-anchor">#</a></h5><p>   有三个问题可能会产生偶发复杂度。<br>      第一个：由于日程或其他外部压力而导致临时大量削减代码。<br>      第二个是复制。<br>      第三个诱因是不可逆性，您做出的无法逆转的所有决定都将最终导致某种程度的偶发复杂度。<br>   架构师： 去熵， 去复杂度。 </p>
 <h5><span id="2-开闭原则">2. 开闭原则</span><a href="#2-开闭原则" class="header-anchor">#</a></h5><p>   1).对于扩展是开放的（Open for extension）。<br>   2).对于修改是关闭的（Closed for modification）。</p>
 <h5><span id="3-happy-path-amp-sad-path-代码执行路径-happy-path-和-sad-path分离">3. Happy path &amp; Sad path 代码执行路径： happy path 和 sad path分离。</span><a href="#3-happy-path-amp-sad-path-代码执行路径-happy-path-和-sad-path分离" class="header-anchor">#</a></h5><p>   测试用例： happy path用例。 sad path用例， 使用@Exception（Junit4）， fail（JUnit3）。</p>
 <h5><span id="4-奥卡姆剃刀原理">4. 奥卡姆剃刀原理</span><a href="#4-奥卡姆剃刀原理" class="header-anchor">#</a></h5><pre><code>     如果对于一个现象有好几种解释, 那么最简单的解释往往是最正确的.
@@ -17711,7 +17713,11 @@ nq： 不排队调度
   <entry>
     <title>研究生论文(非最终版)</title>
     <url>/www6vHomeHexo/2018/08/21/yan/</url>
-    <content><![CDATA[<p><a href="http://www6v.github.io/www6vHome/yan/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86%E6%A1%86%E6%9E%B6%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0-%E9%9D%9E%E6%9C%80%E7%BB%88%E7%89%88.docx">分布式服务治理框架的原理与实现-非最终版</a></p>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<p><a href="http://www6v.github.io/www6vHome/yan/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86%E6%A1%86%E6%9E%B6%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0-%E9%9D%9E%E6%9C%80%E7%BB%88%E7%89%88.docx">分布式服务治理框架的原理与实现-非最终版</a></p>
 ]]></content>
       <categories>
         <category>Paper</category>
@@ -17798,8 +17804,10 @@ nq： 不排队调度
   <entry>
     <title>HDFS NameNode HA 解决方案</title>
     <url>/www6vHomeHexo/2018/06/07/hdfs/</url>
-    <content><![CDATA[<p>HDFS NameNode是可靠和高效的, 简单的架构使HDFS能够在上千个节点可靠的存放生产级的数据. 但是, HDFS NameNode也是一个集群中的单点(SPOF). 开源社区也提供了几个HA的解决方案.</p>
-<span id="more"></span>    
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<p>HDFS NameNode是可靠和高效的, 简单的架构使HDFS能够在上千个节点可靠的存放生产级的数据. 但是, HDFS NameNode也是一个集群中的单点(SPOF). 开源社区也提供了几个HA的解决方案.</p>
 <p>HDFS Namenode 宕机后启动时构建状态的两个相对长的阶段包括:　 I. 加载fsimage,并回放editlog.    II. datanode块的汇报, blockMap的构建. HDFS Namenode HA主要是指Ediglog的HA,  不包括FSImage</p>
 <h2><span id="1-hdfs-ha-解决方案">1   HDFS  HA 解决方案</span><a href="#1-hdfs-ha-解决方案" class="header-anchor">#</a></h2><h3><span id="secondary-namenodesnn">Secondary NameNode(SNN)</span><a href="#secondary-namenodesnn" class="header-anchor">#</a></h3><p>Secondary NameNode 周期的合并edits和fsimage，能减少集群重启的时间。SNN会周期的做检查点(默认一个小时). 如果ＮＮ宕机, 宕机前和上一次checkpoint这个时间段的状态变更会丢失, 所以元数据并不是最新.　</p>
 <p>当NameNode(NN)失效的时 候，Secondary NN并无法立刻提供服务.</p>
@@ -17936,7 +17944,10 @@ nq： 不排队调度
   <entry>
     <title>秒杀系统和商品详情页系统(培训讲义)</title>
     <url>/www6vHomeHexo/2018/05/06/seckill/</url>
-    <content><![CDATA[<p><a href="http://www6v.github.io/www6vHome/seckill.htm">秒杀系统和商品详情页系统(培训讲义)</a></p>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<p><a href="http://www6v.github.io/www6vHome/seckill.htm">秒杀系统和商品详情页系统(培训讲义)</a></p>
 ]]></content>
       <categories>
         <category>架构</category>
@@ -17988,9 +17999,10 @@ nq： 不排队调度
   <entry>
     <title>领域逻辑和SQL</title>
     <url>/www6vHomeHexo/2018/03/17/DomainLogicAndSQL/</url>
-    <content><![CDATA[<p>在企业应用中， 业务逻辑是复杂和庞杂的。 这些业务逻辑应该是被显示， 还是被隐藏， 这是一种选择。 在工作流中， 业务逻辑被从模块中剥离出来， 形成上层的粗粒度的业务流程。 在模块内部， 业务逻辑应该放在内存中， 还是在SQL中， 这也是一种选择。</p>
+    <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<p>在企业应用中， 业务逻辑是复杂和庞杂的。 这些业务逻辑应该是被显示， 还是被隐藏， 这是一种选择。 在工作流中， 业务逻辑被从模块中剥离出来， 形成上层的粗粒度的业务流程。 在模块内部， 业务逻辑应该放在内存中， 还是在SQL中， 这也是一种选择。</p>
 <p>拨开项目的DAO层， 你可能会看到大量的SQL字符串， 业务逻辑就隐藏在这里。在有的项目你会看到hibernate之类的ORM框架， PO对象作为一种承载业务逻辑的机制。</p>
 <p>大量复杂的SQL拼接， 在SQL中放入业务逻辑与企业应用架构的分层原则相违背。OO的本质是抽象和分离， 各司其责。 领域逻辑更符合OO的精神。</p>
 <p>领域逻辑中的ORM不仅是一种可重用的对象装载方式， 也是一种虚拟化技术。对象与数据库的映射机制由ORM管控，对象装载和业务逻辑的分离， 表对于对象来说是透明的。就像JVM， 硬件对于Java工程师来说是透明的一样。</p>
@@ -18018,9 +18030,10 @@ nq： 不排队调度
   <entry>
     <title>CQRS 简介和案例分析</title>
     <url>/www6vHomeHexo/2018/02/25/cqrs/</url>
-    <content><![CDATA[<p>CQRS全称是指Command Query ResponsibilitySeparation.CQRS的核心是一个简单的概念, 使用一个模型来读信息, 使用另一个模型来更新信息. 它是CQS原理在各个软件领域中的应用而产生的一种模式. CQRS把整个系统分成两个部分: 命令部分和查询部分. Command部分关注更新,  Query部分关注读取.</p>
+    <content><![CDATA[<p></p>
 <span id="more"></span> 
 
+<p>CQRS全称是指Command Query ResponsibilitySeparation.CQRS的核心是一个简单的概念, 使用一个模型来读信息, 使用另一个模型来更新信息. 它是CQS原理在各个软件领域中的应用而产生的一种模式. CQRS把整个系统分成两个部分: 命令部分和查询部分. Command部分关注更新,  Query部分关注读取.</p>
 <p>其实你可能早就接触过CQRS相关的概念,熟悉数据库的读者不会对索引陌生.<br>Query部分:如果数据表有索引,  读数据表更加的快速.<br>Command部分:如果数据表有index,update表时需要更新index, 所以update更加的慢.</p>
 <p>本文主要从CQRS在高伸缩性系统和领域驱动设计(DDD)两方面的应用阐述其优势。</p>
 <p>   CQRS的出现有以下两种驱动力</p>
@@ -18289,10 +18302,11 @@ nq： 不排队调度
   <entry>
     <title>线上不能下单问题排查</title>
     <url>/www6vHomeHexo/2017/09/25/mybatisBug/</url>
-    <content><![CDATA[<p>2016.6.7号，整个jso订单都不能下单，数据库的链接从4000降到几百， 只能重启所有的服务，并保留一个机器做thread dump。</p>
-<p>重启后数据库链接涨到了2000多，下单基本能用。</p>
+    <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<p>2016.6.7号，整个jso订单都不能下单，数据库的链接从4000降到几百， 只能重启所有的服务，并保留一个机器做thread dump。</p>
+<p>重启后数据库链接涨到了2000多，下单基本能用。</p>
 <p>运维开始以为是数据库超时引起的整个服务线程夯住，排查下来是ibatis流控的线程里没有做同步的通知（notify），导致所有的线程都lock在同一把锁上并做wait。</p>
 <p><img src="http://www6v.github.io/www6vHome/mybatisBug/thread%20dump.JPG" alt="图1： thread dump中大量的WAITING (on object monitor)" title="图1： thread dump中大量的WAITING (on object monitor)"></p>
 <p><img src="http://www6v.github.io/www6vHome/mybatisBug/mybatisThrottleWait.JPG" alt="图二： 线程wait" title="图二： 线程wait"></p>
@@ -18313,20 +18327,23 @@ nq： 不排队调度
   <entry>
     <title>关于任务取消相关异常的排查</title>
     <url>/www6vHomeHexo/2017/08/09/interrupted/</url>
-    <content><![CDATA[<h2><span id="背景">背景：</span><a href="#背景" class="header-anchor">#</a></h2><p>最近有些应用中会时不时的抛出如下异常：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">++++ exception thrown while trying to get object from cache for key: key值; host:10.4.37.175:11241 -- null</span><br><span class="line">java.nio.channels.ClosedByInterruptException</span><br><span class="line">at java.nio.channels.spi.AbstractInterruptibleChannel.end(AbstractInterruptibleChannel.java:184)</span><br><span class="line">at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:272)</span><br><span class="line">at sun.nio.ch.SocketAdaptor$SocketInputStream.read(SocketAdaptor.java:195)</span><br><span class="line">at sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:86)</span><br><span class="line">at java.io.BufferedInputStream.fill(BufferedInputStream.java:218)</span><br><span class="line">at java.io.BufferedInputStream.read1(BufferedInputStream.java:258)</span><br><span class="line">at java.io.BufferedInputStream.read(BufferedInputStream.java:317)</span><br><span class="line">at java.io.DataInputStream.read(DataInputStream.java:132)</span><br><span class="line">at com.ycache.danga.MemCached.SockIOPool$SockIO.readLine(SockIOPool.java:2023)</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="背景">背景</span><a href="#背景" class="header-anchor">#</a></h2><p>最近有些应用中会时不时的抛出如下异常：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">++++ exception thrown while trying to get object from cache for key: key值; host:10.4.37.175:11241 -- null</span><br><span class="line">java.nio.channels.ClosedByInterruptException</span><br><span class="line">at java.nio.channels.spi.AbstractInterruptibleChannel.end(AbstractInterruptibleChannel.java:184)</span><br><span class="line">at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:272)</span><br><span class="line">at sun.nio.ch.SocketAdaptor$SocketInputStream.read(SocketAdaptor.java:195)</span><br><span class="line">at sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:86)</span><br><span class="line">at java.io.BufferedInputStream.fill(BufferedInputStream.java:218)</span><br><span class="line">at java.io.BufferedInputStream.read1(BufferedInputStream.java:258)</span><br><span class="line">at java.io.BufferedInputStream.read(BufferedInputStream.java:317)</span><br><span class="line">at java.io.DataInputStream.read(DataInputStream.java:132)</span><br><span class="line">at com.ycache.danga.MemCached.SockIOPool$SockIO.readLine(SockIOPool.java:2023)</span><br></pre></td></tr></table></figure>
+<!-- more -->
+
 <p><img src="http://www6v.github.io/www6vHome/interrupt/interrupted_clip_image001.png"></p>
-<h2><span id="异常原因">异常原因：</span><a href="#异常原因" class="header-anchor">#</a></h2><p>调用方使用了 Thread.interrupt 方法 或者 Future.cancel方法。</p>
-<h2><span id="解决办法">解决办法：</span><a href="#解决办法" class="header-anchor">#</a></h2><p>在调用ycache的线程中，去掉Future.cancel 或者 Thread.interrupt 方法使用。</p>
-<h2><span id="调用过程分析">调用过程分析：</span><a href="#调用过程分析" class="header-anchor">#</a></h2><ol>
+<h2><span id="异常原因">异常原因</span><a href="#异常原因" class="header-anchor">#</a></h2><p>调用方使用了 Thread.interrupt 方法 或者 Future.cancel方法。</p>
+<h2><span id="解决办法">解决办法</span><a href="#解决办法" class="header-anchor">#</a></h2><p>在调用ycache的线程中，去掉Future.cancel 或者 Thread.interrupt 方法使用。</p>
+<h2><span id="调用过程分析">调用过程分析</span><a href="#调用过程分析" class="header-anchor">#</a></h2><ol>
 <li>当调用方使用ycache的MemCachedClient.get方法时，就会调用SocketChannelImpl.read 方法，在读操作前运行 begin方法，读操作后使用 end方法<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public int read(ByteBuffer dst) throws IOException &#123; </span><br><span class="line">    try &#123; </span><br><span class="line">          begin(); </span><br><span class="line">          bytesRead = in.read(buf, 0, bytesToRead); </span><br><span class="line">      &#125; finally &#123; </span><br><span class="line">          end(bytesRead &gt; 0); </span><br><span class="line">      &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>in.read前执行begin()，此时创建中断触发器Interruptible的对象interruptor。<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">interruptor = new Interruptible() &#123; </span><br><span class="line">    public void interrupt() &#123; </span><br><span class="line">      synchronized (closeLock) &#123; </span><br><span class="line">        if (!open) </span><br><span class="line">        return; </span><br><span class="line">        interrupted = true; </span><br><span class="line">        open = false; </span><br><span class="line">        try &#123; </span><br><span class="line">            AbstractInterruptibleChannel.this.implCloseChannel(); // 回调AbstractInterruptibleChannel的方法 来关闭 Channel。</span><br><span class="line">            &#125; catch (IOException x) &#123; &#125; </span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure></li>
 <li>当 in.read 在执行且尚未执行完，此时调用方代码 执行了Thread.interrupt 或者 Future.cancel 时，就会调用当前线程interruptor的interrupt方法，<br>将interrupted 设置为true，同时关掉socket<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public void interrupt() &#123; </span><br><span class="line">   if (this != Thread.currentThread()) </span><br><span class="line">       checkAccess();</span><br><span class="line"></span><br><span class="line">   synchronized (blockerLock) &#123; </span><br><span class="line">       Interruptible b = blocker; </span><br><span class="line">       if (b != null) &#123; </span><br><span class="line">      interrupt0();    // Just to set the interrupt flag </span><br><span class="line">      b.interrupt(); </span><br><span class="line">      return; </span><br><span class="line">       &#125; </span><br><span class="line">   &#125; </span><br><span class="line">   interrupt0(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>in.read后执行end(true)，当没有读取到数据或者读取超时时，就会发生ClosedByInterruptException，代码如下<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">protected final void end(boolean completed) </span><br><span class="line">   throws AsynchronousCloseException </span><br><span class="line">    &#123; </span><br><span class="line">   blockedOn(null); </span><br><span class="line">   if (interrupted) throw new ClosedByInterruptException(); </span><br><span class="line">   if (!open) throw new AsynchronousCloseException(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
-<h2><span id="整体过程是">整体过程是：</span><a href="#整体过程是" class="header-anchor">#</a></h2><p>1.线程执行begin方法，植入中断触发器interruptor，然后可能在channel上阻塞；<br>2.另外一个线程调用步骤1线程的interrupt方法；<br>3.interrupt方法会执行channel的close方法，并设置标志位interrupted &#x3D; true；<br>4.线程进入end方法，清空线程的中断触发器，当判断interrupted &#x3D; true时，抛出ClosedByInterruptException。</p>
+<h2><span id="整体过程是">整体过程是</span><a href="#整体过程是" class="header-anchor">#</a></h2><p>1.线程执行begin方法，植入中断触发器interruptor，然后可能在channel上阻塞；<br>2.另外一个线程调用步骤1线程的interrupt方法；<br>3.interrupt方法会执行channel的close方法，并设置标志位interrupted &#x3D; true；<br>4.线程进入end方法，清空线程的中断触发器，当判断interrupted &#x3D; true时，抛出ClosedByInterruptException。</p>
 <p>注：文中代码在java.nio.channels.spi.AbstractInterruptibleChannel中。</p>
 ]]></content>
       <categories>
@@ -18341,9 +18358,12 @@ nq： 不排队调度
   <entry>
     <title>zookeeper未通知到服务客户端的异常排查</title>
     <url>/www6vHomeHexo/2017/07/28/zookeeperBug/</url>
-    <content><![CDATA[<h2><span id="背景">背景</span><a href="#背景" class="header-anchor">#</a></h2><p>按正常的流程，服务提供者上下线，zookeeper会通知到服务客户端，也就是说服务客户端会自动感知到服务的当前状态。但是每隔数月我们会接到同样的问题，说是服务客户端的状态通知丢失了，每次涉及机器比较少只有一两台，所以怀疑是zk漏发通知导致的偶发现象（zookeeper的早期版本有这个bug）。</p>
-<p>随着业务的快速发展，发布的服务和zk节点数量一直在增加，最近一次有40几台机器出现同样状况。通过这几天我的排查和实验问题已经定位，根本原因是客户端没有与zk建立有效session，导致对应的watcher没有注册到zk，最终导致zk服务端不会推送对应的节点变更。</p>
+    <content><![CDATA[<p></p>
 <span id="more"></span>
+
+<h2><span id="背景">背景</span><a href="#背景" class="header-anchor">#</a></h2><p>按正常的流程，服务提供者上下线，zookeeper会通知到服务客户端，也就是说服务客户端会自动感知到服务的当前状态。但是每隔数月我们会接到同样的问题，说是服务客户端的状态通知丢失了，每次涉及机器比较少只有一两台，所以怀疑是zk漏发通知导致的偶发现象（zookeeper的早期版本有这个bug）。</p>
+<p>随着业务的快速发展，发布的服务和zk节点数量一直在增加，最近一次有40几台机器出现同样状况。通过这几天我的排查和实验问题已经定位，根本原因是客户端没有与zk建立有效session，导致对应的watcher没有注册到zk，最终导致zk服务端不会推送对应的节点变更。</p>
+<!-- more -->
 
 <p>下面来剖析session创建不成功的原因。</p>
 <h2><span id="排查过程">排查过程</span><a href="#排查过程" class="header-anchor">#</a></h2><h3><span id="1-zookeeper服务端日志">1. zookeeper服务端日志</span><a href="#1-zookeeper服务端日志" class="header-anchor">#</a></h3><p>通过ZK日志可以看到出，10.4.31.15 这台机器创建zk连接成功，但session创建出现异常导致连接关闭。由于zkclient本身的重连机制，客户端会不断重连服务端，但在session无法创建成功的情况下，watcher并不会注册到服务端所以也不可能受到变更通知。</p>
@@ -20345,8 +20365,10 @@ table th:first-of-type {
   <entry>
     <title>内存泄漏的案例和解决方案</title>
     <url>/www6vHomeHexo/2014/02/02/memoryLeak/</url>
-    <content><![CDATA[<p>如果一个可达对象的生命周期很长，它有一个生命周期较短的对象引用，此时就可能出现Java内存泄漏。也即是说， 造成内存泄漏的原因是对象虽然可达但不是活动的。</p>
+    <content><![CDATA[<p></p>
 <span id="more"></span>
+
+<p>如果一个可达对象的生命周期很长，它有一个生命周期较短的对象引用，此时就可能出现Java内存泄漏。也即是说， 造成内存泄漏的原因是对象虽然可达但不是活动的。</p>
 <h2><span id="避免内存泄漏的三种方式">避免内存泄漏的三种方式</span><a href="#避免内存泄漏的三种方式" class="header-anchor">#</a></h2><h3><span id="1-软引用">1. 软引用</span><a href="#1-软引用" class="header-anchor">#</a></h3><p>对于缓存，如果没有合适的策略让老的缓存项目到期就可能遇到内存泄漏。</p>
 <p>我们希望缓存能用上所有的可用内存，只是在需要额外资源的时候才释放资源。 通过软可达可以实现资源的释放。</p>
 <p>释放软可达对象的规则：</p>
@@ -20434,9 +20456,10 @@ table th:first-of-type {
   <entry>
     <title>单例模式总结</title>
     <url>/www6vHomeHexo/2014/01/01/singleton/</url>
-    <content><![CDATA[<p>可以分成两类： 多线程安全和非多线程安全的单例</p>
+    <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<p>可以分成两类： 多线程安全和非多线程安全的单例</p>
 <h2><span id="一-多线程安全">一. 多线程安全</span><a href="#一-多线程安全" class="header-anchor">#</a></h2><p>1 . initialization-on-demand holder idiom(IODH)</p>
 <p>&#x2F;&#x2F; 用内部类的机制实现了延时加载和线程安全</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private Singleton() &#123;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    private static class SingletonHolder &#123;</span><br><span class="line">        private static final Singleton INSTANCE = new Singleton();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static Singleton getInstance() &#123;</span><br><span class="line">        return SingletonHolder.INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

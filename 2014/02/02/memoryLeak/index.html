@@ -20,16 +20,14 @@
     var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="如果一个可达对象的生命周期很长，它有一个生命周期较短的对象引用，此时就可能出现Java内存泄漏。也即是说， 造成内存泄漏的原因是对象虽然可达但不是活动的。">
-<meta property="og:type" content="article">
+  <meta property="og:type" content="article">
 <meta property="og:title" content="内存泄漏的案例和解决方案">
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2014/02/02/memoryLeak/index.html">
 <meta property="og:site_name" content="www6v的博客">
-<meta property="og:description" content="如果一个可达对象的生命周期很长，它有一个生命周期较短的对象引用，此时就可能出现Java内存泄漏。也即是说， 造成内存泄漏的原因是对象虽然可达但不是活动的。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://www6v.github.io/www6vHome/memoryLeak/threadLocal.jpg">
 <meta property="article:published_time" content="2014-02-02T02:26:27.000Z">
-<meta property="article:modified_time" content="2023-02-25T02:57:47.283Z">
+<meta property="article:modified_time" content="2023-03-21T11:13:06.470Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="内存">
 <meta name="twitter:card" content="summary">
@@ -228,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-25 10:57:47" itemprop="dateModified" datetime="2023-02-25T10:57:47+08:00">2023-02-25</time>
+                <time title="修改时间：2023-03-21 19:13:06" itemprop="dateModified" datetime="2023-03-21T19:13:06+08:00">2023-03-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -259,8 +257,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>如果一个可达对象的生命周期很长，它有一个生命周期较短的对象引用，此时就可能出现Java内存泄漏。也即是说， 造成内存泄漏的原因是对象虽然可达但不是活动的。</p>
+        <p></p>
 <span id="more"></span>
+
+<p>如果一个可达对象的生命周期很长，它有一个生命周期较短的对象引用，此时就可能出现Java内存泄漏。也即是说， 造成内存泄漏的原因是对象虽然可达但不是活动的。</p>
 <h2><span id="避免内存泄漏的三种方式">避免内存泄漏的三种方式</span><a href="#避免内存泄漏的三种方式" class="header-anchor">#</a></h2><h3><span id="1-软引用">1. 软引用</span><a href="#1-软引用" class="header-anchor">#</a></h3><p>对于缓存，如果没有合适的策略让老的缓存项目到期就可能遇到内存泄漏。</p>
 <p>我们希望缓存能用上所有的可用内存，只是在需要额外资源的时候才释放资源。 通过软可达可以实现资源的释放。</p>
 <p>释放软可达对象的规则：</p>

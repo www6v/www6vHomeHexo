@@ -20,12 +20,10 @@
     var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="背景按正常的流程，服务提供者上下线，zookeeper会通知到服务客户端，也就是说服务客户端会自动感知到服务的当前状态。但是每隔数月我们会接到同样的问题，说是服务客户端的状态通知丢失了，每次涉及机器比较少只有一两台，所以怀疑是zk漏发通知导致的偶发现象（zookeeper的早期版本有这个bug）。 随着业务的快速发展，发布的服务和zk节点数量一直在增加，最近一次有40几台机器出现同样状况。通过这几">
-<meta property="og:type" content="article">
+  <meta property="og:type" content="article">
 <meta property="og:title" content="zookeeper未通知到服务客户端的异常排查">
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2017/07/28/zookeeperBug/index.html">
 <meta property="og:site_name" content="www6v的博客">
-<meta property="og:description" content="背景按正常的流程，服务提供者上下线，zookeeper会通知到服务客户端，也就是说服务客户端会自动感知到服务的当前状态。但是每隔数月我们会接到同样的问题，说是服务客户端的状态通知丢失了，每次涉及机器比较少只有一两台，所以怀疑是zk漏发通知导致的偶发现象（zookeeper的早期版本有这个bug）。 随着业务的快速发展，发布的服务和zk节点数量一直在增加，最近一次有40几台机器出现同样状况。通过这几">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://www6v.github.io/www6vHome/zookeeperBug/zk_log.jpg">
 <meta property="og:image" content="http://www6v.github.io/www6vHome/zookeeperBug/readLength.jpg">
@@ -33,7 +31,7 @@
 <meta property="og:image" content="http://www6v.github.io/www6vHome/zookeeperBug/wireshark.JPG">
 <meta property="og:image" content="http://www6v.github.io/www6vHome/zookeeperBug/client_watchers.JPG">
 <meta property="article:published_time" content="2017-07-28T14:56:02.000Z">
-<meta property="article:modified_time" content="2023-02-25T02:57:48.302Z">
+<meta property="article:modified_time" content="2023-03-21T11:05:48.157Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="故障排查">
 <meta name="twitter:card" content="summary">
@@ -232,7 +230,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-25 10:57:48" itemprop="dateModified" datetime="2023-02-25T10:57:48+08:00">2023-02-25</time>
+                <time title="修改时间：2023-03-21 19:05:48" itemprop="dateModified" datetime="2023-03-21T19:05:48+08:00">2023-03-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -263,9 +261,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2><span id="背景">背景</span><a href="#背景" class="header-anchor">#</a></h2><p>按正常的流程，服务提供者上下线，zookeeper会通知到服务客户端，也就是说服务客户端会自动感知到服务的当前状态。但是每隔数月我们会接到同样的问题，说是服务客户端的状态通知丢失了，每次涉及机器比较少只有一两台，所以怀疑是zk漏发通知导致的偶发现象（zookeeper的早期版本有这个bug）。</p>
-<p>随着业务的快速发展，发布的服务和zk节点数量一直在增加，最近一次有40几台机器出现同样状况。通过这几天我的排查和实验问题已经定位，根本原因是客户端没有与zk建立有效session，导致对应的watcher没有注册到zk，最终导致zk服务端不会推送对应的节点变更。</p>
+        <p></p>
 <span id="more"></span>
+
+<h2><span id="背景">背景</span><a href="#背景" class="header-anchor">#</a></h2><p>按正常的流程，服务提供者上下线，zookeeper会通知到服务客户端，也就是说服务客户端会自动感知到服务的当前状态。但是每隔数月我们会接到同样的问题，说是服务客户端的状态通知丢失了，每次涉及机器比较少只有一两台，所以怀疑是zk漏发通知导致的偶发现象（zookeeper的早期版本有这个bug）。</p>
+<p>随着业务的快速发展，发布的服务和zk节点数量一直在增加，最近一次有40几台机器出现同样状况。通过这几天我的排查和实验问题已经定位，根本原因是客户端没有与zk建立有效session，导致对应的watcher没有注册到zk，最终导致zk服务端不会推送对应的节点变更。</p>
+<!-- more -->
 
 <p>下面来剖析session创建不成功的原因。</p>
 <h2><span id="排查过程">排查过程</span><a href="#排查过程" class="header-anchor">#</a></h2><h3><span id="1-zookeeper服务端日志">1. zookeeper服务端日志</span><a href="#1-zookeeper服务端日志" class="header-anchor">#</a></h3><p>通过ZK日志可以看到出，10.4.31.15 这台机器创建zk连接成功，但session创建出现异常导致连接关闭。由于zkclient本身的重连机制，客户端会不断重连服务端，但在session无法创建成功的情况下，watcher并不会注册到服务端所以也不可能受到变更通知。</p>
