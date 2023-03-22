@@ -392,15 +392,17 @@
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<ul>
+<h1><span id="服务治理-汇总">服务治理  汇总</span><a href="#服务治理-汇总" class="header-anchor">#</a></h1><ul>
+<li><a href="/www6vHomeHexo/2019/09/09/microservice/" title="微服务 总结">微服务 总结</a></li>
+<li><a href="/www6vHomeHexo/2015/05/07/soaFeature/" title="分布式服务框架功能">分布式服务框架功能</a></li>
 <li><a href="/www6vHomeHexo/2022/01/21/apiGateway/" title="API Gateway网关">API Gateway网关</a></li>
 <li><a href="/www6vHomeHexo/2020/07/27/config/" title="服务治理-分布式配置">服务治理-分布式配置</a></li>
-<li><a href="/www6vHomeHexo/2019/09/09/microservice/" title="微服务">微服务</a></li>
+<li><a href="/www6vHomeHexo/2015/07/09/jsfThreadModel/" title="京东服务框架JSF服务提供者线程模型">京东服务框架JSF服务提供者线程模型</a></li>
+</ul>
+<h3><span id="非功能性">非功能性</span><a href="#非功能性" class="header-anchor">#</a></h3><ul>
+<li><a href="/www6vHomeHexo/2015/06/17/soaTolerate/" title="分布式服务框架容错机制">分布式服务框架容错机制</a></li>
 <li><a href="/www6vHomeHexo/2016/10/07/Hystrix/" title="Hystrix实现和容错模式">Hystrix实现和容错模式</a></li>
 <li><a href="/www6vHomeHexo/2016/01/17/timeout/" title="超时和重试总结">超时和重试总结</a></li>
-<li><a href="/www6vHomeHexo/2015/07/09/jsfThreadModel/" title="京东服务框架JSF服务提供者线程模型">京东服务框架JSF服务提供者线程模型</a></li>
-<li><a href="/www6vHomeHexo/2015/06/17/soaTolerate/" title="分布式服务框架容错机制">分布式服务框架容错机制</a></li>
-<li><a href="/www6vHomeHexo/2015/05/07/soaFeature/" title="分布式服务框架功能">分布式服务框架功能</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -14498,20 +14500,64 @@ nq： 不排队调度
       </tags>
   </entry>
   <entry>
-    <title>微服务</title>
+    <title>微服务 总结</title>
     <url>/www6vHomeHexo/2019/09/09/microservice/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h2><span id="微服务-定义">微服务 定义</span><a href="#微服务-定义" class="header-anchor">#</a></h2><p>In short, the microservice architectural style [1] is an approach to developing a single application as a suite of <strong>small services</strong>, <strong>each running in its own process</strong> and <strong>communicating with lightweight mechanisms</strong>, often an HTTP resource API. These services are built around business capabilities and <strong>independently deployable</strong> by fully automated deployment machinery. There is a bare minimum of centralized management of these services, which may be written in different programming languages and use different data storage technologies.   –  [Martin Fowler]</p>
-<h2><span id="一-微服务相关的问题">一. 微服务相关的问题</span><a href="#一-微服务相关的问题" class="header-anchor">#</a></h2><h3><span id="1-api网关">1. API网关</span><a href="#1-api网关" class="header-anchor">#</a></h3><ul>
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1-%E5%AE%9A%E4%B9%89">微服务 定义</a></li>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9B%B8%E5%85%B3%E7%9A%84%E9%97%AE%E9%A2%98">微服务相关的问题</a><ul>
+<li><a href="#api%E7%BD%91%E5%85%B3">API网关</a></li>
+<li><a href="#%E6%9C%8D%E5%8A%A1%E5%AE%B9%E9%94%99">服务容错</a></li>
+<li><a href="#%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E5%92%8C%E5%8F%91%E7%8E%B0">服务注册和发现</a></li>
+<li><a href="#%E6%9C%8D%E5%8A%A1%E9%97%B4%E8%B0%83%E7%94%A8">服务间调用</a><ul>
+<li><a href="#%E6%9C%8D%E5%8A%A1%E5%A5%91%E7%BA%A6">服务契约</a></li>
+<li><a href="#%E8%B0%83%E7%94%A8%E5%8D%8F%E8%AE%AE">调用协议</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2%E5%92%8C%E5%8F%91%E5%B8%83">服务部署和发布</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E8%B0%83%E7%94%A8">数据调用</a></li>
+<li><a href="#%E5%8F%AF%E8%A7%82%E5%AF%9F%E6%80%A7">可观察性</a></li>
+<li><a href="#%E6%9C%8D%E5%8A%A1%E5%88%92%E5%88%86%E5%92%8C%E7%BB%84%E5%90%88">服务划分和组合</a></li>
+<li><a href="#%E6%9C%8D%E5%8A%A1%E5%88%86%E5%B1%82">服务分层</a><ul>
+<li><a href="#%E4%B8%8A%E5%B1%82-%E8%81%9A%E5%90%88%E6%9C%8D%E5%8A%A1%E9%80%82%E9%85%8D%E6%9C%8D%E5%8A%A1-%E8%BE%B9%E7%95%8C%E6%9C%8D%E5%8A%A1">上层: 聚合服务（适配服务， 边界服务）</a></li>
+<li><a href="#%E4%B8%8B%E5%B1%82-%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1%E6%A0%B8%E5%BF%83%E9%A2%86%E5%9F%9F%E6%9C%8D%E5%8A%A1-%E5%85%AC%E5%85%B1%E6%9C%8D%E5%8A%A1">下层: 基础服务（核心领域服务， 公共服务）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">微服务设计模式</a><ul>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-1">微服务设计模式</a></li>
+<li><a href="#sidecar-11">Sidecar [11]</a></li>
+</ul>
+</li>
+<li><a href="#the-scale-cube-%E5%8F%AF%E4%BC%B8%E7%BC%A9%E6%80%A7">The Scale Cube 可伸缩性</a></li>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E4%BC%98%E5%8A%BF%E5%92%8C%E4%BB%A3%E4%BB%B7">微服务的优势和代价</a></li>
+<li><a href="#%E5%8E%9F%E5%88%99%E5%92%8C%E7%BC%BA%E7%82%B9%E6%8C%91%E6%88%98">原则和缺点（挑战）</a></li>
+<li><a href="#soa-%E5%BE%AE%E6%9C%8D%E5%8A%A1-%E4%BA%91%E5%8E%9F%E7%94%9F%E6%BC%94%E8%BF%9B">SOA、微服务、云原生演进</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
+<li><a href="#self">self</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="微服务-定义">微服务 定义</span><a href="#微服务-定义" class="header-anchor">#</a></h1><p>In short, the microservice architectural style [1] is an approach to developing a single application as a suite of <strong>small services</strong>, <strong>each running in its own process</strong> and <strong>communicating with lightweight mechanisms</strong>, often an HTTP resource API. These services are built around business capabilities and <strong>independently deployable</strong> by fully automated deployment machinery. There is a bare minimum of centralized management of these services, which may be written in different programming languages and use different data storage technologies.   –  [Martin Fowler]</p>
+<h1><span id="微服务相关的问题">微服务相关的问题</span><a href="#微服务相关的问题" class="header-anchor">#</a></h1><h3><span id="api网关">API网关</span><a href="#api网关" class="header-anchor">#</a></h3><ul>
 <li>灰度发布、</li>
 <li>负载均衡、 </li>
 <li>鉴权、 </li>
 <li>监控、</li>
 <li>缓存<br> <a href="https://www.infoq.cn/article/construct-micro-service-using-api-gateway/">使用 API 网关构建微服务</a></li>
 </ul>
-<h3><span id="2-服务容错">2. 服务容错,</span><a href="#2-服务容错" class="header-anchor">#</a></h3><ul>
+<h3><span id="服务容错">服务容错</span><a href="#服务容错" class="header-anchor">#</a></h3><ul>
 <li>超时重试机制[self 1][self 2]</li>
 <li>限流</li>
 <li>熔断机制</li>
@@ -14519,7 +14565,7 @@ nq： 不排队调度
 <li>降级（本地缓存）</li>
 <li>流量调度、负载均衡<br> <a href="https://yq.aliyun.com/articles/7443?spm=5176.100238.yqhn2.2.XS3jCO">微服务熔断与隔离</a></li>
 </ul>
-<h3><span id="3-服务注册和发现">3. 服务注册和发现</span><a href="#3-服务注册和发现" class="header-anchor">#</a></h3><div style="text-align: center;">
+<h3><span id="服务注册和发现">服务注册和发现</span><a href="#服务注册和发现" class="header-anchor">#</a></h3><div style="text-align: center;">
 
 <p><img src="https://user-images.githubusercontent.com/5608425/66263484-fa29fb00-e825-11e9-83aa-47bcb97d7580.png" alt="service-find"><br>服务注册和发现</p>
 </div>
@@ -14529,7 +14575,7 @@ nq： 不排队调度
 <li>Client-side Discovery  </li>
 <li>Server-side Discovery patterns</li>
 </ul>
-<h3><span id="4-服务间调用">4. 服务间调用</span><a href="#4-服务间调用" class="header-anchor">#</a></h3><p>   <a href="https://yobriefca.se/blog/2013/04/29/micro-service-architecture/">Micro Service Architecture</a><br>   <a href="http://blog.csdn.net/mindfloating/article/details/51221780">Microservice 微服务的理论模型和现实路径</a></p>
+<h3><span id="服务间调用">服务间调用</span><a href="#服务间调用" class="header-anchor">#</a></h3><p>   <a href="https://yobriefca.se/blog/2013/04/29/micro-service-architecture/">Micro Service Architecture</a><br>   <a href="http://blog.csdn.net/mindfloating/article/details/51221780">Microservice 微服务的理论模型和现实路径</a></p>
 <h5><span id="服务契约">服务契约</span><a href="#服务契约" class="header-anchor">#</a></h5><ul>
 <li>API，具体接口的 API 接入技术说明。</li>
 <li>能力，服务能力的描述。</li>
@@ -14545,44 +14591,44 @@ nq： 不排队调度
 <p> <img src="https://user-images.githubusercontent.com/5608425/66257280-8528d800-e7c9-11e9-95f4-bfe436d9d283.png" alt="micro-service-architecture-comms"></p>
  </div></li>
 </ul>
-<h3><span id="5-服务部署和发布">5. 服务部署和发布</span><a href="#5-服务部署和发布" class="header-anchor">#</a></h3><p><a href="https://my.oschina.net/xiaominmin/blog/3070053">微服务部署：蓝绿部署、滚动部署、灰度发布、金丝雀发布</a></p>
+<h3><span id="服务部署和发布">服务部署和发布</span><a href="#服务部署和发布" class="header-anchor">#</a></h3><p><a href="https://my.oschina.net/xiaominmin/blog/3070053">微服务部署：蓝绿部署、滚动部署、灰度发布、金丝雀发布</a></p>
 <ul>
 <li>部署模式</li>
 <li>Single Service per Host  </li>
 <li>Multiple Services per Host patterns</li>
 </ul>
-<h3><span id="6-数据调用">6. 数据调用</span><a href="#6-数据调用" class="header-anchor">#</a></h3><h3><span id="7-可观察性">7. 可观察性</span><a href="#7-可观察性" class="header-anchor">#</a></h3><p>   <a href="https://yq.aliyun.com/articles/60994?spm=5176.100239.blogcont61320.29.6SwFH6">鹰眼跟踪、限流降级，EDAS的微服务解决之道</a><br>   <a href="../../../../2019/08/31/observability/">可观察性</a> self</p>
+<h3><span id="数据调用">数据调用</span><a href="#数据调用" class="header-anchor">#</a></h3><h3><span id="可观察性">可观察性</span><a href="#可观察性" class="header-anchor">#</a></h3><p>   <a href="https://yq.aliyun.com/articles/60994?spm=5176.100239.blogcont61320.29.6SwFH6">鹰眼跟踪、限流降级，EDAS的微服务解决之道</a><br>   <a href="../../../../2019/08/31/observability/">可观察性</a> self</p>
    <div style="text-align: center;">
 
 <p>   <img src="https://user-images.githubusercontent.com/5608425/66256533-43942f00-e7c1-11e9-8fe8-80565025c792.png" alt="apm-fault"><br>   APM 故障<br>   <img src="https://user-images.githubusercontent.com/5608425/66256535-4727b600-e7c1-11e9-82c9-cd2222fce9bb.png" alt="apm-tracing"><br>   APM 稳定性<br>   </p></div><p></p>
-<h3><span id="8-服务划分和组合">8. 服务划分和组合</span><a href="#8-服务划分和组合" class="header-anchor">#</a></h3><blockquote>
+<h3><span id="服务划分和组合">服务划分和组合</span><a href="#服务划分和组合" class="header-anchor">#</a></h3><blockquote>
 <p>微服务不是指”微小”的服务, 而是如何”拆分”服务,然后”组合”服务.</p>
 </blockquote>
 <ul>
 <li>DDD 领域驱动设计, 上下文划分（context）</li>
 <li>康威定律</li>
 </ul>
-<h3><span id="8-服务分层">8. 服务分层</span><a href="#8-服务分层" class="header-anchor">#</a></h3><h3><span id="上层-聚合服务适配服务-边界服务">上层: 聚合服务（适配服务， 边界服务）</span><a href="#上层-聚合服务适配服务-边界服务" class="header-anchor">#</a></h3><pre><code>比如：pc和mobile服务对商品服务返回内容的裁剪。
+<h3><span id="服务分层">服务分层</span><a href="#服务分层" class="header-anchor">#</a></h3><h5><span id="上层-聚合服务适配服务-边界服务">上层: 聚合服务（适配服务， 边界服务）</span><a href="#上层-聚合服务适配服务-边界服务" class="header-anchor">#</a></h5><pre><code>比如：pc和mobile服务对商品服务返回内容的裁剪。
       聚合商品服务和目录服务的内容。   
 </code></pre>
-<h3><span id="下层-基础服务核心领域服务-公共服务">下层: 基础服务（核心领域服务， 公共服务）</span><a href="#下层-基础服务核心领域服务-公共服务" class="header-anchor">#</a></h3><pre><code>比如：电商的商品服务， 目录服务， 订单服务
+<h5><span id="下层-基础服务核心领域服务-公共服务">下层: 基础服务（核心领域服务， 公共服务）</span><a href="#下层-基础服务核心领域服务-公共服务" class="header-anchor">#</a></h5><pre><code>比如：电商的商品服务， 目录服务， 订单服务
 </code></pre>
-<h2><span id="二-微服务设计模式">二. 微服务设计模式</span><a href="#二-微服务设计模式" class="header-anchor">#</a></h2><h3><span id="21-微服务设计模式">2.1 微服务设计模式</span><a href="#21-微服务设计模式" class="header-anchor">#</a></h3><div style="text-align: center;">
+<h1><span id="微服务设计模式">微服务设计模式</span><a href="#微服务设计模式" class="header-anchor">#</a></h1><h3><span id="微服务设计模式">微服务设计模式</span><a href="#微服务设计模式" class="header-anchor">#</a></h3><div style="text-align: center;">
 
 <p><img src="https://user-images.githubusercontent.com/5608425/66229516-8ea43880-e714-11e9-8f56-0a70cc695882.jpg" alt="PatternsRelatedToMicroservices"><br>微服务设计模式    </p>
 </div>    
     
-<h3><span id="22-sidecar-11">2.2 sidecar [11]</span><a href="#22-sidecar-11" class="header-anchor">#</a></h3><p>分离业务逻辑与路由，流控，熔断，幂等，服务发现，鉴权等控制组件。</p>
+<h3><span id="sidecar-11">Sidecar [11]</span><a href="#sidecar-11" class="header-anchor">#</a></h3><p>分离业务逻辑与路由，流控，熔断，幂等，服务发现，鉴权等控制组件。</p>
 <p>适用场景：<br>老系统改造扩展，Sidebar 进程与服务进程部署在同一个节点；<br>多语言混合分布式系统扩展；</p>
 <p>Eg. k8s pod中日志采集sidecar</p>
-<h2><span id="三-the-scale-cube-可伸缩性">三. The Scale Cube 可伸缩性</span><a href="#三-the-scale-cube-可伸缩性" class="header-anchor">#</a></h2><p><a href="https://akfpartners.com/techblog/2008/05/08/splitting-applications-or-services-for-scale/">The Scale Cube</a></p>
+<h1><span id="the-scale-cube-可伸缩性">The Scale Cube 可伸缩性</span><a href="#the-scale-cube-可伸缩性" class="header-anchor">#</a></h1><p><a href="https://akfpartners.com/techblog/2008/05/08/splitting-applications-or-services-for-scale/">The Scale Cube</a></p>
 <blockquote>
 <p>  X-Axis: Horizontal Duplication and Cloning of services and data<br>    Y-Axis: Functional Decomposition and Segmentation - Microservices (or micro-services)<br>    Z-Axis: Service and Data Partitioning along Customer Boundaries - Shards&#x2F;Pods</p>
 </blockquote>
 <blockquote>
 <p>  X-Axis: Replicate &amp;&amp; Load Balance<br>    Y-Axis: Servcie<br>    Z-Axis: Data Sharding</p>
 </blockquote>
-<h2><span id="四-微服务的优势和代价">四. 微服务的优势和代价</span><a href="#四-微服务的优势和代价" class="header-anchor">#</a></h2><p><a href="https://martinfowler.com/bliki/MicroservicePremium.html">MicroservicePremium</a> Martin Fowler. </p>
+<h1><span id="微服务的优势和代价">微服务的优势和代价</span><a href="#微服务的优势和代价" class="header-anchor">#</a></h1><p><a href="https://martinfowler.com/bliki/MicroservicePremium.html">MicroservicePremium</a> Martin Fowler. </p>
 <div style="text-align: center;">
 
 <p><img src="https://user-images.githubusercontent.com/5608425/66262608-af54b700-e816-11e9-9e16-3b95d76e14e2.png" alt="productivity"><br>生产率和复杂度之间的关系。 </p>
@@ -14591,7 +14637,7 @@ nq： 不排队调度
 <blockquote>
 <p>在不复杂的系统中， 更适合monolithic的应用。<br>  复杂度增长时， 微服务的生产率能持续保持，在生产率方面是可伸缩的。</p>
 </blockquote>
-<h2><span id="五-原则和缺点挑战">五. 原则和缺点（挑战）</span><a href="#五-原则和缺点挑战" class="header-anchor">#</a></h2><p><a href="https://www.phodal.com/blog/microservices-is-not-a-free-lunch/">微服务架构——不是免费的午餐</a><br><a href="http://www.infoq.com/cn/news/2014/05/micro-server-architecture-debate">有关微服务架构的争论：更简单还是更复杂？</a> </p>
+<h1><span id="原则和缺点挑战">原则和缺点（挑战）</span><a href="#原则和缺点挑战" class="header-anchor">#</a></h1><p><a href="https://www.phodal.com/blog/microservices-is-not-a-free-lunch/">微服务架构——不是免费的午餐</a><br><a href="http://www.infoq.com/cn/news/2014/05/micro-server-architecture-debate">有关微服务架构的争论：更简单还是更复杂？</a> </p>
 <table>
 <thead>
 <tr>
@@ -14644,7 +14690,7 @@ nq： 不排队调度
 <td align="center">系统集成测试</td>
 </tr>
 </tbody></table>
-<h2><span id="五-soa-微服务-云原生演进">五. SOA、微服务、云原生演进</span><a href="#五-soa-微服务-云原生演进" class="header-anchor">#</a></h2><table>
+<h1><span id="soa-微服务-云原生演进">SOA、微服务、云原生演进</span><a href="#soa-微服务-云原生演进" class="header-anchor">#</a></h1><table>
 <thead>
 <tr>
 <th align="center">关注点</th>
@@ -14708,7 +14754,7 @@ nq： 不排队调度
 <td align="center">开放、融合</td>
 </tr>
 </tbody></table>
-<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://www.nginx.com/blog/introduction-to-microservices/">Introduction to Microservices</a>  英文  </li>
 <li><a href="https://kb.cnblogs.com/page/521880/">Introduction to Microservices</a>  中文  优缺点</li>
 <li><a href="https://yq.aliyun.com/articles/2764?spm=5176.100239.blogcont59193.8.R9MzN9">微服务（Microservice）那点事</a> good</li>
@@ -14716,10 +14762,10 @@ nq： 不排队调度
 <li><a href="../../../2016/02/09/consistent/">一致性</a>  self</li>
 <li><a href="http://www.infoq.com/cn/articles/microservices-intro">微服务：分解应用以实现可部署性和可扩展性</a>  Chris Richardson</li>
 <li><a href="https://www.cnblogs.com/suter/p/3401952.html">《Linux&#x2F;Unix设计思想》随笔 ——Linux&#x2F;Unix哲学概述</a>  未</li>
-<li><a href="https://www.infoq.cn/article/2014/07/microservice-learning-resources/">微服务学习资料汇总</a>  good</li>
+<li><a href="https://www.infoq.cn/article/2014/07/microservice-learning-resources/">微服务学习资料汇总</a>  ***</li>
 <li><a href="https://www.infoq.cn/article/micro-service-technology-stack/?utm_source=infoq&utm_medium=popular_widget&utm_campaign=popular_content_list&utm_content=homepage">微服务架构技术栈选型手册</a> 未</li>
-<li><a href="https://mp.weixin.qq.com/s/zl0Z-bCoLDFGD8GFYh68CQ">从 SOA 到微服务，企业分布式应用架构在云原生时代如何重塑？</a> 阿里 易立 good</li>
-<li><a href="https://mp.weixin.qq.com/s?__biz=MzUzNzYxNjAzMg==&mid=2247486600&idx=1&sn=0ad92a1fe535f141fe2e8c87ffbd1229&chksm=fae50747cd928e51c05c41d2cc206069babbe9dfdba5957c52ac6e77cb754192169bb6b3e898&scene=0&xtrack=1#rd">云原生时代，分布式系统设计必备知识图谱（内含22个知识点）</a> 杨泽强（竹涧） good</li>
+<li><a href="https://mp.weixin.qq.com/s/zl0Z-bCoLDFGD8GFYh68CQ">从 SOA 到微服务，企业分布式应用架构在云原生时代如何重塑？</a> 阿里 易立  *** </li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzUzNzYxNjAzMg==&mid=2247486600&idx=1&sn=0ad92a1fe535f141fe2e8c87ffbd1229&chksm=fae50747cd928e51c05c41d2cc206069babbe9dfdba5957c52ac6e77cb754192169bb6b3e898&scene=0&xtrack=1#rd">云原生时代，分布式系统设计必备知识图谱（内含22个知识点）</a> 杨泽强（竹涧） ***</li>
 <li><a href="https://www.servicemesher.com/blog/202003-gitops-progressive-delivery-with-asm/">使用托管服务网格实现应用在多集群中的 GitOps 全自动化渐进式发布</a>  郝树伟 阿里云容器服务</li>
 </ol>
 <h2><span id="self">self</span><a href="#self" class="header-anchor">#</a></h2><ol>
