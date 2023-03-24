@@ -21,13 +21,13 @@
   </script>
 
   <meta property="og:type" content="article">
-<meta property="og:title" content="Seata">
+<meta property="og:title" content="Seata 总结">
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/03/24/transactionSeata/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/03/24/transactionSeata/AT.jpg">
 <meta property="article:published_time" content="2022-03-24T03:06:49.000Z">
-<meta property="article:modified_time" content="2023-03-24T04:43:54.628Z">
+<meta property="article:modified_time" content="2023-03-24T10:44:16.989Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Seata">
 <meta name="twitter:card" content="summary">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>Seata | www6v的博客</title>
+  <title>Seata 总结 | www6v的博客</title>
   
 
 
@@ -203,7 +203,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Seata
+          Seata 总结
         </h1>
 
         <div class="post-meta">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-24 12:43:54" itemprop="dateModified" datetime="2023-03-24T12:43:54+08:00">2023-03-24</time>
+                <time title="修改时间：2023-03-24 18:44:16" itemprop="dateModified" datetime="2023-03-24T18:44:16+08:00">2023-03-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -256,50 +256,53 @@
         <p></p>
 <span id="more"></span>
 
-
-
 <h2><span id="seata-模式3">Seata 模式[3]</span><a href="#seata-模式3" class="header-anchor">#</a></h2><table>
 <thead>
 <tr>
 <th>功能名称</th>
-<th>官方文档</th>
 <th>特点</th>
 <th>基本原理</th>
 <th>使用场景</th>
 <th>存在问题</th>
+<th>性能</th>
+<th>复杂度</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>AT 模式</td>
-<td><a target="_blank" rel="noopener" href="https://seata.io/zh-cn/docs/dev/mode/at-mode.html">AT模式官方文档 1</a></td>
-<td>自动补偿事务，性能较高，开发简单</td>
+<td>AT 模式<br><a target="_blank" rel="noopener" href="https://seata.io/zh-cn/docs/dev/mode/at-mode.html">AT模式官方文档 1</a></td>
+<td>自动补偿事务</td>
 <td>代理数据源，一阶段解析sql将数据写入undo_log表，二阶段根据undo_log表进行回滚</td>
 <td><strong>支持 ACID 事务的关系型数据库</strong></td>
 <td>开发时需注意：脏读</td>
+<td>性能较高</td>
+<td>开发简单</td>
 </tr>
 <tr>
-<td>TCC 模式</td>
-<td><a target="_blank" rel="noopener" href="https://seata.io/zh-cn/docs/dev/mode/tcc-mode.html">TCC模式官方文档</a></td>
-<td>手动补偿事务，性能高，开发复杂</td>
+<td>TCC 模式<br><a target="_blank" rel="noopener" href="https://seata.io/zh-cn/docs/dev/mode/tcc-mode.html">TCC模式官方文档</a></td>
+<td>手动补偿事务</td>
 <td>代理数据源，一阶段执行prepare方法，二阶段执行commit或rollback方法</td>
 <td><strong>不支持 ACID 事务的数据库</strong></td>
 <td>开发时需注意：空回滚、幂等、悬挂</td>
+<td>性能高</td>
+<td>开发复杂</td>
 </tr>
 <tr>
-<td>Saga 模式</td>
-<td><a target="_blank" rel="noopener" href="https://seata.io/zh-cn/docs/user/saga.html">SAGA模式官方文档</a></td>
-<td>性能高，开发复杂</td>
+<td>Saga 模式<br><a target="_blank" rel="noopener" href="https://seata.io/zh-cn/docs/user/saga.html">SAGA模式官方文档</a></td>
+<td></td>
 <td>基于状态机引擎实现，用户设计状态图，开发rollback方法，状态机根据状态图 json 调用相关方法</td>
 <td><strong>业务流程长、业务流程多</strong> <br>参与者包含其它公司或遗留系统服务，<strong>无法提供 TCC 模式要求的三个接口</strong></td>
 <td>除了额外开发方法，需设计开发状态图 json</td>
+<td>性能高</td>
+<td>开发复杂</td>
 </tr>
 <tr>
-<td>XA 模式</td>
-<td><a target="_blank" rel="noopener" href="https://seata.io/zh-cn/docs/dev/mode/xa-mode.html">XA模式官方文档</a></td>
-<td>满足全局数据一致性，AT、TCC、Saga 都是补偿型，无法做到真正的全局一致性，开发简单，性能较低</td>
+<td>XA 模式<br><a target="_blank" rel="noopener" href="https://seata.io/zh-cn/docs/dev/mode/xa-mode.html">XA模式官方文档</a></td>
+<td>满足全局数据一致性. <br>AT、TCC、Saga 都是补偿型，无法做到真正的全局一致性.</td>
 <td>由数据库XA协议完成提交、回滚</td>
 <td>支持XA 事务的数据库</td>
 <td>性能较低</td>
+<td>性能较低</td>
+<td>开发简单</td>
 </tr>
 </tbody></table>
 <h3><span id="at模式-1">AT模式 [1]</span><a href="#at模式-1" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/03/24/transactionSeata/AT.jpg" class title="AT模式">
@@ -314,11 +317,41 @@
 </ul>
 </li>
 </ul>
-<h3><span id="at模式-示例-4">AT模式 示例 [4]</span><a href="#at模式-示例-4" class="header-anchor">#</a></h3><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU3MDAzNDg1MA==&mid=2247499421&idx=1&sn=a55797652284bafd9216ea981f4125e0">对比7种分布式事务方案，还是偏爱阿里开源的Seata，真香！(原理+实战)</a>  ***</li>
-<li><a target="_blank" rel="noopener" href="https://seata.io/zh-cn/docs/dev/mode/at-mode.html">Seata AT 模式</a>  官方文档</li>
-<li><a target="_blank" rel="noopener" href="http://koca.szkingdom.com/forum/t/topic/322"><a target="_blank" rel="noopener" href="http://koca.szkingdom.com/forum/t/topic/322">Seata 使用调研</a></a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/www6v/seata-samples/tree/master/multiple-datasource">Seata AT模式-多数据源</a></li>
+<h3><span id="at模式-示例-4">AT模式 示例 [4]</span><a href="#at模式-示例-4" class="header-anchor">#</a></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="meta">@GlobalTransactional</span>   <span class="comment">///  TM</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> OperationResponse <span class="title function_">placeOrder</span><span class="params">(PlaceOrderRequestVO placeOrderRequestVO)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 扣减库存</span></span><br><span class="line">        DynamicDataSourceContextHolder.setDataSourceKey(DataSourceKey.STOCK);</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">operationStockResult</span> <span class="operator">=</span> stockService.reduceStock(placeOrderRequestVO.getProductId(), amount);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 扣减余额</span></span><br><span class="line">        DynamicDataSourceContextHolder.setDataSourceKey(DataSourceKey.PAY);</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">operationBalanceResult</span> <span class="operator">=</span> payService.reduceBalance(placeOrderRequestVO.getUserId(), price);</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PayServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">PayService</span> &#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 事务传播特性设置为 REQUIRES_NEW 开启新的事务</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> userId 用户 ID</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> price  扣减金额</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRES_NEW)</span>   <span class="comment">/// RM</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">reduceBalance</span><span class="params">(Long userId, Integer price)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        log.info(<span class="string">&quot;开始扣减用户 &#123;&#125; 余额&quot;</span>, userId);</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">record</span> <span class="operator">=</span> accountDao.reduceBalance(price);</span><br><span class="line">        log.info(<span class="string">&quot;扣减用户 &#123;&#125; 余额结果:&#123;&#125;&quot;</span>, userId, record &gt; <span class="number">0</span> ? <span class="string">&quot;操作成功&quot;</span> : <span class="string">&quot;扣减余额失败&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> record &gt; <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2><span id="seata-同类产品">Seata 同类产品</span><a href="#seata-同类产品" class="header-anchor">#</a></h2><ul>
+<li><p>TCC 模式</p>
+<p>Eg: 支付宝DTS #3<br>蚂蚁 XTS(内部)&#x2F;DTX(蚂蚁金融云) #3 <br></p>
+</li>
+<li><p>两阶段</p>
+<p>阿里 TXC(内部)&#x2F;GTS(阿里云) <br><strong>非入侵性</strong> <br><a target="_blank" rel="noopener" href="https://github.com/seata/seata/wiki/AT-Mode">AT Mode</a> 基于 支持本地 ACID 事务 的 “关系型数据库” <br><a target="_blank" rel="noopener" href="https://github.com/seata/seata/wiki/MT-Mode">MT Mode</a> 支持把”自定义”的分支事务纳入到全局事务的管理中</p>
+</li>
+</ul>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU3MDAzNDg1MA==&mid=2247499421&idx=1&sn=a55797652284bafd9216ea981f4125e0">对比7种分布式事务方案，还是偏爱阿里开源的Seata，真香！(原理+实战)</a>  ***</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://seata.io/zh-cn/docs/dev/mode/at-mode.html">Seata AT 模式</a>  官方文档</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://koca.szkingdom.com/forum/t/topic/322"><a target="_blank" rel="noopener" href="http://koca.szkingdom.com/forum/t/topic/322">Seata 使用调研</a></a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/www6v/seata-samples/tree/master/multiple-datasource">Seata AT模式-多数据源</a></p>
+<p>早期</p>
+</li>
+<li><p>分布式事务之TCC事务 梁钟霖</p>
+</li>
+<li><p>分布式事务之TCC服务设计和实现注意事项 绍辉</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/www6v/tcc-transaction">https://github.com/www6v/tcc-transaction</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/S0touTyVWfolEqgFaAjLxg">更开放的分布式事务 | Fescar 品牌升级，更名为 Seata</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/XTCZEZdmToWrETbR1GtR4g">关于开源分布式事务中间件Fescar，我们总结了开发者关心的13个问题</a></p>
+</li>
 </ol>
 
     </div>
@@ -335,7 +368,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www6v.github.io/www6vHomeHexo/2022/03/24/transactionSeata/" title="Seata">https://www6v.github.io/www6vHomeHexo/2022/03/24/transactionSeata/</a>
+    <a href="https://www6v.github.io/www6vHomeHexo/2022/03/24/transactionSeata/" title="Seata 总结">https://www6v.github.io/www6vHomeHexo/2022/03/24/transactionSeata/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
