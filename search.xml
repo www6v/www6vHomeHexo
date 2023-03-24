@@ -5379,6 +5379,8 @@ BGP 协议传输的消息
 <li><p><a href="http://koca.szkingdom.com/forum/t/topic/322"><a href="http://koca.szkingdom.com/forum/t/topic/322">Seata 使用调研</a></a></p>
 </li>
 <li><p><a href="https://github.com/www6v/seata-samples/tree/master/multiple-datasource">Seata AT模式-多数据源</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/abcd930704/article/details/121650029">seata的AT模式</a></p>
 <p>早期</p>
 </li>
 <li><p>分布式事务之TCC事务 梁钟霖</p>
