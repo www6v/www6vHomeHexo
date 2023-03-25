@@ -19025,13 +19025,36 @@ nq： 不排队调度
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#redis%E9%9B%86%E7%BE%A4">redis集群</a><ul>
+<li><a href="#1-sentinel">1. sentinel</a></li>
+<li><a href="#2-redis-cluster">2. redis cluster</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8B%E5%8A%A1">事务</a></li>
+<li><a href="#%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5">回收策略</a></li>
+<li><a href="#hash%E5%92%8Cscan%E5%91%BD%E4%BB%A4">hash和scan命令</a></li>
+<li><a href="#io%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%80%A7%E8%83%BD">IO模型和性能</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考:</a><ul>
+<li><a href="#%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5-1">回收策略</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
 <img src="/www6vHomeHexo/2016/11/12/redis/redis.jpg" class title="Redis 总结">
 
 
 <h2><span id="redis集群">redis集群</span><a href="#redis集群" class="header-anchor">#</a></h2><h3><span id="1-sentinel">1. sentinel</span><a href="#1-sentinel" class="header-anchor">#</a></h3><p>   master-slave异步复制, 所以会丢消息</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">参数: </span><br><span class="line"># 至少有一个slave复制</span><br><span class="line">min-slaves-to-write 1   </span><br><span class="line"># slave节点最大10s的延迟</span><br><span class="line">min-slaves-max-lag 10   </span><br></pre></td></tr></table></figure>
 
-<h4><span id="2-redis-cluster">2. redis cluster</span><a href="#2-redis-cluster" class="header-anchor">#</a></h4><p><strong>整体架构</strong></p>
+<h3><span id="2-redis-cluster">2. redis cluster</span><a href="#2-redis-cluster" class="header-anchor">#</a></h3><p><strong>整体架构</strong></p>
 <ol>
 <li>去中心化的;</li>
 <li>所有数据划分为16384个slots，每个节点负责其中一部分slots;</li>
