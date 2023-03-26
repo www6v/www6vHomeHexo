@@ -7087,10 +7087,31 @@ func new(Type) *Type
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
-<h2><span id="checkpoint的保存">CheckPoint的保存</span><a href="#checkpoint的保存" class="header-anchor">#</a></h2><p>  <strong>当所有任务都恰好处理完一个相同的输入数据的时候，将它们的状态保存下来</strong></p>
-<h2><span id="从checkpoint恢复状态">从CheckPoint恢复状态</span><a href="#从checkpoint恢复状态" class="header-anchor">#</a></h2><p>（1）重启应用<br>（2）<strong>读取检查点，重置状态</strong><br>（3）<strong>重放数据</strong><br>    重置偏移量<br>（4）继续处理数据</p>
-<h2><span id="checkpoint-算法">CheckPoint 算法</span><a href="#checkpoint-算法" class="header-anchor">#</a></h2><ul>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%8E%9F%E7%90%86-1">原理 [1]</a><ul>
+<li><a href="#checkpoint%E7%9A%84%E4%BF%9D%E5%AD%98">CheckPoint的保存</a></li>
+<li><a href="#%E4%BB%8Echeckpoint%E6%81%A2%E5%A4%8D%E7%8A%B6%E6%80%81">从CheckPoint恢复状态</a></li>
+<li><a href="#checkpoint-%E7%AE%97%E6%B3%95">CheckPoint 算法</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E8%B7%B5">实践</a><ul>
+<li><a href="#api-2-3">API [2] [3]</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E7%BB%8F%E9%AA%8C4n-ai">使用经验[4][N AI]</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="原理-1">原理 [1]</span><a href="#原理-1" class="header-anchor">#</a></h1><h3><span id="checkpoint的保存">CheckPoint的保存</span><a href="#checkpoint的保存" class="header-anchor">#</a></h3><p>  <strong>当所有任务都恰好处理完一个相同的输入数据的时候，将它们的状态保存下来</strong></p>
+<h3><span id="从checkpoint恢复状态">从CheckPoint恢复状态</span><a href="#从checkpoint恢复状态" class="header-anchor">#</a></h3><p>（1）重启应用<br>（2）<strong>读取检查点，重置状态</strong><br>（3）<strong>重放数据</strong><br>    重置偏移量<br>（4）继续处理数据</p>
+<h3><span id="checkpoint-算法">CheckPoint 算法</span><a href="#checkpoint-算法" class="header-anchor">#</a></h3><ul>
 <li><p>检查点的“分界线”（Checkpoint Barrier）<br>watermark 指示的是“之前的数据全部到齐了”，而 barrier 指示的是“之前所有数据的状<br>态更改保存入当前检查点”：它们都是一个“截止时间”的标志。</p>
 </li>
 <li><p>分布式快照算法</p>
@@ -7104,8 +7125,24 @@ func new(Type) *Type
 </ul>
 </li>
 </ul>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li>尚硅谷 flink(Java) - bilibili<br> 《尚硅谷大数据技术之flink（java）》 第 10 章 容错机制</li>
+<h1><span id="实践">实践</span><a href="#实践" class="header-anchor">#</a></h1><h3><span id="api-2-3">API [2] [3]</span><a href="#api-2-3" class="header-anchor">#</a></h3><ul>
+<li>默认不开启 checkpoint</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">StreamExecutionEnvironment</span> <span class="variable">env</span> <span class="operator">=</span> StreamExecutionEnvironment.getExecutionEnvironment();</span><br><span class="line"><span class="comment">// start a checkpoint every 1000 ms</span></span><br><span class="line">env.enableCheckpointing(<span class="number">1000</span>);</span><br><span class="line"><span class="comment">// advanced options:</span></span><br><span class="line"><span class="comment">// set mode to exactly-once (this is the default)</span></span><br><span class="line">env.getCheckpointConfig().setCheckpointingMode(CheckpointingMode.EXACTLY_ONCE);</span><br><span class="line"><span class="comment">// checkpoints have to complete within one minute, or are discarded</span></span><br><span class="line">env.getCheckpointConfig().setCheckpointTimeout(<span class="number">60000</span>);</span><br><span class="line"><span class="comment">// make sure 500 ms of progress happen between checkpoints</span></span><br><span class="line">env.getCheckpointConfig().setMinPauseBetweenCheckpoints(<span class="number">500</span>);</span><br><span class="line"><span class="comment">// allow only one checkpoint to be in progress at the same time</span></span><br><span class="line">env.getCheckpointConfig().setMaxConcurrentCheckpoints(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// enable externalized checkpoints which are retained after job cancellation</span></span><br><span class="line">env.getCheckpointConfig().enableExternalizedCheckpoints(ExternalizedCheckpointCleanup.RETAIN_ON_CANCELLATION);</span><br><span class="line"><span class="comment">// This determines if a task will be failed if an error occurs in the execution of the task’s checkpoint procedure.</span></span><br><span class="line">env.getCheckpointConfig().setFailOnCheckpointingErrors(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">StreamExecutionEnvironment</span> <span class="variable">env</span> <span class="operator">=</span> StreamExecutionEnvironment.getExecutionEnvironment();</span><br><span class="line"><span class="comment">// 每 60s 做一次 checkpoint</span></span><br><span class="line">env.enableCheckpointing(<span class="number">60000</span>);</span><br><span class="line"><span class="comment">// 高级配置：</span></span><br><span class="line"><span class="comment">// checkpoint 语义设置为 EXACTLY_ONCE，这是默认语义</span></span><br><span class="line">env.getCheckpointConfig().setCheckpointingMode(CheckpointingMode.EXACTLY_ONCE);</span><br><span class="line"><span class="comment">// 两次 checkpoint 的间隔时间至少为 1 s，默认是 0，立即进行下一次 checkpoint</span></span><br><span class="line">env.getCheckpointConfig().setMinPauseBetweenCheckpoints(<span class="number">1000</span>);</span><br><span class="line"><span class="comment">// checkpoint 必须在 60s 内结束，否则被丢弃，默认是 10 分钟</span></span><br><span class="line">env.getCheckpointConfig().setCheckpointTimeout(<span class="number">60000</span>);</span><br><span class="line"><span class="comment">// 同一时间只能允许有一个 checkpoint</span></span><br><span class="line">env.getCheckpointConfig().setMaxConcurrentCheckpoints(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// 最多允许 checkpoint 失败 3 次</span></span><br><span class="line">env.getCheckpointConfig().setTolerableCheckpointFailureNumber(<span class="number">3</span>);</span><br><span class="line"><span class="comment">// 当 Flink 任务取消时，保留外部保存的 checkpoint 信息</span></span><br><span class="line">env.getCheckpointConfig().enableExternalizedCheckpoints(ExternalizedCheckpointCleanup.RETAIN_ON_CANCELLATION);</span><br><span class="line"><span class="comment">// 当有较新的 Savepoint 时，作业也会从 Checkpoint 处恢复</span></span><br><span class="line">env.getCheckpointConfig().setPreferCheckpointForRecovery(<span class="literal">true</span>);</span><br><span class="line"><span class="comment">// 允许实验性的功能：非对齐的 checkpoint，以提升性能</span></span><br><span class="line">env.getCheckpointConfig().enableUnalignedCheckpoints();</span><br></pre></td></tr></table></figure>
+
+<h3><span id="使用经验4n-ai">使用经验[4][N AI]</span><a href="#使用经验4n-ai" class="header-anchor">#</a></h3><ol>
+<li>当 Checkpoint 时间比设置的间隔时间长时，可以设置 Checkpoint 间最小时间间隔。这样不会立即进行下一次 Checkpoint，从而减少系统在 Checkpoint 方面的资源消耗，确保任务计算资源的充足。</li>
+<li>如果 Flink 状态很大，在恢复时需要从远程存储读取状态，状态文件过大可能导致任务恢复很慢，浪费时间在网络传输方面。建议开启 Flink Task 本地状态恢复，加快状态恢复速度。</li>
+<li>可以增加 Checkpoint 保存数，以便在最新的 Checkpoint 恢复失败时回滚到之前的 Checkpoint 进行恢复。</li>
+<li>建议设置的 Checkpoint 间隔时间大于完成时间。</li>
+</ol>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li>尚硅谷 flink(Java) - bilibili<br>  《尚硅谷大数据技术之flink（java）》 第 10 章 容错机制</li>
+<li><a href="https://blog.csdn.net/xc_zhou/article/details/124898733">[1143]Flink的Checkpoint和Savepoint</a> </li>
+<li><a href="https://www.shuzhiduo.com/A/xl56qQM9Jr/">Flink Checkpoint 参数详解</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/112876846">有赞实时任务优化：Flink Checkpoint 异常解析与应用实践</a></li>
 </ol>
 ]]></content>
       <categories>
