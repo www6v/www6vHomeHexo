@@ -611,42 +611,49 @@
 </div>
 
 <h2><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h2><ul>
-<li><a href="../../../../2017/05/09/stability/">稳定性总结</a></li>
-<li><a href="../../../../2016/09/26/ratelimit/">限流总结</a><br><a href="../../../../categories/%E6%9E%B6%E6%9E%84/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/">系统架构</a></li>
+<li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a></li>
+<li><a href="/www6vHomeHexo/2016/09/26/ratelimit/" title="限流-总结">限流-总结</a>
+<ul>
+<li><a href="/www6vHomeHexo/2016/10/07/Hystrix/" title="Hystrix实现和容错模式">Hystrix实现和容错模式</a></li>
+<li><a href="/www6vHomeHexo/2022/03/28/ratelimitSentinel/" title="限流-Sentinel">限流-Sentinel</a></li>
 </ul>
+</li>
+</ul>
+<p><a href="../../../../categories/%E6%9E%B6%E6%9E%84/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/">系统架构</a></p>
 <h2><span id="sre">SRE</span><a href="#sre" class="header-anchor">#</a></h2><ul>
-<li><a href="../../../../2022/03/13/sre/">SRE</a></li>
-<li><a href="../../../../2023/02/01/sreWorkbook/">《SRE Workbook》</a></li>
-<li><a href="../../../../2022/03/13/capacityGuarantee/">容量保障与全链路压测 </a> </li>
-<li><a href="../../../../2019/09/24/chaosEngineering/">混沌工程 </a><br> <a href="../../../../categories/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/">可观测性</a></li>
+<li><a href="/www6vHomeHexo/2022/03/13/sre/" title="SRE 总结">SRE 总结</a></li>
+<li><a href="/www6vHomeHexo/2023/02/01/sreWorkbook/" title="《SRE Workbook》">《SRE Workbook》</a></li>
+<li><a href="/www6vHomeHexo/2022/03/13/capacityGuarantee/" title="容量保障与全链路压测">容量保障与全链路压测</a></li>
+<li><a href="/www6vHomeHexo/2019/09/24/chaosEngineering/" title="混沌工程">混沌工程</a></li>
 </ul>
+<p><a href="../../../../categories/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/">可观测性</a></p>
 <h2><span id="故障">故障</span><a href="#故障" class="header-anchor">#</a></h2><ul>
-<li><a href="../../../../2018/10/27/fault/">故障模型</a></li>
-<li><a href="../../../../2020/08/08/tcpFault/">TCP故障模式</a></li>
-<li><a href="../../../../2017/02/19/splitBrain/">Split Brain</a></li>
-<li><a href="../../../../2019/10/12/crashDetect/">宕机检测-Lease、心跳</a><br><a href="../../../../2016/10/07/Hystrix/">Hystrix实现和容错模式</a></li>
+<li><a href="/www6vHomeHexo/2018/10/27/fault/" title="故障模型">故障模型</a></li>
+<li><a href="/www6vHomeHexo/2020/08/08/tcpFault/" title="TCP故障模式">TCP故障模式</a></li>
+<li><a href="/www6vHomeHexo/2017/02/19/splitBrain/" title="Split Brain">Split Brain</a></li>
+<li><a href="/www6vHomeHexo/2019/10/12/crashDetect/" title="宕机检测-Lease、心跳">宕机检测-Lease、心跳</a></li>
 </ul>
 <h2><span id="故障排查">故障排查</span><a href="#故障排查" class="header-anchor">#</a></h2><h5><span id="overview">Overview</span><a href="#overview" class="header-anchor">#</a></h5><ul>
-<li><a href="../../../../2019/07/06/findProblem/">故障排查的流程和方法</a>  </li>
-<li><a href="../../../../2017/10/17/slowRT/">服务慢响应超时排查</a></li>
+<li><a href="/www6vHomeHexo/2019/07/06/findProblem/" title="故障排查的流程和方法">故障排查的流程和方法</a></li>
+<li><a href="/www6vHomeHexo/2017/10/17/slowRT/" title="服务慢响应超时排查">服务慢响应超时排查</a></li>
 </ul>
 <h5><span id="java-core">Java Core</span><a href="#java-core" class="header-anchor">#</a></h5><ul>
-<li><a href="../../../../2014/07/21/twoGCcase/">两个GC案例</a> </li>
-<li><a href="../../../../2017/08/09/interrupted/">关于任务取消相关异常的排查</a> </li>
-<li><a href="../../../../2014/09/06/classloader/">Classloader相关的故障排查</a></li>
+<li><a href="/www6vHomeHexo/2014/07/21/twoGCcase/" title="两个GC案例">两个GC案例</a></li>
+<li><a href="/www6vHomeHexo/2017/08/09/interrupted/" title="关于任务取消相关异常的排查">关于任务取消相关异常的排查</a></li>
+<li><a href="/www6vHomeHexo/2014/09/06/classloader/" title="Classloader相关的故障排查">Classloader相关的故障排查</a></li>
 </ul>
 <h5><span id="中间件">中间件</span><a href="#中间件" class="header-anchor">#</a></h5><ul>
-<li><a href="../../../../2017/07/28/zookeeperBug/">zookeeper未通知到服务客户端的异常排查</a> </li>
-<li><a href="../../../../2017/09/25/mybatisBug/">线上不能下单问题排查</a> </li>
-<li><a href="../../../../2020/06/21/mysqlBestPractice/">使用Mysql的性能问题和紧急处理手段</a></li>
+<li><a href="/www6vHomeHexo/2017/07/28/zookeeperBug/" title="zookeeper未通知到服务客户端的异常排查">zookeeper未通知到服务客户端的异常排查</a></li>
+<li><a href="/www6vHomeHexo/2017/09/25/mybatisBug/" title="线上不能下单问题排查">线上不能下单问题排查</a></li>
+<li><a href="/www6vHomeHexo/2020/06/21/mysqlBestPractice/" title="使用MySQL的性能问题和紧急处理手段">使用MySQL的性能问题和紧急处理手段</a></li>
 </ul>
 <h5><span id="网络">网络</span><a href="#网络" class="header-anchor">#</a></h5><ul>
-<li><a href="../../../../2022/01/11/haproxyTcpdump/">HAProxy抓包</a></li>
+<li><a href="/www6vHomeHexo/2022/01/11/haproxyTcpdump/" title="HAProxy抓包">HAProxy抓包</a></li>
 </ul>
 <h5><span id="k8s">K8s</span><a href="#k8s" class="header-anchor">#</a></h5><ul>
-<li><a href="../../../../2022/06/08/k8sTroubleshoot/">kubernetes 问题Troubleshoot</a>      </li>
-<li><a href="../../../../2022/04/03/k8sProblem/">Kubernetes问题排查-troubleshooting</a>      </li>
-<li><a href="../../../../2022/01/23/k8sBestPractice/">Kubernetes最佳实践-BestPractice</a></li>
+<li><a href="/www6vHomeHexo/2022/06/08/k8sTroubleshoot/" title="kubernetes 问题Troubleshoot">kubernetes 问题Troubleshoot</a>  </li>
+<li><a href="/www6vHomeHexo/2022/04/03/k8sProblem/" title="Kubernetes问题排查-troubleshooting">Kubernetes问题排查-troubleshooting</a>     </li>
+<li><a href="/www6vHomeHexo/2022/01/23/k8sBestPractice/" title="Kubernetes最佳实践-BestPractice">Kubernetes最佳实践-BestPractice</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -5279,6 +5286,41 @@ BGP 协议传输的消息
       </categories>
       <tags>
         <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>限流-Sentinel</title>
+    <url>/www6vHomeHexo/2022/03/28/ratelimitSentinel/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+
+<h2><span id="sentinel">Sentinel</span><a href="#sentinel" class="header-anchor">#</a></h2><ul>
+<li><p>限流 类型 [2]</p>
+<ul>
+<li>直接失败  [滑动时间窗口]</li>
+<li>Warmup 预热 [令牌桶算法]</li>
+<li>限流排队  [漏桶算法]</li>
+</ul>
+</li>
+<li><p>分布式限流 [1]</p>
+</li>
+</ul>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li><a href="https://sentinelguard.io/zh-cn/docs/cluster-flow-control.html">集群流量控制</a></li>
+<li><a href="https://www.bilibili.com/video/BV1MP4y1176q?p=11">【图灵学院】2022最新B站独家分布式限流算法原理与应用讲解视频短合集</a>   V</li>
+<li><a href="https://github.com/www6v/StabilityGuide/blob/master/docs/prevention/resilience/%E6%B5%81%E6%8E%A7%E9%99%8D%E7%BA%A7%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5.md">流控降级最佳实践</a>  阿里 未</li>
+<li><a href="https://github.com/alibaba/Sentinel/wiki/%E5%B8%B8%E7%94%A8%E9%99%90%E6%B5%81%E9%99%8D%E7%BA%A7%E7%BB%84%E4%BB%B6%E5%AF%B9%E6%AF%94">常用限流降级组件对比</a> Sentinel vs. Hystrix  未</li>
+</ol>
+<a href="/www6vHomeHexo/2016/09/26/ratelimit/" title="限流-总结">限流-总结</a>  self
+]]></content>
+      <categories>
+        <category>稳定性</category>
+        <category>限流</category>
+      </categories>
+      <tags>
+        <tag>限流</tag>
       </tags>
   </entry>
   <entry>
@@ -19320,7 +19362,7 @@ nq： 不排队调度
       </tags>
   </entry>
   <entry>
-    <title>限流总结</title>
+    <title>限流-总结</title>
     <url>/www6vHomeHexo/2016/09/26/ratelimit/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -19350,7 +19392,7 @@ nq： 不排队调度
 <tr>
 <td align="center">滑动窗口</td>
 <td align="center">滑动时间窗口划成了多格，粒度细; <br>解决了计数器法的缺点;</td>
-<td align="center">基于时间窗口【5】 #1</td>
+<td align="center">基于时间窗口[5]</td>
 <td align="center">简单</td>
 <td align="center"></td>
 <td align="center"></td>
@@ -19358,7 +19400,7 @@ nq： 不排队调度
 <tr>
 <td align="center">令牌桶算法</td>
 <td align="center"></td>
-<td align="center">Guava RateLimiter  【7】 #2</td>
+<td align="center">Guava RateLimiter  [7]</td>
 <td align="center">复杂</td>
 <td align="center">能够处理突发请求; 允许某些流量的突发，被业界采用地较多</td>
 <td align="center"></td>
@@ -19366,7 +19408,7 @@ nq： 不排队调度
 <tr>
 <td align="center">漏桶算法</td>
 <td align="center"></td>
-<td align="center">#3 漏桶算法【6】 代码【0】</td>
+<td align="center">漏桶算法[6] 代码[0]</td>
 <td align="center">简单</td>
 <td align="center"></td>
 <td align="center"></td>
@@ -19380,18 +19422,16 @@ nq： 不排队调度
 <td align="center"></td>
 </tr>
 </tbody></table>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol start="0">
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol start="0">
 <li><a href="https://github.com/www6v/jDemo/blob/master/src/main/java/middleware/rateLimiter/FunnelRateLimiter.java">漏桶算法实现</a></li>
-<li><a href="https://yq.aliyun.com/articles/4225">限流系统如何发现系统的热点</a>  中间件小哥  good</li>
-<li>接口限流算法总结 夜有所思，日有所梦</li>
+<li><a href="https://yq.aliyun.com/articles/4225">限流系统如何发现系统的热点</a>  中间件小哥  ***</li>
+<li>接口限流算法总结     夜有所思，日有所梦</li>
 <li><a href="https://www.iteye.com/blog/jinnianshilongnian-2305117">聊聊高并发系统之限流特技</a>  张开涛</li>
-<li><a href="http://calvin1978.blogcn.com/articles/ratelimiter.html">服务化体系之－限流</a>  江南白衣</li>
-<li>Redis 深度历险：核心原理与应用实践 应用 6：断尾求生 —— 简单限流 钱文品</li>
-<li>Redis 深度历险：核心原理与应用实践 应用 7：一毛不拔 —— 漏斗限流 钱文品  有代码实现</li>
+<li><a href="http://calvin1978.blogcn.com/articles/ratelimiter.html">服务化体系之－限流</a>  江南白衣  失效</li>
+<li>Redis 深度历险：核心原理与应用实践 应用 6：断尾求生 —— 简单限流       钱文品</li>
+<li>Redis 深度历险：核心原理与应用实践 应用 7：一毛不拔 —— 漏斗限流       钱文品  有代码实现</li>
 <li><a href="https://segmentfault.com/a/1190000012875897">Guava RateLimiter源码解析</a>  林舍  manerfan</li>
 <li><a href="https://mp.weixin.qq.com/s/RM3ffBCJqoQ2JMPKHgmv0Q">淘宝应用柔性架构的探索</a> 自适应负载调节</li>
-<li><a href="https://github.com/www6v/StabilityGuide/blob/master/docs/prevention/resilience/%E6%B5%81%E6%8E%A7%E9%99%8D%E7%BA%A7%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5.md">流控降级最佳实践</a>  阿里 未</li>
-<li><a href="https://github.com/alibaba/Sentinel/wiki/%E5%B8%B8%E7%94%A8%E9%99%90%E6%B5%81%E9%99%8D%E7%BA%A7%E7%BB%84%E4%BB%B6%E5%AF%B9%E6%AF%94">常用限流降级组件对比</a> Sentinel vs. Hystrix  未</li>
 </ol>
 ]]></content>
       <categories>
