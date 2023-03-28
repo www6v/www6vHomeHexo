@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Redis Error-MOVED和ASK指令">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/03/28/redisError/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/03/28/redisError/moved.jpg">
+<meta property="article:published_time" content="2022-03-28T02:47:56.000Z">
+<meta property="article:modified_time" content="2023-03-28T03:16:54.283Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2022/03/28/redisError/moved.jpg">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/03/28/redisError/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Redis Error-MOVED和ASK指令 | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2022/03/28/redisError/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redis Error-MOVED和ASK指令
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-28 10:47:56" itemprop="dateCreated datePublished" datetime="2022-03-28T10:47:56+08:00">2022-03-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-28 11:16:54" itemprop="dateModified" datetime="2023-03-28T11:16:54+08:00">2023-03-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B/" itemprop="url" rel="index"><span itemprop="name">非关系型</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p></p>
+<span id="more"></span>
+
+<details><summary>相关代码</summary><p>cluster.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Return the pointer to the cluster node that is able to serve the command.</span></span><br><span class="line"><span class="comment"> * For the function to succeed the command should only target either:</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 1) A single key (even multiple times like LPOPRPUSH mylist mylist).</span></span><br><span class="line"><span class="comment"> * 2) Multiple keys in the same hash slot, while the slot is stable (no</span></span><br><span class="line"><span class="comment"> *    resharding in progress).</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * On success the function returns the node that is able to serve the request.</span></span><br><span class="line"><span class="comment"> * If the node is not &#x27;myself&#x27; a redirection must be perfomed. The kind of</span></span><br><span class="line"><span class="comment"> * redirection is specified setting the integer passed by reference</span></span><br><span class="line"><span class="comment"> * &#x27;error_code&#x27;, which will be set to CLUSTER_REDIR_ASK or</span></span><br><span class="line"><span class="comment"> * CLUSTER_REDIR_MOVED.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * When the node is &#x27;myself&#x27; &#x27;error_code&#x27; is set to CLUSTER_REDIR_NONE.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * If the command fails NULL is returned, and the reason of the failure is</span></span><br><span class="line"><span class="comment"> * provided via &#x27;error_code&#x27;, which will be set to:</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * CLUSTER_REDIR_CROSS_SLOT if the request contains multiple keys that</span></span><br><span class="line"><span class="comment"> * don&#x27;t belong to the same hash slot.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * CLUSTER_REDIR_UNSTABLE if the request contains multiple keys</span></span><br><span class="line"><span class="comment"> * belonging to the same slot, but the slot is not stable (in migration or</span></span><br><span class="line"><span class="comment"> * importing state, likely because a resharding is in progress).</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * CLUSTER_REDIR_DOWN_UNBOUND if the request addresses a slot which is</span></span><br><span class="line"><span class="comment"> * not bound to any node. In this case the cluster global state should be</span></span><br><span class="line"><span class="comment"> * already &quot;down&quot; but it is fragile to rely on the update of the global state,</span></span><br><span class="line"><span class="comment"> * so we also handle it here.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * CLUSTER_REDIR_DOWN_STATE if the cluster is down but the user attempts to</span></span><br><span class="line"><span class="comment"> * execute a command that addresses one or more keys. */</span></span><br><span class="line">clusterNode *<span class="title function_">getNodeByQuery</span><span class="params">(client *c, <span class="keyword">struct</span> redisCommand *cmd, robj **argv, <span class="type">int</span> argc, <span class="type">int</span> *hashslot, <span class="type">int</span> *error_code)</span> &#123;</span><br><span class="line">    clusterNode *n = <span class="literal">NULL</span>;</span><br><span class="line">    robj *firstkey = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="type">int</span> multiple_keys = <span class="number">0</span>;</span><br><span class="line">    multiState *ms, _ms;</span><br><span class="line">    multiCmd mc;</span><br><span class="line">    <span class="type">int</span> i, slot = <span class="number">0</span>, migrating_slot = <span class="number">0</span>, importing_slot = <span class="number">0</span>, missing_keys = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Allow any key to be set if a module disabled cluster redirections. */</span></span><br><span class="line">    <span class="keyword">if</span> (server.cluster_module_flags &amp; CLUSTER_MODULE_FLAG_NO_REDIRECTION)</span><br><span class="line">        <span class="keyword">return</span> myself;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Set error code optimistically for the base case. */</span></span><br><span class="line">    <span class="keyword">if</span> (error_code) *error_code = CLUSTER_REDIR_NONE;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Modules can turn off Redis Cluster redirection: this is useful</span></span><br><span class="line"><span class="comment">     * when writing a module that implements a completely different</span></span><br><span class="line"><span class="comment">     * distributed system. */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* We handle all the cases as if they were EXEC commands, so we have</span></span><br><span class="line"><span class="comment">     * a common code path for everything */</span></span><br><span class="line">    <span class="keyword">if</span> (cmd-&gt;proc == execCommand) &#123;</span><br><span class="line">        <span class="comment">/* If CLIENT_MULTI flag is not set EXEC is just going to return an</span></span><br><span class="line"><span class="comment">         * error. */</span></span><br><span class="line">        <span class="keyword">if</span> (!(c-&gt;flags &amp; CLIENT_MULTI)) <span class="keyword">return</span> myself;</span><br><span class="line">        ms = &amp;c-&gt;mstate;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">/* In order to have a single codepath create a fake Multi State</span></span><br><span class="line"><span class="comment">         * structure if the client is not in MULTI/EXEC state, this way</span></span><br><span class="line"><span class="comment">         * we have a single codepath below. */</span></span><br><span class="line">        ms = &amp;_ms;</span><br><span class="line">        _ms.commands = &amp;mc;</span><br><span class="line">        _ms.count = <span class="number">1</span>;</span><br><span class="line">        mc.argv = argv;</span><br><span class="line">        mc.argc = argc;</span><br><span class="line">        mc.cmd = cmd;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Check that all the keys are in the same hash slot, and obtain this</span></span><br><span class="line"><span class="comment">     * slot and the node associated. */</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; ms-&gt;count; i++) &#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">redisCommand</span> *<span class="title">mcmd</span>;</span></span><br><span class="line">        robj **margv;</span><br><span class="line">        <span class="type">int</span> margc, *keyindex, numkeys, j;</span><br><span class="line"></span><br><span class="line">        mcmd = ms-&gt;commands[i].cmd;</span><br><span class="line">        margc = ms-&gt;commands[i].argc;</span><br><span class="line">        margv = ms-&gt;commands[i].argv;</span><br><span class="line"></span><br><span class="line">        keyindex = getKeysFromCommand(mcmd,margv,margc,&amp;numkeys);</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; numkeys; j++) &#123;</span><br><span class="line">            robj *thiskey = margv[keyindex[j]];</span><br><span class="line">            <span class="type">int</span> thisslot = keyHashSlot((<span class="type">char</span>*)thiskey-&gt;ptr,</span><br><span class="line">                                       sdslen(thiskey-&gt;ptr));</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (firstkey == <span class="literal">NULL</span>) &#123;</span><br><span class="line">                <span class="comment">/* This is the first key we see. Check what is the slot</span></span><br><span class="line"><span class="comment">                 * and node. */</span></span><br><span class="line">                firstkey = thiskey;</span><br><span class="line">                slot = thisslot;</span><br><span class="line">                n = server.cluster-&gt;slots[slot];</span><br><span class="line"></span><br><span class="line">                <span class="comment">/* Error: If a slot is not served, we are in &quot;cluster down&quot;</span></span><br><span class="line"><span class="comment">                 * state. However the state is yet to be updated, so this was</span></span><br><span class="line"><span class="comment">                 * not trapped earlier in processCommand(). Report the same</span></span><br><span class="line"><span class="comment">                 * error to the client. */</span></span><br><span class="line">                <span class="keyword">if</span> (n == <span class="literal">NULL</span>) &#123;</span><br><span class="line">                    getKeysFreeResult(keyindex);</span><br><span class="line">                    <span class="keyword">if</span> (error_code)</span><br><span class="line">                        *error_code = CLUSTER_REDIR_DOWN_UNBOUND;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">/* If we are migrating or importing this slot, we need to check</span></span><br><span class="line"><span class="comment">                 * if we have all the keys in the request (the only way we</span></span><br><span class="line"><span class="comment">                 * can safely serve the request, otherwise we return a TRYAGAIN</span></span><br><span class="line"><span class="comment">                 * error). To do so we set the importing/migrating state and</span></span><br><span class="line"><span class="comment">                 * increment a counter for every missing key. */</span></span><br><span class="line">                <span class="keyword">if</span> (n == myself &amp;&amp;</span><br><span class="line">                    server.cluster-&gt;migrating_slots_to[slot] != <span class="literal">NULL</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    migrating_slot = <span class="number">1</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (server.cluster-&gt;importing_slots_from[slot] != <span class="literal">NULL</span>) &#123;</span><br><span class="line">                    importing_slot = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">/* If it is not the first key, make sure it is exactly</span></span><br><span class="line"><span class="comment">                 * the same key as the first we saw. */</span></span><br><span class="line">                <span class="keyword">if</span> (!equalStringObjects(firstkey,thiskey)) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (slot != thisslot) &#123;</span><br><span class="line">                        <span class="comment">/* Error: multiple keys from different slots. */</span></span><br><span class="line">                        getKeysFreeResult(keyindex);</span><br><span class="line">                        <span class="keyword">if</span> (error_code)</span><br><span class="line">                            *error_code = CLUSTER_REDIR_CROSS_SLOT;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="comment">/* Flag this request as one with multiple different</span></span><br><span class="line"><span class="comment">                         * keys. */</span></span><br><span class="line">                        multiple_keys = <span class="number">1</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">/* Migarting / Improrting slot? Count keys we don&#x27;t have. */</span></span><br><span class="line">            <span class="keyword">if</span> ((migrating_slot || importing_slot) &amp;&amp;</span><br><span class="line">                lookupKeyRead(&amp;server.db[<span class="number">0</span>],thiskey) == <span class="literal">NULL</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                missing_keys++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        getKeysFreeResult(keyindex);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* No key at all in command? then we can serve the request</span></span><br><span class="line"><span class="comment">     * without redirections or errors in all the cases. */</span></span><br><span class="line">    <span class="keyword">if</span> (n == <span class="literal">NULL</span>) <span class="keyword">return</span> myself;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Cluster is globally down but we got keys? We can&#x27;t serve the request. */</span></span><br><span class="line">    <span class="keyword">if</span> (server.cluster-&gt;state != CLUSTER_OK) &#123;</span><br><span class="line">        <span class="keyword">if</span> (error_code) *error_code = CLUSTER_REDIR_DOWN_STATE;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Return the hashslot by reference. */</span></span><br><span class="line">    <span class="keyword">if</span> (hashslot) *hashslot = slot;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* MIGRATE always works in the context of the local node if the slot</span></span><br><span class="line"><span class="comment">     * is open (migrating or importing state). We need to be able to freely</span></span><br><span class="line"><span class="comment">     * move keys among instances in this case. */</span></span><br><span class="line">    <span class="keyword">if</span> ((migrating_slot || importing_slot) &amp;&amp; cmd-&gt;proc == migrateCommand)</span><br><span class="line">        <span class="keyword">return</span> myself;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* If we don&#x27;t have all the keys and we are migrating the slot, send</span></span><br><span class="line"><span class="comment">     * an ASK redirection. */</span></span><br><span class="line">    <span class="keyword">if</span> (migrating_slot &amp;&amp; missing_keys) &#123;</span><br><span class="line">        <span class="keyword">if</span> (error_code) *error_code = CLUSTER_REDIR_ASK;</span><br><span class="line">        <span class="keyword">return</span> server.cluster-&gt;migrating_slots_to[slot];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* If we are receiving the slot, and the client correctly flagged the</span></span><br><span class="line"><span class="comment">     * request as &quot;ASKING&quot;, we can serve the request. However if the request</span></span><br><span class="line"><span class="comment">     * involves multiple keys and we don&#x27;t have them all, the only option is</span></span><br><span class="line"><span class="comment">     * to send a TRYAGAIN error. */</span></span><br><span class="line">    <span class="keyword">if</span> (importing_slot &amp;&amp;</span><br><span class="line">        (c-&gt;flags &amp; CLIENT_ASKING || cmd-&gt;flags &amp; CMD_ASKING))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (multiple_keys &amp;&amp; missing_keys) &#123;</span><br><span class="line">            <span class="keyword">if</span> (error_code) *error_code = CLUSTER_REDIR_UNSTABLE;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> myself;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Handle the read-only client case reading from a slave: if this</span></span><br><span class="line"><span class="comment">     * node is a slave and the request is about an hash slot our master</span></span><br><span class="line"><span class="comment">     * is serving, we can reply without redirection. */</span></span><br><span class="line">    <span class="keyword">if</span> (c-&gt;flags &amp; CLIENT_READONLY &amp;&amp;</span><br><span class="line">        (cmd-&gt;flags &amp; CMD_READONLY || cmd-&gt;proc == evalCommand ||</span><br><span class="line">         cmd-&gt;proc == evalShaCommand) &amp;&amp;</span><br><span class="line">        nodeIsSlave(myself) &amp;&amp;</span><br><span class="line">        myself-&gt;slaveof == n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> myself;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Base case: just return the right node. However if this node is not</span></span><br><span class="line"><span class="comment">     * myself, set error_code to MOVED since we need to issue a rediretion. */</span></span><br><span class="line">    <span class="keyword">if</span> (n != myself &amp;&amp; error_code) *error_code = CLUSTER_REDIR_MOVED;</span><br><span class="line">    <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</details>
+
+
+<p>代码展示了 getNodeByQuery 函数基本执行过程</p>
+<img src="/www6vHomeHexo/2022/03/28/redisError/moved.jpg" class>
+
+
+<h2><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h2><p>Redis Cluster 会因为负载均衡或节点故障等原因而执行数据迁移，而</p>
+<p>这就会导致客户端访问的 key 并不在接收到命令的集群节点上。因此，集群节点在命令执</p>
+<p>行函数 processCommand 中，针对集群模式，就增加了额外的处理逻辑。这主要是包括</p>
+<p>调用 <strong>getNodeByQuery 函数</strong>查询访问的 key 实际所属的节点，以及根据查询结果调用</p>
+<p><strong>clusterRedirectClient 函数</strong>执行请求重定向。</p>
+<p>事实上，对于分布式集群来说，Redis Cluster 设计实现的请求重定向机制是一个不错的参</p>
+<p>考示例。其中，MOVED 和 ASK 两种重定向情况，就充分考虑了数据正在迁移的场景，这</p>
+<p>种设计值得我们学习。而且，getNodeByQuery 函数在查询 key 所属的 slot 和节点时，</p>
+<p>也充分考虑了 Redis 的事务操作，在对命令访问 key 进行查询时，巧妙地使用了<strong>同一个数</strong></p>
+<p><strong>据结构 multiState</strong>，来封装事务涉及的多条命令和常规的单条命令，增加了代码的复用程</p>
+<p>度，这一点也非常值得学习。</p>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>27 | 从MOVED、ASK看集群节点如何处理命令？  蒋德钧</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2022/03/28/redisError/" title="Redis Error-MOVED和ASK指令">https://www6v.github.io/www6vHomeHexo/2022/03/28/redisError/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/Redis/" rel="tag"># Redis</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2022/03/25/redisSlowResponse/" rel="prev" title="Redis 慢查询排查">
+      <i class="fa fa-chevron-left"></i> Redis 慢查询排查
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2022/03/28/redisReliability-1/" rel="next" title="Redis雪崩、击穿、穿透">
+      Redis雪崩、击穿、穿透 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">385</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">239</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">126</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
