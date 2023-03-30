@@ -3816,19 +3816,19 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 
 
 <h3><span id="云服务器计费方式1">云服务器计费方式[1]</span><a href="#云服务器计费方式1" class="header-anchor">#</a></h3><ul>
-<li>包年&#x2F;包月 按时长计费（EC2）<br>  包年&#x2F;包月的计费模式也称为包周期计费模式，是一种预付费方式</li>
-<li>按需付费<br>  按需付费是后付费方式，可以随时开通&#x2F;删除弹性云服务器，</li>
+<li>包年&#x2F;包月 按时长计费（EC2）  [fixed]<br>  包年&#x2F;包月的计费模式也称为包周期计费模式，是一种预付费方式</li>
+<li>按量付费   [on-demand]<br>  按量付费是后付费方式，可以随时开通&#x2F;删除弹性云服务器，</li>
 </ul>
 <h3><span id="公网计费方式2">公网计费方式[2]</span><a href="#公网计费方式2" class="header-anchor">#</a></h3><ul>
-<li>按流量计费<br>一般情况， 只收取出云流量费用</li>
-<li>按固定带宽收费 <ul>
+<li>按固定带宽收费   [fixed]<ul>
 <li>单EIP实例(独占带宽)</li>
 <li>多EIP实例(共享带宽)</li>
 </ul>
 </li>
-<li>按95线去峰带宽计费</li>
+<li>按流量计费  [on-demand]<br>一般情况， 只收取出云流量费用</li>
+<li>按95线去峰带宽计费   [on-demand]</li>
 </ul>
-<h3><span id="云存储计费方式不确定">云存储计费方式[不确定]</span><a href="#云存储计费方式不确定" class="header-anchor">#</a></h3><ul>
+<h3><span id="云存储计费方式-on-demand">云存储计费方式   [on-demand]</span><a href="#云存储计费方式-on-demand" class="header-anchor">#</a></h3><ul>
 <li>按存储大小计费<br>  S3</li>
 <li>按请求数计费</li>
 </ul>
@@ -3840,6 +3840,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <li><a href="https://help.aliyun.com/document_detail/25370.html?source=5176.11533457&userCode=xbifxhv7">计费方式概述</a></li>
 <li>&lt;&lt;云网络&gt;&gt; 3.2</li>
 <li><a href="https://www.bilibili.com/video/BV1dP411u7js/">精讲云计算系列-成本优化章之综述</a> V</li>
+<li><a href="/www6vHomeHexo/2022/03/30/aliCloudBill/" title="阿里云-计费方式">阿里云-计费方式</a> self</li>
 </ol>
 ]]></content>
       <categories>
@@ -3955,12 +3956,15 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <span id="more"></span>
 
 
-<p> <a href="../../../../2022/03/15/aliCloudNetwork/">阿里云-网络</a></p>
-<p> <a href="../../../../2022/01/15/aliyunCDN/">阿里云-CDN</a></p>
-<p> <a href="../../../../2021/06/27/cloudMigrate/">阿里云-云迁移Migrate</a></p>
-<p> <a href="../../../../2022/01/04/aliyunHybridCloud/">阿里云-混合云HybridCloud</a> </p>
-<p> <a href="../../../../2022/06/26/aliyunDisasterRecovery">阿里云-容灾恢复DisasterRecovery</a></p>
-<p> <a href="../../../../2022/03/24/aliyunBestPractice/">阿里云最佳实践-BestPractice</a></p>
+<ul>
+<li><a href="/www6vHomeHexo/2022/03/15/aliCloudNetwork/" title="阿里云-网络">阿里云-网络</a></li>
+<li><a href="/www6vHomeHexo/2022/01/15/aliyunCDN/" title="阿里云-CDN">阿里云-CDN</a></li>
+<li><a href="/www6vHomeHexo/2021/06/27/aliyunCloudMigrate/" title="阿里云-云迁移Migrate">阿里云-云迁移Migrate</a></li>
+<li><a href="/www6vHomeHexo/2022/01/04/aliyunHybridCloud/" title="阿里云-混合云HybridCloud">阿里云-混合云HybridCloud</a></li>
+<li><a href="/www6vHomeHexo/2022/06/26/aliyunDisasterRecovery/" title="阿里云-容灾恢复DisasterRecovery">阿里云-容灾恢复DisasterRecovery</a></li>
+<li><a href="/www6vHomeHexo/2022/03/24/aliyunBestPractice/" title="阿里云最佳实践-BestPractice">阿里云最佳实践-BestPractice</a></li>
+<li><a href="/www6vHomeHexo/2022/03/30/aliCloudBill/" title="阿里云-计费方式">阿里云-计费方式</a></li>
+</ul>
 ]]></content>
       <categories>
         <category>汇总</category>
@@ -5193,6 +5197,59 @@ BGP 协议传输的消息
       </categories>
       <tags>
         <tag>Kubernetes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>阿里云-计费方式</title>
+    <url>/www6vHomeHexo/2022/03/30/aliCloudBill/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+
+<h3><span id="ecs计费方式">ECS计费方式</span><a href="#ecs计费方式" class="header-anchor">#</a></h3><ul>
+<li>包年包月   [fixed]<br>7*24小时</li>
+<li>按量付费  [on-demand]<br>爆发业务</li>
+<li>抢占式<br>实例可被释放</li>
+</ul>
+<img src="/www6vHomeHexo/2022/03/30/aliCloudBill/ecs-bill.JPG" class>
+
+
+
+<h3><span id="oss计费方式">OSS计费方式</span><a href="#oss计费方式" class="header-anchor">#</a></h3><ul>
+<li>存  ， 取， 处理， 网络流量   [on-demand]</li>
+</ul>
+<img src="/www6vHomeHexo/2022/03/30/aliCloudBill/oss-bill.JPG" class>
+
+
+
+<h3><span id="cdn-计费方式">CDN 计费方式</span><a href="#cdn-计费方式" class="header-anchor">#</a></h3><ul>
+<li><p>基础</p>
+<ul>
+<li>峰值带宽   [on-demand]<br>带宽利用率高</li>
+<li>流量   [on-demand]<br>带宽利用率低</li>
+<li>流量包    [fixed]</li>
+</ul>
+</li>
+<li><p>增值</p>
+<ul>
+<li>全站加速 [动态加速]<br>请求数计费</li>
+</ul>
+</li>
+<li><p>CDN的计费方式 本质上是 网络的计费方式</p>
+</li>
+</ul>
+<img src="/www6vHomeHexo/2022/03/30/aliCloudBill/cdn-bill.JPG" class>
+
+
+
+]]></content>
+      <categories>
+        <category>云计算</category>
+        <category>阿里云</category>
+      </categories>
+      <tags>
+        <tag>阿里云</tag>
       </tags>
   </entry>
   <entry>
