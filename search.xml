@@ -5200,6 +5200,54 @@ BGP 协议传输的消息
       </tags>
   </entry>
   <entry>
+    <title>Flink-Window</title>
+    <url>/www6vHomeHexo/2022/03/31/flinkWindow/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<img src="/www6vHomeHexo/2022/03/31/flinkWindow/window.JPG" class>
+
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>《Flink核心技术与实战》  第三章</p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>计算</category>
+        <category>流式计算</category>
+        <category>flink</category>
+      </categories>
+      <tags>
+        <tag>flink</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Flink-部署方式</title>
+    <url>/www6vHomeHexo/2022/03/31/flinkDeploy/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="flink-集群部署模式">Flink 集群部署模式</span><a href="#flink-集群部署模式" class="header-anchor">#</a></h2><ul>
+<li>Session</li>
+<li>Per-Job</li>
+<li>Application</li>
+</ul>
+<h2><span id="集群资源管理器支持">集群资源管理器支持</span><a href="#集群资源管理器支持" class="header-anchor">#</a></h2><ul>
+<li>Standalone</li>
+<li>Yarn</li>
+<li>Kubernetes<br>Flink on Kubernetes<br><a href="https://github.com/www6v/dev-ops/tree/master/yaml-prod/flink">Flink on Kubernetes</a>  Flink官方的方案</li>
+</ul>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>《Flink核心技术与实战》 极客时间  第二章</p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>计算</category>
+        <category>流式计算</category>
+        <category>flink</category>
+      </categories>
+      <tags>
+        <tag>flink</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>阿里云-计费方式</title>
     <url>/www6vHomeHexo/2022/03/30/aliCloudBill/</url>
     <content><![CDATA[<p></p>
@@ -5292,13 +5340,27 @@ BGP 协议传输的消息
 <span id="more"></span>
 
 
-<h2><span id="watermark">Watermark</span><a href="#watermark" class="header-anchor">#</a></h2><h5><span id="watermark触发时机">Watermark触发时机</span><a href="#watermark触发时机" class="header-anchor">#</a></h5><ol>
+
+<h1><span id="watermark-3">Watermark [3]</span><a href="#watermark-3" class="header-anchor">#</a></h1><h3><span id="定义-作用">定义 作用</span><a href="#定义-作用" class="header-anchor">#</a></h3><p>• Watermark 用于标记 Event-Time 的前进过程；<br>• Watermark 跟随 DataStream Event-Time 变动，并自身携带 TimeStamp；<br>• Watermark 用于表明所有较早的事件已经（可能）到达；<br>• Watermark 本身也属于特殊的事件；</p>
+<h3><span id="目的">目的</span><a href="#目的" class="header-anchor">#</a></h3><p>用于处理乱序和延迟事件.   </p>
+<h3><span id="类型">类型</span><a href="#类型" class="header-anchor">#</a></h3><ul>
+<li><p>完美的Watermark<br>在顺序事件中没有太大的意义</p>
+<img src="/www6vHomeHexo/2022/03/29/flinkWatermarkWindow/perfectWaterwark.JPG" class>
+</li>
+<li><p>启发式的Watermark<br>EG    W(11) &#x3D;  15 - maxOutOfOrderness(4)<br>  W(7) &#x3D; 11 - maxOutOfOrderness(4)    </p>
+<img src="/www6vHomeHexo/2022/03/29/flinkWatermarkWindow/heuristicWatermark.JPG" class>
+</li>
+<li><p>迟到事件<br>迟到事件被丢弃  不计算在窗口中</p>
+<img src="/www6vHomeHexo/2022/03/29/flinkWatermarkWindow/lateEvent.JPG" class></li>
+</ul>
+<h3><span id="watermark触发时机-2">Watermark触发时机 [2]</span><a href="#watermark触发时机-2" class="header-anchor">#</a></h3><ol>
 <li>Watermark时间 &gt; window_end_time<br>如果当前的watermark已经大于或等于窗口的最大时间戳（即窗口的endTime），那么就会触发窗口计算，并输出结果。</li>
 <li>在[window_start_time, window_end_time)区间中有数据存在(左闭右开)</li>
 </ol>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li>muke体系课 - 大数据工程师</li>
-<li><a href="https://www.jianshu.com/p/2a26a26d6599">Flink Window触发机制</a></li>
+<li><a href="https://www.jianshu.com/p/2a26a26d6599">Flink Window触发机制</a> *</li>
+<li>《Flink核心技术与实战》  极客时间  第三章 ***</li>
 </ol>
 ]]></content>
       <categories>
@@ -16618,13 +16680,30 @@ nq： 不排队调度
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+<li><a href="#%E7%BB%84%E4%BB%B6">组件</a></li>
+<li><a href="#runtime-6">Runtime [6]</a></li>
+<li><a href="#%E6%A6%82%E5%BF%B5">概念</a></li>
+<li><a href="#flink-table-store">Flink Table Store</a></li>
+<li><a href="#flink-cdc">Flink CDC</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
 <h2><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2019/07/29/flink/flink.jpg" class title="flink"> 
 
 
 <h2><span id="组件">组件</span><a href="#组件" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2019/07/29/flink/flink-arch.png" class title="flink架构">
 
 
-<h2><span id="runtime">Runtime</span><a href="#runtime" class="header-anchor">#</a></h2><ul>
+<h2><span id="runtime-6">Runtime [6]</span><a href="#runtime-6" class="header-anchor">#</a></h2><ul>
 <li><p>JobMaster AM</p>
 <ul>
 <li>JobManager </li>
@@ -16656,14 +16735,13 @@ nq： 不排队调度
 <li>任务(Tasks)和任务槽(Task Slots)</li>
 </ol>
 <h2><span id="flink-table-store">Flink Table Store</span><a href="#flink-table-store" class="header-anchor">#</a></h2><p><a href="https://zhuanlan.zhihu.com/p/575040340">Flink Table Store：流批一体存储</a></p>
-<h2><span id="flink-cdc">Flink CDC</span><a href="#flink-cdc" class="header-anchor">#</a></h2><h2><span id="flink-on-kubernetes">Flink on Kubernetes</span><a href="#flink-on-kubernetes" class="header-anchor">#</a></h2><p><a href="https://github.com/www6v/dev-ops/tree/master/yaml-prod/flink">Flink on Kubernetes</a>  Flink官方的方案</p>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://www.cnblogs.com/code2one/p/10123112.html">Flink架构及其工作原理</a></li>
+<h2><span id="flink-cdc">Flink CDC</span><a href="#flink-cdc" class="header-anchor">#</a></h2><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li><a href="https://www.cnblogs.com/code2one/p/10123112.html">Flink架构及其工作原理</a>  ***</li>
 <li>&lt;&lt;Flink原理、实战与性能优化&gt;&gt;  张利兵</li>
 <li><a href="http://ju.outofmemory.cn/entry/371335">Flink使用Broadcast State实现流处理配置实时更新</a></li>
 <li><a href="https://www.iteblog.com/archives/2417.html">Apache Flink状态管理和容错机制介绍</a></li>
 <li>尚硅谷 flink(Java) - bilibili </li>
-<li><a href="https://www.infoq.cn/article/RWTM9o0SHHV3Xr8o8giT">Apache Flink 进阶（一）：Runtime 核心机制剖析</a> 阿里-高赟（云骞）</li>
+<li><a href="https://www.infoq.cn/article/RWTM9o0SHHV3Xr8o8giT">Apache Flink 进阶（一）：Runtime 核心机制剖析</a> 阿里-高赟（云骞） ***</li>
 <li><a href="https://www.infoq.cn/article/UXwLxU0D85E9eTU66E2A">数据实时化技术创新进展 | 一文览尽 Flink Forward Asia 2022 重磅干货内容</a>  *** 未</li>
 </ol>
 ]]></content>
