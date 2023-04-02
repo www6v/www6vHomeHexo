@@ -489,6 +489,7 @@
 
 </li>
 <li><a href="/www6vHomeHexo/2022/06/12/paperlsmTreeSurvey/" title="Paper-LSM Tree Survey">Paper-LSM Tree Survey</a></li>
+<li><a href="/www6vHomeHexo/2023/04/02/hbaselsmTree/" title="HBase - LSM-Tree">HBase - LSM-Tree</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -876,6 +877,66 @@
       </categories>
       <tags>
         <tag>汇总</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HBase - LSM-Tree</title>
+    <url>/www6vHomeHexo/2023/04/02/hbaselsmTree/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h3><span id="column-family和lsm-tree">column family和LSM-tree</span><a href="#column-family和lsm-tree" class="header-anchor">#</a></h3><p><strong>column family本质上是一颗LSM-tree</strong>。</p>
+<img src="/www6vHomeHexo/2023/04/02/hbaselsmTree/LSM-tree.JPG" class title="hbase中的LSM-tree实现">
+
+<ul>
+<li>LSM-Tree的核心思想就是将写入推迟(Defer)并转换为批量(Batch)写，首先将大量写入缓存在内存，当积攒到一定程度后，将他们批量写入文件中，这要一次I&#x2F;O可以进行多条数据的写入，充分利用每一次I&#x2F;O。</li>
+<li><strong>LSM-Tree是对写操作友好的索引结构； 将写入操作全部转化为磁盘的顺序写入。一次随机IO写入转换成一次顺序IO写入（HLog顺序写）和一次内存写入（MemStore写入）。</strong></li>
+<li><strong>为了提高读取效率， LSM-tree设计了异步的Compaction</strong>， 小文件合并成大文件（<strong>归并排序</strong>）。</li>
+</ul>
+<h3><span id="hbase的存储lsm-tree">HBase的存储[lsm-tree]</span><a href="#hbase的存储lsm-tree" class="header-anchor">#</a></h3><ul>
+<li>MemStore<br>由两个ConcurrentSkipListMap实现（双缓冲）;<br>ConcurrentSkipListMap A异步flush罗盘成HFile;<br>**HDFS只允许顺序读写，MemStore在落盘生成HFile之前完成kv的排序；  **</li>
+<li>HFile<br><strong>HFile Data Block（文件读取的最小单元）内的kv是按key排序的索引树，对读友好</strong>；<br>HFile Index Block的索引结构分为两种: V1 单层索引， V2 多级索引（只加载部分索引，降低内存使用）<br>HDFS的Block默认是64M，128M；HBase的Block默认是64K；<img src="/www6vHomeHexo/2023/04/02/hbaselsmTree/HFile.JPG" class title="HFile物理结构"></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">Block Type</th>
+<th align="center">基本介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Data Block</td>
+<td align="center">用户Key-Value</td>
+</tr>
+<tr>
+<td align="center">Meta Block</td>
+<td align="center">Bloom过滤器相关元数据</td>
+</tr>
+<tr>
+<td align="center">Root Index</td>
+<td align="center">HFile索引树根索引</td>
+</tr>
+<tr>
+<td align="center">Intermediate Level Index</td>
+<td align="center">HFile索引树中间层级索引</td>
+</tr>
+<tr>
+<td align="center">Leaf Level Index</td>
+<td align="center">HFile索引树叶子索引</td>
+</tr>
+</tbody></table>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://kernelmaker.github.io/lsm-tree">【Paper笔记】The Log structured Merge-Tree（LSM-Tree）</a></li>
+<li>《Hbase原理和实践》 胡争  范欣欣   第1,2,5,7，8章</li>
+</ol>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>存储</category>
+        <category>HBase</category>
+      </categories>
+      <tags>
+        <tag>hbase</tag>
       </tags>
   </entry>
   <entry>
@@ -11700,84 +11761,47 @@ func new(Type) *Type
 <!-- toc -->
 
 <ul>
-<li><a href="#%E4%B8%80-%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B">一. 数据模型</a><ul>
-<li><a href="#1-%E9%80%BB%E8%BE%91%E8%A7%86%E5%9B%BE">1. 逻辑视图</a></li>
-<li><a href="#2-%E7%89%A9%E7%90%86%E8%A7%86%E5%9B%BE">2. 物理视图</a></li>
-<li><a href="#3-column-family%E5%92%8Clsm-tree">3. column family和LSM-tree</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B">数据模型</a><ul>
+<li><a href="#%E9%80%BB%E8%BE%91%E8%A7%86%E5%9B%BE">逻辑视图</a></li>
+<li><a href="#%E7%89%A9%E7%90%86%E8%A7%86%E5%9B%BE">物理视图</a></li>
 </ul>
 </li>
-<li><a href="#%E4%BA%8C-%E6%9E%B6%E6%9E%84">二. 架构</a><ul>
+<li><a href="#%E6%9E%B6%E6%9E%84">架构</a><ul>
 <li><a href="#regionserver">RegionServer</a></li>
 </ul>
 </li>
-<li><a href="#%E5%9B%9B-%E8%AF%BB%E5%86%99%E6%B5%81%E7%A8%8B%E5%92%8C%E8%AF%BB%E4%BC%98%E5%8C%96">四. 读写流程和读优化</a></li>
-<li><a href="#%E4%BA%94-region%E5%88%86%E8%A3%82split">五. Region分裂（split）</a></li>
-<li><a href="#%E5%85%AD-%E4%BC%98%E5%8C%96%E5%92%8C%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">六. 优化和最佳实践</a><ul>
+<li><a href="#%E8%AF%BB%E5%86%99%E6%B5%81%E7%A8%8B%E5%92%8C%E8%AF%BB%E4%BC%98%E5%8C%96">读写流程和读优化</a></li>
+<li><a href="#region%E5%88%86%E8%A3%82split">Region分裂（split）</a></li>
+<li><a href="#%E4%BC%98%E5%8C%96%E5%92%8C%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">优化和最佳实践</a><ul>
 <li><a href="#%E9%A2%84%E5%88%86%E5%8C%BA"><strong>预分区</strong></a></li>
 <li><a href="#row_key%E8%AE%BE%E8%AE%A1-%E9%98%B2%E6%AD%A2%E7%83%AD%E7%82%B9%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95">Row_key设计 防止热点的三种方法</a></li>
 </ul>
 </li>
-<li><a href="#%E4%BA%94-%E6%80%A7%E8%83%BD%E5%92%8C%E7%89%88%E6%9C%AC">五. 性能和版本</a><ul>
+<li><a href="#%E6%80%A7%E8%83%BD%E5%92%8C%E7%89%88%E6%9C%AC">性能和版本</a><ul>
 <li><a href="#%E6%80%A7%E8%83%BD">性能</a></li>
 <li><a href="#%E7%89%88%E6%9C%AC">版本</a></li>
 <li><a href="#%E5%B7%A5%E4%BD%9C%E4%B8%AD%E6%8E%A5%E8%A7%A6%E7%9A%84">工作中接触的</a></li>
 </ul>
 </li>
-<li><a href="#%E5%8F%82%E8%80%83">参考：</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
 
 </div>
 
-<h2><span id="一-数据模型">一. 数据模型</span><a href="#一-数据模型" class="header-anchor">#</a></h2><h3><span id="1-逻辑视图">1. 逻辑视图</span><a href="#1-逻辑视图" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2020/09/04/hbase/model-logic.jpg" class title="hbase逻辑视图">
+<h1><span id="数据模型">数据模型</span><a href="#数据模型" class="header-anchor">#</a></h1><h3><span id="逻辑视图">逻辑视图</span><a href="#逻辑视图" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2020/09/04/hbase/model-logic.jpg" class title="hbase逻辑视图">
 <p><strong>row</strong>: <code>rowkey + (column + columnValue)*n</code><br><strong>column</strong>: <code>column family:qualifier</code>   column family固定, qualifier可增加<br><strong>cell</strong>： (row, column, timestamp, type, value) </p>
-<h3><span id="2-物理视图">2. 物理视图</span><a href="#2-物理视图" class="header-anchor">#</a></h3><p>HBase中的数据是按照列簇存储的。<br>KV存储结构 K( (row, column, timestamp, type) ) -&gt; V( value )<br><code><br>&#123;"com.cnn.www","anchor","cnnsi.com","put","t9"&#125; -> "CNN"<br>&#123;"com.cnn.www","anchor","my.look.ca","put","t8"&#125; -> "CNN.com"<br>&#123;"com.cnn.www","contents","html","put","t7"&#125; -> "..."<br>&#123;"com.cnn.www","contents","html","put","t6"&#125; -> "..."<br>&#123;"com.cnn.www","contents","html","put","t5"&#125; -> "..."<br>&#123;"com.example.www","people","author","put","t5"&#125; -> "John Doe"<br></code></p>
-<h3><span id="3-column-family和lsm-tree">3. column family和LSM-tree</span><a href="#3-column-family和lsm-tree" class="header-anchor">#</a></h3><p><strong>column family本质上是一颗LSM-tree</strong>。</p>
-<img src="/www6vHomeHexo/2020/09/04/hbase/LSM-tree.JPG" class title="hbase中的LSM-tree实现">
-
-<ul>
-<li>LSM-Tree的核心思想就是将写入推迟(Defer)并转换为批量(Batch)写，首先将大量写入缓存在内存，当积攒到一定程度后，将他们批量写入文件中，这要一次I&#x2F;O可以进行多条数据的写入，充分利用每一次I&#x2F;O。</li>
-<li><strong>LSM-Tree是对写操作友好的索引结构； 将写入操作全部转化为磁盘的顺序写入。一次随机IO写入转换成一次顺序IO写入（HLog顺序写）和一次内存写入（MemStore写入）。</strong></li>
-<li><strong>为了提高读取效率， LSM-tree设计了异步的Compaction</strong>， 小文件合并成大文件（<strong>归并排序</strong>）。</li>
-</ul>
-<h2><span id="二-架构">二. 架构</span><a href="#二-架构" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2020/09/04/hbase/arch.JPG" class title="hbase体系结构">
+<h3><span id="物理视图">物理视图</span><a href="#物理视图" class="header-anchor">#</a></h3><p>HBase中的数据是按照列簇存储的。<br>KV存储结构 K( (row, column, timestamp, type) ) -&gt; V( value )<br><code><br>&#123;"com.cnn.www","anchor","cnnsi.com","put","t9"&#125; -> "CNN"<br>&#123;"com.cnn.www","anchor","my.look.ca","put","t8"&#125; -> "CNN.com"<br>&#123;"com.cnn.www","contents","html","put","t7"&#125; -> "..."<br>&#123;"com.cnn.www","contents","html","put","t6"&#125; -> "..."<br>&#123;"com.cnn.www","contents","html","put","t5"&#125; -> "..."<br>&#123;"com.example.www","people","author","put","t5"&#125; -> "John Doe"<br></code></p>
+<h1><span id="架构">架构</span><a href="#架构" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2020/09/04/hbase/arch.JPG" class title="hbase体系结构">
 
 <h3><span id="regionserver">RegionServer</span><a href="#regionserver" class="header-anchor">#</a></h3><ul>
 <li>HLog （WAL）<br>一个RegionServer有一个或者多个HLog；<br><strong>每个HLog是多个Region共享的</strong>；<br>生命周期： 构建，滚动， 失效（MemStore落盘后）， 删除；</li>
 <li>BlockCache<br>LRUBlockCache(时间局部性)；<br>BucketCache(空间局部性)；</li>
-<li>Region<br><strong>分片， 水平切分（split）， 负载均衡的基本单位</strong><br>Region包含<code>n个Store</code>   <strong>Store&#x3D;&#x3D;column family</strong><br>Store包含<code>1个MemStore</code>和<code>n个HFile</code><br>MemStore： 写缓存<br>HFile的Compact操作， 小文件合并成大文件</li>
-<li>MemStore<br>由两个ConcurrentSkipListMap实现（双缓冲）;<br>ConcurrentSkipListMap A异步flush罗盘成HFile;<br>**HDFS只允许顺序读写，MemStore在落盘生成HFile之前完成kv的排序；  **</li>
-<li>HFile<br><strong>HFile Data Block（文件读取的最小单元）内的kv是按key排序的索引树，对读友好</strong>；<br>HFile Index Block的索引结构分为两种: V1 单层索引， V2 多级索引（只加载部分索引，降低内存使用）<br>HDFS的Block默认是64M，128M；HBase的Block默认是64K；<img src="/www6vHomeHexo/2020/09/04/hbase/HFile.JPG" class title="HFile物理结构"></li>
+<li>Region<br><strong>分片， 水平切分（split）， 负载均衡的基本单位</strong><br>Region包含<code>n个Store</code>   <strong>Store&#x3D;&#x3D;column family</strong><br>Store包含<code>1个MemStore</code>和<code>n个HFile</code><br>MemStore： 写缓存<br>HFile的Compact操作， 小文件合并成大文件  </li>
+<li>MemStore [1]</li>
+<li>HFile [1]</li>
 </ul>
-<table>
-<thead>
-<tr>
-<th align="center">Block Type</th>
-<th align="center">基本介绍</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Data Block</td>
-<td align="center">用户Key-Value</td>
-</tr>
-<tr>
-<td align="center">Meta Block</td>
-<td align="center">Bloom过滤器相关元数据</td>
-</tr>
-<tr>
-<td align="center">Root Index</td>
-<td align="center">HFile索引树根索引</td>
-</tr>
-<tr>
-<td align="center">Intermediate Level Index</td>
-<td align="center">HFile索引树中间层级索引</td>
-</tr>
-<tr>
-<td align="center">Leaf Level Index</td>
-<td align="center">HFile索引树叶子索引</td>
-</tr>
-</tbody></table>
-<h2><span id="四-读写流程和读优化">四. 读写流程和读优化</span><a href="#四-读写流程和读优化" class="header-anchor">#</a></h2><ul>
+<h1><span id="读写流程和读优化">读写流程和读优化</span><a href="#读写流程和读优化" class="header-anchor">#</a></h1><ul>
 <li><p>读写流程</p>
 <ul>
 <li>写流程<br>客户端写入MemStore和HFile就表示写入成功。<br>Flush的时机： 三个flush的参数</li>
@@ -11794,19 +11818,19 @@ func new(Type) *Type
 <li><p>数据删除时机<br>flush和Major Compaction的时候会删除冗余的数据。<br>flush时只删除内存的冗余数据，不删除”Delete标记”,因为在Major Compaction删冗余数据的时候会用到这个”Delete标记”。</p>
 </li>
 </ul>
-<h2><span id="五-region分裂split">五. Region分裂（split）</span><a href="#五-region分裂split" class="header-anchor">#</a></h2><ul>
+<h1><span id="region分裂split">Region分裂（split）</span><a href="#region分裂split" class="header-anchor">#</a></h1><ul>
 <li>寻找分裂点</li>
 <li>Region迁移的状态存在meta表， Master内存， zookeeper的region-in-transition节点<br><strong>RIT状态</strong>： Region在三个地方不能保持一致</li>
 <li>整个分裂过程包装成了一个事务， 保证分裂事务的原子性。<br><strong>迁移的中间状态都只存储在内存中， 一旦在分裂过程中出现RegionServer宕机，有可能出现RIT状态， 需要HBCK工具分析并解决。</strong></li>
 <li><strong>Region分裂过程没有涉及数据的移动， 分裂后的子Region的文件没有任何用户数据。 [通过reference文件来查找数据，像游标offset]</strong><br><strong>真正数据迁移的迁移发生在子Region执行Major Compaction时。</strong></li>
 </ul>
-<h2><span id="六-优化和最佳实践">六. 优化和最佳实践</span><a href="#六-优化和最佳实践" class="header-anchor">#</a></h2><h3><span id="预分区"><strong>预分区</strong></span><a href="#预分区" class="header-anchor">#</a></h3><p>自动split有数据倾斜问题，所以要预分区。<br>建议: 生产中列簇不要太多, 列簇数据要有同步增长的趋势（不要一个列簇有很多数据， 其他列簇数据很少），<br>      防止Region分裂时产生多个小文件。</p>
+<h1><span id="优化和最佳实践">优化和最佳实践</span><a href="#优化和最佳实践" class="header-anchor">#</a></h1><h3><span id="预分区"><strong>预分区</strong></span><a href="#预分区" class="header-anchor">#</a></h3><p>自动split有数据倾斜问题，所以要预分区。<br>建议: 生产中列簇不要太多, 列簇数据要有同步增长的趋势（不要一个列簇有很多数据， 其他列簇数据很少），<br>      防止Region分裂时产生多个小文件。</p>
 <h3><span id="row_key设计-防止热点的三种方法">Row_key设计  防止热点的三种方法</span><a href="#row_key设计-防止热点的三种方法" class="header-anchor">#</a></h3><ol>
 <li>Salt</li>
 <li>Hash</li>
 <li>Reversing</li>
 </ol>
-<h2><span id="五-性能和版本">五. 性能和版本</span><a href="#五-性能和版本" class="header-anchor">#</a></h2><h3><span id="性能">性能</span><a href="#性能" class="header-anchor">#</a></h3><p>单表 千亿行， 百万列  容量TB甚至PB级别</p>
+<h1><span id="性能和版本">性能和版本</span><a href="#性能和版本" class="header-anchor">#</a></h1><h3><span id="性能">性能</span><a href="#性能" class="header-anchor">#</a></h3><p>单表 千亿行， 百万列  容量TB甚至PB级别</p>
 <h3><span id="版本">版本</span><a href="#版本" class="header-anchor">#</a></h3><p><strong>v0.98</strong>    目前生产线上使用最广泛的版本之一<br><strong>v1.4.10</strong>   HBase社区推荐使用的稳定版本<br><strong>v2.x</strong>    最受期待的一个版本</p>
 <h3><span id="工作中接触的">工作中接触的</span><a href="#工作中接触的" class="header-anchor">#</a></h3><ul>
 <li>MVCC</li>
@@ -11821,9 +11845,11 @@ func new(Type) *Type
 <li>bulkload</li>
 <li>CAS<br>HBase提供基于单 行 数据操作的原子性保证<br>HBase基于行锁来保证单行操作的原子性<br>checkAndPut&#x2F;checkAndDelete&#x2F;increment&#x2F;append</li>
 </ul>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://kernelmaker.github.io/lsm-tree">【Paper笔记】The Log structured Merge-Tree（LSM-Tree）</a></li>
-<li>《Hbase原理和实践》 胡争  范欣欣   第1,2,5,7，8章</li>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="/www6vHomeHexo/2023/04/02/hbaselsmTree/" title="HBase - LSM-Tree">HBase - LSM-Tree</a>
+</li>
+<li><p>《Hbase原理和实践》 胡争  范欣欣   第1,2,5,7，8章</p>
+</li>
 </ol>
 ]]></content>
       <categories>
