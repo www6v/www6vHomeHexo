@@ -11695,7 +11695,39 @@ func new(Type) *Type
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
+<!-- toc -->
+
+<ul>
+<li><a href="#%E4%B8%80-%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B">一. 数据模型</a><ul>
+<li><a href="#1-%E9%80%BB%E8%BE%91%E8%A7%86%E5%9B%BE">1. 逻辑视图</a></li>
+<li><a href="#2-%E7%89%A9%E7%90%86%E8%A7%86%E5%9B%BE">2. 物理视图</a></li>
+<li><a href="#3-column-family%E5%92%8Clsm-tree">3. column family和LSM-tree</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8C-%E6%9E%B6%E6%9E%84">二. 架构</a><ul>
+<li><a href="#regionserver">RegionServer</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9B%9B-%E8%AF%BB%E5%86%99%E6%B5%81%E7%A8%8B%E5%92%8C%E8%AF%BB%E4%BC%98%E5%8C%96">四. 读写流程和读优化</a></li>
+<li><a href="#%E4%BA%94-region%E5%88%86%E8%A3%82split">五. Region分裂（split）</a></li>
+<li><a href="#%E5%85%AD-%E4%BC%98%E5%8C%96%E5%92%8C%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">六. 优化和最佳实践</a><ul>
+<li><a href="#%E9%A2%84%E5%88%86%E5%8C%BA"><strong>预分区</strong></a></li>
+<li><a href="#row_key%E8%AE%BE%E8%AE%A1-%E9%98%B2%E6%AD%A2%E7%83%AD%E7%82%B9%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95">Row_key设计 防止热点的三种方法</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%94-%E6%80%A7%E8%83%BD%E5%92%8C%E7%89%88%E6%9C%AC">五. 性能和版本</a><ul>
+<li><a href="#%E6%80%A7%E8%83%BD">性能</a></li>
+<li><a href="#%E7%89%88%E6%9C%AC">版本</a></li>
+<li><a href="#%E5%B7%A5%E4%BD%9C%E4%B8%AD%E6%8E%A5%E8%A7%A6%E7%9A%84">工作中接触的</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考：</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
 
 <h2><span id="一-数据模型">一. 数据模型</span><a href="#一-数据模型" class="header-anchor">#</a></h2><h3><span id="1-逻辑视图">1. 逻辑视图</span><a href="#1-逻辑视图" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2020/09/04/hbase/model-logic.jpg" class title="hbase逻辑视图">
 <p><strong>row</strong>: <code>rowkey + (column + columnValue)*n</code><br><strong>column</strong>: <code>column family:qualifier</code>   column family固定, qualifier可增加<br><strong>cell</strong>： (row, column, timestamp, type, value) </p>
@@ -11745,12 +11777,23 @@ func new(Type) *Type
 <td align="center">HFile索引树叶子索引</td>
 </tr>
 </tbody></table>
-<h2><span id="四-读写流程和读优化">四. 读写流程和读优化</span><a href="#四-读写流程和读优化" class="header-anchor">#</a></h2><h3><span id="1-写流程">1. 写流程</span><a href="#1-写流程" class="header-anchor">#</a></h3><p>客户端写入MemStore和HFile就表示写入成功。<br>Flush的时机： 三个flush的参数</p>
-<h3><span id="2-读流程">2. 读流程</span><a href="#2-读流程" class="header-anchor">#</a></h3><p><strong>BlockCache没有数据的前提下， MemStore和StoreFile（HFile）都会读取数据。</strong></p>
-<h3><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h3><p>Master不参与读写流程，但是master宕机了，集群会处于不健康状态， Region分裂后改不了元数据。<br>客户端只要配置Zookeeper地址，Master的切换对客户端是透明的。<br>客户端缓存Meta数据， RegionServer的BlockCache缓存StoreFile（HFile）的数据。</p>
-<h3><span id="3-hfile-compaction-读优化">3. HFile Compaction  读优化</span><a href="#3-hfile-compaction-读优化" class="header-anchor">#</a></h3><p>3.1 类型<br> Minor Compaction: 小的相邻HFile合并成更大的HFiile。<br> Major Compaction: 一个store中所有的HFile合并成一个HFile。<strong>线上建议关闭自动触发，改为在低峰期手动或者自动触发</strong>。<br> <strong>Minor Compaction不会删除数据，Major Compaction会删除数据。</strong><br> <strong>Minor Compaction 合并后，旧的数据不会马上删除， 会对客户端不可见。</strong> </p>
-<p>3.2 Compaction作用<br> 减少文件数， <strong>稳定随机读延迟</strong>; 用短时间的IO消耗以及带宽消耗换取后序读操作的低延迟。（空间换时间）.<br> 清除无效数据，较少数据存储量。</p>
-<h3><span id="4-数据删除时机">4. 数据删除时机</span><a href="#4-数据删除时机" class="header-anchor">#</a></h3><p>flush和Major Compaction的时候会删除冗余的数据。<br>flush时只删除内存的冗余数据，不删除”Delete标记”,因为在Major Compaction删冗余数据的时候会用到这个”Delete标记”。</p>
+<h2><span id="四-读写流程和读优化">四. 读写流程和读优化</span><a href="#四-读写流程和读优化" class="header-anchor">#</a></h2><ul>
+<li><p>读写流程</p>
+<ul>
+<li>写流程<br>客户端写入MemStore和HFile就表示写入成功。<br>Flush的时机： 三个flush的参数</li>
+<li>读流程<br><strong>BlockCache没有数据的前提下， MemStore和StoreFile（HFile）都会读取数据。</strong></li>
+<li>总结<br>Master不参与读写流程，但是master宕机了，集群会处于不健康状态， Region分裂后改不了元数据。<br>客户端只要配置Zookeeper地址，Master的切换对客户端是透明的。<br>客户端缓存Meta数据， RegionServer的BlockCache缓存StoreFile（HFile）的数据。</li>
+</ul>
+</li>
+<li><p>HFile Compaction  读优化</p>
+<ul>
+<li>类型<br> Minor Compaction: 小的相邻HFile合并成更大的HFiile。<br> Major Compaction: 一个store中所有的HFile合并成一个HFile。<strong>线上建议关闭自动触发，改为在低峰期手动或者自动触发</strong>。<br> <strong>Minor Compaction不会删除数据，Major Compaction会删除数据。</strong><br> <strong>Minor Compaction 合并后，旧的数据不会马上删除， 会对客户端不可见。</strong> </li>
+<li>Compaction作用<br>减少文件数， <strong>稳定随机读延迟</strong>; 用短时间的IO消耗以及带宽消耗换取后序读操作的低延迟。（空间换时间）<br>清除无效数据，较少数据存储量。</li>
+</ul>
+</li>
+<li><p>数据删除时机<br>flush和Major Compaction的时候会删除冗余的数据。<br>flush时只删除内存的冗余数据，不删除”Delete标记”,因为在Major Compaction删冗余数据的时候会用到这个”Delete标记”。</p>
+</li>
+</ul>
 <h2><span id="五-region分裂split">五. Region分裂（split）</span><a href="#五-region分裂split" class="header-anchor">#</a></h2><ul>
 <li>寻找分裂点</li>
 <li>Region迁移的状态存在meta表， Master内存， zookeeper的region-in-transition节点<br><strong>RIT状态</strong>： Region在三个地方不能保持一致</li>
