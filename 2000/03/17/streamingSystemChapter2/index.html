@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0209.png">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0215.png">
 <meta property="article:published_time" content="2000-03-17T14:07:43.000Z">
-<meta property="article:modified_time" content="2023-04-04T02:38:59.373Z">
+<meta property="article:modified_time" content="2023-04-04T08:03:14.887Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Streaming System">
 <meta name="twitter:card" content="summary">
@@ -230,7 +230,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-04 10:38:59" itemprop="dateModified" datetime="2023-04-04T10:38:59+08:00">2023-04-04</time>
+                <time title="修改时间：2023-04-04 16:03:14" itemprop="dateModified" datetime="2023-04-04T16:03:14+08:00">2023-04-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -276,6 +276,7 @@
 </ul>
 </li>
 <li><a href="#%E6%96%B9%E6%B3%95%E7%B4%AF%E5%8A%A0"><em><strong>方法</strong></em>：累加</a></li>
+<li><a href="#%E6%91%98%E8%A6%81"><strong>摘要</strong></a></li>
 </ul>
 <!-- tocstop -->
 
@@ -572,6 +573,73 @@
 <img src="/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0215.png" class>
 <p><em>图2-14。累积模式的并排比较</em></p>
 <p>正如您可以想象的那样，按照呈现的顺序的模式（丢弃，累加，累加和撤回）在存储和计算成本方面都是越来越昂贵的。为此，累加模式的选择为沿着正确性、延迟和成本的轴进行权衡提供了另一个维度。</p>
+<h1><span id="摘要"><strong>摘要</strong></span><a href="#摘要" class="header-anchor">#</a></h1><p>通过本章的学习，您现在已经了解了鲁棒流处理的基础知识，已经准备好在世界上做出惊人的事情了。当然，还有八个更多的章节等待您的关注，所以希望您不会在此刻非常急切地前进。但无论如何，让我们回顾一下我们刚刚讨论的内容，以防止您在匆忙前进时忘记了它。首先，我们触及的主要概念：</p>
+<ul>
+<li><p>事件时间与处理时间</p>
+<p>重要的区别是事件发生的时间和数据处理系统观察到它们的时间。</p>
+</li>
+<li><p>窗口化</p>
+<p>通过沿着时间边界（在处理时间或事件时间中）切片管理无界数据的常用方法，尽管在Beam模型中我们将窗口化的定义限制为仅在事件时间内。</p>
+</li>
+<li><p>触发器</p>
+<p>用于指定在特定用例中何时对输出进行实体化的声明性机制。</p>
+</li>
+<li><p>水印</p>
+<p>在事件时间中提供进度的强大概念，为在无界数据上运行的乱序处理系统中推理完整性（因此缺少数据）提供手段。</p>
+</li>
+<li><p>积累</p>
+<p>为单个窗口的结果的细化之间的关系，对于多次演化时它的实体化情况。</p>
+</li>
+<li><p>第二，我们用来构建我们的探索的四个问题：</p>
+<ul>
+<li>计算<em><strong>什么</strong></em>结果？&#x3D; 变换。</li>
+<li>在事件时间中的<em><strong>哪个位置</strong></em>计算结果？&#x3D; 窗口化。</li>
+<li>结果在处理时间中的<em><strong>何时</strong></em>实体化？&#x3D; 触发器加水印。</li>
+<li>结果的细化<em><strong>如何</strong></em>关联？&#x3D; 积累。</li>
+</ul>
+</li>
+</ul>
+<p>第三，为了凸显这种流处理模型所提供的灵活性（因为最终，这就是所有事情的平衡：正确性、延迟和成本等竞争张力），我们仅仅通过最少的代码更改就能在相同的数据集上实现各种主要输出的回顾：</p>
+<p>整数求和</p>
+<p>示例2-1 &#x2F; 图2-3</p>
+<p>整数求和</p>
+<p>固定窗口批处理</p>
+<p>示例2-2 &#x2F; 图2-5</p>
+<p>整数求和</p>
+<p>固定窗口流媒体</p>
+<p>每个记录触发器的重复</p>
+<p>示例2-3 &#x2F; 图2-6</p>
+<p>整数求和</p>
+<p>固定窗口流媒体</p>
+<p>整数求和</p>
+<p>固定窗口流媒体</p>
+<p>整数求和</p>
+<p>固定窗口流媒体</p>
+<p>重复对齐延迟触发器</p>
+<p>示例2-4 &#x2F; 图2-7</p>
+<p>重复的</p>
+<p>未对齐延迟</p>
+<p>触发器</p>
+<p>示例2-5 &#x2F; 图2-8</p>
+<p>固定窗口流式处理</p>
+<p>启发式水印触发器</p>
+<p>示例2-6 &#x2F; 图2-10</p>
+<p>整数求和</p>
+<p>固定窗口流媒体</p>
+<p>早期&#x2F;准时&#x2F;延迟触发器</p>
+<p>丢弃</p>
+<p>示例2-9 &#x2F; 图2-13</p>
+<p>整数求和</p>
+<p>固定窗口流媒体</p>
+<p>早期&#x2F;准时&#x2F;延迟触发器</p>
+<p>积累</p>
+<p>示例2-7 &#x2F; 图2-11</p>
+<p>整数求和</p>
+<p>固定窗口流媒体</p>
+<p>早期&#x2F;准时&#x2F;延迟触发器</p>
+<p>累积和撤回</p>
+<p>示例2-10 &#x2F; ???</p>
+<p>话虽如此，到目前为止，我们只看了一种窗口化类型：事件时间的固定窗口化。正如我们所知，窗口化有许多维度，我想在我们结束Beam模型之前至少再涉及其中两个。不过，首先，我们将稍微偏离主题，深入探讨水印的世界，因为这些知识将有助于框架未来的讨论（并且本身也很有趣）。请欢迎Slava，右台……</p>
 
     </div>
 
