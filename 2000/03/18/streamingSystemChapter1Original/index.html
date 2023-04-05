@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2000-03-18T11:03:13.000Z">
-<meta property="article:modified_time" content="2023-03-18T11:09:35.349Z">
+<meta property="article:modified_time" content="2023-04-05T03:22:58.268Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Streaming System">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-18 19:09:35" itemprop="dateModified" datetime="2023-03-18T19:09:35+08:00">2023-03-18</time>
+                <time title="修改时间：2023-04-05 11:22:58" itemprop="dateModified" datetime="2023-04-05T11:22:58+08:00">2023-04-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -254,11 +254,203 @@
 
 <!-- toc -->
 
-
-
+<ul>
+<li><a href="#terminology-what-is-streaming"><strong>Terminology: What Is Streaming?</strong></a><ul>
+<li><a href="#on-the-greatly-exaggerated-limitations-of-streaming"><strong>On the Greatly Exaggerated Limitations of Streaming</strong></a></li>
+</ul>
+</li>
+</ul>
 <!-- tocstop -->
 
 </div>
+
+
+
+<details><summary>点击 原文</summary><h1><span id="terminology-what-is-streaming"><strong>Terminology: What Is Streaming?</strong></span><a href="#terminology-what-is-streaming" class="header-anchor">#</a></h1><p>Before going any further, I’d like to get one thing out of the way: what is</p>
+<p>streaming? The term streaming is used today to mean a variety of different</p>
+<p>things (and for simplicity I’ve been using it somewhat loosely up until now),</p>
+<p>which can lead to misunderstandings about what streaming really is or what</p>
+<p>streaming systems are actually capable of. As a result, I would prefer to</p>
+<p>define the term somewhat precisely.</p>
+<p>The crux of the problem is that many things that ought to be described by</p>
+<p><em>what</em> they are (unbounded data processing, approximate results, etc.), have</p>
+<p>come to be described colloquially by <em>how</em> they historically have been</p>
+<p>accomplished (i.e., via streaming execution engines). This lack of precision in</p>
+<p>terminology clouds what streaming really means, and in some cases it</p>
+<p>burdens streaming systems themselves with the implication that their</p>
+<p>capabilities are limited to characteristics historically described as “streaming,”</p>
+<p>such as approximate or speculative results.</p>
+<p>Given that well-designed streaming systems are just as capable (technically</p>
+<p>more so) of producing correct, consistent, repeatable results as any existing</p>
+<p>batch engine, I prefer to isolate the term “streaming” to a very specific</p>
+<p>meaning:</p>
+<ul>
+<li>Streaming system</li>
+</ul>
+<p>A type of data processing engine that is designed with infinite datasets in</p>
+<p>mind.</p>
+<p>If I want to talk about low-latency, approximate, or speculative results, I use</p>
+<p>those specific words rather than imprecisely calling them “streaming.”</p>
+<p>Precise terms are also useful when discussing the different types of data one</p>
+<p>might encounter. From my perspective, there are two important (and</p>
+<p>orthogonal) dimensions that define the shape of a given dataset: <em>cardinality</em></p>
+<p>and <em>constitution</em>.</p>
+<p>The cardinality of a dataset dictates its size, with the most salient aspect of</p>
+<p>cardinality being whether a given dataset is finite or infinite. Here are the two</p>
+<p>terms I prefer to use for describing the coarse cardinality in a dataset:</p>
+<ul>
+<li>Bounded data</li>
+</ul>
+<p>A type of dataset that is finite in size.</p>
+<ul>
+<li>Unbounded data</li>
+</ul>
+<p>A type of dataset that is infinite in size (at least theoretically).</p>
+<p>Cardinality is important because the unbounded nature of infinite datasets</p>
+<p>imposes additional burdens on data processing frameworks that consume</p>
+<p>them. More on this in the next section.</p>
+<p>The constitution of a dataset, on the other hand, dictates its physical</p>
+<p>manifestation. As a result, the constitution defines the ways one can interact</p>
+<p>with the data in question. We won’t get around to deeply examining</p>
+<p>constitutions until Chapter 6, but to give you a brief sense of things, there are</p>
+<p>two primary constitutions of importance:</p>
+<ul>
+<li>Table</li>
+</ul>
+<p>A holistic view of a dataset at a specific point in time. SQL systems have</p>
+<p>traditionally dealt in tables.</p>
+<ul>
+<li>Stream</li>
+</ul>
+<p>An element-by-element view of the evolution of a dataset over time. The</p>
+<p>MapReduce lineage of data processing systems have traditionally dealt in</p>
+<p>streams.</p>
+<p>We look quite deeply at the relationship between streams and tables in</p>
+<p>Chapters 6, 8, and 9, and in Chapter 8 we also learn about the unifying</p>
+<p>underlying concept of <em>time-varying relations</em> that ties them together. But until</p>
+<p>then, we deal primarily in streams because that’s the constitution pipeline</p>
+<p>developers directly interact with in most data processing systems today (both</p>
+<p>batch and streaming). It’s also the constitution that most naturally embodies</p>
+<p>the challenges that are unique to stream processing.</p>
+</details>
+
+
+
+
+
+<details><summary>点击 原文</summary><h3><span id="on-the-greatly-exaggerated-limitations-of-streaming"><strong>On the Greatly Exaggerated Limitations of Streaming</strong></span><a href="#on-the-greatly-exaggerated-limitations-of-streaming" class="header-anchor">#</a></h3><p>On that note, let’s next talk a bit about what streaming systems can and can’t</p>
+<p>do, with an emphasis on can. One of the biggest things I want to get across in</p>
+<p>this chapter is just how capable a well-designed streaming system can be.</p>
+<p>Streaming systems have historically been relegated to a somewhat niche</p>
+<p>market of providing low-latency, inaccurate, or speculative results, often in</p>
+<p>conjunction with a more capable batch system to provide eventually correct</p>
+<p>results; in other words, the Lambda Architecture.</p>
+<p>For those of you not already familiar with the Lambda Architecture, the basic</p>
+<p>idea is that you run a streaming system alongside a batch system, both</p>
+<p>performing essentially the same calculation. The streaming system gives you</p>
+<p>low-latency, inaccurate results (either because of the use of an approximation</p>
+<p>algorithm, or because the streaming system itself does not provide</p>
+<p>correctness), and some time later a batch system rolls along and provides you</p>
+<p>with correct output. Originally proposed by Twitter’s Nathan Marz (creator of</p>
+<p>Storm), it ended up being quite successful because it was, in fact, a fantastic</p>
+<p>idea for the time; streaming engines were a bit of a letdown in the correctness</p>
+<p>department, and batch engines were as inherently unwieldy as you’d expect,</p>
+<p>so Lambda gave you a way to have your proverbial cake and eat it too.</p>
+<p>Unfortunately, maintaining a Lambda system is a hassle: you need to build,</p>
+<p>provision, and maintain two independent versions of your pipeline and then</p>
+<p>also somehow merge the results from the two pipelines at the end.</p>
+<p>As someone who spent years working on a strongly consistent streaming</p>
+<p>engine, I also found the entire principle of the Lambda Architecture a bit</p>
+<p>unsavory. Unsurprisingly, I was a huge fan of Jay Kreps’ “Questioning the</p>
+<p>Lambda Architecture” post when it came out. Here was one of the first highly</p>
+<p>visible statements against the necessity of dual-mode execution. Delightful.</p>
+<p>Kreps addressed the issue of repeatability in the context of using a replayable</p>
+<p>system like Kafka as the streaming interconnect, and went so far as to propose</p>
+<p>the Kappa Architecture, which basically means running a single pipeline</p>
+<p>using a well-designed system that’s appropriately built for the job at hand.</p>
+<p>I’m not convinced that notion requires its own Greek letter name, but I fully</p>
+<p>support the idea in principle.</p>
+<p>Quite honestly, I’d take things a step further. I would argue that well-designed</p>
+<p>streaming systems actually provide a strict superset of batch functionality.</p>
+<p>Modulo perhaps an efficiency delta, there should be no need for batch</p>
+<p>systems as they exist today. And kudos to the Apache Flink folks for taking</p>
+<p>this idea to heart and building a system that’s all-streaming-all-the-time under</p>
+<p>the covers, even in “batch” mode; I love it.</p>
+<p><strong>BATCH AND STREAMING EFFICIENCY DIFFERENCES</strong></p>
+<p>One which I propose is not an inherent limitation of streaming systems,</p>
+<p>but simply a consequence of design choices made in most streaming</p>
+<p>systems thus far. The efficiency delta between batch and streaming is</p>
+<p>largely the result of the increased bundling and more efficient shuffle</p>
+<p>transports found in batch systems. Modern batch systems go to great</p>
+<p>lengths to implement sophisticated optimizations that allow for remarkable</p>
+<p>levels of throughput using surprisingly modest compute resources. There’s</p>
+<p>no reason the types of clever insights that make batch systems the</p>
+<p>efficiency heavyweights they are today couldn’t be incorporated into a</p>
+<p>system designed for unbounded data, providing users flexible choice</p>
+<p>between what we typically consider to be high-latency, higher-efficiency</p>
+<p>“batch” processing and low-latency, lower-efficiency “streaming”</p>
+<p>processing. This is effectively what we’ve done at Google with Cloud</p>
+<p>Dataflow by providing both batch and streaming runners under the same</p>
+<p>unified model. In our case, we use separate runners because we happen to</p>
+<p>have two independently designed systems optimized for their specific use</p>
+<p>cases. Long term, from an engineering perspective, I’d love to see us</p>
+<p>merge the two into a single system that incorporates the best parts of both</p>
+<p>while still maintaining the flexibility of choosing an appropriate efficiency</p>
+<p>level. But that’s not what we have today. And honestly, thanks to the</p>
+<p>unified Dataflow Model, it’s not even strictly necessary; so it may well</p>
+<p>never happen.</p>
+<p>The corollary of all this is that broad maturation of streaming systems</p>
+<p>combined with robust frameworks for unbounded data processing will in time</p>
+<p>allow for the relegation of the Lambda Architecture to the antiquity of big</p>
+<p>data history where it belongs. I believe the time has come to make this a</p>
+<p>reality. Because to do so—that is, to beat batch at its own game—you really</p>
+<p>only need two things:</p>
+<ul>
+<li>Correctness</li>
+</ul>
+<p>This gets you parity with batch. At the core, correctness boils down to</p>
+<p>consistent storage. Streaming systems need a method for checkpointing</p>
+<p>persistent state over time (something Kreps has talked about in his “Why</p>
+<p>local state is a fundamental primitive in stream processing” post), and it</p>
+<p>must be well designed enough to remain consistent in light of machine</p>
+<p>failures. When Spark Streaming first appeared in the public big data scene</p>
+<p>a few years ago, it was a beacon of consistency in an otherwise dark</p>
+<p>streaming world. Thankfully, things have improved substantially since</p>
+<p>then, but it is remarkable how many streaming systems still try to get by</p>
+<p>without strong consistency.</p>
+<p>To reiterate—because this point is important: strong consistency is</p>
+<p>required for exactly-once processing,  which is required for correctness,</p>
+<p>which is a requirement for any system that’s going to have a chance at</p>
+<p>meeting or exceeding the capabilities of batch systems. Unless you just</p>
+<p>truly don’t care about your results, I implore you to shun any streaming</p>
+<p>system that doesn’t provide strongly consistent state. Batch systems don’t</p>
+<p>require you to verify ahead of time if they are capable of producing</p>
+<p>correct answers; don’t waste your time on streaming systems that can’t</p>
+<p>meet that same bar.</p>
+<p>If you’re curious to learn more about what it takes to get strong</p>
+<p>consistency in a streaming system, I recommend you check out the</p>
+<p>MillWheel, Spark Streaming, and Flink snapshotting papers. All three</p>
+<p>spend a significant amount of time discussing consistency. Reuven will</p>
+<p>dive into consistency guarantees in Chapter 5, and if you still find</p>
+<p>yourself craving more, there’s a large amount of quality information on</p>
+<p>this topic in the literature and elsewhere.</p>
+<ul>
+<li>Tools for reasoning about time</li>
+</ul>
+<p>This gets you beyond batch. Good tools for reasoning about time are</p>
+<p>essential for dealing with unbounded, unordered data of varying event</p>
+<p>time skew. An increasing number of modern datasets exhibit these</p>
+<p>characteristics, and existing batch systems (as well as many streaming</p>
+<p>systems) lack the necessary tools to cope with the difficulties they impose</p>
+<p>(though this is now rapidly changing, even as I write this). We will spend</p>
+<p>the bulk of this book explaining and focusing on various facets of this</p>
+<p>point.</p>
+<p>To begin with, we get a basic understanding of the important concept of</p>
+<p>time domains, after which we take a deeper look at what I mean by</p>
+<p>unbounded, unordered data of varying event-time skew. We then spend</p>
+<p>the rest of this chapter looking at common approaches to bounded and</p>
+<p>unbounded data processing, using both batch and streaming systems.</p>
+</details>
     </div>
 
     
