@@ -483,16 +483,6 @@
 <li><a href="/www6vHomeHexo/2022/02/09/distributedDatabase/" title="分布式 数据库 总结">分布式 数据库 总结</a></li>
 <li><a href="/www6vHomeHexo/2022/03/11/distributedDatabaseCompare/" title="分布式 数据库 比较">分布式 数据库 比较</a></li>
 </ul>
-<h5><span id="存储引擎">存储引擎</span><a href="#存储引擎" class="header-anchor">#</a></h5><ul>
-<li><a href="/www6vHomeHexo/2022/06/05/lsmTreeKeyValueSeparation/" title="LSM-Tree  KV分离">LSM-Tree  KV分离</a></li>
-<li><a href="/www6vHomeHexo/2022/01/08/lsmTreeCompaction/" title="LSM-Tree Compaction压缩策略">LSM-Tree Compaction压缩策略</a>
-</li>
-<li><a href="/www6vHomeHexo/2022/06/12/paperlsmTreeSurvey/" title="Paper-LSM Tree Survey">Paper-LSM Tree Survey</a></li>
-<li><a href="/www6vHomeHexo/2023/04/02/hbaselsmTree/" title="HBase - LSM-Tree">HBase - LSM-Tree</a> </li>
-<li><a href="/www6vHomeHexo/2022/01/29/rocksdb/" title="RocksDB">RocksDB</a> </li>
-<li><a href="/www6vHomeHexo/2022/04/05/rocksdbLsm/" title="RocksDB- LSM-Tree">RocksDB- LSM-Tree</a>  </li>
-<li><a href="/www6vHomeHexo/2023/04/06/rocksdbSST/" title="Rocksdb-SST">Rocksdb-SST</a></li>
-</ul>
 ]]></content>
       <categories>
         <category>汇总</category>
@@ -535,6 +525,32 @@
       <categories>
         <category>汇总</category>
         <category>Redis</category>
+      </categories>
+      <tags>
+        <tag>汇总</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LSM-Tree 汇总</title>
+    <url>/www6vHomeHexo/2020/04/06/lsmTreeSummary/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="lsm-tree-存储引擎">LSM-Tree 存储引擎</span><a href="#lsm-tree-存储引擎" class="header-anchor">#</a></h2><h3><span id="原理">原理</span><a href="#原理" class="header-anchor">#</a></h3><ul>
+<li><a href="/www6vHomeHexo/2022/06/12/paperlsmTreeSurvey/" title="Paper-LSM Tree Survey">Paper-LSM Tree Survey</a></li>
+<li><a href="/www6vHomeHexo/2022/06/05/lsmTreeKeyValueSeparation/" title="LSM-Tree  KV分离">LSM-Tree  KV分离</a>   优化</li>
+<li><a href="/www6vHomeHexo/2022/01/08/lsmTreeCompaction/" title="LSM-Tree Compaction压缩策略">LSM-Tree Compaction压缩策略</a>   优化</li>
+</ul>
+<h3><span id="工程">工程</span><a href="#工程" class="header-anchor">#</a></h3><ul>
+<li><a href="/www6vHomeHexo/2023/04/02/hbaselsmTree/" title="HBase - LSM-Tree">HBase - LSM-Tree</a> </li>
+<li><a href="/www6vHomeHexo/2022/01/29/rocksdb/" title="RocksDB">RocksDB</a> </li>
+<li><a href="/www6vHomeHexo/2022/04/05/rocksdbLsm/" title="RocksDB- LSM-Tree">RocksDB- LSM-Tree</a>  </li>
+<li><a href="/www6vHomeHexo/2023/04/06/rocksdbSST/" title="Rocksdb-SST">Rocksdb-SST</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>汇总</category>
+        <category>LSM-Tree</category>
       </categories>
       <tags>
         <tag>汇总</tag>
@@ -887,6 +903,25 @@
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#rocksdb-sst-%E7%B1%BB%E5%9E%8B12">Rocksdb SST 类型[1][2]</a></li>
+<li><a href="#rocksdb-sst-blockbasedtable-5">Rocksdb SST- BlockBasedTable [5]</a><ul>
+<li><a href="#%E7%B4%A2%E5%BC%95%E5%9D%97-index-block-3">索引块 Index Block [3]</a></li>
+<li><a href="#sstable%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A3%80%E7%B4%A2%E8%BF%87%E7%A8%8B-6">SSTable的数据检索过程 [6]</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
 <h2><span id="rocksdb-sst-类型12">Rocksdb SST 类型[1][2]</span><a href="#rocksdb-sst-类型12" class="header-anchor">#</a></h2><ul>
 <li><p>BlockBasedTable [本文重点讨论]<br>**an overview of the block-based table type in Rocksdb, which is inherited from LevelDB. **<br>Data is stored in fixed-sized blocks, which can be compressed and encoded for efficient storage. To retrieve data, the block where the record may reside is located and read into memory, and a search is performed within the block. The block cache is used to avoid frequent reads of the same block.<br><strong>Rocksdb 中基于块的表类型的概述，该类型继承自 LevelDB。</strong><br>数据存储在固定大小的块中，可以压缩和编码以实现高效存储。为了检索数据，需要定位并读入可能包含记录的块，并在块内执行搜索。块缓存用于避免频繁读取相同的块。</p>
 </li>
@@ -925,12 +960,15 @@
 </tr>
 </tbody></table>
 <h3><span id="索引块-index-block-3">索引块 Index Block [3]</span><a href="#索引块-index-block-3" class="header-anchor">#</a></h3><p>索引块用于查找包含指定key的数据块。是一种基于<strong>二分搜索</strong>的数据结构。一个文件可能包含一个索引块，也可能包含一组分区索引块，这取决于使用配置。即存在全局索引与分区索引两种索引方式。</p>
+<h3><span id="sstable的数据检索过程-6">SSTable的数据检索过程 [6]</span><a href="#sstable的数据检索过程-6" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2023/04/06/rocksdbSST/querySST.jpg" class>
+
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://github.com/facebook/rocksdb/wiki/A-Tutorial-of-RocksDB-SST-formats">A Tutorial of RocksDB SST formats</a></li>
 <li><a href="https://github.com/facebook/rocksdb/wiki/Rocksdb-BlockBasedTable-Format">Rocksdb BlockBasedTable Format</a></li>
 <li><a href="https://www.yii666.com/blog/334918.html">RocksDB基本架构与原理介绍</a></li>
-<li><a href="https://leveldb-handbook.readthedocs.io/zh/latest/sstable.html">leveldb  sstable</a> *** </li>
-<li><a href="https://www.jianshu.com/p/d6ce3593a69e">RocksDB block-based SST 文件详解</a> ***</li>
+<li><a href="https://leveldb-handbook.readthedocs.io/zh/latest/sstable.html">leveldb  sstable</a> ***  未</li>
+<li><a href="https://www.jianshu.com/p/d6ce3593a69e">RocksDB block-based SST 文件详解</a> *** </li>
+<li><a href="https://zhuanlan.zhihu.com/p/37633790">浅析RocksDB的SSTable格式</a></li>
 </ol>
 ]]></content>
       <categories>
