@@ -490,7 +490,8 @@
 <li><a href="/www6vHomeHexo/2022/06/12/paperlsmTreeSurvey/" title="Paper-LSM Tree Survey">Paper-LSM Tree Survey</a></li>
 <li><a href="/www6vHomeHexo/2023/04/02/hbaselsmTree/" title="HBase - LSM-Tree">HBase - LSM-Tree</a> </li>
 <li><a href="/www6vHomeHexo/2022/01/29/rocksdb/" title="RocksDB">RocksDB</a> </li>
-<li><a href="/www6vHomeHexo/2022/04/05/rocksdbLsm/" title="RocksDB- LSM-Tree">RocksDB- LSM-Tree</a></li>
+<li><a href="/www6vHomeHexo/2022/04/05/rocksdbLsm/" title="RocksDB- LSM-Tree">RocksDB- LSM-Tree</a>  </li>
+<li><a href="/www6vHomeHexo/2023/04/06/rocksdbSST/" title="Rocksdb-SST">Rocksdb-SST</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -878,6 +879,67 @@
       </categories>
       <tags>
         <tag>汇总</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Rocksdb-SST</title>
+    <url>/www6vHomeHexo/2023/04/06/rocksdbSST/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="rocksdb-sst-类型12">Rocksdb SST 类型[1][2]</span><a href="#rocksdb-sst-类型12" class="header-anchor">#</a></h2><ul>
+<li><p>BlockBasedTable [本文重点讨论]<br>**an overview of the block-based table type in Rocksdb, which is inherited from LevelDB. **<br>Data is stored in fixed-sized blocks, which can be compressed and encoded for efficient storage. To retrieve data, the block where the record may reside is located and read into memory, and a search is performed within the block. The block cache is used to avoid frequent reads of the same block.<br><strong>Rocksdb 中基于块的表类型的概述，该类型继承自 LevelDB。</strong><br>数据存储在固定大小的块中，可以压缩和编码以实现高效存储。为了检索数据，需要定位并读入可能包含记录的块，并在块内执行搜索。块缓存用于避免频繁读取相同的块。</p>
+</li>
+<li><p>Plain table</p>
+</li>
+</ul>
+<h2><span id="rocksdb-sst-blockbasedtable-5">Rocksdb SST- BlockBasedTable [5]</span><a href="#rocksdb-sst-blockbasedtable-5" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2023/04/06/rocksdbSST/rocksdbSST.jpg" class>
+
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Footer</td>
+<td>指出 IndexBlock 和 MetaIndexBlock 在文件中的偏移量信息，它是元信息的元信息，它位于 sstable 文件的尾部</td>
+</tr>
+<tr>
+<td>IndexBlock</td>
+<td>记录了 DataBlock 相关的元信息</td>
+</tr>
+<tr>
+<td>MetaIndexBlock</td>
+<td>各个元信息的Block，包括Filter、Properties(整个table的属性信息)、Compression dictionary、Range deletion tombstone</td>
+</tr>
+<tr>
+<td>MetaBlock</td>
+<td>存储布隆过滤器的二进制数据 及其他元信息数据</td>
+</tr>
+<tr>
+<td>DataBlock</td>
+<td>存储实际的数据即键值对内容</td>
+</tr>
+</tbody></table>
+<h3><span id="索引块-index-block-3">索引块 Index Block [3]</span><a href="#索引块-index-block-3" class="header-anchor">#</a></h3><p>索引块用于查找包含指定key的数据块。是一种基于<strong>二分搜索</strong>的数据结构。一个文件可能包含一个索引块，也可能包含一组分区索引块，这取决于使用配置。即存在全局索引与分区索引两种索引方式。</p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://github.com/facebook/rocksdb/wiki/A-Tutorial-of-RocksDB-SST-formats">A Tutorial of RocksDB SST formats</a></li>
+<li><a href="https://github.com/facebook/rocksdb/wiki/Rocksdb-BlockBasedTable-Format">Rocksdb BlockBasedTable Format</a></li>
+<li><a href="https://www.yii666.com/blog/334918.html">RocksDB基本架构与原理介绍</a></li>
+<li><a href="https://leveldb-handbook.readthedocs.io/zh/latest/sstable.html">leveldb  sstable</a> *** </li>
+<li><a href="https://www.jianshu.com/p/d6ce3593a69e">RocksDB block-based SST 文件详解</a> ***</li>
+</ol>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>非关系型</category>
+        <category>RocksDB</category>
+      </categories>
+      <tags>
+        <tag>RocksDB</tag>
       </tags>
   </entry>
   <entry>
