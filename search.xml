@@ -5105,6 +5105,61 @@ BGP 协议传输的消息
       </tags>
   </entry>
   <entry>
+    <title>KV  存储比较</title>
+    <url>/www6vHomeHexo/2022/04/11/kvCompare/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="boltdb-vs-rocksdbn-ai">Boltdb vs.  Rocksdb[N AI]</span><a href="#boltdb-vs-rocksdbn-ai" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th>特征</th>
+<th>Boltdb</th>
+<th>Rocksdb</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>内存管理</td>
+<td>Mmap</td>
+<td>Mmap+预读取</td>
+</tr>
+<tr>
+<td>索引结构</td>
+<td>B+树</td>
+<td>LSM树</td>
+</tr>
+<tr>
+<td>读写性能</td>
+<td>读性能好，写性能差</td>
+<td>读写性能均衡</td>
+</tr>
+<tr>
+<td>数据安全</td>
+<td>具有ACID特性</td>
+<td>具有ACID特性</td>
+</tr>
+<tr>
+<td>备份和恢复</td>
+<td>支持快照备份和恢复</td>
+<td>支持增量备份和恢复</td>
+</tr>
+<tr>
+<td>扩展性</td>
+<td>不支持集群扩展</td>
+<td>支持集群扩展</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>KV</category>
+        <category>总结</category>
+      </categories>
+      <tags>
+        <tag>KV</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>可观测性-Prometheus</title>
     <url>/www6vHomeHexo/2022/04/10/observabilityPrometheus/</url>
     <content><![CDATA[<p></p>
@@ -5220,10 +5275,12 @@ BGP 协议传输的消息
       </tags>
   </entry>
   <entry>
-    <title>etcd</title>
+    <title>etcd 总结</title>
     <url>/www6vHomeHexo/2022/04/06/etcd/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
+
+
 
 <h2><span id="读流程">读流程</span><a href="#读流程" class="header-anchor">#</a></h2><p>etcd 提供的两种读机制 (串行读和线性读) </p>
 <img src="/www6vHomeHexo/2022/04/06/etcd/read1.png" class title="读流程">
@@ -5233,7 +5290,26 @@ BGP 协议传输的消息
 <h2><span id="客户端lease">客户端Lease</span><a href="#客户端lease" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/04/06/etcd/lease.png" class title="客户端Lease">
 
 
-<h2><span id="mvcc-和-revision">MVCC 和 revision</span><a href="#mvcc-和-revision" class="header-anchor">#</a></h2><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p><a href="https://edu.aliyun.com/lesson_1651_18365#_18365">第16 章 ： 深入理解 etcd - 基本原理解析</a> 未</p>
+
+<h2><span id="mvcc-和-revision2">MVCC 和 revision[2]</span><a href="#mvcc-和-revision2" class="header-anchor">#</a></h2><ul>
+<li>etcd revision<ul>
+<li>定义 <ul>
+<li>计数器</li>
+<li>键值空间发生变化， revision相应增加</li>
+</ul>
+</li>
+<li>用途<ul>
+<li>逻辑时钟</li>
+<li><strong>MVCC</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li><a href="https://edu.aliyun.com/lesson_1651_18365#_18365">第16 章 ： 深入理解 etcd - 基本原理解析</a> 未</li>
+<li>《云原生分布式存储基石-etcd深入解析》</li>
+</ol>
 ]]></content>
       <categories>
         <category>数据库</category>
