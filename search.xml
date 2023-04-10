@@ -480,8 +480,11 @@
 <li><a href="/www6vHomeHexo/2022/02/27/mysqlLog/" title="MySQL Logs">MySQL Logs</a></li>
 </ul>
 <h2><span id="分布式">分布式</span><a href="#分布式" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2022/02/09/distributedDatabase/" title="分布式 数据库 总结">分布式 数据库 总结</a></li>
-<li><a href="/www6vHomeHexo/2022/03/11/distributedDatabaseCompare/" title="分布式 数据库 比较">分布式 数据库 比较</a></li>
+<li><a href="/www6vHomeHexo/2022/02/09/distributedDatabase/" title="分布式 数据库 总结">分布式 数据库 总结</a>
+</li>
+<li><a href="/www6vHomeHexo/2022/03/11/distributedDatabaseCompare/" title="分布式 数据库 比较">分布式 数据库 比较</a>
+</li>
+<li><a href="/www6vHomeHexo/2023/04/10/tikvMVCCTransaction/" title="TiKV  MVCC Transaction">TiKV  MVCC Transaction</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -895,6 +898,35 @@
       </categories>
       <tags>
         <tag>汇总</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TiKV  MVCC Transaction</title>
+    <url>/www6vHomeHexo/2023/04/10/tikvMVCCTransaction/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h1><span id="原理">原理</span><a href="#原理" class="header-anchor">#</a></h1><h3><span id="percolator">Percolator</span><a href="#percolator" class="header-anchor">#</a></h3><p>  总体来说就是一个经过<strong>优化的 2PC</strong> 的实现，依赖一个<strong>单点的授时服务 TSO</strong> 来实现单调递增的事务编号生成，提供<strong>SI 的隔离级别</strong>。</p>
+<h3><span id="tikv-的写事务分为两个阶段">TiKV 的写事务分为两个阶段</span><a href="#tikv-的写事务分为两个阶段" class="header-anchor">#</a></h3><ul>
+<li><p>1、Prewrite 阶段<br>MVCC 在对应传统 2PC 的第一阶段的 prewrite 流程。<br>首先选出一个 primary row 和其他的 secondary rows，然后对 primary row 进行上锁，再对 secondary rows 进行类似的上锁流程。如果任何一步出错，都会进行回滚。完成 prewrite 阶段后，进入 commit 阶段，当前时间戳为 commitTs，TSO 会保证 commitTs &gt; startTs。</p>
+</li>
+<li><p>2、Commit 阶段<br>MVCC 中的 Commit 流程，包括在 primary 上写入 meta，删除 Lock 标记，以及异步提交 secondaries。如果 primary row 提交失败，则整个事务回滚。如果成功，则标志着整个事务提交成功。</p>
+</li>
+</ul>
+<h3><span id="tikv-的读事务">TiKV 的读事务</span><a href="#tikv-的读事务" class="header-anchor">#</a></h3><p>  在事务中进行读操作的过程。<br>  <strong>首先，需要检查行是否被锁定，如果被锁定，则需要等待或者清除锁。然后，需要读取最新的数据版本，方法是读取元数据并找到最大的时间戳。</strong> 锁分为两级，Primary和Secondary row，只有Primary row的锁被释放，事务才算提交成功。Secondary row的提交可以异步进行，但在此过程中可能需要清理锁。即使Secondary row提交失败，也可以通过锁找到Primary row，并根据元数据确定事务是回滚还是提交成功。</p>
+<blockquote>
+<p>TiKV 的事务默认隔离级别是 Repeatable Read（SI）, 也对外暴露显式的加锁的 API，用于为客户端实现 SELECT … FOR UPDATE 等隔离级别为 SSI 的语句。</p>
+</blockquote>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://cn.pingcap.com/blog/tidb-transaction-model">TiKV 事务模型概览，Google Spanner 开源实现</a>  ***<br><a href="https://zhuanlan.zhihu.com/p/149377959">percolator的理解与开源实现分析</a>   未<br><a href="https://zhuanlan.zhihu.com/p/261115166">Percolator - 分布式事务的理解与分析</a>   未</p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>关系型</category>
+        <category>分布式</category>
+      </categories>
+      <tags>
+        <tag>分布式数据库</tag>
       </tags>
   </entry>
   <entry>
