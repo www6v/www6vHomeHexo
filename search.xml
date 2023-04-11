@@ -1007,7 +1007,7 @@
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
+        <category>KV</category>
         <category>RocksDB</category>
       </categories>
       <tags>
@@ -4251,7 +4251,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
+        <category>KV</category>
         <category>Redis</category>
       </categories>
       <tags>
@@ -4558,7 +4558,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
+        <category>KV</category>
         <category>Redis</category>
       </categories>
       <tags>
@@ -5362,7 +5362,7 @@ BGP 协议传输的消息
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
+        <category>KV</category>
         <category>etcd</category>
       </categories>
       <tags>
@@ -5470,7 +5470,7 @@ BGP 协议传输的消息
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
+        <category>KV</category>
         <category>RocksDB</category>
       </categories>
       <tags>
@@ -5865,7 +5865,7 @@ BGP 协议传输的消息
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
+        <category>KV</category>
         <category>Redis</category>
       </categories>
       <tags>
@@ -5946,7 +5946,7 @@ BGP 协议传输的消息
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
+        <category>KV</category>
         <category>Redis</category>
       </categories>
       <tags>
@@ -5984,7 +5984,7 @@ BGP 协议传输的消息
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
+        <category>KV</category>
         <category>Redis</category>
       </categories>
       <tags>
@@ -7475,7 +7475,7 @@ func new(Type) *Type
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
+        <category>KV</category>
         <category>Redis</category>
       </categories>
       <tags>
@@ -8186,7 +8186,7 @@ func new(Type) *Type
       </tags>
   </entry>
   <entry>
-    <title>RocksDB</title>
+    <title>RocksDB 总结</title>
     <url>/www6vHomeHexo/2022/01/29/rocksdb/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -8276,7 +8276,7 @@ func new(Type) *Type
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
+        <category>KV</category>
         <category>RocksDB</category>
       </categories>
       <tags>
@@ -9085,7 +9085,7 @@ func new(Type) *Type
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
+        <category>KV</category>
         <category>Redis</category>
       </categories>
       <tags>
@@ -9137,7 +9137,7 @@ func new(Type) *Type
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
+        <category>KV</category>
         <category>Redis</category>
       </categories>
       <tags>
@@ -9154,6 +9154,7 @@ func new(Type) *Type
 <h5><span id="关键词-单线程事件-socket-多路复用">关键词： 单线程，事件， socket， 多路复用</span><a href="#关键词-单线程事件-socket-多路复用" class="header-anchor">#</a></h5><h2><span id="redis-的io模型">Redis 的IO模型</span><a href="#redis-的io模型" class="header-anchor">#</a></h2><p><strong>Redis 是单线程，主要是指 Redis 的网络 IO 和键值对读写是由一个线程来完成的，这也是 Redis 对外提供键值存储服务的主要流程。</strong><br>但 Redis 的其他功能，比如持久化、异步删除、集群数据同步等，其实是由额外的线程执 行的。</p>
 <h5><span id="多路复用">多路复用</span><a href="#多路复用" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2022/01/18/redisIO/redis-multiplex.png" class title="基于多路复用的Redis高性能IO模型">
 
+<p>​                               </p>
 <p>Linux 中的 IO 多路复用机制是指一个线程处理多个 IO 流，就是我们经常听到的 select&#x2F;epoll 机制。简单来说，在 Redis 只运行单线程的情况下，<strong>该机制允许内核中，同 时存在多个监听套接字和已连接套接字</strong>。内核会一直监听这些套接字上的连接请求或数据 请求。一旦有请求到达，就会交给 Redis 线程处理，这就实现了一个 Redis 线程处理多个 IO 流的效果。</p>
 <p>为了在请求到达时能通知到 Redis 线程，<strong>select&#x2F;epoll 提供了基于事件的回调机制，即针 对不同事件的发生，调用相应的处理函数</strong>。</p>
 <h5><span id="epoll的api">epoll的API</span><a href="#epoll的api" class="header-anchor">#</a></h5><p>int epoll_create(int size);<br>int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event);   &#x2F;&#x2F; 事件注册<br>int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout);  &#x2F;&#x2F;  事件分配、事件处理</p>
@@ -9165,7 +9166,7 @@ func new(Type) *Type
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
+        <category>KV</category>
         <category>Redis</category>
       </categories>
       <tags>
@@ -10988,7 +10989,7 @@ func new(Type) *Type
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
+        <category>KV</category>
         <category>Redis</category>
       </categories>
       <tags>
@@ -11018,7 +11019,7 @@ func new(Type) *Type
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
+        <category>KV</category>
         <category>Redis</category>
       </categories>
       <tags>
@@ -11529,7 +11530,7 @@ func new(Type) *Type
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
+        <category>KV</category>
         <category>Redis</category>
       </categories>
       <tags>
@@ -11628,7 +11629,7 @@ func new(Type) *Type
 <h3><span id="dictrehash-的主要执行流程">dictRehash 的主要执行流程</span><a href="#dictrehash-的主要执行流程" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2021/06/20/redisRehash/rehash.png" class title="Rehash">]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
+        <category>KV</category>
         <category>Redis</category>
       </categories>
       <tags>
@@ -11975,7 +11976,7 @@ func new(Type) *Type
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
+        <category>KV</category>
         <category>Redis</category>
       </categories>
       <tags>
@@ -12001,7 +12002,7 @@ func new(Type) *Type
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
+        <category>KV</category>
         <category>Redis</category>
       </categories>
       <tags>
@@ -18980,7 +18981,6 @@ nq： 不排队调度
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
         <category>NoSQL</category>
       </categories>
       <tags>
@@ -19995,7 +19995,7 @@ nq： 不排队调度
 ]]></content>
       <categories>
         <category>数据库</category>
-        <category>非关系型</category>
+        <category>KV</category>
         <category>Redis</category>
       </categories>
       <tags>
