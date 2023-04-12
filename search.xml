@@ -5154,7 +5154,7 @@ BGP 协议传输的消息
       </tags>
   </entry>
   <entry>
-    <title>KV  存储比较</title>
+    <title>KV  存储引擎比较[Boltdb Rocksdb]</title>
     <url>/www6vHomeHexo/2022/04/11/kvCompare/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -5174,18 +5174,18 @@ BGP 协议传输的消息
 </tr>
 <tr>
 <td>索引结构</td>
-<td>B+树</td>
-<td>LSM树</td>
+<td><strong>B+树</strong></td>
+<td><strong>LSM树</strong></td>
 </tr>
 <tr>
-<td>读写性能</td>
-<td>读性能好，写性能差</td>
-<td>读写性能均衡</td>
+<td>读写性能<br>读写场景[1]</td>
+<td>读性能好，写性能差<br><strong>适合‘读多写少’</strong></td>
+<td>读写性能均衡<br><strong>适合‘写多读少’</strong></td>
 </tr>
 <tr>
-<td>数据安全</td>
-<td>具有ACID特性</td>
-<td>具有ACID特性</td>
+<td>数据安全<br>事务</td>
+<td>具有ACID特性<br>支持事务[1]</td>
+<td>具有ACID特性<br>支持事务</td>
 </tr>
 <tr>
 <td>备份和恢复</td>
@@ -5198,6 +5198,9 @@ BGP 协议传输的消息
 <td>支持集群扩展</td>
 </tr>
 </tbody></table>
+<h3><span id="boltdb-磁盘布局和索引结构2">Boltdb 磁盘布局和索引结构[2]</span><a href="#boltdb-磁盘布局和索引结构2" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/04/11/kvCompare/boltdb-index.JPG" class>
+
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>1.《云原生分布式存储基石-etcd深入理解》<br>2. 《10 | boltdb：如何持久化存储你的key-value数据？》  etcd实战课  唐聪</p>
 ]]></content>
       <categories>
         <category>数据库</category>
