@@ -21,12 +21,12 @@
   </script>
 
   <meta property="og:type" content="article">
-<meta property="og:title" content="《Streaming System》- Chapter 1. Streaming 101">
+<meta property="og:title" content="《Streaming System》- Chapter 1. Streaming 101[完整]">
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2000/03/18/streamingSystemChapter1Original/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2000-03-18T11:03:13.000Z">
-<meta property="article:modified_time" content="2023-04-12T04:14:56.949Z">
+<meta property="article:modified_time" content="2023-04-12T09:10:46.477Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Streaming System">
 <meta name="twitter:card" content="summary">
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>《Streaming System》- Chapter 1. Streaming 101 | www6v的博客</title>
+  <title>《Streaming System》- Chapter 1. Streaming 101[完整] | www6v的博客</title>
   
 
 
@@ -201,7 +201,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          《Streaming System》- Chapter 1. Streaming 101
+          《Streaming System》- Chapter 1. Streaming 101[完整]
         </h1>
 
         <div class="post-meta">
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-12 12:14:56" itemprop="dateModified" datetime="2023-04-12T12:14:56+08:00">2023-04-12</time>
+                <time title="修改时间：2023-04-12 17:10:46" itemprop="dateModified" datetime="2023-04-12T17:10:46+08:00">2023-04-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -266,10 +266,22 @@
 <li><a href="#unbounded-data-streaming"><strong>Unbounded Data: Streaming</strong></a></li>
 </ul>
 </li>
+<li><a href="#summary"><strong>Summary</strong></a></li>
 </ul>
 <!-- tocstop -->
 
 </div>
+
+<details><summary>点击 原文</summary><p>Streaming data processing is a big deal in big data these days, and for good<br>reasons; among them are the following:</p>
+<ul>
+<li>Businesses crave ever-more timely insights into their data, and<br>switching to streaming is a good way to achieve lower latency</li>
+<li>The massive, unbounded datasets that are increasingly common in<br>modern business are more easily tamed using a system designed for<br>such never-ending volumes of data.</li>
+<li>Processing data as they arrive spreads workloads out more evenly<br>over time, yielding more consistent and predictable consumption of<br>resources.<br>Despite this business-driven surge of interest in streaming, streaming systems<br>long remained relatively immature compared to their batch brethren. It’s only<br>recently that the tide has swung conclusively in the other direction. In my<br>more bumptious moments, I hope that might be in small part due to the solid<br>dose of goading I originally served up in my “Streaming 101” and “Streaming<br>102” blog posts (on which the first few chapters of this book are rather<br>obviously based). But in reality, there’s also just a lot of industry interest in<br>seeing streaming systems mature and a lot of smart and active folks out there<br>who enjoy building them.<br>Even though the battle for general streaming advocacy has been, in my<br>opinion, effectively won, I’m still going to present my original arguments<br>from “Streaming 101” more or less unaltered. For one, they’re still very<br>applicable today, even if much of industry has begun to heed the battle cry.<br>And for two, there are a lot of folks out there who still haven’t gotten the<br>memo; this book is an extended attempt at getting these points across.<br>To begin, I cover some important background information that will help<br>frame the rest of the topics I want to discuss. I do this in three specific<br>sections:</li>
+<li>Terminology<br>To talk precisely about complex topics requires precise definitions of<br>terms. For some terms that have overloaded interpretations in current use,<br>I’ll try to nail down exactly what I mean when I say them.</li>
+<li>Capabilities<br>I remark on the oft-perceived shortcomings of streaming systems. I also<br>propose the frame of mind that I believe data processing system builders<br>need to adopt in order to address the needs of modern data consumers<br>going forward.</li>
+<li>Time domains<br>I introduce the two primary domains of time that are relevant in data<br>processing, show how they relate, and point out some of the difficulties<br>these two domains impose.</li>
+</ul>
+</details>
 
 
 
@@ -913,6 +925,126 @@
 <p>but one perhaps best explored in the context of concrete examples, which</p>
 <p>we look at next.</p>
 </details>
+
+
+
+
+
+<details><summary>点击 原文</summary><h1><span id="summary"><strong>Summary</strong></span><a href="#summary" class="header-anchor">#</a></h1><p>Whew! That was a lot of information. If you’ve made it this far, you are to be</p>
+<p>commended! But we are only just getting started. Before forging ahead to</p>
+<p>looking in detail at the Beam Model approach, let’s briefly step back and</p>
+<p>recap what we’ve learned so far. In this chapter, we’ve done the following:</p>
+<ul>
+<li>Clarified terminology, focusing the definition of “streaming” to refer</li>
+</ul>
+<p>to systems built with unbounded data in mind, while using more</p>
+<p>descriptive terms like approximate&#x2F;speculative results for distinct</p>
+<p>concepts often categorized under the “streaming” umbrella.</p>
+<p>Additionally, we highlighted two important dimensions of large</p>
+<p>scale datasets: cardinality (i.e., bounded versus unbounded) and</p>
+<p>encoding (i.e., table versus stream), the latter of which will consume</p>
+<p>much of the second half of the book.</p>
+<ul>
+<li>Assessed the relative capabilities of well-designed batch and</li>
+</ul>
+<p>streaming systems, positing streaming is in fact a strict superset of</p>
+<p>batch, and that notions like the Lambda Architecture, which are</p>
+<p>predicated on streaming being inferior to batch, are destined for</p>
+<p>retirement as streaming systems mature.</p>
+<ul>
+<li>Proposed two high-level concepts necessary for streaming systems to</li>
+</ul>
+<p>both catch up to and ultimately surpass batch, those being</p>
+<p>correctness and tools for reasoning about time, respectively.</p>
+<ul>
+<li>Established the important differences between event time and</li>
+</ul>
+<p>processing time, characterized the difficulties those differences</p>
+<p>impose when analyzing data in the context of when they occurred,</p>
+<p>and proposed a shift in approach away from notions of completeness</p>
+<p>and toward simply adapting to changes in data over time.</p>
+<ul>
+<li>Looked at the major data processing approaches in common use</li>
+</ul>
+<p>today for bounded and unbounded data, via both batch and streaming</p>
+<p>engines, roughly categorizing the unbounded approaches into: time</p>
+<p>agnostic, approximation, windowing by processing time, and</p>
+<p>windowing by event time.</p>
+<p>Next up, we dive into the details of the Beam Model, taking a conceptual look</p>
+<p>at how we’ve broken up the notion of data processing across four related</p>
+<p>axes: what, where, when, and how. We also take a detailed look at processing</p>
+<p>a simple, concrete example dataset across multiple scenarios, highlighting the</p>
+<p>plurality of use cases enabled by the Beam Model, with some concrete APIs</p>
+<p>to ground us in reality. These examples will help drive home the notions of</p>
+<p>event time and processing time introduced in this chapter while additionally</p>
+<p>exploring new concepts such as watermarks.</p>
+</details>
+
+
+
+
+
+<details><summary>点击 原文</summary><ol>
+<li>For completeness, it’s perhaps worth calling out that this definition includes</li>
+</ol>
+<p>both true streaming as well as microbatch implementations. For those of you</p>
+<p>who aren’t familiar with microbatch systems, they are streaming systems that</p>
+<p>use repeated executions of a batch processing engine to process unbounded</p>
+<p>data. Spark Streaming is the canonical example in the industry.</p>
+<ol>
+<li>Readers familiar with my original “Streaming 101” article might recall that I</li>
+</ol>
+<p>rather emphatically encouraged the abandonment of the term “stream” when</p>
+<p>referring to datasets. That never caught on, which I initially thought was due</p>
+<p>to its catchiness and pervasive existing usage. In retrospect, however, I think I</p>
+<p>was simply wrong. There actually is great value in distinguishing between the</p>
+<p>two different types of dataset constitutions: tables and streams. Indeed, most</p>
+<p>of the second half of this book is dedicated to understanding the relationship</p>
+<p>between those two.</p>
+<ol>
+<li>If you’re unfamiliar with what I mean when I say <em>exactly-once</em>, it’s referring</li>
+</ol>
+<p>to a specific type of consistency guarantee that certain data processing</p>
+<p>frameworks provide. Consistency guarantees are typically bucketed into three</p>
+<p>main classes: at-most-once processing, at-least-once processing, and exactly</p>
+<p>once processing. Note that the names in use here refer to the effective</p>
+<p>semantics as observed within the outputs generated by the pipeline, not the</p>
+<p>actual number of times a pipeline might process (or attempt to process) any</p>
+<p>given record. For this reason, the term <em>effectively-once</em> is sometimes used</p>
+<p>instead of exactly-once, since it’s more representative of the underlying</p>
+<p>nature of things. Reuven covers these concepts in much more detail in</p>
+<p>Chapter 5.</p>
+<ol>
+<li>Since the original publication of “Streaming 101,” numerous individuals</li>
+</ol>
+<p>have pointed out to me that it would have been more intuitive to place</p>
+<p>processing time on the x-axis and event time on the y-axis. I do agree that</p>
+<p>swapping the two axes would initially feel more natural, as event time seems</p>
+<p>like the dependent variable to processing time’s independent variable.</p>
+<p>However, because both variables are monotonic and intimately related,</p>
+<p>they’re effectively interdependent variables. So I think from a technical</p>
+<p>perspective you just have to pick an axis and stick with it. Math is confusing</p>
+<p>(especially outside of North America, where it suddenly becomes plural and</p>
+<p>gangs up on you).</p>
+<ol>
+<li>This result really shouldn’t be surprising (but was for me, hence why I’m</li>
+</ol>
+<p>pointing it out), because we’re effectively creating a right triangle with the</p>
+<p>ideal line when measuring the two types of skew&#x2F;lag. Maths are cool.</p>
+<ol>
+<li>We look at aligned fixed windows in detail in Chapter 2, and unaligned</li>
+</ol>
+<p>fixed windows in Chapter 4.</p>
+<ol>
+<li>If you poke around enough in the academic literature or SQL-based</li>
+</ol>
+<p>streaming systems, you’ll also come across a third windowing time domain:</p>
+<p><em>tuple-based windowing</em> (i.e., windows whose sizes are counted in numbers of</p>
+<p>elements). However, tuple-based windowing is essentially a form of</p>
+<p>processing-time windowing in which elements are assigned monotonically</p>
+<p>increasing timestamps as they arrive at the system. As such, we won’t discuss</p>
+<p>tuple-based windowing in detail any further.</p>
+</details>
     </div>
 
     
@@ -927,7 +1059,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www6v.github.io/www6vHomeHexo/2000/03/18/streamingSystemChapter1Original/" title="《Streaming System》- Chapter 1. Streaming 101">https://www6v.github.io/www6vHomeHexo/2000/03/18/streamingSystemChapter1Original/</a>
+    <a href="https://www6v.github.io/www6vHomeHexo/2000/03/18/streamingSystemChapter1Original/" title="《Streaming System》- Chapter 1. Streaming 101[完整]">https://www6v.github.io/www6vHomeHexo/2000/03/18/streamingSystemChapter1Original/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -947,8 +1079,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/www6vHomeHexo/2000/03/18/streamingSystemChapter1/" rel="prev" title="《Streaming System》- 第一章：流计算入门">
-      <i class="fa fa-chevron-left"></i> 《Streaming System》- 第一章：流计算入门
+    <a href="/www6vHomeHexo/2000/03/18/streamingSystemChapter1/" rel="prev" title="《Streaming System》- 第一章：流计算入门[完整]">
+      <i class="fa fa-chevron-left"></i> 《Streaming System》- 第一章：流计算入门[完整]
     </a></div>
       <div class="post-nav-item">
     <a href="/www6vHomeHexo/2012/02/04/englishInterview-1/" rel="next" title="English Interview-Q&A">
