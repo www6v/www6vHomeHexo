@@ -498,7 +498,7 @@
       </tags>
   </entry>
   <entry>
-    <title>NoSQL-Redis-汇总</title>
+    <title>Redis[KV]-汇总</title>
     <url>/www6vHomeHexo/2021/02/07/nosqlRedisSummary/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -5022,6 +5022,38 @@ BGP 协议传输的消息
       </tags>
   </entry>
   <entry>
+    <title>BoltDB</title>
+    <url>/www6vHomeHexo/2022/04/12/kvBoltDB/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h2><span id="boltdb-磁盘布局和索引结构2">Boltdb 磁盘布局和索引结构[2]</span><a href="#boltdb-磁盘布局和索引结构2" class="header-anchor">#</a></h2>
+
+<ul>
+<li>BoltDB 的磁盘布局<ul>
+<li>元数据页</li>
+<li>B+树索引节点页</li>
+<li>B+树叶子节点页</li>
+<li>空闲页管理页和空闲页</li>
+</ul>
+</li>
+</ul>
+<p>BoltDB 通过 B+树来管理分支&#x2F;叶子页，实现快速查找和写入 key-value 数据。</p>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol start="2">
+<li>《10 | boltdb：如何持久化存储你的key-value数据？》  etcd实战课  唐聪</li>
+</ol>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>KV</category>
+        <category>BoltDB</category>
+      </categories>
+      <tags>
+        <tag>KV</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数据库迁移</title>
     <url>/www6vHomeHexo/2022/04/11/dbMigrate/</url>
     <content><![CDATA[<p></p>
@@ -5169,13 +5201,13 @@ BGP 协议传输的消息
 </thead>
 <tbody><tr>
 <td>内存管理</td>
-<td>Mmap</td>
-<td>Mmap+预读取</td>
+<td>MMap</td>
+<td>MMap+预读取</td>
 </tr>
 <tr>
 <td>索引结构</td>
-<td><strong>B+树</strong></td>
-<td><strong>LSM树</strong></td>
+<td><strong>B+树</strong>[2]</td>
+<td><strong>LSM树</strong>[3]</td>
 </tr>
 <tr>
 <td>读写性能<br>读写场景[1]</td>
@@ -5198,9 +5230,7 @@ BGP 协议传输的消息
 <td>支持集群扩展</td>
 </tr>
 </tbody></table>
-<h3><span id="boltdb-磁盘布局和索引结构2">Boltdb 磁盘布局和索引结构[2]</span><a href="#boltdb-磁盘布局和索引结构2" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/04/11/kvCompare/boltdb-index.JPG" class>
-
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>1.《云原生分布式存储基石-etcd深入理解》<br>2. 《10 | boltdb：如何持久化存储你的key-value数据？》  etcd实战课  唐聪</p>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>1.《云原生分布式存储基石-etcd深入理解》<br>2. <a href="/www6vHomeHexo/2022/04/12/kvBoltDB/" title="BoltDB">BoltDB</a>  self<br>2. <a href="/www6vHomeHexo/2022/04/05/rocksdbLsm/" title="RocksDB- LSM-Tree">RocksDB- LSM-Tree</a>  self</p>
 ]]></content>
       <categories>
         <category>数据库</category>
@@ -8245,8 +8275,8 @@ func new(Type) *Type
 </ul>
 </li>
 </ul>
-<h2><span id="rocksdb-写x2f读流程">RocksDB 写&#x2F;读流程</span><a href="#rocksdb-写x2f读流程" class="header-anchor">#</a></h2><ul>
-<li>写流程</li>
+<h2><span id="rocksdb-写x2f读流程-5">RocksDB 写&#x2F;读流程 [5]</span><a href="#rocksdb-写x2f读流程-5" class="header-anchor">#</a></h2><ul>
+<li>写流程 </li>
 <li>读流程</li>
 </ul>
 <h2><span id="rocksdb可改进点4">RocksDB可改进点[4]</span><a href="#rocksdb可改进点4" class="header-anchor">#</a></h2><ul>
@@ -8275,6 +8305,7 @@ func new(Type) *Type
 <li><a href="https://www.bilibili.com/video/BV1Jr4y1W7Wn?spm_id_from=333.1007.top_right_bar_window_history.content.click&vd_source=f6e8c1128f9f264c5ab8d9411a644036">RocksDB 是什么？解决了什么问题？是怎么解决的？解决了哪些具体问题？</a> bili  ***</li>
 <li><a href="https://docs.pingcap.com/zh/tidb/dev/rocksdb-overview">RocksDB 简介</a></li>
 <li><a href="https://cloud.tencent.com/developer/article/1352666?ivk_sa=1024320u">LSM-Tree 的写放大写放大、读放大、空间放大RockDB 写放大简单分析参考文档</a></li>
+<li><a href="/www6vHomeHexo/2022/04/05/rocksdbLsm/" title="RocksDB- LSM-Tree">RocksDB- LSM-Tree</a> self</li>
 </ol>
 ]]></content>
       <categories>
