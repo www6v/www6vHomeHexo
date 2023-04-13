@@ -21,12 +21,12 @@
   </script>
 
   <meta property="og:type" content="article">
-<meta property="og:title" content="《Streaming System》-Chapter 3. Watermarks">
+<meta property="og:title" content="《Streaming System》-Chapter 3. Watermarks[完整]">
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2000/03/15/streamingSystemChapter3Original/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2000-03-15T03:48:05.000Z">
-<meta property="article:modified_time" content="2023-04-13T03:49:32.990Z">
+<meta property="article:modified_time" content="2023-04-13T08:24:21.686Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Streaming System">
 <meta name="twitter:card" content="summary">
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>《Streaming System》-Chapter 3. Watermarks | www6v的博客</title>
+  <title>《Streaming System》-Chapter 3. Watermarks[完整] | www6v的博客</title>
   
 
 
@@ -201,7 +201,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          《Streaming System》-Chapter 3. Watermarks
+          《Streaming System》-Chapter 3. Watermarks[完整]
         </h1>
 
         <div class="post-meta">
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-13 11:49:32" itemprop="dateModified" datetime="2023-04-13T11:49:32+08:00">2023-04-13</time>
+                <time title="修改时间：2023-04-13 16:24:21" itemprop="dateModified" datetime="2023-04-13T16:24:21+08:00">2023-04-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -275,6 +275,7 @@
 <li><a href="#case-study-source-watermarks-for-google-cloud-pubsub"><strong>Case Study: Source Watermarks for Google Cloud Pub&#x2F;Sub</strong></a></li>
 </ul>
 </li>
+<li><a href="#summary"><strong>Summary</strong></a></li>
 </ul>
 <!-- tocstop -->
 
@@ -1226,6 +1227,67 @@
 <p>reordering is within the estimation band, there will be no additional late data.</p>
 </details>
 
+
+
+<details><summary>点击 原文</summary><h1><span id="summary"><strong>Summary</strong></span><a href="#summary" class="header-anchor">#</a></h1><p>At this point, we have explored how we can use the event times of messages</p>
+<p>to give a robust definition of progress in a stream processing system. We saw</p>
+<p>how this notion of progress can subsequently help us answer the question of</p>
+<p><em>where</em> in event time processing is taking place and <em>when</em> in processing time</p>
+<p>results are materialized. Specifically, we looked at how watermarks are</p>
+<p>created at the sources, the points of data ingestion into a pipeline, and then</p>
+<p>propagated throughout the pipeline to preserve the essential guarantees that</p>
+<p>allow the questions of <em>where</em> and <em>when</em> to be answered. We also looked at the</p>
+<p>implications of changing the output window timestamps on watermarks.</p>
+<p>Finally, we explored some real-world system considerations when building</p>
+<p>watermarks at scale.</p>
+<p>Now that we have a firm footing in how watermarks work under the covers,</p>
+<p>we can take a dive into what they can do for us as we use windowing and</p>
+<p>triggering to answer more complex queries in Chapter 4.</p>
+</details>
+
+
+
+
+
+<details><summary>点击 原文</summary><ol>
+<li>Note the additional mention of monotonicity; we have not yet discussed</li>
+</ol>
+<p>how to achieve this. Indeed the discussion thus far makes no mention of</p>
+<p>monotonicity. If we considered exclusively the oldest in-flight event time, the</p>
+<p>watermark would not always be monotonic, as we have made no assumptions</p>
+<p>about our input. We return to this discussion later on.</p>
+<ol start="2">
+<li>To be precise, it’s not so much that the number of logs need be static as it is</li>
+</ol>
+<p>that the number of logs at any given time be known a priori by the system. A</p>
+<p>more sophisticated input source composed of a dynamically chosen number</p>
+<p>of inputs logs, such as Pravega, could just as well be used for constructing a</p>
+<p>perfect watermark. It’s only when the number of logs that exist in the</p>
+<p>dynamic set at any given time is unknown (as in the example in the next</p>
+<p>section) that one must fall back on a heuristic watermark.</p>
+<ol start="3">
+<li>Note that by saying “flow through the system,” I don’t necessarily imply</li>
+</ol>
+<p>they flow along the same path as normal data. They might (as in Apache</p>
+<p>Flink), but they might also be transmitted out-of-band (as in MillWheel&#x2F;Cloud</p>
+<p>Dataflow).</p>
+<ol start="4">
+<li>The <em>start</em> of the window is not a safe choice from a watermark correctness</li>
+</ol>
+<p>perspective because the first element in the window often comes <em>after</em> the</p>
+<p>beginning of the window itself, which means that the watermark is not</p>
+<p>guaranteed to have been held back as far as the start of the window.</p>
+<ol start="5">
+<li>The percentile watermark triggering scheme described here is not currently</li>
+</ol>
+<p>implemented by Beam; however, other systems such as MillWheel implement</p>
+<p>this.</p>
+<ol start="6">
+<li>For more information on Flink watermarks, see the Flink documentation on</li>
+</ol>
+<p>the subject.</p>
+</details>
+
     </div>
 
     
@@ -1240,7 +1302,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www6v.github.io/www6vHomeHexo/2000/03/15/streamingSystemChapter3Original/" title="《Streaming System》-Chapter 3. Watermarks">https://www6v.github.io/www6vHomeHexo/2000/03/15/streamingSystemChapter3Original/</a>
+    <a href="https://www6v.github.io/www6vHomeHexo/2000/03/15/streamingSystemChapter3Original/" title="《Streaming System》-Chapter 3. Watermarks[完整]">https://www6v.github.io/www6vHomeHexo/2000/03/15/streamingSystemChapter3Original/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -1260,8 +1322,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/www6vHomeHexo/2000/03/15/streamingSystemChapter3/" rel="prev" title="《Streaming System》-第三章：水位">
-      <i class="fa fa-chevron-left"></i> 《Streaming System》-第三章：水位
+    <a href="/www6vHomeHexo/2000/03/15/streamingSystemChapter3/" rel="prev" title="《Streaming System》-第三章：水位[完整]">
+      <i class="fa fa-chevron-left"></i> 《Streaming System》-第三章：水位[完整]
     </a></div>
       <div class="post-nav-item">
     <a href="/www6vHomeHexo/2000/03/16/streamingSystemChapter5/" rel="next" title="《Streaming System》-第五章：精确一次和副作用">
