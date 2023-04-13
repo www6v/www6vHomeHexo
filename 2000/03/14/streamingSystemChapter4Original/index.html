@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2000-03-14T14:07:51.000Z">
-<meta property="article:modified_time" content="2023-03-14T15:10:25.323Z">
+<meta property="article:modified_time" content="2023-04-13T09:56:03.947Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Streaming System">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-14 23:10:25" itemprop="dateModified" datetime="2023-03-14T23:10:25+08:00">2023-03-14</time>
+                <time title="修改时间：2023-04-13 17:56:03" itemprop="dateModified" datetime="2023-04-13T17:56:03+08:00">2023-04-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -262,10 +262,32 @@
 </ul>
 </li>
 <li><a href="#where-session-windows">*<strong>Where*: Session Windows</strong></a></li>
+<li><a href="#where-custom-windowing"><strong><em>Where</em>: Custom Windowing</strong></a><ul>
+<li><a href="#variations-on-fixed-windows"><strong>Variations on Fixed Windows</strong></a></li>
+<li><a href="#variations-on-session-windows"><strong>Variations on Session Windows</strong></a></li>
+<li><a href="#one-size-does-not-fit-all"><strong>One Size Does Not Fit All</strong></a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 
 </div>
+
+<details><summary>点击 原文</summary><p>Hello again! I hope you enjoyed Chapter 3 as much as I did. Watermarks are</p>
+<p>a fascinating topic, and Slava knows them better than anyone on the planet.</p>
+<p>Now that we have a deeper understanding of watermarks under our belts, I’d</p>
+<p>like to dive into some more advanced topics related to the <em>what</em>, <em>where</em>, <em>when</em>,</p>
+<p>and <em>how</em> questions.</p>
+<p>We first look at <em>processing-time windowing</em>, which is an interesting mix of</p>
+<p>both where and when, to understand better how it relates to event-time</p>
+<p>windowing and get a sense for times when it’s actually the right approach to</p>
+<p>take. We then dive into some more advanced event-time windowing concepts,</p>
+<p>looking at <em>session windows</em> in detail, and finally making a case for why</p>
+<p>generalized <em>custom windowing</em> is a useful (and surprisingly straightforward)</p>
+<p>concept by exploring three different types of custom windows: <em>unaligned</em></p>
+<p>fixed windows, <em>per-key</em> fixed windows, and <em>bounded</em> sessions windows.</p>
+</details>
+
 
 <details><summary>点击 原文</summary><h1><span id="whenx2fwhere-processing-time-windows">*<strong>When*&#x2F;*Where*: Processing-Time Windows</strong></span><a href="#whenx2fwhere-processing-time-windows" class="header-anchor">#</a></h1><p>Processing-time windowing is important for two reasons:</p>
 <ul>
@@ -593,6 +615,266 @@
 <p>top of Spark 1.x; you can’t say the same for most other systems out there).</p>
 <p>It’s quite involved, and they’re not even doing proper event-time sessions, or</p>
 <p>providing speculative or late firings, or retractions.</p>
+</details>
+
+
+
+<details><summary>点击 原文</summary><h1><span id="where-custom-windowing"><strong><em>Where</em>: Custom Windowing</strong></span><a href="#where-custom-windowing" class="header-anchor">#</a></h1><p>Up until now, we’ve talked primarily about predefined types of windowing</p>
+<p>strategies: fixed, sliding, and sessions. You can get a lot of mileage out of</p>
+<p>standard types of windows, but there are plenty of real-world use cases for</p>
+<p>which being able to define a custom windowing strategy can really save the</p>
+<p>day (three of which we’re about to see now).</p>
+<p>Most systems today don’t support custom windowing to the degree that it’s</p>
+<p>supported in Beam, so we focus on the Beam approach. In Beam, a custom</p>
+<p>windowing strategy consists of two things:</p>
+<ul>
+<li>Window assignment</li>
+</ul>
+<p>This places each element into an initial window. At the limit, this allows</p>
+<p>every element to be placed within a unique window, which is very</p>
+<p>powerful.</p>
+<ul>
+<li>(Optional) window merging</li>
+</ul>
+<p>This allows windows to merge at grouping times, which makes it possible</p>
+<p>for windows to evolve over time, which we saw in action earlier with</p>
+<p>session windows.</p>
+<p>To give you a sense for how simple windowing strategies really are, and also</p>
+<p>how useful custom windows support can be, we’re going to look in detail at</p>
+<p>the stock implementations of fixed windows and sessions in Beam and then</p>
+<p>consider a few real-world use cases that require custom variations on those</p>
+<p>themes. In the process, we’ll see both how easy it is to create a custom</p>
+<p>windowing strategy, and how limiting the lack of custom windowing support</p>
+<p>can be when your use case doesn’t quite fit into the stock approaches.</p>
+<h3><span id="variations-on-fixed-windows"><strong>Variations on Fixed Windows</strong></span><a href="#variations-on-fixed-windows" class="header-anchor">#</a></h3><p>To begin, let’s look at the relatively simple strategy of fixed windows. The</p>
+<p>stock fixed-windows implementation is as straightforward as you might</p>
+<p>imagine, and consists of the following logic:</p>
+<ul>
+<li>Assignment</li>
+</ul>
+<p>The element is placed into the appropriate fixed-window based on its</p>
+<p>timestamp and the window’s size and offset parameters.</p>
+<ul>
+<li>Merging</li>
+</ul>
+<p>None.</p>
+<p>An abbreviated version of the code looks like Example 4-4.</p>
+<p><em>Example 4-4. Abbreviated FixedWindows implementation</em></p>
+<p><code>public class FixedWindows extends WindowFn&lt;Object, IntervalWindow&gt; {</code></p>
+<p><code>private final Duration size;</code></p>
+<p><code>private final Duration offset;</code></p>
+<p><code>public Collection&lt;IntervalWindow&gt; assignWindow(AssignContext c) {</code></p>
+<p><code>long start = c.timestamp().getMillis() - c.timestamp()</code></p>
+<p><code>.plus(size)</code></p>
+<p><code>.minus(offset)</code></p>
+<p><code>.getMillis() % size.getMillis();</code></p>
+<p><code>return Arrays.asList(IntervalWindow(new Instant(start), size));</code></p>
+<p><code>}</code></p>
+<p><code>}</code></p>
+<p>Keep in mind that the point of showing you the code here isn’t so much to</p>
+<p>teach you how to write windowing strategies (although it’s nice to demystify</p>
+<p>them and call out how simple they are). It’s really to help contrast the</p>
+<p>comparative ease and difficulty of supporting some relatively basic use cases,</p>
+<p>both with and without custom windowing, respectively. Let’s consider two</p>
+<p>such use cases that are variations on the fixed-windows theme now.</p>
+</details>
+
+
+
+<details><summary>点击 原文</summary><p><strong>Unaligned fixed windows</strong></p>
+<p>One characteristic of the default fixed-windows implementation that we</p>
+<p>alluded to previously is that windows are aligned across all of the data. In our</p>
+<p>running example, the window from noon to 1 PM for any given team aligns</p>
+<p>with the corresponding windows for all other teams, which also extend from</p>
+<p>noon to 1 PM. And in use cases for which you want to compare like windows</p>
+<p>across another dimension, such as between teams, this alignment is very</p>
+<p>useful. However, it comes at a somewhat subtle cost. All of the active</p>
+<p>windows from noon to 1 PM become complete at around the same time,</p>
+<p>which means that once an hour the system is hit with a massive load of</p>
+<p>windows to materialize.</p>
+<p>To see what I mean, let’s look at a concrete example (Example 4-5). We’ll</p>
+<p>begin with a score summation pipeline as we’ve used in most examples, with</p>
+<p>fixed two-minute windows, and a single watermark trigger.</p>
+<p><em>Example 4-5. Watermark completeness trigger (same as Example 2-6)</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</span><br><span class="line">.apply(Window.into(FixedWindows.of(TWO_MINUTES))</span><br><span class="line">.triggering(AfterWatermark()))</span><br><span class="line">.apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
+
+<p>But in this instance, we’ll look at two different keys (see Figure 4-8) from the</p>
+<p>same dataset in parallel. What we’ll see is that the outputs for those two keys</p>
+<p>are all aligned, on account of the windows being aligned across all of the</p>
+<p>keys. As a result, we end up with <em>N</em> panes being materialized every time the</p>
+<p>watermark passes the end of a window, where <em>N</em> is the number of keys with</p>
+<p>updates in that window. In this example, where <em>N</em> is 2, that’s maybe not too</p>
+<p>painful. But when <em>N</em> starts to order in the thousands, millions, or more, that</p>
+<p>synchronized burstiness can become problematic.</p>
+<p><em>Figure 4-8. Aligned fixed windows</em></p>
+<p>In circumstances for which comparing across windows is unnecessary, it’s</p>
+<p>often more desirable to spread window completion load out evenly across</p>
+<p>time. This makes system load more predictable, which can reduce the</p>
+<p>provisioning requirements for handling peak load. In most systems, however,</p>
+<p>unaligned fixed windows are only available if the system provides support for</p>
+<p>them out of the box.  But with custom-windowing support, it’s a relatively</p>
+<p>trivial modification to the default fixed-windows implementation to provide</p>
+<p>unaligned fixed-windows support. What we want to do is continue</p>
+<p>guaranteeing that the windows for all elements being grouped together (i.e.,</p>
+<p>the ones with the same key) have the same alignment, while relaxing the</p>
+<p>alignment restriction across different keys. The code changes to the default</p>
+<p>fixed-windowing strategy and looks something like Example 4-6.</p>
+<p><em>Example 4-6. Abbreviated UnalignedFixedWindows implementation</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class UnalignedFixedWindows</span><br><span class="line">extends WindowFn&lt;KV&lt;K, V&gt;, IntervalWindow&gt; &#123;</span><br><span class="line">private final Duration size;</span><br><span class="line">private final Duration offset;</span><br><span class="line">public Collection&lt;IntervalWindow&gt; assignWindow(AssignContext c) &#123;</span><br><span class="line">long perKeyShift = hash(c.element().key()) % size;</span><br><span class="line">long start = perKeyShift + c.timestamp().getMillis()</span><br><span class="line">-c.timestamp()</span><br><span class="line">.plus(size)</span><br><span class="line">.minus(offset)</span><br><span class="line">return Arrays.asList(IntervalWindow(new Instant(start), size));</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>With this change, the windows for all elements <em>with the same key</em> are</p>
+<p>aligned, but the windows for elements <em>with different keys</em> will (typically) be</p>
+<p>unaligned, thus spreading window completion load out at the cost of also</p>
+<p>making comparisons across keys somewhat less meaningful. We can switch</p>
+<p>our pipeline to use our new windowing strategy, illustrated in Example 4-7.</p>
+<p><em>Example 4-7. Unaligned fixed windows with a single watermark trigger</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</span><br><span class="line">.apply(Window.into(UnalignedFixedWindows.of(TWO_MINUTES))</span><br><span class="line">.triggering(AfterWatermark()))</span><br><span class="line">.apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
+
+<p>And then you can see what this looks like in Figure 4-9 by comparing</p>
+<p>different fixed-window alignments across the same dataset as before (in this</p>
+<p>case, I’ve chosen a maximal phase shift between the two alignments to most</p>
+<p>clearly call out the benefits, given that randomly chosen phases across a large</p>
+<p>number of keys will result in similar effects).</p>
+<p><em>Figure 4-9. Unaligned fixed windows</em></p>
+<p>Note how there are no instances where we emit multiple panes for multiple</p>
+<p>keys simultaneously. Instead, the panes arrive individually at a much more</p>
+<p>even cadence. This is another example of being able to make trade-offs in one</p>
+<p>dimension (ability to compare across keys) in exchange for benefits in another</p>
+<p>dimension (reduced peak resource provisioning requirements) when the use</p>
+<p>case allows. Such flexibility is critical when you’re trying to process massive</p>
+<p>quantities of data as efficiently as possible.</p>
+<p>Let’s now look at a second variation on fixed windows, one which is more</p>
+<p>intrinsically tied to the data being processed.</p>
+</details>
+
+
+
+<details><summary>点击 原文</summary><p><strong>Per-element&#x2F;key fixed windows</strong></p>
+<p>Our second example comes courtesy of one of the early adopters of Cloud</p>
+<p>Dataflow. This company generates analytics data for its customers, but each</p>
+<p>customer is allowed to configure the window size over which it wants to</p>
+<p>aggregate its metrics. In other words, each customer gets to define the specific</p>
+<p>size of its fixed windows.</p>
+<p>Supporting a use case like this isn’t too difficult as long the number of</p>
+<p>available window sizes is itself fixed. For example, you could imagine</p>
+<p>offering the option of choosing 30-minute, 60-minute, and 90-minute fixed</p>
+<p>windows and then running a separate pipeline (or fork of the pipeline) for</p>
+<p>each of those options. Not ideal, but not too horrible. However, that rapidly</p>
+<p>becomes intractable as the number of options increases, and in the limit of</p>
+<p>providing support for truly arbitrary window sizes (which is what this</p>
+<p>customer’s use case required) is entirely impractical.</p>
+<p>Fortunately, because each record the customer processes is already annotated</p>
+<p>with metadata describing the desired size of window for aggregation,</p>
+<p>supporting arbitrary, per-user fixed-window size was as simple as changing a</p>
+<p>couple of lines from the stock fixed-windows implementation, as</p>
+<p>demonstrated in Example 4-8.</p>
+<p><em>Example 4-8. Modified (and abbreviated) FixedWindows implementation that</em></p>
+<p><em>supports per-element window sizes</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class PerElementFixedWindows&lt;T extends HasWindowSize%gt;</span><br><span class="line">extends WindowFn&lt;T, IntervalWindow&gt; &#123;</span><br><span class="line">private final Duration offset;</span><br><span class="line">public Collection&lt;IntervalWindow&gt; assignWindow(AssignContext c) &#123;</span><br><span class="line">long perElementSize = c.element().getWindowSize();</span><br><span class="line">long start = perKeyShift + c.timestamp().getMillis()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>c.timestamp()</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.plus(size)</span><br><span class="line">.minus(offset)</span><br><span class="line">.getMillis() % size.getMillis();</span><br><span class="line">return Arrays.asList(IntervalWindow(</span><br><span class="line">new Instant(start), perElementSize));</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>With this change, each element is assigned to a fixed window with the</p>
+<p>appropriate size, as dictated by metadata carried around in the element itself. Changing the pipeline code to use this new strategy is again trivial, as shown</p>
+<p>in Example 4-9.</p>
+<p><em>Example 4-9. Per-element fixed-window sizes with a single watermark trigger</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</span><br><span class="line">.apply(Window.into(PerElementFixedWindows.of(TWO_MINUTES))</span><br><span class="line">.triggering(AfterWatermark()))</span><br><span class="line">.apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
+
+<p>And then looking at an this pipeline in action (Figure 4-10), it’s easy to see</p>
+<p>that the elements for Key A all have two minutes as their window size,</p>
+<p>whereas the elements for Key B have one-minute window sizes.</p>
+<p><em>Figure 4-10. Per-key custom-sized fixed windows</em></p>
+<p>This really isn’t something you would ever reasonably expect a system to</p>
+<p>provide to you; the nature of where window size preferences are stored is too</p>
+<p>use-case specific for it to make sense to try to build into a standard API.</p>
+<p>Nevertheless, as exhibited by this customer’s needs, use cases like this do</p>
+<p>exist. That’s why the flexibility provided by custom windowing is so</p>
+<p>powerful.</p>
+</details>
+
+
+
+<details><summary>点击 原文</summary><h3><span id="variations-on-session-windows"><strong>Variations on Session Windows</strong></span><a href="#variations-on-session-windows" class="header-anchor">#</a></h3><p>To really drive home the usefulness of custom windowing, let’s look at one</p>
+<p>final example, which is a variation on sessions. Session windowing is</p>
+<p>understandably a bit more complex than fixed windows. Its implementation</p>
+<p>consists of the following:</p>
+<ul>
+<li>Assignment</li>
+</ul>
+<p>Each element is initially placed into a proto-session window that begins at</p>
+<p>the element’s timestamp and extends for the gap duration.</p>
+<ul>
+<li>Merging</li>
+</ul>
+<p>At grouping time, all eligible windows are sorted, after which any</p>
+<p>overlapping windows are merged together.</p>
+<p>An abbreviated version of the sessions code (hand merged together from a</p>
+<p>number of helper classes) looks something like that shown in Example 4-10.</p>
+<p><em>Example 4-10. Abbreviated Sessions implementation</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public class Sessions extends WindowFn&lt;Object, IntervalWindow&gt; &#123;</span><br><span class="line">private final Duration gapDuration;</span><br><span class="line">public Collection&lt;IntervalWindow&gt; assignWindows(AssignContext c) &#123;</span><br><span class="line">return Arrays.asList(</span><br><span class="line">new IntervalWindow(c.timestamp(), gapDuration));</span><br><span class="line">&#125;</span><br><span class="line">public void mergeWindows(MergeContext c) throws Exception &#123;</span><br><span class="line">List&lt;IntervalWindow&gt; sortedWindows = new ArrayList&lt;&gt;();</span><br><span class="line">for (IntervalWindow window : c.windows()) &#123;</span><br><span class="line">sortedWindows.add(window);</span><br><span class="line">&#125;</span><br><span class="line">Collections.sort(sortedWindows);</span><br><span class="line">List&lt;MergeCandidate&gt; merges = new ArrayList&lt;&gt;();</span><br><span class="line">MergeCandidate current = new MergeCandidate();</span><br><span class="line">for (IntervalWindow window : sortedWindows) &#123;</span><br><span class="line">if (current.intersects(window)) &#123;</span><br><span class="line">current.add(window);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">merges.add(current);</span><br><span class="line">current = new MergeCandidate(window);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">merges.add(current);</span><br><span class="line">for (MergeCandidate merge : merges) &#123;</span><br><span class="line">merge.apply(c);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>As before, the point of seeing the code isn’t so much to teach you how custom</p>
+<p>windowing functions are implemented, or even what the implementation of</p>
+<p>sessions looks like; it’s really to show the ease with which you can support</p>
+<p>new use via custom windowing.</p>
+</details>
+
+
+
+<details><summary>点击 原文</summary><p><strong>Bounded sessions</strong></p>
+<p>One such custom use case I’ve come across multiple times is bounded</p>
+<p>sessions: sessions that are not allowed to grow beyond a certain size, either in</p>
+<p>time, element count, or some other dimension. This can be for semantic</p>
+<p>reasons, or it can simply be an exercise in spam protection. However, given</p>
+<p>the variations in types of limits (some use cases care about total session size</p>
+<p>in event time, some care about total element count, some care about element</p>
+<p>density, etc.), it’s difficult to provide a clean and concise API for bounded</p>
+<p>sessions. Much more practical is allowing users to implement their own</p>
+<p>custom windowing logic, tailored to their specific use case. An example of</p>
+<p>one such use case, in which session windows are time-limited, might look</p>
+<p>something like Example 4-11 (eliding some of the builder boilerplate we’ll</p>
+<p>utilize here).</p>
+<p><em>Example 4-11. Abbreviated Sessions implementation</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">public class BoundedSessions extends WindowFn&lt;Object, IntervalWindow&gt; &#123;</span><br><span class="line">private final Duration gapDuration;</span><br><span class="line">private final Duration maxSize;</span><br><span class="line">public Collection&lt;IntervalWindow&gt; assignWindows(AssignContext c) &#123;</span><br><span class="line">return Arrays.asList(</span><br><span class="line">new IntervalWindow(c.timestamp(), gapDuration));</span><br><span class="line">&#125;</span><br><span class="line">private Duration windowSize(IntervalWindow window) &#123;</span><br><span class="line">return window == null</span><br><span class="line">? new Duration(0)</span><br><span class="line">: new Duration(window.start(), window.end());</span><br><span class="line">&#125;</span><br><span class="line">public static void mergeWindows(</span><br><span class="line">WindowFn&lt;?, IntervalWindow&gt;.MergeContext c) throws Exception &#123;</span><br><span class="line">List&lt;IntervalWindow&gt; sortedWindows = new ArrayList&lt;&gt;();</span><br><span class="line">for (IntervalWindow window : c.windows()) &#123;</span><br><span class="line">sortedWindows.add(window);</span><br><span class="line">&#125;</span><br><span class="line">Collections.sort(sortedWindows);</span><br><span class="line">List&lt;MergeCandidate&gt; merges = new ArrayList&lt;&gt;();</span><br><span class="line">MergeCandidate current = new MergeCandidate();</span><br><span class="line">for (IntervalWindow window : sortedWindows) &#123;</span><br><span class="line">MergeCandidate next = new MergeCandidate(window);</span><br><span class="line">if (current.intersects(window)) &#123;</span><br><span class="line">current.add(window);</span><br><span class="line">if (windowSize(current.union) &lt;= (maxSize - gapDuration))</span><br><span class="line">continue;</span><br><span class="line">// Current window exceeds bounds, so flush and move to next</span><br><span class="line">next = new MergeCandidate();</span><br><span class="line">&#125;</span><br><span class="line">merges.add(current);</span><br><span class="line">current = next;</span><br><span class="line">&#125;</span><br><span class="line">merges.add(current);</span><br><span class="line">for (MergeCandidate merge : merges) &#123;</span><br><span class="line">merge.apply(c);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>As always, updating our pipeline (the early&#x2F;on-time&#x2F;late version of it, from</p>
+<p>Example 2-7, in this case) to use this custom windowing strategy is trivial, as</p>
+<p>you can see in Example 4-12.</p>
+<p><em>Example 4-12. Early, on-time, and late firings via the early&#x2F;on-time&#x2F;late API</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</span><br><span class="line">.apply(Window.into(BoundedSessions</span><br><span class="line">.withGapDuration(ONE_MINUTE)</span><br><span class="line">.withMaxSize(THREE_MINUTES))</span><br><span class="line">.triggering(</span><br><span class="line">AfterWatermark()</span><br><span class="line">.withEarlyFirings(AlignedDelay(ONE_MINUTE))</span><br><span class="line">.withLateFirings(AfterCount(1))))</span><br><span class="line">.apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
+
+<p>And executed over our running example, it might then look something like</p>
+<p>Figure 4-11.</p>
+<p><em>Figure 4-11. Per-key custom-sized fixed windows</em></p>
+<p>Note how the large session with value 36 that spanned [12:00.26, 12:05.20),</p>
+<p>or nearly five minutes of time, in the unbounded sessions implementation</p>
+<p>from Figure 2-7 now ends up broken apart into two shorter sessions of length</p>
+<p>2 minutes and 2 minutes 53 seconds.</p>
+<p>Given how few systems provide custom windowing support today, it’s worth</p>
+<p>pointing out how much more effort would be required to implement such a</p>
+<p>thing using a system that supported only an unbounded sessions</p>
+<p>implementation. Your only real recourse would be to write code downstream</p>
+<p>of the session grouping logic that looked at the generated sessions and</p>
+<p>chopped them up if they exceed the length limit. This would require the</p>
+<p>ability to decompose a session after the fact, which would obviate the benefits</p>
+<p>of incremental aggregation (something we look at in more detail in</p>
+<p>Chapter 7), increasing cost. It would also eliminate any spam protection</p>
+<p>benefits one might hope to gain by limiting session lengths, because the</p>
+<p>sessions would first need to grow to their full sizes before being chopped or</p>
+<p>truncated.</p>
+<h3><span id="one-size-does-not-fit-all"><strong>One Size Does Not Fit All</strong></span><a href="#one-size-does-not-fit-all" class="header-anchor">#</a></h3><p>We’ve now looked at three real-world use cases, each of which was a subtle</p>
+<p>variation on the stock types of windowing typically provided by data</p>
+<p>processing systems: unaligned fixed windows, per-element fixed windows,</p>
+<p>and bounded sessions. In all three cases, we saw how simple it was to support</p>
+<p>those use cases via custom windowing and how much more difficult (or</p>
+<p>expensive) it would be to support those use cases without it. Though custom</p>
+<p>windowing doesn’t see broad support across the industry as yet, it’s a feature</p>
+<p>that provides much needed flexibility for balancing trade-offs when building</p>
+<p>data processing pipelines that need to handle complex, real-world use cases</p>
+<p>over massive amounts of data as efficiently as possible.</p>
 </details>
     </div>
 
