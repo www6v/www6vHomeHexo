@@ -21354,11 +21354,18 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 </li>
 <li><a href="#%E7%99%BE%E5%88%86%E4%BD%8D%E6%95%B0%E6%B0%B4%E5%8D%B0">百分位数水印</a></li>
 <li><a href="#%E5%A4%84%E7%90%86%E6%97%B6%E9%97%B4%E6%B0%B4%E5%8D%B0">处理时间水印</a></li>
+<li><a href="#%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6">案例研究</a><ul>
+<li><a href="#%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6google-cloud-dataflow%E4%B8%AD%E7%9A%84%E6%B0%B4%E5%8D%B0">案例研究：Google Cloud Dataflow中的水印</a></li>
+<li><a href="#%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6apache-flink%E4%B8%AD%E7%9A%84%E6%B0%B4%E5%8D%B0"><strong>案例研究：Apache Flink中的水印</strong></a></li>
+<li><a href="#%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6google-cloud-pubsub-%E7%9A%84%E6%BA%90%E6%B0%B4%E5%8D%B0">案例研究：Google Cloud Pub&#x2F;Sub 的源水印</a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 
 </div>
 
+<p>到目前为止，我们已经从流处理的角度来看待管道作者或数据科学家。第2章将水印引入作为回答事件时间处理正在进行的<em><strong>位置</strong></em>和处理时间结果<em><strong>何时</strong></em>实现的基本问题的一部分。在本章中，我们从流处理系统的基本机制的角度来看待相同的问题。观察这些机制将有助于我们激发、理解和应用水印的概念。我们讨论了水印如何在数据输入点创建、如何通过数据处理管道传播以及如何影响输出时间戳。我们还演示了水印如何保留必要的保证，以回答事件时间数据在<em><strong>何处</strong></em>处理以及<em><strong>何时</strong></em>它被实现，同时处理无界数据。</p>
 <h1><span id="定义">定义</span><a href="#定义" class="header-anchor">#</a></h1><p>考虑任何连续摄取数据并输出结果的管道。我们希望解决何时可以安全地关闭事件时间窗口的一般问题，即窗口不再期望有任何数据。为了解决这个问题，我们希望相对于无限输入特征化管道正在做的进展。</p>
 <p>解决事件时间窗口问题的一种天真的方法是只基于当前处理时间来设置事件时间窗口。如第一章所述，我们很快就会遇到麻烦，因为数据处理和传输不是瞬间完成的，因此处理和事件时间几乎永远不会相等。我们的管道中的任何故障或峰值可能会导致我们错误地将消息分配到窗口中。最终，这种策略失败了，因为我们没有可靠的方法来保证这样的窗口。</p>
 <p>另一种直观但最终不正确的方法是考虑管道处理的消息速率。虽然这是一个有趣的指标，但速率可能会因输入变化、预期结果的变化、可用于处理的资源等因素而任意变化。更重要的是，速率无法帮助回答完整性的根本问题。具体而言，速率无法告诉我们何时看到了特定时间间隔的所有消息。在现实世界的系统中，会有消息无法通过系统进行进展的情况。这可能是暂时性错误（例如崩溃、网络故障、机器停机）的结果，也可能是需要更改应用逻辑或其他手动干预的应用级故障的结果。当然，如果发生大量故障，则处理速率指标可能是检测到这种情况的良好代理。但是，速率指标永远无法告诉我们单个消息未能通过管道进行进展。然而，即使单个这样的消息，也可能会任意影响输出结果的正确性。</p>
@@ -21531,6 +21538,70 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <img src="/www6vHomeHexo/2000/03/15/streamingSystemChapter3/stsy_0315.png" class> 
 <p><em>图3-15. 固定窗口的水印延迟。随着元素为每个窗口缓冲，事件时间水印延迟增加，随着每个窗口的聚合通过及时触发器发出，事件时间水印延迟减少，而处理时间水印仅跟踪系统级延迟（在健康的管道中仍保持相对稳定）。</em></p>
 <p>因此，处理时间水印是区分系统延迟和数据延迟的有用工具。除了可见性外，我们可以在系统实现级别使用处理时间水印来执行任务，例如临时状态的垃圾回收（Reuven在第5章中对一个示例进行了更多的讨论）。</p>
+<h1><span id="案例研究">案例研究</span><a href="#案例研究" class="header-anchor">#</a></h1><p>既然我们已经奠定了水印应该如何行为的基础，现在是时候看一下一些真实的系统，以了解不同<br>实现水印机制的方式。我们希望这些能够为现实世界中的水印在延迟和正确性以及可扩展性和可用性之间的权衡提供一些启示。</p>
+<h3><span id="案例研究google-cloud-dataflow中的水印">案例研究：Google Cloud Dataflow中的水印</span><a href="#案例研究google-cloud-dataflow中的水印" class="header-anchor">#</a></h3><p>在流处理系统中实现水印有许多可能的方法。在这里，我们简要介绍在Google Cloud Dataflow中的实现情况，这是一个完全托管的服务，用于执行Apache Beam管道。Dataflow包括用于定义数据处理工作流程的SDK，以及在Google Cloud Platform资源上运行这些工作流程的Cloud Platform托管服务。</p>
+<p>数据流通过将每个数据处理图中的数据处理步骤条带（划分）到多个物理工作器中，将每个工作器的可用键空间分割为键范围，并将每个范围分配给一个工作器。每当遇到具有不同键的GroupByKey操作时，数据必须被洗牌到相应的键。</p>
+<p>图3-16描述了具有GroupByKey的处理图的逻辑表示。</p>
+<img src="/www6vHomeHexo/2000/03/15/streamingSystemChapter3/stsy_0316.png" class>
+<p><em>图3-16。 GroupByKey步骤从另一个DoFn消耗数据。这意味着第一步的键和第二步的键之间存在数据洗牌。</em></p>
+<p>虽然将键范围物理分配给工作器的方式可能如图3-17所示。</p>
+<img src="/www6vHomeHexo/2000/03/15/streamingSystemChapter3/stsy_0317.png" class>
+<p><em>图3-17。两个步骤的键范围分配（条带）在可用工作器上。</em></p>
+<p>在水印传播部分，我们讨论了为每个步骤维护水印的多个子组件。Dataflow跟踪每个组件的每个范围的水印。然后，水印聚合涉及计算所有范围中每个水印的最小值，以确保满足以下保证：</p>
+<ul>
+<li>所有范围都必须报告水印。如果没有范围的水印，我们无法推进水印，因为必须将不报告的范围视为未知。</li>
+<li>确保水印单调递增。因为可能存在延迟数据，所以如果更新水印会导致水印后移，我们不能更新水印。</li>
+</ul>
+<p>Google Cloud Dataflow通过一个集中的聚合代理进行聚合。我们可以为了效率而分片这个代理。从正确性的角度来看，水印聚合器作为水印的“真正的数据源”。</p>
+<p>确保分布式水印聚合的正确性带来了某些挑战。重要的是不要过早地推进水印，因为过早地推进水印会将准时数据转换为延迟数据。具体而言，当物理分配被激活到工作器时，工作器对附加到键范围的持久状态维护租约，确保只有一个工作器可以对一个键的持久状态进行修改。为了保证水印的正确性，必须确保仅当工作器进程仍然在其持久状态上保持租约时，才会将来自工作器进程的每个水印更新纳入聚合;因此，水印更新协议必须考虑状态所有权租约验证。</p>
+<h3><span id="案例研究apache-flink中的水印"><strong>案例研究：Apache Flink中的水印</strong></span><a href="#案例研究apache-flink中的水印" class="header-anchor">#</a></h3><p>Apache Flink是一个开源的流处理框架，用于分布式、高性能、始终可用和准确的数据流应用程序。可以使用Flink运行Beam程序。在这样做时，Beam依赖于Flink中实现的流处理概念，例如水印。与实现集中式水印聚合的Google Cloud Dataflow不同，Flink在带内执行水印跟踪和聚合。</p>
+<p>为了理解这是如何工作的，让我们看看Flink管道，如图3-18所示。</p>
+<img src="/www6vHomeHexo/2000/03/15/streamingSystemChapter3/stsy_0318.png" class>
+
+<p><em>图3-18。带有两个源和带内传播事件时间水印的Flink管道</em></p>
+<p>在此管道中，数据在两个源处生成。这些源还都生成与数据流同步带内发送的水印“检查点”。这意味着当来自时间戳“53”的源A的水印检查点被发出时，它保证不会从源A发出时间戳在“53”之后的非延迟数据消息。下游的“keyBy”操作员消耗输入数据和水印检查点。随着新的水印检查点被消耗，下游操作员的水印视图被推进，可以发出下游操作员的新水印检查点。</p>
+<p>与依赖于集中聚合的Cloud Dataflow方法不同，选择在数据流中带内发送水印检查点会导致一些有趣的权衡。</p>
+<p>以下是带内水印的一些优点：</p>
+<ul>
+<li><p>减少水印传播延迟，非常低延迟的水印<br>因为不需要水印数据穿过多个跳跃并等待集中聚合，所以使用带内方法更容易实现非常低延迟。</p>
+</li>
+<li><p>水印聚合没有单点故障<br>集中的水印聚合代理不可用将导致整个管道中的水印延迟。使用带内方法，管道的一部分不可用也不能导致整个管道的水印延迟。</p>
+</li>
+<li><p>内在可扩展性<br>尽管Cloud Dataflow在实践中具有良好的可扩展性，但是使用集中式水印聚合服务需要更多的复杂性，而使用带内水印具有隐式的可扩展性。</p>
+</li>
+</ul>
+<p>以下是带外水印聚合的一些优点：</p>
+<ul>
+<li><p>唯一的“真相”来源<br>为了可调试性、监视和其他应用程序（例如基于管道进度限制输入），拥有一个能够提供水印值的服务比将水印隐式地放在流中更有优势，因为系统的每个组件都有自己的部分视图。</p>
+</li>
+<li><p>源水印创建<br>某些源水印需要全局信息。例如，源可能处于暂时闲置状态、数据速率较低或需要有关源或其他系统组件的带外信息来生成水印。这在中央服务中更容易实现。有关示例，请参见下面针对Google Cloud Pub&#x2F;Sub的源水印案例研究。</p>
+</li>
+</ul>
+<h3><span id="案例研究google-cloud-pubx2fsub-的源水印">案例研究：Google Cloud Pub&#x2F;Sub 的源水印</span><a href="#案例研究google-cloud-pubx2fsub-的源水印" class="header-anchor">#</a></h3><p>Google Cloud Pub&#x2F;Sub 是一种完全托管的实时消息传递服务，允许您在独立应用程序之间发送和接收消息。在这里，我们讨论如何为通过 Cloud Pub&#x2F;Sub 发送到管道的数据创建一个合理的启发式水印。</p>
+<p>首先，我们需要描述一下 Pub&#x2F;Sub 的工作原理。消息发布在 Pub&#x2F;Sub <em>主题</em> 上。任何数量的 Pub&#x2F;Sub <em>订阅</em> 可以订阅特定主题。相同的消息被发送到订阅给定主题的所有订阅。客户端通过提供的 ID 从订阅中<em>拉取</em>消息，并确认接收到特定消息。客户端无法选择拉取哪些消息，尽管 Pub&#x2F;Sub 尽力提供最旧的消息，但没有硬性保证。</p>
+<p>为了构建一个启发式，我们对将数据发送到 Pub&#x2F;Sub 的源进行了一些假设。具体来说，我们假设原始数据的时间戳是“良好的”，换句话说，我们期望在将数据发送到 Pub&#x2F;Sub 之前，源数据出现有限数量的时间戳乱序。任何以时间戳超出允许的乱序范围发送的数据都将被视为延迟数据。在我们当前的实现中，此边界至少为 10 秒，这意味着在发送到 Pub&#x2F;Sub 之前重新排序时间戳最多可达到 10 秒。我们称这个值为<em>估计范围</em>。另一个看待这个的方式是，当管道完全赶上输入时，水印将落后于实时 10 秒，以允许源可能的重新排序。如果管道积压，所有积压（而不仅仅是 10 秒的范围）都用于估计水印。</p>
+<p>我们在 Pub&#x2F;Sub 中面临的挑战是什么？因为 Pub&#x2F;Sub 不保证顺序，我们必须具有某种额外的元数据以了解有关积压的足够信息。幸运的是，Pub&#x2F;Sub 提供了一个“最旧的未确认发布时间戳”的积压度量。这与我们的消息的事件时间戳不同，因为 Pub&#x2F;Sub 对通过它发送的应用程序级元数据是不可知的；相反，这是消息被 Pub&#x2F;Sub 摄取的时间戳。</p>
+<p>这个测量不同于事件时间水印。实际上，它是 Pub&#x2F;Sub 消息传递的处理时间水印。Pub&#x2F;Sub 发布时间戳不等于事件时间戳，在发送历史（过去）数据的情况下，它可能会远离。这些时间戳的排序也可能是不同的，因为我们允许有限数量的重新排序，如前面所述。</p>
+<p>但是，我们可以将其用作积压的度量，以了解有关积压中存在的事件时间戳的足够信息，从而可以创建如下合理的水印。</p>
+<p>我们在包含输入消息的主题中创建两个订阅：<em>基本订阅</em>，管道将实际使用它来读取要处理的数据，以及<em>跟踪订阅</em>，仅用于元数据，以执行水印估计。</p>
+<p>在图3-19中查看我们的基本订阅，我们可以看到消息可能乱序到达。我们使用 Pub&#x2F;Sub 发布时间戳“pt”和事件时间戳“et”标记每条消息。请注意，这两个时间域可能是无关的。</p>
+<img src="/www6vHomeHexo/2000/03/15/streamingSystemChapter3/stsy_0319.png" class>
+<p><em>图3-19。Pub&#x2F;Sub订阅上到达的处理时间和事件时间时间戳</em></p>
+<p>基本订阅中的一些消息未被确认，形成了积压。这可能是因为它们尚未被传递，或者它们可能已经被传递但尚未被处理。请记住，从此订阅拉取是分布在多个碎片上的。因此，仅仅通过查看基本订阅，无法确定我们的水印应该是什么。</p>
+<p>跟踪订阅（如图3-20所示）用于有效地检查基本订阅的积压，并获取积压中事件时间戳的最小值。通过在跟踪订阅上保持很少或没有积压，我们可以检查基本订阅的最旧未确认消息之前的消息。</p>
+<img src="/www6vHomeHexo/2000/03/15/streamingSystemChapter3/stsy_0320.png" class>
+<p><em>图3-20。接收相同消息的附加“跟踪”订阅和“基本”订阅</em></p>
+<p>我们通过确保从此订阅中拉取是计算廉价的来保持在跟踪订阅上。相反，如果我们在跟踪订阅上落后足够多，我们将停止推进水印。为此，我们确保至少满足以下条件之一：</p>
+<ul>
+<li>跟踪订阅足够领先于基本订阅。足够领先意味着跟踪订阅领先至少估计范围。这确保考虑了估计范围内的任何有界重新排序。</li>
+<li>跟踪订阅足够接近实时。换句话说，跟踪订阅上没有积压。</li>
+</ul>
+<p>我们尽快确认跟踪订阅上的消息，之后我们会持久保存有关消息的发布和事件时间戳的元数据。我们将此元数据以稀疏直方图格式存储，以最小化使用空间和持久写入的大小。</p>
+<p>最后，我们确保具有足够的数据来进行合理的水印估计。我们从我们的跟踪订阅中读取的事件时间戳带宽有最新的发布时间戳，这些时间戳比基本订阅的最旧未确认时间戳新，或者估计范围的宽度。这确保我们考虑了积压中的所有事件时间戳，或者如果积压很小，则考虑了最近的估计范围，以进行水印估计。</p>
+<p>最后，水印值计算为带宽中的最小事件时间。</p>
+<p>这种方法的正确性在于，输入中在重新排序限制范围内的所有时间戳将由水印考虑，不会出现延迟数据。然而，它可能会产生过度保守的水印，一种“进展过慢”的方式，如第2章所述。因为我们在跟踪订阅上考虑了基本订阅的最旧未确认消息之前的所有消息，所以我们可以将已经确认的消息的事件时间戳包括在水印估计中。</p>
+<p>此外，还有一些启发式方法以确保进展。在密集、频繁到达数据的情况下，此方法效果很好。在数据稀疏或不频繁的情况下，可能没有足够的最近消息来构建合理的估计。如果我们在订阅上没有看到数据超过两分钟（并且没有积压），我们将将水印推进到接近实时。这确保即使没有更多的消息，水印和管道也会继续前进。</p>
+<p>以上所有内容都确保只要源数据事件时间戳的重新排序在估计范围内，就不会有额外的延迟数据。</p>
 ]]></content>
       <categories>
         <category>Streaming System</category>
@@ -21564,10 +21635,33 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 </li>
 <li><a href="#percentile-watermarks"><strong>Percentile Watermarks</strong></a></li>
 <li><a href="#processing-time-watermarks"><strong>Processing-Time Watermarks</strong></a></li>
+<li><a href="#case-studies"><strong>Case Studies</strong></a><ul>
+<li><a href="#case-study-watermarks-in-google-cloud-dataflow"><strong>Case Study: Watermarks in Google Cloud Dataflow</strong></a></li>
+<li><a href="#case-study-watermarks-in-apache-flink"><strong>Case Study: Watermarks in Apache Flink</strong></a></li>
+<li><a href="#case-study-source-watermarks-for-google-cloud-pubsub"><strong>Case Study: Source Watermarks for Google Cloud Pub&#x2F;Sub</strong></a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 
 </div>
+
+
+
+<details><summary>点击 原文</summary><p>So far, we have been looking at stream processing from the perspective of the</p>
+<p>pipeline author or data scientist. Chapter 2 introduced watermarks as part of</p>
+<p>the answer to the fundamental questions of <em>where</em> in event-time processing is</p>
+<p>taking place and <em>when</em> in processing time results are materialized. In this</p>
+<p>chapter, we approach the same questions, but instead from the perspective of</p>
+<p>the underlying mechanics of the stream processing system. Looking at these</p>
+<p>mechanics will help us motivate, understand, and apply the concepts around</p>
+<p>watermarks. We discuss how watermarks are created at the point of data</p>
+<p>ingress, how they propagate through a data processing pipeline, and how they</p>
+<p>affect output timestamps. We also demonstrate how watermarks preserve the</p>
+<p>guarantees that are necessary for answering the questions of <em>where</em> in event</p>
+<p>time data are processed and <em>when</em> it is materialized, while dealing with</p>
+<p>unbounded data.</p>
+</details>
 
 
 
@@ -22260,6 +22354,243 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <p>as garbage collection of temporary state (Reuven talks more about an example</p>
 <p>of this in Chapter 5).</p>
 </details>
+
+
+
+<details><summary>点击 原文</summary><h1><span id="case-studies"><strong>Case Studies</strong></span><a href="#case-studies" class="header-anchor">#</a></h1><p>Now that we’ve laid the groundwork for how watermarks ought to behave,</p>
+<p>it’s time to take a look at some real systems to understand how different</p>
+<p>mechanisms of the watermark are implemented. We hope that these shed</p>
+<p>some light on the trade-offs that are possible between latency and correctness</p>
+<p>as well as scalability and availability for watermarks in real-world systems.</p>
+<h3><span id="case-study-watermarks-in-google-cloud-dataflow"><strong>Case Study: Watermarks in Google Cloud Dataflow</strong></span><a href="#case-study-watermarks-in-google-cloud-dataflow" class="header-anchor">#</a></h3><p>There are many possible approaches to implementing watermarks in a stream</p>
+<p>processing system. Here, we present a quick survey of the implementation in</p>
+<p>Google Cloud Dataflow, a fully managed service for executing Apache Beam</p>
+<p>pipelines. Dataflow includes SDKs for defining data processing workflows,</p>
+<p>and a Cloud Platform managed service to run those workflows on Google</p>
+<p>Cloud Platform resources.</p>
+<p>Dataflow stripes (shards) each of the data processing steps in its data</p>
+<p>processing graph across multiple physical workers by splitting the available</p>
+<p>keyspace of each worker into key ranges and assigning each range to a</p>
+<p>worker. Whenever a GroupByKey operation with distinct keys is encountered,</p>
+<p>data must be shuffled to corresponding keys.</p>
+<p>Figure 3-16 depicts a logical representation of the processing graph with a</p>
+<p>GroupByKey.</p>
+<p><em>Figure 3-16. A GroupByKey step consumes data from another DoFn. This means that there is a data</em></p>
+<p><em>shuffle between the keys of the first step and the keys of the second step.</em></p>
+<p>Whereas the physical assignment of key ranges to workers might look</p>
+<p>Figure 3-17.</p>
+<p><em>Figure 3-17. Key ranges of both steps are assigned (striped) across the available workers.</em></p>
+<p>In the watermark propagation section, we discussed that the watermark is</p>
+<p>maintained for multiple subcomponents of each step. Dataflow keeps track of</p>
+<p>the per-range watermarks of each of these components. Watermark</p>
+<p>aggregation then involves computing the minimum of each watermark across</p>
+<p>all ranges, ensuring that the following guarantees are met:</p>
+<ul>
+<li>All ranges must be reporting a watermark. If a watermark is not</li>
+</ul>
+<p>present for a range, we cannot advance the watermark, because a</p>
+<p>range not reporting must be treated as unknown.</p>
+<ul>
+<li>Ensure that the watermark is monotonically increasing. Because late</li>
+</ul>
+<p>data is possible, we must not update the watermark if it would cause</p>
+<p>the watermark to move backward.</p>
+<p>Google Cloud Dataflow performs aggregation via a centralized aggregator</p>
+<p>agent. We can shard this agent for efficiency. From a correctness standpoint,</p>
+<p>the watermark aggregator serves as a “single source of truth” about the</p>
+<p>watermark.</p>
+<p>Ensuring correctness in distributed watermark aggregation poses certain</p>
+<p>challenges. It is paramount that watermarks are not advanced prematurely</p>
+<p>because advancing the watermark prematurely will turn on-time data into late</p>
+<p>data. Specifically, as physical assignments are actuated to workers, the</p>
+<p>workers maintain leases on the persistent state attached to the key ranges,</p>
+<p>ensuring that only a single worker may mutate the persistent state for a key.</p>
+<p>To guarantee watermark correctness, we must ensure that each watermark</p>
+<p>update from a worker process is admitted into the aggregate only if the</p>
+<p>worker process still maintains a lease on its persistent state; therefore, the</p>
+<p>watermark update protocol must take state ownership lease validation into</p>
+<p>account.</p>
+</details>
+
+
+
+
+
+<details><summary>点击 原文</summary><h3><span id="case-study-watermarks-in-apache-flink"><strong>Case Study: Watermarks in Apache Flink</strong></span><a href="#case-study-watermarks-in-apache-flink" class="header-anchor">#</a></h3><p>Apache Flink is an open source stream processing framework for distributed,</p>
+<p>high-performing, always-available, and accurate data streaming applications.</p>
+<p>It is possible to run Beam programs using a Flink runner. In doing so, Beam</p>
+<p>relies on the implementation of stream processing concepts such as</p>
+<p>watermarks within Flink. Unlike Google Cloud Dataflow, which implements</p>
+<p>watermark aggregation via a centralized watermark aggregator agent, Flink</p>
+<p>performs watermark tracking and aggregation in-band.</p>
+<p>To understand how this works, let’s look at a Flink pipeline, as shown in</p>
+<p>Figure 3-18.</p>
+<p><em>Figure 3-18. A Flink pipeline with two sources and event-time watermarks propagating in-band</em></p>
+<p>In this pipeline data is generated at two sources. These sources also both</p>
+<p>generate watermark “checkpoints” that are sent synchronously in-band with</p>
+<p>the data stream. This means that when a watermark checkpoint from source A</p>
+<p>for timestamp “53” is emitted, it guarantees that no nonlate data messages</p>
+<p>will be emitted from source A with timestamp behind “53”. The downstream</p>
+<p>“keyBy” operators consume the input data and the watermark checkpoints. As</p>
+<p>new watermark checkpoints are consumed, the downstream operators’ view</p>
+<p>of the watermark is advanced, and a new watermark checkpoint for</p>
+<p>downstream operators can be emitted.</p>
+<p>This choice to send watermark checkpoints in-band with the data stream</p>
+<p>differs from the Cloud Dataflow approach that relies on central aggregation</p>
+<p>and leads to a few interesting trade-offs.</p>
+<p>Following are some advantages of in-band watermarks:</p>
+<ul>
+<li>Reduced watermark propagation latency, and very low-latency watermarks</li>
+</ul>
+<p>Because it is not necessary to have watermark data traverse multiple hops</p>
+<p>and await central aggregation, it is possible to achieve very low latency</p>
+<p>more easily with the in-band approach.</p>
+<ul>
+<li>No single point of failure for watermark aggregation</li>
+</ul>
+<p>Unavailability in the central watermark aggregation agent will lead to a</p>
+<p>delay in watermarks across the entire pipeline. With the in-band approach,</p>
+<p>unavailability of part of the pipeline cannot cause watermark delay to the</p>
+<p>entire pipeline.</p>
+<ul>
+<li>Inherent scalability</li>
+</ul>
+<p>Although Cloud Dataflow scales well in practice, more complexity is</p>
+<p>needed to achieve scalability with a centralized watermark aggregation</p>
+<p>service versus implicit scalability with in-band watermarks.</p>
+<p>Here are some advantages of out-of-band watermark aggregation:</p>
+<ul>
+<li>Single source of “truth”</li>
+</ul>
+<p>For debuggability, monitoring, and other applications such as throttling</p>
+<p>inputs based on pipeline progress, it is advantageous to have a service that</p>
+<p>can vend the values of watermarks rather than having watermarks implicit</p>
+<p>in the streams, with each component of the system having its own partial</p>
+<p>view.</p>
+<ul>
+<li>Source watermark creation</li>
+</ul>
+<p>Some source watermarks require global information. For example,</p>
+<p>sources might be temprarily idle, have low data rates, or require out-of</p>
+<p>band information about the source or other system components to</p>
+<p>generate the watermarks. This is easier to achieve in a central service. For</p>
+<p>an example see the case study that follows on source watermarks for</p>
+<p>Google Cloud Pub&#x2F;Sub.</p>
+</details>
+
+
+
+
+
+<details><summary>点击 原文</summary><h3><span id="case-study-source-watermarks-for-google-cloud-pubx2fsub"><strong>Case Study: Source Watermarks for Google Cloud Pub&#x2F;Sub</strong></span><a href="#case-study-source-watermarks-for-google-cloud-pubx2fsub" class="header-anchor">#</a></h3><p>Google Cloud Pub&#x2F;Sub is a fully managed real-time messaging service that</p>
+<p>allows you to send and receive messages between independent applications.</p>
+<p>Here, we discuss how to create a reasonable heuristic watermark for data sent</p>
+<p>into a pipeline via Cloud Pub&#x2F;Sub.</p>
+<p>First, we need to describe a little about how Pub&#x2F;Sub works. Messages are</p>
+<p>published on Pub&#x2F;Sub <em>topics</em>. A particular topic can be subscribed to by any</p>
+<p>number of Pub&#x2F;Sub <em>subscriptions</em>. The same messages are delivered on all</p>
+<p>subscriptions subscribed to a given topic. The method of delivery is for</p>
+<p>clients to <em>pull</em> messages off the subscription, and to ack the receipt of</p>
+<p>particular messages via provided IDs. Clients do not get to choose which</p>
+<p>messages are pulled, although Pub&#x2F;Sub does attempt to provide oldest</p>
+<p>messages first, with no hard guarantees around this.</p>
+<p>To build a heuristic, we make some assumptions about the source that is</p>
+<p>sending data into Pub&#x2F;Sub. Specifically, we assume that the timestamps of the</p>
+<p>original data are “well behaved”; in other words, we expect a bounded</p>
+<p>amount of out-of-order timestamps on the source data, before it is sent to</p>
+<p>Pub&#x2F;Sub. Any data that are sent with timestamps outside the allowed out-of</p>
+<p>order bounds will be considered late data. In our current implementation, this</p>
+<p>bound is at least 10 seconds, meaning reordering of timestamps up to 10</p>
+<p>seconds before sending to Pub&#x2F;Sub will not create late data. We call this value</p>
+<p>the <em>estimation band</em>. Another way to look at this is that when the pipepline is</p>
+<p>perfectly caught up with the input, the watermark will be 10 seconds behind</p>
+<p>real time to allow for possible reorderings from the source. If the pipeline is</p>
+<p>backlogged, all of the backlog (not just the 10-second band) is used for</p>
+<p>estimating the watermark.</p>
+<p>What are the challenges we face with Pub&#x2F;Sub? Because Pub&#x2F;Sub does not</p>
+<p>guarantee ordering, we must have some kind of additional metadata to know</p>
+<p>enough about the backlog. Luckily, Pub&#x2F;Sub provides a measurement of</p>
+<p>backlog in terms of the “oldest unacknowledged publish timestamp.” This is</p>
+<p>not the same as the event timestamp of our message, because Pub&#x2F;Sub is</p>
+<p>agnostic to the application-level metadata being sent through it; instead, this</p>
+<p>is the timestamp of when the message was ingested by Pub&#x2F;Sub.</p>
+<p>This measurement is not the same as an event-time watermark. It is in fact the</p>
+<p>processing-time watermark for Pub&#x2F;Sub message delivery. The Pub&#x2F;Sub</p>
+<p>publish timestamps are not equal to the event timestamps, and in the case that</p>
+<p>historical (past) data are being sent, it might be arbitrarily far away. The</p>
+<p>ordering on these timestamps might also be different because, as mentioned</p>
+<p>earlier, we allow a limited amount of reordering.</p>
+<p>However, we can use this as a measure of backlog to learn enough</p>
+<p>information about the event timestamps present in the backlog so that we can</p>
+<p>create a reasonable watermark as follows.</p>
+<p>We create two subscriptions to the topic containing the input messages: a</p>
+<p><em>base subscription</em> that the pipeline will actually use to read the data to be</p>
+<p>processed, and a <em>tracking subscription</em>, which is used for metadata only, to</p>
+<p>perform the watermark estimation.</p>
+<p>Taking a look at our base subscription in Figure 3-19, we see that messages</p>
+<p>might arrive out of order. We label each message with its Pub&#x2F;Sub publish</p>
+<p>timestamp “pt” and its event-time timestamp “et.” Note that the two time</p>
+<p>domains can be unrelated.</p>
+<p><em>Figure 3-19. Processing-time and event-time timestamps of messages arriving on a Pub&#x2F;Sub</em></p>
+<p><em>subscription</em></p>
+<p>Some messages on the base subscription are unacknowledged forming a</p>
+<p>backlog. This might be due to them not yet being delivered or they might</p>
+<p>have been delivered but not yet processed. Remember also that pulls from this</p>
+<p>subscription are distributed across multiple shards. Thus, it is not possible to</p>
+<p>say just by looking at the base subscription what our watermark should be.</p>
+<p>The tracking subscription, seen in Figure 3-20, is used to effectively inspect</p>
+<p>the backlog of the base subscription and take the minimum of the event</p>
+<p>timestamps in the backlog. By maintaining little or no backlog on the tracking</p>
+<p>subscription, we can inspect the messages ahead of the base subsciption’s</p>
+<p>oldest unacknowledged message.</p>
+<p><em>Figure 3-20. An additional “tracking” subscription receiving the same messages as the “base”</em></p>
+<p><em>subscription</em></p>
+<p>We stay caught up on the tracking subscription by ensuring that pulling from</p>
+<p>this subscription is computationally inexpensive. Conversely, if we fall</p>
+<p>sufficiently behind on the tracking subscription, we will stop advancing the</p>
+<p>watermark. To do so, we ensure that at least one of the following conditions is</p>
+<p>met:</p>
+<ul>
+<li>The tracking subscription is sufficiently ahead of the base</li>
+</ul>
+<p>subscription. Sufficiently ahead means that the tracking subscription</p>
+<p>is ahead by at least the estimation band. This ensures that any</p>
+<p>bounded reorder within the estimation band is taken into account.</p>
+<ul>
+<li>The tracking subscription is sufficiently close to real time. In other</li>
+</ul>
+<p>words, there is no backlog on the tracking subscription.</p>
+<p>We acknowledge the messages on the tracking subscription as soon as</p>
+<p>possible, after we have durably saved metadata about the publish and event</p>
+<p>timestamps of the messages. We store this metadata in a sparse histogram</p>
+<p>format to minimize the amount of space used and the size of the durable</p>
+<p>writes.</p>
+<p>Finally, we ensure that we have enough data to make a reasonable watermark</p>
+<p>estimate. We take a band of event timestamps we’ve read from our tracking</p>
+<p>subscription with publish timestamps newer than the oldest unacknowledged</p>
+<p>of the base subscription, or the width of the estimation band. This ensures that</p>
+<p>we consider all event timestamps in the backlog, or if the backlog is small, the</p>
+<p>most recent estimation band, to make a watermark estimate.</p>
+<p>Finally, the watermark value is computed to be the minimum event time in</p>
+<p>the band.</p>
+<p>This method is correct in the sense that all timestamps within the reordering</p>
+<p>limit of 10 seconds at the input will be accounted for by the watermark and</p>
+<p>not appear as late data. However, it produces possibly an overly conservative</p>
+<p>watermark, one that advances “too slowly” in the sense described in</p>
+<p>Chapter 2. Because we consider all messages ahead of the base subscription’s</p>
+<p>oldest unacknowledged message on the tracking subscription, we can include</p>
+<p>event timestamps in the watermark estimate for messages that have already</p>
+<p>been acknowledged.</p>
+<p>Additionally, there are a few heuristics to ensure progress. This method works</p>
+<p>well in the case of dense, frequently arriving data. In the case of sparse or</p>
+<p>infrequent data, there might not be enough recent messages to build a</p>
+<p>reasonable estimate. In the case that we have not seen data on the subscription</p>
+<p>in more than two minutes (and there’s no backlog), we advance the</p>
+<p>watermark to near real time. This ensures that the watermark and the pipeline</p>
+<p>continue to make progress even if no more messages are forthcoming.</p>
+<p>All of the above ensures that as long as source data-event timestamp</p>
+<p>reordering is within the estimation band, there will be no additional late data.</p>
+</details>
 ]]></content>
       <categories>
         <category>Streaming System</category>
@@ -22833,7 +23164,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
-    <title>《Streaming System》-第二章： 数据处理的什么、何地、何时以及如何进行</title>
+    <title>《Streaming System》-第二章： 数据处理的什么、何地、何时以及如何进行[完整]</title>
     <url>/www6vHomeHexo/2000/03/17/streamingSystemChapter2/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -22864,6 +23195,12 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 
 </div>
 
+
+<p>好了，派对人们，是时候开始具体化了！</p>
+<p>第一章主要涉及三个方面：<em>术语</em>，准确定义当我使用过载术语“流式处理”时的含义；<em>批处理与流处理</em>，比较两种系统的理论能力，并推断只有两个方面是将流处理系统推向超越批处理系统所必须的：正确性和关于时间的推理工具；以及<em>数据处理模式</em>，研究在处理有界数据和无界数据时，批处理系统和流处理系统采用的概念方法。</p>
+<p>在本章中，我们将进一步关注第一章中的数据处理模式，但更详细地在具体示例的背景下进行。到最后，我们将涵盖我认为对于强大的乱序数据处理所必需的核心原则和概念；这些是真正将您推向经典批处理之外的关于时间的推理工具。</p>
+<p>为了让您了解实际情况，我使用Apache Beam代码片段，配合时间流逝图表，提供概念的可视化表示。Apache Beam是一种统一的批处理和流处理编程模型和可移植性层，具有各种语言的具体SDK（例如Java和Python）。使用Apache Beam编写的管道可以在任何支持的执行引擎上进行便携式运行（Apache Apex、Apache Flink、Apache Spark、Cloud Dataflow等）。</p>
+<p>我在这里使用Apache Beam作为示例，不是因为这是一本Beam书籍（它不是），而是因为它最完全地体现了本书中描述的概念。回想一下，“流处理102”最初编写时（当它仍然是Google Cloud Dataflow的Dataflow模型，而不是Apache Beam的Beam模型时），它是唯一存在的系统，提供了所有我们将在此处涵盖的示例所需的表达能力。一年半后，我很高兴地说，很多事情发生了改变，大多数主要系统已经移动或正在朝向支持类似于本书所描述的模型。因此，请放心，尽管是通过Beam的镜头，我们在这里涵盖的概念同样适用于您将遇到的大多数其他系统。</p>
 <h1><span id="路线图">路线图</span><a href="#路线图" class="header-anchor">#</a></h1><p>为了帮助为本章打下基础，我想提出五个主要概念，这些概念将支撑所有讨论，以及大部分第一部分的内容。我们已经讨论了其中两个。</p>
 <p>在第一章中，我首先建立了事件时间（事件发生的时间）和处理时间（在处理期间观察到的时间）之间的关键区别。这为本书提出的一个主要论点奠定了基础：如果您关心正确性和事件实际发生的上下文，则必须相对于它们固有的事件时间而不是在分析过程中遇到它们的处理时间来分析数据。</p>
 <p>然后，我介绍了<em>窗口化</em>的概念（即沿着时间边界对数据集进行分区），这是一种常用的方法，用于应对无限数据源在技术上可能永远不会结束的事实。窗口化策略的一些更简单的例子是<em>固定</em>和<em>滑动</em>窗口，但更复杂的窗口化类型，例如<em>会话</em>（其中窗口是由数据本身的特征定义的;例如，捕获用户的每个活动会话，然后是不活动的间隙），也广泛使用。</p>
@@ -22944,7 +23281,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <p>如前所述，Safari版本将完整执行作为动画电影呈现，而打印和所有其他数字格式使用一系列静态关键帧序列，这些关键帧提供了管道如何随时间推移的进展的感觉。在这两种情况下，我们还提供指向*<a href="http://www.streamingbook.net/">www.streamingbook.net</a>*上完全动画版本的URL。</p>
 <p>每个图表在两个维度上绘制输入和输出：事件时间（x轴）和处理时间（y轴）。因此，由管道观察到的实时时间从底部向上推进，如处理时间轴中上升的粗黑线所示。输入是圆圈，圆圈内的数字表示特定记录的值。它们开始是浅灰色的，并随着管道观察到它们而变暗。</p>
 <p>当管道观察到值时，它会在其中间状态中累积它们，并最终将聚合结果实现为输出。状态和输出由矩形表示（灰色为状态，蓝色为输出），聚合值靠近顶部，并且由矩形覆盖的区域表示积累到结果的事件时间和处理时间的部分。对于示例2-1中的管道，在经典批处理引擎上执行时，它看起来像图2-3所示。</p>
-<div id="dplayer0" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer0"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0203.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer6" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer6"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0203.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图2-3.经典批处理</em></p>
 <p>因为这是批处理管道，所以它会累积状态，直到看到所有输入为止（由顶部的虚线绿线表示），此时它会产生其单个输出为48。在这个示例中，我们正在计算事件时间的所有总和，因为我们没有应用任何特定的窗口转换；因此，状态和输出的矩形覆盖了整个x轴。但是，如果我们想要处理无限数据源，则经典批处理将不足够；我们无法等待输入结束，因为它实际上永远不会结束。我们想要的概念之一是窗口，这是我们在第1章中介绍的。因此，在我们的第二个问题“事件时间的<em><strong>哪里</strong></em>计算结果？”的上下文中，我们现在将简要重新访问窗口。</p>
 <h3><span id="何地窗口">何地：窗口</span><a href="#何地窗口" class="header-anchor">#</a></h3><p>如第1章所述，窗口是沿时间边界切分数据源的过程。常见的窗口策略包括固定窗口、滑动窗口和会话窗口，如图2-4所示。</p>
@@ -22954,7 +23291,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <p><em>示例2-2.分段求和代码</em></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team，Integer&gt;&gt; totals = input</span><br><span class="line">  .apply（Window.into（FixedWindows.of（TWO_MINUTES）））</span><br><span class="line">  .apply（Sum.integersPerKey（））;</span><br></pre></td></tr></table></figure>
 <p>请记住，Beam提供了一个统一的模型，可以在批处理和流处理中使用，因为从语义上讲，批处理实际上只是流处理的一个子集。因此，让我们首先在批处理引擎上执行此管道；机制更加简单，当我们切换到流引擎时，它将为我们提供直接比较的内容。图2-5呈现了结果。</p>
-<div id="dplayer1" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer1"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0205.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer7" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer7"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0205.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图2-5.在批处理引擎上的分段求和</em></p>
 <p>与以前一样，输入会在状态中累积，直到完全消耗，此后才会产生输出。但是，在这种情况下，我们不仅仅得到一个输出，而是得到四个输出：每个相关的两分钟事件时间窗口的单个输出。</p>
 <p>到目前为止，我们已经重新访问了我在第1章中介绍的两个主要概念：事件时间和处理时间域之间的关系以及窗口。如果我们想继续，我们将需要开始添加本节开头提到的新概念：触发器、水印和累积。</p>
@@ -22976,7 +23313,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <p><em>示例2-3。每个记录都会重复触发</em></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team，Integer&gt;&gt; totals = input</span><br><span class="line">  .apply(Window.into(FixedWindows.of(TWO_MINUTES))</span><br><span class="line">               .triggering(Repeatedly(AfterCount(1))));</span><br><span class="line">  .apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
 <p>如果我们在流式引擎上运行这个新管道，结果会像图2-6所示。</p>
-<div id="dplayer2" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer2"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0206.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer8" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer8"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0206.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><em>图2-6.在流媒体引擎上每条记录触发</em></p>
 <p>您可以看到我们现在为每个窗口获得多个输出（窗格）：每个对应输入的一次。当输出流被写入某种表以便您可以简单地轮询结果时，这种触发模式工作得很好。每当您查看表时，您将看到给定窗口的最新值，这些值随着时间的推移会趋于正确。</p>
@@ -22986,7 +23323,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team，Integer&gt;&gt; totals = input</span><br><span class="line">  .apply(Window.into(FixedWindows.of(TWO_MINUTES))</span><br><span class="line">               .triggering(Repeatedly(AlignedDelay(TWO_MINUTES)))</span><br><span class="line">  .apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
 
 
-<div id="dplayer3" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer3"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0207.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer9" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer9"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0207.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><em>图2-7。两分钟对齐延迟触发器（即，微批处理）</em></p>
 <p>这种对齐延迟触发器实际上类似于Spark Streaming之类的微批处理流系统。它的好处在于可预测性;您在相同时间内获得所有修改的窗口的定期更新。这也是缺点：所有更新都同时发生，这会导致爆发式的工作负载，通常需要更大的峰值配额来正确处理负载。另一种选择是使用不对齐的延迟。这在Beam中可能类似于示例2-5，其结果如图2-8所示。</p>
@@ -22995,7 +23332,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 
 
 
-<div id="dplayer4" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer4"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0208.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer10" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer10"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0208.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><em>图2-8。两分钟不对齐延迟触发器</em></p>
 <p>将图2-8中的不对齐延迟与图2-6中的对齐延迟进行对比，可以很容易地看出不对齐延迟如何更均匀地分布负载。对于任何给定窗口涉及的实际延迟在两者之间有所不同，有时更多，有时更少，但最终平均延迟将基本保持不变。从这个角度来看，对于大规模处理，不对齐的延迟通常是更好的选择，因为它们会导致时间上更均匀的负载分布。</p>
@@ -23019,7 +23356,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</span><br><span class="line">  .apply(Window.into(FixedWindows.of(TWO_MINUTES))</span><br><span class="line">              .triggering(AfterWatermark()))</span><br><span class="line">  .apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
 <p>水印的一个有趣的特点是它们是一类函数，这意味着有多个不同的函数<em>F</em>(<em>P</em>)→<em>E</em>满足水印的属性，成功程度不同。正如我之前所指出的，对于您拥有输入数据的情况，可能可以构建完美的水印，这是理想的情况。但是对于缺乏输入的完美知识或计算完美水印的计算成本太高的情况，您可能会选择使用启发式来定义您的水印。我想在这里强调的一点是，使用的水印算法独立于管道本身。我们不会在这里详细讨论实施水印的含义（Slava在第3章中介绍），但是为了帮助加强这个想法，即一组给定的输入可以应用不同的水印，让我们看一下在相同的数据集上运行示例2-6的管道，但使用两个不同的水印实现（图2-10）：在左侧，完美的水印；在右侧，启发式水印。</p>
 <p>在两种情况下，窗口在水印通过窗口结束时实现。如您所预期的，完美水印完美地捕获了管道随着时间的推移的事件时间完整性。相比之下，右侧启发式水印使用的特定算法未考虑9的值，这大大改变了材料化输出的形状，无论是在输出延迟还是正确性方面（如为[12:00,12:02)窗口提供的不正确答案5所示）。水印触发器与图2-9中所示的重复更新触发器之间的最大区别是，水印使我们有一种方法来推断我们的输入的完整性。在系统为给定窗口实现输出之前，我们知道系统尚未认为输入已完成。这对于希望推断输入中缺少数据或缺少数据的用例尤其重要。</p>
-<div id="dplayer5" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer5"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0210.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer11" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer11"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0210.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图2-10. 具有完美（左）和启发式（右）水印的流式引擎上的窗口求和</em></p>
 <p>缺少数据用例的一个很好的例子是外连接。没有像水印这样的完整性概念，您如何知道何时放弃发出部分连接而不是继续等待该连接完成？你不知道。在缺乏真正的水印支持的流式系统中，将该决定基于处理时间延迟并不安全，因为我们在第1章中所说的事件时间偏差的可变性：只要偏差保持小于所选处理时间延迟，缺少数据的结果将是正确的，但是任何时候偏差超过该延迟，它们将突然变得不正确。从这个角度来看，事件时间水印是许多必须推断输入中缺少数据（例如外连接，异常检测等）的实际流用例的关键部分。</p>
 <p>现在，话虽如此，这些水印示例也突出了水印（和任何其他完整性概念）的两个缺点，具体而言，它们可能是以下两者之一：</p>
@@ -23044,7 +23381,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <p><em>Example 2-7.通过早期&#x2F;准时&#x2F;延迟API进行早期、准时和延迟触发</em></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</span><br><span class="line">   .apply(Window.into(FixedWindows.of(TWO_MINUTES))</span><br><span class="line">               .triggering(AfterWatermark()</span><br><span class="line">                         .withEarlyFirings(AlignedDelay(ONE_MINUTE))</span><br><span class="line">                         .withLateFirings(AfterCount(1))))</span><br><span class="line">   .apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
 
-<div id="dplayer6" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer6"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0211.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer12" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer12"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0211.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>Figure 2-11.带有早期、准时和延迟触发的流式引擎的窗口求和</em></p>
 <p>这个版本比Figure 2-9有两个明显的改进：</p>
 <ul>
@@ -23066,7 +23403,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <li>当水印通过窗口的延迟范围时，该窗口关闭，这意味着窗口的所有状态都会被丢弃。我保留了一个虚线矩形，显示窗口关闭时它覆盖的时间范围（在两个域中），并带有一个小尾巴向右延伸，以与水印进行对比。</li>
 <li>仅在此图表中，我添加了一个额外的晚到数据（第一个值为6的窗口）。6是晚到的，但仍然在允许的延迟时间范围内，因此与值11的更新结果合并。然而，9在延迟时间范围之外到达，因此被简单地丢弃。</li>
 </ul>
-<div id="dplayer7" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer7"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0212.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer13" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer13"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0212.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图2-12。允许早期&#x2F;按时&#x2F;晚期触发</em></p>
 <p>关于延迟时间范围，最后有两个侧面需要注意：</p>
 <ul>
@@ -23142,13 +23479,13 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <p><em>示例2-9.早期&#x2F;按时&#x2F;迟到触发的丢弃模式版本</em></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team，Integer&gt;&gt; totals = input</span><br><span class="line">   .apply（Window.into（FixedWindows.of（TWO_MINUTES））</span><br><span class="line">                .triggering（</span><br><span class="line">                  AfterWatermark（）</span><br><span class="line">                   .withEarlyFirings（AlignedDelay（ONE_MINUTE））</span><br><span class="line">                   .withLateFirings（AtCount（1）））</span><br><span class="line">                .discardingFiredPanes（））</span><br><span class="line">    .apply（Sum.integersPerKey（））;</span><br></pre></td></tr></table></figure>
 <p>在启用启发式水印的流引擎上重新运行会产生如图2-13所示的输出。</p>
-<div id="dplayer8" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer8"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0213.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer14" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer14"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0213.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图2-13。流引擎上的早期&#x2F;按时&#x2F;迟到触发的丢弃模式版本</em></p>
 <p>即使整体输出的形状与图2-11中的累加模式版本相似，但请注意，此丢弃版本中的窗格都不重叠。因此，每个输出都与其他输出无关。<br>如果我们想查看撤回的操作，更改将类似，如示例2-10所示。 ???描述了结果。</p>
 <p><em>示例2-10.早期&#x2F;按时&#x2F;迟到触发的累加和撤回模式版本</em></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team，Integer&gt;&gt; totals = input</span><br><span class="line">  .apply（Window.into（FixedWindows.of（TWO_MINUTES））</span><br><span class="line">               .triggering（</span><br><span class="line">                 AfterWatermark（）</span><br><span class="line">                  .withEarlyFirings（AlignedDelay（ONE_MINUTE））</span><br><span class="line">                  .withLateFirings（AtCount（1）））</span><br><span class="line">               .accumulatingAndRetractingFiredPanes（））</span><br><span class="line">  .apply（Sum.integersPerKey（））;</span><br></pre></td></tr></table></figure>
 
-<div id="dplayer9" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer9"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0214.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer15" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer15"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0214.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p>在流引擎上运行早期&#x2F;按时&#x2F;迟到触发的累加和撤回模式版本</p>
 <p>由于每个窗口的窗格都重叠，因此很难清晰地看到撤回。撤回以红色表示，与重叠的蓝色窗格相结合，形成了略带紫色的颜色。我还略微水平移了给定窗格内两个输出的值（并用逗号分隔它们），以使它们更容易区分。</p>
 <p>图2-14组合了图2-9、2-11（仅启发式）和并排的最终帧，提供了三种模式的良好视觉对比。</p>
@@ -23222,6 +23559,18 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <p>累积和撤回</p>
 <p>示例2-10 &#x2F; ???</p>
 <p>话虽如此，到目前为止，我们只看了一种窗口化类型：事件时间的固定窗口化。正如我们所知，窗口化有许多维度，我想在我们结束Beam模型之前至少再涉及其中两个。不过，首先，我们将稍微偏离主题，深入探讨水印的世界，因为这些知识将有助于框架未来的讨论（并且本身也很有趣）。请欢迎Slava，右台……</p>
+<hr>
+<ol>
+<li>如果你足够幸运能读到 Safari 版本的书籍，你会看到完整的类似“流式媒体 102”中的时间-lapse 动画。对于印刷、Kindle 和其他电子书版本，这些都是静态图像，带有到网络动画版本的链接。</li>
+<li>请耐心等待。复合标点符号（即表情符号）的细粒度情感表达在 O’Reilly 出版物中是严格禁止的 <winky-smiley>。</winky-smiley></li>
+<li>的确，我们在 Beam 的原始触发器功能中就是这样做的。回想起来，我们有点过头了。未来的迭代将更简单、更易于使用，在本书中我只关注那些可能以某种形式保留的部分。</li>
+<li>更准确地说，函数的输入实际上是上游管道中水印被观察到的点上游的所有内容在时间 <em>P</em> 的状态:输入源、缓冲数据、正在处理的数据等等;但从概念上来讲，把它看作是从处理时间到事件时间的映射更简单。</li>
+<li>请注意，我选择明确省略启发式水印的 9 值，因为它将帮助我就延迟数据和水印滞后提出一些重要观点。实际上，一个启发式水印可能会同样有可能省略其他某些值，这反过来可能会对水印产生显著不那么严重的影响。如果你的目标是从水印中筛选迟到的数据（在某些情况下非常有效，例如在滥用检测中，你只想尽快看到大多数数据），你不一定要选择启发式水印而不是完美水印。你真正想要的是百分位水印，它明确地从其计算中删除一些迟到的数据百分位。见第三章。</li>
+<li>这并不是说没有那些主要关心正确性而不是延迟的使用情况；在这些情况下，使用准确的水印作为管道输出的唯一驱动器是一种合理的方法。</li>
+<li>正如我们之前所知道的，这个断言要么是在使用完美水印的情况下保证的，要么是在使用启发式水印的情况下的一个经过教育的猜测。</li>
+<li>你可能会注意到应该有第四种模式：丢弃和撤销。在大多数情况下，这种模式并不是非常有用，所以我在这里不再讨论它。</li>
+<li>回想起来，选择一组更加面向材料化流中数据的观察性名称（例如“输出模式”）而不是描述产生这些数据的状态管理语义的名称可能会更清晰。例如：丢弃模式 → Δ 模式，累积模式 → 值模式，累积和撤回模式 → 值和撤回模式？然而，丢弃&#x2F;累积&#x2F;累积和撤回名称已经在 Beam Model 的 1.x 和 2.x 衍生版本中得到了确认，因此我不想通过偏离来引入潜在的困惑。此外，随着 Beam 3.0 的推出和汇合触发器的引入，累积模式很可能会更加淡化。在第 8 章中讨论 SQL 时会更详细地讨论这个问题。</li>
+</ol>
 ]]></content>
       <categories>
         <category>Streaming System</category>
@@ -23231,7 +23580,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
-    <title>《Streaming System》-Chapter 2. The What, Where, When, and How of Data Processing</title>
+    <title>《Streaming System》-Chapter 2. The What, Where, When, and How of Data Processing[完整]</title>
     <url>/www6vHomeHexo/2000/03/17/streamingSystemChapter2Original/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -23261,6 +23610,44 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <!-- tocstop -->
 
 </div>
+
+
+
+<details><summary>点击 原文</summary><p>Okay party people, it’s time to get concrete!</p>
+<p>Chapter 1 focused on three main areas: <em>terminology</em>, defining precisely what I</p>
+<p>mean when I use overloaded terms like “streaming”; <em>batch versus streaming</em>,</p>
+<p>comparing the theoretical capabilities of the two types of systems, and</p>
+<p>postulating that only two things are necessary to take streaming systems</p>
+<p>beyond their batch counterparts: correctness and tools for reasoning about</p>
+<p>time; and <em>data processing patterns</em>, looking at the conceptual approaches</p>
+<p>taken with both batch and streaming systems when processing bounded and</p>
+<p>unbounded data.</p>
+<p>In this chapter, we’re now going to focus further on the data processing</p>
+<p>patterns from Chapter 1, but in more detail, and within the context of concrete</p>
+<p>examples. By the time we’re finished, we’ll have covered what I consider to</p>
+<p>be the core set of principles and concepts required for robust out-of-order data</p>
+<p>processing; these are the tools for reasoning about time that truly get you</p>
+<p>beyond classic batch processing.</p>
+<p>To give you a sense of what things look like in action, I use snippets of</p>
+<p>Apache Beam code, coupled with time-lapse diagrams to provide a visual</p>
+<p>representation of the concepts. Apache Beam is a unified programming model</p>
+<p>and portability layer for batch and stream processing, with a set of concrete</p>
+<p>SDKs in various languages (e.g., Java and Python). Pipelines written with</p>
+<p>Apache Beam can then be portably run on any of the supported execution</p>
+<p>engines (Apache Apex, Apache Flink, Apache Spark, Cloud Dataflow, etc.).</p>
+<p>I use Apache Beam here for examples not because this is a Beam book (it’s</p>
+<p>not), but because it most completely embodies the concepts described in this</p>
+<p>book. Back when “Streaming 102” was originally written (back when it was</p>
+<p>still the Dataflow Model from Google Cloud Dataflow and not the Beam</p>
+<p>Model from Apache Beam), it was literally the only system in existence that</p>
+<p>provided the amount of expressiveness necessary for all the examples we’ll</p>
+<p>cover here. A year and a half later, I’m happy to say much has changed, and</p>
+<p>most of the major systems out there have moved or are moving toward</p>
+<p>supporting a model that looks a lot like the one described in this book. So rest</p>
+<p>assured that the concepts we cover here, though informed through the Beam</p>
+<p>lens, as it were, will apply equally across most other systems you’ll come</p>
+<p>across.</p>
+</details>
 
 
 
@@ -24261,6 +24648,81 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <p>to take a slight detour to dive deeper into the world of watermarks, as this</p>
 <p>knowledge will help frame future discussions (and be fascinating in and of</p>
 <p>itself). Enter Slava, stage right…</p>
+</details>
+
+
+
+
+
+
+
+<details><summary>点击 原文</summary><ol>
+<li>If you’re fortunate enough to be reading the Safari version of the book, you</li>
+</ol>
+<p>have full-blown time-lapse animations just like in “Streaming 102”. For print,</p>
+<p>Kindle, and other ebook versions, there are static images with a link to</p>
+<p>animated versions on the web.</p>
+<ol start="2">
+<li>Bear with me here. Fine-grained emotional expressions via composite</li>
+</ol>
+<p>punctuation (i.e., emoticons) are strictly forbidden in O’Reilly publications &lt;</p>
+<p>winky-smiley&#x2F;&gt;.</p>
+<ol start="3">
+<li>And indeed, we did just that with the original triggers feature in Beam. In</li>
+</ol>
+<p>retrospect, we went a bit overboard. Future iterations will be simpler and</p>
+<p>easier to use, and in this book I focus only on the pieces that are likely to</p>
+<p>remain in some form or another.</p>
+<ol start="4">
+<li>More accurately, the input to the function is really the state at time <em>P</em> of</li>
+</ol>
+<p>everything upstream of the point in the pipeline where the watermark is being</p>
+<p>observed: the input source, buffered data, data actively being processed, and</p>
+<p>so on; but conceptually it’s simpler to think of it as a mapping from</p>
+<p>processing time to event time.</p>
+<ol start="5">
+<li>Note that I specifically chose to omit the value of 9 from the heuristic</li>
+</ol>
+<p>watermark because it will help me to make some important points about late</p>
+<p>data and watermark lag. In reality, a heuristic watermark might be just as</p>
+<p>likely to omit some other value(s) instead, which in turn could have</p>
+<p>significantly less drastic effect on the watermark. If winnowing late-arriving</p>
+<p>data from the watermark is your goal (which is very valid in some cases, such</p>
+<p>as abuse detection, for which you just want to see a significant majority of the</p>
+<p>data as quickly as possible), you don’t necessarily want a heuristic watermark</p>
+<p>rather than a perfect watermark. What you really want is a percentile</p>
+<p>watermark, which explicitly drops some percentile of late-arriving data from</p>
+<p>its calculations. See Chapter 3.</p>
+<ol start="6">
+<li>Which isn’t to say there aren’t use cases that care primarily about</li>
+</ol>
+<p>correctness and not so much about latency; in those cases, using an accurate</p>
+<p>watermark as the sole driver of output from a pipeline is a reasonable</p>
+<p>approach.</p>
+<ol start="7">
+<li>And, as we know from before, this assertion is either guaranteed, in the case</li>
+</ol>
+<p>of a perfect watermark being used, or an educated guess, in the case of a</p>
+<p>heuristic watermark.</p>
+<ol start="8">
+<li>You might note that there should logically be a fourth mode: discarding and</li>
+</ol>
+<p>retracting. That mode isn’t terribly useful in most cases, so I don’t discuss it</p>
+<p>further here.</p>
+<ol start="9">
+<li>In retrospect, it probably would have been clearer to choose a different set</li>
+</ol>
+<p>of names that are more oriented toward the observed nature of data in the</p>
+<p>materialized stream (e.g., “output modes”) rather than names describing the</p>
+<p>state management semantics that yield those data. Perhaps: discarding mode</p>
+<p>→ delta mode, accumulating mode → value mode, accumulating and</p>
+<p>retracting mode → value and retraction mode? However, the</p>
+<p>discarding&#x2F;accumulating&#x2F;accumulating and retracting names are enshrined in</p>
+<p>the 1.x and 2.x lineages of the Beam Model, so I don’t want to introduce</p>
+<p>potential confusion in the book by deviating. Also, it’s very likely</p>
+<p>accumulating modes will blend into the background more with Beam 3.0 and</p>
+<p>the introduction of sink triggers; more on this when we discuss SQL in</p>
+<p>Chapter 8.</p>
 </details>]]></content>
       <categories>
         <category>Streaming System</category>

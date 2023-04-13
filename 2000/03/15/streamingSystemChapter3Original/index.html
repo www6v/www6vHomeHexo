@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2000-03-15T03:48:05.000Z">
-<meta property="article:modified_time" content="2023-03-15T09:53:09.757Z">
+<meta property="article:modified_time" content="2023-04-13T03:49:32.990Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Streaming System">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-15 17:53:09" itemprop="dateModified" datetime="2023-03-15T17:53:09+08:00">2023-03-15</time>
+                <time title="修改时间：2023-04-13 11:49:32" itemprop="dateModified" datetime="2023-04-13T11:49:32+08:00">2023-04-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,10 +269,33 @@
 </li>
 <li><a href="#percentile-watermarks"><strong>Percentile Watermarks</strong></a></li>
 <li><a href="#processing-time-watermarks"><strong>Processing-Time Watermarks</strong></a></li>
+<li><a href="#case-studies"><strong>Case Studies</strong></a><ul>
+<li><a href="#case-study-watermarks-in-google-cloud-dataflow"><strong>Case Study: Watermarks in Google Cloud Dataflow</strong></a></li>
+<li><a href="#case-study-watermarks-in-apache-flink"><strong>Case Study: Watermarks in Apache Flink</strong></a></li>
+<li><a href="#case-study-source-watermarks-for-google-cloud-pubsub"><strong>Case Study: Source Watermarks for Google Cloud Pub&#x2F;Sub</strong></a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 
 </div>
+
+
+
+<details><summary>点击 原文</summary><p>So far, we have been looking at stream processing from the perspective of the</p>
+<p>pipeline author or data scientist. Chapter 2 introduced watermarks as part of</p>
+<p>the answer to the fundamental questions of <em>where</em> in event-time processing is</p>
+<p>taking place and <em>when</em> in processing time results are materialized. In this</p>
+<p>chapter, we approach the same questions, but instead from the perspective of</p>
+<p>the underlying mechanics of the stream processing system. Looking at these</p>
+<p>mechanics will help us motivate, understand, and apply the concepts around</p>
+<p>watermarks. We discuss how watermarks are created at the point of data</p>
+<p>ingress, how they propagate through a data processing pipeline, and how they</p>
+<p>affect output timestamps. We also demonstrate how watermarks preserve the</p>
+<p>guarantees that are necessary for answering the questions of <em>where</em> in event</p>
+<p>time data are processed and <em>when</em> it is materialized, while dealing with</p>
+<p>unbounded data.</p>
+</details>
 
 
 
@@ -964,6 +987,243 @@
 <p>processing-time watermark at the system-implementation level for tasks such</p>
 <p>as garbage collection of temporary state (Reuven talks more about an example</p>
 <p>of this in Chapter 5).</p>
+</details>
+
+
+
+<details><summary>点击 原文</summary><h1><span id="case-studies"><strong>Case Studies</strong></span><a href="#case-studies" class="header-anchor">#</a></h1><p>Now that we’ve laid the groundwork for how watermarks ought to behave,</p>
+<p>it’s time to take a look at some real systems to understand how different</p>
+<p>mechanisms of the watermark are implemented. We hope that these shed</p>
+<p>some light on the trade-offs that are possible between latency and correctness</p>
+<p>as well as scalability and availability for watermarks in real-world systems.</p>
+<h3><span id="case-study-watermarks-in-google-cloud-dataflow"><strong>Case Study: Watermarks in Google Cloud Dataflow</strong></span><a href="#case-study-watermarks-in-google-cloud-dataflow" class="header-anchor">#</a></h3><p>There are many possible approaches to implementing watermarks in a stream</p>
+<p>processing system. Here, we present a quick survey of the implementation in</p>
+<p>Google Cloud Dataflow, a fully managed service for executing Apache Beam</p>
+<p>pipelines. Dataflow includes SDKs for defining data processing workflows,</p>
+<p>and a Cloud Platform managed service to run those workflows on Google</p>
+<p>Cloud Platform resources.</p>
+<p>Dataflow stripes (shards) each of the data processing steps in its data</p>
+<p>processing graph across multiple physical workers by splitting the available</p>
+<p>keyspace of each worker into key ranges and assigning each range to a</p>
+<p>worker. Whenever a GroupByKey operation with distinct keys is encountered,</p>
+<p>data must be shuffled to corresponding keys.</p>
+<p>Figure 3-16 depicts a logical representation of the processing graph with a</p>
+<p>GroupByKey.</p>
+<p><em>Figure 3-16. A GroupByKey step consumes data from another DoFn. This means that there is a data</em></p>
+<p><em>shuffle between the keys of the first step and the keys of the second step.</em></p>
+<p>Whereas the physical assignment of key ranges to workers might look</p>
+<p>Figure 3-17.</p>
+<p><em>Figure 3-17. Key ranges of both steps are assigned (striped) across the available workers.</em></p>
+<p>In the watermark propagation section, we discussed that the watermark is</p>
+<p>maintained for multiple subcomponents of each step. Dataflow keeps track of</p>
+<p>the per-range watermarks of each of these components. Watermark</p>
+<p>aggregation then involves computing the minimum of each watermark across</p>
+<p>all ranges, ensuring that the following guarantees are met:</p>
+<ul>
+<li>All ranges must be reporting a watermark. If a watermark is not</li>
+</ul>
+<p>present for a range, we cannot advance the watermark, because a</p>
+<p>range not reporting must be treated as unknown.</p>
+<ul>
+<li>Ensure that the watermark is monotonically increasing. Because late</li>
+</ul>
+<p>data is possible, we must not update the watermark if it would cause</p>
+<p>the watermark to move backward.</p>
+<p>Google Cloud Dataflow performs aggregation via a centralized aggregator</p>
+<p>agent. We can shard this agent for efficiency. From a correctness standpoint,</p>
+<p>the watermark aggregator serves as a “single source of truth” about the</p>
+<p>watermark.</p>
+<p>Ensuring correctness in distributed watermark aggregation poses certain</p>
+<p>challenges. It is paramount that watermarks are not advanced prematurely</p>
+<p>because advancing the watermark prematurely will turn on-time data into late</p>
+<p>data. Specifically, as physical assignments are actuated to workers, the</p>
+<p>workers maintain leases on the persistent state attached to the key ranges,</p>
+<p>ensuring that only a single worker may mutate the persistent state for a key.</p>
+<p>To guarantee watermark correctness, we must ensure that each watermark</p>
+<p>update from a worker process is admitted into the aggregate only if the</p>
+<p>worker process still maintains a lease on its persistent state; therefore, the</p>
+<p>watermark update protocol must take state ownership lease validation into</p>
+<p>account.</p>
+</details>
+
+
+
+
+
+<details><summary>点击 原文</summary><h3><span id="case-study-watermarks-in-apache-flink"><strong>Case Study: Watermarks in Apache Flink</strong></span><a href="#case-study-watermarks-in-apache-flink" class="header-anchor">#</a></h3><p>Apache Flink is an open source stream processing framework for distributed,</p>
+<p>high-performing, always-available, and accurate data streaming applications.</p>
+<p>It is possible to run Beam programs using a Flink runner. In doing so, Beam</p>
+<p>relies on the implementation of stream processing concepts such as</p>
+<p>watermarks within Flink. Unlike Google Cloud Dataflow, which implements</p>
+<p>watermark aggregation via a centralized watermark aggregator agent, Flink</p>
+<p>performs watermark tracking and aggregation in-band.</p>
+<p>To understand how this works, let’s look at a Flink pipeline, as shown in</p>
+<p>Figure 3-18.</p>
+<p><em>Figure 3-18. A Flink pipeline with two sources and event-time watermarks propagating in-band</em></p>
+<p>In this pipeline data is generated at two sources. These sources also both</p>
+<p>generate watermark “checkpoints” that are sent synchronously in-band with</p>
+<p>the data stream. This means that when a watermark checkpoint from source A</p>
+<p>for timestamp “53” is emitted, it guarantees that no nonlate data messages</p>
+<p>will be emitted from source A with timestamp behind “53”. The downstream</p>
+<p>“keyBy” operators consume the input data and the watermark checkpoints. As</p>
+<p>new watermark checkpoints are consumed, the downstream operators’ view</p>
+<p>of the watermark is advanced, and a new watermark checkpoint for</p>
+<p>downstream operators can be emitted.</p>
+<p>This choice to send watermark checkpoints in-band with the data stream</p>
+<p>differs from the Cloud Dataflow approach that relies on central aggregation</p>
+<p>and leads to a few interesting trade-offs.</p>
+<p>Following are some advantages of in-band watermarks:</p>
+<ul>
+<li>Reduced watermark propagation latency, and very low-latency watermarks</li>
+</ul>
+<p>Because it is not necessary to have watermark data traverse multiple hops</p>
+<p>and await central aggregation, it is possible to achieve very low latency</p>
+<p>more easily with the in-band approach.</p>
+<ul>
+<li>No single point of failure for watermark aggregation</li>
+</ul>
+<p>Unavailability in the central watermark aggregation agent will lead to a</p>
+<p>delay in watermarks across the entire pipeline. With the in-band approach,</p>
+<p>unavailability of part of the pipeline cannot cause watermark delay to the</p>
+<p>entire pipeline.</p>
+<ul>
+<li>Inherent scalability</li>
+</ul>
+<p>Although Cloud Dataflow scales well in practice, more complexity is</p>
+<p>needed to achieve scalability with a centralized watermark aggregation</p>
+<p>service versus implicit scalability with in-band watermarks.</p>
+<p>Here are some advantages of out-of-band watermark aggregation:</p>
+<ul>
+<li>Single source of “truth”</li>
+</ul>
+<p>For debuggability, monitoring, and other applications such as throttling</p>
+<p>inputs based on pipeline progress, it is advantageous to have a service that</p>
+<p>can vend the values of watermarks rather than having watermarks implicit</p>
+<p>in the streams, with each component of the system having its own partial</p>
+<p>view.</p>
+<ul>
+<li>Source watermark creation</li>
+</ul>
+<p>Some source watermarks require global information. For example,</p>
+<p>sources might be temprarily idle, have low data rates, or require out-of</p>
+<p>band information about the source or other system components to</p>
+<p>generate the watermarks. This is easier to achieve in a central service. For</p>
+<p>an example see the case study that follows on source watermarks for</p>
+<p>Google Cloud Pub&#x2F;Sub.</p>
+</details>
+
+
+
+
+
+<details><summary>点击 原文</summary><h3><span id="case-study-source-watermarks-for-google-cloud-pubx2fsub"><strong>Case Study: Source Watermarks for Google Cloud Pub&#x2F;Sub</strong></span><a href="#case-study-source-watermarks-for-google-cloud-pubx2fsub" class="header-anchor">#</a></h3><p>Google Cloud Pub&#x2F;Sub is a fully managed real-time messaging service that</p>
+<p>allows you to send and receive messages between independent applications.</p>
+<p>Here, we discuss how to create a reasonable heuristic watermark for data sent</p>
+<p>into a pipeline via Cloud Pub&#x2F;Sub.</p>
+<p>First, we need to describe a little about how Pub&#x2F;Sub works. Messages are</p>
+<p>published on Pub&#x2F;Sub <em>topics</em>. A particular topic can be subscribed to by any</p>
+<p>number of Pub&#x2F;Sub <em>subscriptions</em>. The same messages are delivered on all</p>
+<p>subscriptions subscribed to a given topic. The method of delivery is for</p>
+<p>clients to <em>pull</em> messages off the subscription, and to ack the receipt of</p>
+<p>particular messages via provided IDs. Clients do not get to choose which</p>
+<p>messages are pulled, although Pub&#x2F;Sub does attempt to provide oldest</p>
+<p>messages first, with no hard guarantees around this.</p>
+<p>To build a heuristic, we make some assumptions about the source that is</p>
+<p>sending data into Pub&#x2F;Sub. Specifically, we assume that the timestamps of the</p>
+<p>original data are “well behaved”; in other words, we expect a bounded</p>
+<p>amount of out-of-order timestamps on the source data, before it is sent to</p>
+<p>Pub&#x2F;Sub. Any data that are sent with timestamps outside the allowed out-of</p>
+<p>order bounds will be considered late data. In our current implementation, this</p>
+<p>bound is at least 10 seconds, meaning reordering of timestamps up to 10</p>
+<p>seconds before sending to Pub&#x2F;Sub will not create late data. We call this value</p>
+<p>the <em>estimation band</em>. Another way to look at this is that when the pipepline is</p>
+<p>perfectly caught up with the input, the watermark will be 10 seconds behind</p>
+<p>real time to allow for possible reorderings from the source. If the pipeline is</p>
+<p>backlogged, all of the backlog (not just the 10-second band) is used for</p>
+<p>estimating the watermark.</p>
+<p>What are the challenges we face with Pub&#x2F;Sub? Because Pub&#x2F;Sub does not</p>
+<p>guarantee ordering, we must have some kind of additional metadata to know</p>
+<p>enough about the backlog. Luckily, Pub&#x2F;Sub provides a measurement of</p>
+<p>backlog in terms of the “oldest unacknowledged publish timestamp.” This is</p>
+<p>not the same as the event timestamp of our message, because Pub&#x2F;Sub is</p>
+<p>agnostic to the application-level metadata being sent through it; instead, this</p>
+<p>is the timestamp of when the message was ingested by Pub&#x2F;Sub.</p>
+<p>This measurement is not the same as an event-time watermark. It is in fact the</p>
+<p>processing-time watermark for Pub&#x2F;Sub message delivery. The Pub&#x2F;Sub</p>
+<p>publish timestamps are not equal to the event timestamps, and in the case that</p>
+<p>historical (past) data are being sent, it might be arbitrarily far away. The</p>
+<p>ordering on these timestamps might also be different because, as mentioned</p>
+<p>earlier, we allow a limited amount of reordering.</p>
+<p>However, we can use this as a measure of backlog to learn enough</p>
+<p>information about the event timestamps present in the backlog so that we can</p>
+<p>create a reasonable watermark as follows.</p>
+<p>We create two subscriptions to the topic containing the input messages: a</p>
+<p><em>base subscription</em> that the pipeline will actually use to read the data to be</p>
+<p>processed, and a <em>tracking subscription</em>, which is used for metadata only, to</p>
+<p>perform the watermark estimation.</p>
+<p>Taking a look at our base subscription in Figure 3-19, we see that messages</p>
+<p>might arrive out of order. We label each message with its Pub&#x2F;Sub publish</p>
+<p>timestamp “pt” and its event-time timestamp “et.” Note that the two time</p>
+<p>domains can be unrelated.</p>
+<p><em>Figure 3-19. Processing-time and event-time timestamps of messages arriving on a Pub&#x2F;Sub</em></p>
+<p><em>subscription</em></p>
+<p>Some messages on the base subscription are unacknowledged forming a</p>
+<p>backlog. This might be due to them not yet being delivered or they might</p>
+<p>have been delivered but not yet processed. Remember also that pulls from this</p>
+<p>subscription are distributed across multiple shards. Thus, it is not possible to</p>
+<p>say just by looking at the base subscription what our watermark should be.</p>
+<p>The tracking subscription, seen in Figure 3-20, is used to effectively inspect</p>
+<p>the backlog of the base subscription and take the minimum of the event</p>
+<p>timestamps in the backlog. By maintaining little or no backlog on the tracking</p>
+<p>subscription, we can inspect the messages ahead of the base subsciption’s</p>
+<p>oldest unacknowledged message.</p>
+<p><em>Figure 3-20. An additional “tracking” subscription receiving the same messages as the “base”</em></p>
+<p><em>subscription</em></p>
+<p>We stay caught up on the tracking subscription by ensuring that pulling from</p>
+<p>this subscription is computationally inexpensive. Conversely, if we fall</p>
+<p>sufficiently behind on the tracking subscription, we will stop advancing the</p>
+<p>watermark. To do so, we ensure that at least one of the following conditions is</p>
+<p>met:</p>
+<ul>
+<li>The tracking subscription is sufficiently ahead of the base</li>
+</ul>
+<p>subscription. Sufficiently ahead means that the tracking subscription</p>
+<p>is ahead by at least the estimation band. This ensures that any</p>
+<p>bounded reorder within the estimation band is taken into account.</p>
+<ul>
+<li>The tracking subscription is sufficiently close to real time. In other</li>
+</ul>
+<p>words, there is no backlog on the tracking subscription.</p>
+<p>We acknowledge the messages on the tracking subscription as soon as</p>
+<p>possible, after we have durably saved metadata about the publish and event</p>
+<p>timestamps of the messages. We store this metadata in a sparse histogram</p>
+<p>format to minimize the amount of space used and the size of the durable</p>
+<p>writes.</p>
+<p>Finally, we ensure that we have enough data to make a reasonable watermark</p>
+<p>estimate. We take a band of event timestamps we’ve read from our tracking</p>
+<p>subscription with publish timestamps newer than the oldest unacknowledged</p>
+<p>of the base subscription, or the width of the estimation band. This ensures that</p>
+<p>we consider all event timestamps in the backlog, or if the backlog is small, the</p>
+<p>most recent estimation band, to make a watermark estimate.</p>
+<p>Finally, the watermark value is computed to be the minimum event time in</p>
+<p>the band.</p>
+<p>This method is correct in the sense that all timestamps within the reordering</p>
+<p>limit of 10 seconds at the input will be accounted for by the watermark and</p>
+<p>not appear as late data. However, it produces possibly an overly conservative</p>
+<p>watermark, one that advances “too slowly” in the sense described in</p>
+<p>Chapter 2. Because we consider all messages ahead of the base subscription’s</p>
+<p>oldest unacknowledged message on the tracking subscription, we can include</p>
+<p>event timestamps in the watermark estimate for messages that have already</p>
+<p>been acknowledged.</p>
+<p>Additionally, there are a few heuristics to ensure progress. This method works</p>
+<p>well in the case of dense, frequently arriving data. In the case of sparse or</p>
+<p>infrequent data, there might not be enough recent messages to build a</p>
+<p>reasonable estimate. In the case that we have not seen data on the subscription</p>
+<p>in more than two minutes (and there’s no backlog), we advance the</p>
+<p>watermark to near real time. This ensures that the watermark and the pipeline</p>
+<p>continue to make progress even if no more messages are forthcoming.</p>
+<p>All of the above ensures that as long as source data-event timestamp</p>
+<p>reordering is within the estimation band, there will be no additional late data.</p>
 </details>
 
     </div>

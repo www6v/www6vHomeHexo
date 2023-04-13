@@ -21,7 +21,7 @@
   </script>
 
   <meta property="og:type" content="article">
-<meta property="og:title" content="《Streaming System》-第二章： 数据处理的什么、何地、何时以及如何进行">
+<meta property="og:title" content="《Streaming System》-第二章： 数据处理的什么、何地、何时以及如何进行[完整]">
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2000/03/17/streamingSystemChapter2/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0209.png">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0215.png">
 <meta property="article:published_time" content="2000-03-17T14:07:43.000Z">
-<meta property="article:modified_time" content="2023-04-04T08:03:14.887Z">
+<meta property="article:modified_time" content="2023-04-13T02:15:27.389Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Streaming System">
 <meta name="twitter:card" content="summary">
@@ -50,7 +50,7 @@
   };
 </script>
 
-  <title>《Streaming System》-第二章： 数据处理的什么、何地、何时以及如何进行 | www6v的博客</title>
+  <title>《Streaming System》-第二章： 数据处理的什么、何地、何时以及如何进行[完整] | www6v的博客</title>
   
 
 
@@ -207,7 +207,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          《Streaming System》-第二章： 数据处理的什么、何地、何时以及如何进行
+          《Streaming System》-第二章： 数据处理的什么、何地、何时以及如何进行[完整]
         </h1>
 
         <div class="post-meta">
@@ -230,7 +230,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-04 16:03:14" itemprop="dateModified" datetime="2023-04-04T16:03:14+08:00">2023-04-04</time>
+                <time title="修改时间：2023-04-13 10:15:27" itemprop="dateModified" datetime="2023-04-13T10:15:27+08:00">2023-04-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -282,6 +282,12 @@
 
 </div>
 
+
+<p>好了，派对人们，是时候开始具体化了！</p>
+<p>第一章主要涉及三个方面：<em>术语</em>，准确定义当我使用过载术语“流式处理”时的含义；<em>批处理与流处理</em>，比较两种系统的理论能力，并推断只有两个方面是将流处理系统推向超越批处理系统所必须的：正确性和关于时间的推理工具；以及<em>数据处理模式</em>，研究在处理有界数据和无界数据时，批处理系统和流处理系统采用的概念方法。</p>
+<p>在本章中，我们将进一步关注第一章中的数据处理模式，但更详细地在具体示例的背景下进行。到最后，我们将涵盖我认为对于强大的乱序数据处理所必需的核心原则和概念；这些是真正将您推向经典批处理之外的关于时间的推理工具。</p>
+<p>为了让您了解实际情况，我使用Apache Beam代码片段，配合时间流逝图表，提供概念的可视化表示。Apache Beam是一种统一的批处理和流处理编程模型和可移植性层，具有各种语言的具体SDK（例如Java和Python）。使用Apache Beam编写的管道可以在任何支持的执行引擎上进行便携式运行（Apache Apex、Apache Flink、Apache Spark、Cloud Dataflow等）。</p>
+<p>我在这里使用Apache Beam作为示例，不是因为这是一本Beam书籍（它不是），而是因为它最完全地体现了本书中描述的概念。回想一下，“流处理102”最初编写时（当它仍然是Google Cloud Dataflow的Dataflow模型，而不是Apache Beam的Beam模型时），它是唯一存在的系统，提供了所有我们将在此处涵盖的示例所需的表达能力。一年半后，我很高兴地说，很多事情发生了改变，大多数主要系统已经移动或正在朝向支持类似于本书所描述的模型。因此，请放心，尽管是通过Beam的镜头，我们在这里涵盖的概念同样适用于您将遇到的大多数其他系统。</p>
 <h1><span id="路线图">路线图</span><a href="#路线图" class="header-anchor">#</a></h1><p>为了帮助为本章打下基础，我想提出五个主要概念，这些概念将支撑所有讨论，以及大部分第一部分的内容。我们已经讨论了其中两个。</p>
 <p>在第一章中，我首先建立了事件时间（事件发生的时间）和处理时间（在处理期间观察到的时间）之间的关键区别。这为本书提出的一个主要论点奠定了基础：如果您关心正确性和事件实际发生的上下文，则必须相对于它们固有的事件时间而不是在分析过程中遇到它们的处理时间来分析数据。</p>
 <p>然后，我介绍了<em>窗口化</em>的概念（即沿着时间边界对数据集进行分区），这是一种常用的方法，用于应对无限数据源在技术上可能永远不会结束的事实。窗口化策略的一些更简单的例子是<em>固定</em>和<em>滑动</em>窗口，但更复杂的窗口化类型，例如<em>会话</em>（其中窗口是由数据本身的特征定义的;例如，捕获用户的每个活动会话，然后是不活动的间隙），也广泛使用。</p>
@@ -362,7 +368,7 @@
 <p>如前所述，Safari版本将完整执行作为动画电影呈现，而打印和所有其他数字格式使用一系列静态关键帧序列，这些关键帧提供了管道如何随时间推移的进展的感觉。在这两种情况下，我们还提供指向*<a target="_blank" rel="noopener" href="http://www.streamingbook.net/">www.streamingbook.net</a>*上完全动画版本的URL。</p>
 <p>每个图表在两个维度上绘制输入和输出：事件时间（x轴）和处理时间（y轴）。因此，由管道观察到的实时时间从底部向上推进，如处理时间轴中上升的粗黑线所示。输入是圆圈，圆圈内的数字表示特定记录的值。它们开始是浅灰色的，并随着管道观察到它们而变暗。</p>
 <p>当管道观察到值时，它会在其中间状态中累积它们，并最终将聚合结果实现为输出。状态和输出由矩形表示（灰色为状态，蓝色为输出），聚合值靠近顶部，并且由矩形覆盖的区域表示积累到结果的事件时间和处理时间的部分。对于示例2-1中的管道，在经典批处理引擎上执行时，它看起来像图2-3所示。</p>
-<div id="dplayer0" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer0"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0203.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer6" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer6"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0203.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图2-3.经典批处理</em></p>
 <p>因为这是批处理管道，所以它会累积状态，直到看到所有输入为止（由顶部的虚线绿线表示），此时它会产生其单个输出为48。在这个示例中，我们正在计算事件时间的所有总和，因为我们没有应用任何特定的窗口转换；因此，状态和输出的矩形覆盖了整个x轴。但是，如果我们想要处理无限数据源，则经典批处理将不足够；我们无法等待输入结束，因为它实际上永远不会结束。我们想要的概念之一是窗口，这是我们在第1章中介绍的。因此，在我们的第二个问题“事件时间的<em><strong>哪里</strong></em>计算结果？”的上下文中，我们现在将简要重新访问窗口。</p>
 <h3><span id="何地窗口">何地：窗口</span><a href="#何地窗口" class="header-anchor">#</a></h3><p>如第1章所述，窗口是沿时间边界切分数据源的过程。常见的窗口策略包括固定窗口、滑动窗口和会话窗口，如图2-4所示。</p>
@@ -372,7 +378,7 @@
 <p><em>示例2-2.分段求和代码</em></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team，Integer&gt;&gt; totals = input</span><br><span class="line">  .apply（Window.into（FixedWindows.of（TWO_MINUTES）））</span><br><span class="line">  .apply（Sum.integersPerKey（））;</span><br></pre></td></tr></table></figure>
 <p>请记住，Beam提供了一个统一的模型，可以在批处理和流处理中使用，因为从语义上讲，批处理实际上只是流处理的一个子集。因此，让我们首先在批处理引擎上执行此管道；机制更加简单，当我们切换到流引擎时，它将为我们提供直接比较的内容。图2-5呈现了结果。</p>
-<div id="dplayer1" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer1"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0205.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer7" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer7"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0205.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图2-5.在批处理引擎上的分段求和</em></p>
 <p>与以前一样，输入会在状态中累积，直到完全消耗，此后才会产生输出。但是，在这种情况下，我们不仅仅得到一个输出，而是得到四个输出：每个相关的两分钟事件时间窗口的单个输出。</p>
 <p>到目前为止，我们已经重新访问了我在第1章中介绍的两个主要概念：事件时间和处理时间域之间的关系以及窗口。如果我们想继续，我们将需要开始添加本节开头提到的新概念：触发器、水印和累积。</p>
@@ -394,7 +400,7 @@
 <p><em>示例2-3。每个记录都会重复触发</em></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team，Integer&gt;&gt; totals = input</span><br><span class="line">  .apply(Window.into(FixedWindows.of(TWO_MINUTES))</span><br><span class="line">               .triggering(Repeatedly(AfterCount(1))));</span><br><span class="line">  .apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
 <p>如果我们在流式引擎上运行这个新管道，结果会像图2-6所示。</p>
-<div id="dplayer2" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer2"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0206.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer8" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer8"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0206.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><em>图2-6.在流媒体引擎上每条记录触发</em></p>
 <p>您可以看到我们现在为每个窗口获得多个输出（窗格）：每个对应输入的一次。当输出流被写入某种表以便您可以简单地轮询结果时，这种触发模式工作得很好。每当您查看表时，您将看到给定窗口的最新值，这些值随着时间的推移会趋于正确。</p>
@@ -404,7 +410,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team，Integer&gt;&gt; totals = input</span><br><span class="line">  .apply(Window.into(FixedWindows.of(TWO_MINUTES))</span><br><span class="line">               .triggering(Repeatedly(AlignedDelay(TWO_MINUTES)))</span><br><span class="line">  .apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
 
 
-<div id="dplayer3" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer3"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0207.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer9" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer9"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0207.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><em>图2-7。两分钟对齐延迟触发器（即，微批处理）</em></p>
 <p>这种对齐延迟触发器实际上类似于Spark Streaming之类的微批处理流系统。它的好处在于可预测性;您在相同时间内获得所有修改的窗口的定期更新。这也是缺点：所有更新都同时发生，这会导致爆发式的工作负载，通常需要更大的峰值配额来正确处理负载。另一种选择是使用不对齐的延迟。这在Beam中可能类似于示例2-5，其结果如图2-8所示。</p>
@@ -413,7 +419,7 @@
 
 
 
-<div id="dplayer4" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer4"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0208.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer10" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer10"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0208.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><em>图2-8。两分钟不对齐延迟触发器</em></p>
 <p>将图2-8中的不对齐延迟与图2-6中的对齐延迟进行对比，可以很容易地看出不对齐延迟如何更均匀地分布负载。对于任何给定窗口涉及的实际延迟在两者之间有所不同，有时更多，有时更少，但最终平均延迟将基本保持不变。从这个角度来看，对于大规模处理，不对齐的延迟通常是更好的选择，因为它们会导致时间上更均匀的负载分布。</p>
@@ -437,7 +443,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</span><br><span class="line">  .apply(Window.into(FixedWindows.of(TWO_MINUTES))</span><br><span class="line">              .triggering(AfterWatermark()))</span><br><span class="line">  .apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
 <p>水印的一个有趣的特点是它们是一类函数，这意味着有多个不同的函数<em>F</em>(<em>P</em>)→<em>E</em>满足水印的属性，成功程度不同。正如我之前所指出的，对于您拥有输入数据的情况，可能可以构建完美的水印，这是理想的情况。但是对于缺乏输入的完美知识或计算完美水印的计算成本太高的情况，您可能会选择使用启发式来定义您的水印。我想在这里强调的一点是，使用的水印算法独立于管道本身。我们不会在这里详细讨论实施水印的含义（Slava在第3章中介绍），但是为了帮助加强这个想法，即一组给定的输入可以应用不同的水印，让我们看一下在相同的数据集上运行示例2-6的管道，但使用两个不同的水印实现（图2-10）：在左侧，完美的水印；在右侧，启发式水印。</p>
 <p>在两种情况下，窗口在水印通过窗口结束时实现。如您所预期的，完美水印完美地捕获了管道随着时间的推移的事件时间完整性。相比之下，右侧启发式水印使用的特定算法未考虑9的值，这大大改变了材料化输出的形状，无论是在输出延迟还是正确性方面（如为[12:00,12:02)窗口提供的不正确答案5所示）。水印触发器与图2-9中所示的重复更新触发器之间的最大区别是，水印使我们有一种方法来推断我们的输入的完整性。在系统为给定窗口实现输出之前，我们知道系统尚未认为输入已完成。这对于希望推断输入中缺少数据或缺少数据的用例尤其重要。</p>
-<div id="dplayer5" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer5"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0210.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer11" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer11"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0210.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图2-10. 具有完美（左）和启发式（右）水印的流式引擎上的窗口求和</em></p>
 <p>缺少数据用例的一个很好的例子是外连接。没有像水印这样的完整性概念，您如何知道何时放弃发出部分连接而不是继续等待该连接完成？你不知道。在缺乏真正的水印支持的流式系统中，将该决定基于处理时间延迟并不安全，因为我们在第1章中所说的事件时间偏差的可变性：只要偏差保持小于所选处理时间延迟，缺少数据的结果将是正确的，但是任何时候偏差超过该延迟，它们将突然变得不正确。从这个角度来看，事件时间水印是许多必须推断输入中缺少数据（例如外连接，异常检测等）的实际流用例的关键部分。</p>
 <p>现在，话虽如此，这些水印示例也突出了水印（和任何其他完整性概念）的两个缺点，具体而言，它们可能是以下两者之一：</p>
@@ -462,7 +468,7 @@
 <p><em>Example 2-7.通过早期&#x2F;准时&#x2F;延迟API进行早期、准时和延迟触发</em></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</span><br><span class="line">   .apply(Window.into(FixedWindows.of(TWO_MINUTES))</span><br><span class="line">               .triggering(AfterWatermark()</span><br><span class="line">                         .withEarlyFirings(AlignedDelay(ONE_MINUTE))</span><br><span class="line">                         .withLateFirings(AfterCount(1))))</span><br><span class="line">   .apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
 
-<div id="dplayer6" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer6"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0211.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer12" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer12"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0211.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>Figure 2-11.带有早期、准时和延迟触发的流式引擎的窗口求和</em></p>
 <p>这个版本比Figure 2-9有两个明显的改进：</p>
 <ul>
@@ -484,7 +490,7 @@
 <li>当水印通过窗口的延迟范围时，该窗口关闭，这意味着窗口的所有状态都会被丢弃。我保留了一个虚线矩形，显示窗口关闭时它覆盖的时间范围（在两个域中），并带有一个小尾巴向右延伸，以与水印进行对比。</li>
 <li>仅在此图表中，我添加了一个额外的晚到数据（第一个值为6的窗口）。6是晚到的，但仍然在允许的延迟时间范围内，因此与值11的更新结果合并。然而，9在延迟时间范围之外到达，因此被简单地丢弃。</li>
 </ul>
-<div id="dplayer7" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer7"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0212.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer13" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer13"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0212.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图2-12。允许早期&#x2F;按时&#x2F;晚期触发</em></p>
 <p>关于延迟时间范围，最后有两个侧面需要注意：</p>
 <ul>
@@ -560,13 +566,13 @@
 <p><em>示例2-9.早期&#x2F;按时&#x2F;迟到触发的丢弃模式版本</em></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team，Integer&gt;&gt; totals = input</span><br><span class="line">   .apply（Window.into（FixedWindows.of（TWO_MINUTES））</span><br><span class="line">                .triggering（</span><br><span class="line">                  AfterWatermark（）</span><br><span class="line">                   .withEarlyFirings（AlignedDelay（ONE_MINUTE））</span><br><span class="line">                   .withLateFirings（AtCount（1）））</span><br><span class="line">                .discardingFiredPanes（））</span><br><span class="line">    .apply（Sum.integersPerKey（））;</span><br></pre></td></tr></table></figure>
 <p>在启用启发式水印的流引擎上重新运行会产生如图2-13所示的输出。</p>
-<div id="dplayer8" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer8"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0213.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer14" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer14"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0213.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图2-13。流引擎上的早期&#x2F;按时&#x2F;迟到触发的丢弃模式版本</em></p>
 <p>即使整体输出的形状与图2-11中的累加模式版本相似，但请注意，此丢弃版本中的窗格都不重叠。因此，每个输出都与其他输出无关。<br>如果我们想查看撤回的操作，更改将类似，如示例2-10所示。 ???描述了结果。</p>
 <p><em>示例2-10.早期&#x2F;按时&#x2F;迟到触发的累加和撤回模式版本</em></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team，Integer&gt;&gt; totals = input</span><br><span class="line">  .apply（Window.into（FixedWindows.of（TWO_MINUTES））</span><br><span class="line">               .triggering（</span><br><span class="line">                 AfterWatermark（）</span><br><span class="line">                  .withEarlyFirings（AlignedDelay（ONE_MINUTE））</span><br><span class="line">                  .withLateFirings（AtCount（1）））</span><br><span class="line">               .accumulatingAndRetractingFiredPanes（））</span><br><span class="line">  .apply（Sum.integersPerKey（））;</span><br></pre></td></tr></table></figure>
 
-<div id="dplayer9" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer9"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0214.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer15" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer15"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0214.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p>在流引擎上运行早期&#x2F;按时&#x2F;迟到触发的累加和撤回模式版本</p>
 <p>由于每个窗口的窗格都重叠，因此很难清晰地看到撤回。撤回以红色表示，与重叠的蓝色窗格相结合，形成了略带紫色的颜色。我还略微水平移了给定窗格内两个输出的值（并用逗号分隔它们），以使它们更容易区分。</p>
 <p>图2-14组合了图2-9、2-11（仅启发式）和并排的最终帧，提供了三种模式的良好视觉对比。</p>
@@ -640,6 +646,18 @@
 <p>累积和撤回</p>
 <p>示例2-10 &#x2F; ???</p>
 <p>话虽如此，到目前为止，我们只看了一种窗口化类型：事件时间的固定窗口化。正如我们所知，窗口化有许多维度，我想在我们结束Beam模型之前至少再涉及其中两个。不过，首先，我们将稍微偏离主题，深入探讨水印的世界，因为这些知识将有助于框架未来的讨论（并且本身也很有趣）。请欢迎Slava，右台……</p>
+<hr>
+<ol>
+<li>如果你足够幸运能读到 Safari 版本的书籍，你会看到完整的类似“流式媒体 102”中的时间-lapse 动画。对于印刷、Kindle 和其他电子书版本，这些都是静态图像，带有到网络动画版本的链接。</li>
+<li>请耐心等待。复合标点符号（即表情符号）的细粒度情感表达在 O’Reilly 出版物中是严格禁止的 <winky-smiley>。</winky-smiley></li>
+<li>的确，我们在 Beam 的原始触发器功能中就是这样做的。回想起来，我们有点过头了。未来的迭代将更简单、更易于使用，在本书中我只关注那些可能以某种形式保留的部分。</li>
+<li>更准确地说，函数的输入实际上是上游管道中水印被观察到的点上游的所有内容在时间 <em>P</em> 的状态:输入源、缓冲数据、正在处理的数据等等;但从概念上来讲，把它看作是从处理时间到事件时间的映射更简单。</li>
+<li>请注意，我选择明确省略启发式水印的 9 值，因为它将帮助我就延迟数据和水印滞后提出一些重要观点。实际上，一个启发式水印可能会同样有可能省略其他某些值，这反过来可能会对水印产生显著不那么严重的影响。如果你的目标是从水印中筛选迟到的数据（在某些情况下非常有效，例如在滥用检测中，你只想尽快看到大多数数据），你不一定要选择启发式水印而不是完美水印。你真正想要的是百分位水印，它明确地从其计算中删除一些迟到的数据百分位。见第三章。</li>
+<li>这并不是说没有那些主要关心正确性而不是延迟的使用情况；在这些情况下，使用准确的水印作为管道输出的唯一驱动器是一种合理的方法。</li>
+<li>正如我们之前所知道的，这个断言要么是在使用完美水印的情况下保证的，要么是在使用启发式水印的情况下的一个经过教育的猜测。</li>
+<li>你可能会注意到应该有第四种模式：丢弃和撤销。在大多数情况下，这种模式并不是非常有用，所以我在这里不再讨论它。</li>
+<li>回想起来，选择一组更加面向材料化流中数据的观察性名称（例如“输出模式”）而不是描述产生这些数据的状态管理语义的名称可能会更清晰。例如：丢弃模式 → Δ 模式，累积模式 → 值模式，累积和撤回模式 → 值和撤回模式？然而，丢弃&#x2F;累积&#x2F;累积和撤回名称已经在 Beam Model 的 1.x 和 2.x 衍生版本中得到了确认，因此我不想通过偏离来引入潜在的困惑。此外，随着 Beam 3.0 的推出和汇合触发器的引入，累积模式很可能会更加淡化。在第 8 章中讨论 SQL 时会更详细地讨论这个问题。</li>
+</ol>
 
     </div>
 
@@ -655,7 +673,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www6v.github.io/www6vHomeHexo/2000/03/17/streamingSystemChapter2/" title="《Streaming System》-第二章： 数据处理的什么、何地、何时以及如何进行">https://www6v.github.io/www6vHomeHexo/2000/03/17/streamingSystemChapter2/</a>
+    <a href="https://www6v.github.io/www6vHomeHexo/2000/03/17/streamingSystemChapter2/" title="《Streaming System》-第二章： 数据处理的什么、何地、何时以及如何进行[完整]">https://www6v.github.io/www6vHomeHexo/2000/03/17/streamingSystemChapter2/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -679,8 +697,8 @@
       <i class="fa fa-chevron-left"></i> 《Streaming System》-Chapter 5. Exactly-Once and Side Effects
     </a></div>
       <div class="post-nav-item">
-    <a href="/www6vHomeHexo/2000/03/17/streamingSystemChapter2Original/" rel="next" title="《Streaming System》-Chapter 2. The What, Where, When, and How of Data Processing">
-      《Streaming System》-Chapter 2. The What, Where, When, and How of Data Processing <i class="fa fa-chevron-right"></i>
+    <a href="/www6vHomeHexo/2000/03/17/streamingSystemChapter2Original/" rel="next" title="《Streaming System》-Chapter 2. The What, Where, When, and How of Data Processing[完整]">
+      《Streaming System》-Chapter 2. The What, Where, When, and How of Data Processing[完整] <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
