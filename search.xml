@@ -8973,7 +8973,19 @@ func new(Type) *Type
 <blockquote>
 <p>Flink是通过State状态来缓存等待join的实时流</p>
 </blockquote>
-<h5><span id="基于原生state的connect算子操作">基于原生State的Connect算子操作</span><a href="#基于原生state的connect算子操作" class="header-anchor">#</a></h5><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p><a href="https://blog.csdn.net/m0_49834705/article/details/119421944">Flink中的双流Join详解</a><br><a href="https://zhuanlan.zhihu.com/p/452924664">面试高频|趣味Flink双流JOIN</a></p>
+<h5><span id="基于原生state的connect算子操作">基于原生State的Connect算子操作</span><a href="#基于原生state的connect算子操作" class="header-anchor">#</a></h5><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li><a href="https://blog.csdn.net/m0_49834705/article/details/119421944">Flink中的双流Join详解</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/452924664">面试高频|趣味Flink双流JOIN</a></li>
+<li><a href="https://www.skyzh.dev/posts/articles/2022-01-15-store-of-streaming-states/">流处理系统中状态的表示和存储</a> *** 未</li>
+</ol>
+<ul>
+<li>Full State - 算子维护自己的完整状态      <ul>
+<li>Join State 的存储</li>
+<li>Aggregation State 的存储</li>
+<li>总结</li>
+</ul>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>大数据</category>
