@@ -136,7 +136,7 @@
 <li><a href="/www6vHomeHexo/2019/09/01/k8sStorage/" title="Kubernetes存储">Kubernetes存储</a> </li>
 <li><a href="/www6vHomeHexo/2022/01/12/k8sRook/" title="Kubernetes Rook">Kubernetes Rook</a> </li>
 <li><a href="/www6vHomeHexo/2022/01/08/ceph/" title="Ceph">Ceph</a> </li>
-<li><a href="/www6vHomeHexo/2022/04/06/etcd/" title="etcd">etcd</a></li>
+<li><a href="/www6vHomeHexo/2022/04/06/etcd/" title="etcd 总结">etcd 总结</a></li>
 </ul>
 <h2><span id="调度">调度</span><a href="#调度" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2019/06/09/k8sScheduler/" title="Kubernetes调度器">Kubernetes调度器</a> </li>
@@ -536,6 +536,41 @@
       </tags>
   </entry>
   <entry>
+    <title>流处理 汇总</title>
+    <url>/www6vHomeHexo/2020/04/22/streamingSummary/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="flink">Flink</span><a href="#flink" class="header-anchor">#</a></h2><ul>
+<li><a href="/www6vHomeHexo/2019/07/29/streamingFlink/" title="Flink 总结">Flink 总结</a></li>
+<li><a href="/www6vHomeHexo/2022/03/31/streamingFlinkWindow/" title="Flink-Window">Flink-Window</a></li>
+<li><a href="/www6vHomeHexo/2022/03/29/streamingFlinkWatermarkWindow/" title="Flink中的Watermark &amp; Window">Flink中的Watermark &amp; Window</a></li>
+<li><a href="/www6vHomeHexo/2022/02/03/streamingFlinkCheckpoint/" title="Flink Checkpoint-分布式快照方法">Flink Checkpoint-分布式快照方法</a></li>
+<li><a href="/www6vHomeHexo/2022/02/01/streamingFlinkExactlyOnce/" title="Flink 端到端Exactly-once">Flink 端到端Exactly-once</a></li>
+<li><a href="/www6vHomeHexo/2022/01/22/streamingFlinkJoin/" title="Flink 双流Join">Flink 双流Join</a></li>
+<li><a href="/www6vHomeHexo/2022/03/31/streamingFlinkDeploy/" title="Flink-部署方式">Flink-部署方式</a></li>
+</ul>
+<h2><span id="spark">Spark</span><a href="#spark" class="header-anchor">#</a></h2><ul>
+<li><a href="/www6vHomeHexo/2019/03/09/streamingSpark/" title="Spark 总结">Spark 总结</a></li>
+<li><a href="/www6vHomeHexo/2022/05/19/streamingSparkPerformance/" title="Spark 性能优化">Spark 性能优化</a></li>
+<li><a href="/www6vHomeHexo/2019/03/10/streamingSparkTrain/" title="Spark公司内部培训">Spark公司内部培训</a></li>
+</ul>
+<h2><span id="beam">Beam</span><a href="#beam" class="header-anchor">#</a></h2><ul>
+<li><a href="/www6vHomeHexo/2022/04/21/streamingBeam/" title="流计算-Beam">流计算-Beam</a></li>
+</ul>
+<h2><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h2><ul>
+<li><a href="/www6vHomeHexo/2019/07/19/streamComputing/" title="流式计算-Flink vs. Spark">流式计算-Flink vs. Spark</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>汇总</category>
+        <category>流处理</category>
+      </categories>
+      <tags>
+        <tag>汇总</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>LSM-Tree 汇总</title>
     <url>/www6vHomeHexo/2020/04/06/lsmTreeSummary/</url>
     <content><![CDATA[<p></p>
@@ -548,7 +583,7 @@
 </ul>
 <h3><span id="工程">工程</span><a href="#工程" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2023/04/02/hbaselsmTree/" title="HBase - LSM-Tree">HBase - LSM-Tree</a> </li>
-<li><a href="/www6vHomeHexo/2022/01/29/rocksdb/" title="RocksDB">RocksDB</a> </li>
+<li><a href="/www6vHomeHexo/2022/01/29/rocksdb/" title="RocksDB 总结">RocksDB 总结</a> </li>
 <li><a href="/www6vHomeHexo/2022/04/05/rocksdbLsm/" title="RocksDB- LSM-Tree">RocksDB- LSM-Tree</a>  </li>
 <li><a href="/www6vHomeHexo/2023/04/06/rocksdbSST/" title="Rocksdb-SST">Rocksdb-SST</a></li>
 </ul>
@@ -4132,7 +4167,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
   </entry>
   <entry>
     <title>Spark 性能优化</title>
-    <url>/www6vHomeHexo/2022/05/19/sparkPerformance/</url>
+    <url>/www6vHomeHexo/2022/05/19/streamingSparkPerformance/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
@@ -5681,21 +5716,7 @@ BGP 协议传输的消息
 <li>原因: 集群中存在 psp(PodSecurityPolicy) 禁止 pod 直接挂载 hostpath.</li>
 <li>解决: 通过添加以下的 psp 规则来允许或者删除存在的 psp 都可</li>
 </ul>
-<h2><span id="draft-here">Draft Here</span><a href="#draft-here" class="header-anchor">#</a></h2><ol>
-<li><p><a href="https://corvo.myseu.cn/2021/03/22/2021-03-22-%E8%AE%B0%E4%B8%80%E6%AC%A1Ingress%E4%B8%AD%E5%BC%82%E5%B8%B8502%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5/">记一次Ingress中异常502问题的排查</a> 未</p>
-</li>
-<li><p><a href="https://corvo.myseu.cn/2021/03/21/2021-03-21-%E8%AE%B0%E4%B8%80%E6%AC%A1kubernetes%E6%9C%BA%E5%99%A8%E5%86%85%E6%A0%B8%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5/">记一次Kubernetes机器内核问题排查</a></p>
-</li>
-<li><p><a href="https://mp.weixin.qq.com/s/cR6MpQu-n1cwMbXmVaXqzQ">添加 K8S CPU limit 会降低服务性能？</a></p>
-</li>
-<li><p><a href="https://blog.csdn.net/alex_yangchuansheng/article/details/119224283">Kubernetes 常见问题排查与解决方案！（纯干货）</a> ***</p>
-</li>
-<li><p><a href="https://www.chenshaowen.com/blog/kubernetes-cluster-troubleshooting.html">Kubernetes 集群 troubleshooting</a> 未</p>
-</li>
-<li><p><a href="https://www.chenshaowen.com/blog/kubernetes-app-troubleshooting.html">Kubernetes 应用 troubleshooting</a> 未</p>
-</li>
-</ol>
-
+<h2><span id="draft-here">Draft Here</span><a href="#draft-here" class="header-anchor">#</a></h2>
 ]]></content>
       <categories>
         <category>稳定性</category>
@@ -5732,11 +5753,11 @@ BGP 协议传输的消息
   </entry>
   <entry>
     <title>Flink-Window</title>
-    <url>/www6vHomeHexo/2022/03/31/flinkWindow/</url>
+    <url>/www6vHomeHexo/2022/03/31/streamingFlinkWindow/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<img src="/www6vHomeHexo/2022/03/31/flinkWindow/window.JPG" class>
+<img src="/www6vHomeHexo/2022/03/31/streamingFlinkWindow/window.JPG" class>
 
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>《Flink核心技术与实战》  第三章</p>
 ]]></content>
@@ -5752,7 +5773,7 @@ BGP 协议传输的消息
   </entry>
   <entry>
     <title>Flink-部署方式</title>
-    <url>/www6vHomeHexo/2022/03/31/flinkDeploy/</url>
+    <url>/www6vHomeHexo/2022/03/31/streamingFlinkDeploy/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
@@ -5866,7 +5887,7 @@ BGP 协议传输的消息
   </entry>
   <entry>
     <title>Flink中的Watermark &amp; Window</title>
-    <url>/www6vHomeHexo/2022/03/29/flinkWatermarkWindow/</url>
+    <url>/www6vHomeHexo/2022/03/29/streamingFlinkWatermarkWindow/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
@@ -5876,13 +5897,13 @@ BGP 协议传输的消息
 <h3><span id="目的">目的</span><a href="#目的" class="header-anchor">#</a></h3><p>用于处理乱序和延迟事件.   </p>
 <h3><span id="类型">类型</span><a href="#类型" class="header-anchor">#</a></h3><ul>
 <li><p>完美的Watermark<br>在顺序事件中没有太大的意义</p>
-<img src="/www6vHomeHexo/2022/03/29/flinkWatermarkWindow/perfectWaterwark.JPG" class>
+<img src="/www6vHomeHexo/2022/03/29/streamingFlinkWatermarkWindow/perfectWaterwark.JPG" class>
 </li>
 <li><p>启发式的Watermark<br>EG    W(11) &#x3D;  15 - maxOutOfOrderness(4)<br>  W(7) &#x3D; 11 - maxOutOfOrderness(4)    </p>
-<img src="/www6vHomeHexo/2022/03/29/flinkWatermarkWindow/heuristicWatermark.JPG" class>
+<img src="/www6vHomeHexo/2022/03/29/streamingFlinkWatermarkWindow/heuristicWatermark.JPG" class>
 </li>
 <li><p>迟到事件<br>迟到事件被丢弃  不计算在窗口中</p>
-<img src="/www6vHomeHexo/2022/03/29/flinkWatermarkWindow/lateEvent.JPG" class></li>
+<img src="/www6vHomeHexo/2022/03/29/streamingFlinkWatermarkWindow/lateEvent.JPG" class></li>
 </ul>
 <h3><span id="watermark触发时机-2">Watermark触发时机 [2]</span><a href="#watermark触发时机-2" class="header-anchor">#</a></h3><ol>
 <li>Watermark时间 &gt; window_end_time<br>如果当前的watermark已经大于或等于窗口的最大时间戳（即窗口的endTime），那么就会触发窗口计算，并输出结果。</li>
@@ -7836,7 +7857,7 @@ func new(Type) *Type
   </entry>
   <entry>
     <title>Flink Checkpoint-分布式快照方法</title>
-    <url>/www6vHomeHexo/2022/02/03/flinkCheckpoint/</url>
+    <url>/www6vHomeHexo/2022/02/03/streamingFlinkCheckpoint/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
@@ -8084,12 +8105,12 @@ func new(Type) *Type
   </entry>
   <entry>
     <title>Flink 端到端Exactly-once</title>
-    <url>/www6vHomeHexo/2022/02/01/flinkExactlyOnce/</url>
+    <url>/www6vHomeHexo/2022/02/01/streamingFlinkExactlyOnce/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
 <h2><span id="实现端到端exactly-once123">实现端到端Exactly-once[1][2][3]</span><a href="#实现端到端exactly-once123" class="header-anchor">#</a></h2><p>(1)启动检查点保存<br>(2)算子任务对状态做快照<br>(3)Sink 任务开启事务，进行预提交<br>(4)检查点保存完成，提交事务</p>
-<img src="/www6vHomeHexo/2022/02/01/flinkExactlyOnce/flinkExactlyOnce.png" class title="Flink Exactly-Once">
+<img src="/www6vHomeHexo/2022/02/01/streamingFlinkExactlyOnce/flinkExactlyOnce.png" class title="Flink Exactly-Once">
 
 <p>  Once all of the operators complete their pre-commit, they issue a commit.<br>  If at least one pre-commit fails, all others are aborted, and we roll back to the previous successfully-completed checkpoint.<br>  After a successful pre-commit, the commit must be guaranteed to eventually succeed – both our operators and our external system need to make this guarantee. If a commit fails (for example, due to an intermittent network issue), the entire Flink application fails, restarts according to the user’s restart strategy, and there is another commit attempt. This process is critical because if the commit does not eventually succeed, data loss occurs.</p>
 <p>[关键:  barrier , pre-commit，commit]</p>
@@ -8106,7 +8127,7 @@ func new(Type) *Type
 <li><a href="https://zhuanlan.zhihu.com/p/77677075">端到端一致性,流系统Spark&#x2F;Flink&#x2F;Kafka&#x2F;DataFlow对比总结(压箱宝具呕血之作)</a> 原理 - aws SDE - 未</li>
 <li><a href="http://www.54tianzhisheng.cn/2019/06/20/flink-kafka-Exactly-Once/">Apache Flink 结合 Kafka 构建端到端的 Exactly-Once 处理 </a></li>
 <li><a href="http://www.54tianzhisheng.cn/2019/08/21/Flink-Exactly_Once_vs_At_Least_Once/">一文搞懂 Flink 的 Exactly Once 和 At Least Once </a>  ***</li>
-<li><a href="/www6vHomeHexo/2022/02/03/flinkCheckpoint/" title="Flink Checkpoint-分布式快照方法">Flink Checkpoint-分布式快照方法</a>  self</li>
+<li><a href="/www6vHomeHexo/2022/02/03/streamingFlinkCheckpoint/" title="Flink Checkpoint-分布式快照方法">Flink Checkpoint-分布式快照方法</a>  self</li>
 </ol>
 ]]></content>
       <categories>
@@ -8936,7 +8957,7 @@ func new(Type) *Type
   </entry>
   <entry>
     <title>Flink 双流Join</title>
-    <url>/www6vHomeHexo/2022/01/22/flinkJoin/</url>
+    <url>/www6vHomeHexo/2022/01/22/streamingFlinkJoin/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
@@ -17227,7 +17248,7 @@ nq： 不排队调度
   </entry>
   <entry>
     <title>Flink 总结</title>
-    <url>/www6vHomeHexo/2019/07/29/flink/</url>
+    <url>/www6vHomeHexo/2019/07/29/streamingFlink/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
@@ -17248,10 +17269,10 @@ nq： 不排队调度
 
 </div>
 
-<h2><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2019/07/29/flink/flink.jpg" class title="flink"> 
+<h2><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2019/07/29/streamingFlink/flink.jpg" class title="flink"> 
 
 
-<h2><span id="组件">组件</span><a href="#组件" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2019/07/29/flink/flink-arch.png" class title="flink架构">
+<h2><span id="组件">组件</span><a href="#组件" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2019/07/29/streamingFlink/flink-arch.png" class title="flink架构">
 
 
 <h2><span id="runtime-6">Runtime [6]</span><a href="#runtime-6" class="header-anchor">#</a></h2><ul>
@@ -17268,7 +17289,7 @@ nq： 不排队调度
 </ul>
 </li>
 </ul>
-<img src="/www6vHomeHexo/2019/07/29/flink/flink-runtime.png" class title="flink架构">
+<img src="/www6vHomeHexo/2019/07/29/streamingFlink/flink-runtime.png" class title="flink架构">
 
 
 <h2><span id="概念">概念</span><a href="#概念" class="header-anchor">#</a></h2><ol>
@@ -18482,7 +18503,7 @@ nq： 不排队调度
   </entry>
   <entry>
     <title>Spark公司内部培训</title>
-    <url>/www6vHomeHexo/2019/03/10/sparkTrain/</url>
+    <url>/www6vHomeHexo/2019/03/10/streamingSparkTrain/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>  
 
@@ -18506,11 +18527,11 @@ nq： 不排队调度
   </entry>
   <entry>
     <title>Spark 总结</title>
-    <url>/www6vHomeHexo/2019/03/09/spark/</url>
+    <url>/www6vHomeHexo/2019/03/09/streamingSpark/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>   
 
-<h2><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2019/03/09/spark/spark.jpg" class title="spark总结">
+<h2><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2019/03/09/streamingSpark/spark.jpg" class title="spark总结">
 
 
 <h2><span id="structured-streaming">Structured Streaming</span><a href="#structured-streaming" class="header-anchor">#</a></h2><ol>
@@ -18524,7 +18545,7 @@ nq： 不排队调度
 <li><p>实时性<br><strong>Spark Streaming</strong> 是准实时的，它能做到的最小延迟在一秒左右。 <strong>秒级</strong><br><strong>Structured Streaming</strong> 引入了<strong>连续处理</strong>的模式，可以做到真正的<strong>毫秒级</strong>延迟。</p>
 </li>
 </ol>
-<h2><span id="spark-sql">spark-sql</span><a href="#spark-sql" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2019/03/09/spark/rdd-dataset-dataframe.PNG" class title="RDD,DataFrame,DataSet比较">
+<h2><span id="spark-sql">spark-sql</span><a href="#spark-sql" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2019/03/09/streamingSpark/rdd-dataset-dataframe.PNG" class title="RDD,DataFrame,DataSet比较">
 
 
 <h2><span id="spark-streaming-kafka-反压backpressure">Spark Streaming Kafka 反压（Backpressure）</span><a href="#spark-streaming-kafka-反压backpressure" class="header-anchor">#</a></h2><h2><span id="互联网运营常用数据指标">互联网运营常用数据指标</span><a href="#互联网运营常用数据指标" class="header-anchor">#</a></h2><ol>

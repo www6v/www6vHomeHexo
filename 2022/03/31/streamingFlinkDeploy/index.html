@@ -21,17 +21,17 @@
   </script>
 
   <meta property="og:type" content="article">
-<meta property="og:title" content="Flink 双流Join">
-<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/01/22/flinkJoin/index.html">
+<meta property="og:title" content="Flink-部署方式">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/03/31/streamingFlinkDeploy/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-01-22T03:26:05.000Z">
-<meta property="article:modified_time" content="2023-02-25T02:57:46.156Z">
+<meta property="article:published_time" content="2022-03-31T03:53:52.000Z">
+<meta property="article:modified_time" content="2023-03-31T04:01:02.273Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="flink">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/01/22/flinkJoin/">
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/03/31/streamingFlinkDeploy/">
 
 
 <script id="page-configurations">
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>Flink 双流Join | www6v的博客</title>
+  <title>Flink-部署方式 | www6v的博客</title>
   
 
 
@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2022/01/22/flinkJoin/">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2022/03/31/streamingFlinkDeploy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
@@ -201,7 +201,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Flink 双流Join
+          Flink-部署方式
         </h1>
 
         <div class="post-meta">
@@ -217,14 +217,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-01-22 11:26:05" itemprop="dateCreated datePublished" datetime="2022-01-22T11:26:05+08:00">2022-01-22</time>
+              <time title="创建时间：2022-03-31 11:53:52" itemprop="dateCreated datePublished" datetime="2022-03-31T11:53:52+08:00">2022-03-31</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-25 10:57:46" itemprop="dateModified" datetime="2023-02-25T10:57:46+08:00">2023-02-25</time>
+                <time title="修改时间：2023-03-31 12:01:02" itemprop="dateModified" datetime="2023-03-31T12:01:02+08:00">2023-03-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -262,19 +262,17 @@
         <p></p>
 <span id="more"></span>
 
-<h2><span id="双流join">双流Join</span><a href="#双流join" class="header-anchor">#</a></h2><h5><span id="基于窗口的join操作">基于窗口的JOIN操作</span><a href="#基于窗口的join操作" class="header-anchor">#</a></h5><ul>
-<li>Window Join<ul>
-<li>Tumbling Window Join</li>
-<li>Sliding Window Join</li>
-<li>Session Widnow Join</li>
+<h2><span id="flink-集群部署模式">Flink 集群部署模式</span><a href="#flink-集群部署模式" class="header-anchor">#</a></h2><ul>
+<li>Session</li>
+<li>Per-Job</li>
+<li>Application</li>
 </ul>
-</li>
-<li>Interval Join</li>
+<h2><span id="集群资源管理器支持">集群资源管理器支持</span><a href="#集群资源管理器支持" class="header-anchor">#</a></h2><ul>
+<li>Standalone</li>
+<li>Yarn</li>
+<li>Kubernetes<br>Flink on Kubernetes<br><a target="_blank" rel="noopener" href="https://github.com/www6v/dev-ops/tree/master/yaml-prod/flink">Flink on Kubernetes</a>  Flink官方的方案</li>
 </ul>
-<blockquote>
-<p>Flink是通过State状态来缓存等待join的实时流</p>
-</blockquote>
-<h5><span id="基于原生state的connect算子操作">基于原生State的Connect算子操作</span><a href="#基于原生state的connect算子操作" class="header-anchor">#</a></h5><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_49834705/article/details/119421944">Flink中的双流Join详解</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/452924664">面试高频|趣味Flink双流JOIN</a></p>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>《Flink核心技术与实战》 极客时间  第二章</p>
 
     </div>
 
@@ -290,7 +288,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www6v.github.io/www6vHomeHexo/2022/01/22/flinkJoin/" title="Flink 双流Join">https://www6v.github.io/www6vHomeHexo/2022/01/22/flinkJoin/</a>
+    <a href="https://www6v.github.io/www6vHomeHexo/2022/03/31/streamingFlinkDeploy/" title="Flink-部署方式">https://www6v.github.io/www6vHomeHexo/2022/03/31/streamingFlinkDeploy/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -310,12 +308,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/www6vHomeHexo/2022/01/21/apiGateway/" rel="prev" title="API Gateway网关">
-      <i class="fa fa-chevron-left"></i> API Gateway网关
+    <a href="/www6vHomeHexo/2022/03/30/aliCloudBill/" rel="prev" title="阿里云-计费方式">
+      <i class="fa fa-chevron-left"></i> 阿里云-计费方式
     </a></div>
       <div class="post-nav-item">
-    <a href="/www6vHomeHexo/2022/01/22/aiOverview/" rel="next" title="人工智能知识点">
-      人工智能知识点 <i class="fa fa-chevron-right"></i>
+    <a href="/www6vHomeHexo/2022/03/31/streamingFlinkWindow/" rel="next" title="Flink-Window">
+      Flink-Window <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -388,14 +386,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">399</span>
+          <span class="site-state-item-count">400</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/www6vHomeHexo/categories/">
           
-        <span class="site-state-item-count">243</span>
+        <span class="site-state-item-count">244</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
