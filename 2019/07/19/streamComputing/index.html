@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-07-18T23:37:56.000Z">
-<meta property="article:modified_time" content="2023-03-21T11:17:59.537Z">
+<meta property="article:modified_time" content="2023-04-23T14:15:11.717Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="flink">
 <meta property="article:tag" content="spark">
@@ -225,7 +225,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-21 19:17:59" itemprop="dateModified" datetime="2023-03-21T19:17:59+08:00">2023-03-21</time>
+                <time title="修改时间：2023-04-23 22:15:11" itemprop="dateModified" datetime="2023-04-23T22:15:11+08:00">2023-04-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -263,57 +263,271 @@
         <p></p>
 <span id="more"></span>
 
-
-<table>
+<h3><span id="flink-vs-spark">Flink vs. Spark</span><a href="#flink-vs-spark" class="header-anchor">#</a></h3><table>
 <thead>
 <tr>
 <th>特性</th>
-<th>Spark</th>
 <th>Flink</th>
+<th>Spark</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>本质</td>
-<td>batch</td>
 <td>event</td>
+<td>batch</td>
 </tr>
 <tr>
 <td>State</td>
-<td>RDD</td>
 <td>Keyed State(Value, List, Map) <br> Operator State(List)</td>
+<td>RDD</td>
 </tr>
 <tr>
-<td>算子</td>
-<td>Transformation<br> Action</td>
+<td>算子[What]</td>
 <td>Source<br> Transform<br> Sink</td>
+<td>Transformation<br> Action</td>
 </tr>
 <tr>
-<td>API</td>
-<td>1.SparkSQL(DataFrame， DataSet)<br> 2. Spark Streaming <br></td>
+<td>API [What]</td>
 <td>1. Table<br> 2. DataStream <br> 3.DataSet</td>
+<td>1.SparkSQL(DataFrame， DataSet)<br> 2. Spark Streaming <br></td>
 </tr>
 <tr>
-<td>Time</td>
-<td>无</td>
+<td>Time[When]</td>
 <td>Event Time<br> Ingestion Time<br> Processing Time</td>
+<td>无</td>
 </tr>
 <tr>
-<td>Windows</td>
-<td>Sliding <br> batchDuration,windowDuration,slideDuration</td>
+<td>Windows[Where]</td>
 <td>Tumbling<br> Sliding <br> Session</td>
+<td>Sliding <br> batchDuration,windowDuration,slideDuration</td>
 </tr>
 <tr>
 <td>可靠性</td>
-<td>linage<br> master checkpoint</td>
 <td>Savepoint<br>External Checkpoint</td>
+<td>linage<br> master checkpoint</td>
 </tr>
 </tbody></table>
-<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h3><span id="beam-vs-flink-vs-spark-6">Beam vs. Flink vs. Spark  [6]</span><a href="#beam-vs-flink-vs-spark-6" class="header-anchor">#</a></h3><ul>
+<li>What</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="center">Beam model</th>
+<th align="center">Flink</th>
+<th align="center">Spark</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">ParDo</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="right">GroupByKey</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">~</td>
+</tr>
+<tr>
+<td align="right">Flatten</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="right">Combine</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="right">Composite Transfrom</td>
+<td align="center">√</td>
+<td align="center">~</td>
+<td align="center">~</td>
+</tr>
+<tr>
+<td align="right">Side Inputs</td>
+<td align="center">√</td>
+<td align="center">~</td>
+<td align="center">~</td>
+</tr>
+<tr>
+<td align="right">Source API</td>
+<td align="center">√</td>
+<td align="center">~</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="right">Aggregators</td>
+<td align="center">~</td>
+<td align="center">~</td>
+<td align="center">~</td>
+</tr>
+<tr>
+<td align="right">Keyed States</td>
+<td align="center">×</td>
+<td align="center">×</td>
+<td align="center">×</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Where</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="center">Beam model</th>
+<th align="center">Flink</th>
+<th align="center">Spark</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">Global windows</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="right">Fixed windows</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">~</td>
+</tr>
+<tr>
+<td align="right">Sliding windows</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">×</td>
+</tr>
+<tr>
+<td align="right">Session windows</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">×</td>
+</tr>
+<tr>
+<td align="right">Custom windows</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">×</td>
+</tr>
+<tr>
+<td align="right">Custom merging windows</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">×</td>
+</tr>
+<tr>
+<td align="right">Timestamp control</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">×</td>
+</tr>
+</tbody></table>
+<ul>
+<li>When</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="center">Beam model</th>
+<th align="center">Flink</th>
+<th align="center">Spark</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">Configurable triggering</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">×</td>
+</tr>
+<tr>
+<td align="right">Event-time triggers</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">×</td>
+</tr>
+<tr>
+<td align="right">Proccessing-time triggers</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="right">Count triggers</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">×</td>
+</tr>
+<tr>
+<td align="right">[Meta]data driven  triggers</td>
+<td align="center">×</td>
+<td align="center">×</td>
+<td align="center">×</td>
+</tr>
+<tr>
+<td align="right">Composite triggers</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">×</td>
+</tr>
+<tr>
+<td align="right">Allowed lateness</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">×</td>
+</tr>
+<tr>
+<td align="right">Timers</td>
+<td align="center">×</td>
+<td align="center">×</td>
+<td align="center">×</td>
+</tr>
+</tbody></table>
+<ul>
+<li>How</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Beam model</th>
+<th>Flink</th>
+<th>Spark</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Discarding</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Accumulating</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+</tr>
+<tr>
+<td>Accumulating @ Retracting</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+</tr>
+</tbody></table>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><a target="_blank" rel="noopener" href="https://www.iteblog.com/archives/2417.html">Apache Flink状态管理和容错机制介绍</a></li>
 <li><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/674450">Streaming System 第二章：The What- Where- When- and How of Data Processing</a> 未</li>
 <li><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/682873">Streaming System 第三章：Watermarks</a> 未</li>
 <li><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/706954">大数据架构如何做到流批一体？</a> 未</li>
 <li>&lt;&lt;Spark大数据处理技术&gt;&gt; 10.2节</li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zlslch/p/7609417.html">Apache Beam是什么？</a></li>
 </ol>
 
     </div>
