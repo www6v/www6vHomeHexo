@@ -5057,6 +5057,25 @@ BGP 协议传输的消息
       </tags>
   </entry>
   <entry>
+    <title>etcd 部署</title>
+    <url>/www6vHomeHexo/2022/04/24/etcdDeploy/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="单机docker部署">单机Docker部署</span><a href="#单机docker部署" class="header-anchor">#</a></h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">image</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker pull bitnami/etcd:latest</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">network</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker network create app-tier --driver bridge</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">server start</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run -d --name etcd-server \</span></span><br><span class="line"><span class="language-bash">    --network app-tier \</span></span><br><span class="line"><span class="language-bash">    --publish 2379:2379 \</span></span><br><span class="line"><span class="language-bash">    --publish 2380:2380 \</span></span><br><span class="line"><span class="language-bash">    --<span class="built_in">env</span> ALLOW_NONE_AUTHENTICATION=<span class="built_in">yes</span> \</span></span><br><span class="line"><span class="language-bash">    --<span class="built_in">env</span> ETCD_ADVERTISE_CLIENT_URLS=http://etcd-server:2379 \</span></span><br><span class="line"><span class="language-bash">    bitnami/etcd:latest</span></span><br><span class="line">    </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">client-&gt;put</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run -it --<span class="built_in">rm</span> \</span></span><br><span class="line"><span class="language-bash">    --network app-tier \</span></span><br><span class="line"><span class="language-bash">    --<span class="built_in">env</span> ALLOW_NONE_AUTHENTICATION=<span class="built_in">yes</span> \</span></span><br><span class="line"><span class="language-bash">    bitnami/etcd:latest etcdctl --endpoints http://etcd-server:2379 put       testKey helloEtcd!</span></span><br><span class="line">    </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">client-&gt;get</span>    </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run -it --<span class="built_in">rm</span> \</span></span><br><span class="line"><span class="language-bash">    --network app-tier \</span></span><br><span class="line"><span class="language-bash">    --<span class="built_in">env</span> ALLOW_NONE_AUTHENTICATION=<span class="built_in">yes</span> \</span></span><br><span class="line"><span class="language-bash">    bitnami/etcd:latest etcdctl --endpoints=http://etcd-server:2379 get testKey</span>    </span><br></pre></td></tr></table></figure>
+
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p><a href="https://www.cnblogs.com/zjdxr-up/p/15409176.html">docker 安装 ETCD 及 etcd 使用</a></p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>KV</category>
+        <category>etcd</category>
+      </categories>
+      <tags>
+        <tag>etcd</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>流计算-Beam</title>
     <url>/www6vHomeHexo/2022/04/21/streamingBeam/</url>
     <content><![CDATA[<p></p>
