@@ -10458,7 +10458,7 @@
       <link href="/www6vHomeHexo/2014/05/27/lock/"/>
       <url>/www6vHomeHexo/2014/05/27/lock/</url>
       
-        <content type="html"><![CDATA[<p></p><span id="more"></span><img src="/www6vHomeHexo/2014/05/27/lock/lock.jpg" class title="多线程中的锁"><h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol><li>《java并发编程实践》 13章 显示锁 ,13.5 读-写锁</li><li>轻松学习java可重入锁(ReentrantLock)的实现原理</li><li>锁模式 -&gt; 共享锁，排他锁</li><li>轻松掌握java读写锁(ReentrantReadWriteLock)的实现原理</li><li>Java中的读&#x2F;写锁 作者:Jakob Jenkov</li><li>Java同步块 作者:Jakob Jenkov</li><li>《Java并发编程的艺术》-Java并发包中的读写锁及其实现分析</li><li>怎么理解Condition 码梦为生|刘锟洋</li><li>多线程之：偏向锁，轻量级锁，重量级锁 无信不立</li></ol>]]></content>
+        <content type="html"><![CDATA[<p></p><span id="more"></span><img src="/www6vHomeHexo/2014/05/27/lock/Lock-theory.jpg" class><img src="/www6vHomeHexo/2014/05/27/lock/Lock-java.jpg" class><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol><li>《java并发编程实践》 13章 显示锁 ,13.5 读-写锁</li><li>轻松学习java可重入锁(ReentrantLock)的实现原理</li><li>锁模式 -&gt; 共享锁，排他锁</li><li>轻松掌握java读写锁(ReentrantReadWriteLock)的实现原理</li><li>Java中的读&#x2F;写锁 作者:Jakob Jenkov</li><li>Java同步块 作者:Jakob Jenkov</li><li>《Java并发编程的艺术》-Java并发包中的读写锁及其实现分析</li><li>怎么理解Condition 码梦为生|刘锟洋</li><li>多线程之：偏向锁，轻量级锁，重量级锁 无信不立</li></ol>]]></content>
       
       
       <categories>
