@@ -26,8 +26,9 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/06/26/available/ha.png">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/06/26/available/layer-analysis.jpg">
 <meta property="article:published_time" content="2022-06-26T13:55:43.000Z">
-<meta property="article:modified_time" content="2023-02-25T02:57:45.497Z">
+<meta property="article:modified_time" content="2023-04-28T06:12:06.524Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="高可用">
 <meta name="twitter:card" content="summary">
@@ -226,7 +227,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-25 10:57:45" itemprop="dateModified" datetime="2023-02-25T10:57:45+08:00">2023-02-25</time>
+                <time title="修改时间：2023-04-28 14:12:06" itemprop="dateModified" datetime="2023-04-28T14:12:06+08:00">2023-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -260,9 +261,38 @@
         <p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
-<h2><span id="cap">CAP</span><a href="#cap" class="header-anchor">#</a></h2><p>CP系统: hbase, zookeeper<br>AP系统: cassandra, eureka</p>
-<h2><span id="nprt公式">nPRT公式</span><a href="#nprt公式" class="header-anchor">#</a></h2><h5><span id="可以推导出风险期望的公式">可以推导出风险期望的公式</span><a href="#可以推导出风险期望的公式" class="header-anchor">#</a></h5><h5><span id="控制风险的4大因素nprt">控制风险的4大因素（nPRT）</span><a href="#控制风险的4大因素nprt" class="header-anchor">#</a></h5><ul>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%8E%9F%E7%90%86">原理</a><ul>
+<li><a href="#cap">CAP</a></li>
+<li><a href="#nprt%E5%85%AC%E5%BC%8F-1">nPRT公式 [1]</a><ul>
+<li><a href="#%E5%8F%AF%E4%BB%A5%E6%8E%A8%E5%AF%BC%E5%87%BA%E9%A3%8E%E9%99%A9%E6%9C%9F%E6%9C%9B%E7%9A%84%E5%85%AC%E5%BC%8F">可以推导出风险期望的公式</a></li>
+<li><a href="#%E6%8E%A7%E5%88%B6%E9%A3%8E%E9%99%A9%E7%9A%844%E5%A4%A7%E5%9B%A0%E7%B4%A0nprt">控制风险的4大因素（nPRT）</a></li>
+<li><a href="#%E9%AB%98%E5%8F%AF%E7%94%A8%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E7%9A%847%E5%A4%A7%E6%A0%B8%E5%BF%83%E5%8E%9F%E5%88%99">高可用架构设计的7大核心原则</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%AF%E7%94%A8%E6%80%A7-7-%E7%BA%A7%E5%9B%BE%E8%A1%A8-%E6%88%90%E7%86%9F%E5%BA%A6-5">可用性 7 级图表  [成熟度] [5]</a></li>
+</ul>
+</li>
+<li><a href="#%E9%AB%98%E5%8F%AF%E7%94%A8">高可用</a><ul>
+<li><a href="#%E5%88%86%E5%B1%82%E8%A7%A3%E6%9E%90-6">分层解析 [6]</a></li>
+<li><a href="#%E6%8E%A5%E5%85%A5%E5%B1%82-2-r">接入层 [2] [R]</a></li>
+<li><a href="#%E6%9C%8D%E5%8A%A1%E5%B1%82-%E5%BA%94%E7%94%A8%E5%B1%82-6">服务层 应用层  [6]</a></li>
+<li><a href="#%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%B1%82">中间件层</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%B1%82-3-p">数据层 [3] [P]</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="原理">原理</span><a href="#原理" class="header-anchor">#</a></h1><h3><span id="cap">CAP</span><a href="#cap" class="header-anchor">#</a></h3><p>CP系统:  hbase, zookeeper<br>AP系统:  cassandra, eureka</p>
+<h3><span id="nprt公式-1">nPRT公式 [1]</span><a href="#nprt公式-1" class="header-anchor">#</a></h3><h5><span id="可以推导出风险期望的公式">可以推导出风险期望的公式</span><a href="#可以推导出风险期望的公式" class="header-anchor">#</a></h5><h5><span id="控制风险的4大因素nprt">控制风险的4大因素（nPRT）</span><a href="#控制风险的4大因素nprt" class="header-anchor">#</a></h5><ul>
 <li>减少风险数量，n</li>
 <li>降低风险变故障的概率（即：增加风险变故障的难度），P</li>
 <li>减小故障影响范围，R</li>
@@ -279,12 +309,65 @@
 </ul>
 <img src="/www6vHomeHexo/2022/06/26/available/ha.png" class title="高可用">
 
-<h2><span id="服务高可用-2-r">服务高可用 [2] [R]</span><a href="#服务高可用-2-r" class="header-anchor">#</a></h2><ul>
+
+<h3><span id="可用性-7-级图表-成熟度-5">可用性 7 级图表  [成熟度] [5]</span><a href="#可用性-7-级图表-成熟度-5" class="header-anchor">#</a></h3><p>当一个服务挂了的时候</p>
+<ul>
+<li>第一级：Crash with data corruption, destruction. </li>
+<li>第二级：Crash with new data loss. </li>
+<li>第三级：Crash without data loss.<br>   数据高可用-冗余, destruction 测试</li>
+<li>第四级：No crash, but with no or very limited service, low service quality.<br>   流控系统， eg. 秒杀流量漏斗</li>
+<li>第五级：Partial or limited service, with good to medium service quality. </li>
+<li>第六级：Failover with significant user visible delay, near full quality of service<br>   容灾，恢复慢</li>
+<li>第七级：Failover with minimal to none user visible delay, near full quality<br>   异地容灾</li>
+</ul>
+<h1><span id="高可用">高可用</span><a href="#高可用" class="header-anchor">#</a></h1><h3><span id="分层解析-6">分层解析 [6]</span><a href="#分层解析-6" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/06/26/available/layer-analysis.jpg" class>
+
+<h3><span id="接入层-2-r">接入层   [2] [R]</span><a href="#接入层-2-r" class="header-anchor">#</a></h3><ul>
 <li>地域&amp;错误感知自动 failover<br>视 endpoint 健康度自动 failover 一定比例流量至其他可用区&#x2F;地域，直至 endpoint 全部不健康时 100% 流量自动 failover 至其他可用区&#x2F;地域。</li>
 <li>地域感知流量分发 distribute<br>eg. 上海一区和上海二区按照 80% 和 20% 的比例分发</li>
 </ul>
-<h2><span id="数据高可用-3-p">数据高可用 [3] [P]</span><a href="#数据高可用-3-p" class="header-anchor">#</a></h2><ul>
-<li>数据复制<ul>
+<h3><span id="服务层-应用层-6">服务层 应用层  [6]</span><a href="#服务层-应用层-6" class="header-anchor">#</a></h3><ul>
+<li><p>传统应用高可用</p>
+<ul>
+<li>CLB+CVM+AS  <ul>
+<li>架构图 [pic]</li>
+<li>应用实践</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>云原生应用部署</p>
+<ul>
+<li>涉及的产品<ul>
+<li>微服务平台 TSF</li>
+<li>API网关</li>
+<li>TKE容器服务</li>
+</ul>
+</li>
+<li>云原生应用部署方案[pic]</li>
+</ul>
+</li>
+<li><p>应用的容灾设计 [pic 要重新看]</p>
+<ul>
+<li>单区域容灾   </li>
+<li>跨地域容灾</li>
+<li>跨地域多活<br>业务拆分, 单元化部署</li>
+<li>混合云部署<br>云上和IDC各部署一套完整的业务系统</li>
+<li>异地多活set化部署<br>Unit由多个set组成<br>建议单写多读的架构<br>set不一定限制在一个机房，可跨机房、跨地域部署</li>
+</ul>
+</li>
+<li><p>系统中的高可用 examples<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Br6J3nC51SnRTXBArfs_ug">Kubernetes 之 master高可用集群搭建</a><br>Redlock - redis分布式锁的高可用</p>
+</li>
+</ul>
+<h3><span id="中间件层">中间件层</span><a href="#中间件层" class="header-anchor">#</a></h3><ul>
+<li><p>kafka</p>
+</li>
+<li><p>系统中的高可用 examples<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/GMsYVgPmoCbdWW4FQthrAA">面试|图解 kafka 的高可用机制</a>  isr</p>
+</li>
+</ul>
+<h3><span id="数据层-3-p">数据层   [3] [P]</span><a href="#数据层-3-p" class="header-anchor">#</a></h3><ul>
+<li><p>数据复制</p>
+<ul>
 <li>主从复制<ul>
 <li>同步复制，异步复制</li>
 <li>复制日志的实现：<br> 基于语句到复制，<br> 基于wal的传输，<br> 基于行的逻辑日志复制<br> eg. mysql， redis， hbase </li>
@@ -295,25 +378,18 @@
 <li>无主复制</li>
 </ul>
 </li>
-<li>一致性和共识<br>raft - etcd<br>zab - zookeeper</li>
+<li><p>一致性和共识<br>raft - etcd<br>zab - zookeeper</p>
+</li>
+<li><p>系统中的高可用  examples<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/fh_9Mk-FVFSkX5pmsc8HPA">MySQL 同步复制及高可用方案总结</a>  MHA, MMM<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Iz7cwun1y_oLUV9fDDh0UQ">这可能是目前最全的Redis高可用技术解决方案总结</a>  Master-slave, Cluster<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/yH5JVD422k6FNtiqAGw75Q">干货 | 阿里巴巴HBase高可用8年抗战回忆录</a><br>etcd - raft</p>
+</li>
 </ul>
-<h2><span id="可用性-7-级图表-5">可用性 7 级图表 [5]</span><a href="#可用性-7-级图表-5" class="header-anchor">#</a></h2><p>当一个服务挂了的时候</p>
-<ul>
-<li>第一级：Crash with data corruption, destruction. </li>
-<li>第二级：Crash with new data loss. </li>
-<li>第三级：Crash without data loss.<br>   数据高可用-冗余, destruction 测试</li>
-<li>第四级：No crash, but with no or very limited service, low service quality.<br>   流控系统， eg. 秒杀流量漏斗</li>
-<li>第五级：Partial or limited service, with good to medium service quality. </li>
-<li>第六级：Failover with significant user visible delay, near full quality of service<br>   容灾，恢复慢</li>
-<li>第七级：Failover with minimal to none user visible delay, near full quality<br>   异地容灾</li>
-</ul>
-<h2><span id="系统中的高可用">系统中的高可用</span><a href="#系统中的高可用" class="header-anchor">#</a></h2><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/fh_9Mk-FVFSkX5pmsc8HPA">MySQL 同步复制及高可用方案总结</a>  MHA, MMM<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Iz7cwun1y_oLUV9fDDh0UQ">这可能是目前最全的Redis高可用技术解决方案总结</a>  Master-slave, Cluster<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/GMsYVgPmoCbdWW4FQthrAA">面试|图解 kafka 的高可用机制</a>  isr<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/yH5JVD422k6FNtiqAGw75Q">干货 | 阿里巴巴HBase高可用8年抗战回忆录</a><br>etcd - raft<br>Redlock - redis分布式锁的高可用<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Br6J3nC51SnRTXBArfs_ug">Kubernetes 之 master高可用集群搭建</a></p>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/CkFHTuxqoj1WJ7d0HUEbAg">高可用的本质</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/0f9Z8yIsT7-iJ2AUHfgqiw">云原生应用负载均衡系列 (2): 入口流量分发、容错与高可用调度</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/0f9Z8yIsT7-iJ2AUHfgqiw">云原生应用负载均衡系列 (2): 入口流量分发、容错与高可用调度</a>  istio</li>
 <li>&lt;&lt;数据密集型应用系统设计&gt;&gt;  5章, 9章</li>
 <li>&lt;&lt;亿级流量 网站架构核心技术&gt;&gt;  1.4</li>
 <li><a target="_blank" rel="noopener" href="https://www.ktanx.com/blog/p/4273">来自 Google 的高可用架构理念与实践</a></li>
+<li><a href="/www6vHomeHexo/2022/01/25/tencentTCP3/" title="腾讯云TCP3-构建腾讯云上高可用架构">腾讯云TCP3-构建腾讯云上高可用架构</a> self</li>
 </ol>
 
     </div>
