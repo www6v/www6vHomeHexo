@@ -713,7 +713,9 @@
 <li><a href="../../../../categories/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/">可观测性</a> category</li>
 </ul>
 <h2><span id="故障">故障</span><a href="#故障" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2018/10/27/fault/" title="故障模型">故障模型</a></li>
+<li><a href="/www6vHomeHexo/2018/10/27/faultModel1/" title="故障模型-1">故障模型-1</a></li>
+<li><a href="/www6vHomeHexo/2018/05/03/faultModel2/" title="故障模型-2">故障模型-2</a></li>
+<li><a href="/www6vHomeHexo/2018/05/03/faultModel3/" title="故障模型-3">故障模型-3</a></li>
 <li><a href="/www6vHomeHexo/2020/08/08/tcpFault/" title="TCP故障模式">TCP故障模式</a></li>
 <li><a href="/www6vHomeHexo/2017/02/19/splitBrain/" title="Split Brain">Split Brain</a></li>
 <li><a href="/www6vHomeHexo/2019/10/12/crashDetect/" title="宕机检测-Lease、心跳">宕机检测-Lease、心跳</a></li>
@@ -19568,13 +19570,13 @@ nq： 不排队调度
       </tags>
   </entry>
   <entry>
-    <title>故障模型</title>
-    <url>/www6vHomeHexo/2018/10/27/fault/</url>
+    <title>故障模型-1 Application</title>
+    <url>/www6vHomeHexo/2018/10/27/faultModel1/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<img src="/www6vHomeHexo/2018/10/27/fault/fault1.jpg" class title="故障模型1">
-<img src="/www6vHomeHexo/2018/10/27/fault/fault2.jpg" class title="故障模型2">
+<img src="/www6vHomeHexo/2018/10/27/faultModel1/fault1.jpg" class title="故障模型1">
+
 
 
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="大纲">大纲</span><a href="#大纲" class="header-anchor">#</a></h3><ol>
@@ -19593,27 +19595,10 @@ nq： 不排队调度
 <li>如何排查Java内存泄露(内附各种排查工具介绍) 不闻</li>
 <li><a href="https://hllvm-group.iteye.com/group/topic/28379">生产环境下持久带满导致FullGC，如何跟踪</a> </li>
 <li><a href="/www6vHomeHexo/2017/11/27/optimize/" title="JVM性能调优">JVM性能调优</a>  self</li>
-<li>听阿里巴巴JVM工程师为你分析常见Java故障案例  陆传胜</li>
+<li><a href="https://blog.csdn.net/github_32521685/article/details/89953050">听阿里巴巴JVM工程师为你分析常见Java故障案例</a>  ***</li>
 <li><a href="http://hellojava.info/?p=464">从一个故障说说Java的三个BlockingQueue  阿里毕玄</a></li>
 <li><a href="/www6vHomeHexo/2016/10/07/Hystrix/" title="Hystrix实现和容错模式">Hystrix实现和容错模式</a>  self </li>
 <li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>  self</li>
-</ol>
-<h3><span id="runtime-amp-middleware-amp-os">Runtime &amp; Middleware &amp; OS</span><a href="#runtime-amp-middleware-amp-os" class="header-anchor">#</a></h3><ol>
-<li><a href="https://help.aliyun.com/document_detail/67252.html">热点 Key 问题的发现与解决</a> 阿里 文档</li>
-</ol>
-<blockquote>
-<p>通常的解决方案主要集中在对<strong>客户端</strong>和<strong>Server端</strong>进行相应的改造。<br>  I. 服务端本地缓存.<br>  II. 服务端分布式缓存。</p>
-</blockquote>
-<blockquote>
-<p>阿里云方案 (整体看是用中间件 负载均衡 水平扩展)<br>  I. 读写分离方案解决热读<br>     写 热备; 读 存储水平扩展<br>  II. 热点数据解决方案<br>     该方案通过主动<strong>发现热点</strong>并对其进行<strong>存储</strong>来解决热点Key的问题。</p>
-</blockquote>
-<ol start="2">
-<li><a href="https://www.admin5.com/article/20190404/902952.shtml">UCloud高可用数据库UDB主从复制延时的解决</a></li>
-</ol>
-<h3><span id="virtualization-amp-storage-amp-networking">Virtualization &amp; Storage &amp; Networking</span><a href="#virtualization-amp-storage-amp-networking" class="header-anchor">#</a></h3><ol>
-<li><a href="https://tencentcloudcontainerteam.github.io/2019/08/12/troubleshooting-with-kubernetes-network/">Kubernetes 网络疑难杂症排查分享</a>  腾讯云 ***</li>
-<li><a href="https://tencentcloudcontainerteam.github.io/2019/06/08/kubernetes-best-practice-handle-disk-full/">kubernetes 最佳实践：处理容器数据磁盘被写满</a> 腾讯云</li>
-<li><a href="https://www.infoq.cn/article/aEut*ZAIffp0q4MSKDSg">百度大规模战略性混部系统演进</a></li>
 </ol>
 ]]></content>
       <categories>
@@ -19929,6 +19914,65 @@ nq： 不排队调度
       </categories>
       <tags>
         <tag>秒杀系统</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>故障模型-3 Infra</title>
+    <url>/www6vHomeHexo/2018/05/03/faultModel3/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+
+<img src="/www6vHomeHexo/2018/05/03/faultModel3/fault3.jpg" class title="故障模型3">
+
+
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="virtualization-amp-storage-amp-networking">Virtualization &amp; Storage &amp; Networking</span><a href="#virtualization-amp-storage-amp-networking" class="header-anchor">#</a></h3><ol>
+<li><a href="https://tencentcloudcontainerteam.github.io/2019/08/12/troubleshooting-with-kubernetes-network/">Kubernetes 网络疑难杂症排查分享</a>  腾讯云 ***</li>
+<li><a href="https://tencentcloudcontainerteam.github.io/2019/06/08/kubernetes-best-practice-handle-disk-full/">kubernetes 最佳实践：处理容器数据磁盘被写满</a> 腾讯云</li>
+<li><a href="https://www.infoq.cn/article/aEut*ZAIffp0q4MSKDSg">百度大规模战略性混部系统演进</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>稳定性</category>
+        <category>故障模型</category>
+      </categories>
+      <tags>
+        <tag>故障模型</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>故障模型-2 Middleware</title>
+    <url>/www6vHomeHexo/2018/05/03/faultModel2/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<img src="/www6vHomeHexo/2018/05/03/faultModel2/fault2.jpg" class title="故障模型2">
+
+
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="大纲">大纲</span><a href="#大纲" class="header-anchor">#</a></h3><ol>
+<li><a href="https://developer.aliyun.com/article/105551">超全总结 | 阿里如何应对电商故障？神秘演练细节曝光</a> 阿里巴巴  周洋</li>
+</ol>
+<h3><span id="runtime-amp-middleware-amp-os">Runtime &amp; Middleware &amp; OS</span><a href="#runtime-amp-middleware-amp-os" class="header-anchor">#</a></h3><ol>
+<li><a href="https://help.aliyun.com/document_detail/67252.html">热点 Key 问题的发现与解决</a> 阿里 文档</li>
+</ol>
+<blockquote>
+<p>通常的解决方案主要集中在对<strong>客户端</strong>和<strong>Server端</strong>进行相应的改造。<br>  I. 服务端本地缓存.<br>  II. 服务端分布式缓存。</p>
+</blockquote>
+<blockquote>
+<p>阿里云方案 (整体看是用中间件 负载均衡 水平扩展)<br>  I. 读写分离方案解决热读<br>     写 热备; 读 存储水平扩展<br>  II. 热点数据解决方案<br>     该方案通过主动<strong>发现热点</strong>并对其进行<strong>存储</strong>来解决热点Key的问题。</p>
+</blockquote>
+<ol start="2">
+<li><a href="https://www.admin5.com/article/20190404/902952.shtml">UCloud高可用数据库UDB主从复制延时的解决</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>稳定性</category>
+        <category>故障模型</category>
+      </categories>
+      <tags>
+        <tag>故障模型</tag>
       </tags>
   </entry>
   <entry>
