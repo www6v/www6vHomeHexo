@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/04/05/k8sAvailable/interrupt.png">
 <meta property="article:published_time" content="2022-04-05T07:09:31.000Z">
-<meta property="article:modified_time" content="2023-02-25T02:57:46.621Z">
+<meta property="article:modified_time" content="2023-05-04T09:21:13.377Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Kubernetes">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-25 10:57:46" itemprop="dateModified" datetime="2023-02-25T10:57:46+08:00">2023-02-25</time>
+                <time title="修改时间：2023-05-04 17:21:13" itemprop="dateModified" datetime="2023-05-04T17:21:13+08:00">2023-05-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -256,7 +256,7 @@
         <p></p>
 <span id="more"></span>
 
-<h2><span id="自主中断和非自主中断">自主中断和非自主中断</span><a href="#自主中断和非自主中断" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/04/05/k8sAvailable/interrupt.png" class title="自主中断和非自主中断">
+<h2><span id="自主中断和非自主中断4">自主中断和非自主中断[4]</span><a href="#自主中断和非自主中断4" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/04/05/k8sAvailable/interrupt.png" class title="自主中断和非自主中断">
 
 <h2><span id="poddisruptionbudged">PodDisruptionBudged</span><a href="#poddisruptionbudged" class="header-anchor">#</a></h2><ol>
 <li>无状态应用：<br>maxUnavailable &#x3D; 40%</li>
@@ -267,7 +267,7 @@
 <ul>
 <li>探针类型<br>httpGet: 指定端口和路径执行 HTTP GET 请求<br>tcpSocket: 对容器的 IP 地址上的指定端口执行 TCP 检查<br>命令,exec: 在容器内执行指定命令</li>
 </ul>
-<h2><span id="优雅终止参考3">优雅终止（参考3）</span><a href="#优雅终止参考3" class="header-anchor">#</a></h2><p>  系统底层默认会向主进程发送 SIGTERM 信号，而对剩余子进程发送 SIGKILL 信号。系统这样做的大概原因是因为大家在设计主进程脚本的时候都不会进行信号的捕获和传递，这会导致容器关闭时，多个子进程无法被正常终止，所以系统使用 SIGKILL 这个不可屏蔽信号，而是为了能够在没有任何前提条件的情况下，能够把容器中所有的进程关掉。</p>
+<h2><span id="优雅终止-3">优雅终止 [3]</span><a href="#优雅终止-3" class="header-anchor">#</a></h2><p>  系统底层默认会向主进程发送 SIGTERM 信号，而对剩余子进程发送 SIGKILL 信号。系统这样做的大概原因是因为大家在设计主进程脚本的时候都不会进行信号的捕获和传递，这会导致容器关闭时，多个子进程无法被正常终止，所以系统使用 SIGKILL 这个不可屏蔽信号，而是为了能够在没有任何前提条件的情况下，能够把容器中所有的进程关掉。</p>
 <p>  也就是说如果主进程自身不是服务本身，可能会导致是被强制Kill的，解决的方法也很简单，也就是在主进程中对收到的信号做个转发，发送到容器中的其他子进程，这样容器中的所有进程在停止时，都会收到 SIGTERM，而不是 SIGKILL 信号了。</p>
 <h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/alisystemsoftware/article/details/106520606">更新应用时，如何实现 K8s 零中断滚动更新</a> 未</li>

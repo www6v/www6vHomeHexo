@@ -5998,7 +5998,7 @@ BGP 协议传输的消息
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h2><span id="自主中断和非自主中断">自主中断和非自主中断</span><a href="#自主中断和非自主中断" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/04/05/k8sAvailable/interrupt.png" class title="自主中断和非自主中断">
+<h2><span id="自主中断和非自主中断4">自主中断和非自主中断[4]</span><a href="#自主中断和非自主中断4" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/04/05/k8sAvailable/interrupt.png" class title="自主中断和非自主中断">
 
 <h2><span id="poddisruptionbudged">PodDisruptionBudged</span><a href="#poddisruptionbudged" class="header-anchor">#</a></h2><ol>
 <li>无状态应用：<br>maxUnavailable &#x3D; 40%</li>
@@ -6009,7 +6009,7 @@ BGP 协议传输的消息
 <ul>
 <li>探针类型<br>httpGet: 指定端口和路径执行 HTTP GET 请求<br>tcpSocket: 对容器的 IP 地址上的指定端口执行 TCP 检查<br>命令,exec: 在容器内执行指定命令</li>
 </ul>
-<h2><span id="优雅终止参考3">优雅终止（参考3）</span><a href="#优雅终止参考3" class="header-anchor">#</a></h2><p>  系统底层默认会向主进程发送 SIGTERM 信号，而对剩余子进程发送 SIGKILL 信号。系统这样做的大概原因是因为大家在设计主进程脚本的时候都不会进行信号的捕获和传递，这会导致容器关闭时，多个子进程无法被正常终止，所以系统使用 SIGKILL 这个不可屏蔽信号，而是为了能够在没有任何前提条件的情况下，能够把容器中所有的进程关掉。</p>
+<h2><span id="优雅终止-3">优雅终止 [3]</span><a href="#优雅终止-3" class="header-anchor">#</a></h2><p>  系统底层默认会向主进程发送 SIGTERM 信号，而对剩余子进程发送 SIGKILL 信号。系统这样做的大概原因是因为大家在设计主进程脚本的时候都不会进行信号的捕获和传递，这会导致容器关闭时，多个子进程无法被正常终止，所以系统使用 SIGKILL 这个不可屏蔽信号，而是为了能够在没有任何前提条件的情况下，能够把容器中所有的进程关掉。</p>
 <p>  也就是说如果主进程自身不是服务本身，可能会导致是被强制Kill的，解决的方法也很简单，也就是在主进程中对收到的信号做个转发，发送到容器中的其他子进程，这样容器中的所有进程在停止时，都会收到 SIGTERM，而不是 SIGKILL 信号了。</p>
 <h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><a href="https://blog.csdn.net/alisystemsoftware/article/details/106520606">更新应用时，如何实现 K8s 零中断滚动更新</a> 未</li>
@@ -12515,7 +12515,7 @@ func new(Type) *Type
       </tags>
   </entry>
   <entry>
-    <title>多个Agent</title>
+    <title>多个Java Agent同时使用的类增强冲突问题</title>
     <url>/www6vHomeHexo/2021/05/04/multiAgent/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
