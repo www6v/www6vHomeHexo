@@ -6,27 +6,28 @@
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h2><span id="厂商">厂商</span><a href="#厂商" class="header-anchor">#</a></h2><h5><span id="overview">Overview</span><a href="#overview" class="header-anchor">#</a></h5><p><a href="../../../../2022/04/30/cloudProduct/">云计算产品-计算</a><br><a href="../../../../2022/05/22/cloudProduct-Network/">云计算产品-网络Network</a><br><a href="../../../../2022/05/22/cloudProduct-Storage/">云计算产品-存储Storage</a><br></p>
-<table>
-<thead>
-<tr>
-<th>厂商</th>
-<th>总结</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>AWS</td>
-<td><a href="../../../../2018/10/04/awsSummary/">AWS 汇总</a></td>
-</tr>
-<tr>
-<td>阿里云</td>
-<td><a href="../../../../2022/05/16/aliyunSummary/">阿里云 汇总</a></td>
-</tr>
-<tr>
-<td>腾讯云</td>
-<td><a href="../../../../2022/06/30/tencentTCPSummary/">腾讯云TCP-汇总</a></td>
-</tr>
-</tbody></table>
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%8E%82%E5%95%86">厂商</a><br>- <a href="#%E5%88%86%E7%B1%BB">分类</a><br>- <a href="#%E6%A8%AA%E5%90%91%E6%AF%94%E8%BE%83">横向比较</a></li>
+<li><a href="#%E9%80%9A%E7%94%A8%E6%80%BB%E7%BB%93">通用总结</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h2><span id="厂商">厂商</span><a href="#厂商" class="header-anchor">#</a></h2><h5><span id="分类">分类</span><a href="#分类" class="header-anchor">#</a></h5><ul>
+<li><a href="/www6vHomeHexo/2018/10/04/awsSummary/" title="AWS 汇总">AWS 汇总</a></li>
+<li><a href="/www6vHomeHexo/2022/05/16/aliyunSummary/" title="阿里云 汇总">阿里云 汇总</a></li>
+<li><a href="/www6vHomeHexo/2022/06/30/tencentTCPSummary/" title="腾讯云TCP-汇总">腾讯云TCP-汇总</a></li>
+</ul>
+<h5><span id="横向比较">横向比较</span><a href="#横向比较" class="header-anchor">#</a></h5><ul>
+<li><a href="/www6vHomeHexo/2022/04/30/cloudProduct/" title="云计算产品-计算">云计算产品-计算</a></li>
+<li><a href="/www6vHomeHexo/2022/05/22/cloudProduct-Network/" title="云计算产品-网络Network">云计算产品-网络Network</a></li>
+<li><a href="/www6vHomeHexo/2022/05/22/cloudProduct-Storage/" title="云计算产品-存储Storage">云计算产品-存储Storage</a></li>
+</ul>
 <h2><span id="通用总结">通用总结</span><a href="#通用总结" class="header-anchor">#</a></h2><table>
 <thead>
 <tr>
@@ -2633,7 +2634,7 @@
 
 
 <h2><span id="基础概念">基础概念</span><a href="#基础概念" class="header-anchor">#</a></h2><p>VMM(Virtual Machine Monitor) Hypervisor<br>QEMU: 软件虚拟化</p>
-<h2><span id="kvm架构图">KVM架构图</span><a href="#kvm架构图" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/06/25/kvm/kvm-arch.png" class title="KVM架构图">
+<h2><span id="kvm架构图">KVM架构图</span><a href="#kvm架构图" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/06/25/kvm/kvm-arch.jpg" class title="KVM架构图">
 
 <h2><span id="kvm-虚机的创建过程">KVM 虚机的创建过程</span><a href="#kvm-虚机的创建过程" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/06/25/kvm/kvm-start.jpg" class title="KVM 虚机的创建过程">
 
@@ -12133,9 +12134,9 @@ func new(Type) *Type
 <h5><span id="迁移工具">迁移工具</span><a href="#迁移工具" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2021/06/27/aliyunCloudMigrate/dbMigrate.png" class>
 
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://www.bilibili.com/video/BV1tD4y1977x?spm_id_from=333.1007.top_right_bar_window_history.content.click&vd_source=f6e8c1128f9f264c5ab8d9411a644036">课时1</a></li>
-<li><a href="../../../../2022/04/11/dbMigrate/">数据库迁移</a> self</li>
-<li><a href="../../../../2022/06/25/kvm/">KVM 虚拟机</a> self  KVM动态迁移</li>
+<li><a href="https://www.bilibili.com/video/BV15y4y1a7ds">阿里云云上常见架构设计及优化-课时1：迁移上云架构设计及解决方案</a></li>
+<li><a href="/www6vHomeHexo/2022/04/11/dbMigrate/" title="数据库迁移">数据库迁移</a> self</li>
+<li><a href="/www6vHomeHexo/2022/06/25/kvm/" title="KVM 虚拟机">KVM 虚拟机</a>  self  KVM动态迁移</li>
 </ol>
 ]]></content>
       <categories>
