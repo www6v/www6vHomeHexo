@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-06T03:29:37.000Z">
-<meta property="article:modified_time" content="2023-05-06T04:34:53.246Z">
+<meta property="article:modified_time" content="2023-05-06T09:24:23.460Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="负载均衡">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-06 12:34:53" itemprop="dateModified" datetime="2023-05-06T12:34:53+08:00">2023-05-06</time>
+                <time title="修改时间：2023-05-06 17:24:23" itemprop="dateModified" datetime="2023-05-06T17:24:23+08:00">2023-05-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,8 +255,7 @@
 <span id="more"></span>
 
 
-
-<table>
+<h1><span id="负载均衡算法">负载均衡算法</span><a href="#负载均衡算法" class="header-anchor">#</a></h1><h3><span id="lvs12">LVS[1][2]</span><a href="#lvs12" class="header-anchor">#</a></h3><table>
 <thead>
 <tr>
 <th>组件</th>
@@ -268,13 +267,13 @@
 <tbody><tr>
 <td>LVS</td>
 <td><strong>静态</strong></td>
-<td>RR：roundrobin</td>
+<td>RR：roundrobin [常用]</td>
 <td>轮询机制</td>
 </tr>
 <tr>
 <td></td>
 <td></td>
-<td>WRR：Weighted RR</td>
+<td>WRR：Weighted RR [常用]</td>
 <td>加权轮询，权重越大承担负载越大</td>
 </tr>
 <tr>
@@ -298,7 +297,7 @@
 <tr>
 <td></td>
 <td></td>
-<td>WLC：Weighted LC</td>
+<td>WLC：Weighted LC  [常用]</td>
 <td>默认调度方法,较常用（加上了权重）<br><code>Overhead=(activeconns*256+inactiveconns)/weight</code></td>
 </tr>
 <tr>
@@ -332,7 +331,7 @@
 <td></td>
 </tr>
 </tbody></table>
-<table>
+<h3><span id="nginx-3">Nginx [3]</span><a href="#nginx-3" class="header-anchor">#</a></h3><table>
 <thead>
 <tr>
 <th>组件</th>
@@ -345,25 +344,31 @@
 <td>Nginx</td>
 <td><strong>静态</strong><br></td>
 <td>轮询<br></td>
-<td></td>
+<td>每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器 down 掉，能自动剔除</td>
 </tr>
 <tr>
 <td></td>
 <td></td>
 <td>加权轮询<br></td>
-<td></td>
+<td>指定轮询几率，weight 和访问比率成正比，用于后端服务器性能不均的情况</td>
 </tr>
 <tr>
 <td></td>
 <td></td>
 <td>IP Hash<br></td>
-<td></td>
+<td>每个请求按访问 ip 的 hash 结果分配，这样每个访客固定访问一个后端服务器，可以解决 session 的问题</td>
 </tr>
 <tr>
 <td></td>
 <td><strong>动态</strong><br></td>
-<td>Fair<br></td>
+<td>Fair （第三方）<br></td>
+<td>按后端服务器的响应时间来分配请求，响应时间短的优先分配</td>
+</tr>
+<tr>
 <td></td>
+<td></td>
+<td>url_hash（第三方）</td>
+<td>按访问 url 的 hash 结果来分配请求，使每个 url 定向到同一个后端服务器，后端服务器为缓存时比较有效</td>
 </tr>
 <tr>
 <td></td>
@@ -372,7 +377,7 @@
 <td></td>
 </tr>
 </tbody></table>
-<table>
+<h3><span id="haproxy">HAproxy</span><a href="#haproxy" class="header-anchor">#</a></h3><table>
 <thead>
 <tr>
 <th>组件</th>
@@ -412,6 +417,24 @@
 <td></td>
 </tr>
 </tbody></table>
+<h1><span id="lvs工作模式11-16">LVS工作模式[11-16]</span><a href="#lvs工作模式11-16" class="header-anchor">#</a></h1><ul>
+<li>DR</li>
+<li>TUN模式</li>
+<li>NAT模式</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a target="_blank" rel="noopener" href="https://demo.dandelioncloud.cn/article/details/1547407561087266818">LVS负载均衡集群服务搭建详解</a>      </li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/aa896517050/article/details/125399055">LVS调度算法总结</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42073629/article/details/109440892">LVS、Nginx 及 HAProxy 的区别</a><br> <a target="_blank" rel="noopener" href="http://www.linuxvirtualserver.org/zh/lvs4.html">LVS集群的负载调度</a>  ***  未</li>
+</ol>
+<h3><span id="lvs工作模式">LVS工作模式</span><a href="#lvs工作模式" class="header-anchor">#</a></h3><ol start="11">
+<li><a target="_blank" rel="noopener" href="https://www.likecs.com/show-739972.html">LVS三种模式的区别及负载均衡算法</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.likecs.com/show-307061337.html">LVS 介绍以及配置应用</a> ***</li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/363346400">深入浅出 LVS 负载均衡（一）NAT、FULLNAT 模型原理</a>  未</li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/377090230">深入浅出 LVS 负载均衡（二）DR、TUN 模型原理</a>  未</li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/381297341">深入浅出 LVS 负载均衡（三）实操 NAT、TUNNEL 模型</a>  未</li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/356354676">深入浅出 LVS 负载均衡（四）实操 DR 模型、Keepalived DR 模型的高可用</a>  未</li>
+</ol>
 
     </div>
 
