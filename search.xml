@@ -4710,6 +4710,179 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
+    <title>负载均衡-算法</title>
+    <url>/www6vHomeHexo/2022/05/06/loadBalance/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>类型</th>
+<th>负载均衡算法</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LVS</td>
+<td><strong>静态</strong></td>
+<td>RR：roundrobin</td>
+<td>轮询机制</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>WRR：Weighted RR</td>
+<td>加权轮询，权重越大承担负载越大</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>SH：Source Hashing 源地址哈希</td>
+<td>实现session sticky<br>缺点：调度粒度大，对负载均衡效果差；</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>DH：Destination Hashing 目标地址哈希</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>动态</strong></td>
+<td>LC：least connections</td>
+<td>适用于长连接应用<br><code>Overhead=activeconns*256+inactiveconns</code></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>WLC：Weighted LC</td>
+<td>默认调度方法,较常用（加上了权重）<br><code>Overhead=(activeconns*256+inactiveconns)/weight</code></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><a href="https://so.csdn.net/so/search?q=SED&spm=1001.2101.3001.7020">SED</a>：Shortest Expection Delay</td>
+<td><code>Overhead=(activeconns+1)*256/weight</code></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>NQ：Never Queue，</td>
+<td>第一轮均匀分配，后续SED<br>****SED****算法改进</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>LBLC：Locality-Based LC</td>
+<td>动态的 ****DH****连接算法</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>LBLCR：LBLC with Replication</td>
+<td>带复制功能的LBLC</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>类型</th>
+<th>负载均衡算法</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Nginx</td>
+<td><strong>静态</strong><br></td>
+<td>轮询<br></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>加权轮询<br></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>IP Hash<br></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>动态</strong><br></td>
+<td>Fair<br></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Least Connections</td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>类型</th>
+<th>负载均衡算法</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HAproxy</td>
+<td><strong>静态</strong><br></td>
+<td>轮询<br></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>加权轮询<br></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>IP Hash<br></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>动态</strong><br></td>
+<td>Least Connections<br></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Source</td>
+<td></td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>中间件</category>
+        <category>负载均衡</category>
+      </categories>
+      <tags>
+        <tag>负载均衡</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>AWS Network-Transit Gateway</title>
     <url>/www6vHomeHexo/2022/05/05/awsNetworkTGW/</url>
     <content><![CDATA[<p></p>
