@@ -4666,6 +4666,35 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
+    <title>DevOps-Tekton</title>
+    <url>/www6vHomeHexo/2022/05/10/devopsTekton/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="事件触发的自动化流水线1">事件触发的自动化流水线[1]</span><a href="#事件触发的自动化流水线1" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/05/10/devopsTekton/tekton-pipeline.JPG" class>
+
+<h2><span id="example1-chat">Example1 [chat]</span><a href="#example1-chat" class="header-anchor">#</a></h2><p>下面是一个包含EventListener、TriggerTemplate和PipelineRun的Tekton YAML模板示例，其中包含interceptors、bindings和template，旨在从Git中拉取代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apiVersion: tekton.dev/v1beta1</span><br><span class="line">kind: EventListener  ##</span><br><span class="line">metadata:</span><br><span class="line">  name: my-event-listener</span><br><span class="line">spec:</span><br><span class="line">  interceptors:  ##</span><br><span class="line">  - cel:</span><br><span class="line">      filter: &quot;body.repository.full_name == &#x27;my-org/my-repo&#x27;&quot;</span><br><span class="line">  triggers:</span><br><span class="line">  - name: my-trigger</span><br><span class="line">    bindings:   ##</span><br><span class="line">    - name: my-binding</span><br><span class="line">      ref: my-binding</span><br><span class="line">    template:   ##</span><br><span class="line">      name: my-trigger-template</span><br><span class="line">---</span><br><span class="line">apiVersion: tekton.dev/v1beta1</span><br><span class="line">kind: TriggerTemplate</span><br><span class="line">metadata:</span><br><span class="line">  name: my-trigger-template</span><br><span class="line">spec:</span><br><span class="line">  params:</span><br><span class="line">  - name: repoUrl</span><br><span class="line">    description: The URL of the git repository to clone</span><br><span class="line">  resourcetemplates:</span><br><span class="line">  - apiVersion: tekton.dev/v1alpha1</span><br><span class="line">    kind: PipelineRun    </span><br><span class="line">    metadata:</span><br><span class="line">      name: my-pipeline-run ##</span><br><span class="line">    spec:</span><br><span class="line">      pipelineRef:</span><br><span class="line">        name: my-pipeline   ##</span><br><span class="line">      params:</span><br><span class="line">      - name: repoUrl</span><br><span class="line">        value: $(tt.params.repoUrl)</span><br><span class="line">---</span><br><span class="line">apiVersion: tekton.dev/v1beta1</span><br><span class="line">kind: Pipeline</span><br><span class="line">metadata:</span><br><span class="line">  name: my-pipeline  ##</span><br><span class="line">spec:</span><br><span class="line">  tasks:</span><br><span class="line">  - name: git-clone   ##</span><br><span class="line">    taskRef:</span><br><span class="line">      name: git-clone</span><br><span class="line">    params:</span><br><span class="line">    - name: REPO_URL</span><br><span class="line">      value: $(inputs.params.repoUrl)</span><br><span class="line">---</span><br><span class="line">apiVersion: tekton.dev/v1beta1</span><br><span class="line">kind: Task</span><br><span class="line">metadata:</span><br><span class="line">  name: git-clone   ##</span><br><span class="line">spec:</span><br><span class="line">  inputs:</span><br><span class="line">    params:</span><br><span class="line">    - name: REPO_URL</span><br><span class="line">      type: string</span><br><span class="line">  steps:</span><br><span class="line">  - name: git-clone</span><br><span class="line">    image: alpine/git</span><br><span class="line">    script:</span><br><span class="line">    - apk add --no-cache git</span><br><span class="line">    - git clone $(inputs.params.REPO_URL)</span><br><span class="line">---</span><br><span class="line">apiVersion: tekton.dev/v1beta1</span><br><span class="line">kind: PipelineRun</span><br><span class="line">metadata:</span><br><span class="line">  name: my-pipeline-run   ##</span><br><span class="line">spec:</span><br><span class="line">  pipelineRef:</span><br><span class="line">    name: my-pipeline</span><br><span class="line">  params:</span><br><span class="line">  - name: repoUrl</span><br><span class="line">    value: https://github.com/my-org/my-repo.git</span><br></pre></td></tr></table></figure>
+
+
+
+<h2><span id="example2-2">Example2  [2]</span><a href="#example2-2" class="header-anchor">#</a></h2><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><p>《10丨模块十：Kubernetes的生产化运维》  云原生训练营 </p>
+</li>
+<li><p><a href="https://www.bilibili.com/video/BV1e94y117tY/">第一季：第 5 集 云原生 CI 中的强者 Tekton</a> 未</p>
+<p><a href="https://github.com/DevopsChina/lab/tree/main/ci/lab05-tekton">相关的git-代码</a></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>devops</category>
+        <category>Tekton</category>
+      </categories>
+      <tags>
+        <tag>devops</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>chatGPT</title>
     <url>/www6vHomeHexo/2022/05/09/chatgpt/</url>
     <content><![CDATA[<p></p>
@@ -4691,9 +4720,18 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 </li>
 <li><p>ChatGPT Sidebar<br>要注册账号, 需要api token</p>
 </li>
-<li><p>ChatHub  [instatlled]<br> chatgpt + new bing<br> <a href="https://github.com/chathub-dev/chathub">ChatHub </a></p>
+<li><p>ChatHub  [instatlled]<br> chatgpt + new bing<br><a href="https://github.com/chathub-dev/chathub">ChatHub </a></p>
 </li>
 <li><p>OpenAI Translator<br><a href="https://github.com/yetone/openai-translator">openai-translator</a><br>要注册账号, 需要api token</p>
+</li>
+</ul>
+<h2><span id="创业">创业</span><a href="#创业" class="header-anchor">#</a></h2><ul>
+<li><a href="https://gpt3demo.com/map">GPT-3 Demo</a><ul>
+<li>聊天机器人</li>
+<li>代码辅助</li>
+<li>写作应用</li>
+<li>游戏</li>
+</ul>
 </li>
 </ul>
 ]]></content>
