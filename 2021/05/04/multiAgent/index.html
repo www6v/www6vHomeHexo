@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-05-04T04:09:07.000Z">
-<meta property="article:modified_time" content="2023-05-04T09:00:07.859Z">
+<meta property="article:modified_time" content="2023-05-10T08:31:05.375Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="故障排查">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-04 17:00:07" itemprop="dateModified" datetime="2023-05-04T17:00:07+08:00">2023-05-04</time>
+                <time title="修改时间：2023-05-10 16:31:05" itemprop="dateModified" datetime="2023-05-10T16:31:05+08:00">2023-05-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -266,6 +266,12 @@
 
 
 <p>Draft Here[参考]</p>
+
+
+
+<h2><span id="扩展-chat">扩展 [chat]</span><a href="#扩展-chat" class="header-anchor">#</a></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">为确保使用多个代理程序增强Java应用程序时增强的顺序正确，您可以按照以下步骤操作：</span><br><span class="line"></span><br><span class="line">1. 定义代理程序的特定顺序：确保增强顺序正确的一种方法是定义代理程序的特定顺序。这可以通过指定代理程序加载的顺序或使用配置文件来指定顺序来完成。 [本文]</span><br><span class="line"></span><br><span class="line">2. 使用支持排序的代理程序库：一些代理程序库支持排序，这有助于确保代理程序按正确的顺序加载。例如，Byte Buddy代理程序库允许您使用“AgentBuilder”类指定代理程序加载的顺序。[todo]</span><br><span class="line">  </span><br><span class="line">3. 测试增强顺序：为确保代理程序按正确的顺序加载，您可以尝试使用不同的代理程序顺序测试应用程序。这可以帮助您识别由于增强顺序而可能出现的任何问题，并确保代理程序按正确的顺序加载。</span><br><span class="line"></span><br><span class="line">4. 使用**单个代理程序**来编排其他代理程序：另一种方法是使用单个代理程序来编排其他代理程序。该代理程序可以按正确的顺序加载其他代理程序，并确保它们被正确初始化。</span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">总之，在使用多个代理程序增强Java应用程序时确保增强顺序正确是确保应用程序的稳定性和可靠性的重要步骤。通过遵循这些步骤，您可以确保代理程序按正确的顺序加载，避免由于错误排序而可能导致的任何问题。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">4.1 第四点建议使用**单个代理程序**来编排其他代理程序，这样可以确保代理程序按照正确的顺序加载，并确保它们被正确初始化。这种方法可以确保代理程序之间的相互依赖性得到满足，并且避免了增强顺序不正确的问题。</span><br><span class="line"></span><br><span class="line">具体而言，可以编写一个主代理程序，它负责加载和初始化其他代理程序。在主代理程序中，可以按照正确的顺序加载其他代理程序，并确保每个代理程序被正确初始化。这种方法可以确保代理程序按正确的顺序加载，并且可以更好地管理代理程序之间的相互依赖性。</span><br><span class="line"></span><br><span class="line">以下是一些使用单个代理程序编排其他代理程序的开源项目：</span><br><span class="line"></span><br><span class="line">1. Spring Boot: Spring Boot是一个流行的Java应用程序框架，它使用单个代理程序来编排其他代理程序。Spring Boot的代理程序称为Spring Boot Agent，它负责加载和初始化其他代理程序，例如Micrometer和Logback。</span><br><span class="line">2. Quarkus: Quarkus是一个面向云原生应用程序的Java框架，它使用单个代理程序来编排其他代理程序。Quarkus的代理程序称为Quarkus Agent，它负责加载和初始化其他代理程序，例如Hibernate Validator和RestEasy。</span><br><span class="line">3. Jaeger: Jaeger是一个流行的分布式跟踪系统，它使用单个代理程序来编排其他代理程序。Jaeger的代理程序称为Jaeger Agent，它负责加载和初始化其他代理程序，例如Jaeger Tracer和Zipkin Reporter。</span><br><span class="line">4. Apache SkyWalking: Apache SkyWalking是一个分布式追踪和性能监测系统，它使用单个代理程序来编排其他代理程序。SkyWalking的代理程序称为SkyWalking Agent，它负责加载和初始化其他代理程序，例如SkyWalking Tracing和SkyWalking Metrics。</span><br><span class="line"></span><br><span class="line">以上这些开源项目都使用单个代理程序来编排其他代理程序，以确保代理程序按正确的顺序加载，并确保它们被正确初始化。这种方法可以帮助开发人员更好地管理代理程序之间的相互依赖性，并确保应用程序的稳定性和可靠性。</span><br></pre></td></tr></table></figure>
 
 
     </div>
