@@ -719,7 +719,7 @@
 <li><a href="/www6vHomeHexo/2014/07/21/twoGCcase/" title="两个GC案例">两个GC案例</a></li>
 <li><a href="/www6vHomeHexo/2017/08/09/interrupted/" title="关于任务取消相关异常的排查">关于任务取消相关异常的排查</a></li>
 <li><a href="/www6vHomeHexo/2014/09/06/classloader/" title="Classloader相关的故障排查">Classloader相关的故障排查</a></li>
-<li><a href="/www6vHomeHexo/2021/05/04/multiAgent/" title="多个Agent">多个Agent</a></li>
+<li><a href="/www6vHomeHexo/2021/05/04/multiAgent/" title="多个Java Agent同时使用的类增强冲突问题">多个Java Agent同时使用的类增强冲突问题</a>  ***</li>
 </ul>
 </li>
 </ul>
@@ -742,6 +742,8 @@
 <li><a href="/www6vHomeHexo/2018/05/03/faultModel3/" title="故障模型-3 Infra">故障模型-3 Infra</a>
 <ul>
 <li><a href="/www6vHomeHexo/2022/01/11/haproxyTcpdump/" title="HAProxy抓包">HAProxy抓包</a>   网络</li>
+<li><a href="/www6vHomeHexo/2020/08/09/tcpTimewait/" title="TIME_WAIT和优化">TIME_WAIT和优化</a> ***</li>
+<li><a href="/www6vHomeHexo/2020/08/16/linuxPerformance-cpu/" title="Linux性能优化 之 cpu优化">Linux性能优化 之 cpu优化</a></li>
 </ul>
 </li>
 </ul>
@@ -13467,21 +13469,41 @@ func new(Type) *Type
   <entry>
     <title>TIME_WAIT和优化</title>
     <url>/www6vHomeHexo/2020/08/09/tcpTimewait/</url>
-    <content><![CDATA[<p hidden></p>
+    <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
-<h2><span id="一-time_wait概念和作用">一. TIME_WAIT概念和作用</span><a href="#一-time_wait概念和作用" class="header-anchor">#</a></h2><h3><span id="11-概念">1.1 概念</span><a href="#11-概念" class="header-anchor">#</a></h3><ul>
+<!-- toc -->
+
+<ul>
+<li><a href="#time_wait%E6%A6%82%E5%BF%B5%E5%92%8C%E4%BD%9C%E7%94%A8">TIME_WAIT概念和作用</a><ul>
+<li><a href="#%E6%A6%82%E5%BF%B5">概念</a></li>
+<li><a href="#%E4%BD%9C%E7%94%A8">作用</a></li>
+</ul>
+</li>
+<li><a href="#time_wait%E7%9A%84%E5%89%AF%E4%BD%9C%E7%94%A8%E5%92%8C%E4%BC%98%E5%8C%96">TIME_WAIT的副作用和优化</a><ul>
+<li><a href="#tcp%E5%92%8Ctime_wait">TCP和TIME_WAIT</a></li>
+<li><a href="#%E5%89%AF%E4%BD%9C%E7%94%A8%E5%92%8C%E4%BC%98%E5%8C%96">副作用和优化</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h2><span id="time_wait概念和作用">TIME_WAIT概念和作用</span><a href="#time_wait概念和作用" class="header-anchor">#</a></h2><h3><span id="概念">概念</span><a href="#概念" class="header-anchor">#</a></h3><ul>
 <li><strong>只有发起连接终止的一方会进入 TIME_WAIT 状态</strong>。</li>
 <li><strong>TIME_WAIT</strong>停留持续时间是固定的，是最长分节生命期 MSL（maximumsegment lifetime）的两倍（<strong>2MSL</strong>）。Linux系统里有一个硬编码的字段，名称为TCP_IMEWAIT_LEN，其值为 60 秒。也就是说，<strong>Linux 系统停留在 TIME_WAIT 的时间为固定的 60 秒</strong>。</li>
 </ul>
-<h3><span id="12-作用">1.2 作用</span><a href="#12-作用" class="header-anchor">#</a></h3><ul>
+<h3><span id="作用">作用</span><a href="#作用" class="header-anchor">#</a></h3><ul>
 <li>这样做是为了<strong>确保最后的 ACK 能让被动关闭方接收</strong>（可能丢失ACK后<strong>重传ACK</strong>），从而帮助其<strong>正常关闭</strong>。</li>
 <li>第二个理由和连接“化身”和报文迷走有关系，为了让旧连接的重复分节在网络中自然消失。</li>
 </ul>
-<h2><span id="二-time_wait的副作用和优化">二. TIME_WAIT的副作用和优化</span><a href="#二-time_wait的副作用和优化" class="header-anchor">#</a></h2><h3><span id="21-tcp和time_wait">2.1 TCP和TIME_WAIT</span><a href="#21-tcp和time_wait" class="header-anchor">#</a></h3><p>当连接的一方主动关闭连接，在接收到对端的 FIN 报文之后，<strong>主动关闭连接的一方</strong>会在 TIME_WAIT 这个状态里停留一段时间，这个时间大约为 2MSL。</p>
+<h2><span id="time_wait的副作用和优化">TIME_WAIT的副作用和优化</span><a href="#time_wait的副作用和优化" class="header-anchor">#</a></h2><h3><span id="tcp和time_wait">TCP和TIME_WAIT</span><a href="#tcp和time_wait" class="header-anchor">#</a></h3><p>当连接的一方主动关闭连接，在接收到对端的 FIN 报文之后，<strong>主动关闭连接的一方</strong>会在 TIME_WAIT 这个状态里停留一段时间，这个时间大约为 2MSL。</p>
 <p><strong>主动关闭连接的一方可以是客户端，也可以是服务端；</strong><br><strong>副作用1 主动关闭连接的一方 是客户端；</strong><br><strong>副作用2 主动关闭连接的一方 是服务端；</strong></p>
-<h3><span id="22-副作用和优化">2.2 副作用和优化</span><a href="#22-副作用和优化" class="header-anchor">#</a></h3><ul>
+<h3><span id="副作用和优化">副作用和优化</span><a href="#副作用和优化" class="header-anchor">#</a></h3><ul>
 <li><p>副作用1 <strong>对端口资源的占用，一个 TCP 连接至少消耗一个本地端口</strong></p>
 </li>
 <li><p>副作用1 优化<br> <strong>net.ipv4.tcp_tw_reuse（推荐）</strong><br>  从协议角度理解如果是安全可控的，可以<strong>复用</strong>处于 TIME_WAIT 的套接字为新的<strong>连接</strong>所用.</p>
@@ -13499,7 +13521,7 @@ func new(Type) *Type
 <li><p>副作用2  优化<br>服务器端程序，都应该设置 <strong>SO_REUSEADDR 套接字选项</strong>，以便服务端程序可以在极短时间内<strong>复用同一个端口启动</strong>。</p>
 </li>
 </ul>
-<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><a href>网络编程实战 - 10 | TIME_WAIT：隐藏在细节下的魔鬼</a> 盛延敏  </li>
 <li><a href>网络编程实战 - 15 | 怎么老是出现“地址已经被使用”？</a> 盛延敏</li>
 </ol>
@@ -17507,22 +17529,14 @@ nq： 不排队调度
 
 <span id="more"></span>
 
-<div style="width:60%; height:60%; text-align: center;">
+<h3><span id="最常用的cpu工具">最常用的cpu工具</span><a href="#最常用的cpu工具" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2019/08/08/linuxPerformance/cpu-tool.jpg" class title="最常用的cpu工具">
 
-<p><img src="https://user-images.githubusercontent.com/5608425/65083664-b6d52d00-d9db-11e9-918c-2a99c5708189.jpg" alt="最常用的cpu工具"><br>最常用的cpu工具</p>
-</div>
-
-<div style="text-align: center;">
-    
-<p><img src="https://user-images.githubusercontent.com/5608425/65083667-b76dc380-d9db-11e9-8e74-3e80c8692fa8.jpg" alt="memory"><br>memory</p>
-<p><img src="https://user-images.githubusercontent.com/5608425/65083666-b6d52d00-d9db-11e9-9b57-e6a9f74235be.JPG" alt="io"><br>io</p>
-</div>
-
-
+<h3><span id="memory-tool">memory tool</span><a href="#memory-tool" class="header-anchor">#</a></h3><p><img src="https://user-images.githubusercontent.com/5608425/65083667-b76dc380-d9db-11e9-8e74-3e80c8692fa8.jpg" alt="memory"></p>
+<h3><span id="io-tool">IO tool</span><a href="#io-tool" class="header-anchor">#</a></h3><p><img src="https://user-images.githubusercontent.com/5608425/65083666-b6d52d00-d9db-11e9-9b57-e6a9f74235be.JPG" alt="io"></p>
 <blockquote>
 <p>Buffer是对磁盘数据的缓存，而Cache是文件数据的缓存，它们既会用在读请求中，也会用在写请求中。</p>
 </blockquote>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li>&lt;&lt;Linux性能优化实战  11 - 套路篇：如何迅速分析出系统CPU的瓶颈在哪里？&gt;&gt; 倪朋飞</li>
 <li>&lt;&lt;Linux性能优化实战  21 - 套路篇：如何“快准狠”找到系统内存的问题？&gt;&gt; 倪朋飞</li>
 <li>&lt;&lt;Linux性能优化实战  30 - 套路篇：如何迅速分析出系统IO的瓶颈在哪里？&gt;&gt; 倪朋飞</li>
@@ -17621,14 +17635,9 @@ nq： 不排队调度
 
 <img src="/www6vHomeHexo/2019/08/07/tcpUdpControlCongestion/tcp&udp.jpg" class title="TCP流控和拥塞控制">
 
-
-<div style="text-align: center;">
-
-<p><img src="https://user-images.githubusercontent.com/5608425/63579884-31ba4c00-c5c6-11e9-97d1-28defaa3286f.jpg" alt="TCP拥塞控制">   TCP拥塞控制</p>
-<p><img src="https://user-images.githubusercontent.com/5608425/63579883-31ba4c00-c5c6-11e9-83ca-78a892b3243d.jpg" alt="TCP拥塞控制-快速重传">   TCP拥塞控制-快速重传</p>
-<p><img src="https://user-images.githubusercontent.com/5608425/63579882-3121b580-c5c6-11e9-8483-c53b4ec03fe6.jpg" alt="快速重传">  快速重传</p>
-</div>
-
+<h3><span id="tcp拥塞控制">TCP拥塞控制</span><a href="#tcp拥塞控制" class="header-anchor">#</a></h3><p><img src="https://user-images.githubusercontent.com/5608425/63579884-31ba4c00-c5c6-11e9-97d1-28defaa3286f.jpg" alt="TCP拥塞控制">   </p>
+<h3><span id="tcp拥塞控制-快速重传">TCP拥塞控制-快速重传</span><a href="#tcp拥塞控制-快速重传" class="header-anchor">#</a></h3><p><img src="https://user-images.githubusercontent.com/5608425/63579883-31ba4c00-c5c6-11e9-83ca-78a892b3243d.jpg" alt="TCP拥塞控制-快速重传">   </p>
+<h3><span id="快速重传">快速重传</span><a href="#快速重传" class="header-anchor">#</a></h3><p><img src="https://user-images.githubusercontent.com/5608425/63579882-3121b580-c5c6-11e9-8483-c53b4ec03fe6.jpg" alt="快速重传">  </p>
 <blockquote>
 <p>拥塞窗口是为了怕把网络塞满，在出现丢包的时候减少发送速度.<br>  滑动窗口就是为了怕把接收方塞满，而控制发送速度.</p>
 </blockquote>
@@ -19814,19 +19823,18 @@ nq： 不排队调度
       </tags>
   </entry>
   <entry>
-    <title>linux性能分析</title>
+    <title>Linux性能分析</title>
     <url>/www6vHomeHexo/2018/12/26/linuxProfile/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h2><span id="一-linux-observability-tools-linux-性能观测工具">一. Linux observability tools | Linux 性能观测工具</span><a href="#一-linux-observability-tools-linux-性能观测工具" class="header-anchor">#</a></h2><div style="text-align: center;">
-    
+<h2><span id="linux-observability-tools-linux-性能观测工具">Linux observability tools | Linux 性能观测工具</span><a href="#linux-observability-tools-linux-性能观测工具" class="header-anchor">#</a></h2><div style="text-align: center;">
+
 <p><img src="https://user-images.githubusercontent.com/5608425/65083384-fe0eee00-d9da-11e9-9b5f-c3361a273b67.jpg" alt="linux_observe_tools"><br>Linux性能观测工具</p>
 </div>
 
-<!-- more -->
 
-<h2><span id="二-快速性能诊断快速体检">二. 快速性能诊断(快速体检)</span><a href="#二-快速性能诊断快速体检" class="header-anchor">#</a></h2><ol>
+<h2><span id="快速性能诊断快速体检">快速性能诊断(快速体检)</span><a href="#快速性能诊断快速体检" class="header-anchor">#</a></h2><ol>
 <li>系统平均负载<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> # 0.25- 1分钟负载 ， 0.22-5分钟负载， 0.23-15分钟负载</span><br><span class="line"> [root@10-25-3-55 /]# uptime</span><br><span class="line"> 23:02:19 up 285 days, 11:37,  1 user,  load average: 0.25, 0.22, 0.23</span><br><span class="line"></span><br><span class="line"># 如果cpu个数是4， 则平均负载4是合理的。</span><br><span class="line">[root@10-23-25-248]$grep &#x27;model name&#x27; /proc/cpuinfo | wc -l</span><br><span class="line">4</span><br></pre></td></tr></table></figure></li>
 </ol>
 <ul>
@@ -22318,11 +22326,12 @@ table th:first-of-type {
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<img src="/www6vHomeHexo/2015/04/25/tcp/tcp-base.jpg" class title="TCP基础总结">
-<img src="/www6vHomeHexo/2015/04/25/tcp/tcp-optimize.jpg" class title="TCP优化">
+<h2><span id="tcp基础总结">TCP基础总结</span><a href="#tcp基础总结" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2015/04/25/tcp/tcp-base.jpg" class title="TCP基础总结">
+
+<h2><span id="tcp优化">TCP优化</span><a href="#tcp优化" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2015/04/25/tcp/tcp-optimize.jpg" class title="TCP优化">
 
 <p>Tcp五元组: 源ip, 源port, 目的ip, 目的port, 协议</p>
-<h2><span id="一-tcp-keep-alive">一.  TCP Keep-Alive</span><a href="#一-tcp-keep-alive" class="header-anchor">#</a></h2><table>
+<h2><span id="tcp-keep-alive">TCP Keep-Alive</span><a href="#tcp-keep-alive" class="header-anchor">#</a></h2><table>
 <thead>
 <tr>
 <th>【TCP Keep-Alive】</th>
@@ -22341,14 +22350,14 @@ table th:first-of-type {
 <td>HTTP2的Multiplexing多路传输特性， 可行</td>
 </tr>
 </tbody></table>
-<h2><span id="二-tcp-握手-挥手">二. TCP 握手、挥手</span><a href="#二-tcp-握手-挥手" class="header-anchor">#</a></h2><div style="text-align: center;">
-    
+<h2><span id="tcp-握手-挥手">TCP 握手、挥手</span><a href="#tcp-握手-挥手" class="header-anchor">#</a></h2><div style="text-align: center;">
+
 <p><img src="https://user-images.githubusercontent.com/5608425/65186269-e2b7e780-da9b-11e9-926f-ea186bb3282a.jpg" alt="图1.TCP三次握手"><br>图1.TCP三次握手</p>
 <p><img src="https://user-images.githubusercontent.com/5608425/65186267-e21f5100-da9b-11e9-9f92-3fcab8f30679.jpg" alt="图2.TCP四次挥手"><br>图2.TCP四次挥手</p>
 <p><img src="https://user-images.githubusercontent.com/5608425/65186270-e3507e00-da9b-11e9-8419-bab1f09e35eb.jpg" alt="tcp-sync-queue-and-accept-queue">  图3.全&#x2F;半连接队列</p>
 </div>
 
-<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><a href="https://blog.csdn.net/huang_xw/article/details/7340241">java socket参数详解:TcpNoDelay</a> huang_xw  </li>
 <li><a href="http://jm.taobao.org/2017/05/25/525-1/">关于TCP 半连接队列和全连接队列 蛰剑</a></li>
 <li><a href="http://jm.taobao.org/2017/06/08/20170608/">就是要你懂 TCP 蛰剑</a> </li>
