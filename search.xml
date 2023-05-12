@@ -1033,7 +1033,7 @@
       </tags>
   </entry>
   <entry>
-    <title>TiKV  MVCC Transaction</title>
+    <title>TiKV Transaction-MVCC+TSO</title>
     <url>/www6vHomeHexo/2023/04/10/tikvMVCCTransaction/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -1063,6 +1063,9 @@
 <li>《11｜隔离性：读写冲突时，快照是最好的办法吗？》 分布式数据库30讲</li>
 <li><a href="https://zhuanlan.zhihu.com/p/149377959">percolator的理解与开源实现分析</a>   未</li>
 <li><a href="https://zhuanlan.zhihu.com/p/261115166">Percolator - 分布式事务的理解与分析</a>   未</li>
+<li>《云原生数据库 原理与实践》 8.1.3   未</li>
+<li><a href="https://cn.pingcap.com/blog/pessimistic-transaction-the-new-features-of-tidb">TiDB 新特性漫谈：悲观事务</a> 未</li>
+<li><a href="/www6vHomeHexo/2022/04/11/distributedDatabaseGlobalTime/" title="分布式数据库-全局时钟">分布式数据库-全局时钟</a>  self</li>
 </ol>
 ]]></content>
       <categories>
@@ -4645,6 +4648,107 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
+    <title>MVCC</title>
+    <url>/www6vHomeHexo/2022/05/12/mvcc/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#mvcc">MVCC</a><ul>
+<li><a href="#%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%E5%8D%8F%E8%AE%AE-4">并发控制协议 [4]</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84mvcc">数据库中的MVCC</a></li>
+<li><a href="#mysql%E4%B8%AD%E7%9A%84mvcc-3">MySQL中的MVCC [3]</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="mvcc">MVCC</span><a href="#mvcc" class="header-anchor">#</a></h1><ul>
+<li>四个关键模块设计<ul>
+<li>并发控制协议 ***<ul>
+<li>Two-phase Locking (MV2PL)</li>
+<li>MVOCC</li>
+<li>Timestamp Ordering (MVTO)</li>
+</ul>
+</li>
+<li>版本数据存储  ***<ul>
+<li>Append-only</li>
+<li>Time-Travel</li>
+<li>Delta</li>
+</ul>
+</li>
+<li>垃圾清理机制</li>
+<li>索引管理</li>
+</ul>
+</li>
+</ul>
+<h3><span id="并发控制协议-4">并发控制协议 [4]</span><a href="#并发控制协议-4" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/05/12/mvcc/mvccProtocol.jpg" class>
+
+<h3><span id="数据库中的mvcc">数据库中的MVCC</span><a href="#数据库中的mvcc" class="header-anchor">#</a></h3><table>
+<thead>
+<tr>
+<th>DB</th>
+<th>Protocol</th>
+<th>Version Storage</th>
+<th>Garbage Collection</th>
+<th></th>
+<th>Index Management</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Oracle</td>
+<td>MV2PL</td>
+<td>Delta</td>
+<td>Tuple-level (VAC)</td>
+<td></td>
+<td>Logical Pointers (TupleId)</td>
+</tr>
+<tr>
+<td>Postgres</td>
+<td>MV2PL&#x2F;SSI</td>
+<td>Append-only (O2N)</td>
+<td>Tuple-level (VAC)</td>
+<td></td>
+<td>Physical Pointers</td>
+</tr>
+<tr>
+<td>MySQL-InnoDB</td>
+<td>MV2PL</td>
+<td>Delta</td>
+<td>Tuple-level (VAC)</td>
+<td></td>
+<td>Logical Pointers (PKey)</td>
+</tr>
+</tbody></table>
+<h3><span id="mysql中的mvcc-3">MySQL中的MVCC [3]</span><a href="#mysql中的mvcc-3" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><p><a href="https://jiekun.dev/posts/mvcc/">Paper Reading：聊一聊MVCC</a> ***</p>
+</li>
+<li><p>[1] Y. Wu, An Empirical Evaluation of In-Memory Multi-Version Concurrency Control. In VLDB 2017.</p>
+</li>
+<li><a href="/www6vHomeHexo/2020/08/14/mysqlTransactionAndLock/" title="MySQL 事务-隔离性和锁">MySQL 事务-隔离性和锁</a> self 
+
+<p>MySQL MVCC 快照都 vs 当前读 </p>
+</li>
+<li><p><a href="https://www.zhihu.com/question/27876575">乐观锁和 MVCC 的区别？</a></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>MVCC</category>
+      </categories>
+      <tags>
+        <tag>db</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Kafka Rebalance机制</title>
     <url>/www6vHomeHexo/2022/05/11/kafkaRebalance/</url>
     <content><![CDATA[<p></p>
@@ -7594,8 +7698,7 @@ BGP 协议传输的消息
 <li><a href="https://www.modb.pro/db/84156">CockroachDB分布式事务解密(一)：CockroachDB &amp; HLC</a><br>CockroachDB使用了一个软件实现的基于NTP时钟同步的混合逻辑时钟算法(Hybrid Logic Clock)——HLC追踪系统中事务的的hb关系(happen before)。</li>
 <li><a href="https://www.modb.pro/db/84153">CockroachDB事务解密(二)：事务模型</a></li>
 <li><a href="https://github.com/cockroachdb/cockroach/blob/master/pkg/util/hlc/hlc.go">Cockroach  HLC</a></li>
-<li>《云原生数据库 原理与实践》 8.1.3</li>
-<li><a href="https://cn.pingcap.com/blog/pessimistic-transaction-the-new-features-of-tidb">TiDB 新特性漫谈：悲观事务</a></li>
+<li><a href="/www6vHomeHexo/2023/04/10/tikvMVCCTransaction/" title="TiKV Transaction-MVCC+TSO">TiKV Transaction-MVCC+TSO</a></li>
 <li><a href="/www6vHomeHexo/2022/04/11/distributedDatabaseGlobalTime/" title="分布式数据库-全局时钟">分布式数据库-全局时钟</a>  self</li>
 </ol>
 ]]></content>
@@ -12710,11 +12813,26 @@ func new(Type) *Type
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h1><span id="基于zk的分布式锁">基于zk的分布式锁</span><a href="#基于zk的分布式锁" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2021/05/12/zookeeperDistributedLock/distributedLock-zk.jpg" class title="图3.zk分布式锁">
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
+<!-- toc -->
 
+<ul>
+<li><a href="#%E5%9F%BA%E4%BA%8Ezk%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81">基于ZK的分布式锁</a><ul>
+<li><a href="#%E5%8F%AF%E9%87%8D%E5%85%A5%E6%80%A723-%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F">可重入性[2][3]-实现方式</a></li>
+<li><a href="#%E5%8F%AF%E9%87%8D%E5%85%A5%E6%80%A72-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0">可重入性[2]-代码实现</a></li>
+<li><a href="#%E7%BE%8A%E7%BE%A4%E6%95%88%E5%BA%94-%E4%BC%98%E5%8C%96-1">羊群效应 优化 [1]</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
 
-<p>[chat]</p>
+</div>
+
+<h1><span id="基于zk的分布式锁">基于ZK的分布式锁</span><a href="#基于zk的分布式锁" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2021/05/12/zookeeperDistributedLock/distributedLock-zk.jpg" class title="图3.zk分布式锁">
+
+<h3><span id="可重入性23-实现方式">可重入性[2][3]-实现方式</span><a href="#可重入性23-实现方式" class="header-anchor">#</a></h3><p>[chat]</p>
 <p>在ZooKeeper中，分布式锁的可重入性是通过在锁节点的数据中保存一个拥有者ID和计数器来实现的。具体来说，当一个客户端第一次获取锁时，它会在锁节点的数据中设置一个拥有者ID，并将计数器设置为1。当这个客户端再次请求获取锁时，它会检查锁节点的数据中是否已经设置了拥有者ID，并且该ID是否与自己相同。如果相同，则将计数器加1，表示该客户端已经多次获取了锁；如果不同，则该客户端需要等待锁的释放。</p>
 <p>通过保存拥有者ID和计数器，ZooKeeper可以轻松地实现分布式锁的可重入性。当一个客户端多次获取锁时，它只需要检查锁节点的数据中保存的拥有者ID是否与自己相同，并且计数器是否大于等于1即可。如果满足条件，则说明该客户端已经拥有了锁，并且可以继续执行操作；否则，该客户端需要等待锁的释放。</p>
 <p>需要注意的是，为了避免死锁，ZooKeeper分布式锁的可重入性实现中还需要考虑锁的释放顺序。具体来说，当一个客户端释放锁时，需要按照获取锁的顺序依次释放所有的锁，从而避免死锁的发生。</p>
@@ -12723,7 +12841,9 @@ func new(Type) *Type
 <p>[chat]  总结: 在ZooKeeper中，分布式锁的可重入性是如何实现的   </p>
 <p>具体来说，它通过在锁节点的数据中保存<strong>拥有者ID和计数器</strong>来判断一个客户端是否已经持有锁，并且在客户端多次获取锁时，可以通过增加计数器的方式来实现可重入性。为了避免死锁，ZooKeeper分布式锁的实现中还需要考虑锁的释放顺序，即按照获取锁的顺序依次释放所有的锁。这种实现方式简单、高效，并且可以避免死锁的发生。</p>
 <p>[endchat]</p>
-<h3><span id="羊群效应-优化-1">羊群效应 优化 [1]</span><a href="#羊群效应-优化-1" class="header-anchor">#</a></h3><h3><span id="可重入性23">可重入性[2][3]</span><a href="#可重入性23" class="header-anchor">#</a></h3><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h3><span id="可重入性2-代码实现">可重入性[2]-代码实现</span><a href="#可重入性2-代码实现" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line"></span><br><span class="line">public boolean lock() &#123;</span><br><span class="line"></span><br><span class="line">    //可重入的判断</span><br><span class="line"></span><br><span class="line">    synchronized (this) &#123;</span><br><span class="line"></span><br><span class="line">        if (lockCount.get() == 0) &#123;</span><br><span class="line"></span><br><span class="line">            thread = Thread.currentThread();</span><br><span class="line"></span><br><span class="line">            lockCount.incrementAndGet();</span><br><span class="line"></span><br><span class="line">        &#125; else &#123;</span><br><span class="line"></span><br><span class="line">            if (!thread.equals(Thread.currentThread())) &#123; ## 本线程是否已经占有锁</span><br><span class="line"></span><br><span class="line">            return false;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        lockCount.incrementAndGet();</span><br><span class="line"></span><br><span class="line">        return true;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   //....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3><span id="羊群效应-优化-1">羊群效应 优化 [1]</span><a href="#羊群效应-优化-1" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li>《从Paxos到Zookeeper分布式一致性原理与实践》 倪超 6.1.7节</li>
 <li><a href="https://www.cnblogs.com/crazymakercircle/p/14504520.html">Zookeeper 分布式锁 （图解+秒懂+史上最全）</a> *** </li>
 <li><a href="https://blog.csdn.net/u013278314/article/details/82715716">分布式锁（一）基于Zookeeper实现可重入分布式锁</a>  *</li>
@@ -15174,9 +15294,9 @@ nq： 不排队调度
 
 <img src="/www6vHomeHexo/2019/10/27/dbClassify/database.jpg" class title="数据库分类">
 
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><a href="https://blog.csdn.net/icycode/article/details/81008607">5分钟理解数据库全景图(SQL,NoSQL,NewSQL,OLAP,OLTP)</a> icycode</li>
-<li><a href="../../../../2018/07/19/NoSQL/">NoSQL总结</a> self</li>
+<li><a href="/www6vHomeHexo/2018/07/19/NoSQL/" title="NoSQL总结">NoSQL总结</a>  self</li>
 </ol>
 ]]></content>
       <categories>
@@ -22484,7 +22604,7 @@ table th:first-of-type {
 <li><a href="https://dbaplus.cn/news-160-1729-1.html">拨开云雾见天日：剖析单机事务原理</a> CHEN川 ***</li>
 <li><a href="https://coolshell.cn/articles/6790.html">多版本并发控制(MVCC)在分布式系统中的应用</a> Todd</li>
 <li>阿里云分布式缓存OCS与DB之间的数据一致性 杨成虎</li>
-<li><a href="https://www.zhihu.com/question/27876575">乐观锁和 MVCC 的区别？  二楼 三楼</a></li>
+<li><a href="https://www.zhihu.com/question/27876575">乐观锁和 MVCC 的区别？  </a></li>
 <li><a href="https://blog.csdn.net/cweeyii/article/details/70991230">mysql可重复读和幻读实例  CWeeYii</a></li>
 <li><a href="https://www.cnblogs.com/lz0925/articles/8988922.html">MySQL脏读、虚读、幻读 Eternity味道</a></li>
 <li><a href="https://blog.csdn.net/J_java1/article/details/82025189">MySQL 中事务的实现原理</a>  失效</li>
