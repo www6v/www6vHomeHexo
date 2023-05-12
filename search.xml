@@ -12705,6 +12705,28 @@ func new(Type) *Type
       </tags>
   </entry>
   <entry>
+    <title>Zookeeper-分布式锁</title>
+    <url>/www6vHomeHexo/2021/05/12/zookeeperDistributedLock/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h1><span id="基于zk的分布式锁">基于zk的分布式锁</span><a href="#基于zk的分布式锁" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2021/05/12/zookeeperDistributedLock/distributedLock-zk.jpg" class title="图3.zk分布式锁">
+
+<h3><span id="羊群效应-优化-1">羊群效应 优化 [1]</span><a href="#羊群效应-优化-1" class="header-anchor">#</a></h3><h3><span id="可重入性23">可重入性[2][3]</span><a href="#可重入性23" class="header-anchor">#</a></h3><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li>《从Paxos到Zookeeper分布式一致性原理与实践》 倪超 6.1.7节</li>
+<li><a href="https://www.cnblogs.com/crazymakercircle/p/14504520.html">Zookeeper 分布式锁 （图解+秒懂+史上最全）</a> *** </li>
+<li><a href="https://blog.csdn.net/u013278314/article/details/82715716">分布式锁（一）基于Zookeeper实现可重入分布式锁</a>  *</li>
+</ol>
+]]></content>
+      <categories>
+        <category>中间件</category>
+        <category>Zookeeper</category>
+      </categories>
+      <tags>
+        <tag>Zookeeper</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Reactive</title>
     <url>/www6vHomeHexo/2021/05/10/reactive/</url>
     <content><![CDATA[<p></p>
@@ -21058,35 +21080,46 @@ nq： 不排队调度
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<img src="/www6vHomeHexo/2016/12/05/distributedLock/distributedLock.jpg" class title="分布式锁">  
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
+<!-- toc -->
 
-<h2><span id="二-基于zk的分布式锁">二. 基于zk的分布式锁</span><a href="#二-基于zk的分布式锁" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2016/12/05/distributedLock/distributedLock-zk.jpg" class title="图3.zk分布式锁">
+<ul>
+<li><a href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81">分布式锁</a></li>
+<li><a href="#%E9%94%81%E7%9A%84%E7%89%B9%E6%80%A7">锁的特性</a></li>
+<li><a href="#%E5%AE%9E%E7%8E%B0">实现</a><ul>
+<li><a href="#redis5">Redis[5]</a></li>
+<li><a href="#zookeeper4">Zookeeper[4]</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
 
+</div>
 
+<h1><span id="分布式锁">分布式锁</span><a href="#分布式锁" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2016/12/05/distributedLock/distributedLock.jpg" class title="分布式锁">  
 
-<h2><span id="锁的特性">锁的特性:</span><a href="#锁的特性" class="header-anchor">#</a></h2><ol>
+<h1><span id="锁的特性">锁的特性</span><a href="#锁的特性" class="header-anchor">#</a></h1><ol>
 <li>排它性</li>
 <li>超时释放锁<br>zk临时目录</li>
-<li>高可用，锁集群容错[图2]，<br>安全性[7]，</li>
-<li>可重入锁, 避免死锁 [9]</li>
-<li>乐观锁, 悲观锁[10][图2]</li>
+<li>高可用，锁集群容错[图2]，<br>安全性[3]，</li>
+<li>可重入锁, 避免死锁 [4]</li>
+<li>乐观锁, 悲观锁[6][图2]</li>
 </ol>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h1><span id="实现">实现</span><a href="#实现" class="header-anchor">#</a></h1><h3><span id="redis5">Redis[5]</span><a href="#redis5" class="header-anchor">#</a></h3><h3><span id="zookeeper4">Zookeeper[4]</span><a href="#zookeeper4" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><p><a href="https://tech.meituan.com/2016/09/29/distributed-system-mutually-exclusive-idempotence-cerberus-gtis.html">分布式系统互斥性与幂等性问题的分析与解决</a> 点评 蒋谞 </p>
 </li>
 <li><p>漫画：什么是分布式锁？ 程序员小灰</p>
 </li>
-<li><p>《从Paxos到Zookeeper分布式一致性原理与实践》 倪超 6.1.7节</p>
+<li><p><a href="https://www.jianshu.com/p/31e85a18a9e7">分布式服务总结 分布式锁</a><br>通过栅栏(fencing)使得锁更安全, fencing token<br><a href="http://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html">How to do distributed locking</a> Martin Kleppmann  </p>
+</li>
+<li><a href="/www6vHomeHexo/2021/05/12/zookeeperDistributedLock/" title="Zookeeper-分布式锁">Zookeeper-分布式锁</a> self</li>
+<li><a href="/www6vHomeHexo/2022/05/05/redisDistKey/" title="Redis 分布式锁">Redis 分布式锁</a> self</li>
+<li><p><a href="https://www.cnblogs.com/jasonZh/p/9522772.html">Redis分布式锁实现秒杀业务(乐观锁、悲观锁)</a>  最后<br> 乐观锁: jedis的watch方法</p>
 </li>
 <li><p><a href="https://mp.weixin.qq.com/s/ahcbgxWVVmRwrH9Y4-gXBA">SOFAJRaft-RheaKV 分布式锁实现剖析 | SOFAJRaft 实现原理</a>   SOFALab 米麒麟 未</p>
 </li>
-</ol>
-<hr>
-<ol start="7">
-<li><a href="https://www.jianshu.com/p/31e85a18a9e7">分布式服务总结 分布式锁</a><br>通过栅栏(fencing)使得锁更安全, fencing token<br><a href="http://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html">How to do distributed locking</a> Martin Kleppmann  </li>
-<li><a href="https://blog.csdn.net/u013278314/article/details/82715716">分布式锁（一）基于Zookeeper实现可重入分布式锁</a> </li>
-<li><a href="https://www.cnblogs.com/jasonZh/p/9522772.html">Redis分布式锁实现秒杀业务(乐观锁、悲观锁)</a>  最后<br>乐观锁: jedis的watch方法</li>
 </ol>
 ]]></content>
       <categories>
