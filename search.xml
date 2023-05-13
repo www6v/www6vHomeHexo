@@ -1033,6 +1033,82 @@
       </tags>
   </entry>
   <entry>
+    <title>统一模型</title>
+    <url>/www6vHomeHexo/2023/05/13/unifyModel/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+
+<table>
+<thead>
+<tr>
+<th>计算密集</th>
+<th>技术</th>
+<th>产品</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>微服务</td>
+<td>RPC<br>Service Mesh(3th)<br>多运行时(4th )</td>
+<td>Dubbo<br>istio proxyless<br>daper</td>
+</tr>
+<tr>
+<td>容器</td>
+<td>编排</td>
+<td>K8s</td>
+</tr>
+<tr>
+<td>Service Mesh</td>
+<td>Sidecar <br>控制面， 数据面</td>
+<td>Envoy xDS <br>微软SMI</td>
+</tr>
+<tr>
+<td>可观测</td>
+<td>Tracing+Metric+Logs</td>
+<td>OpenTelemetry&#x3D;<br>OpenCensus+OpenTracing</td>
+</tr>
+<tr>
+<td>Sererless</td>
+<td>Sererless+ VM<br>Sererless+容器<br>Sererless+服务<br>Sererless+数据库<br></td>
+<td>Ali ECS<br>Ali ECI<br>FasS<br>Aurora，TiDB Cloud<br></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>数据密集</th>
+<th>技术</th>
+<th>产品</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>消息队列</td>
+<td>CloudEvent</td>
+<td>EventMesh</td>
+</tr>
+<tr>
+<td>数据库</td>
+<td>存算分离(资源伸缩)，融合HTAP(模型)</td>
+<td>TiDB(TiKV, TiFlash) ，PolarDB</td>
+</tr>
+<tr>
+<td>大数据</td>
+<td>流计算</td>
+<td>Beam，Flink</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>架构</category>
+        <category>系统架构</category>
+        <category>统一模型</category>
+      </categories>
+      <tags>
+        <tag>统一模型</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>TiKV Transaction-MVCC+TSO</title>
     <url>/www6vHomeHexo/2023/04/10/tikvMVCCTransaction/</url>
     <content><![CDATA[<p></p>
