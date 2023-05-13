@@ -1038,9 +1038,7 @@
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-
-
-<table>
+<h2><span id="计算密集">计算密集</span><a href="#计算密集" class="header-anchor">#</a></h2><table>
 <thead>
 <tr>
 <th>计算密集</th>
@@ -1050,7 +1048,7 @@
 </thead>
 <tbody><tr>
 <td>微服务</td>
-<td>RPC<br>Service Mesh(3th)<br>多运行时(4th )</td>
+<td>RPC(2th)<br>Service Mesh(3th)<br>多运行时(4th )</td>
 <td>Dubbo<br>istio proxyless<br>daper</td>
 </tr>
 <tr>
@@ -1074,7 +1072,7 @@
 <td>Ali ECS<br>Ali ECI<br>FasS<br>Aurora，TiDB Cloud<br></td>
 </tr>
 </tbody></table>
-<table>
+<h2><span id="数据密集">数据密集</span><a href="#数据密集" class="header-anchor">#</a></h2><table>
 <thead>
 <tr>
 <th>数据密集</th>
@@ -1089,7 +1087,7 @@
 </tr>
 <tr>
 <td>数据库</td>
-<td>存算分离(资源伸缩)，融合HTAP(模型)</td>
+<td>分离: 存算分离(资源伸缩)<br>融合: HTAP(模型)</td>
 <td>TiDB(TiKV, TiFlash) ，PolarDB</td>
 </tr>
 <tr>
