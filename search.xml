@@ -4555,6 +4555,26 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
+    <title>多主-CRDT</title>
+    <url>/www6vHomeHexo/2022/05/14/multiMasterCRDT/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>分布式</category>
+        <category>一致性</category>
+        <category>多主</category>
+      </categories>
+      <tags>
+        <tag>db</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>AWS Serverless</title>
     <url>/www6vHomeHexo/2022/05/12/awsServerless/</url>
     <content><![CDATA[<p></p>
@@ -21944,8 +21964,10 @@ nq： 不排队调度
 
 </div>
 
-<h1><span id="分布式一致性">分布式一致性</span><a href="#分布式一致性" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2016/02/09/consistent/consistent.jpg" class title="分布式一致性总结">
+<h1><span id="分布式一致性">分布式一致性</span><a href="#分布式一致性" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2016/02/09/consistent/overview.jpg" class title="一致性级别概览（图源：https:&#x2F;&#x2F;jepsen.io&#x2F;consistency）">
 
+<p>[粉色-Unavailable]  在某些网络故障情况下不可用。为了确保安全，一些或所有节点必须暂停操作。<br>[黄色-Sticky Available]  只要客户端只与相同的服务器通信而不切换到新的服务器，就可在每个非故障节点上使用。<br>[蓝色-Total Available]  即使网络完全瘫痪，也可在每个非故障节点上使用。</p>
+<img src="/www6vHomeHexo/2016/02/09/consistent/consistent.jpg" class title="分布式一致性总结">
 
 <h1><span id="一致性">一致性</span><a href="#一致性" class="header-anchor">#</a></h1><div style="text-align: center;">
 
@@ -21955,47 +21977,43 @@ nq： 不排队调度
 <h3><span id="强一致性">强一致性</span><a href="#强一致性" class="header-anchor">#</a></h3><table>
 <thead>
 <tr>
-<th align="center">强一致性</th>
 <th align="center">协议</th>
+<th align="center">强一致性</th>
 <th align="center">特性</th>
 <th align="center">工程</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">强一致性</td>
-<td align="center">两阶段<br>三阶段 #1</td>
+<td align="center">2PC<br>3PC #1</td>
+<td align="center">线性一致性[chat]</td>
 <td align="center">延迟大，吞吐低。全局锁资源</td>
 <td align="center">JTA(XA)<br>  <a href="/www6vHomeHexo/2022/03/24/transactionSeata/" title="Seata 总结">Seata XA,AT **非入侵**</a> self</td>
 </tr>
 <tr>
-<td align="center">强一致性</td>
-<td align="center">paxos #1</td>
+<td align="center">Paxos #1</td>
+<td align="center">顺序一致性[chat]</td>
 <td align="center">难理解，延迟大，吞吐中等，全局锁资源</td>
 <td align="center">分布式锁系统Chubby</td>
 </tr>
 <tr>
-<td align="center">顺序一直性（Sequential Consistency）</td>
 <td align="center">逻辑时钟</td>
+<td align="center">顺序一致性</td>
 <td align="center">类似多线程程序执行顺序的模型</td>
 <td align="center">Zookeeper的读 <br>1.两个主流程，三个阶段 <br> 2.Zab（Qurum）:2f+1个节点，允许f个节点失败</td>
 </tr>
 </tbody></table>
-<blockquote>
-<p>Lamport提出<strong>逻辑时钟</strong>是为了解决分布式系统中的时序问题，即如何定义a在b之前发生.<br>  Java中有happen-before  </p>
-</blockquote>
-<blockquote>
-<p><strong>线性一致性</strong>  #1： 严格一致性（Strict Consistency）或者原子一致性（Atomic Consistency） 一个操作对于系统的其他部分是不可中断的	</p>
-</blockquote>
-<blockquote>
-<p><strong>顺序一致性</strong>  </p>
-</blockquote>
+<ul>
+<li><p>逻辑时钟<br>Lamport提出<strong>逻辑时钟</strong>是为了解决分布式系统中的时序问题，即如何定义a在b之前发生.<br>Java中有happen-before  </p>
+</li>
+<li><p>线性一致性 Linearizability<br><strong>线性一致性</strong>  #1： 严格一致性（Strict Consistency）或者原子一致性（Atomic Consistency） 一个操作对于系统的其他部分是不可中断的	</p>
+</li>
+<li><p><strong>顺序一致性</strong>   Sequential </p>
 <ul>
 <li>任何一次读写操作都是按照某种特定的顺序。</li>
-<li>所有进程看到的读写操作顺序都保持一致。</li>
+<li>所有进程看到的读写操作顺序都保持一致。<br><strong>顺序一致性</strong>虽然通过逻辑时钟保证所有进程保持一致的读写操作顺序，但这些读写操作的顺序跟实际上发生的顺序并不一定一致。而<strong>线性一致性</strong>是严格保证跟实际发生的顺序一致的。</li>
 </ul>
-<blockquote>
-<p><strong>顺序一致性</strong>虽然通过逻辑时钟保证所有进程保持一致的读写操作顺序，但这些读写操作的顺序跟实际上发生的顺序并不一定一致。而<strong>线性一致性</strong>是严格保证跟实际发生的顺序一致的。</p>
-</blockquote>
+</li>
+</ul>
 <h3><span id="弱一致性">弱一致性</span><a href="#弱一致性" class="header-anchor">#</a></h3><table>
 <thead>
 <tr>
@@ -22021,7 +22039,7 @@ nq： 不排队调度
 <td align="center">最终一致性</td>
 <td align="center"><a href="/www6vHomeHexo/2019/06/21/raft/" title="Raft协议">Raft协议</a> self</td>
 <td align="center">相对Paxos简单。主从，三个阶段</td>
-<td align="center"><a href="/www6vHomeHexo/2022/04/06/etcd/" title="etcd">etcd</a> self</td>
+<td align="center"><a href="/www6vHomeHexo/2022/04/06/etcd/" title="etcd 总结">etcd 总结</a> self</td>
 </tr>
 <tr>
 <td align="center">最终一致性</td>
