@@ -441,12 +441,12 @@
 <li><a href="/www6vHomeHexo/2016/06/25/kafkaConsumer/" title="Kafka消费者总结">Kafka消费者总结</a></li>
 <li><a href="/www6vHomeHexo/2022/05/11/kafkaRebalance/" title="Kafka Rebalance机制">Kafka Rebalance机制</a></li>
 <li><a href="/www6vHomeHexo/2016/07/05/kafkaReliability/" title="Kafka 可靠性总结">Kafka 可靠性总结</a></li>
+<li><a href="/www6vHomeHexo/2021/05/15/kafkaIndex/" title="Kafka 索引">Kafka 索引</a></li>
 <li><a href="/www6vHomeHexo/2022/05/04/kafkaTransaction/" title="Kafka 幂等性和事务">Kafka 幂等性和事务</a></li>
 <li><a href="/www6vHomeHexo/2021/05/16/kafkaController/" title="Kafka Controller-控制器">Kafka Controller-控制器</a></li>
 <li><a href="/www6vHomeHexo/2021/05/16/kafka-replica/" title="Kafka Replication-副本机制">Kafka Replication-副本机制</a></li>
 <li><a href="/www6vHomeHexo/2021/05/16/kafka-election/" title="Kafka 中的选主">Kafka 中的选主</a></li>
 <li><a href="/www6vHomeHexo/2019/05/15/kafkaQ-A/" title="Kafka  Q&amp;A">Kafka  Q&amp;A</a></li>
-<li><a href="/www6vHomeHexo/2021/05/15/kafkaIndex/" title="Kafka 索引">Kafka 索引</a></li>
 </ul>
 <h2><span id="rocketmq">Rocketmq</span><a href="#rocketmq" class="header-anchor">#</a></h2><ul>
 <li><a href="../../../../2019/06/18/mqRocketmq/">RocketMQ总结</a> </li>
@@ -12909,6 +12909,29 @@ func new(Type) *Type
 <li>偏移量索引</li>
 <li>时间戳索引</li>
 </ul>
+<hr>
+<p>在 AbstractIndex 中，这个 MappedByteBuffer 就是名为 <strong>mmap</strong> 的变量。接下来，我用</p>
+<p>注释的方式，带你深入了解下这个 mmap 的主要流程。</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="meta">@volatile</span> <span class="keyword">protected</span> <span class="keyword">var</span> mmap: <span class="type">MappedByteBuffer</span> = &#123; </span><br><span class="line"><span class="comment">// 第1步：创建索引文件</span></span><br><span class="line"><span class="keyword">val</span> newlyCreated = file.createNewFile() </span><br><span class="line"><span class="comment">// 第2步：以writable指定的方式（读写方式或只读方式）打开索引文件</span></span><br><span class="line"><span class="keyword">val</span> raf = <span class="keyword">if</span> (writable) <span class="keyword">new</span> <span class="type">RandomAccessFile</span>(file, <span class="string">&quot;rw&quot;</span>) <span class="keyword">else</span> <span class="keyword">new</span> <span class="type">Rando</span> <span class="keyword">try</span> &#123;    </span><br><span class="line">  <span class="keyword">if</span>(newlyCreated) &#123;       </span><br><span class="line">    <span class="keyword">if</span>(maxIndexSize &lt; entrySize) <span class="comment">// 预设的索引文件大小不能太小，如果连一个索引     throw new IllegalArgumentException(&quot;Invalid max index size: &quot; + m       // 第3步：设置索引文件长度，roundDownToExactMultiple计算的是不超过maxInde       // 比如maxIndexSize=1234567，entrySize=8，那么调整后的文件长度为1234560       raf.setLength(roundDownToExactMultipl</span></span><br></pre></td></tr></table></figure>
+
+<p>这些代码最主要的作用就是创建 mmap 对象。要知道，AbstractIndex 其他大部分的操作都是和 mmap 相关。</p>
+<p>AbstractIndex：这是 Kafka 所有类型索引的抽象父类，里面的 mmap 变量是实现索引机制的核心，你一定要掌握它。</p>
+<ul>
+<li><strong>改进版二分查找算法</strong></li>
+</ul>
+<p>现在，最新索引项保存在 Page #13 中。如果要查找最新索引项，原版二分查找算法将会</p>
+<p>依次访问 Page #0、7、10、12 和 13。此时，问题来了：Page 7 和 10 已经很久没有被</p>
+<p>访问过了，它们大概率不在页缓存中，因此，一旦索引开始征用 Page #13，就会发生</p>
+<p><strong>Page Fault，</strong>等待那些<strong>冷页数据从磁盘中加载到页缓存</strong>。根据国外用户的测试，这种加载</p>
+<p>过程可能长达 1 秒。</p>
+<ul>
+<li><strong>位移索引和时间戳索引</strong></li>
+</ul>
+<img src="/www6vHomeHexo/2021/05/15/kafkaIndex/kafkaIndex.jpg" class>
+
+
+<p><strong>参考：</strong><br><strong>04 | 索引（上）：改进的二分查找算法在Kafka索引的应用</strong><br><strong>05丨索引（下）：位移索引和时间戳索引的区别是什么？</strong></p>
+<hr>
 <h2><span id="日志模块-qampa">日志模块 Q&amp;A</span><a href="#日志模块-qampa" class="header-anchor">#</a></h2><ul>
 <li>简述Kafka的日志目录结构</li>
 <li>Kafka中有那些索引文件？</li>
@@ -12917,6 +12940,7 @@ func new(Type) *Type
 <li>聊一聊你对Kafka的Log Retention的理解</li>
 <li>聊一聊你对Kafka的Log Compaction的理解</li>
 <li>聊一聊你对Kafka底层存储的理解（页缓存、内核层、块层、设备层）</li>
+<li>kafka的mmap是对写的优化，还是读的优化？</li>
 </ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><a href="/www6vHomeHexo/2019/09/14/zeroCopy/" title="Linux zero copy-零拷贝">Linux zero copy-零拷贝</a> self
 ]]></content>
