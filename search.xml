@@ -16251,18 +16251,13 @@ nq： 不排队调度
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<blockquote>
-<p>零拷贝就是一种避免 CPU 将数据从一块存储拷贝到另外一块存储的技术</p>
-</blockquote>
-<blockquote>
-<p>零拷贝包括三种方式： </p>
-</blockquote>
-<ul>
-<li>mmap()<br> &lt;&lt;深入理解计算机系统&gt;&gt;mmap定义为：Linux通过将一个虚拟内存区域与一个磁盘上的对象(object)关联起来，以初始化这个虚拟内存区域的内容，这个过程称为内存映射(memory mapping)。</li>
+<h1><span id="零拷贝">零拷贝</span><a href="#零拷贝" class="header-anchor">#</a></h1><h3><span id="零拷贝">零拷贝</span><a href="#零拷贝" class="header-anchor">#</a></h3><p>  就是一种避免 CPU 将数据从一块存储拷贝到另外一块存储的技术</p>
+<h3><span id="零拷贝包括三种方式">零拷贝包括三种方式：</span><a href="#零拷贝包括三种方式" class="header-anchor">#</a></h3><ul>
+<li>mmap()<br>&lt;&lt;深入理解计算机系统&gt;&gt;mmap定义为：Linux通过将一个虚拟内存区域与一个磁盘上的对象(object)关联起来，以初始化这个虚拟内存区域的内容，这个过程称为内存映射(memory mapping)。</li>
 <li>sendfile() -&gt; Java transferTo();</li>
 <li>DMA</li>
 </ul>
-<div style="text-align: center;">
+<h3><span id="mmap">mmap</span><a href="#mmap" class="header-anchor">#</a></h3><div style="text-align: center;">
 <img width="454" alt="mmap概念" src="https://user-images.githubusercontent.com/5608425/64915067-0aa00600-d791-11e9-9aae-6e4832a279af.png"> mmap概念
 
 <p><img src="https://user-images.githubusercontent.com/5608425/64915187-57391080-d794-11e9-95e5-012e92b674ee.png" alt="12605489-b5b0f3d90c6baa8f"><br>mmap</p>
@@ -16273,7 +16268,7 @@ nq： 不排队调度
 <ol>
 <li><a href="https://www.cnblogs.com/AaronCui/p/10528046.html">零拷贝-zero copy</a></li>
 <li><a href="https://developer.ibm.com/articles/j-zerocopy/">Efficient data transfer through zero copy</a> good transferTo()</li>
-<li><a href="https://www.linuxjournal.com/article/6345">Zero Copy I: User-Mode Perspective</a>   good</li>
+<li><a href="https://www.linuxjournal.com/article/6345">Zero Copy I: User-Mode Perspective</a>   ***</li>
 <li><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-zerocopy1/">Linux 中的零拷贝技术，第 1 部分</a></li>
 <li><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-zerocopy2/">Linux 中的零拷贝技术，第 2 部分</a></li>
 <li><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-directio/">Linux 中直接 I&#x2F;O 机制的介绍</a>  good</li>
@@ -16282,7 +16277,7 @@ nq： 不排队调度
 </ol>
 <p>应用<br>7. <a href="https://blog.csdn.net/allwefantasy/article/details/50663533">Kafka Zero-Copy 使用分析</a>  transferTo()<br>8. <a href="https://cloud.tencent.com/developer/news/333695">linux零拷贝原理，RocketMQ＆Kafka使用对比</a><br>9. <a href="http://www.uml.org.cn/zjjs/201504011.asp">RocketMQ入门（上）</a></p>
 <ol start="10">
-<li><a href="../../../../2019/08/23/linux-memory/">Linux内存管理</a> self</li>
+<li><a href="/www6vHomeHexo/2019/08/23/linuxMemory/" title="Linux内存管理">Linux内存管理</a> self</li>
 </ol>
 ]]></content>
       <categories>
