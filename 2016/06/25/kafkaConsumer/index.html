@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2016/06/25/kafkaConsumer/kafka-consumer.jpg">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2016/06/25/kafkaConsumer/lag.png">
 <meta property="article:published_time" content="2016-06-25T10:46:27.000Z">
-<meta property="article:modified_time" content="2023-02-25T02:57:47.083Z">
+<meta property="article:modified_time" content="2023-05-15T08:03:51.436Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="kafka">
 <meta name="twitter:card" content="summary">
@@ -227,7 +227,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-25 10:57:47" itemprop="dateModified" datetime="2023-02-25T10:57:47+08:00">2023-02-25</time>
+                <time title="修改时间：2023-05-15 16:03:51" itemprop="dateModified" datetime="2023-05-15T16:03:51+08:00">2023-05-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -257,17 +257,36 @@
         <p></p>
 <span id="more"></span>
 
-<img src="/www6vHomeHexo/2016/06/25/kafkaConsumer/kafka-consumer.jpg" class title="Kafka消费者总结">
 
-<img src="/www6vHomeHexo/2016/06/25/kafkaConsumer/lag.png" class title="Kafka lag">
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
+<!-- toc -->
+
+<ul>
+<li><a href="#kafka%E6%B6%88%E8%B4%B9%E8%80%85">Kafka消费者</a><ul>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+<li><a href="#lag">lag</a></li>
+<li><a href="#%E6%B6%88%E8%B4%B9%E8%80%85">消费者</a></li>
+</ul>
+</li>
+<li><a href="#qa">Q&amp;A</a><ul>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="kafka消费者">Kafka消费者</span><a href="#kafka消费者" class="header-anchor">#</a></h1><h3><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2016/06/25/kafkaConsumer/kafka-consumer.jpg" class title="Kafka消费者总结">
+
+<h3><span id="lag">lag</span><a href="#lag" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2016/06/25/kafkaConsumer/lag.png" class title="Kafka lag">
 
 <h3><span id="消费者">消费者</span><a href="#消费者" class="header-anchor">#</a></h3><ol>
 <li>批量消费</li>
 <li>消费者的ZeroCopy:<br>直接把消息从文件里发送到网络通道， 而不需要内核与用户态之间数据的来回复制。</li>
 </ol>
-<h2><span id="qampa">Q&amp;A</span><a href="#qampa" class="header-anchor">#</a></h2><p><a href="../../../../2016/06/25/kafkaConsumer/">Kafka消费者总结</a></p>
-<ul>
+<h1><span id="qampa">Q&amp;A</span><a href="#qampa" class="header-anchor">#</a></h1><ul>
 <li><p>怎么计算Lag？(注意read_uncommitted和read_committed状态下的不同)</p>
 </li>
 <li><p>“消费组中的消费者个数如果超过topic的分区，那么就会有消费者消费不到数据”这句话是否正确？如果不正确，那么有没有什么hack的手段？</p>
@@ -285,15 +304,15 @@
 <li><p>Kafka的旧版Scala的消费者客户端的设计有什么缺陷？</p>
 </li>
 </ul>
-<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><a target="_blank" rel="noopener" href="http://www.jasongj.com/2015/08/09/KafkaColumn4/">Kafka设计解析（四）- Kafka Consumer设计解析</a> 郭俊</li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013256816/article/details/81123600">Kafka分区分配策略（1）——RangeAssignor</a> 朱小厮</li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013256816/article/details/81123625">Kafka分区分配策略（2）——RoundRobinAssignor和StickyAssignor</a> 朱小厮</li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013256816/article/details/81123858">Kafka分区分配策略（3）——自定义分区分配策略</a> 朱小厮</li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013256816/article/details/79955578">Kafka的Lag计算误区及正确实现</a> 朱小厮</li>
 <li>《kafka权威指南》 薛命灯 第3，4 ，5章</li>
 <li>Kafka Consumer机制优化-保证每条消息至少消费一次 幽灵之使</li>
 </ol>
+<ul>
+<li>分区分配策略<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013256816/article/details/81123600">Kafka分区分配策略（1）——RangeAssignor</a> 朱小厮<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013256816/article/details/81123625">Kafka分区分配策略（2）——RoundRobinAssignor和StickyAssignor</a> 朱小厮<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013256816/article/details/81123858">Kafka分区分配策略（3）——自定义分区分配策略</a> 朱小厮</li>
+</ul>
 
     </div>
 
@@ -407,7 +426,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">416</span>
+          <span class="site-state-item-count">417</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
