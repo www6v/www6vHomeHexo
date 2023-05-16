@@ -12912,11 +12912,14 @@ func new(Type) *Type
 <ul>
 <li><a href="#kafka%E7%B4%A2%E5%BC%95">Kafka索引</a><ul>
 <li><a href="#logsegment-%E6%9E%84%E6%88%90">LogSegment 构成</a></li>
-<li><a href="#index%E7%B1%BB%E5%9E%8B-2">Index类型 [2]</a></li>
+<li><a href="#index%E7%B1%BB%E5%9E%8B">Index类型</a></li>
 <li><a href="#%E6%94%B9%E8%BF%9B%E7%89%88%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95-1">改进版二分查找算法 [1]</a></li>
 </ul>
 </li>
-<li><a href="#index-%E4%B8%AD%E7%9A%84mmap">Index 中的mmap</a></li>
+<li><a href="#index-%E4%B8%AD%E7%9A%84mmap">Index 中的mmap</a><ul>
+<li><a href="#mmapwrite-45">mmap+write [4][5]</a></li>
+</ul>
+</li>
 <li><a href="#%E6%97%A5%E5%BF%97%E6%A8%A1%E5%9D%97-qa">日志模块 Q&amp;A</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
@@ -12929,26 +12932,56 @@ func new(Type) *Type
 </ul>
 <h3><span id="logsegment-构成">LogSegment 构成</span><a href="#logsegment-构成" class="header-anchor">#</a></h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">tree /tmp/kafka-logs/t1-1/</span></span><br><span class="line">/tmp/kafka-logs/t1-1/</span><br><span class="line">├── 00000000000000000000.index</span><br><span class="line">├── 00000000000000000000.log  ## 位移索引</span><br><span class="line">├── 00000000000000000000.timeindex  ## 时间戳索引</span><br><span class="line">└── leader-epoch-checkpoint</span><br></pre></td></tr></table></figure>
 
-<h3><span id="index类型-2">Index类型 [2]</span><a href="#index类型-2" class="header-anchor">#</a></h3><ul>
-<li>位移索引 vs 时间戳索引</li>
+<h3><span id="index类型">Index类型</span><a href="#index类型" class="header-anchor">#</a></h3><ul>
+<li><p>位移索引 [3]</p>
+<img src="/www6vHomeHexo/2021/05/15/kafkaIndex/offsetIndex.jpg" class>  
+<ul>
+<li>假设要查找偏移量为230的消息，查找过程如下：<ul>
+<li>首先找到baseOffset&#x3D;217的日志段文件（这里使用了跳跃表的结构来加速查找）</li>
+<li>计算相对偏移量relativeOffset&#x3D;230-217&#x3D;13</li>
+<li>在索引文件中查找不大于13的最大相对偏移量对应的索引项，即[12,456]</li>
+<li>根据12对应的物理地址456，在日志文件.log中定位到准确位置</li>
+<li>从日志文件物理位置456继续向后查找找到相对偏移量为13，即绝对偏移量为230，物理地址为468的消息</li>
 </ul>
-<img src="/www6vHomeHexo/2021/05/15/kafkaIndex/kafkaIndex.jpg" class>
-
-
+</li>
+</ul>
+</li>
+<li><p>时间戳索引 [3]</p>
+<img src="/www6vHomeHexo/2021/05/15/kafkaIndex/timeIndex.jpg" class>
+<ul>
+<li>假设要查找时间戳为1540的消息，查找过程如下（这里时间戳只是一个示意值）：<ul>
+<li>将要查找的时间戳1540和每个日志段的最大时间戳逐一对比，直到找到最大时间戳不小于1540的日志段。（日志段的最大时间戳：获取时间戳索引文件最后一个索引项的时间戳，如果大于0，取该值；否则取日志段的最近修改时间）</li>
+<li>找到对应的日志段后，在时间戳索引文件中使用二分查找找到不大于目标时间戳1540的最大索引项，即图中的[1530,12]，获取对应的相对偏移量12</li>
+<li>在该日志段的偏移量索引文件中找到相对偏移量不大于12的索引项，即图中的[12，456]</li>
+<li>在日志文件中从物理位置456开始查找时间戳不小于1540的消息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>位移索引 vs 时间戳索引 [2]</p>
+<img src="/www6vHomeHexo/2021/05/15/kafkaIndex/kafkaIndex.jpg" class></li>
+</ul>
 <h3><span id="改进版二分查找算法-1">改进版二分查找算法 [1]</span><a href="#改进版二分查找算法-1" class="header-anchor">#</a></h3><ul>
-<li>在位移索引 和 时间戳索引中都使用二分查找算法</li>
+<li><p>在位移索引 和 时间戳索引中都使用二分查找算法</p>
+</li>
+<li><p>示例<br>现在，最新索引项保存在 Page #13 中。如果要查找最新索引项，原版二分查找算法将会<br>依次访问 Page #0、7、10、12 和 13。此时，问题来了：Page 7 和 10 已经很久没有被<br>访问过了，它们大概率不在页缓存中，因此，一旦索引开始征用 Page #13，就会发生<br><strong>Page Fault，</strong>等待那些<strong>冷页数据从磁盘中加载到页缓存</strong>。根据国外用户的测试，这种加载<br>过程可能长达 1 秒。</p>
+</li>
 </ul>
-<p>现在，最新索引项保存在 Page #13 中。如果要查找最新索引项，原版二分查找算法将会<br>依次访问 Page #0、7、10、12 和 13。此时，问题来了：Page 7 和 10 已经很久没有被<br>访问过了，它们大概率不在页缓存中，因此，一旦索引开始征用 Page #13，就会发生<br><strong>Page Fault，</strong>等待那些<strong>冷页数据从磁盘中加载到页缓存</strong>。根据国外用户的测试，这种加载<br>过程可能长达 1 秒。</p>
 <h2><span id="index-中的mmap">Index 中的mmap</span><a href="#index-中的mmap" class="header-anchor">#</a></h2><p>在 AbstractIndex 中，这个 MappedByteBuffer 就是名为 <strong>mmap</strong> 的变量。<br>接下来，我用注释的方式，带你深入了解下这个 mmap 的主要流程。</p>
 <figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="meta">@volatile</span> <span class="keyword">protected</span> <span class="keyword">var</span> mmap: <span class="type">MappedByteBuffer</span> = &#123; </span><br><span class="line"><span class="comment">// 第1步：创建索引文件</span></span><br><span class="line"><span class="keyword">val</span> newlyCreated = file.createNewFile() </span><br><span class="line"><span class="comment">// 第2步：以writable指定的方式（读写方式或只读方式）打开索引文件</span></span><br><span class="line"><span class="keyword">val</span> raf = <span class="keyword">if</span> (writable) <span class="keyword">new</span> <span class="type">RandomAccessFile</span>(file, <span class="string">&quot;rw&quot;</span>) <span class="keyword">else</span> <span class="keyword">new</span> <span class="type">Rando</span></span><br><span class="line"><span class="keyword">try</span> &#123;    </span><br><span class="line">  <span class="keyword">if</span>(newlyCreated) &#123;       </span><br><span class="line">    <span class="keyword">if</span>(maxIndexSize &lt; entrySize) <span class="comment">// 预设的索引文件大小不能太小，如果连一个索引</span></span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="type">IllegalArgumentException</span>(<span class="string">&quot;Invalid max index size: &quot;</span> + m</span><br><span class="line">    <span class="comment">// 第3步：设置索引文件长度，roundDownToExactMultiple计算的是不超过maxInde</span></span><br><span class="line">    <span class="comment">// 比如maxIndexSize=1234567，entrySize=8，那么调整后的文件长度为1234560</span></span><br><span class="line">    raf.setLength(roundDownToExactMultipl</span><br></pre></td></tr></table></figure>
 
 <p>这些代码最主要的作用就是创建 mmap 对象。AbstractIndex 其他大部分的操作都是和 mmap 相关。</p>
 <p>AbstractIndex：这是 Kafka 所有类型索引的抽象父类，里面的 mmap 变量是实现索引机制的核心。</p>
+<h3><span id="mmapwrite-45">mmap+write [4][5]</span><a href="#mmapwrite-45" class="header-anchor">#</a></h3><ul>
+<li>4次context切换</li>
+</ul>
+<img src="/www6vHomeHexo/2021/05/15/kafkaIndex/mmap+write.JPG" class>
+
 <h2><span id="日志模块-qampa">日志模块 Q&amp;A</span><a href="#日志模块-qampa" class="header-anchor">#</a></h2><ul>
 <li><em>简述Kafka的日志目录结构</em></li>
 <li><em>Kafka中有那些索引文件？</em></li>
-<li>如果我指定了一个offset，Kafka怎么查找到对应的消息？</li>
-<li>如果我指定了一个timestamp，Kafka怎么查找到对应的消息？</li>
+<li><em>如果我指定了一个offset，Kafka怎么查找到对应的消息？</em></li>
+<li><em>如果我指定了一个timestamp，Kafka怎么查找到对应的消息？</em></li>
 <li>聊一聊你对Kafka的Log Retention的理解</li>
 <li>聊一聊你对Kafka的Log Compaction的理解</li>
 <li>聊一聊你对Kafka底层存储的理解（页缓存、内核层、块层、设备层）</li>
@@ -12957,6 +12990,8 @@ func new(Type) *Type
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li>《04 | 索引（上）：改进的二分查找算法在Kafka索引的应用》</li>
 <li>《05丨索引（下）：位移索引和时间戳索引的区别是什么？》</li>
+<li><a href="https://blog.csdn.net/qq_32907195/article/details/127635622">深入理解Kafka服务端之索引文件及mmap内存映射</a> *** </li>
+<li><a href="https://www.bilibili.com/video/BV1Sy4y1o7Ej/">动画讲解：Kafka为什么快之零拷贝技术 – mmap</a></li>
 <li><a href="/www6vHomeHexo/2019/09/14/zeroCopy/" title="Linux zero copy-零拷贝">Linux zero copy-零拷贝</a> self</li>
 </ol>
 ]]></content>
