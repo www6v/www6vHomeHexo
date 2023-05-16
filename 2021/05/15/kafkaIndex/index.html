@@ -28,9 +28,8 @@
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2021/05/15/kafkaIndex/offsetIndex.jpg">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2021/05/15/kafkaIndex/timeIndex.jpg">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2021/05/15/kafkaIndex/kafkaIndex.jpg">
-<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2021/05/15/kafkaIndex/mmap+write.JPG">
 <meta property="article:published_time" content="2021-05-15T07:51:57.000Z">
-<meta property="article:modified_time" content="2023-05-16T04:19:14.413Z">
+<meta property="article:modified_time" content="2023-05-16T09:25:53.475Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Kafka">
 <meta name="twitter:card" content="summary">
@@ -229,7 +228,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-16 12:19:14" itemprop="dateModified" datetime="2023-05-16T12:19:14+08:00">2023-05-16</time>
+                <time title="修改时间：2023-05-16 17:25:53" itemprop="dateModified" datetime="2023-05-16T17:25:53+08:00">2023-05-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,10 +267,6 @@
 <li><a href="#logsegment-%E6%9E%84%E6%88%90">LogSegment 构成</a></li>
 <li><a href="#index%E7%B1%BB%E5%9E%8B">Index类型</a></li>
 <li><a href="#%E6%94%B9%E8%BF%9B%E7%89%88%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95-1">改进版二分查找算法 [1]</a></li>
-</ul>
-</li>
-<li><a href="#index-%E4%B8%AD%E7%9A%84mmap">Index 中的mmap</a><ul>
-<li><a href="#mmapwrite-45">mmap+write [4][5]</a></li>
 </ul>
 </li>
 <li><a href="#%E6%97%A5%E5%BF%97%E6%A8%A1%E5%9D%97-qa">日志模块 Q&amp;A</a></li>
@@ -321,16 +316,6 @@
 <li><p>示例<br>现在，最新索引项保存在 Page #13 中。如果要查找最新索引项，原版二分查找算法将会<br>依次访问 Page #0、7、10、12 和 13。此时，问题来了：Page 7 和 10 已经很久没有被<br>访问过了，它们大概率不在页缓存中，因此，一旦索引开始征用 Page #13，就会发生<br><strong>Page Fault，</strong>等待那些<strong>冷页数据从磁盘中加载到页缓存</strong>。根据国外用户的测试，这种加载<br>过程可能长达 1 秒。</p>
 </li>
 </ul>
-<h2><span id="index-中的mmap">Index 中的mmap</span><a href="#index-中的mmap" class="header-anchor">#</a></h2><p>在 AbstractIndex 中，这个 MappedByteBuffer 就是名为 <strong>mmap</strong> 的变量。<br>接下来，我用注释的方式，带你深入了解下这个 mmap 的主要流程。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@volatile</span> <span class="keyword">protected</span> <span class="keyword">var</span> mmap: <span class="type">MappedByteBuffer</span> = &#123; </span><br><span class="line"><span class="comment">// 第1步：创建索引文件</span></span><br><span class="line"><span class="keyword">val</span> newlyCreated = file.createNewFile() </span><br><span class="line"><span class="comment">// 第2步：以writable指定的方式（读写方式或只读方式）打开索引文件</span></span><br><span class="line"><span class="keyword">val</span> raf = <span class="keyword">if</span> (writable) <span class="keyword">new</span> <span class="type">RandomAccessFile</span>(file, <span class="string">&quot;rw&quot;</span>) <span class="keyword">else</span> <span class="keyword">new</span> <span class="type">Rando</span></span><br><span class="line"><span class="keyword">try</span> &#123;    </span><br><span class="line">  <span class="keyword">if</span>(newlyCreated) &#123;       </span><br><span class="line">    <span class="keyword">if</span>(maxIndexSize &lt; entrySize) <span class="comment">// 预设的索引文件大小不能太小，如果连一个索引</span></span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="type">IllegalArgumentException</span>(<span class="string">&quot;Invalid max index size: &quot;</span> + m</span><br><span class="line">    <span class="comment">// 第3步：设置索引文件长度，roundDownToExactMultiple计算的是不超过maxInde</span></span><br><span class="line">    <span class="comment">// 比如maxIndexSize=1234567，entrySize=8，那么调整后的文件长度为1234560</span></span><br><span class="line">    raf.setLength(roundDownToExactMultipl</span><br></pre></td></tr></table></figure>
-
-<p>这些代码最主要的作用就是创建 mmap 对象。AbstractIndex 其他大部分的操作都是和 mmap 相关。</p>
-<p>AbstractIndex：这是 Kafka 所有类型索引的抽象父类，里面的 mmap 变量是实现索引机制的核心。</p>
-<h3><span id="mmapwrite-45">mmap+write [4][5]</span><a href="#mmapwrite-45" class="header-anchor">#</a></h3><ul>
-<li>4次context切换</li>
-</ul>
-<img src="/www6vHomeHexo/2021/05/15/kafkaIndex/mmap+write.JPG" class>
-
 <h2><span id="日志模块-qampa">日志模块 Q&amp;A</span><a href="#日志模块-qampa" class="header-anchor">#</a></h2><ul>
 <li><em>简述Kafka的日志目录结构</em></li>
 <li><em>Kafka中有那些索引文件？</em></li>
@@ -339,14 +324,11 @@
 <li>聊一聊你对Kafka的Log Retention的理解</li>
 <li>聊一聊你对Kafka的Log Compaction的理解</li>
 <li>聊一聊你对Kafka底层存储的理解（页缓存、内核层、块层、设备层）</li>
-<li>kafka的mmap是对写的优化，还是读的优化？</li>
 </ul>
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li>《04 | 索引（上）：改进的二分查找算法在Kafka索引的应用》</li>
 <li>《05丨索引（下）：位移索引和时间戳索引的区别是什么？》</li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32907195/article/details/127635622">深入理解Kafka服务端之索引文件及mmap内存映射</a> *** </li>
-<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Sy4y1o7Ej/">动画讲解：Kafka为什么快之零拷贝技术 – mmap</a></li>
-<li><a href="/www6vHomeHexo/2019/09/14/zeroCopy/" title="Linux zero copy-零拷贝">Linux zero copy-零拷贝</a> self</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32907195/article/details/127635622">深入理解Kafka服务端之索引文件及mmap内存映射</a> ***</li>
 </ol>
 
     </div>
@@ -461,7 +443,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">417</span>
+          <span class="site-state-item-count">418</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
