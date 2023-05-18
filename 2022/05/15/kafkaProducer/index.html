@@ -25,13 +25,14 @@
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/05/15/kafkaProducer/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/05/15/kafkaProducer/kafka-producer1.jpg">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/05/15/kafkaProducer/kafka-producer.jpg">
 <meta property="article:published_time" content="2022-05-15T15:05:40.000Z">
-<meta property="article:modified_time" content="2023-03-24T15:14:34.535Z">
+<meta property="article:modified_time" content="2023-05-18T06:37:06.930Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="kafka">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2022/05/15/kafkaProducer/kafka-producer.jpg">
+<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2022/05/15/kafkaProducer/kafka-producer1.jpg">
 
 <link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/05/15/kafkaProducer/">
 
@@ -226,7 +227,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-24 23:14:34" itemprop="dateModified" datetime="2023-03-24T23:14:34+08:00">2023-03-24</time>
+                <time title="修改时间：2023-05-18 14:37:06" itemprop="dateModified" datetime="2023-05-18T14:37:06+08:00">2023-05-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -257,15 +258,16 @@
 <span id="more"></span>
 
 
+<h2><span id="producer-arch">Producer Arch</span><a href="#producer-arch" class="header-anchor">#</a></h2><h3><span id="overviw-1-2">Overviw 1 [2]</span><a href="#overviw-1-2" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/05/15/kafkaProducer/kafka-producer1.jpg" class title="Producer架构">
 
-<img src="/www6vHomeHexo/2022/05/15/kafkaProducer/kafka-producer.jpg" class title="Producer架构">
+<p>整个生产者客户端是由主线程和Sender线程协调运行的, 主线程创建消息, 然后通过 拦截器、元信息更新、序列化、分区器、缓存消息等等流程。<br>Sender线程在初始化的时候就已经运行了,并且是一个while循环。</p>
+<h3><span id="overviw-2">Overviw 2</span><a href="#overviw-2" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/05/15/kafkaProducer/kafka-producer.jpg" class title="Producer架构">
 
 
 
-<h3><span id="qampa">Q&amp;A</span><a href="#qampa" class="header-anchor">#</a></h3><ul>
-<li>Kafka中的分区器、序列化器、拦截器是否了解？它们之间的处理顺序是什么？</li>
-<li>Kafka生产者客户端中使用了几个线程来处理？分别是什么？</li>
-</ul>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg4ODY1NTcxNg==&mid=2247493639&idx=1&sn=4bd43c8137a701e73dddd9ccdf58ad45&c">图解kafka生产者流程,超详细！</a> 未</li>
+</ol>
 
     </div>
 
@@ -379,14 +381,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">419</span>
+          <span class="site-state-item-count">420</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/www6vHomeHexo/categories/">
           
-        <span class="site-state-item-count">253</span>
+        <span class="site-state-item-count">254</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
