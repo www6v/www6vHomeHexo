@@ -441,7 +441,7 @@
 <li><a href="/www6vHomeHexo/2016/06/25/kafkaConsumer/" title="Kafka消费者总结">Kafka消费者总结</a></li>
 <li><a href="/www6vHomeHexo/2022/05/11/kafkaRebalance/" title="Kafka消费者-Rebalance机制">Kafka消费者-Rebalance机制</a></li>
 <li><a href="/www6vHomeHexo/2016/07/05/kafkaReliability/" title="Kafka 可靠性总结">Kafka 可靠性总结</a></li>
-<li><a href="/www6vHomeHexo/2021/05/15/kafkaIndex/" title="Kafka 索引">Kafka 索引</a></li>
+<li><a href="/www6vHomeHexo/2021/05/15/kafkaIndex/" title="Kafka 索引">Kafka 索引</a>   #1</li>
 <li><a href="/www6vHomeHexo/2021/05/16/kafkaZeroCopy/" title="Kafka-ZeroCopy">Kafka-ZeroCopy</a> </li>
 <li><a href="/www6vHomeHexo/2021/05/16/kafkaController/" title="Kafka Controller-控制器">Kafka Controller-控制器</a></li>
 <li><a href="/www6vHomeHexo/2021/05/16/kafkaReplica/" title="Kafka Replication-副本机制">Kafka Replication-副本机制</a></li>
@@ -449,16 +449,17 @@
 <li><a href="/www6vHomeHexo/2019/05/15/kafkaQ-A/" title="Kafka  Q&amp;A">Kafka  Q&amp;A</a></li>
 <li><a href="/www6vHomeHexo/2021/05/19/kafkaStudy/" title="Kafka 学习资料&amp;案例">Kafka 学习资料&amp;案例</a> 
 </li>
-<li><a href="/www6vHomeHexo/2022/05/04/kafkaTransaction/" title="Kafka 幂等性和事务">Kafka 幂等性和事务</a></li>
+<li><a href="/www6vHomeHexo/2022/05/04/kafkaTransaction/" title="Kafka 幂等性和事务">Kafka 幂等性和事务</a>  #2</li>
 </ul>
-<h2><span id="rocketmq">Rocketmq</span><a href="#rocketmq" class="header-anchor">#</a></h2><ul>
-<li><a href="../../../../2019/06/18/mqRocketmq/">RocketMQ总结</a> </li>
-<li><a href="../../../../2020/08/12/mqRocketmqTransaction/">Rocketmq中的事务</a></li>
+<h2><span id="rocketmq">RocketMQ</span><a href="#rocketmq" class="header-anchor">#</a></h2><ul>
+<li><a href="/www6vHomeHexo/2019/06/18/mqRocketmq/" title="RocketMQ总结">RocketMQ总结</a>  </li>
+<li><a href="/www6vHomeHexo/2020/08/12/mqRocketmqTransaction/" title="Rocketmq中的事务">Rocketmq中的事务</a>   #2 </li>
+<li><a href="/www6vHomeHexo/2023/02/26/mqRocketmqStorage/" title="RocketMQ 文件系统">RocketMQ 文件系统</a>  #1</li>
 </ul>
 <h2><span id="pulsar">Pulsar</span><a href="#pulsar" class="header-anchor">#</a></h2><ul>
-<li><a href="../../../../2022/05/31/mqPulsar/">Pulsar</a>  </li>
-<li><a href="../../../../2022/06/18/mqPulsarSync/">Pulsar-数据同步</a>      </li>
-<li><a href="../../../../2022/06/10/mqComparePulsarVsKafka/">Pulsar vs. Kafka</a></li>
+<li><a href="/www6vHomeHexo/2022/05/31/mqPulsar/" title="Pulsar">Pulsar</a>  </li>
+<li><a href="/www6vHomeHexo/2022/06/18/mqPulsarSync/" title="Pulsar-数据同步">Pulsar-数据同步</a>  </li>
+<li><a href="/www6vHomeHexo/2022/06/10/mqComparePulsarVsKafka/" title="Pulsar vs. Kafka">Pulsar vs. Kafka</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -12823,11 +12824,29 @@ func new(Type) *Type
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
 <ul>
-<li>顺序消息<ul>
-<li>pull模型+单线程生产&#x2F;消费[metaq]</li>
-<li>严格顺序消息(场景:数据库复制),单个生产者&#x2F;消费者[jmq,Rocketmq]<ul>
-<li>jmq方案，任意时刻都有两个消息副本<ul>
+<li><a href="#%E9%A1%BA%E5%BA%8F%E6%B6%88%E6%81%AF">顺序消息</a><ul>
+<li><a href="#%E4%B8%A5%E6%A0%BC%E9%A1%BA%E5%BA%8F%E6%B6%88%E6%81%AF%E5%9C%BA%E6%99%AF%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%8D%E5%88%B6%E5%8D%95%E4%B8%AA%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85jmqrocketmq">严格顺序消息(场景:数据库复制),单个生产者&#x2F;消费者[jmq,Rocketmq]</a></li>
+<li><a href="#partition-%E5%86%85%E9%83%A8%E6%9C%89%E5%BA%8F-%E5%B1%80%E9%83%A8%E6%9C%89%E5%BA%8Fkafka">partition 内部有序, 局部有序[kafka]</a></li>
+<li><a href="#pull%E6%A8%A1%E5%9E%8B%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9metaq">pull模型+单线程生产&#x2F;消费[metaq]</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
+<li><a href="#jmq%E9%A1%BA%E5%BA%8F%E6%B6%88%E6%81%AF">jmq顺序消息</a></li>
+<li><a href="#rocketmq%E9%A1%BA%E5%BA%8F%E6%B6%88%E6%81%AF">rocketmq顺序消息</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="顺序消息">顺序消息</span><a href="#顺序消息" class="header-anchor">#</a></h1><h3><span id="严格顺序消息场景数据库复制单个生产者x2f消费者jmqrocketmq">严格顺序消息(场景:数据库复制),单个生产者&#x2F;消费者[jmq,Rocketmq]</span><a href="#严格顺序消息场景数据库复制单个生产者x2f消费者jmqrocketmq" class="header-anchor">#</a></h3><ul>
+<li>jmq方案，任意时刻都有两个消息副本 [3]<ul>
 <li>单个生产者生产，其余生产者会抛出异常[jmq]</li>
 <li>单个消费者消费，其余消费者会抛出异常[jmq]</li>
 <li>正常流程:消息队列分配在两组以上的BROKER组，每个BROKER组由MASTER-SLAVE组成。消息同步写入单个broker的MASTER。</li>
@@ -12835,18 +12854,21 @@ func new(Type) *Type
 <li>协调者 controller：BROKER组的集群信息在协调者上保存为一个单向的链表，消费者和发送者各有一份独立的链表数据。</li>
 </ul>
 </li>
-<li>rocketmq方案<ul>
+</ul>
+<ul>
+<li>rocketmq方案   顺序消息   rocketmq 顺序消息   [6][9][10]<ul>
 <li>从业务层面来保证消息的顺序而不仅仅是依赖于消息系统.比如，订单号相同的消息会被先后发送到同一个队列中</li>
+<li>从业务层面来保证消息的顺序, 而不仅仅是依赖于消息系统  Eg. 订单号相同的消息会被先后发送到同一个队列中</li>
 </ul>
 </li>
 </ul>
-</li>
-<li>partition 内部有序, 局部有序[kafka]</li>
-</ul>
-</li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol start="3">
+<h3><span id="partition-内部有序-局部有序kafka">partition 内部有序, 局部有序[kafka]</span><a href="#partition-内部有序-局部有序kafka" class="header-anchor">#</a></h3><h3><span id="pull模型单线程生产x2f消费metaq">pull模型+单线程生产&#x2F;消费[metaq]</span><a href="#pull模型单线程生产x2f消费metaq" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="jmq顺序消息">jmq顺序消息</span><a href="#jmq顺序消息" class="header-anchor">#</a></h3><ol start="3">
 <li>高可用保证消息绝对顺序消费的BROKER设计方案 丁俊</li>
+</ol>
+<h3><span id="rocketmq顺序消息">rocketmq顺序消息</span><a href="#rocketmq顺序消息" class="header-anchor">#</a></h3><ol start="6">
+<li><a href="https://zhuanlan.zhihu.com/p/396726719">分布式开放消息系统(RocketMQ)的原理与实践</a>   CHEN川  ***  消息的顺序问题  消息的重复问题</li>
+<li><a href="https://www.cnblogs.com/hzmark/p/orderly_message.html">聊一聊顺序消息（RocketMQ顺序消息的实现机制）</a>  杭州.Mark<br>producer: selector, 相同orderid的发送到同一个topic;<br>consumer: 多消费者加锁竞争消息</li>
+<li><a href="https://help.aliyun.com/document_detail/49323.html">收发顺序消息</a>  阿里云文档</li>
 </ol>
 ]]></content>
       <categories>
@@ -14043,17 +14065,51 @@ func new(Type) *Type
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
-<h2><span id="rocketmq事务">Rocketmq事务</span><a href="#rocketmq事务" class="header-anchor">#</a></h2><p><strong>半消息</strong>保存在特殊的内部主题RMQ_SYS_TRANS_HALF_TOPIC中，使用的队列号固定为0。这个主题和队列对消费者是不可见的。</p>
-<h2><span id="事务总结">事务总结</span><a href="#事务总结" class="header-anchor">#</a></h2><p>RocketMQ 和 Kafka 的事务都是基于<strong>两阶段提交</strong>来实现的事务，都利用了<strong>特殊的主题中的队列和分区</strong>来记录<strong>事务日志</strong>.<br>RocketMQ 和 Kafka 的事务，它们的适用场景是不一样的，<strong>RocketMQ的事务适用于解决本地事务和发消息的数据一致性问题</strong>，而 <strong>Kafka 的事务则是用于实现它的 Exactly Once 机制，应用于实时计算的场景中</strong>。</p>
-<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<!-- toc -->
+
+<ul>
+<li><a href="#rocketmq-%E4%BA%8B%E5%8A%A1">RocketMQ 事务</a></li>
+<li><a href="#%E4%BA%8B%E5%8A%A1%E6%80%BB%E7%BB%93-2">事务总结 [2]</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a><br>- <a href="#%E4%BA%8B%E5%8A%A1">事务</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h2><span id="rocketmq-事务">RocketMQ 事务</span><a href="#rocketmq-事务" class="header-anchor">#</a></h2><ul>
+<li><p>事务消息【6，7】</p>
+<ul>
+<li>ebay模式，half消息<ul>
+<li>1.提交流程（正向流程）<br>  1.发消息（half消息）<ol start="2">
+<li>执行本地事务</li>
+<li>更新事务消息的最终状态</li>
+</ol>
+</li>
+<li>2.回查流程（逆向流程）<br>  找到尚未提交的超时事务</li>
+<li>大事务 &#x3D; 小事务 + 异步（阿里中台战略）【8】</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>半消息<br><strong>半消息</strong>保存在特殊的内部主题RMQ_SYS_TRANS_HALF_TOPIC中，使用的队列号固定为0。这个主题和队列对消费者是不可见的。</p>
+</li>
+</ul>
+<h2><span id="事务总结-2">事务总结 [2]</span><a href="#事务总结-2" class="header-anchor">#</a></h2><p>RocketMQ 和 Kafka 的事务都是基于<strong>两阶段提交</strong>来实现的事务，都利用了<strong>特殊的主题中的队列和分区</strong>来记录<strong>事务日志</strong>.<br>RocketMQ 和 Kafka 的事务，它们的适用场景是不一样的，<strong>RocketMQ的事务适用于解决本地事务和发消息的数据一致性问题</strong>，而 <strong>Kafka 的事务则是用于实现它的 Exactly Once 机制，应用于实时计算的场景中</strong>。</p>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><a href="https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&mid=2651008627&idx=1&sn=a308010e080e1aa7784abb4a1bcaadb7&chksm=bdbed6208ac95f3614f4055821e870882ea207e8a58af48f043e78cb4391e6f1206b41f86a88&scene=27#wechat_redirect">RocketMQ 4.3正式发布，支持分布式事务</a></li>
-<li><a href>消息队列高手课 - 25 | RocketMQ与Kafka中如何实现事务？</a> 李玥</li>
+<li>《消息队列高手课 - 25 | RocketMQ与Kafka中如何实现事务？》 李玥</li>
+</ol>
+<h5><span id="事务">事务</span><a href="#事务" class="header-anchor">#</a></h5><ol start="6">
+<li><a href="https://zhuanlan.zhihu.com/p/396726719">分布式开放消息系统(RocketMQ)的原理与实践</a>   CHEN川  ***<br>消息的顺序问题  消息的重复问题</li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&mid=2651008627&idx=1&sn=a308010e080e1aa7784abb4a1bcaadb7">RocketMQ 4.3正式发布，支持分布式事务</a></li>
+<li><a href="/www6vHomeHexo/2019/05/02/middleStage/" title="中台战略">中台战略</a>  self</li>
 </ol>
 ]]></content>
       <categories>
         <category>消息系统</category>
-        <category>事务</category>
+        <category>RocketMQ</category>
       </categories>
       <tags>
         <tag>消息系统</tag>
@@ -19563,31 +19619,17 @@ nq： 不排队调度
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<p>关键词: 顺序消息[6][9][10], 重复消息, 事务消息</p>
+<p>关键词: 重复消息, 事务消息</p>
 <img src="/www6vHomeHexo/2019/06/18/mqRocketmq/rocketMQ.jpg" class title="RocketMQ">
 
 
 <h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><h5><span id="overview">Overview</span><a href="#overview" class="header-anchor">#</a></h5><ol>
-<li><p><a href="https://yq.aliyun.com/articles/71889?spm=5176.100239.blogcont55626.10.FWVVKw">Apache RocketMQ背后的设计思路与最佳实践</a> 阿里 冯嘉</p>
-</li>
-<li><p><a href="https://yq.aliyun.com/articles/66101?spm=5176.100239.blogcont55634.18.ODias7">十分钟入门RocketMQ</a>  阿里 尘央</p>
-</li>
-<li><p><a href="https://yq.aliyun.com/articles/66110?spm=a2c4e.11155435.0.0.2cb97b3fBOIG8W">RocketMQ 关键特性</a> ***</p>
-</li>
-<li><p>xxx</p>
-</li>
-<li><p>xxx</p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/396726719">分布式开放消息系统(RocketMQ)的原理与实践</a>   CHEN川  ***  消息的顺序问题  消息的重复问题</p>
-</li>
-</ol>
-<h5><span id="事务">事务</span><a href="#事务" class="header-anchor">#</a></h5><ol start="7">
-<li><a href="https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&mid=2651008627&idx=1&sn=a308010e080e1aa7784abb4a1bcaadb7">RocketMQ 4.3正式发布，支持分布式事务</a></li>
-<li><a href="/www6vHomeHexo/2019/05/02/middleStage/" title="中台战略">中台战略</a>  self</li>
-</ol>
-<h5><span id="顺序消息">顺序消息</span><a href="#顺序消息" class="header-anchor">#</a></h5><ol start="9">
-<li><a href="https://www.cnblogs.com/hzmark/p/orderly_message.html">聊一聊顺序消息（RocketMQ顺序消息的实现机制）</a>  杭州.Mark<br>producer: selector, 相同orderid的发送到同一个topic;<br>consumer: 多消费者加锁竞争消息</li>
-<li><a href="https://help.aliyun.com/document_detail/49323.html">收发顺序消息</a>  阿里云文档</li>
+<li><a href="https://yq.aliyun.com/articles/71889?spm=5176.100239.blogcont55626.10.FWVVKw">Apache RocketMQ背后的设计思路与最佳实践</a> 阿里 冯嘉</li>
+<li><a href="https://yq.aliyun.com/articles/66101?spm=5176.100239.blogcont55634.18.ODias7">十分钟入门RocketMQ</a>  阿里 尘央</li>
+<li><a href="https://yq.aliyun.com/articles/66110?spm=a2c4e.11155435.0.0.2cb97b3fBOIG8W">RocketMQ 关键特性</a> ***</li>
+<li><a href="https://zhuanlan.zhihu.com/p/396726719">分布式开放消息系统(RocketMQ)的原理与实践</a>   CHEN川  ***  消息的顺序问题  消息的重复问题</li>
+<li><a href="/www6vHomeHexo/2021/05/19/mqOrdering/" title="消息系统 顺序消息">消息系统 顺序消息</a> self</li>
+<li><a href="/www6vHomeHexo/2020/08/12/mqRocketmqTransaction/" title="Rocketmq中的事务">Rocketmq中的事务</a> self</li>
 </ol>
 ]]></content>
       <categories>
