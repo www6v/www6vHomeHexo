@@ -513,7 +513,11 @@
 <!-- toc -->
 
 <ul>
-<li><a href="#%E5%8E%9F%E7%90%86">原理</a><br>  * <a href="#%E5%8F%AF%E9%9D%A0%E6%80%A7">可靠性</a></li>
+<li><a href="#%E5%8E%9F%E7%90%86">原理</a><ul>
+<li><a href="#%E5%8F%AF%E9%9D%A0%E6%80%A7">可靠性</a></li>
+<li><a href="#%E6%95%85%E9%9A%9C%E4%BC%98%E5%8C%96">故障&amp;优化</a></li>
+</ul>
+</li>
 <li><a href="#%E5%BA%94%E7%94%A8">应用</a></li>
 </ul>
 <!-- tocstop -->
@@ -528,13 +532,16 @@
 <li><a href="/www6vHomeHexo/2021/05/05/redisDataStructure/" title="Redis数据结构">Redis数据结构</a></li>
 <li><a href="/www6vHomeHexo/2022/05/14/redisNVM/" title="Redis NVM">Redis NVM</a></li>
 </ul>
-<h5><span id="可靠性">可靠性</span><a href="#可靠性" class="header-anchor">#</a></h5><ul>
+<h3><span id="可靠性">可靠性</span><a href="#可靠性" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2021/01/02/redisReliability/" title="Redis可靠性">Redis可靠性</a></li>
 <li><a href="/www6vHomeHexo/2022/01/18/redisAOF/" title="Redis AOF">Redis AOF</a></li>
 <li><a href="/www6vHomeHexo/2021/12/08/rdb/" title="Redis RDB源码">Redis RDB源码</a></li>
 <li><a href="/www6vHomeHexo/2021/11/21/aofRewrite/" title="Redis AOF Rewrite">Redis AOF Rewrite</a></li>
 <li><a href="/www6vHomeHexo/2022/03/28/redisError/" title="Redis Error-MOVED和ASK指令">Redis Error-MOVED和ASK指令</a></li>
 <li><a href="/www6vHomeHexo/2022/04/27/redisSLO/" title="Redis SLO">Redis SLO</a></li>
+</ul>
+<h3><span id="故障amp优化">故障&amp;优化</span><a href="#故障amp优化" class="header-anchor">#</a></h3><ul>
+<li><a href="/www6vHomeHexo/2021/05/21/redisBigKey/" title="Redis 大Key">Redis 大Key</a></li>
 </ul>
 <h1><span id="应用">应用</span><a href="#应用" class="header-anchor">#</a></h1><ul>
 <li><a href="/www6vHomeHexo/2021/06/29/redisUseCase/" title="Redis 使用场景UseCase">Redis 使用场景UseCase</a></li>
@@ -12819,6 +12826,47 @@ func new(Type) *Type
       </tags>
   </entry>
   <entry>
+    <title>Redis 大Key</title>
+    <url>/www6vHomeHexo/2021/05/21/redisBigKey/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#redis-%E5%A4%A7key">Redis 大Key</a><ul>
+<li><a href="#%E9%97%AE%E9%A2%98-1">问题 [1]</a></li>
+<li><a href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1">解决方案 [1]</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h2><span id="redis-大key">Redis 大Key</span><a href="#redis-大key" class="header-anchor">#</a></h2><h3><span id="问题-1">问题 [1]</span><a href="#问题-1" class="header-anchor">#</a></h3><p>大key在数据迁移、扩容、删除时会有卡顿。   </p>
+<h3><span id="解决方案-1">解决方案 [1]</span><a href="#解决方案-1" class="header-anchor">#</a></h3><ul>
+<li>用scan扫描大key</li>
+<li>–bigkeys参数</li>
+</ul>
+<p><a href="../../../../2018/10/27/fault/">故障模型 - 热点 Key 问题的发现与解决</a>  self</p>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li>《Redis 深度历险：核心原理与应用实践》 7. 大海捞针 ——— scan  钱文品</li>
+</ol>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>KV</category>
+        <category>Redis</category>
+      </categories>
+      <tags>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>消息系统 顺序消息</title>
     <url>/www6vHomeHexo/2021/05/19/mqOrdering/</url>
     <content><![CDATA[<p></p>
@@ -21942,8 +21990,6 @@ nq： 不排队调度
 <li><p>redis rehash: 渐进式rehash<br>Java rehash： 一次性将旧数组下挂接的元素全部转移到新数组下面</p>
 </li>
 <li><p>scan命令：<br>zset -&gt; zscan<br>hash -&gt; hscan<br>set -&gt; sscan<br>key of hash -&gt; scan<br>SCAN：命令用于迭代 数据库键。<br>SSCAN：命令用于迭代 set 中的元素。<br>HSCAN：命令用于迭代 hash 中的键值对。<br>ZSCAN：命令用于迭代  zset 中的元素（包括元素成员和元素分值）。</p>
-</li>
-<li><p>大key在数据迁移、扩容、删除时会有卡顿。<br>解决方案： 用scan扫描大key， –bigkeys参数<br><a href="../../../../2018/10/27/fault/">故障模型 - 热点 Key 问题的发现与解决</a>  self</p>
 </li>
 </ul>
 <h2><span id="io模型和性能">IO模型和性能</span><a href="#io模型和性能" class="header-anchor">#</a></h2><ul>
