@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://user-images.githubusercontent.com/5608425/66014512-ca1ae900-e501-11e9-93d7-840409a862c5.png">
 <meta property="og:image" content="https://user-images.githubusercontent.com/5608425/66014514-cab37f80-e501-11e9-9be8-a247690b5f9f.png">
 <meta property="article:published_time" content="2016-11-12T15:29:16.000Z">
-<meta property="article:modified_time" content="2023-05-20T23:42:46.746Z">
+<meta property="article:modified_time" content="2023-05-22T09:57:18.370Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-21 07:42:46" itemprop="dateModified" datetime="2023-05-21T07:42:46+08:00">2023-05-21</time>
+                <time title="修改时间：2023-05-22 17:57:18" itemprop="dateModified" datetime="2023-05-22T17:57:18+08:00">2023-05-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,15 +269,16 @@
 
 <ul>
 <li><a href="#redis%E9%9B%86%E7%BE%A4">redis集群</a><ul>
-<li><a href="#1-sentinel">1. sentinel</a></li>
-<li><a href="#2-redis-cluster">2. redis cluster</a></li>
+<li><a href="#sentinel">sentinel</a></li>
+<li><a href="#redis-cluster">redis cluster</a></li>
 </ul>
 </li>
 <li><a href="#%E4%BA%8B%E5%8A%A1">事务</a></li>
 <li><a href="#%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5">回收策略</a></li>
 <li><a href="#hash%E5%92%8Cscan%E5%91%BD%E4%BB%A4">hash和scan命令</a></li>
 <li><a href="#io%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%80%A7%E8%83%BD">IO模型和性能</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考:</a><ul>
+<li><a href="#hotkey">HotKey</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
 <li><a href="#%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5-1">回收策略</a></li>
 </ul>
 </li>
@@ -289,10 +290,10 @@
 <img src="/www6vHomeHexo/2016/11/12/redis/redis.jpg" class title="Redis 总结">
 
 
-<h2><span id="redis集群">redis集群</span><a href="#redis集群" class="header-anchor">#</a></h2><h3><span id="1-sentinel">1. sentinel</span><a href="#1-sentinel" class="header-anchor">#</a></h3><p>   master-slave异步复制, 所以会丢消息</p>
+<h2><span id="redis集群">redis集群</span><a href="#redis集群" class="header-anchor">#</a></h2><h3><span id="sentinel">sentinel</span><a href="#sentinel" class="header-anchor">#</a></h3><p>   master-slave异步复制, 所以会丢消息</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">参数: </span><br><span class="line"># 至少有一个slave复制</span><br><span class="line">min-slaves-to-write 1   </span><br><span class="line"># slave节点最大10s的延迟</span><br><span class="line">min-slaves-max-lag 10   </span><br></pre></td></tr></table></figure>
 
-<h3><span id="2-redis-cluster">2. redis cluster</span><a href="#2-redis-cluster" class="header-anchor">#</a></h3><p><strong>整体架构</strong></p>
+<h3><span id="redis-cluster">redis cluster</span><a href="#redis-cluster" class="header-anchor">#</a></h3><p><strong>整体架构</strong></p>
 <ol>
 <li>去中心化的;</li>
 <li>所有数据划分为16384个slots，每个节点负责其中一部分slots;</li>
@@ -400,7 +401,9 @@
 <blockquote>
 <p>大体上可以说 Redis 的工作模式是，reactor 模式配合一个队列，用一个 serverAccept 线程来处理建立请求的链接，<br>并且通过 IO 多路复用模型，让内核来监听这些 socket，一旦某些 socket 的读写事件准备就绪后就对应的事件压入队列中，<br>然后 worker 工作，由文件事件分派器从中获取事件交于对应的处理器去执行，当某个事件执行完成后文件事件分派器才会从队列中获取下一个事件进行处理。<br>可以类比在 netty 中，我们一般会设置 bossGroup 和 workerGroup 默认情况下 bossGroup 为 1，workerGroup &#x3D; 2 * cpu 数量，<br>这样可以由多个线程来处理读写就绪的事件，但是其中不能有比较耗时的操作如果有的话需要将其放入线程池中，不然会降低其吐吞量。<br>在 Redis 中我们可以看做这二者的值都是 1。</p>
 </blockquote>
-<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><p>《Redis 深度历险：核心原理与应用实践》 钱文品</p>
+<h2><span id="hotkey">HotKey</span><a href="#hotkey" class="header-anchor">#</a></h2><a href="/www6vHomeHexo/2018/05/03/faultModel2/" title="故障模型-2 Middleware">故障模型- 热点 Key 问题的发现与解决</a>  self
+
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>《Redis 深度历险：核心原理与应用实践》 钱文品</p>
 <ol>
 <li>原理 4：雷厉风行 —— 管道</li>
 <li>原理 5：同舟共济 —— 事务</li>
