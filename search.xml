@@ -12838,8 +12838,9 @@ func new(Type) *Type
 
 <ul>
 <li><a href="#redis-%E5%A4%A7key">Redis 大Key</a><ul>
-<li><a href="#%E9%97%AE%E9%A2%98-1">问题 [1]</a></li>
-<li><a href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1">解决方案 [1]</a></li>
+<li><a href="#%E9%97%AE%E9%A2%98">问题</a></li>
+<li><a href="#%E6%9F%A5%E6%89%BE-%E5%A4%A7key">查找 大Key</a></li>
+<li><a href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">解决方案</a></li>
 </ul>
 </li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
@@ -12848,19 +12849,37 @@ func new(Type) *Type
 
 </div>
 
-<h2><span id="redis-大key">Redis 大Key</span><a href="#redis-大key" class="header-anchor">#</a></h2><h3><span id="问题-1">问题 [1]</span><a href="#问题-1" class="header-anchor">#</a></h3><p>大key在数据迁移、扩容、删除时会有卡顿。   </p>
-<h3><span id="解决方案-1">解决方案 [1]</span><a href="#解决方案-1" class="header-anchor">#</a></h3><ul>
+<h1><span id="redis-大key">Redis 大Key</span><a href="#redis-大key" class="header-anchor">#</a></h1><h3><span id="问题">问题</span><a href="#问题" class="header-anchor">#</a></h3><p>问题1 [1] </p>
+<ul>
+<li>大key在数据迁移[遇到过]、扩容、删除[遇到过]时会有卡顿。</li>
+</ul>
+<p>问题2 [3]</p>
+<ul>
+<li>执行大key命令的客户端本身，耗时明显增加，甚至超时</li>
+<li>执行大key相关读取或者删除操作时，会严重占用带宽和CPU，影响其他客户端</li>
+<li>大key本身的存储带来分布式系统中分片数据不平衡，CPU使用率也不平衡</li>
+<li>大key有时候也是热key，读取操作频繁，影响面会很大</li>
+<li>执行大key删除时，在低版本redis中可能阻塞线程   [遇到过]</li>
+</ul>
+<h3><span id="查找-大key">查找 大Key</span><a href="#查找-大key" class="header-anchor">#</a></h3><ul>
 <li><p>用scan扫描大key  [1]</p>
 </li>
-<li><p>–bigkeys参数  [1]</p>
+<li><p>–bigkeys参数  [1][2]</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">redis-cli --bigkeys</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Scanning the entire keyspace to find biggest keys as well as</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">average sizes per key <span class="built_in">type</span>.  You can use -i 0.1 to <span class="built_in">sleep</span> 0.1 sec</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">per 100 SCAN commands (not usually needed).</span></span><br><span class="line">[00.00%] Biggest zset   found so far &#x27;testzset&#x27; with 129 members</span><br><span class="line">[00.00%] Biggest hash   found so far &#x27;h2&#x27; with 513 fields</span><br><span class="line">[00.00%] Biggest set    found so far &#x27;si1&#x27; with 5 members</span><br><span class="line">[00.00%] Biggest hash   found so far &#x27;h4&#x27; with 514 fields</span><br><span class="line">[00.00%] Biggest string found so far &#x27;key&#x27; with 9 bytes</span><br><span class="line">-------- summary -------</span><br><span class="line">Sampled 9 keys in the keyspace!</span><br><span class="line">Total key length in bytes is 27 (avg len 3.00)</span><br><span class="line">Biggest string found &#x27;key&#x27; has 9 bytes</span><br><span class="line">Biggest    set found &#x27;si1&#x27; has 5 members</span><br><span class="line">Biggest   hash found &#x27;h4&#x27; has 514 fields</span><br><span class="line">Biggest   zset found &#x27;testzset&#x27; has 129 members</span><br><span class="line">1 strings with 9 bytes (11.11% of keys, avg size 9.00)</span><br><span class="line">0 lists with 0 items (00.00% of keys, avg size 0.00)</span><br><span class="line">2 sets with 8 members (22.22% of keys, avg size 4.00)</span><br><span class="line">4 hashs with 1541 fields (44.44% of keys, avg size 385.25)</span><br><span class="line">2 zsets with 132 members (22.22% of keys, avg size 66.00)</span><br><span class="line">0 streams with 0 entries (00.00% of keys, avg size 0.00)</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>离线分析RDB</p>
+<li><p>离线分析RDB [3]<br>使用redis-rdb-tools离线分析工具来扫描RDB持久化文件</p>
 </li>
 </ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li>《Redis 深度历险：核心原理与应用实践》 7. 大海捞针 ——— scan  钱文品</li>
-<li><a href="https://segmentfault.com/a/1190000018193214?utm_source=tag-newest">Redis中查找大key</a></li>
+<h3><span id="解决方案">解决方案</span><a href="#解决方案" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><p>《Redis 深度历险：核心原理与应用实践》 钱文品</p>
+<ol start="7">
+<li>大海捞针 ——— scan</li>
+</ol>
+</li>
+<li><p><a href="https://segmentfault.com/a/1190000018193214?utm_source=tag-newest">Redis中查找大key</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/473930220">解决了Redis大key问题</a>  ***<br><a href="https://mp.weixin.qq.com/s/0WS7_9EIQqpYlUNWgZZJog">解决了Redis大key问题</a></p>
+</li>
 </ol>
 ]]></content>
       <categories>
