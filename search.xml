@@ -541,7 +541,8 @@
 <li><a href="/www6vHomeHexo/2022/04/27/redisSLO/" title="Redis SLO">Redis SLO</a></li>
 </ul>
 <h3><span id="故障amp优化">故障&amp;优化</span><a href="#故障amp优化" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2021/05/21/redisBigKey/" title="Redis 大Key">Redis 大Key</a></li>
+<li><a href="/www6vHomeHexo/2021/05/21/redisBigKey/" title="Redis 大Key">Redis 大Key</a> </li>
+<li><a href="/www6vHomeHexo/2022/05/23/redisNodeId/" title="Redis 集群扩容时NodeId问题">Redis 集群扩容时NodeId问题</a></li>
 </ul>
 <h1><span id="应用">应用</span><a href="#应用" class="header-anchor">#</a></h1><ul>
 <li><a href="/www6vHomeHexo/2021/06/29/redisUseCase/" title="Redis 使用场景UseCase">Redis 使用场景UseCase</a></li>
@@ -741,11 +742,19 @@
 <ul>
 <li>微服务<ul>
 <li><a href="/www6vHomeHexo/2019/07/06/findProblem/" title="故障排查的流程和方法">故障排查的流程和方法</a></li>
-<li><a href="/www6vHomeHexo/2017/10/17/slowRT/" title="服务慢响应超时排查">服务慢响应超时排查</a></li>
+<li><a href="/www6vHomeHexo/2017/10/17/slowRT/" title="服务慢响应超时排查">服务慢响应超时排查</a> </li>
+<li><a href="/www6vHomeHexo/2017/07/28/zookeeperBug/" title="zookeeper未通知到服务客户端的异常排查">zookeeper未通知到服务客户端的异常排查</a>  ***</li>
 </ul>
 </li>
-<li><a href="/www6vHomeHexo/2017/07/28/zookeeperBug/" title="zookeeper未通知到服务客户端的异常排查">zookeeper未通知到服务客户端的异常排查</a>  ***</li>
+<li>Redis<ul>
+<li><a href="/www6vHomeHexo/2021/05/21/redisBigKey/" title="Redis 大Key">Redis 大Key</a> ***</li>
+<li><a href="/www6vHomeHexo/2022/05/23/redisNodeId/" title="Redis 集群扩容时NodeId问题">Redis 集群扩容时NodeId问题</a> ***</li>
+</ul>
+</li>
+<li>Kafka<ul>
 <li><a href="/www6vHomeHexo/2021/05/18/kafkaGracefulDown/" title="Kafka 故障排查">Kafka 故障排查</a>  ***</li>
+</ul>
+</li>
 <li><a href="/www6vHomeHexo/2017/09/25/mybatisBug/" title="线上不能下单问题排查">线上不能下单问题排查</a></li>
 <li><a href="/www6vHomeHexo/2020/06/21/mysqlBestPractice/" title="使用MySQL的性能问题和紧急处理手段">使用MySQL的性能问题和紧急处理手段</a></li>
 <li><a href="/www6vHomeHexo/2017/02/19/splitBrain/" title="Split Brain">Split Brain</a></li>
@@ -3781,6 +3790,172 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>Kubernetes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redis 集群扩容时NodeId问题</title>
+    <url>/www6vHomeHexo/2022/05/23/redisNodeId/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#1-%E8%83%8C%E6%99%AF">1. 背景</a></li>
+<li><a href="#2-redis%E9%9B%86%E7%BE%A4%E6%89%A9%E5%AE%B9%E8%BF%87%E7%A8%8B%E6%A2%B3%E7%90%86">2. Redis集群扩容过程梳理</a><ul>
+<li><a href="#21-%E5%90%AF%E5%8A%A8redis%E5%AE%9E%E4%BE%8B">2.1 启动Redis实例</a></li>
+<li><a href="#22-redis%E9%9B%86%E7%BE%A4%E6%89%80%E6%9C%89%E4%B8%BB%E8%8A%82%E7%82%B9meet%E5%BE%85%E5%8A%A0%E5%85%A5%E8%8A%82%E7%82%B9">2.2 Redis集群所有主节点meet待加入节点</a></li>
+<li><a href="#23-%E7%A1%AE%E5%AE%9A%E4%B8%BB%E4%BB%8E%E8%A7%92%E8%89%B2">2.3 确定主从角色</a></li>
+</ul>
+</li>
+<li><a href="#3-redis%E9%9B%86%E7%BE%A4%E6%89%A9%E5%AE%B9%E6%9C%9F%E9%97%B4%E8%8A%82%E7%82%B9%E7%8A%B6%E6%80%81">3. Redis集群扩容期间节点状态</a><ul>
+<li><a href="#31-%E6%89%A9%E5%AE%B9%E5%89%8D%E9%9B%86%E7%BE%A4%E8%8A%82%E7%82%B9%E7%8A%B6%E6%80%81">3.1 扩容前集群节点状态</a></li>
+<li><a href="#32-redis%E5%90%AF%E5%8A%A8%E5%90%8E%E5%8D%95%E8%BA%AB%E7%8A%B6%E6%80%81">3.2 Redis启动后“单身”状态</a></li>
+<li><a href="#33-meet-redis%E5%AE%9E%E4%BE%8B1">3.3 Meet Redis实例1</a></li>
+<li><a href="#34-meet-redis%E5%AE%9E%E4%BE%8B2">3.4 Meet Redis实例2</a></li>
+<li><a href="#35-%E6%8C%87%E5%AE%9A%E6%96%B0%E5%A2%9E%E5%AE%9E%E4%BE%8B%E4%B8%BB%E4%BB%8E%E5%85%B3%E7%B3%BB">3.5 指定新增实例主从关系</a></li>
+</ul>
+</li>
+<li><a href="#5-%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB">5. 延伸阅读</a><ul>
+<li><a href="#51-redis-%E9%9B%86%E7%BE%A4%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">5.1 Redis 集群数据结构</a></li>
+<li><a href="#52-redis-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B">5.2 Redis 启动过程</a></li>
+<li><a href="#53-cluster-meet%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B">5.3 cluster meet处理过程</a></li>
+<li><a href="#53-%E6%8F%AD%E6%99%93-node_id%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E7%9A%84%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%8F%98%E5%8C%96%E5%91%A2">5.3 揭晓 node_id是如何生成的？为什么会变化呢？</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="1-背景">1. 背景</span><a href="#1-背景" class="header-anchor">#</a></h1><p>有一次扩容 Redis 集群，往集群加入节点，这个操作了很多次的功能居然失败了。查看到异常日志：addAppClusterSharding:10.3.28.7:10240:10.3.28.70, result is false<br>观察发现，Redis实例已启动，并且加入到集群，但是主从角色不正确<br>本地调试发现，在从节点执行cluster replicate <master_node_id>报错，提示***，发现命令的<master_node_id>和Redis实例的<node_id>不一致</node_id></master_node_id></master_node_id></p>
+<ul>
+<li>Redis node_id是如何生成的，怎么会变化呢？</li>
+</ul>
+<p>临时查看最近修改代码，<br>com.tuhu.renault.portal.redis.impl.RedisCenterImpl  getNodeId方法<br>原来：<br>从目标Redis实例获取自己的node_id<br>改成了：<br>可以从其他Redis实例获取（因为cluster nodes命令可以拿到集群所有节点信息）<br>原因是：<br>当目标节点挂了，会获取不到node_id，页面操作故障节点下线会失败（用于下线故障节点）<br>修复方法：<br>临时恢复从目标实例获取自己的node_id;下线故障节点时候从其他节点获取node_id</p>
+<img src="/www6vHomeHexo/2022/05/23/redisNodeId/img.png" class>
+
+<p>下文简单梳理 Redis 集群扩容过程，主要关注 Redis node_id 变化及相关源码。</p>
+<h1><span id="2-redis集群扩容过程梳理">2. Redis集群扩容过程梳理</span><a href="#2-redis集群扩容过程梳理" class="header-anchor">#</a></h1><p>Renault管理平台入口：</p>
+<ul>
+<li>com.tuhu.renault.portal.controller.ClusterController   doAddHorizontalNodes 方法<br>主要包括三个步骤：（1）启动 Redis 实例；（2）meet Redis 实例；（3）确定主从角色。</li>
+</ul>
+<h3><span id="21-启动redis实例">2.1 启动Redis实例</span><a href="#21-启动redis实例" class="header-anchor">#</a></h3><ul>
+<li>根据模板生成Redis配置文件，并拷贝到目标机器</li>
+<li>执行：redis-server &#x2F;usr&#x2F;local&#x2F;renault&#x2F;conf&#x2F;redis-cluster-6379.conf</li>
+<li>没有返回值，检测端口被占用则认为成功</li>
+</ul>
+<h3><span id="22-redis集群所有主节点meet待加入节点">2.2 Redis集群所有主节点meet待加入节点</span><a href="#22-redis集群所有主节点meet待加入节点" class="header-anchor">#</a></h3><ul>
+<li>确定Redis实例为”单身”</li>
+<li>执行：cluster meet <ip> <port>，<a href="https://redis.io/commands/cluster-meet">https://redis.io/commands/cluster-meet</a></port></ip></li>
+<li>返回“OK”即成功</li>
+</ul>
+<h3><span id="23-确定主从角色">2.3 确定主从角色</span><a href="#23-确定主从角色" class="header-anchor">#</a></h3><ul>
+<li>获取主节点NodeId</li>
+<li>从节点实例执行：cluster replicate <node_id>，<a href="https://redis.io/commands/cluster-replicate">https://redis.io/commands/cluster-replicate</a></node_id></li>
+<li>返回“OK”即成功</li>
+</ul>
+<h1><span id="3-redis集群扩容期间节点状态">3. Redis集群扩容期间节点状态</span><a href="#3-redis集群扩容期间节点状态" class="header-anchor">#</a></h1><h3><span id="31-扩容前集群节点状态">3.1 扩容前集群节点状态</span><a href="#31-扩容前集群节点状态" class="header-anchor">#</a></h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@work-arch-renault-redis-3 (16:06:02) ~ # redis-cli -p 6436 cluster nodes</span><br><span class="line">798f8791b4e302df6c5e1418466e91899e199546 10.100.140.229:6436@16436 master - 0 1642579573335 66 connected 0-5454</span><br><span class="line">68eab9a2f3bae16afd41ae43970f866c01bebcf0 10.100.140.231:6436@16436 myself,master - 0 1642579573000 69 connected 5455-10923</span><br><span class="line">9a1be71bd5699ecb62b4308212ba1363ea72020f 10.100.140.233:6435@16435 master - 0 1642579575338 67 connected 10924-16383</span><br><span class="line">86107b968a281aedbcddd9267b53dfb4bcaadee4 10.100.140.230:6437@16437 slave 798f8791b4e302df6c5e1418466e91899e199546 0 1642579574337 66 connected</span><br><span class="line">ba7481602474ce44fa964af043c9417670246002 10.100.140.232:6437@16437 slave 68eab9a2f3bae16afd41ae43970f866c01bebcf0 0 1642579573000 69 connected</span><br><span class="line">ad0cc373957d84ba9e37114feee68a8414408bf6 10.100.140.234:6436@16436 slave 9a1be71bd5699ecb62b4308212ba1363ea72020f 0 1642579572335 67 connected</span><br></pre></td></tr></table></figure>
+<p>每行的组成结构：<code>&lt;id&gt; &lt;ip:port&gt; &lt;flags&gt; &lt;master&gt; &lt;ping-sent&gt; &lt;pong-recv&gt; &lt;config-epoch&gt; &lt;link-state&gt; &lt;slot&gt; &lt;slot&gt; ... &lt;slot&gt;</code><br>每项的含义如下:</p>
+<ul>
+<li>1.id: 节点ID</li>
+<li>2.ip:port：客户端与节点通信使用的地址</li>
+<li>3.flags：逗号分割的标记位，可能的值如下 <ul>
+<li>a. myself：当前连接的节点</li>
+<li>b. master：节点是master</li>
+<li>c. slave：节点是slave</li>
+<li>d. fail?：节点处于PFAIL 状态。 当前节点无法联系，但逻辑上是可达的 (非 FAIL 状态)</li>
+<li>e. fail：节点处于FAIL 状态. 大部分节点都无法与其取得联系将会将改节点由 PFAIL 状态升级至FAIL状态</li>
+<li>f. handshake：还未取得信任的节点，当前正在与其进行握手</li>
+<li>g. noaddr：没有地址的节点</li>
+<li>h. noflags：连个标记都没有</li>
+</ul>
+</li>
+<li><ol start="4">
+<li>master_id：如果节点是slave，并且已知master节点，则这里列出master节点ID,否则的话这里列出”-“</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>ping-sent：最近一次发送ping的时间，这个时间是一个unix毫秒时间戳，0代表没有发送过</li>
+</ol>
+</li>
+<li><ol start="6">
+<li>pong-recv：最近一次收到pong的时间，使用unix时间戳表示</li>
+</ol>
+</li>
+<li><ol start="7">
+<li>config-epoch：节点的epoch值（从节点值随主节点）</li>
+</ol>
+<ul>
+<li>a. 每当节点发生失败切换时，都会创建一个新的，独特的，递增的epoch</li>
+<li>b. 如果多个节点竞争同一个哈希槽时，epoch值更高的节点会抢夺到</li>
+</ul>
+</li>
+<li><ol start="8">
+<li>link-state：node-to-node集群总线使用的链接的状态，我们使用这个链接与集群中其他节点进行通信</li>
+</ol>
+<ul>
+<li>a. 值可以是 connected 和 disconnected</li>
+</ul>
+</li>
+<li><ol start="9">
+<li>slot：哈希槽值或者一个哈希槽范围，代表当前节点可以提供服务的哈希槽值</li>
+</ol>
+</li>
+</ul>
+<h3><span id="32-redis启动后单身状态">3.2 Redis启动后“单身”状态</span><a href="#32-redis启动后单身状态" class="header-anchor">#</a></h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@work-arch-docker-3 (16:14:17) ~ # redis-cli -p 6379 cluster nodes</span><br><span class="line">77199f3d3b63360117c352f51f0262627a53d215 :6379@16379 myself,master - 0 0 0 connected</span><br><span class="line">root@work-arch-docker-3 (16:14:30) ~ #</span><br><span class="line">root@work-arch-docker-3 (16:14:30) ~ # redis-cli -p 6380 cluster nodes</span><br><span class="line">60445f6231213b2285f216eac53f67408bdeae28 :6380@16380 myself,master - 0 0 0 connected</span><br></pre></td></tr></table></figure>
+
+<h3><span id="33-meet-redis实例1">3.3 Meet Redis实例1</span><a href="#33-meet-redis实例1" class="header-anchor">#</a></h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@work-arch-docker-3 (16:15:16) ~ # redis-cli -p 6379 cluster nodes</span><br><span class="line">ba7481602474ce44fa964af043c9417670246002 10.100.140.232:6437@16437 slave 68eab9a2f3bae16afd41ae43970f866c01bebcf0 0 1642580117000 69 connected</span><br><span class="line">86107b968a281aedbcddd9267b53dfb4bcaadee4 10.100.140.230:6437@16437 slave 798f8791b4e302df6c5e1418466e91899e199546 0 1642580117750 66 connected</span><br><span class="line">ad0cc373957d84ba9e37114feee68a8414408bf6 10.100.140.234:6436@16436 slave 9a1be71bd5699ecb62b4308212ba1363ea72020f 0 1642580115000 67 connected</span><br><span class="line">798f8791b4e302df6c5e1418466e91899e199546 10.100.140.229:6436@16436 master - 0 1642580115742 66 connected 0-5454</span><br><span class="line">68eab9a2f3bae16afd41ae43970f866c01bebcf0 10.100.140.231:6436@16436 master - 0 1642580115000 69 connected 5455-10923</span><br><span class="line">9a1be71bd5699ecb62b4308212ba1363ea72020f 10.100.140.233:6435@16435 master - 0 1642580117000 67 connected 10924-16383</span><br><span class="line">77199f3d3b63360117c352f51f0262627a53d215 10.100.140.152:6379@16379 myself,master - 0 1642580115000 0 connected</span><br></pre></td></tr></table></figure>
+
+<h3><span id="34-meet-redis实例2">3.4 Meet Redis实例2</span><a href="#34-meet-redis实例2" class="header-anchor">#</a></h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@work-arch-docker-3 (16:15:22) ~ # redis-cli -p 6380 cluster nodes</span><br><span class="line">86107b968a281aedbcddd9267b53dfb4bcaadee4 10.100.140.230:6437@16437 slave 798f8791b4e302df6c5e1418466e91899e199546 0 1642580129887 66 connected</span><br><span class="line">ba7481602474ce44fa964af043c9417670246002 10.100.140.232:6437@16437 slave 68eab9a2f3bae16afd41ae43970f866c01bebcf0 0 1642580132000 69 connected</span><br><span class="line">ad0cc373957d84ba9e37114feee68a8414408bf6 10.100.140.234:6436@16436 slave 9a1be71bd5699ecb62b4308212ba1363ea72020f 0 1642580130000 67 connected</span><br><span class="line">798f8791b4e302df6c5e1418466e91899e199546 10.100.140.229:6436@16436 master - 0 1642580130590 66 connected 0-5454</span><br><span class="line">68eab9a2f3bae16afd41ae43970f866c01bebcf0 10.100.140.231:6436@16436 master - 0 1642580133595 69 connected 5455-10923</span><br><span class="line">9a1be71bd5699ecb62b4308212ba1363ea72020f 10.100.140.233:6435@16435 master - 0 1642580132593 67 connected 10924-16383</span><br><span class="line">77199f3d3b63360117c352f51f0262627a53d215 10.100.140.152:6379@16379 master - 0 1642580131592 0 connected</span><br><span class="line">60445f6231213b2285f216eac53f67408bdeae28 10.100.140.152:6380@16380 myself,master - 0 1642580133000 73 connected</span><br></pre></td></tr></table></figure>
+
+<h3><span id="35-指定新增实例主从关系">3.5 指定新增实例主从关系</span><a href="#35-指定新增实例主从关系" class="header-anchor">#</a></h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@work-arch-docker-3 (16:16:55) ~ # redis-cli -p 6379 cluster nodes</span><br><span class="line">ba7481602474ce44fa964af043c9417670246002 10.100.140.232:6437@16437 slave 68eab9a2f3bae16afd41ae43970f866c01bebcf0 0 1642580214980 69 connected</span><br><span class="line">86107b968a281aedbcddd9267b53dfb4bcaadee4 10.100.140.230:6437@16437 slave 798f8791b4e302df6c5e1418466e91899e199546 0 1642580215985 66 connected</span><br><span class="line">60445f6231213b2285f216eac53f67408bdeae28 10.100.140.152:6380@16380 slave 77199f3d3b63360117c352f51f0262627a53d215 0 1642580213000 73 connected</span><br><span class="line">ad0cc373957d84ba9e37114feee68a8414408bf6 10.100.140.234:6436@16436 slave 9a1be71bd5699ecb62b4308212ba1363ea72020f 0 1642580212000 67 connected</span><br><span class="line">798f8791b4e302df6c5e1418466e91899e199546 10.100.140.229:6436@16436 master - 0 1642580212000 66 connected 0-5454</span><br><span class="line">68eab9a2f3bae16afd41ae43970f866c01bebcf0 10.100.140.231:6436@16436 master - 0 1642580213578 69 connected 5455-10923</span><br><span class="line">9a1be71bd5699ecb62b4308212ba1363ea72020f 10.100.140.233:6435@16435 master - 0 1642580214000 67 connected 10924-16383</span><br><span class="line">77199f3d3b63360117c352f51f0262627a53d215 10.100.140.152:6379@16379 myself,master - 0 1642580214000 0 connected</span><br></pre></td></tr></table></figure>
+
+<h1><span id="5-延伸阅读">5. 延伸阅读</span><a href="#5-延伸阅读" class="header-anchor">#</a></h1><h3><span id="51-redis-集群数据结构">5.1 Redis 集群数据结构</span><a href="#51-redis-集群数据结构" class="header-anchor">#</a></h3><p>初始化 cluster 中有三个重要数据结构：</p>
+<ul>
+<li>clusterState：记录当前节点视角下，集群目前的状态</li>
+<li>clusterNode：记录节点的状态</li>
+<li>clusterLink：为clusterNode的属性，记录了连接该节点所需的有关信息<br>源码文件：cluster.h cluster.c<br><strong>struct clusterState</strong> 展开源码<br><strong>struct clusterNode</strong> 展开源码<br><strong>struct clusterLink</strong> 展开源码</li>
+</ul>
+<h3><span id="52-redis-启动过程">5.2 Redis 启动过程</span><a href="#52-redis-启动过程" class="header-anchor">#</a></h3><p>5.2.1 启动流程</p>
+<img src="/www6vHomeHexo/2022/05/23/redisNodeId/img1.jpg" class>
+
+<p>5.2.2 启动日志<br>Redis实例1日志<br> 展开源码<br>Redis实例2日志<br> 展开源码</p>
+<h3><span id="53-cluster-meet处理过程">5.3 cluster meet处理过程</span><a href="#53-cluster-meet处理过程" class="header-anchor">#</a></h3><p>5.3.1 meet 命令处理<br>大致分为 3 个阶段：</p>
+<ul>
+<li>A 通过 meet msg 的 pong 回包，更改 A 对 B 的认识</li>
+<li>B 通过 ping msg 的 pong 回包，更改 B 对 A 的认识</li>
+<li>来自 A 的 ping or pong msg， B 更新自己看到的 A 的 slot 信息</li>
+</ul>
+<img src="/www6vHomeHexo/2022/05/23/redisNodeId/img2.png" class>
+
+<p>5.3.2 Gossip消息结构（MEET、PING、PONG）<br><strong>MEET PING PNG message</strong> 展开源码</p>
+<h3><span id="53-揭晓-node_id是如何生成的为什么会变化呢">5.3 揭晓 node_id是如何生成的？为什么会变化呢？</span><a href="#53-揭晓-node_id是如何生成的为什么会变化呢" class="header-anchor">#</a></h3><p>5.3.1 node_id 如何生成?<br>新建 redis 节点时候生成，几乎不会改变，除非执行：cluster reset hard</p>
+<ul>
+<li>cluster.c  line462 随机40字节字符串，这个值在节点启动的时候，从节点配置文件获取或者创建<ul>
+<li><code>clusterLoadConfig  /* Load or create a new nodes configuration. */</code> </li>
+<li><code>getRandomHexChars(node-&gt;name, CLUSTER_NAMELEN);</code></li>
+</ul>
+</li>
+<li>cluster.c  line532  <strong>Only for hard reset: a new Node ID is generated.</strong><ul>
+<li>hard reset多用于测试</li>
+</ul>
+</li>
+<li>cluster reset 命令说明：<a href="http://www.redis.cn/commands/cluster-reset.html">http://www.redis.cn/commands/cluster-reset.html</a><br>5.3.2 Redis 集群扩容时候 node_id 为什么会变化?</li>
+<li>其实 Redis 节点的 node_id 是没有变化的</li>
+<li>扩容期间，meet 新节点后，立刻从其他节点获取该新节点的 nodei_id，可能拿到的是随机生成的 node_id (不认识的时候是随机生成node_id，认识之后再更新次node_id）</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>KV</category>
+        <category>Redis</category>
+      </categories>
+      <tags>
+        <tag>Redis</tag>
       </tags>
   </entry>
   <entry>
