@@ -13158,48 +13158,6 @@ func new(Type) *Type
       </tags>
   </entry>
   <entry>
-    <title>Kafka 故障排查</title>
-    <url>/www6vHomeHexo/2021/05/18/kafkaGracefulDown/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="draft-here内容">Draft Here[内容]</span><a href="#draft-here内容" class="header-anchor">#</a></h2>
-
-<h2><span id="draft-here总结">Draft Here[总结]</span><a href="#draft-here总结" class="header-anchor">#</a></h2>]]></content>
-      <categories>
-        <category>稳定性</category>
-        <category>故障排查</category>
-        <category>Kafka</category>
-      </categories>
-      <tags>
-        <tag>故障排查</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>TraceId 丢失问题</title>
-    <url>/www6vHomeHexo/2021/05/17/lostTraceId/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-
-
-<h2><span id="draft-here内容">Draft Here[内容]</span><a href="#draft-here内容" class="header-anchor">#</a></h2>
-
-
-<h2><span id="draft-here总结">Draft Here[总结]</span><a href="#draft-here总结" class="header-anchor">#</a></h2>
-
-]]></content>
-      <categories>
-        <category>稳定性</category>
-        <category>故障排查</category>
-        <category>TraceId 丢失</category>
-      </categories>
-      <tags>
-        <tag>故障排查</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Kafka-ZeroCopy</title>
     <url>/www6vHomeHexo/2021/05/16/kafkaZeroCopy/</url>
     <content><![CDATA[<p></p>
@@ -13649,32 +13607,6 @@ func new(Type) *Type
       </categories>
       <tags>
         <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>多个Java Agent同时使用的类增强冲突问题</title>
-    <url>/www6vHomeHexo/2021/05/04/multiAgent/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-
-<h2><span id="draft-here内容">Draft Here[内容]</span><a href="#draft-here内容" class="header-anchor">#</a></h2>
-
-
-
-<h1><span id="draft-here总结">Draft Here[总结]</span><a href="#draft-here总结" class="header-anchor">#</a></h1>
-
-
-
-]]></content>
-      <categories>
-        <category>稳定性</category>
-        <category>故障排查</category>
-        <category>Agent</category>
-      </categories>
-      <tags>
-        <tag>故障排查</tag>
       </tags>
   </entry>
   <entry>
@@ -22262,7 +22194,7 @@ nq： 不排队调度
 <blockquote>
 <p>大体上可以说 Redis 的工作模式是，reactor 模式配合一个队列，用一个 serverAccept 线程来处理建立请求的链接，<br>并且通过 IO 多路复用模型，让内核来监听这些 socket，一旦某些 socket 的读写事件准备就绪后就对应的事件压入队列中，<br>然后 worker 工作，由文件事件分派器从中获取事件交于对应的处理器去执行，当某个事件执行完成后文件事件分派器才会从队列中获取下一个事件进行处理。<br>可以类比在 netty 中，我们一般会设置 bossGroup 和 workerGroup 默认情况下 bossGroup 为 1，workerGroup &#x3D; 2 * cpu 数量，<br>这样可以由多个线程来处理读写就绪的事件，但是其中不能有比较耗时的操作如果有的话需要将其放入线程池中，不然会降低其吐吞量。<br>在 Redis 中我们可以看做这二者的值都是 1。</p>
 </blockquote>
-<h2><span id="hotkey">HotKey</span><a href="#hotkey" class="header-anchor">#</a></h2><a href="/www6vHomeHexo/2018/05/03/faultModel2/" title="故障模型-2 Middleware">故障模型- 热点 Key 问题的发现与解决</a>  self
+<h2><span id="hotkey">HotKey</span><a href="#hotkey" class="header-anchor">#</a></h2><a href="/www6vHomeHexo/2018/05/03/faultModel2/" title="故障模型-中间件层">故障模型- 热点 Key 问题的发现与解决</a>  self
 
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>《Redis 深度历险：核心原理与应用实践》 钱文品</p>
 <ol>
