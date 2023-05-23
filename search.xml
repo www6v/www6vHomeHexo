@@ -351,6 +351,87 @@
       </tags>
   </entry>
   <entry>
+    <title>故障模型 &amp;&amp; 故障排查</title>
+    <url>/www6vHomeHexo/2021/05/23/troubleshootingSummary/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E6%95%85%E9%9A%9C%E6%A8%A1%E5%9E%8B-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5">故障模型 &amp;&amp; 故障排查</a><br>- <a href="#java-core-%E5%BA%94%E7%94%A8">Java Core &amp;&amp; 应用</a><br>- <a href="#%E4%B8%AD%E9%97%B4%E4%BB%B6">中间件</a><br>- <a href="#infra">Infra</a><br>- <a href="#k8s">K8s</a><br>- <a href="#basic">Basic</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+
+<h2><span id="故障模型-ampamp-故障排查">故障模型 &amp;&amp; 故障排查</span><a href="#故障模型-ampamp-故障排查" class="header-anchor">#</a></h2><h5><span id="java-core-ampamp-应用">Java Core &amp;&amp; 应用</span><a href="#java-core-ampamp-应用" class="header-anchor">#</a></h5><ul>
+<li><a href="/www6vHomeHexo/2018/10/27/faultModel1/" title="故障模型-应用层">故障模型-应用层</a>
+<ul>
+<li><a href="/www6vHomeHexo/2014/02/02/memoryLeak/" title="内存泄漏的案例和解决方案">内存泄漏的案例和解决方案</a> </li>
+<li><a href="/www6vHomeHexo/2014/07/21/twoGCcase/" title="两个GC案例">两个GC案例</a></li>
+<li><a href="/www6vHomeHexo/2017/08/09/interrupted/" title="关于任务取消相关异常的排查">关于任务取消相关异常的排查</a></li>
+<li><a href="/www6vHomeHexo/2014/09/06/classloader/" title="Classloader相关的故障排查">Classloader相关的故障排查</a></li>
+<li><a href="/www6vHomeHexo/2021/05/04/multiAgent/" title="多个Java Agent同时使用的类增强冲突问题">多个Java Agent同时使用的类增强冲突问题</a>  ***</li>
+<li><a href="/www6vHomeHexo/2021/05/17/lostTraceId/" title="TraceId 丢失问题">TraceId 丢失问题</a>  ***</li>
+</ul>
+</li>
+</ul>
+<h5><span id="中间件">中间件</span><a href="#中间件" class="header-anchor">#</a></h5><ul>
+<li><a href="/www6vHomeHexo/2018/05/03/faultModel2/" title="故障模型-中间件层">故障模型-中间件层</a>
+<ul>
+<li>微服务<ul>
+<li><a href="/www6vHomeHexo/2019/07/06/findProblem/" title="故障排查的流程和方法">故障排查的流程和方法</a></li>
+<li><a href="/www6vHomeHexo/2017/10/17/slowRT/" title="服务慢响应超时排查">服务慢响应超时排查</a> </li>
+<li><a href="/www6vHomeHexo/2017/07/28/zookeeperBug/" title="zookeeper未通知到服务客户端的异常排查">zookeeper未通知到服务客户端的异常排查</a>  ***</li>
+</ul>
+</li>
+<li>Redis<ul>
+<li><a href="/www6vHomeHexo/2021/05/21/redisBigKey/" title="Redis 大Key">Redis 大Key</a> ***</li>
+<li><a href="/www6vHomeHexo/2022/05/23/redisNodeId/" title="Redis 集群扩容时NodeId问题">Redis 集群扩容时NodeId问题</a> ***</li>
+</ul>
+</li>
+<li>Kafka<ul>
+<li><a href="/www6vHomeHexo/2021/05/18/kafkaGracefulDown/" title="Kafka 故障排查">Kafka 故障排查</a>  ***</li>
+</ul>
+</li>
+<li><a href="/www6vHomeHexo/2017/09/25/mybatisBug/" title="线上不能下单问题排查">线上不能下单问题排查</a></li>
+<li><a href="/www6vHomeHexo/2020/06/21/mysqlBestPractice/" title="使用MySQL的性能问题和紧急处理手段">使用MySQL的性能问题和紧急处理手段</a></li>
+<li><a href="/www6vHomeHexo/2017/02/19/splitBrain/" title="Split Brain">Split Brain</a></li>
+</ul>
+</li>
+</ul>
+<h5><span id="infra">Infra</span><a href="#infra" class="header-anchor">#</a></h5><ul>
+<li><a href="/www6vHomeHexo/2018/05/03/faultModel3/" title="故障模型-基础设施层">故障模型-基础设施层</a>
+<ul>
+<li><a href="/www6vHomeHexo/2022/01/11/haproxyTcpdump/" title="HAProxy抓包">HAProxy抓包</a>   网络</li>
+<li><a href="/www6vHomeHexo/2020/08/09/tcpTimewait/" title="TIME_WAIT和优化">TIME_WAIT和优化</a> ***</li>
+<li><a href="/www6vHomeHexo/2020/08/16/linuxPerformance-cpu/" title="Linux性能优化 之 cpu优化">Linux性能优化 之 cpu优化</a></li>
+</ul>
+</li>
+</ul>
+<h5><span id="k8s">K8s</span><a href="#k8s" class="header-anchor">#</a></h5><ul>
+<li><a href="/www6vHomeHexo/2022/06/08/k8sTroubleshoot/" title="kubernetes 问题Troubleshoot">kubernetes 问题Troubleshoot</a>  </li>
+<li><a href="/www6vHomeHexo/2022/04/03/k8sProblem/" title="Kubernetes问题排查-troubleshooting">Kubernetes问题排查-troubleshooting</a>     </li>
+<li><a href="/www6vHomeHexo/2022/01/23/k8sBestPractice/" title="Kubernetes最佳实践-BestPractice">Kubernetes最佳实践-BestPractice</a></li>
+</ul>
+<h5><span id="basic">Basic</span><a href="#basic" class="header-anchor">#</a></h5><ul>
+<li><a href="/www6vHomeHexo/2020/08/08/tcpFault/" title="TCP故障模式">TCP故障模式</a></li>
+<li><a href="/www6vHomeHexo/2019/10/12/crashDetect/" title="宕机检测-Lease、心跳">宕机检测-Lease、心跳</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>汇总</category>
+        <category>故障排查</category>
+      </categories>
+      <tags>
+        <tag>故障排查</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>架构 汇总</title>
     <url>/www6vHomeHexo/2021/03/20/archSummary/</url>
     <content><![CDATA[<p></p>
@@ -692,7 +773,6 @@
 <ul>
 <li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
 <li><a href="#sre">SRE</a></li>
-<li><a href="#%E6%95%85%E9%9A%9C%E6%A8%A1%E5%9E%8B-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5">故障模型 &amp;&amp; 故障排查</a><br>- <a href="#java-core-application">Java Core &amp;&amp; Application</a><br>- <a href="#%E4%B8%AD%E9%97%B4%E4%BB%B6">中间件</a><br>- <a href="#infra">Infra</a><br>- <a href="#k8s">K8s</a><br>- <a href="#basic">Basic</a></li>
 </ul>
 <!-- tocstop -->
 
@@ -724,60 +804,6 @@
 </ul>
 <ul>
 <li><a href="../../../../categories/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/">可观测性</a> category</li>
-</ul>
-<h2><span id="故障模型-ampamp-故障排查">故障模型 &amp;&amp; 故障排查</span><a href="#故障模型-ampamp-故障排查" class="header-anchor">#</a></h2><h5><span id="java-core-ampamp-application">Java Core &amp;&amp; Application</span><a href="#java-core-ampamp-application" class="header-anchor">#</a></h5><ul>
-<li><a href="/www6vHomeHexo/2018/10/27/faultModel1/" title="故障模型-1 Application">故障模型-1 Application</a>
-<ul>
-<li><a href="/www6vHomeHexo/2014/02/02/memoryLeak/" title="内存泄漏的案例和解决方案">内存泄漏的案例和解决方案</a> </li>
-<li><a href="/www6vHomeHexo/2014/07/21/twoGCcase/" title="两个GC案例">两个GC案例</a></li>
-<li><a href="/www6vHomeHexo/2017/08/09/interrupted/" title="关于任务取消相关异常的排查">关于任务取消相关异常的排查</a></li>
-<li><a href="/www6vHomeHexo/2014/09/06/classloader/" title="Classloader相关的故障排查">Classloader相关的故障排查</a></li>
-<li><a href="/www6vHomeHexo/2021/05/04/multiAgent/" title="多个Java Agent同时使用的类增强冲突问题">多个Java Agent同时使用的类增强冲突问题</a>  ***</li>
-<li><a href="/www6vHomeHexo/2021/05/17/lostTraceId/" title="TraceId 丢失问题">TraceId 丢失问题</a>  ***</li>
-</ul>
-</li>
-</ul>
-<h5><span id="中间件">中间件</span><a href="#中间件" class="header-anchor">#</a></h5><ul>
-<li><a href="/www6vHomeHexo/2018/05/03/faultModel2/" title="故障模型-2 Middleware">故障模型-2 Middleware</a>
-<ul>
-<li>微服务<ul>
-<li><a href="/www6vHomeHexo/2019/07/06/findProblem/" title="故障排查的流程和方法">故障排查的流程和方法</a></li>
-<li><a href="/www6vHomeHexo/2017/10/17/slowRT/" title="服务慢响应超时排查">服务慢响应超时排查</a> </li>
-<li><a href="/www6vHomeHexo/2017/07/28/zookeeperBug/" title="zookeeper未通知到服务客户端的异常排查">zookeeper未通知到服务客户端的异常排查</a>  ***</li>
-</ul>
-</li>
-<li>Redis<ul>
-<li><a href="/www6vHomeHexo/2021/05/21/redisBigKey/" title="Redis 大Key">Redis 大Key</a> ***</li>
-<li><a href="/www6vHomeHexo/2022/05/23/redisNodeId/" title="Redis 集群扩容时NodeId问题">Redis 集群扩容时NodeId问题</a> ***</li>
-</ul>
-</li>
-<li>Kafka<ul>
-<li><a href="/www6vHomeHexo/2021/05/18/kafkaGracefulDown/" title="Kafka 故障排查">Kafka 故障排查</a>  ***</li>
-</ul>
-</li>
-<li><a href="/www6vHomeHexo/2017/09/25/mybatisBug/" title="线上不能下单问题排查">线上不能下单问题排查</a></li>
-<li><a href="/www6vHomeHexo/2020/06/21/mysqlBestPractice/" title="使用MySQL的性能问题和紧急处理手段">使用MySQL的性能问题和紧急处理手段</a></li>
-<li><a href="/www6vHomeHexo/2017/02/19/splitBrain/" title="Split Brain">Split Brain</a></li>
-</ul>
-</li>
-</ul>
-<h5><span id="infra">Infra</span><a href="#infra" class="header-anchor">#</a></h5><ul>
-<li><a href="/www6vHomeHexo/2018/05/03/faultModel3/" title="故障模型-3 Infra">故障模型-3 Infra</a>
-<ul>
-<li><a href="/www6vHomeHexo/2022/01/11/haproxyTcpdump/" title="HAProxy抓包">HAProxy抓包</a>   网络</li>
-<li><a href="/www6vHomeHexo/2020/08/09/tcpTimewait/" title="TIME_WAIT和优化">TIME_WAIT和优化</a> ***</li>
-<li><a href="/www6vHomeHexo/2020/08/16/linuxPerformance-cpu/" title="Linux性能优化 之 cpu优化">Linux性能优化 之 cpu优化</a></li>
-</ul>
-</li>
-</ul>
-<h5><span id="k8s">K8s</span><a href="#k8s" class="header-anchor">#</a></h5><ul>
-<li><a href="/www6vHomeHexo/2022/06/08/k8sTroubleshoot/" title="kubernetes 问题Troubleshoot">kubernetes 问题Troubleshoot</a>  </li>
-<li><a href="/www6vHomeHexo/2022/04/03/k8sProblem/" title="Kubernetes问题排查-troubleshooting">Kubernetes问题排查-troubleshooting</a>     </li>
-<li><a href="/www6vHomeHexo/2022/01/23/k8sBestPractice/" title="Kubernetes最佳实践-BestPractice">Kubernetes最佳实践-BestPractice</a></li>
-</ul>
-<h5><span id="basic">Basic</span><a href="#basic" class="header-anchor">#</a></h5><ul>
-<li><a href="/www6vHomeHexo/2020/08/08/tcpFault/" title="TCP故障模式">TCP故障模式</a></li>
-<li><a href="/www6vHomeHexo/2019/10/12/crashDetect/" title="宕机检测-Lease、心跳">宕机检测-Lease、心跳</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -1004,52 +1030,6 @@
       <categories>
         <category>汇总</category>
         <category>学习资源</category>
-      </categories>
-      <tags>
-        <tag>汇总</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>AWS 汇总</title>
-    <url>/www6vHomeHexo/2018/10/04/awsSummary/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="计算">计算</span><a href="#计算" class="header-anchor">#</a></h2><ul>
-<li><a href="../../../../2022/03/30/awsComputing/">AWS Computing</a></li>
-<li><a href="../../../../2022/06/22/awsComputingELB/">AWS Computing-ELB</a></li>
-</ul>
-<h2><span id="存储">存储</span><a href="#存储" class="header-anchor">#</a></h2><ul>
-<li><a href="../../../../2022/10/01/awsStorageS3/">AWS Storage-S3</a></li>
-<li><a href="../../../../2022/06/17/awsStorageEBS/">AWS Storage-EBS</a></li>
-<li><a href="../../../../2022/06/17/awsStorageEFS/">AWS Storage-EFS</a></li>
-</ul>
-<h2><span id="网络">网络</span><a href="#网络" class="header-anchor">#</a></h2><ul>
-<li><a href="../../../../2022/10/01/awsNetwork/">AWS Network</a></li>
-<li><a href="../../../../2022/10/30/awsNetworkVPC/">AWS Network-VPC</a></li>
-<li><a href="../../../../2022/06/17/awsNetworkVPCendpoint/">AWS Network-VPC Endpoint</a></li>
-<li><a href="../../../../2022/10/30/awsNetworkDX/">AWS Network-Direct Connect</a></li>
-<li><a href="../../../../2022/05/03/awsNetworkCDN/">AWS Network-CDN</a></li>
-<li><a href="../../../../2022/05/03/awsNetworkDNS/">AWS Network-DNS</a></li>
-<li><a href="../../../../2022/05/05/awsNetworkTGW/">AWS Network-TWG</a></li>
-</ul>
-<h2><span id="其他">其他</span><a href="#其他" class="header-anchor">#</a></h2><ul>
-<li><a href="../../../../2022/10/01/awsAllServices/">AWS 所有的Services</a></li>
-<li><a href="../../../../2022/06/23/awsAccountOrgnization/">AWS Account和Orgnization</a></li>
-<li><a href="../../../../2022/06/23/awsManagement/">AWS Management</a></li>
-<li><a href="../../../../2022/05/12/awsServerless/">AWS Serverless</a></li>
-<li><a href="../../../../2022/10/01/awsDatabase/">AWS Database</a></li>
-<li><a href="../../../../2022/06/21/awsDatabaseNoSQL/">AWS NoSQL</a></li>
-<li><a href="../../../../2022/10/01/awsSecurity/">AWS Security</a></li>
-<li><a href="../../../../2022/06/18/awsDeployment/">AWS Deployment</a></li>
-<li><a href="../../../../2022/06/28/awsMigrate/">AWS Migrate</a></li>
-<li><a href="../../../../2022/05/01/awsArch/">AWS 三层架构</a></li>
-<li><a href="../../../../2022/10/01/awsStudyResource/">AWS 学习资源</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>汇总</category>
-        <category>AWS</category>
       </categories>
       <tags>
         <tag>汇总</tag>
@@ -20899,7 +20879,7 @@ nq： 不排队调度
       </tags>
   </entry>
   <entry>
-    <title>故障模型-1 Application</title>
+    <title>故障模型-应用层</title>
     <url>/www6vHomeHexo/2018/10/27/faultModel1/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -20943,7 +20923,6 @@ nq： 不排队调度
         - heap
             解决：对比Fullgc后的相同对象的数量、大小
     + 堆外Native
-     
 </code></pre>
 <p>参考:<br>3. <a href="/www6vHomeHexo/2014/07/16/gc/" title="垃圾收集GC总结">垃圾收集GC总结</a>  self<br>10. 如何排查Java内存泄露(内附各种排查工具介绍) 不闻<br>11. <a href="https://hllvm-group.iteye.com/group/topic/28379">生产环境下持久带满导致FullGC，如何跟踪</a><br>12. <a href="/www6vHomeHexo/2017/11/27/optimize/" title="JVM性能调优">JVM性能调优</a>  self</p>
 <h3><span id="应用性能变差">应用性能变差</span><a href="#应用性能变差" class="header-anchor">#</a></h3><pre><code>    + 原因
@@ -20984,7 +20963,6 @@ nq： 不排队调度
 </code></pre>
 <h3><span id="系统单点">系统单点</span><a href="#系统单点" class="header-anchor">#</a></h3><pre><code>    + 原因: 设计问题
     + 解决：服务去状态，多实例部署
-    
 </code></pre>
 <h3><span id="异步阻塞同步">异步阻塞同步</span><a href="#异步阻塞同步" class="header-anchor">#</a></h3><h3><span id="依赖超时依赖异常">依赖超时，依赖异常</span><a href="#依赖超时依赖异常" class="header-anchor">#</a></h3><pre><code>    + 解决【15,16】
         - 区分强弱依赖
@@ -21020,6 +20998,52 @@ nq： 不排队调度
       </categories>
       <tags>
         <tag>故障模型</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AWS 汇总</title>
+    <url>/www6vHomeHexo/2018/10/04/awsSummary/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="计算">计算</span><a href="#计算" class="header-anchor">#</a></h2><ul>
+<li><a href="../../../../2022/03/30/awsComputing/">AWS Computing</a></li>
+<li><a href="../../../../2022/06/22/awsComputingELB/">AWS Computing-ELB</a></li>
+</ul>
+<h2><span id="存储">存储</span><a href="#存储" class="header-anchor">#</a></h2><ul>
+<li><a href="../../../../2022/10/01/awsStorageS3/">AWS Storage-S3</a></li>
+<li><a href="../../../../2022/06/17/awsStorageEBS/">AWS Storage-EBS</a></li>
+<li><a href="../../../../2022/06/17/awsStorageEFS/">AWS Storage-EFS</a></li>
+</ul>
+<h2><span id="网络">网络</span><a href="#网络" class="header-anchor">#</a></h2><ul>
+<li><a href="../../../../2022/10/01/awsNetwork/">AWS Network</a></li>
+<li><a href="../../../../2022/10/30/awsNetworkVPC/">AWS Network-VPC</a></li>
+<li><a href="../../../../2022/06/17/awsNetworkVPCendpoint/">AWS Network-VPC Endpoint</a></li>
+<li><a href="../../../../2022/10/30/awsNetworkDX/">AWS Network-Direct Connect</a></li>
+<li><a href="../../../../2022/05/03/awsNetworkCDN/">AWS Network-CDN</a></li>
+<li><a href="../../../../2022/05/03/awsNetworkDNS/">AWS Network-DNS</a></li>
+<li><a href="../../../../2022/05/05/awsNetworkTGW/">AWS Network-TWG</a></li>
+</ul>
+<h2><span id="其他">其他</span><a href="#其他" class="header-anchor">#</a></h2><ul>
+<li><a href="../../../../2022/10/01/awsAllServices/">AWS 所有的Services</a></li>
+<li><a href="../../../../2022/06/23/awsAccountOrgnization/">AWS Account和Orgnization</a></li>
+<li><a href="../../../../2022/06/23/awsManagement/">AWS Management</a></li>
+<li><a href="../../../../2022/05/12/awsServerless/">AWS Serverless</a></li>
+<li><a href="../../../../2022/10/01/awsDatabase/">AWS Database</a></li>
+<li><a href="../../../../2022/06/21/awsDatabaseNoSQL/">AWS NoSQL</a></li>
+<li><a href="../../../../2022/10/01/awsSecurity/">AWS Security</a></li>
+<li><a href="../../../../2022/06/18/awsDeployment/">AWS Deployment</a></li>
+<li><a href="../../../../2022/06/28/awsMigrate/">AWS Migrate</a></li>
+<li><a href="../../../../2022/05/01/awsArch/">AWS 三层架构</a></li>
+<li><a href="../../../../2022/10/01/awsStudyResource/">AWS 学习资源</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>汇总</category>
+        <category>AWS</category>
+      </categories>
+      <tags>
+        <tag>汇总</tag>
       </tags>
   </entry>
   <entry>
@@ -21347,7 +21371,7 @@ nq： 不排队调度
       </tags>
   </entry>
   <entry>
-    <title>故障模型-3 Infra</title>
+    <title>故障模型-基础设施层</title>
     <url>/www6vHomeHexo/2018/05/03/faultModel3/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -21372,7 +21396,7 @@ nq： 不排队调度
       </tags>
   </entry>
   <entry>
-    <title>故障模型-2 Middleware</title>
+    <title>故障模型-中间件层</title>
     <url>/www6vHomeHexo/2018/05/03/faultModel2/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
