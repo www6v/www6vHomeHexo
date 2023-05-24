@@ -490,6 +490,11 @@
 </li>
 <li><a href="/www6vHomeHexo/2020/07/27/config/" title="服务治理-分布式配置">服务治理-分布式配置</a></li>
 <li><a href="/www6vHomeHexo/2015/07/09/jsfThreadModel/" title="京东服务框架JSF服务提供者线程模型">京东服务框架JSF服务提供者线程模型</a></li>
+<li>负载均衡<ul>
+<li><a href="/www6vHomeHexo/2022/05/06/loadBalance/" title="负载均衡-算法">负载均衡-算法</a></li>
+<li><a href="/www6vHomeHexo/2019/08/22/nginx/" title="Nginx总结">Nginx总结</a></li>
+</ul>
+</li>
 </ul>
 <h3><span id="非功能性">非功能性</span><a href="#非功能性" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2015/06/17/soaTolerate/" title="分布式服务框架容错机制">分布式服务框架容错机制</a></li>
@@ -612,6 +617,7 @@
 <li><a href="/www6vHomeHexo/2021/06/20/redisRehash/" title="Redis Rehash机制">Redis Rehash机制</a></li>
 <li><a href="/www6vHomeHexo/2021/05/05/redisDataStructure/" title="Redis数据结构">Redis数据结构</a></li>
 <li><a href="/www6vHomeHexo/2022/05/14/redisNVM/" title="Redis NVM">Redis NVM</a></li>
+<li><a href="/www6vHomeHexo/2021/05/24/redisStudy/" title="Redis 学习资源">Redis 学习资源</a></li>
 </ul>
 <h3><span id="可靠性">可靠性</span><a href="#可靠性" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2021/01/02/redisReliability/" title="Redis可靠性">Redis可靠性</a></li>
@@ -12979,6 +12985,28 @@ func new(Type) *Type
       </categories>
       <tags>
         <tag>Kubernetes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redis 学习资源</title>
+    <url>/www6vHomeHexo/2021/05/24/redisStudy/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<ul>
+<li><p>client<br><a href="https://zhuanlan.zhihu.com/p/388041321">初探 Redis 客户端 Lettuce：真香！</a></p>
+</li>
+<li><p>优化<br><a href="https://zhuanlan.zhihu.com/p/382677486">十亿级流量下，我与Redis时延小突刺的战斗史</a><br><a href="https://zhuanlan.zhihu.com/p/422659513">Redis大集群扩容性能优化实践</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>KV</category>
+        <category>Redis</category>
+      </categories>
+      <tags>
+        <tag>Redis</tag>
       </tags>
   </entry>
   <entry>
