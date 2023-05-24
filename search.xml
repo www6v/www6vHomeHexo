@@ -20686,7 +20686,7 @@ nq： 不排队调度
 <p><a href="https://tech.antfin.com/">蚂蚁金融科技</a></p>
 <p>参考<br><a href="http://www.cnblogs.com/IT-Bear/p/3191423.htmls">国内各大互联网公司相关技术站点2.0版 （集合腾讯、阿里、百度、搜狐、新浪、360等共49个）</a></p>
 <h2><span id="知乎-有自己关注的大佬">知乎 [有自己关注的大佬]</span><a href="#知乎-有自己关注的大佬" class="header-anchor">#</a></h2><ul>
-<li><p>大厂<br><a href="https://www.zhihu.com/org/e-han-jia-gou-shi">鹅厂架构师</a> - 知乎 ***<br><a href="https://www.zhihu.com/org/mei-tuan-dian-ping-ji-shu-tuan-dui/posts">美团技术团队</a><br><a href="https://www.zhihu.com/org/vivohu-lian-wang-ji-zhu-2/posts">vivo互联网技术</a><br><a href="https://www.zhihu.com/org/xi-cheng-ji-shu-zhong-xin/posts">携程技术</a><br><a href="https://www.zhihu.com/people/a-li-xi-tong-ruan-jian-ji-zhu-90/posts">阿里巴巴开源</a><br><a href="https://www.zhihu.com/org/you-zan-ji-zhu-tuan-dui/activities">有赞技术团队 知乎</a>  *** 干货多<br><a href="https://www.zhihu.com/org/archsummit/activities">ArchSummit 知乎</a></p>
+<li><p>大厂<br><a href="https://www.zhihu.com/org/e-han-jia-gou-shi">鹅厂架构师</a>  ***<br><a href="https://www.zhihu.com/org/mei-tuan-dian-ping-ji-shu-tuan-dui/posts">美团技术团队</a><br><a href="https://www.zhihu.com/org/vivohu-lian-wang-ji-zhu-2/posts">vivo互联网技术</a> ***<br><a href="https://www.zhihu.com/org/xi-cheng-ji-shu-zhong-xin/posts">携程技术</a><br><a href="https://www.zhihu.com/people/a-li-xi-tong-ruan-jian-ji-zhu-90/posts">阿里巴巴开源</a><br><a href="https://www.zhihu.com/org/you-zan-ji-zhu-tuan-dui/activities">有赞技术团队 知乎</a>  *** 干货多<br><a href="https://www.zhihu.com/org/archsummit/activities">ArchSummit 知乎</a></p>
 </li>
 <li><p>中间件<br><a href="https://www.zhihu.com/org/teng-xun-yun-zhong-jian-jian/posts">腾讯云中间件</a><br><a href="https://www.zhihu.com/org/streamnative/posts">StreamNative Pulsar</a></p>
 </li>
@@ -22077,6 +22077,7 @@ nq： 不排队调度
 <li><a href="https://www.cnblogs.com/haoxinyue/p/6663720.html">延迟任务的实现总结</a>  nick hao</li>
 <li><a href="https://www.jianshu.com/p/33aa208ea058">rocketMq-延迟消息介绍</a>   晴天哥_王志 *</li>
 <li><a href>RPC实战与核心原理进 - 20 | 详解时钟轮在RPC中的应用</a>   何小锋</li>
+<li><a href="https://zhuanlan.zhihu.com/p/488730353">时间轮原理及其在框架中的应用</a>  未<br>Dubbo 心跳检测</li>
 </ol>
 ]]></content>
       <categories>
