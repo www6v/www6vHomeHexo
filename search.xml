@@ -21688,14 +21688,14 @@ nq： 不排队调度
 <ul>
 <li><a href="#%E5%85%B3%E9%94%AE%E8%AF%8D">关键词</a></li>
 <li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
-<li><a href="#%E5%A4%B1%E6%95%88%E7%AD%96%E7%95%A5%E7%BC%93%E5%AD%98%E6%9B%B4%E6%96%B0-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%BC%8F">失效策略(缓存更新)、 使用模式</a><ul>
+<li><a href="#%E5%A4%B1%E6%95%88%E7%AD%96%E7%95%A5%E7%BC%93%E5%AD%98%E6%9B%B4%E6%96%B0-9">失效策略(缓存更新) [9]</a><ul>
 <li><a href="#%E7%BC%93%E5%AD%98%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5-readwrite-through%E6%A8%A1%E5%BC%8F">缓存更新策略: Read&#x2F;Write Through模式</a></li>
 <li><a href="#%E7%BC%93%E5%AD%98%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5-cache-aside-%E6%A8%A1%E5%BC%8F">缓存更新策略: Cache Aside 模式</a></li>
 <li><a href="#%E7%BC%93%E5%AD%98%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5-write-behind%E6%A8%A1%E5%BC%8F">缓存更新策略: Write Behind模式</a></li>
 </ul>
 </li>
 <li><a href="#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F">缓存穿透</a></li>
-<li><a href="#%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98-5">多级缓存 [5?]</a></li>
+<li><a href="#%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98-5">二级缓存 [5?]</a></li>
 <li><a href="#%E5%91%BD%E4%B8%AD%E7%8E%87">命中率</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
@@ -21703,10 +21703,10 @@ nq： 不排队调度
 
 </div>
 
-<h1><span id="关键词">关键词</span><a href="#关键词" class="header-anchor">#</a></h1><p> 失效策略(缓存更新)、 使用模式、 缓存与数据库的一致性、 二级缓存（本地缓存+远程缓存）</p>
+<h1><span id="关键词">关键词</span><a href="#关键词" class="header-anchor">#</a></h1><p> 失效策略(缓存更新)、  缓存与数据库的一致性、 二级缓存（本地缓存+远程缓存）</p>
 <h1><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2018/01/21/cacheSummary/cacheSummary.jpg" class title="cache总结">
 
-<h1><span id="失效策略缓存更新-使用模式">失效策略(缓存更新)、 使用模式</span><a href="#失效策略缓存更新-使用模式" class="header-anchor">#</a></h1><h3><span id="缓存更新策略-readx2fwrite-through模式">缓存更新策略: Read&#x2F;Write Through模式</span><a href="#缓存更新策略-readx2fwrite-through模式" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2018/01/21/cacheSummary/write-read-through.PNG" class title="Read&#x2F;Write Through">
+<h1><span id="失效策略缓存更新-9">失效策略(缓存更新) [9]</span><a href="#失效策略缓存更新-9" class="header-anchor">#</a></h1><h3><span id="缓存更新策略-readx2fwrite-through模式">缓存更新策略: Read&#x2F;Write Through模式</span><a href="#缓存更新策略-readx2fwrite-through模式" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2018/01/21/cacheSummary/write-read-through.PNG" class title="Read&#x2F;Write Through">
 <p>Read Through : 被动失效<br>Write Through ： 主动失效</p>
 <h3><span id="缓存更新策略-cache-aside-模式">缓存更新策略: Cache Aside 模式</span><a href="#缓存更新策略-cache-aside-模式" class="header-anchor">#</a></h3><p>Cache Aside 模式和上面的 Read&#x2F;Write Through 模式非常像，它们处理读请求的逻辑是完全一样的，唯一的一个小差别就是，Cache Aside 模式在更新数据的时候，并不去尝试更新缓存，而是去删除缓存。</p>
 <img src="/www6vHomeHexo/2018/01/21/cacheSummary/cache-aside.PNG" class title="Cache Aside模式">
@@ -21719,7 +21719,7 @@ nq： 不排队调度
 <li>回种空值</li>
 <li>使用bloomfilter</li>
 </ol>
-<h1><span id="多级缓存-5">多级缓存 [5?]</span><a href="#多级缓存-5" class="header-anchor">#</a></h1><ul>
+<h1><span id="二级缓存-5">二级缓存 [5?]</span><a href="#二级缓存-5" class="header-anchor">#</a></h1><ul>
 <li>本地缓存+远程缓存<ul>
 <li>远端Cache推全量或者部分的数据到本地cache，并设置过期时间【初始化】</li>
 <li>查询流程<ul>
@@ -21767,11 +21767,11 @@ nq： 不排队调度
 <li>Local Cache的小TIP  阿里 放翁（文初）</li>
 <li><a href="https://www.csdn.net/article/1970-01-01/2825234">阿里云分布式缓存OCS与DB之间的数据一致性</a> 杨成虎</li>
 <li><a href="https://developer.aliyun.com/article/55842">缓存失效竟然可以这么解？</a> serana_cai</li>
-<li>移动选购线缓存实践 赵思奇</li>
+<li>移动选购线缓存实践 赵思奇 *** </li>
 <li>《亿级流量网站架构核心技术》 第9章 张开涛</li>
 <li>cache 58沈剑</li>
-<li><a href="https://coolshell.cn/articles/17416.html">缓存更新的套路</a></li>
-<li><a href>后端存储实战课 - MySQL如何应对高并发（一）：使用缓存保护MySQL</a>  李玥</li>
+<li><a href="https://coolshell.cn/articles/17416.html">缓存更新的套路</a>  coolshell ***</li>
+<li>《后端存储实战课 - MySQL如何应对高并发（一）：使用缓存保护MySQL》  李玥</li>
 </ol>
 ]]></content>
       <categories>
@@ -21797,10 +21797,8 @@ nq： 不排队调度
 <ul>
 <li><a href="#%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E6%A8%A1%E5%BC%8F">缓存数据分布模式</a><br>- <a href="#%E5%88%86%E7%89%87%E6%A8%A1%E5%BC%8F-sharding">分片模式 （sharding）</a><br>- <a href="#%E5%A4%8D%E5%88%B6%E6%A8%A1%E5%BC%8F">复制模式</a></li>
 <li><a href="#%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98">本地缓存</a><br>- <a href="#%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5">过期策略：</a><br>- <a href="#%E8%A2%AB%E5%8A%A8%E8%BF%87%E6%9C%9F-%E4%B8%80%E8%87%B4%E6%80%A7%E4%BD%8E-%E7%BC%93%E5%AD%98%E8%B6%85%E6%97%B6">被动过期 （一致性低， 缓存超时）</a><br>- <a href="#%E4%B8%BB%E5%8A%A8%E8%BF%87%E6%9C%9F%E4%B8%80%E8%87%B4%E6%80%A7%E9%AB%98-%E4%BA%8B%E4%BB%B6%E8%BF%87%E6%9C%9F-%E5%BC%82%E6%AD%A5%E8%BF%87%E6%9C%9F-%E5%8F%98%E5%8C%96%E4%BA%8B%E4%BB%B6">主动过期（一致性高， 事件过期， 异步过期，  变化事件）</a><br>- <a href="#%E5%9F%BA%E4%BA%8E%E7%89%88%E6%9C%AC%E7%9A%84%E8%BF%87%E6%9C%9F%E6%96%B9%E5%BC%8F">基于版本的过期方式</a></li>
-<li><a href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%BC%93%E5%AD%98">服务端缓存</a></li>
-<li><a href="#%E7%BC%93%E5%AD%98%E5%88%86%E5%B1%82">缓存分层</a><br>- <a href="#%E8%BE%B9%E7%BC%98cache-%E5%8F%AF%E7%94%A8cdn%E5%AE%9E%E7%8E%B0%E5%BE%80%E5%BE%80%E6%98%AF%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E7%BC%93%E5%AD%98%E5%AD%98%E9%9D%99%E6%80%81%E6%95%B0%E6%8D%AE">边缘cache: 可用CDN实现，往往是服务器端缓存，存静态数据。</a><br>- <a href="#%E9%A1%B5%E9%9D%A2%E7%BA%A7%E7%BC%93%E5%AD%98-%E5%BE%80%E5%BE%80%E6%98%AF%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98-%E6%95%B0%E6%8D%AE%E7%9B%B8%E5%AF%B9%E5%8A%A8%E6%80%81">页面级缓存： 往往是本地缓存， 数据相对动态。</a><br>- <a href="#%E9%80%BB%E8%BE%91%E7%BC%93%E5%AD%98-%E9%80%BB%E8%BE%91%E8%AE%A1%E7%AE%97%E7%BB%93%E6%9E%9C%E7%9A%84%E7%BC%93%E5%AD%98">逻辑缓存: 逻辑计算结果的缓存</a><br>- <a href="#%E6%95%B0%E6%8D%AE%E6%BA%90%E7%BA%A7%E7%BC%93%E5%AD%98-%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%E6%BA%90%E7%BB%93%E6%9E%9C%E9%9B%86">数据源级缓存： 缓存数据源结果集</a></li>
+<li><a href="#%E7%BC%93%E5%AD%98%E5%88%86%E5%B1%82">缓存分层</a><br>- <a href="#%E8%BE%B9%E7%BC%98cache">边缘cache</a><br>- <a href="#%E9%A1%B5%E9%9D%A2%E7%BA%A7%E7%BC%93%E5%AD%98">页面级缓存</a><br>- <a href="#%E9%80%BB%E8%BE%91%E7%BC%93%E5%AD%98-%E9%80%BB%E8%BE%91%E8%AE%A1%E7%AE%97%E7%BB%93%E6%9E%9C%E7%9A%84%E7%BC%93%E5%AD%98">逻辑缓存: 逻辑计算结果的缓存</a><br>- <a href="#%E6%95%B0%E6%8D%AE%E6%BA%90%E7%BA%A7%E7%BC%93%E5%AD%98-%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%E6%BA%90%E7%BB%93%E6%9E%9C%E9%9B%86">数据源级缓存： 缓存数据源结果集</a></li>
 <li><a href="#%E7%BC%93%E5%AD%98%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B2%92%E5%BA%A6">缓存对象的粒度</a></li>
-<li><a href="#%E7%BC%93%E5%AD%98%E4%B8%8E%E4%B8%80%E8%87%B4%E6%80%A7">缓存与一致性</a></li>
 <li><a href="#%E7%BC%93%E5%AD%98%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5">缓存与数据库的数据同步</a></li>
 <li><a href="#%E7%BC%93%E5%AD%98%E4%B8%8E%E5%9C%BA%E6%99%AF">缓存与场景</a><br>- <a href="#1-%E9%9D%9E%E5%85%B1%E6%80%A7%E6%95%B0%E6%8D%AE%E7%BC%93%E5%AD%98-eg-%E5%BE%AE%E5%8D%9A-%E5%8D%9A%E5%AE%A2%E4%B8%AA%E4%BA%BA%E9%A6%96%E9%A1%B5">1. 非共性数据缓存 eg. 微博， 博客个人首页</a><br>- <a href="#i-%E7%83%AD%E7%82%B9%E7%BC%93%E5%AD%98">I. 热点缓存。</a><br>- <a href="#ii-%E9%9D%9E%E7%83%AD%E7%82%B9%E6%95%B0%E6%8D%AE">II. 非热点数据，</a><br>- <a href="#iii-read-only%E7%BC%93%E5%AD%98">III. read-only缓存</a><br>- <a href="#2-%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9B%B4%E6%96%B0%E5%9C%BA%E6%99%AF">2. 高并发更新场景</a><br>- <a href="#i-%E6%82%B2%E8%A7%82%E9%94%81%E6%96%B9%E6%A1%88">I. 悲观锁方案</a><br>- <a href="#ii-%E4%B9%90%E8%A7%82%E9%94%81%E6%96%B9%E6%A1%88">II. 乐观锁方案</a></li>
 <li><a href="#redies%E4%BD%9C%E4%B8%BA%E7%BC%93%E5%AD%98%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">Redies作为缓存的最佳实践</a></li>
@@ -21817,9 +21815,11 @@ nq： 不排队调度
 <h5><span id="过期策略">过期策略：</span><a href="#过期策略" class="header-anchor">#</a></h5><h5><span id="被动过期-一致性低-缓存超时">被动过期 （一致性低， 缓存超时）</span><a href="#被动过期-一致性低-缓存超时" class="header-anchor">#</a></h5><p>对一致性要求较低的系统，可以采用常规的缓存超时策略，此类策略属于被动过期。<br>存放数据时，永不过期的数据不要与有过期策略的数据放在一起， 早期的版本memcache曾经有一个这样的bug， 永不过期的数据被有过期策略的数据踢走了。不要把所有的数据的过期时间设为同一个时间， 这样可能造成大规模的数据同时过期，hit rate变小， 对数据库的查询数瞬时变大，造成数据库的压力。 </p>
 <h5><span id="主动过期一致性高-事件过期-异步过期-变化事件">主动过期（一致性高， 事件过期， 异步过期，  变化事件）</span><a href="#主动过期一致性高-事件过期-异步过期-变化事件" class="header-anchor">#</a></h5><p>对一致性要求较高的系统，可以采用事件过期策略，此类策略属于主动过期。<br>      某个组件的结构发生变化，或者某个业务对象状态发生变化，把组件id或业务对象id放入过期队列中， 缓存节点异步读取这些数据， 将对应cache的对象移除。亦可把变化封装成事件放入过期队列中， 由代理处理这个事件， 异步的移除相应的缓存。         </p>
 <h5><span id="基于版本的过期方式">基于版本的过期方式</span><a href="#基于版本的过期方式" class="header-anchor">#</a></h5><p>在存储空间较大的前提下，借鉴mvcc的概念，每次更改数据时增加一个副本，并带版本号元数据。 然后由一个代理定时的删除低版本的过期的数据。</p>
-<h2><span id="服务端缓存">服务端缓存</span><a href="#服务端缓存" class="header-anchor">#</a></h2><p>   缓存服务端常用的有memcache。 Nosql的解决方案有Redies，Redies在作为cache时往往配置为无持久化的形式 。两者数据模型都是key-value的。 Redies比老牌的memcache能提供更好的性能， 更快的速度。 Memcache 没有自建的replicaion 机制, 可靠性需要在客户端以双写支持。 Redies可以看成自带持久化机制的Write-back缓存，在write-behind缓存中，数据的读取和更新通过缓存进行，与write-through缓存不同，更新的数据并不会立即持久化。相反，在缓存中一旦进行更新操作，缓存就会跟踪脏记录列表，并定期将当前的脏记录集刷新到外部存储中， 在Redies中这种机制叫做AOF。 </p>
-<h2><span id="缓存分层">缓存分层</span><a href="#缓存分层" class="header-anchor">#</a></h2><h5><span id="边缘cache-可用cdn实现往往是服务器端缓存存静态数据">边缘cache: 可用CDN实现，往往是服务器端缓存，存静态数据。</span><a href="#边缘cache-可用cdn实现往往是服务器端缓存存静态数据" class="header-anchor">#</a></h5><p>可以存Html页面， 脚本， 样式， 图片，页面片段等。</p>
-<h5><span id="页面级缓存-往往是本地缓存-数据相对动态">页面级缓存： 往往是本地缓存， 数据相对动态。</span><a href="#页面级缓存-往往是本地缓存-数据相对动态" class="header-anchor">#</a></h5><h5><span id="逻辑缓存-逻辑计算结果的缓存">逻辑缓存:  逻辑计算结果的缓存</span><a href="#逻辑缓存-逻辑计算结果的缓存" class="header-anchor">#</a></h5><p>可以存储索引聚合数据，比如  BI里的数据聚合表。也可以存储耗时查询数据 ，比如搜索的结果。也可以存储业务相关数据， 比如对象模型的有向图可以整个缓存起来。在微博系统中，所有@你的微博是相对耗时， 可以 考虑作为逻辑缓存。</p>
+<p><del>## 服务端缓存</del></p>
+<p><del>缓存服务端常用的有memcache。 Nosql的解决方案有Redies，Redies在作为cache时往往配置为无持久化的形式 。两者数据模型都是key-value的。 Redies比老牌的memcache能提供更好的性能， 更快的速度。 Memcache 没有自建的replicaion 机制, 可靠性需要在客户端以双写支持。 Redies可以看成自带持久化机制的Write-back缓存，在write-behind缓存中，数据的读取和更新通过缓存进行，与write-through缓存不同，更新的数据并不会立即持久化。相反，在缓存中一旦进行更新操作，缓存就会跟踪脏记录列表，并定期将当前的脏记录集刷新到外部存储中， 在Redies中这种机制叫做AOF</del></p>
+<h2><span id="缓存分层">缓存分层</span><a href="#缓存分层" class="header-anchor">#</a></h2><h5><span id="边缘cache">边缘cache</span><a href="#边缘cache" class="header-anchor">#</a></h5><p>可用CDN实现，往往是服务器端缓存，存静态数据。<br>可以存Html页面， 脚本， 样式， 图片，页面片段等。</p>
+<h5><span id="页面级缓存">页面级缓存</span><a href="#页面级缓存" class="header-anchor">#</a></h5><p>往往是本地缓存， 数据相对动态。</p>
+<h5><span id="逻辑缓存-逻辑计算结果的缓存">逻辑缓存:  逻辑计算结果的缓存</span><a href="#逻辑缓存-逻辑计算结果的缓存" class="header-anchor">#</a></h5><p>可以存储索引聚合数据，比如  BI里的数据聚合表。也可以存储耗时查询数据 ，比如搜索的结果。也可以存储业务相关数据， 比如对象模型的有向图可以整个缓存起来。在微博系统中，所有@你的微博是相对耗时， 可以 考虑作为逻辑缓存。</p>
 <h5><span id="数据源级缓存-缓存数据源结果集">数据源级缓存： 缓存数据源结果集</span><a href="#数据源级缓存-缓存数据源结果集" class="header-anchor">#</a></h5><p><del>比如Hibernate缓存中的QueryCache用来缓存查询语句, 及查询结果集中对象的Id与Type. 当再次使用已缓存的Query时, 就可以通过对象的Id与Type在二级缓存中查找实际的对象.</del></p>
 <p><del>Hibernate提供了短生命周期的缓存， 也叫事务级别的缓存。长生命周期的缓存，也叫应用级别的缓存。</del></p>
 <p>  缓存分层之间的失效方式： 1. 映射关系  2. 日志 ＋ 重试</p>
@@ -21828,7 +21828,8 @@ nq： 不排队调度
 <p>核心缓存会直接把您传递给它的数据存储在一个树型结构中。键／值对被存储在树的节点上，出于复制或持续性的需要它们都被序列化了。</p>
 <p>POJO 缓存则采用比较复杂的机制——利用字节码编织来内省（introspecting）用户类，并向用户类的域添加侦听器，一旦域值有任何变化，侦听器会立刻 通知缓存。例如，如果要在POJO缓存中存储一个庞大、复杂的对象，会导致POJO缓存内省对象的字节码，最终只把该对象的原始域存储到树结构中。一旦域 值有所变化，缓存只复制这个改变了的域值而不会去复制整个用户类，这是高效的细粒度复制。</p>
 <p>在缓存了细粒度的对象后， 造成的一个问题是数据的冗余。 例如查询条件1的返回的是model1, model2, model3, 查询条件2返回的是model2, model3, model4. model2, model3在缓存里就存了两份， 造成了冗余。这时可以分离出一个索引层，索引层存储缓存对象的地址， 这样可以节约大量的存储空间。 例如可以存储model1- model4的索引， 再从缓存中取得到实际的model.  在数据库中， 这种方式叫look up table. 如果系统更复杂， 可以采取缓存的partition加多级索引的方式。</p>
-<h2><span id="缓存与一致性">缓存与一致性</span><a href="#缓存与一致性" class="header-anchor">#</a></h2><p>  缓存多副本之间的同步：<br>  可分为replication和invalidaiton机制。 Replication机制表示一旦有数据的更新， 其余副本都会同步复制一份更新后的数据。Replication机制复制时slave会对master节点有拖累， 这时可以考虑采取invalidation机制。 Invalidation机制在jboss cache里已有实现, 一旦有更新， 广播消息， 失效所有其他的副本，让其重新去获得该值。 可通过这种方式缓存大对象以减少在实例中复制对象的代价。根据用户在一定时间段内上网地点固定不变的规律，用户始终都是访问同一个机房， 针对主节点的本地缓存在有更新时可以异步发invalidation消息，副本节点可以慢慢的再加载回这个大对象， 这样可以提高用户响应度。这种方式也可用在边缘缓存中。对于无法分组的数据， 比如在某时间段的用户认证数据需要保证副本同步，最好的方式是清除相应的副本， 让它在下次使用时初始化。 </p>
+<p><del>## 缓存与一致性</del></p>
+<p>  <del>缓存多副本之间的同步：</del><br>  <del>可分为replication和invalidaiton机制。 Replication机制表示一旦有数据的更新， 其余副本都会同步复制一份更新后的数据。Replication机制复制时slave会对master节点有拖累， 这时可以考虑采取invalidation机制。 Invalidation机制在jboss cache里已有实现, 一旦有更新， 广播消息， 失效所有其他的副本，让其重新去获得该值。 可通过这种方式缓存大对象以减少在实例中复制对象的代价。根据用户在一定时间段内上网地点固定不变的规律，用户始终都是访问同一个机房， 针对主节点的本地缓存在有更新时可以异步发invalidation消息，副本节点可以慢慢的再加载回这个大对象， 这样可以提高用户响应度。这种方式也可用在边缘缓存中。对于无法分组的数据， 比如在某时间段的用户认证数据需要保证副本同步，最好的方式是清除相应的副本， 让它在下次使用时初始化</del></p>
 <h2><span id="缓存与数据库的数据同步">缓存与数据库的数据同步</span><a href="#缓存与数据库的数据同步" class="header-anchor">#</a></h2><p>  在应用层， 可以根据业务场景对一致性的要求不同， 给数据分配不同的队列，即<br>一致性分级队列。 强一致性的场景如自己发布的评论， 自己应该及时看到。 而别人看到我的评论属于会话一致性， 一致性要求比较弱。 这样可以把一致性要求高的业务分配更多资源， 做到快速同步。<br>  缓存与数据库同步的异步化也是提高响应度的方式， 在write-behind的方式中，所有的数据的操作都在缓存中， 更新的数据并不会立即传到数据库。相反，在缓存中一旦进行更新操作，缓存就会跟踪脏记录列表，并定期将当前的脏记录集刷新到数据库中。</p>
 <p>  <del>在DAO层的hibernate针对一致性的要求提出了类似DBMS的事务级别的4个配置项。 非严格读写型(nonstrict-read-write)策略提供弱一致性，不保证缓存与数据库中数据的一致性。如果存在两个事务同时访问缓存中相同数据的可能，必须为该数据配置一个很短的数据过期时间，从而尽量避免脏读。对于极少被修改，并且允许偶尔脏读的数据，可以采用这种并发访问策略。 事务策略(transactional )只可用于托管环境，如有必要，它还保证完全的事务隔离级别直到可重复读。事务策略可以用在强一致性的场景中。</del></p>
 <h2><span id="缓存与场景">缓存与场景</span><a href="#缓存与场景" class="header-anchor">#</a></h2><h5><span id="1-非共性数据缓存-eg-微博-博客个人首页">1. 非共性数据缓存 eg. 微博， 博客个人首页</span><a href="#1-非共性数据缓存-eg-微博-博客个人首页" class="header-anchor">#</a></h5><p>  问题：缓存所有的数据性价比不高，　命中率不高<br>  解决方案：</p>
@@ -21856,11 +21857,11 @@ nq： 不排队调度
 <p><strong>缓存类型：</strong><br>   Read-through  读贯穿<br>   Write-trrough  写贯穿<br>   Write-behind</p>
 </blockquote>
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="http://www.infoq.com/cn/news/2011/03/nosql-architecture-practice-3">NoSQL架构实践（三）——以NoSQL为缓存</a> </li>
+<li><a href="http://www.infoq.com/cn/news/2011/03/nosql-architecture-practice-3">NoSQL架构实践（三）——以NoSQL为缓存</a>   </li>
 <li><a href="http://wenku.baidu.com/view/018e3f2d7375a417866f8fbc.html">大型网站架构系列之五,缓存策略设计概要</a>  失效</li>
 <li><a href="http://timyang.net/programming/memcache-mutex/">Memcache mutex设计模式</a> </li>
 <li><a href="http://superleo.iteye.com/blog/265823">深入理解JBoss Cache3.0——Naga</a>  *</li>
-<li><a href="http://www.infoq.com/cn/articles/write-behind-caching">极端事务处理模式：Write-behind缓存</a> </li>
+<li><a href="http://www.infoq.com/cn/articles/write-behind-caching">极端事务处理模式：Write-behind缓存</a>   </li>
 <li><a href="http://coolshell.cn/articles/6790.html">多版本并发控制(MVCC)在分布式系统中的应用</a></li>
 </ol>
 ]]></content>
