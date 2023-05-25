@@ -26,10 +26,8 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2018/01/21/cacheSummary/cacheSummary.jpg">
-<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2018/01/21/cacheSummary/write-read-through.PNG">
-<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2018/01/21/cacheSummary/cache-aside.PNG">
 <meta property="article:published_time" content="2018-01-21T01:59:17.000Z">
-<meta property="article:modified_time" content="2023-05-25T04:01:06.061Z">
+<meta property="article:modified_time" content="2023-05-25T07:21:58.766Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="cache">
 <meta property="article:tag" content="中间件">
@@ -230,7 +228,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-25 12:01:06" itemprop="dateModified" datetime="2023-05-25T12:01:06+08:00">2023-05-25</time>
+                <time title="修改时间：2023-05-25 15:21:58" itemprop="dateModified" datetime="2023-05-25T15:21:58+08:00">2023-05-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -265,16 +263,8 @@
 <!-- toc -->
 
 <ul>
-<li><a href="#%E5%85%B3%E9%94%AE%E8%AF%8D">关键词</a></li>
 <li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
-<li><a href="#%E5%A4%B1%E6%95%88%E7%AD%96%E7%95%A5%E7%BC%93%E5%AD%98%E6%9B%B4%E6%96%B0-9">失效策略(缓存更新) [9]</a><ul>
-<li><a href="#%E7%BC%93%E5%AD%98%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5-readwrite-through%E6%A8%A1%E5%BC%8F">缓存更新策略: Read&#x2F;Write Through模式</a></li>
-<li><a href="#%E7%BC%93%E5%AD%98%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5-cache-aside-%E6%A8%A1%E5%BC%8F">缓存更新策略: Cache Aside 模式</a></li>
-<li><a href="#%E7%BC%93%E5%AD%98%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5-write-behind%E6%A8%A1%E5%BC%8F">缓存更新策略: Write Behind模式</a></li>
-</ul>
-</li>
 <li><a href="#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F">缓存穿透</a></li>
-<li><a href="#%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98-5">二级缓存 [5?]</a></li>
 <li><a href="#%E5%91%BD%E4%B8%AD%E7%8E%87">命中率</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
@@ -282,59 +272,14 @@
 
 </div>
 
-<h1><span id="关键词">关键词</span><a href="#关键词" class="header-anchor">#</a></h1><p> 失效策略(缓存更新)、  缓存与数据库的一致性、 二级缓存（本地缓存+远程缓存）</p>
 <h1><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2018/01/21/cacheSummary/cacheSummary.jpg" class title="cache总结">
 
-<h1><span id="失效策略缓存更新-9">失效策略(缓存更新) [9]</span><a href="#失效策略缓存更新-9" class="header-anchor">#</a></h1><h3><span id="缓存更新策略-readx2fwrite-through模式">缓存更新策略: Read&#x2F;Write Through模式</span><a href="#缓存更新策略-readx2fwrite-through模式" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2018/01/21/cacheSummary/write-read-through.PNG" class title="Read&#x2F;Write Through">
-<p>Read Through : 被动失效<br>Write Through ： 主动失效</p>
-<h3><span id="缓存更新策略-cache-aside-模式">缓存更新策略: Cache Aside 模式</span><a href="#缓存更新策略-cache-aside-模式" class="header-anchor">#</a></h3><p>Cache Aside 模式和上面的 Read&#x2F;Write Through 模式非常像，它们处理读请求的逻辑是完全一样的，唯一的一个小差别就是，Cache Aside 模式在更新数据的时候，并不去尝试更新缓存，而是去删除缓存。</p>
-<img src="/www6vHomeHexo/2018/01/21/cacheSummary/cache-aside.PNG" class title="Cache Aside模式">
-<p><strong>普遍使用这种方式</strong></p>
-<p>场景：<br>订单服务收到更新数据请求之后，先更新数据库，如果更新成功了，再尝试去删除缓存中订 单，如果缓存中存在这条订单就删除它，如果不存在就什么都不做，然后返回更新成功。这 条更新后的订单数据将在下次被访问的时候加载到缓存中。使用 Cache Aside 模式来更新 缓存，可以非常有效地避免并发读写导致的脏数据问题。</p>
-<h3><span id="缓存更新策略-write-behind模式">缓存更新策略: Write Behind模式</span><a href="#缓存更新策略-write-behind模式" class="header-anchor">#</a></h3><p>linux page cache: dirty page刷盘。<br>kafka使用page cache异步刷盘。</p>
 <h1><span id="缓存穿透">缓存穿透</span><a href="#缓存穿透" class="header-anchor">#</a></h1><p>缓存穿透: 指缓存和数据库中都没有的数据，而用户不断发起请求，如发起为id为“-1”的数据或id为特别大不存在的数据.</p>
 <p>解决方案:</p>
 <ol>
 <li>回种空值</li>
 <li>使用bloomfilter</li>
 </ol>
-<h1><span id="二级缓存-5">二级缓存 [5?]</span><a href="#二级缓存-5" class="header-anchor">#</a></h1><ul>
-<li>本地缓存+远程缓存<ul>
-<li>远端Cache推全量或者部分的数据到本地cache，并设置过期时间【初始化】</li>
-<li>查询流程<ul>
-<li>先从本地缓存拿，如果有数据且有效，就直接返回</li>
-<li>如果没有命中<ul>
-<li>1.本地查询远端服务，并拿到结果</li>
-<li>2.本地更新远端缓存</li>
-<li>3.更新本地缓存</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>本地cache失效+更新流程,本地防穿透【1】<ul>
-<li>同步更新缓存<ul>
-<li>访问同一个key的业务线程只有一个线程穿透到远端Cache，其他线程等待穿透线程的返回结果[加锁]</li>
-</ul>
-</li>
-<li>异步更新缓存<ul>
-<li>1.过期时间到了后，产生过期事件，延长数据有效期，返回旧的数据</li>
-<li><ol start="2">
-<li>检查过期事件，后台线程池更新缓存数据，并重新设置有效时间</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>eg. Google LoadingCache 以上两种方式都有</li>
-</ul>
-</li>
-<li>远端cache，防穿透<ul>
-<li>远端cache访穿透采用永久缓存数据，每次查询都能查到值.</li>
-<li>通过辅助信息判断逻辑过期, 再从远端服务异步拉数据刷新远端cache。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <h1><span id="命中率">命中率</span><a href="#命中率" class="header-anchor">#</a></h1><ul>
 <li>cache命中率不高<ul>
 <li>会增加接口响应时间</li>
@@ -344,13 +289,11 @@
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a target="_blank" rel="noopener" href="https://www.geek-share.com/detail/2615401101.html">应用系统数据缓存设计</a> 淘宝技术部 *** 失效</li>
 <li>Local Cache的小TIP  阿里 放翁（文初）</li>
-<li><a target="_blank" rel="noopener" href="https://www.csdn.net/article/1970-01-01/2825234">阿里云分布式缓存OCS与DB之间的数据一致性</a> 杨成虎</li>
-<li><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/55842">缓存失效竟然可以这么解？</a> serana_cai</li>
-<li>移动选购线缓存实践 赵思奇 *** </li>
-<li>《亿级流量网站架构核心技术》 第9章 张开涛</li>
+<li>xxx</li>
+<li>xxx</li>
+<li>xxx</li>
+<li>xxx</li>
 <li>cache 58沈剑</li>
-<li><a target="_blank" rel="noopener" href="https://coolshell.cn/articles/17416.html">缓存更新的套路</a>  coolshell ***</li>
-<li>《后端存储实战课 - MySQL如何应对高并发（一）：使用缓存保护MySQL》  李玥</li>
 </ol>
 
     </div>
@@ -467,7 +410,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">424</span>
+          <span class="site-state-item-count">426</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -480,7 +423,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/www6vHomeHexo/tags/">
           
-        <span class="site-state-item-count">129</span>
+        <span class="site-state-item-count">130</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
