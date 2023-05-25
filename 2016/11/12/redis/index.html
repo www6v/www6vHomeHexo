@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://user-images.githubusercontent.com/5608425/66014512-ca1ae900-e501-11e9-93d7-840409a862c5.png">
 <meta property="og:image" content="https://user-images.githubusercontent.com/5608425/66014514-cab37f80-e501-11e9-9be8-a247690b5f9f.png">
 <meta property="article:published_time" content="2016-11-12T15:29:16.000Z">
-<meta property="article:modified_time" content="2023-05-22T09:57:18.370Z">
+<meta property="article:modified_time" content="2023-05-25T11:03:05.702Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-22 17:57:18" itemprop="dateModified" datetime="2023-05-22T17:57:18+08:00">2023-05-22</time>
+                <time title="修改时间：2023-05-25 19:03:05" itemprop="dateModified" datetime="2023-05-25T19:03:05+08:00">2023-05-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,11 +268,6 @@
 <!-- toc -->
 
 <ul>
-<li><a href="#redis%E9%9B%86%E7%BE%A4">redis集群</a><ul>
-<li><a href="#sentinel">sentinel</a></li>
-<li><a href="#redis-cluster">redis cluster</a></li>
-</ul>
-</li>
 <li><a href="#%E4%BA%8B%E5%8A%A1">事务</a></li>
 <li><a href="#%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5">回收策略</a></li>
 <li><a href="#hash%E5%92%8Cscan%E5%91%BD%E4%BB%A4">hash和scan命令</a></li>
@@ -289,26 +284,6 @@
 
 <img src="/www6vHomeHexo/2016/11/12/redis/redis.jpg" class title="Redis 总结">
 
-
-<h2><span id="redis集群">redis集群</span><a href="#redis集群" class="header-anchor">#</a></h2><h3><span id="sentinel">sentinel</span><a href="#sentinel" class="header-anchor">#</a></h3><p>   master-slave异步复制, 所以会丢消息</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">参数: </span><br><span class="line"># 至少有一个slave复制</span><br><span class="line">min-slaves-to-write 1   </span><br><span class="line"># slave节点最大10s的延迟</span><br><span class="line">min-slaves-max-lag 10   </span><br></pre></td></tr></table></figure>
-
-<h3><span id="redis-cluster">redis cluster</span><a href="#redis-cluster" class="header-anchor">#</a></h3><p><strong>整体架构</strong></p>
-<ol>
-<li>去中心化的;</li>
-<li>所有数据划分为16384个slots，每个节点负责其中一部分slots;</li>
-</ol>
-<p><strong>容错</strong></p>
-<ol>
-<li>主从容错，主升从。</li>
-<li>PFail（Possibly Fail） -&gt; 临时不可用<br>Fail -&gt; 确定不可用， PFail Count&gt; 集群的1&#x2F;2</li>
-</ol>
-<p><strong>Gossip</strong>协议<br>集群节点采用 Gossip 协议来广播自己的状态以及自己对整个集群认知的改变;<br>可能下线 (PFAIL-Possibly Fail) &amp;&amp; 确定下线 (Fail)</p>
-<p><strong>slot迁移</strong><br>在迁移过程中，客户端访问的流程会有很大的变化。<br>迁移是会影响服务效率的，同样的指令在正常情况下一个 ttl 就能完成，而在迁移中得 3 个 ttl 才能搞定。</p>
-<p><strong>网络抖动</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 表示当某个节点持续 timeout 的时间失联时，才可以认定该节点出现故障</span><br><span class="line">cluster-node-timeout </span><br></pre></td></tr></table></figure>
-
-<p><strong>槽位迁移感知</strong><br>2个error指令<br>1.<strong>MOVED错误</strong>：  用来纠正槽位<br>  槽的负责权已经从一个节点转移到了另一节点<br>2. <strong>ASK错误， ASKING命令</strong>： 用来临时纠正槽位<br>    只是两个节点在迁移槽的过程中使用的一种临时措施</p>
 <h2><span id="事务">事务</span><a href="#事务" class="header-anchor">#</a></h2><table>
 <thead>
 <tr>
@@ -407,10 +382,7 @@
 <ol>
 <li>原理 4：雷厉风行 —— 管道</li>
 <li>原理 5：同舟共济 —— 事务</li>
-<li>原理 8：有备无患 —— 主从同步</li>
 <li>原理 3：未雨绸缪 —— 持久化</li>
-<li>集群 1：李代桃僵 —— Sentinel</li>
-<li>集群 3：众志成城 —— Cluster</li>
 <li>大海捞针 ——— scan</li>
 <li>鞭辟入里 ——— 线程IO模型</li>
 </ol>
@@ -541,7 +513,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">426</span>
+          <span class="site-state-item-count">427</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
