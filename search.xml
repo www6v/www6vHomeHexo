@@ -13010,6 +13010,43 @@ func new(Type) *Type
       </tags>
   </entry>
   <entry>
+    <title>chatgpt  Prompt</title>
+    <url>/www6vHomeHexo/2021/05/26/chatgptPrompt/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h3><span id="通用">通用</span><a href="#通用" class="header-anchor">#</a></h3><p>prompt &#x3D;  定义角色+背景信息+任务目标+输出要求</p>
+<h3><span id="文本类">文本类</span><a href="#文本类" class="header-anchor">#</a></h3><ul>
+<li><p>归纳</p>
+<ul>
+<li>使用markdown格式写富爸爸穷爸爸的思维导图，以代码格式输出</li>
+<li>以脑图的方式归纳上文</li>
+<li>请用提纲的方式来归纳上文</li>
+<li>请用简练的列提纲的方式来归纳上文</li>
+</ul>
+</li>
+<li><p>思维链</p>
+</li>
+</ul>
+<h3><span id="代码相关">代码相关</span><a href="#代码相关" class="header-anchor">#</a></h3><ul>
+<li>代码转换<br> 请把下面这段python代码转换成Java代码</li>
+<li>注释<br> 你作为一名程序员，请解释一下下面这段代码</li>
+<li>防御性编程<br> 请为这段代码增加防御性编程的功能</li>
+<li>时间复杂度<br> 这段代码的时间复杂度是多少</li>
+<li>流程图<br> 画出redis master和slave之间同步的流程图</li>
+</ul>
+<h3><span id="没啥用">没啥用</span><a href="#没啥用" class="header-anchor">#</a></h3><p>请用简单的语句来归纳上文，归纳的语句可以生成脑图<br>请用金字塔思维的方式来简单的归纳上文</p>
+]]></content>
+      <categories>
+        <category>AI</category>
+        <category>chatgpt</category>
+      </categories>
+      <tags>
+        <tag>chatgpt</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>分库分表</title>
     <url>/www6vHomeHexo/2021/05/26/tableSharding/</url>
     <content><![CDATA[<p></p>
