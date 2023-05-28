@@ -13421,7 +13421,7 @@ func new(Type) *Type
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<img src="/www6vHomeHexo/2021/05/24/redisOptimize/redis-suggest.jpg" class width="450" height="300">
+<h2><span id="优化建议">优化建议</span><a href="#优化建议" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2021/05/24/redisOptimize/redis-suggest.jpg" class width="450" height="300">
 
 <h2><span id="优化建议2">优化建议[2]</span><a href="#优化建议2" class="header-anchor">#</a></h2><ul>
 <li><p>对象内存优化</p>
@@ -13435,9 +13435,23 @@ func new(Type) *Type
 <li><p>序列化 + 压缩<br>Renault（序列化： Json or Hession，压缩： Hession自带压缩 ）</p>
 </li>
 </ul>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h2><span id="提高redis命中率-34">提高redis命中率 [3][4]</span><a href="#提高redis命中率-34" class="header-anchor">#</a></h2><ul>
+<li>缓存粒度<br>缓存粒度越小，命中率越高</li>
+<li>合理调整缓存有效期的时间<br>  避免缓存同时失效</li>
+<li>预加载</li>
+<li>防止缓存击穿和穿透[5]</li>
+<li>增加存储容量<br>容量不足时会触发Redis内存淘汰机制<ul>
+<li>清空策略 [6]<br> FIFO(first in first out)<br> LFU(less frequently used)<br> LRU(least recently used)</li>
+</ul>
+</li>
+</ul>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li>加餐（六）| Redis的使用规范小建议</li>
-<li><a href="https://zhuanlan.zhihu.com/p/506470564">Redis 内存优化在 vivo 的探索与实践</a> vivo</li>
+<li><a href="https://zhuanlan.zhihu.com/p/506470564">Redis 内存优化在 vivo 的探索与实践</a> vivo </li>
+<li><a href="https://segmentfault.com/a/1190000023730820">如何提高redis缓存命中率</a></li>
+<li><a href="https://www.cnblogs.com/chenhaoyu/p/11308753.html">关于如何提高缓存命中率（redis）</a></li>
+<li><a href="/www6vHomeHexo/2022/03/28/redisReliability-1/" title="Redis雪崩、击穿、穿透">Redis雪崩、击穿、穿透</a></li>
+<li><a href="https://tech.meituan.com/2017/03/17/cache-about.html">缓存那些事</a></li>
 </ol>
 ]]></content>
       <categories>
