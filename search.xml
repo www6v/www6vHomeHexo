@@ -1456,11 +1456,26 @@
 
 <h2><span id="log-模型1">Log 模型[1]</span><a href="#log-模型1" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2023/01/28/observabilityLog/log.JPG" class title="log">
 
-<h2><span id="产品">产品</span><a href="#产品" class="header-anchor">#</a></h2><p>ELK，EFK</p>
+<h2><span id="日志框架">日志框架</span><a href="#日志框架" class="header-anchor">#</a></h2><ul>
+<li>ELK，EFK</li>
+<li>Loki-基于tag</li>
+</ul>
+<h2><span id="日志采集">日志采集</span><a href="#日志采集" class="header-anchor">#</a></h2><ul>
+<li>Java应用中<ul>
+<li>API<ul>
+<li>log4j</li>
+</ul>
+</li>
+<li>基于AOP的采集[4]<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">    <span class="meta">@LogRecord(</span></span><br><span class="line"><span class="meta">     content = &quot;修改了订单的配送地址：从“#oldAddress”, 修改到“#request.address”&quot;,</span></span><br><span class="line"><span class="meta">     operator = &quot;#request.userName&quot;, bizNo=&quot;#request.deliveryOrderNo&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">modifyAddress</span><span class="params">(updateDeliveryRequest request, String oldAddress)</span>&#123;</span><br><span class="line">    <span class="comment">// 更新派送信息 电话，收件人、地址</span></span><br><span class="line">    doUpdate(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>容器中[2]</li>
+</ul>
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li>[微服务架构实战160讲 第七模块 ：微服务监控告警Prometheus架构和实践 119.监控模式分类] 杨波 partial</li>
 <li><a href="https://yq.aliyun.com/articles/674327">容器日志采集利器Log-Pilot</a>  阿里开源的Log-Pilot 容器日志采集模式</li>
 <li><a href="https://microservices.io/patterns/microservices.html">Pattern: Microservice Architecture</a></li>
+<li><a href="https://tech.meituan.com/2021/09/16/operational-logbook.html">如何优雅地记录操作日志？</a>  美团 ***</li>
 <li><a href="https://github.com/oldratlee/translations/blob/master/log-what-every-software-engineer-should-know-about-real-time-datas-unifying/README.md">日志：每个软件工程师都应该知道的有关实时数据的统一概念</a>  论文翻译 *** 未</li>
 </ol>
 ]]></content>
@@ -1722,14 +1737,24 @@
 
 
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://wenku.baidu.com/view/7f2c9810c8aedd3383c4bb4cf7ec4afe05a1b14c?fr=xueshu">基于Web应用层的DDoS攻击模型研究</a> *</li>
-<li>《Web 漏洞挖掘实战》  王昊天</li>
-<li>《13 | Linux系统安全：多人共用服务器，如何防止别人干“坏事”？》  何为舟</li>
-<li>xxx</li>
-<li>xxx</li>
-<li>《模块串讲（一）丨Web安全：如何评估用户数据和资产数据面临的威胁？》 何为舟</li>
-<li>xxx</li>
-<li>《红蓝攻防》</li>
+<li><p><a href="https://wenku.baidu.com/view/7f2c9810c8aedd3383c4bb4cf7ec4afe05a1b14c?fr=xueshu">基于Web应用层的DDoS攻击模型研究</a> *</p>
+</li>
+<li><p>《Web 漏洞挖掘实战》  王昊天</p>
+</li>
+<li><p>《13 | Linux系统安全：多人共用服务器，如何防止别人干“坏事”？》  何为舟</p>
+</li>
+<li><p>xxx</p>
+</li>
+<li><p>xxx</p>
+</li>
+<li><p>《模块串讲（一）丨Web安全：如何评估用户数据和资产数据面临的威胁？》 何为舟</p>
+</li>
+<li><p>xxx</p>
+</li>
+<li><p>《红蓝攻防》</p>
+</li>
+<li><p><a href="https://tech.meituan.com/2021/04/08/threat-modeling-security.html">实践之后，我们来谈谈如何做好威胁建模</a>  美团  未</p>
+</li>
 </ol>
 ]]></content>
       <categories>
@@ -2582,16 +2607,22 @@
 <li>异地多活set化部署<br>Unit由多个set组成<br>建议单写多读的架构<br>set不一定限制在一个机房，可跨机房、跨地域部署</li>
 </ul>
 </li>
-<li><p>系统中的高可用 examples<br><a href="https://mp.weixin.qq.com/s/Br6J3nC51SnRTXBArfs_ug">Kubernetes 之 master高可用集群搭建</a><br>Redlock - redis分布式锁的高可用</p>
+<li><p>系统中的高可用</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/Br6J3nC51SnRTXBArfs_ug">Kubernetes 之 master高可用集群搭建</a></li>
+<li>Redlock - redis分布式锁的高可用</li>
+<li><a href="https://tech.meituan.com/2021/05/20/shepherd-api-gateway.html">百亿规模API网关服务Shepherd的设计与实现</a><ul>
+<li>服务隔离<br>集群隔离  请求隔离</li>
+<li>稳定性<br>流量管控, 请求缓存, 超时管理, 熔断降级</li>
+</ul>
+</li>
+</ul>
 </li>
 </ul>
 <h3><span id="中间件层">中间件层</span><a href="#中间件层" class="header-anchor">#</a></h3><ul>
-<li><p>kafka 高可用</p>
-</li>
-<li><p>zk高可用</p>
-</li>
-<li><p>系统中的高可用 examples<br><a href="https://mp.weixin.qq.com/s/GMsYVgPmoCbdWW4FQthrAA">面试|图解 kafka 的高可用机制</a>  isr</p>
-</li>
+<li>kafka 高可用</li>
+<li>zk高可用</li>
+<li>系统中的高可用<br><a href="https://mp.weixin.qq.com/s/GMsYVgPmoCbdWW4FQthrAA">面试|图解 kafka 的高可用机制</a>  isr</li>
 </ul>
 <h3><span id="数据层-3-p">数据层   [3] [P]</span><a href="#数据层-3-p" class="header-anchor">#</a></h3><ul>
 <li><p>数据复制</p>
@@ -2608,7 +2639,7 @@
 </li>
 <li><p>一致性和共识<br>raft - etcd<br>zab - zookeeper</p>
 </li>
-<li><p>系统中的高可用  examples<br><a href="https://mp.weixin.qq.com/s/fh_9Mk-FVFSkX5pmsc8HPA">MySQL 同步复制及高可用方案总结</a>  MHA, MMM<br><a href="https://mp.weixin.qq.com/s/Iz7cwun1y_oLUV9fDDh0UQ">这可能是目前最全的Redis高可用技术解决方案总结</a>  Master-slave, Cluster<br><a href="https://mp.weixin.qq.com/s/yH5JVD422k6FNtiqAGw75Q">干货 | 阿里巴巴HBase高可用8年抗战回忆录</a><br>etcd - raft</p>
+<li><p>系统中的高可用<br><a href="https://mp.weixin.qq.com/s/fh_9Mk-FVFSkX5pmsc8HPA">MySQL 同步复制及高可用方案总结</a>  MHA, MMM<br><a href="https://mp.weixin.qq.com/s/Iz7cwun1y_oLUV9fDDh0UQ">这可能是目前最全的Redis高可用技术解决方案总结</a>  Master-slave, Cluster<br><a href="https://mp.weixin.qq.com/s/yH5JVD422k6FNtiqAGw75Q">干货 | 阿里巴巴HBase高可用8年抗战回忆录</a><br>etcd - raft</p>
 </li>
 </ul>
 <h1><span id="高可用-运营7">高可用-运营[7]</span><a href="#高可用-运营7" class="header-anchor">#</a></h1><h3><span id="灰度发布"><strong>灰度发布</strong></span><a href="#灰度发布" class="header-anchor">#</a></h3><h3><span id="监控告警">监控+告警</span><a href="#监控告警" class="header-anchor">#</a></h3><h3><span id="安全性-防攻击设计"><strong>安全性、防攻击设计</strong></span><a href="#安全性-防攻击设计" class="header-anchor">#</a></h3><h3><span id="故障演练混沌实验"><strong>故障演练（混沌实验）</strong></span><a href="#故障演练混沌实验" class="header-anchor">#</a></h3><h3><span id="接口拨测巡检">接口拨测+巡检</span><a href="#接口拨测巡检" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>

@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2023/01/28/observabilityLog/log.JPG">
 <meta property="article:published_time" content="2023-01-28T14:16:42.000Z">
-<meta property="article:modified_time" content="2023-02-25T02:57:47.494Z">
+<meta property="article:modified_time" content="2023-05-29T09:12:56.485Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="可观测性">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-25 10:57:47" itemprop="dateModified" datetime="2023-02-25T10:57:47+08:00">2023-02-25</time>
+                <time title="修改时间：2023-05-29 17:12:56" itemprop="dateModified" datetime="2023-05-29T17:12:56+08:00">2023-05-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -260,11 +260,26 @@
 
 <h2><span id="log-模型1">Log 模型[1]</span><a href="#log-模型1" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2023/01/28/observabilityLog/log.JPG" class title="log">
 
-<h2><span id="产品">产品</span><a href="#产品" class="header-anchor">#</a></h2><p>ELK，EFK</p>
+<h2><span id="日志框架">日志框架</span><a href="#日志框架" class="header-anchor">#</a></h2><ul>
+<li>ELK，EFK</li>
+<li>Loki-基于tag</li>
+</ul>
+<h2><span id="日志采集">日志采集</span><a href="#日志采集" class="header-anchor">#</a></h2><ul>
+<li>Java应用中<ul>
+<li>API<ul>
+<li>log4j</li>
+</ul>
+</li>
+<li>基于AOP的采集[4]<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    <span class="meta">@LogRecord(</span></span><br><span class="line"><span class="meta">     content = &quot;修改了订单的配送地址：从“#oldAddress”, 修改到“#request.address”&quot;,</span></span><br><span class="line"><span class="meta">     operator = &quot;#request.userName&quot;, bizNo=&quot;#request.deliveryOrderNo&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">modifyAddress</span><span class="params">(updateDeliveryRequest request, String oldAddress)</span>&#123;</span><br><span class="line">    <span class="comment">// 更新派送信息 电话，收件人、地址</span></span><br><span class="line">    doUpdate(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>容器中[2]</li>
+</ul>
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li>[微服务架构实战160讲 第七模块 ：微服务监控告警Prometheus架构和实践 119.监控模式分类] 杨波 partial</li>
 <li><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/674327">容器日志采集利器Log-Pilot</a>  阿里开源的Log-Pilot 容器日志采集模式</li>
 <li><a target="_blank" rel="noopener" href="https://microservices.io/patterns/microservices.html">Pattern: Microservice Architecture</a></li>
+<li><a target="_blank" rel="noopener" href="https://tech.meituan.com/2021/09/16/operational-logbook.html">如何优雅地记录操作日志？</a>  美团 ***</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/oldratlee/translations/blob/master/log-what-every-software-engineer-should-know-about-real-time-datas-unifying/README.md">日志：每个软件工程师都应该知道的有关实时数据的统一概念</a>  论文翻译 *** 未</li>
 </ol>
 
