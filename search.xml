@@ -6132,12 +6132,12 @@ BGP 协议传输的消息
 <span id="more"></span>
 
 <h2><span id="slo">SLO</span><a href="#slo" class="header-anchor">#</a></h2><ul>
-<li>命中率<ul>
+<li>命中率 Hit Ratio<ul>
 <li>每秒命中数量   </li>
 <li>每秒未命中数量</li>
 </ul>
 </li>
-<li>吞吐<ul>
+<li>吞吐 Throughput<ul>
 <li>操作数</li>
 </ul>
 </li>
@@ -6150,8 +6150,13 @@ BGP 协议传输的消息
 <li>expired&#x2F;evicted keys</li>
 </ul>
 </li>
+<li>内存使用率 Memory Utilization</li>
+<li>活动连接数 Active Connections</li>
 </ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p><a href="https://blog.51cto.com/wutengfei/6026334">部署一个redis exporter监控所有的Redis实例</a></p>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li><a href="https://blog.51cto.com/wutengfei/6026334">部署一个redis exporter监控所有的Redis实例</a></li>
+<li><a href="https://scalegrid.io/blog/6-crucial-redis-monitoring-metrics/">6 Crucial Redis Monitoring Metrics You Need To Watch</a></li>
+</ol>
 ]]></content>
       <categories>
         <category>数据库</category>
