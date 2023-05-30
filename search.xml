@@ -5203,16 +5203,14 @@ MySQL MVCC 快照读 vs 当前读 </li>
 <span id="more"></span>
 
 <h2><span id="chatgpt">Chatgpt</span><a href="#chatgpt" class="header-anchor">#</a></h2><p><a href="https://poe.com/ChatGPT">Poe</a> ***</p>
-<h2><span id="prompt">Prompt</span><a href="#prompt" class="header-anchor">#</a></h2><ul>
-<li><a href="https://www.aishort.top/">Chatgpt ShortCut</a><br><a href="https://github.com/rockbenben/ChatGPT-Shortcut">ChatGPT Shortcut </a></li>
-</ul>
 <h2><span id="tools-amp-mix">Tools &amp; Mix</span><a href="#tools-amp-mix" class="header-anchor">#</a></h2><ul>
 <li>GPT学习宝典<br><a href="https://gpt.candobear.com/toolbox">GPT  工具箱</a><br><a href="https://gpt.candobear.com/prompt">Prompt 大全</a><br><a href="https://gpt.candobear.com/courses">学习资料</a></li>
 <li><a href="https://www.ailookme.com/">AI 工具箱</a>  ***</li>
 </ul>
 <h2><span id="app">App</span><a href="#app" class="header-anchor">#</a></h2><ul>
 <li><a href="https://chatpaper.org/">ChatPaper</a><br><a href="https://github.com/kaixindelele/ChatPaper">ChatPaper</a></li>
-<li>chatpdf  收费<br> 总结文献</li>
+<li>chatpdf  收费<br><a href="https://www.chatpdf.com/">Chat with any PDF</a> 总结文献</li>
+<li><a href="https://chatdoc.com/">Chat with documents</a></li>
 <li><a href="https://chat2doc.cn/">阅读文档的好帮手</a>  免费</li>
 <li>ChatGPT 客户端<br> windows， mac</li>
 </ul>
@@ -13133,6 +13131,7 @@ func new(Type) *Type
 <li><a href="#%E6%B2%A1%E5%95%A5%E7%94%A8">没啥用</a></li>
 </ul>
 </li>
+<li><a href="#prompt-learning">Prompt Learning</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
@@ -13163,6 +13162,14 @@ func new(Type) *Type
 <li>请用简练的列提纲的方式来归纳上文</li>
 </ul>
 <h3><span id="思维链">思维链</span><a href="#思维链" class="header-anchor">#</a></h3><h3><span id="没啥用">没啥用</span><a href="#没啥用" class="header-anchor">#</a></h3><p>请用简单的语句来归纳上文，归纳的语句可以生成脑图<br>请用金字塔思维的方式来简单的归纳上文</p>
+<h1><span id="prompt-learning">Prompt Learning</span><a href="#prompt-learning" class="header-anchor">#</a></h1><ul>
+<li><p><a href="https://learnprompting.org/zh-Hans/docs/intro">Learn Prompting</a> *** </p>
+</li>
+<li><p><a href="https://www.aishort.top/">Chatgpt ShortCut</a><br><a href="https://github.com/rockbenben/ChatGPT-Shortcut">ChatGPT Shortcut </a></p>
+</li>
+<li><p><a href="https://prompts.chat/"> Awesome ChatGPT Prompts</a></p>
+</li>
+</ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://www.bilibili.com/video/BV1Lg4y1c7fk/">学完这个视频，简历加一条：熟练掌握ChatGPT解决复杂问题｜ChatGPT使用教程</a>  ***</p>
 ]]></content>
       <categories>
@@ -16953,6 +16960,7 @@ nq： 不排队调度
 </ul>
 </li>
 </ul>
+<h2><span id="产品-其他">产品- 其他</span><a href="#产品-其他" class="header-anchor">#</a></h2><p>Nest 美团[17]</p>
 <div style="text-align: center; width: 80%; height: 80%">
 
 <p><img src="https://user-images.githubusercontent.com/5608425/66989009-1d8e5900-f0f6-11e9-9902-2efb75d27da7.png" alt="caas-faas"></p>
@@ -16965,6 +16973,7 @@ nq： 不排队调度
 <li>6.<a href="https://yq.aliyun.com/articles/574222">当我们在聊Serverless时你应该知道这些</a>  阿里 竹涧， 场景 产品 架构</li>
 <li>8.<a href="https://yq.aliyun.com/articles/717318">Serverless 与容器决战在即？有了弹性伸缩就不一样了</a>  阿里 莫源 未   </li>
 <li>16.<a href="https://yq.aliyun.com/articles/78172">15+文章详细讲述Serverless：开启函数计算时代！（含PDF下载）</a></li>
+<li>17.<a href="https://tech.meituan.com/2021/04/21/nest-serverless.html">美团Serverless平台Nest的探索与实践</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -21293,8 +21302,8 @@ nq： 不排队调度
 <td></td>
 </tr>
 <tr>
-<td>美团点评技术博客 ***</td>
-<td></td>
+<td><a href="https://tech.meituan.com/">美团点评技术博客</a> ***</td>
+<td>看到 2020年</td>
 </tr>
 <tr>
 <td><a href="https://pingcap.com/blog-cn/">pingcap</a> ***</td>
@@ -21332,7 +21341,7 @@ nq： 不排队调度
 <p><a href="https://tech.antfin.com/">蚂蚁金融科技</a></p>
 <p>参考<br><a href="http://www.cnblogs.com/IT-Bear/p/3191423.htmls">国内各大互联网公司相关技术站点2.0版 （集合腾讯、阿里、百度、搜狐、新浪、360等共49个）</a></p>
 <h2><span id="知乎-有自己关注的大佬">知乎 [有自己关注的大佬]</span><a href="#知乎-有自己关注的大佬" class="header-anchor">#</a></h2><ul>
-<li><p>大厂<br><a href="https://www.zhihu.com/org/e-han-jia-gou-shi">鹅厂架构师</a>  ***<br><a href="https://www.zhihu.com/org/mei-tuan-dian-ping-ji-shu-tuan-dui/posts">美团技术团队</a><br><a href="https://www.zhihu.com/org/vivohu-lian-wang-ji-zhu-2/posts">vivo互联网技术</a> ***<br><a href="https://www.zhihu.com/org/xi-cheng-ji-shu-zhong-xin/posts">携程技术</a><br><a href="https://www.zhihu.com/people/a-li-xi-tong-ruan-jian-ji-zhu-90/posts">阿里巴巴开源</a><br><a href="https://www.zhihu.com/org/you-zan-ji-zhu-tuan-dui/activities">有赞技术团队 知乎</a>  *** 干货多<br><a href="https://www.zhihu.com/org/archsummit/activities">ArchSummit 知乎</a></p>
+<li><p>大厂<br><a href="https://www.zhihu.com/org/e-han-jia-gou-shi">鹅厂架构师</a>  ***<br><a href="https://www.zhihu.com/org/mei-tuan-dian-ping-ji-shu-tuan-dui/posts">美团技术团队</a><br><a href="https://www.zhihu.com/org/vivohu-lian-wang-ji-zhu-2/posts">vivo互联网技术</a> ***   看了50%左右<br><a href="https://www.zhihu.com/org/xi-cheng-ji-shu-zhong-xin/posts">携程技术</a><br><a href="https://www.zhihu.com/people/a-li-xi-tong-ruan-jian-ji-zhu-90/posts">阿里巴巴开源</a><br><a href="https://www.zhihu.com/org/you-zan-ji-zhu-tuan-dui/activities">有赞技术团队 知乎</a>  *** 干货多<br><a href="https://www.zhihu.com/org/archsummit/activities">ArchSummit 知乎</a></p>
 </li>
 <li><p>中间件<br><a href="https://www.zhihu.com/org/teng-xun-yun-zhong-jian-jian/posts">腾讯云中间件</a><br><a href="https://www.zhihu.com/org/streamnative/posts">StreamNative Pulsar</a></p>
 </li>
