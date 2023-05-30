@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-02T15:10:42.000Z">
-<meta property="article:modified_time" content="2023-02-25T02:57:45.829Z">
+<meta property="article:modified_time" content="2023-05-30T21:57:32.179Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="范式">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-25 10:57:45" itemprop="dateModified" datetime="2023-02-25T10:57:45+08:00">2023-02-25</time>
+                <time title="修改时间：2023-05-31 05:57:32" itemprop="dateModified" datetime="2023-05-31T05:57:32+08:00">2023-05-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -260,6 +260,34 @@
 <h5><span id="多主">多主</span><a href="#多主" class="header-anchor">#</a></h5><p>Git</p>
 <h5><span id="无主">无主</span><a href="#无主" class="header-anchor">#</a></h5><p>Cassandra</p>
 <h5><span id="kafka-isr">Kafka ISR</span><a href="#kafka-isr" class="header-anchor">#</a></h5><p>原理上是主从，但是从延迟太大会被踢出ISR</p>
+<table>
+<thead>
+<tr>
+<th>弱一致性</th>
+<th>协议</th>
+<th>特性</th>
+<th>工程</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Master-Slave<br>(最终一致性)</td>
+<td></td>
+<td>延迟低，吞吐高<br>主动推送&#x2F;被动拉取</td>
+<td><a href="/www6vHomeHexo/2020/06/21/mysqlReliability/" title="MySQL的高可靠和高可用">MySQL的高可靠和高可用</a> self</td>
+</tr>
+<tr>
+<td>Master-Master<br>(最终一致性)</td>
+<td><a href="/www6vHomeHexo/2022/05/14/multiMasterCRDT/" title="多主-CRDT">CRDT</a> self</td>
+<td>延迟低，吞吐高</td>
+<td><a href="/www6vHomeHexo/2020/06/21/mysqlReliability/" title="MySQL的高可靠和高可用">MySQL的高可靠和高可用</a> self</td>
+</tr>
+<tr>
+<td>弱一致性</td>
+<td>Backups（备份）</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
 <h2><span id="数据存储和处理">数据存储和处理</span><a href="#数据存储和处理" class="header-anchor">#</a></h2><h5><span id="oltp">OLTP</span><a href="#oltp" class="header-anchor">#</a></h5><p>MYSQL</p>
 <h5><span id="olap">OLAP</span><a href="#olap" class="header-anchor">#</a></h5><p>HADOOP</p>
 <h5><span id="hatpat">HATP（A，T）</span><a href="#hatpat" class="header-anchor">#</a></h5><p>TiDB， TiKV(行存)， Tiflash（列存）</p>
