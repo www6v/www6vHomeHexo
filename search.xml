@@ -577,7 +577,9 @@
 </li>
 <li><a href="/www6vHomeHexo/2023/04/10/tikvMVCCTransaction/" title="TiKV Transaction-MVCC+TSO">TiKV Transaction-MVCC+TSO</a>
 </li>
-<li><a href="/www6vHomeHexo/2022/04/11/distributedDatabaseGlobalTime/" title="分布式数据库-全局时钟">分布式数据库-全局时钟</a></li>
+<li><a href="/www6vHomeHexo/2022/04/11/distributedDatabaseGlobalTime/" title="分布式数据库-全局时钟">分布式数据库-全局时钟</a>  
+</li>
+<li><a href="/www6vHomeHexo/2021/05/30/distributedDatabaseJoinQuery/" title="数据库  关联查询">数据库  关联查询</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -10193,7 +10195,81 @@ func new(Type) *Type
 <blockquote>
 <p>Flink是通过State状态来缓存等待join的实时流</p>
 </blockquote>
-<h5><span id="基于原生state的connect算子操作">基于原生State的Connect算子操作</span><a href="#基于原生state的connect算子操作" class="header-anchor">#</a></h5><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h5><span id="基于原生state的connect算子操作">基于原生State的Connect算子操作</span><a href="#基于原生state的connect算子操作" class="header-anchor">#</a></h5><h2><span id="总结-4">总结 [4]</span><a href="#总结-4" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th>JOIN 类型</th>
+<th>触发join</th>
+<th>场景</th>
+<th>实时性</th>
+<th>准确度</th>
+<th>内存占用</th>
+<th>waterrmark</th>
+<th>时间属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>双流join</td>
+<td><strong>双流</strong></td>
+<td>每一个数据流有变更都会触发join，并且状态会保存</td>
+<td>高</td>
+<td>先低后高（逐步更新）</td>
+<td>高（需要设置状态生存时间）</td>
+<td>否</td>
+<td>事件时间、处理时间</td>
+</tr>
+<tr>
+<td>时间区间 JOIN</td>
+<td><strong>双流</strong></td>
+<td>拥有相同key且 事件时间处于 lowerBoundTime 和 upperBoundTime之间的元素进行join</td>
+<td>中</td>
+<td>中（取决于区间大小）</td>
+<td>中（取决于区间大小）</td>
+<td>是（都需要）</td>
+<td>事件时间、处理时间</td>
+</tr>
+<tr>
+<td>时态表 JOIN（版本表）</td>
+<td>单流</td>
+<td>单流和版本表的join，具有历史版本状态管理功能。流表：事件时间，版本表：事件时间和主键</td>
+<td>中</td>
+<td>高（取决于具体实现）</td>
+<td>高（取决于版本表大小 ）</td>
+<td>是（都需要）</td>
+<td>事件时间</td>
+</tr>
+<tr>
+<td>时态表 JOIN（Join Lookup ）</td>
+<td>单流</td>
+<td>单流和维表的join，join要求一个表具有处理时间属性（流表），另一个表由查找源连接器支持（维表，实现了LookupableTableSource）</td>
+<td>高</td>
+<td>高（取决于是否缓存、异步等）</td>
+<td>低（取决于是否缓存、异步等）</td>
+<td>是（流表）</td>
+<td>处理时间</td>
+</tr>
+<tr>
+<td>JOIN LATERAL</td>
+<td>单流</td>
+<td>单流和UDTF的join。JOIN LATERAL 的右边不是一个物理表，而是一个视图（view）或者Table-valued Funciton。不具备状态管理功能</td>
+<td>高</td>
+<td>高（取决于是否缓存、异步等）</td>
+<td>低（取决于是否缓存、异步等）</td>
+<td>否</td>
+<td></td>
+</tr>
+<tr>
+<td>窗口 JOIN</td>
+<td><strong>双流</strong></td>
+<td>相同key且位于相同时间窗口的元素进行 join</td>
+<td>低</td>
+<td>低（取决于窗口大小和类型）</td>
+<td>中（取决于窗口大小）</td>
+<td>是（都需要）watermark取双流中较慢的为准</td>
+<td>事件时间、处理时间</td>
+</tr>
+</tbody></table>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><a href="https://blog.csdn.net/m0_49834705/article/details/119421944">Flink中的双流Join详解</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/452924664">面试高频|趣味Flink双流JOIN</a></li>
 <li><a href="https://www.skyzh.dev/posts/articles/2022-01-15-store-of-streaming-states/">流处理系统中状态的表示和存储</a> *** 未</li>
@@ -10207,7 +10283,7 @@ func new(Type) *Type
 </li>
 </ul>
 <ol start="4">
-<li><a href="https://mp.weixin.qq.com/s/Sc1tgBWPVfGIcVuYr-UrKA">大厂案例|基于Flink实现跨库JOIN的数据同步预研方案</a>  ***  最后有表格总结 未</li>
+<li><a href="https://mp.weixin.qq.com/s/Sc1tgBWPVfGIcVuYr-UrKA">大厂案例|基于Flink实现跨库JOIN的数据同步预研方案</a>  ***</li>
 </ol>
 ]]></content>
       <categories>
@@ -13074,6 +13150,47 @@ func new(Type) *Type
       </categories>
       <tags>
         <tag>Kubernetes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据库  关联查询</title>
+    <url>/www6vHomeHexo/2021/05/30/distributedDatabaseJoinQuery/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<img src="/www6vHomeHexo/2021/05/30/distributedDatabaseJoinQuery/join.jpg" class>
+
+<h2><span id="tidb-的-join-算法2">TiDB 的 Join 算法[2]</span><a href="#tidb-的-join-算法2" class="header-anchor">#</a></h2><ul>
+<li><p>TiDB 的 Join 算法包括如下几类：</p>
+<ul>
+<li>Hash Join</li>
+<li>Merge Join</li>
+<li>Index Hash Join</li>
+<li>Index Merge Join</li>
+</ul>
+</li>
+<li><p>TiDB 目前表 Join 的方式 [3][4]</p>
+<ul>
+<li>Sort Merge Join</li>
+<li>Index Nested Loop Join</li>
+<li>Hash Join</li>
+</ul>
+</li>
+</ul>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li>《20 | 关联查询：如何提升多表Join能力？ 》</li>
+<li><a href="https://cn.pingcap.com/blog/tidb-query-optimization-and-tuning-2">TiDB 查询优化及调优系列（二）TiDB 查询计划简介</a>  <strong>查看 Join 的执行计划</strong></li>
+<li><a href="https://cn.pingcap.com/blog/?tag=TiDB%20%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB">TiDB 源码阅读系列</a></li>
+<li><a href="https://cn.pingcap.com/blog/tidb-query-optimization-and-tuning-4">TiDB 查询优化及调优系列（四）查询执行计划的调整及优化原理</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>关系型</category>
+        <category>分布式</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
       </tags>
   </entry>
   <entry>
