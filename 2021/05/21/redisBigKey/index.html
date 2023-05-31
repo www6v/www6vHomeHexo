@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-05-20T23:33:33.000Z">
-<meta property="article:modified_time" content="2023-05-31T14:25:01.813Z">
+<meta property="article:modified_time" content="2023-05-31T22:24:02.829Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-31 22:25:01" itemprop="dateModified" datetime="2023-05-31T22:25:01+08:00">2023-05-31</time>
+                <time title="修改时间：2023-06-01 06:24:02" itemprop="dateModified" datetime="2023-06-01T06:24:02+08:00">2023-06-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -266,9 +266,10 @@
 <li><a href="#redis-%E5%A4%A7key">Redis 大Key</a><ul>
 <li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF-bigkey-5">什么是 Bigkey [5]</a></li>
 <li><a href="#%E9%97%AE%E9%A2%98">问题</a></li>
+<li><a href="#%E5%BB%BA%E8%AE%AE-6">建议 [6]</a></li>
 <li><a href="#%E6%9F%A5%E6%89%BE-%E5%A4%A7key">查找 大Key</a></li>
 <li><a href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-3">解决方案 [3]</a></li>
-<li><a href="#scan%E5%91%BD%E4%BB%A41">scan命令[1]</a></li>
+<li><a href="#scan%E5%91%BD%E4%BB%A4">scan命令</a></li>
 </ul>
 </li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
@@ -290,6 +291,18 @@
 <li>大key有时候也是热key，读取操作频繁，影响面会很大</li>
 <li>执行大key删除时，在低版本redis中可能阻塞线程   [遇到过]</li>
 </ul>
+<h3><span id="建议-6">建议 [6]</span><a href="#建议-6" class="header-anchor">#</a></h3><ul>
+<li><p>bigKey 容量</p>
+<ul>
+<li>string类型控制在10KB以内</li>
+<li>hash、list、set、zset元素个数不要超过5000</li>
+</ul>
+</li>
+<li><p><strong>非字符串的bigkey</strong>，不要使用del删除，<strong>使用hscan、sscan、zscan方式渐进式删除</strong></p>
+</li>
+<li><p><strong>防止bigkey过期时间自动删除问题</strong>(例如一个200万的zset设置1小时过期，会触发del操作，造成阻塞，而且该操作不会不出现在慢查询中(latency可查))，查找方法和删除方法</p>
+</li>
+</ul>
 <h3><span id="查找-大key">查找 大Key</span><a href="#查找-大key" class="header-anchor">#</a></h3><ul>
 <li><p>–bigkeys参数,   用scan扫描大key  [1][2][5]</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">redis-cli --bigkeys</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Scanning the entire keyspace to find biggest keys as well as</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">average sizes per key <span class="built_in">type</span>.  You can use -i 0.1 to <span class="built_in">sleep</span> 0.1 sec</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">per 100 SCAN commands (not usually needed).</span></span><br><span class="line">[00.00%] Biggest zset   found so far &#x27;testzset&#x27; with 129 members</span><br><span class="line">[00.00%] Biggest hash   found so far &#x27;h2&#x27; with 513 fields</span><br><span class="line">[00.00%] Biggest set    found so far &#x27;si1&#x27; with 5 members</span><br><span class="line">[00.00%] Biggest hash   found so far &#x27;h4&#x27; with 514 fields</span><br><span class="line">[00.00%] Biggest string found so far &#x27;key&#x27; with 9 bytes</span><br><span class="line">-------- summary -------</span><br><span class="line">Sampled 9 keys in the keyspace!</span><br><span class="line">Total key length in bytes is 27 (avg len 3.00)</span><br><span class="line">Biggest string found &#x27;key&#x27; has 9 bytes</span><br><span class="line">Biggest    set found &#x27;si1&#x27; has 5 members</span><br><span class="line">Biggest   hash found &#x27;h4&#x27; has 514 fields</span><br><span class="line">Biggest   zset found &#x27;testzset&#x27; has 129 members</span><br><span class="line">1 strings with 9 bytes (11.11% of keys, avg size 9.00)</span><br><span class="line">0 lists with 0 items (00.00% of keys, avg size 0.00)</span><br><span class="line">2 sets with 8 members (22.22% of keys, avg size 4.00)</span><br><span class="line">4 hashs with 1541 fields (44.44% of keys, avg size 385.25)</span><br><span class="line">2 zsets with 132 members (22.22% of keys, avg size 66.00)</span><br><span class="line">0 streams with 0 entries (00.00% of keys, avg size 0.00)</span><br></pre></td></tr></table></figure>
@@ -310,7 +323,7 @@
 <h3><span id="解决方案-3">解决方案 [3]</span><a href="#解决方案-3" class="header-anchor">#</a></h3><ul>
 <li><p>可删除</p>
 <ul>
-<li>渐进式删除&lt;4.0版本<br><strong>scan命令  游标式迭代扫描</strong><br>使用 hscan、sscan、zscan 方式渐进式删除 [4]</li>
+<li>渐进式删除&lt;4.0版本<br><a href="#scan%E5%91%BD%E4%BB%A4">scan命令</a>  <strong>游标式迭代扫描</strong><br>使用 hscan、sscan、zscan 方式渐进式删除 [4]</li>
 <li>惰性删除&gt;4.0版本<br><strong>unlink命令  异步惰性非阻塞删除</strong> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unlink &lt;keyName&gt; </span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
@@ -325,8 +338,14 @@
 </ul>
 </li>
 </ul>
-<h3><span id="scan命令1">scan命令[1]</span><a href="#scan命令1" class="header-anchor">#</a></h3><ul>
-<li>scan命令：<br>zset -&gt; zscan<br>hash -&gt; hscan<br>set -&gt; sscan<br>key of hash -&gt; scan<br>SCAN：命令用于迭代 数据库键。<br>SSCAN：命令用于迭代 set 中的元素。<br>HSCAN：命令用于迭代 hash 中的键值对。<br>ZSCAN：命令用于迭代  zset 中的元素（包括元素成员和元素分值）。</li>
+<h3><span id="scan命令">scan命令</span><a href="#scan命令" class="header-anchor">#</a></h3><ul>
+<li>scan命令[1]<ul>
+<li>zset -&gt; zscan<br>ZSCAN：命令用于迭代  zset 中的元素（包括元素成员和元素分值）。</li>
+<li>hash -&gt; hscan<br>HSCAN：命令用于迭代 hash 中的键值对。</li>
+<li>set -&gt; sscan<br>SSCAN：命令用于迭代 set 中的元素。</li>
+<li>key of hash -&gt; scan<br>SCAN：命令用于迭代 数据库键。</li>
+</ul>
+</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; keys *</span><br><span class="line">1) &quot;db_number&quot;</span><br><span class="line">2) &quot;key1&quot;</span><br><span class="line">3) &quot;myKey&quot;</span><br><span class="line">127.0.0.1:6379&gt; scan 0 MATCH * COUNT 1</span><br><span class="line">1) &quot;2&quot;</span><br><span class="line">2) 1) &quot;db_number&quot;</span><br><span class="line">127.0.0.1:6379&gt; scan 2 MATCH * COUNT 1</span><br><span class="line">1) &quot;1&quot;</span><br><span class="line">2) 1) &quot;myKey&quot;</span><br><span class="line">127.0.0.1:6379&gt; scan 1 MATCH * COUNT 1</span><br><span class="line">1) &quot;3&quot;</span><br><span class="line">2) 1) &quot;key1&quot;</span><br><span class="line">127.0.0.1:6379&gt; scan 3 MATCH * COUNT 1</span><br><span class="line">1) &quot;0&quot;</span><br><span class="line">2) (empty list or set)</span><br></pre></td></tr></table></figure>
 
@@ -335,7 +354,8 @@
 <li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000018193214?utm_source=tag-newest">Redis中查找大key</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/473930220">解决了Redis大key问题</a>  ***<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/0WS7_9EIQqpYlUNWgZZJog">解决了Redis大key问题</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34827674/article/details/126225192">Redis 大 key 要如何处理？</a></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/584594738">Bigkey问题的解决思路与方式探索</a> vivo team ***</li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/584594738">Bigkey问题的解决思路与方式探索</a> vivo team *** </li>
+<li><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/846851">一份完整的阿里云 Redis 开发规范，值得收藏！</a>  ***</li>
 </ol>
 
     </div>
