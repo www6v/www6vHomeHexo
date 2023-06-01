@@ -13342,13 +13342,37 @@ func new(Type) *Type
 </li>
 <li><p>Writing shell script</p>
 </li>
-<li><p>Writing git commands</p>
+<li><p>Writing git commands<br>一个分支中的代码合并到另一个分支中</p>
 </li>
 <li><p><strong>Improve code</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">  How do i improve this code?</span><br><span class="line">fruits = [<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;cherry&quot;</span>]</span><br><span class="line">newlist = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> fruits:</span><br><span class="line">  <span class="keyword">if</span> <span class="string">&quot;a&quot;</span> <span class="keyword">in</span> x:</span><br><span class="line">    newlist.append(x)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(newlist)</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>Translating Code</strong> 代码转换<br>Convert this Python code to Javascript<br>请把下面这段python代码转换成Java代码 </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">  How do i improve this code?</span><br><span class="line">  fruits = [<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;cherry&quot;</span>]</span><br><span class="line">  newlist = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> fruits:</span><br><span class="line">  <span class="keyword">if</span> <span class="string">&quot;a&quot;</span> <span class="keyword">in</span> x:</span><br><span class="line">    newlist.append(x)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(newlist)</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>Translating Code</strong> 代码转换</p>
+<ul>
+<li>Convert this Python code to Javascript    </li>
+<li>请把下面这段python代码转换成Java代码</li>
+</ul>
 </li>
-<li><p>Generating Dummy Data<br>Generate dummy data for a table called customers. Each customer should have an ID, first name, last name and city.<br>I don’t need a Javascript. Just give the data.<br>Create a Python class for storing these objects.</p>
+<li><p><strong>Generating Dummy Data</strong></p>
+<ul>
+<li>Generate dummy data for a table called customers. Each customer should have an ID, first name, last name and city.</li>
+<li>I don’t need a Javascript. Just give the data.</li>
+<li>Create a Python class for storing these objects.</li>
+</ul>
+</li>
+<li><p>Building API</p>
+<ul>
+<li>I need an API built with express.js to return the list of products. Each product should have attributes like ID, title, description, price and imageUrl</li>
+<li>modify the code and  retrieve the products from a MongoDB database</li>
+<li>use TypeScript in this code</li>
+<li>Generate this API using Python and FastAPI</li>
+</ul>
+</li>
+<li><p><strong>SQL</strong></p>
+<ul>
+<li>write a SQL query to generate a table called products with these columns：<br>ID（int）<br>title（string）<br>category(int)</li>
+<li>write a query to retrieve the top 5 customers in Shanghai</li>
+<li>Revise this query and join the customers table with the orders table to find out how much each cumster has spent. Then pick the top 5 who have spent the most.</li>
+</ul>
 </li>
 </ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://www.bilibili.com/video/BV1Z84y1G7nY/">【ChatGPT】面向程序员的ChatGPT使用教程38种方式来提升生产力</a></p>
@@ -13429,7 +13453,17 @@ func new(Type) *Type
 </li>
 <li><p><a href="https://www.aishort.top/">Chatgpt ShortCut</a><br><a href="https://github.com/rockbenben/ChatGPT-Shortcut">ChatGPT Shortcut </a></p>
 </li>
-<li><p><a href="https://prompts.chat/"> Awesome ChatGPT Prompts</a></p>
+<li><p><a href="https://prompts.chat/"> Awesome ChatGPT Prompts</a>  </p>
+</li>
+<li><p><a href="https://snackprompt.com/">snackprompt.com</a> ***</p>
+</li>
+<li><p><a href="https://flowgpt.com/">flowgpt</a> ***</p>
+</li>
+<li><p><a href="https://prompthero.com/">prompthero</a></p>
+</li>
+<li><p><a href="https://publicprompts.art/">publicprompts</a></p>
+</li>
+<li><p><a href="https://learningprompt.wiki/">https://learningprompt.wiki/</a> prompt 学习教程</p>
 </li>
 </ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://www.bilibili.com/video/BV1Lg4y1c7fk/">学完这个视频，简历加一条：熟练掌握ChatGPT解决复杂问题｜ChatGPT使用教程</a>  ***</p>
