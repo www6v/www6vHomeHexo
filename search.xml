@@ -624,9 +624,9 @@
 <li><a href="/www6vHomeHexo/2021/05/24/redisStudy/" title="Redis 学习资源">Redis 学习资源</a></li>
 </ul>
 <h3><span id="可靠性">可靠性</span><a href="#可靠性" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2021/01/02/redisReliability/" title="Redis可靠性">Redis可靠性</a></li>
-<li><a href="/www6vHomeHexo/2022/01/18/redisAOF/" title="Redis AOF">Redis AOF</a></li>
+<li><a href="/www6vHomeHexo/2021/01/02/redisRDB/" title="Redis RDB">Redis RDB</a></li>
 <li><a href="/www6vHomeHexo/2021/12/08/rdb/" title="Redis RDB源码">Redis RDB源码</a></li>
+<li><a href="/www6vHomeHexo/2022/01/18/redisAOF/" title="Redis AOF">Redis AOF</a></li>
 <li><a href="/www6vHomeHexo/2021/11/21/aofRewrite/" title="Redis AOF Rewrite">Redis AOF Rewrite</a></li>
 <li><a href="/www6vHomeHexo/2022/03/28/redisError/" title="Redis Error-MOVED和ASK指令">Redis Error-MOVED和ASK指令</a></li>
 <li><a href="/www6vHomeHexo/2022/04/27/redisSLO/" title="Redis SLO">Redis SLO</a></li>
@@ -3697,10 +3697,10 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 
 
 <h2><span id="场景-1">场景 [1]</span><a href="#场景-1" class="header-anchor">#</a></h2><ul>
-<li>场景一：客户端执行的显示删除&#x2F;清除命令，比如 del，flushdb 等；</li>
+<li>场景一：客户端执行的<strong>显示删除&#x2F;清除命令</strong>，比如 del，flushdb 等；</li>
 <li>场景二：某些指令带有的隐式删除命令，比如 move , rename 等；</li>
-<li>场景三：到达过期时间的数据需要删除；</li>
-<li>场景四：使用内存达到 maxmemory 后被选出来要淘汰的数据需要删除；</li>
+<li>场景三：到达<strong>过期</strong>时间的数据需要删除；</li>
+<li>场景四：使用内存达到 maxmemory 后被选出来要<strong>淘汰</strong>的数据需要删除；</li>
 <li>场景五：在主从同步全量同步阶段，从库收到主库的 RDB 文件后要先删除现有的数据再加载 RDB 文件；</li>
 </ul>
 <h2><span id="相关配置">相关配置</span><a href="#相关配置" class="header-anchor">#</a></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">惰性删除相 关的配置项</span><br><span class="line"></span><br><span class="line">lazyfree-lazy-eviction：对应缓存淘汰时的数据删除场景。</span><br><span class="line">lazyfree-lazy-expire：对应过期 key 的删除场景。</span><br><span class="line">lazyfree-lazy-server-del：对应会隐式进行删除操作的 server 命令执行场景。</span><br><span class="line">replica-lazy-flush：对应从节点完成全量同步后，删除原有旧数据的场景。</span><br></pre></td></tr></table></figure>
@@ -10559,13 +10559,43 @@ func new(Type) *Type
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
-<h2><span id="aof">AOF</span><a href="#aof" class="header-anchor">#</a></h2><ul>
-<li><strong>AOF 日志</strong>正好相反，它是<strong>写后日志</strong>，“写后”的意思是 Redis 是先执行命令，把数据写入内存，然后才记录日志。</li>
-<li>而写后日志这种方式，就是先让系统执行命令，只有命令能执行成功，才会被记录到日志中，否则，系统就会直接向客户端报错。<br>所以，Redis 使用写后日志这一方式的一大好处是，可以避免出现记录错误命令的情况。</li>
-<li>AOF 还有一个好处：它是在命令执行后才记录日志，所以<strong>不会阻塞当前的写操作</strong>。</li>
+<!-- toc -->
+
+<ul>
+<li><a href="#aof">AOF</a><ul>
+<li><a href="#%E5%AE%9A%E4%B9%891">定义[1]</a></li>
+<li><a href="#%E4%B8%A4%E4%B8%AA%E6%BD%9C%E5%9C%A8%E7%9A%84%E9%A3%8E%E9%99%A9-1">两个潜在的风险 [1]</a></li>
+<li><a href="#%E4%B8%89%E7%A7%8D%E5%86%99%E5%9B%9E%E7%AD%96%E7%95%A5-1">三种写回策略 [1]</a></li>
+<li><a href="#aof-%E9%9D%9E%E9%98%BB%E5%A1%9E%E7%9A%84%E9%87%8D%E5%86%99rewrite%E8%BF%87%E7%A8%8B-1">AOF 非阻塞的重写Rewrite过程 [1]</a></li>
+<li><a href="#%E5%85%B3%E9%97%ADaof%E8%90%BD%E7%9B%98-2">关闭AOF落盘 [2]</a></li>
 </ul>
-<h2><span id="三种写回策略">三种写回策略</span><a href="#三种写回策略" class="header-anchor">#</a></h2><ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+                                    
+<h1><span id="aof">AOF</span><a href="#aof" class="header-anchor">#</a></h1><h3><span id="定义1">定义[1]</span><a href="#定义1" class="header-anchor">#</a></h3><ul>
+<li><p>[AOF不是WAL，是先操作，后记录日志。]</p>
+</li>
+<li><p>传统数据库的日志，例如 redo log(重做日志)，记录的是修改后的数据，而AOF里记录的是Redis收到的每一条命令，这些命令是以文本形式保存的。</p>
+</li>
+<li><p><strong>AOF 日志</strong>正好相反，它是<strong>写后日志</strong>，“写后”的意思是 Redis 是先执行命令，把数据写入内存，然后才记录日志。</p>
+</li>
+<li><p>而写后日志这种方式，就是先让系统执行命令，只有命令能执行成功，才会被记录到日志中，否则，系统就会直接向客户端报错。<br>所以，Redis 使用写后日志这一方式的一大好处是，可以避免出现记录错误命令的情况。</p>
+</li>
+<li><p>AOF 还有一个好处：它是在命令执行后才记录日志，所以<strong>不会阻塞当前的写操作</strong>。</p>
+</li>
+</ul>
+<p><strong>AOF 是 写前日志</strong></p>
+<h3><span id="两个潜在的风险-1">两个潜在的风险 [1]</span><a href="#两个潜在的风险-1" class="header-anchor">#</a></h3><ol>
+<li>如果刚执行完一个命令，还没有来得及记日志就宕机了，那么这个命令和相应的数 据就有丢失的风险.</li>
+<li>AOF 日志也是在主线程中执行的，如果在把日志文件写入磁盘时，磁盘写压力大，就 会导致写盘很慢，进而导致后续的操作也无法执行了.</li>
+</ol>
+<h3><span id="三种写回策略-1">三种写回策略 [1]</span><a href="#三种写回策略-1" class="header-anchor">#</a></h3><ul>
 <li>AOF 配置项  -  appendfsync 的三个可选值<ul>
 <li><strong>Always</strong>，同步写回：每个写命令执行完，<strong>立马同步地将日志写回磁盘</strong>；</li>
 <li><strong>Everysec</strong>，每秒写回：每个写命令执行完，只是先把日志写到 AOF 文件的内存缓冲区，<strong>每隔一秒把缓冲区中的内容写入磁盘</strong>；</li>
@@ -10575,9 +10605,16 @@ func new(Type) *Type
 </ul>
 <img src="/www6vHomeHexo/2022/01/18/redisAOF/aof-1.png" class title="三种写回策略">
 
-<h2><span id="aof-非阻塞的重写过程">AOF 非阻塞的重写过程</span><a href="#aof-非阻塞的重写过程" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/01/18/redisAOF/aof-2.png" class title="AOF 非阻塞的重写过程">
-<h2><span id="关闭aof落盘">关闭AOF落盘</span><a href="#关闭aof落盘" class="header-anchor">#</a></h2><p>AOF落盘会带来一定写性能损耗，如果将Redis实例应用于纯缓存场景中，对数据持久化没有需求，您可以按照本章节的说明，修改appendonly参数的值，关闭AOF落盘。</p>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p><a href="https://help.aliyun.com/knowledge_detail/147408.html?spm=a2c4g.11186623.2.2.7e373f2e7XKCDO">关闭AOF落盘</a></p>
+<h3><span id="aof-非阻塞的重写rewrite过程-1">AOF 非阻塞的重写Rewrite过程 [1]</span><a href="#aof-非阻塞的重写rewrite过程-1" class="header-anchor">#</a></h3><p>一个拷贝，两处日志</p>
+<img src="/www6vHomeHexo/2022/01/18/redisAOF/redisRewrite.png" class title="AOF非阻塞的重写过程 838 398">
+
+
+<h3><span id="关闭aof落盘-2">关闭AOF落盘 [2]</span><a href="#关闭aof落盘-2" class="header-anchor">#</a></h3><p>AOF落盘会带来一定写性能损耗，如果将Redis实例应用于纯缓存场景中，对数据持久化没有需求，您可以按照本章节的说明，修改appendonly参数的值，关闭AOF落盘。</p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li>《04 | AOF日志:宕机了，Redis如何避免数据丢失? 》    蒋德钧</li>
+<li><a href="https://help.aliyun.com/knowledge_detail/147408.html?spm=a2c4g.11186623.2.2.7e373f2e7XKCDO">关闭AOF落盘</a></li>
+<li><a href="/www6vHomeHexo/2021/11/21/aofRewrite/" title="Redis AOF Rewrite">Redis AOF Rewrite</a></li>
+</ol>
 ]]></content>
       <categories>
         <category>数据库</category>
@@ -14450,21 +14487,32 @@ func new(Type) *Type
       </tags>
   </entry>
   <entry>
-    <title>Redis可靠性</title>
-    <url>/www6vHomeHexo/2021/01/02/redisReliability/</url>
+    <title>Redis RDB</title>
+    <url>/www6vHomeHexo/2021/01/02/redisRDB/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h1><span id="aof">AOF</span><a href="#aof" class="header-anchor">#</a></h1><p>[AOF不是WAL，是先操作，后记录日志。]<br>传统数据库的日志，例如 redo log(重做日志)，记录的是修改后的数据，而AOF里记录的是Redis收到的每一条命令，这些命令是以文本形式保存的。</p>
-<h4><span id="两个潜在的风险">两个潜在的风险</span><a href="#两个潜在的风险" class="header-anchor">#</a></h4><ol>
-<li>如果刚执行完一个命令，还没有来得及记日志就宕机了，那么这个命令和相应的数 据就有丢失的风险.</li>
-<li>AOF 日志也是在主线程中执行的，如果在把日志文件写入磁盘时，磁盘写压力大，就 会导致写盘很慢，进而导致后续的操作也无法执行了.</li>
-</ol>
-<h4><span id="aof-配置项-appendfsync-的三个可选值">AOF 配置项 appendfsync 的三个可选值。</span><a href="#aof-配置项-appendfsync-的三个可选值" class="header-anchor">#</a></h4><p>Always，同步写回: 每个写命令执行完，立马同步地将日志写回磁盘;<br>Everysec，每秒写回: 每个写命令执行完，只是先把日志写到 AOF 文件的内存缓冲区，每隔一秒把缓冲区中的内容写入磁盘;<br>No，操作系统控制的写回: 每个写命令执行完，只是先把日志写到 AOF 文件的内存缓 冲区，由操作系统决定何时将缓冲区内容写回磁盘。</p>
-<h4><span id="aof-重写rewrite">AOF 重写Rewrite</span><a href="#aof-重写rewrite" class="header-anchor">#</a></h4><p>一个拷贝，两处日志</p>
-<img src="/www6vHomeHexo/2021/01/02/redisReliability/redisRewrite.png" class title="AOF非阻塞的重写过程">
 
-<h1><span id="rdb">RDB</span><a href="#rdb" class="header-anchor">#</a></h1><h1><span id="aofrdb混合">AOF+RDB混合</span><a href="#aofrdb混合" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>《Redis核心技术与实战》 蒋德钧<br>04 | AOF日志:宕机了，Redis如何避免数据丢失?</p>
+
+<h1><span id="rdb-1">RDB [1]</span><a href="#rdb-1" class="header-anchor">#</a></h1><ul>
+<li><p>只需要把 <strong>RDB 文件</strong>直接读入内存，可以快速恢复数据库。这就避免了 AOF 需要顺序、逐一重新执行操作命令带来的低效性能问题。</p>
+</li>
+<li><p>Redis 设计了 <strong>bgsave</strong> 和<strong>写时复制</strong>方式，尽可能减少了内存快照对正常读写的影响，但是，频繁快照仍然是不太能接受的。</p>
+</li>
+</ul>
+<ul>
+<li>建议<ul>
+<li><strong>数据不能丢失时</strong>，<strong>内存快照和 AOF 的混合使用</strong>是一个很好的选择；</li>
+<li>如果允许<strong>分钟级别的数据丢失</strong>，可以只使用 <strong>RDB</strong>；</li>
+<li>如果只用 <strong>AOF</strong>，优先使用 <strong>everysec</strong> 的配置选项，因为它在可靠性和性能之间取了一个平衡。</li>
+</ul>
+</li>
+</ul>
+<p>【 总结: <strong>bgsave 异步 + 写时复制（copy-on-write）</strong>】</p>
+<h1><span id="aofrdb混合">AOF+RDB混合</span><a href="#aofrdb混合" class="header-anchor">#</a></h1><p>​     而<strong>混合使用 RDB 和 AOF</strong>，正好可以取两者之长，避两者之短，以较小的性能开销保证数据可靠性和性能。</p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li>《05丨内存快照：宕机后，Redis如何实现快速恢复？》</li>
+</ol>
 ]]></content>
       <categories>
         <category>数据库</category>
