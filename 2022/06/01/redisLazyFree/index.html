@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Redis LazyFree">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/06/01/redisLazyFree/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-01T02:46:16.000Z">
+<meta property="article:modified_time" content="2023-06-01T03:33:07.123Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="KV">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/06/01/redisLazyFree/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Redis LazyFree | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2022/06/01/redisLazyFree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redis LazyFree
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-01 10:46:16" itemprop="dateCreated datePublished" datetime="2022-06-01T10:46:16+08:00">2022-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-01 11:33:07" itemprop="dateModified" datetime="2023-06-01T11:33:07+08:00">2023-06-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/KV/" itemprop="url" rel="index"><span itemprop="name">KV</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/KV/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p></p>
+<span id="more"></span>
+
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%9C%BA%E6%99%AF-1">场景 [1]</a></li>
+<li><a href="#%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE">相关配置</a></li>
+<li><a href="#%E6%BA%90%E4%BB%A3%E7%A0%81">源代码</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+
+<h2><span id="场景-1">场景 [1]</span><a href="#场景-1" class="header-anchor">#</a></h2><ul>
+<li>场景一：客户端执行的显示删除&#x2F;清除命令，比如 del，flushdb 等；</li>
+<li>场景二：某些指令带有的隐式删除命令，比如 move , rename 等；</li>
+<li>场景三：到达过期时间的数据需要删除；</li>
+<li>场景四：使用内存达到 maxmemory 后被选出来要淘汰的数据需要删除；</li>
+<li>场景五：在主从同步全量同步阶段，从库收到主库的 RDB 文件后要先删除现有的数据再加载 RDB 文件；</li>
+</ul>
+<h2><span id="相关配置">相关配置</span><a href="#相关配置" class="header-anchor">#</a></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">惰性删除相 关的配置项</span><br><span class="line"></span><br><span class="line">lazyfree-lazy-eviction：对应缓存淘汰时的数据删除场景。</span><br><span class="line">lazyfree-lazy-expire：对应过期 key 的删除场景。</span><br><span class="line">lazyfree-lazy-server-del：对应会隐式进行删除操作的 server 命令执行场景。</span><br><span class="line">replica-lazy-flush：对应从节点完成全量同步后，删除原有旧数据的场景。</span><br></pre></td></tr></table></figure>
+
+
+<h2><span id="源代码">源代码</span><a href="#源代码" class="header-anchor">#</a></h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">evict.c</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">freeMemoryIfNeeded</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="comment">/*......*/</span></span><br><span class="line">    <span class="comment">/* Finally remove the selected key. */</span></span><br><span class="line">        <span class="keyword">if</span> (bestkey) &#123;</span><br><span class="line">            db = server.db+bestdbid;</span><br><span class="line">            robj *keyobj = createStringObject(bestkey,sdslen(bestkey));</span><br><span class="line">            propagateExpire(db,keyobj,server.lazyfree_lazy_eviction);  ### <span class="number">1</span></span><br><span class="line">            <span class="comment">/* We compute the amount of memory freed by db*Delete() alone.</span></span><br><span class="line"><span class="comment">             * It is possible that actually the memory needed to propagate</span></span><br><span class="line"><span class="comment">             * the DEL in AOF and replication link is greater than the one</span></span><br><span class="line"><span class="comment">             * we are freeing removing the key, but we can&#x27;t account for</span></span><br><span class="line"><span class="comment">             * that otherwise we would never exit the loop.</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             * AOF and Output buffer memory will be freed eventually so</span></span><br><span class="line"><span class="comment">             * we only care about memory used by the key space. */</span></span><br><span class="line">            delta = (<span class="type">long</span> <span class="type">long</span>) zmalloc_used_memory();    <span class="comment">//获取当前内存使用量</span></span><br><span class="line">            latencyStartMonitor(eviction_latency);</span><br><span class="line">            <span class="keyword">if</span> (server.lazyfree_lazy_eviction)   <span class="comment">/////. 如果 lazyfree_lazy_eviction 被设置为 1，也就是启用了缓存淘汰时的惰性删除，</span></span><br><span class="line">                dbAsyncDelete(db,keyobj);        <span class="comment">/////.  那么，删除操作对应的命令就是 UNLINK；</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                dbSyncDelete(db,keyobj);         <span class="comment">/////.  否则的话，命令就是 DEL。</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">/*......*/</span></span><br><span class="line">            delta -= (<span class="type">long</span> <span class="type">long</span>) zmalloc_used_memory();   <span class="comment">///根据当前内存使用量计算数据删除前后释放....</span></span><br><span class="line">            mem_freed += delta;    <span class="comment">//更新已释放的内存量</span></span><br><span class="line">            <span class="comment">/*......*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">db.c ### <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Propagate expires into slaves and the AOF file.</span></span><br><span class="line"><span class="comment"> * When a key expires in the master, a DEL operation for this key is sent</span></span><br><span class="line"><span class="comment"> * to all the slaves and the AOF file if enabled.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * This way the key expiry is centralized in one place, and since both</span></span><br><span class="line"><span class="comment"> * AOF and the master-&gt;slave link guarantee operation ordering, everything</span></span><br><span class="line"><span class="comment"> * will be consistent even if we allow write operations against expiring</span></span><br><span class="line"><span class="comment"> * keys. */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">propagateExpire</span><span class="params">(redisDb *db, robj *key, <span class="type">int</span> lazy)</span> &#123;</span><br><span class="line">    robj *argv[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">    argv[<span class="number">0</span>] = lazy ? shared.unlink : shared.del;    <span class="comment">// 如果server启用了lazyfree-lazy</span></span><br><span class="line">    argv[<span class="number">1</span>] = key;                <span class="comment">//被淘汰的key对象</span></span><br><span class="line">    incrRefCount(argv[<span class="number">0</span>]);</span><br><span class="line">    incrRefCount(argv[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (server.aof_state != AOF_OFF)   <span class="comment">///  是否启用了 AOF 日志 /// 如果启用了AOF日志</span></span><br><span class="line">        feedAppendOnlyFile(server.delCommand,db-&gt;id,argv,<span class="number">2</span>);  <span class="comment">// 把被淘汰 key 的删除操作记录到 AOF 文件中，以保证后续使用 AOF 文件进行 Redis 数据库恢复时，可以和恢复前保持一致</span></span><br><span class="line">    replicationFeedSlaves(server.slaves,db-&gt;id,argv,<span class="number">2</span>);   <span class="comment">//// 把删除操作同步给从节点，以保证主从节点的数据一致</span></span><br><span class="line"></span><br><span class="line">    decrRefCount(argv[<span class="number">0</span>]);</span><br><span class="line">    decrRefCount(argv[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">子操作一</span><br><span class="line"></span><br><span class="line">子操作一：将被淘汰的键值对从哈希表中去除，这里的哈希表既可能是设置了过期 key</span><br><span class="line">的哈希表，也可能是全局哈希表。</span><br><span class="line">子操作二：释放被淘汰键值对所占用的内存空间。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">子操作一</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Search and remove an element. This is an helper function for</span></span><br><span class="line"><span class="comment"> * dictDelete() and dictUnlink(), please check the top comment</span></span><br><span class="line"><span class="comment"> * of those functions. */</span></span><br><span class="line"><span class="type">static</span> dictEntry *<span class="title function_">dictGenericDelete</span><span class="params">(dict *d, <span class="type">const</span> <span class="type">void</span> *key, <span class="type">int</span> nofree)</span> &#123;</span><br><span class="line">... ...</span><br><span class="line"></span><br><span class="line">    h = dictHashKey(d, key);  <span class="comment">//计算key的哈希值 </span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (table = <span class="number">0</span>; table &lt;= <span class="number">1</span>; table++) &#123;</span><br><span class="line">        idx = h &amp; d-&gt;ht[table].sizemask;  <span class="comment">//根据key的哈希值获取它所在的哈希桶编号</span></span><br><span class="line">        he = d-&gt;ht[table].table[idx];   <span class="comment">//获取key所在哈希桶的第一个哈希项</span></span><br><span class="line">        prevHe = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">while</span>(he) &#123;        <span class="comment">//在哈希桶中逐一查找被删除的key是否存在</span></span><br><span class="line">            <span class="keyword">if</span> (key==he-&gt;key || dictCompareKeys(d, key, he-&gt;key)) &#123;</span><br><span class="line">                <span class="comment">/* Unlink the element from the list */</span></span><br><span class="line">                <span class="comment">//如果找见被删除key了，那么将它从哈希桶的链表中去除</span></span><br><span class="line">                <span class="keyword">if</span> (prevHe)</span><br><span class="line">                    prevHe-&gt;next = he-&gt;next;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    d-&gt;ht[table].table[idx] = he-&gt;next;</span><br><span class="line">                <span class="keyword">if</span> (!nofree) &#123;        <span class="comment">//如果要同步删除，那么就释放key和value的内存空间</span></span><br><span class="line">                    dictFreeKey(d, he);     <span class="comment">//调用dictFreeKey释放</span></span><br><span class="line">                    dictFreeVal(d, he);</span><br><span class="line">                    zfree(he);</span><br><span class="line">                &#125;</span><br><span class="line">                d-&gt;ht[table].used--;</span><br><span class="line">                <span class="keyword">return</span> he;</span><br><span class="line">            &#125;</span><br><span class="line">            prevHe = he;</span><br><span class="line">            he = he-&gt;next;           <span class="comment">//当前key不是要查找的key，再找下一个</span></span><br><span class="line">        &#125;</span><br><span class="line">        ......</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Remove an element, returning DICT_OK on success or DICT_ERR if the</span></span><br><span class="line"><span class="comment"> * element was not found. */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">dictDelete</span><span class="params">(dict *ht, <span class="type">const</span> <span class="type">void</span> *key)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> dictGenericDelete(ht,key,<span class="number">0</span>) ? DICT_OK : DICT_ERR;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Remove an element from the table, but without actually releasing</span></span><br><span class="line"><span class="comment"> * the key, value and dictionary entry. The dictionary entry is returned</span></span><br><span class="line"><span class="comment"> * if the element was found (and unlinked from the table), and the user</span></span><br><span class="line"><span class="comment"> * should later call `dictFreeUnlinkedEntry()` with it in order to release it.</span></span><br><span class="line"><span class="comment"> * Otherwise if the key is not found, NULL is returned.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * This function is useful when we want to remove something from the hash</span></span><br><span class="line"><span class="comment"> * table but want to use its value before actually deleting the entry.</span></span><br><span class="line"><span class="comment"> * Without this function the pattern would require two lookups:</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *  entry = dictFind(...);</span></span><br><span class="line"><span class="comment"> *  // Do something with entry</span></span><br><span class="line"><span class="comment"> *  dictDelete(dictionary,entry);</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Thanks to this function it is possible to avoid this, and use</span></span><br><span class="line"><span class="comment"> * instead:</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * entry = dictUnlink(dictionary,entry);</span></span><br><span class="line"><span class="comment"> * // Do something with entry</span></span><br><span class="line"><span class="comment"> * dictFreeUnlinkedEntry(entry); // &lt;- This does not need to lookup again.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">dictEntry *<span class="title function_">dictUnlink</span><span class="params">(dict *ht, <span class="type">const</span> <span class="type">void</span> *key)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> dictGenericDelete(ht,key,<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line">子操作二</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">基于异步删除的数据淘汰</span><br><span class="line">dbAsyncDelete</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Delete a key, value, and associated expiration entry if any, from the DB.</span></span><br><span class="line"><span class="comment"> * If there are enough allocations to free the value object may be put into</span></span><br><span class="line"><span class="comment"> * a lazy free list instead of being freed synchronously. The lazy free list</span></span><br><span class="line"><span class="comment"> * will be reclaimed in a different bio.c thread. */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LAZYFREE_THRESHOLD 64</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">dbAsyncDelete</span><span class="params">(redisDb *db, robj *key)</span> &#123;</span><br><span class="line">    <span class="comment">/* Deleting an entry from the expires dict will not free the sds of</span></span><br><span class="line"><span class="comment">     * the key, because it is shared with the main dictionary. */</span></span><br><span class="line">    <span class="keyword">if</span> (dictSize(db-&gt;expires) &gt; <span class="number">0</span>) dictDelete(db-&gt;expires,key-&gt;ptr);  <span class="comment">/// 在过期 key 的哈希表中同步删除被淘汰的键值对</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* If the value is composed of a few allocations, to free in a lazy way</span></span><br><span class="line"><span class="comment">     * is actually just slower... So under a certain limit we just free</span></span><br><span class="line"><span class="comment">     * the object synchronously. */</span></span><br><span class="line">    dictEntry *de = dictUnlink(db-&gt;dict,key-&gt;ptr);  <span class="comment">/// 在全局哈希表中异步删除被淘汰的键值对</span></span><br><span class="line">    <span class="keyword">if</span> (de) &#123;</span><br><span class="line">        robj *val = dictGetVal(de);</span><br><span class="line">        <span class="type">size_t</span> free_effort = lazyfreeGetFreeEffort(val);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* If releasing the object is too much work, do it in the background</span></span><br><span class="line"><span class="comment">         * by adding the object to the lazy free list.</span></span><br><span class="line"><span class="comment">         * Note that if the object is shared, to reclaim it now it is not</span></span><br><span class="line"><span class="comment">         * possible. This rarely happens, however sometimes the implementation</span></span><br><span class="line"><span class="comment">         * of parts of the Redis core may call incrRefCount() to protect</span></span><br><span class="line"><span class="comment">         * objects, and then call dbDelete(). In this case we&#x27;ll fall</span></span><br><span class="line"><span class="comment">         * through and reach the dictFreeUnlinkedEntry() call, that will be</span></span><br><span class="line"><span class="comment">         * equivalent to just calling decrRefCount(). */</span></span><br><span class="line">        <span class="keyword">if</span> (free_effort &gt; LAZYFREE_THRESHOLD &amp;&amp; val-&gt;refcount == <span class="number">1</span>) &#123; <span class="comment">/// 计算释放被淘汰键值对内存空间的开销///当被淘汰键值对是包含超过 64 个元素的集合类型时</span></span><br><span class="line">            atomicIncr(lazyfree_objects,<span class="number">1</span>);</span><br><span class="line">            bioCreateBackgroundJob(BIO_LAZY_FREE,val,<span class="literal">NULL</span>,<span class="literal">NULL</span>); <span class="comment">/// 会调用 bioCreateBackgroundJob 函数，来实际创建后台任务执行惰性删除</span></span><br><span class="line">            dictSetVal(db-&gt;dict,de,<span class="literal">NULL</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Release the key-val pair, or just the key if we set the val</span></span><br><span class="line"><span class="comment">     * field to NULL in order to lazy free it later. */</span></span><br><span class="line">    <span class="keyword">if</span> (de) &#123;</span><br><span class="line">        dictFreeUnlinkedEntry(db-&gt;dict,de);</span><br><span class="line">        <span class="keyword">if</span> (server.cluster_enabled) slotToKeyDel(key);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Return the amount of work needed in order to free an object.</span></span><br><span class="line"><span class="comment"> * The return value is not always the actual number of allocations the</span></span><br><span class="line"><span class="comment"> * object is compoesd of, but a number proportional to it.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * For strings the function always returns 1.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * For aggregated objects represented by hash tables or other data structures</span></span><br><span class="line"><span class="comment"> * the function just returns the number of elements the object is composed of.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Objects composed of single allocations are always reported as having a</span></span><br><span class="line"><span class="comment"> * single item even if they are actually logical composed of multiple</span></span><br><span class="line"><span class="comment"> * elements.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * For lists the function returns the number of elements in the quicklist</span></span><br><span class="line"><span class="comment"> * representing the list. */</span></span><br><span class="line"><span class="type">size_t</span> <span class="title function_">lazyfreeGetFreeEffort</span><span class="params">(robj *obj)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (obj-&gt;type == OBJ_LIST) &#123;</span><br><span class="line">        quicklist *ql = obj-&gt;ptr;</span><br><span class="line">        <span class="keyword">return</span> ql-&gt;len;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (obj-&gt;type == OBJ_SET &amp;&amp; obj-&gt;encoding == OBJ_ENCODING_HT) &#123;</span><br><span class="line">        dict *ht = obj-&gt;ptr;</span><br><span class="line">        <span class="keyword">return</span> dictSize(ht);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (obj-&gt;type == OBJ_ZSET &amp;&amp; obj-&gt;encoding == OBJ_ENCODING_SKIPLIST)&#123;</span><br><span class="line">        zset *zs = obj-&gt;ptr;</span><br><span class="line">        <span class="keyword">return</span> zs-&gt;zsl-&gt;length;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (obj-&gt;type == OBJ_HASH &amp;&amp; obj-&gt;encoding == OBJ_ENCODING_HT) &#123;</span><br><span class="line">        dict *ht = obj-&gt;ptr;</span><br><span class="line">        <span class="keyword">return</span> dictSize(ht);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (obj-&gt;type == OBJ_STREAM) &#123;</span><br><span class="line">        <span class="type">size_t</span> effort = <span class="number">0</span>;</span><br><span class="line">        stream *s = obj-&gt;ptr;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Make a best effort estimate to maintain constant runtime. Every macro</span></span><br><span class="line"><span class="comment">         * node in the Stream is one allocation. */</span></span><br><span class="line">        effort += s-&gt;rax-&gt;numnodes;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Every consumer group is an allocation and so are the entries in its</span></span><br><span class="line"><span class="comment">         * PEL. We use size of the first group&#x27;s PEL as an estimate for all</span></span><br><span class="line"><span class="comment">         * others. */</span></span><br><span class="line">        <span class="keyword">if</span> (s-&gt;cgroups) &#123;</span><br><span class="line">            raxIterator ri;</span><br><span class="line">            streamCG *cg;</span><br><span class="line">            raxStart(&amp;ri,s-&gt;cgroups);</span><br><span class="line">            raxSeek(&amp;ri,<span class="string">&quot;^&quot;</span>,<span class="literal">NULL</span>,<span class="number">0</span>);</span><br><span class="line">            <span class="comment">/* There must be at least one group so the following should always</span></span><br><span class="line"><span class="comment">             * work. */</span></span><br><span class="line">            serverAssert(raxNext(&amp;ri));</span><br><span class="line">            cg = ri.data;</span><br><span class="line">            effort += raxSize(s-&gt;cgroups)*(<span class="number">1</span>+raxSize(cg-&gt;pel));</span><br><span class="line">            raxStop(&amp;ri);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> effort;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">/* Everything else is a single allocation. */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">子操作二</span><br><span class="line"></span><br><span class="line">基于同步删除的数据淘汰</span><br><span class="line">dbSyncDelete</span><br></pre></td></tr></table></figure>
+
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/LIFE_PLAN/article/details/127786442">redis惰性删除 lazy free 源码剖析，干货满满</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2022/06/01/redisLazyFree/" title="Redis LazyFree">https://www6v.github.io/www6vHomeHexo/2022/06/01/redisLazyFree/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/KV/" rel="tag"># KV</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2022/05/31/mqPulsar/" rel="prev" title="Pulsar">
+      <i class="fa fa-chevron-left"></i> Pulsar
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2022/06/03/k8sVM/" rel="next" title="Kubernetes和VM">
+      Kubernetes和VM <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">432</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">255</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">133</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
