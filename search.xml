@@ -13330,12 +13330,28 @@ func new(Type) *Type
 
 
 <h1><span id="代码相关">代码相关</span><a href="#代码相关" class="header-anchor">#</a></h1><ul>
-<li>代码转换<br> 请把下面这段python代码转换成Java代码</li>
-<li>注释<br> 你作为一名程序员，请解释一下下面这段代码</li>
-<li>防御性编程<br> 请为这段代码增加防御性编程的功能</li>
-<li>时间复杂度<br> 这段代码的时间复杂度是多少</li>
-<li>流程图<br> 画出redis master和slave之间同步的流程图</li>
+<li><p><strong>注释</strong><br> 你作为一名程序员，请解释一下下面这段代码</p>
+</li>
+<li><p><strong>防御性编程</strong><br> 请为这段代码增加防御性编程的功能</p>
+</li>
+<li><p>写单元测试   </p>
+</li>
+<li><p><strong>时间复杂度  time complexity</strong><br> 这段代码的时间复杂度是多少</p>
+</li>
+<li><p>流程图<br> 画出redis master和slave之间同步的流程图</p>
+</li>
+<li><p>Writing shell script</p>
+</li>
+<li><p>Writing git commands</p>
+</li>
+<li><p><strong>Improve code</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">  How do i improve this code?</span><br><span class="line">fruits = [<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;cherry&quot;</span>]</span><br><span class="line">newlist = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> fruits:</span><br><span class="line">  <span class="keyword">if</span> <span class="string">&quot;a&quot;</span> <span class="keyword">in</span> x:</span><br><span class="line">    newlist.append(x)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(newlist)</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>Translating Code</strong> 代码转换<br>Convert this Python code to Javascript<br>请把下面这段python代码转换成Java代码 </p>
+</li>
+<li><p>Generating Dummy Data<br>Generate dummy data for a table called customers. Each customer should have an ID, first name, last name and city.<br>I don’t need a Javascript. Just give the data.<br>Create a Python class for storing these objects.</p>
+</li>
 </ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://www.bilibili.com/video/BV1Z84y1G7nY/">【ChatGPT】面向程序员的ChatGPT使用教程38种方式来提升生产力</a></p>
 ]]></content>
       <categories>
         <category>AI</category>
