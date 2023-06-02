@@ -26,11 +26,8 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2016/11/12/redis/redis.jpg">
-<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/66014513-cab37f80-e501-11e9-9b2c-917838d91a4d.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/66014512-ca1ae900-e501-11e9-93d7-840409a862c5.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/66014514-cab37f80-e501-11e9-9be8-a247690b5f9f.png">
 <meta property="article:published_time" content="2016-11-12T15:29:16.000Z">
-<meta property="article:modified_time" content="2023-05-31T14:23:08.394Z">
+<meta property="article:modified_time" content="2023-06-02T03:52:40.926Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
@@ -229,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-31 22:23:08" itemprop="dateModified" datetime="2023-05-31T22:23:08+08:00">2023-05-31</time>
+                <time title="修改时间：2023-06-02 11:52:40" itemprop="dateModified" datetime="2023-06-02T11:52:40+08:00">2023-06-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,14 +266,11 @@
 
 <ul>
 <li><a href="#%E4%BA%8B%E5%8A%A1">事务</a></li>
-<li><a href="#%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5">回收策略</a></li>
 <li><a href="#hash%E5%91%BD%E4%BB%A4">hash命令</a></li>
 <li><a href="#io%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%80%A7%E8%83%BD">IO模型和性能</a></li>
 <li><a href="#hotkey">HotKey</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
-<li><a href="#%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5-1">回收策略</a></li>
-</ul>
-</li>
+<li><a href="#%E7%89%B9%E6%80%A7">特性</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
 
@@ -323,33 +317,6 @@
 <td>redo log</td>
 </tr>
 </tbody></table>
-<h2><span id="回收策略">回收策略</span><a href="#回收策略" class="header-anchor">#</a></h2><table>
-<thead>
-<tr>
-<th align="center">回收策略</th>
-<th align="center">redis</th>
-<th align="center">kafka</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">基于时间</td>
-<td align="center">过期删除策略 <br>1. 定时删除(对内存最友好， 对CPU时间最不友好) <br>2. 惰性删除(对CPU时间最友好， 对内存最不友好) <br>3.定期删除(整合和折中)</td>
-<td align="center"><img src="https://user-images.githubusercontent.com/5608425/66014513-cab37f80-e501-11e9-9b2c-917838d91a4d.png" alt="kafka-time"></td>
-</tr>
-<tr>
-<td align="center">基于大小</td>
-<td align="center">内存淘汰策略 <br>1. noeviction <br>2.lru <br>3. random <br>4. ttl</td>
-<td align="center"><img src="https://user-images.githubusercontent.com/5608425/66014512-ca1ae900-e501-11e9-93d7-840409a862c5.png" alt="kafka-size"></td>
-</tr>
-<tr>
-<td align="center">其他</td>
-<td align="center">x</td>
-<td align="center"><img src="https://user-images.githubusercontent.com/5608425/66014514-cab37f80-e501-11e9-9be8-a247690b5f9f.png" alt="kafka-offset"></td>
-</tr>
-</tbody></table>
-<ul>
-<li>近似LRU算法[11]</li>
-</ul>
 <h2><span id="hash命令">hash命令</span><a href="#hash命令" class="header-anchor">#</a></h2><ul>
 <li><p>redis hash的结构：一维数组+二维链表（和java的hashmap结构一样）</p>
 </li>
@@ -376,6 +343,16 @@
 </blockquote>
 <h2><span id="hotkey">HotKey</span><a href="#hotkey" class="header-anchor">#</a></h2><a href="/www6vHomeHexo/2018/05/03/faultModel2/" title="故障模型-中间件层">故障模型- 热点 Key 问题的发现与解决</a>  self
 
+<h2><span id="特性">特性</span><a href="#特性" class="header-anchor">#</a></h2><ul>
+<li>Redis 2.6<br>lua, pubsub, Sentinel V1</li>
+<li>Redis 2.8<br>Sentinel V2, ipv6</li>
+<li>Redis 3.0<br>Redis Cluster </li>
+<li>Redis3.2<br>GEO</li>
+<li>Redis 4.0<br>psync2.0,  lazy-free, modules<br>RDB-AOF 混合持久化</li>
+<li>Redis 5.0<br>Stream</li>
+<li>Redis 6.0<br>Thread I&#x2F;O<br>SSL, ACL</li>
+<li>Redis 7.0<br>functions, ACL v2<br>sharded-pubsub<br>client-eviction<br>multi-part AOF</li>
+</ul>
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>《Redis 深度历险：核心原理与应用实践》 钱文品</p>
 <ol>
 <li>原理 4：雷厉风行 —— 管道</li>
@@ -387,15 +364,10 @@
 <ol start="5">
 <li>《Redis实战》 黄健宏 3.7 ,4.4, 6.2</li>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/fO0yoHGqtFH5lpu6688h2w">Redis 数据结构和对象系统，记住这 12 张图就够啦！</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&mid=2650780240&idx=1&sn=49fb636a97a3c21fec7d2e2b59bea09f&chksm=f3f907c5c48e8ed3aec22d5c9b227e08916da9c4318524b435335340dc9852b314dd8f3abf8b&scene=0&xtrack=1#rd">七问Redis，才知道我与技术大牛的差距在哪里 </a> ***</li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&mid=2650780240&idx=1&sn=49fb636a97a3c21fec7d2e2b59bea09f">七问Redis，才知道我与技术大牛的差距在哪里 </a> ***</li>
 <li><a href="../../../../2015/02/21/transaction/">Mysql事务总结</a> self</li>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/meituantech/p/9376472.html">美团针对Redis Rehash机制的探索和实践</a> ***</li>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/QrvUl6Ul9DxYoRZwSsMQZw">为什么 Redis 单线程能达到百万+QPS？</a> ***</li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/gkkjJu04sS2qtRdd-yB5DQ">经典面试题：Redis 内存满了怎么办？</a></li>
-</ol>
-<h3><span id="回收策略">回收策略</span><a href="#回收策略" class="header-anchor">#</a></h3><ol start="10">
-<li><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5ODI5Njc2MA==&mid=2655826994&idx=2&sn=c7efe2b7cdd350f1b3c6fb72cc8c1cd7&chksm=bd74f9e58a0370f3fdbe7c81365b73eafcfc77c4856ce865d43ab8502e677a6100ef7a24d193&scene=0&xtrack=1#rd">Redis内存回收机制，把我整懵了…</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013256816/article/details/80418297">Kafka日志清理之Log Deletion</a></li>
 </ol>
 
     </div>
@@ -510,7 +482,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">432</span>
+          <span class="site-state-item-count">433</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
