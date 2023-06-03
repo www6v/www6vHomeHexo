@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2016/11/12/redis/redis.jpg">
 <meta property="article:published_time" content="2016-11-12T15:29:16.000Z">
-<meta property="article:modified_time" content="2023-06-02T03:52:40.926Z">
+<meta property="article:modified_time" content="2023-06-03T13:55:47.796Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-02 11:52:40" itemprop="dateModified" datetime="2023-06-02T11:52:40+08:00">2023-06-02</time>
+                <time title="修改时间：2023-06-03 21:55:47" itemprop="dateModified" datetime="2023-06-03T21:55:47+08:00">2023-06-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,7 +268,6 @@
 <li><a href="#%E4%BA%8B%E5%8A%A1">事务</a></li>
 <li><a href="#hash%E5%91%BD%E4%BB%A4">hash命令</a></li>
 <li><a href="#io%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%80%A7%E8%83%BD">IO模型和性能</a></li>
-<li><a href="#hotkey">HotKey</a></li>
 <li><a href="#%E7%89%B9%E6%80%A7">特性</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
@@ -341,17 +340,15 @@
 <blockquote>
 <p>大体上可以说 Redis 的工作模式是，reactor 模式配合一个队列，用一个 serverAccept 线程来处理建立请求的链接，<br>并且通过 IO 多路复用模型，让内核来监听这些 socket，一旦某些 socket 的读写事件准备就绪后就对应的事件压入队列中，<br>然后 worker 工作，由文件事件分派器从中获取事件交于对应的处理器去执行，当某个事件执行完成后文件事件分派器才会从队列中获取下一个事件进行处理。<br>可以类比在 netty 中，我们一般会设置 bossGroup 和 workerGroup 默认情况下 bossGroup 为 1，workerGroup &#x3D; 2 * cpu 数量，<br>这样可以由多个线程来处理读写就绪的事件，但是其中不能有比较耗时的操作如果有的话需要将其放入线程池中，不然会降低其吐吞量。<br>在 Redis 中我们可以看做这二者的值都是 1。</p>
 </blockquote>
-<h2><span id="hotkey">HotKey</span><a href="#hotkey" class="header-anchor">#</a></h2><a href="/www6vHomeHexo/2018/05/03/faultModel2/" title="故障模型-中间件层">故障模型- 热点 Key 问题的发现与解决</a>  self
-
 <h2><span id="特性">特性</span><a href="#特性" class="header-anchor">#</a></h2><ul>
 <li>Redis 2.6<br>lua, pubsub, Sentinel V1</li>
 <li>Redis 2.8<br>Sentinel V2, ipv6</li>
-<li>Redis 3.0<br>Redis Cluster </li>
+<li>Redis 3.0<br><strong>Redis Cluster</strong> </li>
 <li>Redis3.2<br>GEO</li>
-<li>Redis 4.0<br>psync2.0,  lazy-free, modules<br>RDB-AOF 混合持久化</li>
+<li>Redis 4.0<br>psync2.0, <strong>lazy-free</strong>, modules<br>RDB-AOF 混合持久化</li>
 <li>Redis 5.0<br>Stream</li>
-<li>Redis 6.0<br>Thread I&#x2F;O<br>SSL, ACL</li>
-<li>Redis 7.0<br>functions, ACL v2<br>sharded-pubsub<br>client-eviction<br>multi-part AOF</li>
+<li>Redis 6.0<br><strong>Thread I&#x2F;O</strong><br>SSL, ACL</li>
+<li>Redis 7.0<br>functions, ACL v2<br>sharded-pubsub<br>client-eviction<br><strong>multi-part AOF</strong></li>
 </ul>
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>《Redis 深度历险：核心原理与应用实践》 钱文品</p>
 <ol>
@@ -364,7 +361,7 @@
 <ol start="5">
 <li>《Redis实战》 黄健宏 3.7 ,4.4, 6.2</li>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/fO0yoHGqtFH5lpu6688h2w">Redis 数据结构和对象系统，记住这 12 张图就够啦！</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&mid=2650780240&idx=1&sn=49fb636a97a3c21fec7d2e2b59bea09f">七问Redis，才知道我与技术大牛的差距在哪里 </a> ***</li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&mid=2650780240&idx=1&sn=49fb636a97a3c21fec7d2e2b59bea09f">七问Redis，才知道我与技术大牛的差距在哪里 </a><br>*** 事务，乐观锁watch，持久化， 内存优化，主从复制，过期删除策略</li>
 <li><a href="../../../../2015/02/21/transaction/">Mysql事务总结</a> self</li>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/meituantech/p/9376472.html">美团针对Redis Rehash机制的探索和实践</a> ***</li>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/QrvUl6Ul9DxYoRZwSsMQZw">为什么 Redis 单线程能达到百万+QPS？</a> ***</li>
@@ -482,7 +479,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">433</span>
+          <span class="site-state-item-count">434</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
