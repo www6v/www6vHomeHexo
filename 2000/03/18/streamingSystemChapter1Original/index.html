@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2000-03-18T11:03:13.000Z">
-<meta property="article:modified_time" content="2023-04-21T02:12:08.365Z">
+<meta property="article:modified_time" content="2023-06-03T17:25:05.768Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Streaming System">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-21 10:12:08" itemprop="dateModified" datetime="2023-04-21T10:12:08+08:00">2023-04-21</time>
+                <time title="修改时间：2023-06-04 01:25:05" itemprop="dateModified" datetime="2023-06-04T01:25:05+08:00">2023-06-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,7 +273,11 @@
 </div>
 
 <p>Page 19</p>
-<details><summary>点击 原文</summary><p>Streaming data processing is a big deal in big data these days, and for good<br>reasons; among them are the following:</p>
+<details><summary>点击 原文</summary></details>
+
+
+
+<p>Streaming data processing is a big deal in big data these days, and for good<br>reasons; among them are the following:</p>
 <ul>
 <li>Businesses crave ever-more timely insights into their data, and<br>switching to streaming is a good way to achieve lower latency</li>
 <li>The massive, unbounded datasets that are increasingly common in<br>modern business are more easily tamed using a system designed for<br>such never-ending volumes of data.</li>
@@ -282,11 +286,9 @@
 <li>Capabilities<br>I remark on the oft-perceived shortcomings of streaming systems. I also<br>propose the frame of mind that I believe data processing system builders<br>need to adopt in order to address the needs of modern data consumers<br>going forward.</li>
 <li>Time domains<br>I introduce the two primary domains of time that are relevant in data<br>processing, show how they relate, and point out some of the difficulties<br>these two domains impose.</li>
 </ul>
-</details>
+<details><summary>点击 原文</summary></details>
 
-
-
-<details><summary>点击 原文</summary><h1><span id="terminology-what-is-streaming"><strong>Terminology: What Is Streaming?</strong></span><a href="#terminology-what-is-streaming" class="header-anchor">#</a></h1><p>Before going any further, I’d like to get one thing out of the way: what is</p>
+<h1><span id="terminology-what-is-streaming"><strong>Terminology: What Is Streaming?</strong></span><a href="#terminology-what-is-streaming" class="header-anchor">#</a></h1><p>Before going any further, I’d like to get one thing out of the way: what is</p>
 <p>streaming? The term streaming is used today to mean a variety of different</p>
 <p>things (and for simplicity I’ve been using it somewhat loosely up until now),</p>
 <p>which can lead to misunderstandings about what streaming really is or what</p>
@@ -352,13 +354,9 @@
 <p>developers directly interact with in most data processing systems today (both</p>
 <p>batch and streaming). It’s also the constitution that most naturally embodies</p>
 <p>the challenges that are unique to stream processing.</p>
-</details>
+<details><summary>点击 原文</summary></details>
 
-
-
-
-
-<details><summary>点击 原文</summary><h3><span id="on-the-greatly-exaggerated-limitations-of-streaming"><strong>On the Greatly Exaggerated Limitations of Streaming</strong></span><a href="#on-the-greatly-exaggerated-limitations-of-streaming" class="header-anchor">#</a></h3><p>On that note, let’s next talk a bit about what streaming systems can and can’t</p>
+<h3><span id="on-the-greatly-exaggerated-limitations-of-streaming"><strong>On the Greatly Exaggerated Limitations of Streaming</strong></span><a href="#on-the-greatly-exaggerated-limitations-of-streaming" class="header-anchor">#</a></h3><p>On that note, let’s next talk a bit about what streaming systems can and can’t</p>
 <p>do, with an emphasis on can. One of the biggest things I want to get across in</p>
 <p>this chapter is just how capable a well-designed streaming system can be.</p>
 <p>Streaming systems have historically been relegated to a somewhat niche</p>
@@ -470,13 +468,9 @@
 <p>unbounded, unordered data of varying event-time skew. We then spend</p>
 <p>the rest of this chapter looking at common approaches to bounded and</p>
 <p>unbounded data processing, using both batch and streaming systems.</p>
-</details>
+<details><summary>点击 原文</summary></details>
 
-
-
-
-
-<details><summary>点击 原文</summary><h3><span id="event-time-versus-processing-time"><strong>Event Time Versus Processing Time</strong></span><a href="#event-time-versus-processing-time" class="header-anchor">#</a></h3><p>To speak cogently about unbounded data processing requires a clear</p>
+<h3><span id="event-time-versus-processing-time"><strong>Event Time Versus Processing Time</strong></span><a href="#event-time-versus-processing-time" class="header-anchor">#</a></h3><p>To speak cogently about unbounded data processing requires a clear</p>
 <p>understanding of the domains of time involved. Within any data processing</p>
 <p>system, there are typically two domains of time that we care about:</p>
 <ul>
@@ -577,13 +571,9 @@
 <p>Before getting into specifics about what such an approach might look like,</p>
 <p>let’s finish up one more useful piece of background: common data processing</p>
 <p>patterns.</p>
-</details>
+<details><summary>点击 原文</summary></details>
 
-
-
-
-
-<details><summary>点击 原文</summary><h1><span id="data-processing-patterns"><strong>Data Processing Patterns</strong></span><a href="#data-processing-patterns" class="header-anchor">#</a></h1><p>At this point, we have enough background established that we can begin</p>
+<h1><span id="data-processing-patterns"><strong>Data Processing Patterns</strong></span><a href="#data-processing-patterns" class="header-anchor">#</a></h1><p>At this point, we have enough background established that we can begin</p>
 <p>looking at the core types of usage patterns common across bounded and</p>
 <p>unbounded data processing today. We look at both types of processing and,</p>
 <p>where relevant, within the context of the two main types of engines we care</p>
@@ -647,13 +637,11 @@
 <p>Either way, using a classic batch engine to calculate sessions is less than</p>
 <p>ideal. A nicer way would be to build up sessions in a streaming manner,</p>
 <p>which we look at later on.</p>
-</details>
+<details><summary>点击 原文</summary></details>
 
 
 
-
-
-<details><summary>点击 原文</summary><h3><span id="unbounded-data-streaming"><strong>Unbounded Data: Streaming</strong></span><a href="#unbounded-data-streaming" class="header-anchor">#</a></h3><p>Contrary to the ad hoc nature of most batch-based unbounded data processing</p>
+<h3><span id="unbounded-data-streaming"><strong>Unbounded Data: Streaming</strong></span><a href="#unbounded-data-streaming" class="header-anchor">#</a></h3><p>Contrary to the ad hoc nature of most batch-based unbounded data processing</p>
 <p>approaches, streaming systems are built for unbounded data. As we talked</p>
 <p>about earlier, for many real-world, distributed input sources, you not only find</p>
 <p>yourself dealing with unbounded data, but also data such as the following:</p>
@@ -738,13 +726,11 @@
 <p>are essentially another example of time-agnostic processing (modulo the</p>
 <p>temporal features of the algorithms themselves), they’re quite straightforward</p>
 <p>to use and thus not worth further attention, given our current focus.</p>
-</details>
+<details><summary>点击 原文</summary></details>
 
 
 
-
-
-<details><summary>点击 原文</summary><p><strong>Windowing</strong></p>
+<p><strong>Windowing</strong></p>
 <p>The remaining two approaches for unbounded data processing are both</p>
 <p>variations of windowing. Before diving into the differences between them, I</p>
 <p>should make it clear exactly what I mean by windowing, insomuch as we</p>
@@ -797,11 +783,11 @@
 <p>domains, so let’s look at each in detail and see how they differ. Because</p>
 <p>processing-time windowing has historically been more common, we’ll start</p>
 <p>there.</p>
-</details>
+<details><summary>点击 原文</summary></details>
 
 
 
-<details><summary>点击 原文</summary><p><em><strong>Windowing by processing time</strong></em></p>
+<p><em><strong>Windowing by processing time</strong></em></p>
 <p>When windowing by processing time, the system essentially buffers up</p>
 <p>incoming data into windows until some amount of processing time has</p>
 <p>passed. For example, in the case of five-minute fixed windows, the system</p>
@@ -925,13 +911,11 @@
 <p>Dealing with window completeness (or lack thereof) is a fascinating topic</p>
 <p>but one perhaps best explored in the context of concrete examples, which</p>
 <p>we look at next.</p>
-</details>
+<details><summary>点击 原文</summary></details>
 
 
 
-
-
-<details><summary>点击 原文</summary><h1><span id="summary"><strong>Summary</strong></span><a href="#summary" class="header-anchor">#</a></h1><p>Whew! That was a lot of information. If you’ve made it this far, you are to be</p>
+<h1><span id="summary"><strong>Summary</strong></span><a href="#summary" class="header-anchor">#</a></h1><p>Whew! That was a lot of information. If you’ve made it this far, you are to be</p>
 <p>commended! But we are only just getting started. Before forging ahead to</p>
 <p>looking in detail at the Beam Model approach, let’s briefly step back and</p>
 <p>recap what we’ve learned so far. In this chapter, we’ve done the following:</p>
@@ -979,13 +963,11 @@
 <p>to ground us in reality. These examples will help drive home the notions of</p>
 <p>event time and processing time introduced in this chapter while additionally</p>
 <p>exploring new concepts such as watermarks.</p>
-</details>
+<details><summary>点击 原文</summary></details>
 
 
 
-
-
-<details><summary>点击 原文</summary><ol>
+<ol>
 <li>For completeness, it’s perhaps worth calling out that this definition includes</li>
 </ol>
 <p>both true streaming as well as microbatch implementations. For those of you</p>
@@ -1045,7 +1027,7 @@
 <p>processing-time windowing in which elements are assigned monotonically</p>
 <p>increasing timestamps as they arrive at the system. As such, we won’t discuss</p>
 <p>tuple-based windowing in detail any further.</p>
-</details>
+
     </div>
 
     
