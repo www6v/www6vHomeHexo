@@ -3596,7 +3596,29 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h2><span id="hotkey">HotKey</span><a href="#hotkey" class="header-anchor">#</a></h2><p><a href="https://help.aliyun.com/document_detail/67252.html">热点 Key 问题的发现与解决</a> 阿里 文档</p>
+<h2><span id="hotkey">HotKey</span><a href="#hotkey" class="header-anchor">#</a></h2><ul>
+<li><p>寻找热点Key [2]</p>
+<ul>
+<li>客户端  [1]<br>缺点: 只能统计单个客户端</li>
+<li>代理<br>缺点:  代理端的开发部署成本</li>
+<li>服务端<br>缺点:  monitor命令,  短时间用</li>
+<li>机器<br>packetbeat 抓包<br>缺点:  运维部署和机器成本</li>
+</ul>
+</li>
+<li><p>解决热点key [2]</p>
+<ul>
+<li>拆分复杂数据结构</li>
+<li>迁移热点key</li>
+<li>本地缓存加通知机制  [3]<br>使用二级缓存  [1]</li>
+</ul>
+</li>
+</ul>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzAxOTY5MDMxNA==&mid=2455759090&idx=1&sn=f9f0b49d7c1916672f9d4f63dab0c2b6">有赞透明多级缓存解决方案（TMC）</a></li>
+<li>《Redis 开发与运维》  12.5</li>
+<li><a href="https://github.com/shiyindaxiaojie/hotkey">京东 Redis 热点数据探测工具镜像</a><br><a href="https://mp.weixin.qq.com/s/xOzEj5HtCeh_ezHDPHw6Jw">京东毫秒级热key探测框架设计与实践，已实战于618大促</a></li>
+<li><a href="https://help.aliyun.com/document_detail/67252.html">热点 Key 问题的发现与解决</a> 阿里 文档  已失效</li>
+</ol>
 <blockquote>
 <p>通常的解决方案主要集中在对<strong>客户端</strong>和<strong>Server端</strong>进行相应的改造。<br>I. 服务端本地缓存.<br>II. 服务端分布式缓存。</p>
 </blockquote>
