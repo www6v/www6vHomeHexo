@@ -25,11 +25,14 @@
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/06/05/lsmTreeKeyValueSeparation/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/06/05/lsmTreeKeyValueSeparation/write-titan.png">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/06/05/lsmTreeKeyValueSeparation/get-titan.png">
 <meta property="article:published_time" content="2022-06-05T07:39:47.000Z">
-<meta property="article:modified_time" content="2023-03-02T02:49:17.252Z">
+<meta property="article:modified_time" content="2023-06-04T11:19:13.324Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="LSM-Tree">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2022/06/05/lsmTreeKeyValueSeparation/write-titan.png">
 
 <link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/06/05/lsmTreeKeyValueSeparation/">
 
@@ -224,7 +227,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-02 10:49:17" itemprop="dateModified" datetime="2023-03-02T10:49:17+08:00">2023-03-02</time>
+                <time title="修改时间：2023-06-04 19:19:13" itemprop="dateModified" datetime="2023-06-04T19:19:13+08:00">2023-06-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -254,44 +257,34 @@
         <p></p>
 <span id="more"></span>
 
-<h2><span id="kv分离3">KV分离[3]</span><a href="#kv分离3" class="header-anchor">#</a></h2><ul>
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%89%8D%E6%8F%90">前提</a></li>
+<li><a href="#kv%E5%88%86%E7%A6%BB3">KV分离[3]</a></li>
+<li><a href="#%E4%B8%9A%E7%95%8C%E5%AE%9E%E7%8E%B0-titan2">业界实现-Titan[2]</a><ul>
+<li><a href="#%E5%86%99%E6%B5%81%E7%A8%8B">写流程</a></li>
+<li><a href="#%E8%AF%BB%E6%B5%81%E7%A8%8B">读流程</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="前提">前提</span><a href="#前提" class="header-anchor">#</a></h1><p>常见的 LSM 存储引擎，如 LevelDB 和 RocksDB，将用户写入的一组的 key 和 value 存放在一起，按顺序写入 SST。在 compaction 过程中，引擎将上层的 SST 与下层 SST 合并，产生新的 SST 文件。这一过程中，SST 里面的 key 和 value 都会被重写一遍，带来较大的写放大。<strong>如果 value 的大小远大于 key，compaction 过程带来的写放大会引入巨大的开销。</strong></p>
+<h1><span id="kv分离3">KV分离[3]</span><a href="#kv分离3" class="header-anchor">#</a></h1><ul>
 <li>Wisckey</li>
 </ul>
-<h2><span id="工业界的实现2">工业界的实现[2]</span><a href="#工业界的实现2" class="header-anchor">#</a></h2><table>
-<thead>
-<tr>
-<th>存储引擎</th>
-<th>BadgerDB</th>
-<th>TerarkDB</th>
-<th>Titan</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Scan 性能</td>
-<td>差，需要 prefetch</td>
-<td>好</td>
-<td>好</td>
-</tr>
-<tr>
-<td>点读 key</td>
-<td>需要访问所有层</td>
-<td>遇到第一个即可停止</td>
-<td>遇到第一个即可停止</td>
-</tr>
-<tr>
-<td>读 value</td>
-<td>offset 直接读取</td>
-<td>需要访问 v-SST 索引</td>
-<td>offset 直接读取</td>
-</tr>
-<tr>
-<td>MVCC</td>
-<td>支持</td>
-<td>内部 Sequence No.</td>
-<td>内部 Sequence No.</td>
-</tr>
-</tbody></table>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h1><span id="业界实现-titan2">业界实现-Titan[2]</span><a href="#业界实现-titan2" class="header-anchor">#</a></h1><h3><span id="写流程">写流程</span><a href="#写流程" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/06/05/lsmTreeKeyValueSeparation/write-titan.png" class>
+
+<h3><span id="读流程">读流程</span><a href="#读流程" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/06/05/lsmTreeKeyValueSeparation/get-titan.png" class>
+
+
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li>bili </li>
 <li><a target="_blank" rel="noopener" href="https://www.skyzh.dev/posts/articles/2021-08-07-lsm-kv-separation-overview/">LSM 存储引擎中 KV 分离的实现</a>  *** </li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/428270334">LSM-Tree:从入门到放弃——放弃：LSM Tree的Compaction机制探讨和分析</a>   Overview</li>
