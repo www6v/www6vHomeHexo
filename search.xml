@@ -1082,34 +1082,53 @@
 <ul>
 <li><a href="#%E5%9C%BA%E6%99%AF">场景</a></li>
 <li><a href="#%E5%85%A8%E5%B1%80%E7%B4%A2%E5%BC%95-vs-%E5%B1%80%E9%83%A8%E7%B4%A2%E5%BC%95-12">全局索引 vs 局部索引 [1][2]</a></li>
-<li><a href="#%E5%85%A8%E5%B1%80%E7%B4%A2%E5%BC%95">全局索引</a></li>
+<li><a href="#polardb-%E5%85%A8%E5%B1%80%E7%B4%A2%E5%BC%95">PolarDB 全局索引</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
 
 </div>
 
-<h2><span id="场景">场景</span><a href="#场景" class="header-anchor">#</a></h2><p>[Claude]<br>分布式数据库的全局二级索引主要有以下几个使用场景:<br>    <strong>加速多表关联查询</strong>:用全局二级索引构建外键索引,可以有效地加速涉及多表关联的查询。<br>    全表扫描查询:当需要做全表扫描时,使用全局二级索引可以跳过不需要的行,大幅降低扫描成本。<br>    频繁查询的列上:对于数据库中经常需要根据某列进行查询的情况,建立该列的全局二级索引,可以大幅提高查询效率。<br>    <strong>需要排序的查询</strong>:当需要查询结果按某个列排序时,全局二级索引可以加速排序。<br>    模糊查询优化:通过部分键值匹配,全局二级索引可以优化like查询等模式查询。<br>    <strong>分页查询优化</strong>:结合 Cursor 标记,全局二级索引可以有效的支持分页查询。</p>
+<h2><span id="场景">场景</span><a href="#场景" class="header-anchor">#</a></h2><p>[Claude]<br>分布式数据库的全局二级索引主要有以下几个使用场景:<br>    <strong>加速多表关联查询</strong>:用全局二级索引构建外键索引,可以有效地加速涉及多表关联的查询。<br>    <strong>全表扫描查询</strong>:当需要做全表扫描时,使用全局二级索引可以跳过不需要的行,大幅降低扫描成本。<br>    频繁查询的列上:对于数据库中经常需要根据某列进行查询的情况,建立该列的全局二级索引,可以大幅提高查询效率。<br>    <strong>需要排序的查询</strong>:当需要查询结果按某个列排序时,全局二级索引可以加速排序。<br>    模糊查询优化:通过部分键值匹配,全局二级索引可以优化like查询等模式查询。<br>    <strong>分页查询优化</strong>:结合 Cursor 标记,全局二级索引可以有效的支持分页查询。</p>
 <p>总的来说,对于需要高效查询、排序、混合查询等复杂查询的分布式数据库而言,引入全局二级索引可以大大提高性能。尤其是处理大规模数据时,二级索引发挥的作用更加明显。</p>
 <ul>
-<li>全局二级索引能够解决什么问题<br>如果查询的维度与逻辑表的拆分维度不同，会<strong>产生跨分片查询</strong>。跨分片查询的增加会导致查询卡慢、连接池耗尽等性能问题。<strong>GSI</strong>能够通过增加拆分维度来<strong>减少跨分片查询，消除性能瓶颈</strong>。</li>
+<li><p>全局二级索引能够解决什么问题 [1]<br>如果查询的维度与逻辑表的拆分维度不同，会<strong>产生跨分片查询</strong>。跨分片查询的增加会导致查询卡慢、连接池耗尽等性能问题。<strong>GSI</strong>能够通过增加拆分维度来<strong>减少跨分片查询，消除性能瓶颈</strong>。</p>
+</li>
+<li><p>增加拆分维度 [4]<br>例如，对于在线商城的订单表，假设按照买家用户维度拆分，那么对于卖家查询（例如，查询某个卖家的本月所有订单）就需要扫描所有分区。但是借助全局二级索引，可以仅仅扫描相应卖家所在的索引表分区，快速找到所需的订单信息。</p>
+</li>
+<li><p>全局唯一约束 [4]<br>例如，假设用户表是一张分布式表，按照用户ID分区。若要求用户手机号需要全局唯一，那么本地索引无法满足，必须构建一个按手机号作为索引键（同时也是分区键）的唯一索引。</p>
+</li>
 </ul>
 <h2><span id="全局索引-vs-局部索引-12">全局索引 vs 局部索引 [1][2]</span><a href="#全局索引-vs-局部索引-12" class="header-anchor">#</a></h2><ul>
 <li><p>全局二级索引 [DDIA  基于关键词的二级索引分区]<br>数据行和对应的索引行保存在不同分片上</p>
+<ul>
+<li>分类 [3]<ul>
+<li>全局非分区索引（Global Non-Partitioned Index）</li>
+<li>全局分区索引（Global Partitioned Index）</li>
+</ul>
+</li>
+</ul>
 </li>
 <li><p>局部索引  [DDIA  基于文档的二级索引分区]<br>如果数据行和对应的索引行保存在相同分片上</p>
 </li>
 </ul>
-<h2><span id="全局索引">全局索引</span><a href="#全局索引" class="header-anchor">#</a></h2><ul>
-<li>PolarDB-X [1]<ul>
-<li>XA多写，保证主表与索引表数据强一致。[性能会不会慢]</li>
+<h2><span id="polardb-全局索引">PolarDB 全局索引</span><a href="#polardb-全局索引" class="header-anchor">#</a></h2><ul>
+<li><p>PolarDB-X [1]</p>
+<ul>
+<li>XA多写，保证主表与<strong>索引表</strong>数据强一致。[性能会不会慢]</li>
 <li>Online Schema Change，添加GSI不锁主表。</li>
 </ul>
 </li>
+<li><p>PolarDB-X GSI [4]<br>每个GSI对应一张分布式索引表，和其他分布式表一样，按照指定的分区规则水平拆分为多张物理表。PolarDB-X使用分布式事务维护主表和索引表之间数据强一致。</p>
+</li>
 </ul>
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://help.aliyun.com/document_detail/182179.html">全局二级索引</a>  </li>
+<li><a href="https://help.aliyun.com/document_detail/182179.html">全局二级索引</a>   PolarDB</li>
 <li><a href="https://zhuanlan.zhihu.com/p/384439886">设计数据密集型应用-C6-分区和二级索引</a>  DDIA</li>
+<li><a href="https://www.oceanbase.com/docs/enterprise-oceanbase-database-cn-10000000000376130">二级索引</a>  OB</li>
+<li><a href="https://doc.polardbx.com/features/topics/gsi.html">全局二级索引 </a>  PolarDB</li>
+<li><a href="https://zhuanlan.zhihu.com/p/572156705">PolarDB-X 全局二级索引</a> 未</li>
+<li><a href="https://zhuanlan.zhihu.com/p/440801781">PolarDB-X 数据分布解读（三） ：TPCC与透明分布式</a>  未</li>
 </ol>
 ]]></content>
       <categories>
