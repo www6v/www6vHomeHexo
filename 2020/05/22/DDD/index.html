@@ -20,15 +20,13 @@
     var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="https">
-<meta property="og:type" content="article">
+  <meta property="og:type" content="article">
 <meta property="og:title" content="DDD  领域驱动设计">
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2020/05/22/DDD/index.html">
 <meta property="og:site_name" content="www6v的博客">
-<meta property="og:description" content="https">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-22T01:54:58.000Z">
-<meta property="article:modified_time" content="2023-02-25T02:57:45.333Z">
+<meta property="article:modified_time" content="2023-06-05T14:22:48.489Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="DDD">
 <meta name="twitter:card" content="summary">
@@ -226,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-25 10:57:45" itemprop="dateModified" datetime="2023-02-25T10:57:45+08:00">2023-02-25</time>
+                <time title="修改时间：2023-06-05 22:22:48" itemprop="dateModified" datetime="2023-06-05T22:22:48+08:00">2023-06-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -257,55 +255,61 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p hidden>https</p>
-
+        <p></p>
 <span id="more"></span>
 
-<h2><span id="目标">目标：</span><a href="#目标" class="header-anchor">#</a></h2><ul>
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E7%9B%AE%E6%A0%87">目标</a></li>
+<li><a href="#%E4%B8%89%E4%B8%AA%E6%A0%B8%E5%BF%83">三个核心</a><ul>
+<li><a href="#%E7%BB%9F%E4%B8%80%E8%AF%AD%E8%A8%80">统一语言</a></li>
+<li><a href="#%E9%A2%86%E5%9F%9F%E5%88%92%E5%88%86">领域划分</a></li>
+<li><a href="#%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B">领域模型</a></li>
+</ul>
+</li>
+<li><a href="#%E8%90%BD%E5%9C%B0">落地</a><ul>
+<li><a href="#%E5%9F%BA%E4%BA%8Eddd%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84%E7%9A%84%E6%A0%B8%E5%BF%83">基于DDD应用架构的核心</a></li>
+<li><a href="#%E5%88%86%E5%B1%82">分层</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82">代码分层</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="目标">目标</span><a href="#目标" class="header-anchor">#</a></h1><ul>
 <li>DDD的精髓是降低<strong>系统复杂度</strong></li>
 <li>规则</li>
 </ul>
-<h2><span id="三个核心">三个核心</span><a href="#三个核心" class="header-anchor">#</a></h2><ol>
-<li>统一语言</li>
-</ol>
-<ul>
+<h1><span id="三个核心">三个核心</span><a href="#三个核心" class="header-anchor">#</a></h1><h3><span id="统一语言">统一语言</span><a href="#统一语言" class="header-anchor">#</a></h3><ul>
 <li>核心领域词汇表</li>
 <li>统一语言重构迭代： 模型-》实现-》 重构-》 隐喻 -》 再到模型</li>
 <li>命名规范</li>
 <li>DSL - Domain Specific Language</li>
 </ul>
-<ol start="2">
-<li>领域划分</li>
-</ol>
-<ul>
+<h3><span id="领域划分">领域划分</span><a href="#领域划分" class="header-anchor">#</a></h3><ul>
 <li>边界上下文（Bounded Context）</li>
 <li>上下文映射（Context Mapping)<br>共享内核（Shared Kernel）<br>防腐层（Anti-Corruption）： 类似adaptor、facade， 对内部领域模型的隔离和屏蔽。</li>
 </ul>
-<ol start="3">
-<li>领域模型</li>
-</ol>
-<ul>
+<h3><span id="领域模型">领域模型</span><a href="#领域模型" class="header-anchor">#</a></h3><ul>
 <li><p>抽象：<br>是从具体事物抽取、概括出它们共同的方面、本质属性与关系等。</p>
 </li>
 <li><p>领域建模方法论：<br>UML用例分析、 UML用例分析法<br>四色建模法<br><a target="_blank" rel="noopener" href="https://www.eventstorming.com/">事件风暴</a></p>
 </li>
 </ul>
-<h2><span id="落地">落地</span><a href="#落地" class="header-anchor">#</a></h2><ol>
-<li><p>基于DDD应用架构的核心：<br> 分离业务复杂度和技术复杂度</p>
-</li>
-<li><p>分层</p>
-</li>
-</ol>
-<ul>
+<h1><span id="落地">落地</span><a href="#落地" class="header-anchor">#</a></h1><h3><span id="基于ddd应用架构的核心">基于DDD应用架构的核心</span><a href="#基于ddd应用架构的核心" class="header-anchor">#</a></h3><p>分离业务复杂度和技术复杂度</p>
+<h3><span id="分层">分层</span><a href="#分层" class="header-anchor">#</a></h3><ul>
 <li>用户接口层(Controller层) </li>
 <li>Application层</li>
 <li>Domain层</li>
 <li>Infrastructure层</li>
 </ul>
-<ol start="3">
-<li>代码分层</li>
-</ol>
-<ul>
+<h3><span id="代码分层">代码分层</span><a href="#代码分层" class="header-anchor">#</a></h3><ul>
 <li><p>Interface</p>
 <ul>
 <li>assembler(DTO和领域对象的互转)</li>
@@ -337,13 +341,13 @@
 </ul>
 </li>
 </ul>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li>《DDD（Domain Driven Design)的精髓》  直播+ppt  阿里张建飞  钉钉2020.05.21视频</li>
+<li><a href>DDD实战课进入课程 - 代码模型（上）：如何使用DDD设计微服务代码模型？</a> 欧创新</li>
 <li>《领域驱动设计精粹》 未 </li>
 <li>《实现领域驱动设计》 未</li>
 <li>《领域专用语言实战》 未</li>
 <li><a target="_blank" rel="noopener" href="https://developer.aliyun.com/live/2874">事件风暴和领域建模在阿里巴巴的落地实践</a>  未</li>
-<li><a href>DDD实战课进入课程 - 代码模型（上）：如何使用DDD设计微服务代码模型？</a> 欧创新</li>
 </ol>
 
     </div>
