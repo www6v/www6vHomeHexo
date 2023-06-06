@@ -13371,6 +13371,24 @@ func new(Type) *Type
       </tags>
   </entry>
   <entry>
+    <title>SpringCloud</title>
+    <url>/www6vHomeHexo/2021/06/06/springCloud/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p><a href="https://www.cnblogs.com/crazymakercircle/p/13900212.html">SpringCloud 面试题 （持续更新、吐血推荐）</a></p>
+]]></content>
+      <categories>
+        <category>中间件</category>
+        <category>spring</category>
+        <category>springcloud</category>
+      </categories>
+      <tags>
+        <tag>微服务</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Kubernetes安装-kubeasz</title>
     <url>/www6vHomeHexo/2021/06/02/k8sDeploy/</url>
     <content><![CDATA[<p></p>
@@ -17810,24 +17828,53 @@ nq： 不排队调度
       </tags>
   </entry>
   <entry>
-    <title>Springboot</title>
+    <title>SpringBoot</title>
     <url>/www6vHomeHexo/2019/09/20/springboot/</url>
-    <content><![CDATA[<p hidden></p>
+    <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h2><span id="一">一.</span><a href="#一" class="header-anchor">#</a></h2><h2><span id="11-spring-boot定义">1.1 Spring Boot定义</span><a href="#11-spring-boot定义" class="header-anchor">#</a></h2><p><strong>Spring Boot</strong> is designed to get you up and running as quickly as possible,<br>with <strong>minimal</strong> upfront <strong>configuration</strong> of Spring.<br>Spring Boot takes an opinionated view of building production-ready applications.</p>
-<h2><span id="12-springboot-4个核心">1.2 Springboot 4个核心</span><a href="#12-springboot-4个核心" class="header-anchor">#</a></h2><p>Auto Configuration<br>Starter Dependency<br>Springboot CLI<br>Actuator（Runtime）</p>
-<h2><span id="13-springboot-特性">1.3 Springboot 特性</span><a href="#13-springboot-特性" class="header-anchor">#</a></h2><p>为Spring及第三方库提供自动配置;<br>无需生成代码或进行xml配置;<br>简化了项目的构建配置;</p>
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#core">Core</a><ul>
+<li><a href="#11-spring-boot%E5%AE%9A%E4%B9%89">1.1 Spring Boot定义</a></li>
+<li><a href="#12-springboot-4%E4%B8%AA%E6%A0%B8%E5%BF%83">1.2 Springboot 4个核心</a></li>
+<li><a href="#13-springboot-%E7%89%B9%E6%80%A7">1.3 Springboot 特性</a></li>
+</ul>
+</li>
+<li><a href="#config">Config</a><ul>
+<li><a href="#21-auto-configuration">2.1 Auto Configuration</a></li>
+<li><a href="#22-starter-dependency">2.2 Starter Dependency</a></li>
+<li><a href="#23-%E5%A4%96%E9%83%A8%E5%8C%96%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F">2.3 外部化配置加载顺序</a></li>
+</ul>
+</li>
+<li><a href="#%E8%BF%90%E8%A1%8C%E4%B8%AD%E7%9A%84springboot">运行中的Springboot</a><ul>
+<li><a href="#31-actuator">3.1 Actuator</a></li>
+<li><a href="#31-actuator-endpoint">3.1 Actuator Endpoint</a></li>
+<li><a href="#32-%E5%86%85%E5%B5%8C%E7%9A%84web%E5%AE%B9%E5%99%A8">3.2 内嵌的Web容器</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="core">Core</span><a href="#core" class="header-anchor">#</a></h1><h3><span id="11-spring-boot定义">1.1 Spring Boot定义</span><a href="#11-spring-boot定义" class="header-anchor">#</a></h3><p><strong>Spring Boot</strong> is designed to get you up and running as quickly as possible,<br>with <strong>minimal</strong> upfront <strong>configuration</strong> of Spring.<br>Spring Boot takes an opinionated view of building production-ready applications.</p>
+<h3><span id="12-springboot-4个核心">1.2 Springboot 4个核心</span><a href="#12-springboot-4个核心" class="header-anchor">#</a></h3><p>Auto Configuration<br>Starter Dependency<br>Springboot CLI<br>Actuator（Runtime）</p>
+<h3><span id="13-springboot-特性">1.3 Springboot 特性</span><a href="#13-springboot-特性" class="header-anchor">#</a></h3><p>为Spring及第三方库提供自动配置;<br>无需生成代码或进行xml配置;<br>简化了项目的构建配置;</p>
 <p>方便地创建可独立运行的Spring应用程序;<br>直接内嵌的Tomcat， Jetty或者Undertow;<br>提供生产级特性;</p>
 <p>约定优于配置(Convention Over Configuration) CoC</p>
-<h2><span id="二">二.</span><a href="#二" class="header-anchor">#</a></h2><h2><span id="21-auto-configuration">2.1 Auto Configuration</span><a href="#21-auto-configuration" class="header-anchor">#</a></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">组件</span><br><span class="line">   @EnableXXX</span><br><span class="line">        @Importer @ImportXXXSelector</span><br><span class="line">   @Conditional</span><br><span class="line">   @ConditionalOnClass</span><br><span class="line">   @ConditionalOnBean</span><br><span class="line">   ... </span><br></pre></td></tr></table></figure>
+<h1><span id="config">Config</span><a href="#config" class="header-anchor">#</a></h1><h3><span id="21-auto-configuration">2.1 Auto Configuration</span><a href="#21-auto-configuration" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">组件</span><br><span class="line">   @EnableXXX</span><br><span class="line">        @Importer @ImportXXXSelector</span><br><span class="line">   @Conditional</span><br><span class="line">   @ConditionalOnClass</span><br><span class="line">   @ConditionalOnBean</span><br><span class="line">   ... </span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">开启自动配置</span><br><span class="line">@EnableAutoConfiguration</span><br><span class="line">@SpringBootApplication</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">实现原理 - 有条件的加载机制</span><br><span class="line">@ConditionalOnClass</span><br><span class="line">@ConditionalOnBean</span><br><span class="line">@ConditionalOnMissingBean</span><br><span class="line">@ConditionalOnProperty</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
 
-<h2><span id="22-starter-dependency">2.2 Starter Dependency</span><a href="#22-starter-dependency" class="header-anchor">#</a></h2><ul>
+<h3><span id="22-starter-dependency">2.2 Starter Dependency</span><a href="#22-starter-dependency" class="header-anchor">#</a></h3><ul>
 <li>直接面向功能</li>
 <li>官方Starters spring-boot-starter-*</li>
 </ul>
@@ -17836,23 +17883,23 @@ nq： 不排队调度
 <ul>
 <li>扩展自定义starter<br>…</li>
 </ul>
-<h2><span id="23-外部化配置加载顺序">2.3 外部化配置加载顺序</span><a href="#23-外部化配置加载顺序" class="header-anchor">#</a></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">命令行参数（--server.port=9000）</span><br><span class="line">...</span><br><span class="line">System.getProperties()</span><br><span class="line">操作系统环境变量</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h3><span id="23-外部化配置加载顺序">2.3 外部化配置加载顺序</span><a href="#23-外部化配置加载顺序" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">命令行参数（--server.port=9000）</span><br><span class="line">...</span><br><span class="line">System.getProperties()</span><br><span class="line">操作系统环境变量</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
 
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">jar包外的application-&#123;profile&#125;.properties 或 .yml</span><br><span class="line">jar包内的application-&#123;profile&#125;.properties 或 .yml</span><br><span class="line">jar包外的application.properties或 .yml</span><br><span class="line">jar包内的application.properties或 .yml</span><br></pre></td></tr></table></figure>
 
-<h2><span id="三-运行中的springboot">三. 运行中的Springboot</span><a href="#三-运行中的springboot" class="header-anchor">#</a></h2><h2><span id="31-actuator">3.1 Actuator</span><a href="#31-actuator" class="header-anchor">#</a></h2><ul>
+<h1><span id="运行中的springboot">运行中的Springboot</span><a href="#运行中的springboot" class="header-anchor">#</a></h1><h3><span id="31-actuator">3.1 Actuator</span><a href="#31-actuator" class="header-anchor">#</a></h3><ul>
 <li>目的： 监控并管理应用程序</li>
 <li>访问方式： HTTP, JMX</li>
 <li>依赖： spring-boot-starter-actuator</li>
 </ul>
-<h2><span id="31-actuator-endpoint">3.1 Actuator Endpoint</span><a href="#31-actuator-endpoint" class="header-anchor">#</a></h2><ul>
+<h3><span id="31-actuator-endpoint">3.1 Actuator Endpoint</span><a href="#31-actuator-endpoint" class="header-anchor">#</a></h3><ul>
 <li>http访问<br>&#x2F;actuator&#x2F;<id></id></li>
 <li>端口与路径</li>
 <li>management.server.address&#x3D;</li>
 <li>management.server.port&#x3D;</li>
 </ul>
-<h2><span id="32-内嵌的web容器">3.2 内嵌的Web容器</span><a href="#32-内嵌的web容器" class="header-anchor">#</a></h2><p>可选容器列表</p>
+<h3><span id="32-内嵌的web容器">3.2 内嵌的Web容器</span><a href="#32-内嵌的web容器" class="header-anchor">#</a></h3><p>可选容器列表</p>
 <ul>
 <li>spring-boot-starter-tomcat</li>
 <li>spring-boot-starter-jetty</li>
@@ -17871,10 +17918,18 @@ nq： 不排队调度
 <li>server.tomcat.max-http-post-size</li>
 <li>server.tomcat.max-threads</li>
 </ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>《玩转Spring全家桶》 67.68.71.73.75,79 丁雪峰<br>黑马程序员SpringBoot教程，6小时快速入门Java微服务架构Spring Boot - bilibili</p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><p>《玩转Spring全家桶》 67.68.71.73.75,79 丁雪峰 </p>
+</li>
+<li><p>《黑马程序员SpringBoot教程，6小时快速入门Java微服务架构Spring Boot》 V</p>
+</li>
+<li><p><a href="https://www.cnblogs.com/crazymakercircle/p/14365487.html">SpringBoot面试题 (史上最全、持续更新、吐血推荐) </a> 未</p>
+</li>
+</ol>
 ]]></content>
       <categories>
-        <category>Java基础</category>
+        <category>中间件</category>
+        <category>spring</category>
         <category>springboot</category>
       </categories>
       <tags>
@@ -24773,13 +24828,12 @@ table th:first-of-type {
 </ol>
 ]]></content>
       <categories>
-        <category>Java基础</category>
+        <category>中间件</category>
+        <category>spring</category>
         <category>事务</category>
       </categories>
       <tags>
-        <tag>事务</tag>
         <tag>spring</tag>
-        <tag>transaction</tag>
       </tags>
   </entry>
   <entry>
