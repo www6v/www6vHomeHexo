@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-26T04:07:27.000Z">
-<meta property="article:modified_time" content="2023-03-02T02:15:18.598Z">
+<meta property="article:modified_time" content="2023-06-08T09:05:54.867Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Nginx">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-02 10:15:18" itemprop="dateModified" datetime="2023-03-02T10:15:18+08:00">2023-03-02</time>
+                <time title="修改时间：2023-06-08 17:05:54" itemprop="dateModified" datetime="2023-06-08T17:05:54+08:00">2023-06-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -251,26 +251,52 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p hidden></p>
+        <p></p>
 <span id="more"></span>
 
-<h2><span id="一-nginx-参数优化">一. Nginx 参数优化</span><a href="#一-nginx-参数优化" class="header-anchor">#</a></h2><h3><span id="反向代理">反向代理</span><a href="#反向代理" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">proxy_cache: 10M(重要)</span><br><span class="line">proxy_cache_path /data/nginx_cache/ levels=1:2 keys_zone=my_zone:10m inactive=300s max_size=5g;</span><br></pre></td></tr></table></figure>
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#nginx-%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96">Nginx 参数优化</a><ul>
+<li><a href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86">反向代理</a></li>
+<li><a href="#tls-ssl">tls ssl</a></li>
+<li><a href="#%E9%9D%9E%E5%AE%89%E5%85%A8%E8%AF%B7%E6%B1%82%E9%87%8D%E5%AE%9A%E5%90%91">非安全请求重定向：</a></li>
+<li><a href="#gzip">gzip</a></li>
+<li><a href="#worker">worker</a></li>
+<li><a href="#%E5%87%8F%E5%B0%91%E8%BF%9B%E7%A8%8B%E9%97%B4%E5%88%87%E6%8D%A2">减少进程间切换</a></li>
+<li><a href="#%E6%8F%90%E5%8D%87cpu%E7%BC%93%E5%AD%98%E5%91%BD%E4%B8%AD%E7%8E%87">提升CPU缓存命中率</a></li>
+<li><a href="#lua-%E5%88%86%E9%85%8D%E7%9A%84%E5%86%85%E5%AD%98%E6%9A%82%E6%97%B6%E6%B2%A1%E6%9C%89%E4%BD%BF%E7%94%A8">lua 分配的内存（暂时没有使用）</a></li>
+<li><a href="#http%E7%9A%84keeplive-%E9%95%BF%E9%93%BE%E6%8E%A5%E4%B8%80%E4%B8%AAtcp%E7%9A%84%E9%93%BE%E6%8E%A5%E4%B8%8A%E9%9D%A2%E6%9C%89%E5%A4%9A%E4%B8%AAhttp%E7%9A%84%E8%AF%B7%E6%B1%82">http的keeplive 长链接（一个tcp的链接，上面有多个http的请求）</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B">测试用例</a><ul>
+<li><a href="#case1">case1</a></li>
+<li><a href="#case2">case2</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h2><span id="nginx-参数优化">Nginx 参数优化</span><a href="#nginx-参数优化" class="header-anchor">#</a></h2><h3><span id="反向代理">反向代理</span><a href="#反向代理" class="header-anchor">#</a></h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">proxy_cache: 10M(重要)</span><br><span class="line"><span class="attribute">proxy_cache_path</span> /data/nginx_cache/ levels=<span class="number">1</span>:<span class="number">2</span> keys_zone=my_zone:<span class="number">10m</span> inactive=<span class="number">300s</span> max_size=<span class="number">5g</span>;</span><br></pre></td></tr></table></figure>
 
 
+<h3><span id="tls-ssl">tls ssl</span><a href="#tls-ssl" class="header-anchor">#</a></h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ssl_session_cache</span> builtin:<span class="number">1000</span> shared:SSL:<span class="number">10m</span>;  /// 一天内连接上的用户， 不需要再协商秘钥</span><br><span class="line"><span class="attribute">ssl_session_cache</span> builtin:<span class="number">1000</span> shared:SSL:<span class="number">10m</span>;  /// 1<span class="attribute">m</span> -&gt; <span class="number">4000</span>个https连接</span><br><span class="line">ssl_session_timeout <span class="number">10m</span>; /// 10分钟</span><br><span class="line"><span class="attribute">ssl_protocols</span> TLSv1.<span class="number">2</span>;  /// 版本号</span><br></pre></td></tr></table></figure>
+
+<h3><span id="非安全请求重定向">非安全请求重定向：</span><a href="#非安全请求重定向" class="header-anchor">#</a></h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">No</span> <span class="literal">redirect</span>:  无重定向 </span><br><span class="line">Redirect： <span class="number">301</span>-<span class="number">302</span> -》 转到https站点 </span><br></pre></td></tr></table></figure>
+
+<h3><span id="gzip">gzip</span><a href="#gzip" class="header-anchor">#</a></h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">gzip</span> <span class="literal">on</span>;</span><br><span class="line"><span class="attribute">gzip_comp_level</span> <span class="number">5</span>;</span><br><span class="line"><span class="attribute">gzip_http_version</span> <span class="number">1</span>.<span class="number">1</span>;   /// 注意：<span class="attribute">gzip</span> 在<span class="number">1</span>.<span class="number">1</span>上有效， http2.<span class="number">0</span>上是无效的</span><br><span class="line">gzip_min_length <span class="number">256</span>;</span><br><span class="line"><span class="attribute">gzip_types</span> application/atom+xml ... </span><br><span class="line">gzip_proxied any;</span><br><span class="line"><span class="attribute">gzip_vary</span> <span class="literal">on</span>;</span><br></pre></td></tr></table></figure>
 
 
-<h3><span id="tls-ssl">tls ssl</span><a href="#tls-ssl" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ssl_session_cache builtin:1000 shared:SSL:10m;  /// 一天内连接上的用户， 不需要再协商秘钥</span><br><span class="line">ssl_session_cache builtin:1000 shared:SSL:10m;  /// 1m -&gt; 4000个https连接</span><br><span class="line">ssl_session_timeout 10m; /// 10分钟</span><br><span class="line">ssl_protocols TLSv1.2;  /// 版本号</span><br></pre></td></tr></table></figure>
+<h3><span id="worker">worker</span><a href="#worker" class="header-anchor">#</a></h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">worker_connections</span>  <span class="number">16384</span>;  ///    一个worker有 16384/2=8192 ‬个链接 .</span><br><span class="line">                                   两个事件， 一个读事件， 一个写事件。 </span><br><span class="line">                                   越多的connections对应更多的内存消耗。</span><br><span class="line">Default: <span class="attribute">worker_connections</span> <span class="number">512</span>;                                 </span><br></pre></td></tr></table></figure>
 
-<h3><span id="非安全请求重定向">非安全请求重定向：</span><a href="#非安全请求重定向" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">No redirect:  无重定向 </span><br><span class="line">Redirect： 301-302 -》 转到https站点 </span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">高级选项：</span><br><span class="line"><span class="attribute">worker</span> connections的内存池（pools）， 更少的的内存碎片。一般是nginx自动分配的， 不用分配。</span><br><span class="line">Default: 	connection_pool_size <span class="number">256</span>|<span class="number">512</span></span><br><span class="line">Default: 	request_pool_size <span class="number">4k</span>;</span><br></pre></td></tr></table></figure>
 
-<h3><span id="gzip">gzip</span><a href="#gzip" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gzip on;</span><br><span class="line">gzip_comp_level 5;</span><br><span class="line">gzip_http_version 1.1;   /// 注意：gzip 在1.1上有效， http2.0上是无效的</span><br><span class="line">gzip_min_length 256;</span><br><span class="line">gzip_types application/atom+xml ... </span><br><span class="line">gzip_proxied any;</span><br><span class="line">gzip_vary on;</span><br></pre></td></tr></table></figure>
-
-
-<h3><span id="worker">worker</span><a href="#worker" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">worker_connections  16384;  ///    一个worker有 16384/2=8192 ‬个链接 .</span><br><span class="line">                                   两个事件， 一个读事件， 一个写事件。 </span><br><span class="line">                                   越多的connections对应更多的内存消耗。</span><br><span class="line">Default: worker_connections 512;                                 </span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">高级选项：</span><br><span class="line">worker connections的内存池（pools）， 更少的的内存碎片。一般是nginx自动分配的， 不用分配。</span><br><span class="line">Default: 	connection_pool_size 256|512</span><br><span class="line">Default: 	request_pool_size 4k;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">worker_processes  设置worker进程的数量</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">worker_processes</span>  设置worker进程的数量</span><br></pre></td></tr></table></figure>
 
 
 <h3><span id="减少进程间切换">减少进程间切换</span><a href="#减少进程间切换" class="header-anchor">#</a></h3><p>程间切换： cpu从一个进程或线程切换到另一个进程或线程。</p>
@@ -280,18 +306,22 @@
 <li>被动切换：时间片耗尽。<br>减少被动切换： <strong>增大进程优先级</strong><br>Nice 静态优先级: -20 – 19<br>Priority 动态优先级： 0-139</li>
 </ul>
 <h3><span id="提升cpu缓存命中率">提升CPU缓存命中率</span><a href="#提升cpu缓存命中率" class="header-anchor">#</a></h3><ul>
-<li><strong>绑定worker到指定cpu</strong><br>L1,L2(cpu独享)<br>L3（共享的）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">worker_cpu_affinity cpumask ...;</span><br><span class="line">worker_cpu_affinity auto [cpumask];</span><br></pre></td></tr></table></figure></li>
+<li><strong>绑定worker到指定cpu</strong><br>L1,L2(cpu独享)<br>L3（共享的）<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">worker_cpu_affinity</span> cpumask ...;</span><br><span class="line"><span class="attribute">worker_cpu_affinity</span> auto [cpumask];</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3><span id="lua-分配的内存暂时没有使用">lua 分配的内存（暂时没有使用）</span><a href="#lua-分配的内存暂时没有使用" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lua_shared_dict configuration_data 5M;</span><br><span class="line">lua_shared_dict certificate_data 16M;</span><br><span class="line">应用场景: 集群流控,  多个worker之间的内存的共享。</span><br></pre></td></tr></table></figure>
+<h3><span id="lua-分配的内存暂时没有使用">lua 分配的内存（暂时没有使用）</span><a href="#lua-分配的内存暂时没有使用" class="header-anchor">#</a></h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">lua_shared_dict</span> configuration_data <span class="number">5M</span>;</span><br><span class="line"><span class="attribute">lua_shared_dict</span> certificate_data <span class="number">16M</span>;</span><br><span class="line">// 应用场景: 集群流控,  多个worker之间的内存的共享。</span><br></pre></td></tr></table></figure>
 
 
-<h3><span id="http的keeplive-长链接一个tcp的链接上面有多个http的请求-非tcp-keeplive">http的keeplive  长链接（一个tcp的链接，上面有多个http的请求）  非tcp keeplive</span><a href="#http的keeplive-长链接一个tcp的链接上面有多个http的请求-非tcp-keeplive" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">keepalive_disable;  /// 没有设置</span><br><span class="line">keepalive_timeout  75s; // 默认值</span><br><span class="line">keepalive_requests 100; // 默认值  一个tcp请求中可发100个http请求</span><br></pre></td></tr></table></figure>
+<h3><span id="http的keeplive-长链接一个tcp的链接上面有多个http的请求">http的keeplive  长链接（一个tcp的链接，上面有多个http的请求）</span><a href="#http的keeplive-长链接一个tcp的链接上面有多个http的请求" class="header-anchor">#</a></h3><p>注意: 非tcp keeplive </p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">keepalive_disable;  /// 没有设置</span><br><span class="line"><span class="attribute">keepalive_timeout</span>  <span class="number">75s</span>; // 默认值</span><br><span class="line"><span class="attribute">keepalive_requests</span> <span class="number">100</span>; // 默认值  一个tcp请求中可发100个http请求</span><br></pre></td></tr></table></figure>
 
-<h3><span id="二-测试用例">二. 测试用例</span><a href="#二-测试用例" class="header-anchor">#</a></h3><p>URL：logsearch.sh.pre.urtc.com.cn</p>
+<h2><span id="测试用例">测试用例</span><a href="#测试用例" class="header-anchor">#</a></h2><p>URL：logsearch.sh.pre.urtc.com.cn</p>
 <h3><span id="case1">case1</span><a href="#case1" class="header-anchor">#</a></h3><p>input：<br>1000用户并发, 短连接， 非keepalive的   </p>
 <p>result：<br>链接数  40000+<br>tps 4000+<br>avg 百ms   </p>
 <h3><span id="case2">case2</span><a href="#case2" class="header-anchor">#</a></h3><p>input：<br>1500用户并发，短连接， 非keepalive的    </p>
-<p>result：<br>链接数 30000+，<br>tps 4000+ ，<br>avg 200ms+</p>
+<p>result：<br>链接数 30000+，<br>tps 4000+ ，<br>avg 200ms+ </p>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol start="100">
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xfeiyun/p/15877678.html">Nginx全面配置</a>  *** 未</li>
+</ol>
 
     </div>
 
