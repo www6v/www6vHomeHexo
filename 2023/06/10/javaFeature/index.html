@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2023/06/10/javaFeature/version.jpg">
 <meta property="article:published_time" content="2023-06-10T02:14:03.000Z">
-<meta property="article:modified_time" content="2023-06-10T08:58:40.569Z">
+<meta property="article:modified_time" content="2023-06-10T09:20:11.806Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Java基础">
 <meta name="twitter:card" content="summary">
@@ -220,7 +220,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-06-10 10:14:03 / 修改时间：16:58:40" itemprop="dateCreated datePublished" datetime="2023-06-10T10:14:03+08:00">2023-06-10</time>
+              <time title="创建时间：2023-06-10 10:14:03 / 修改时间：17:20:11" itemprop="dateCreated datePublished" datetime="2023-06-10T10:14:03+08:00">2023-06-10</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -256,7 +256,10 @@
 
 <ul>
 <li><a href="#%E7%89%88%E6%9C%AC">版本</a></li>
-<li><a href="#%E7%89%88%E6%9C%AC%E7%89%B9%E6%80%A7">版本+特性</a><ul>
+<li><a href="#%E7%89%88%E6%9C%AC%E7%89%B9%E6%80%A7-1">版本+特性 [1]</a><ul>
+<li><a href="#java-14">Java 1.4</a></li>
+<li><a href="#java-5java-15">Java 5（Java 1.5）</a></li>
+<li><a href="#java-7">Java 7</a></li>
 <li><a href="#java-se-8java-8-lts%E9%95%BF%E6%9C%9F%E6%94%AF%E6%8C%81%E7%89%88%E6%9C%AC">Java SE 8（Java 8）- LTS长期支持版本</a></li>
 <li><a href="#java-se-9java-9">Java SE 9（Java 9）</a></li>
 <li><a href="#java-se-10java-10">Java SE 10（Java 10）</a></li>
@@ -282,6 +285,7 @@
 <li><a href="#switch%E5%8C%B9%E9%85%8D-%E9%80%82%E9%85%8D%E4%B8%8D%E5%90%8C%E7%9A%84%E7%B1%BB%E5%9E%8B-jdk-17-21">switch匹配 [适配不同的类型]  |  JDK 17-21</a></li>
 <li><a href="#%E5%A4%96%E9%83%A8%E5%86%85%E5%AD%98%E6%8E%A5%E5%8F%A3-jdk18-">外部内存接口 | JDK18-?</a></li>
 <li><a href="#%E5%A4%96%E9%83%A8%E5%87%BD%E6%95%B0%E6%8E%A5%E5%8F%A3%E5%8F%96%E4%BB%A3java%E6%9C%AC%E5%9C%B0%E6%8E%A5%E5%8F%A3-jdk-17-">外部函数接口[取代Java本地接口] |  JDK 17-?</a></li>
+<li><a href="#gc">GC</a></li>
 </ul>
 </li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
@@ -290,7 +294,7 @@
 
 </div>
 
-<h1><span id="版本">版本</span><a href="#版本" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2023/06/10/javaFeature/version.jpg" class>
+<h1><span id="版本">版本</span><a href="#版本" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2023/06/10/javaFeature/version.jpg" class width="720" height="756">
 
 <table>
 <thead>
@@ -305,10 +309,21 @@
 </tr>
 <tr>
 <td>JDK 20</td>
-<td>2023 年 3 月 21 日</td>
+<td>2023&#x2F;03&#x2F;21</td>
 </tr>
 </tbody></table>
-<h1><span id="版本特性">版本+特性</span><a href="#版本特性" class="header-anchor">#</a></h1><h3><span id="java-se-8java-8-lts长期支持版本">Java SE 8（Java 8）- LTS长期支持版本</span><a href="#java-se-8java-8-lts长期支持版本" class="header-anchor">#</a></h3><ul>
+<h1><span id="版本特性-1">版本+特性 [1]</span><a href="#版本特性-1" class="header-anchor">#</a></h1><h3><span id="java-14">Java 1.4</span><a href="#java-14" class="header-anchor">#</a></h3><ul>
+<li>NIO（New I&#x2F;O）</li>
+</ul>
+<h3><span id="java-5java-15">Java 5（Java 1.5）</span><a href="#java-5java-15" class="header-anchor">#</a></h3><ul>
+<li>泛型</li>
+<li>自动装箱&#x2F;拆箱</li>
+<li>枚举类型</li>
+</ul>
+<h3><span id="java-7">Java 7</span><a href="#java-7" class="header-anchor">#</a></h3><ul>
+<li>Try-with-resources</li>
+</ul>
+<h3><span id="java-se-8java-8-lts长期支持版本">Java SE 8（Java 8）- LTS长期支持版本</span><a href="#java-se-8java-8-lts长期支持版本" class="header-anchor">#</a></h3><ul>
 <li><strong>Lambda 表达式</strong>：简化函数式编程。允许以更简洁的语法编写函数式接口的实例，使代码更加简洁。</li>
 <li><strong>Stream API</strong>：用于处理集合，支持函数式操作，如过滤、映射和聚合。</li>
 <li>方法引用：允许直接引用现有方法或构造函数，避免了重复编写类似的代码。</li>
@@ -319,24 +334,20 @@
 <li>Nashorn 引擎：提供了一种基于 JavaScript 的解决方案，允许将 JavaScript 代码嵌入到 Java 应用程序中。</li>
 <li><strong>Optional 类</strong>：减少空指针异常，提高代码可读性。</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/8u-relnotes.html">JDK 8 Update Release Notes (oracle.com)</a></p>
 <h3><span id="java-se-9java-9">Java SE 9（Java 9）</span><a href="#java-se-9java-9" class="header-anchor">#</a></h3><ul>
 <li><strong>模块系统（Project Jigsaw）</strong>：将 Java 的庞大代码库划分为可重用的模块，简化大型应用的构建和维护。</li>
 <li>JShell：Java 的交互式命令行工具，用于快速尝试和测试 Java 代码片段。</li>
 <li>新的集合工厂方法：方便地创建不可变集合，如 List.of()、Set.of() 和 Map.of()。</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/9u-relnotes.html">Java Development Kit 9 Update Release Notes (oracle.com)</a></p>
 <h3><span id="java-se-10java-10">Java SE 10（Java 10）</span><a href="#java-se-10java-10" class="header-anchor">#</a></h3><ul>
 <li><strong>局部变量类型推断</strong>：使用 var 关键字自动推断局部变量的类型，简化代码。</li>
 <li>垃圾收集器接口改进：提高了垃圾收集器的可插拔性和灵活性。</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/10u-relnotes.html">Java Development Kit 10 Update Release Notes (oracle.com)</a></p>
 <h3><span id="java-se-11java-11-lts长期支持版本">Java SE 11（Java 11）-LTS长期支持版本</span><a href="#java-se-11java-11-lts长期支持版本" class="header-anchor">#</a></h3><ul>
 <li>新的 HTTP 客户端 API：支持 HTTP&#x2F;2 和 WebSocket，提供了更现代化的编程方式。</li>
 <li>改进的垃圾收集：引入了 <strong>ZGC</strong> 和 Epsilon 垃圾收集器。</li>
 <li>String 类的新方法：如 lines()、isBlank()、strip() 等。</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/11u-relnotes.html">Java Development Kit 11 Release Notes (oracle.com)</a></p>
 <h3><span id="java-se-12java-12">Java SE 12（Java 12）</span><a href="#java-se-12java-12" class="header-anchor">#</a></h3><ul>
 <li><strong>switch 表达式</strong>：允许在 switch 语句中使用表达式，提高了代码的可读性和简洁性。</li>
 <li>改进的字符串类：提供了一些新的方法，使得字符串的操作更加方便和高效。</li>
@@ -344,14 +355,12 @@
 <li>微基准测试套件：提供了一种用于快速测试性能的微基准测试框架。</li>
 <li>JDK 源代码重构：对 JDK 源代码进行了重构，提高了代码的可读性和维护性。</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/12u-relnotes.html">Java Development Kit 12 Update Release Notes (oracle.com)</a></p>
 <h3><span id="java-se-13-java-13">Java SE 13 （Java 13）</span><a href="#java-se-13-java-13" class="header-anchor">#</a></h3><ul>
 <li><strong>文本块</strong>：允许以更简洁的语法创建多行字符串，提高了代码的可读性和简洁性。</li>
 <li>改进的 switch 表达式：允许在 switch 语句中使用表达式，提供更好的类型推断和更灵活的写法。</li>
 <li>ZGC 垃圾回收器改进：提高了 ZGC 垃圾回收器的性能和可靠性。</li>
 <li>应用程序类数据共享改进：提高了应用程序类数据共享的性能和效率。</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/13u-relnotes.html">Java Development Kit 13 Update Release Notes (oracle.com)</a></p>
 <h3><span id="java-se-14-java-14">Java SE 14 （Java 14）</span><a href="#java-se-14-java-14" class="header-anchor">#</a></h3><p>2020年3月17日</p>
 <ul>
 <li>instanceof 模式匹配：允许在 instanceof 操作符中使用模式匹配，提高了代码的简洁性和可读性。</li>
@@ -360,7 +369,6 @@
 <li>文本块增强：允许在文本块中使用嵌入式表达式，使得文本块更加灵活和强大。</li>
 <li>改进的 NullPointerException 信息：提供更详细的 NullPointerException 信息。</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/14u-relnotes.html">Java Development Kit 14 Update Release Notes (oracle.com)</a></p>
 <h3><span id="java-se-15-java-15">Java SE 15 （Java 15）</span><a href="#java-se-15-java-15" class="header-anchor">#</a></h3><ul>
 <li><strong>隐式的类文件</strong>：允许在 Java 源代码中定义多个类，而不需要单独的类文件。</li>
 <li>改进的文本块：允许在文本块中使用转义字符和 Unicode 转义，提高了文本块的灵活性和可读性。</li>
@@ -368,7 +376,6 @@
 <li><strong>Sealed 类和接口</strong>：允许控制哪些类或接口可以继承或实现该类或接口，提高了代码的安全性和可维护性。</li>
 <li>其他改进：包括增强的 ZGC 垃圾回收器、改进的内存管理、新增的 Unix 域套接字 API 等。</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/15u-relnotes.html">Java Development Kit 15 Release Notes (oracle.com)</a></p>
 <h3><span id="java-se-16-java-16">Java SE 16 （Java 16）</span><a href="#java-se-16-java-16" class="header-anchor">#</a></h3><ul>
 <li>增强的文本块：允许在文本块中使用转义字符和嵌入式表达式。</li>
 <li>移除了废弃的 ParallelScavenge 垃圾回收器。</li>
@@ -376,7 +383,6 @@
 <li>Records 类的增强：允许在 records 类中添加静态方法和私有构造函数。</li>
 <li><strong>Vector API</strong>：提供了一种新的 API，用于高效地执行矢量化操作。</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/16u-relnotes.html">Java Development Kit 16 Release Notes (oracle.com)</a></p>
 <h3><span id="java-se-17java-17-lts长期支持版本">Java SE 17（Java 17）-LTS长期支持版本</span><a href="#java-se-17java-17-lts长期支持版本" class="header-anchor">#</a></h3><ul>
 <li><strong>嵌套枚举</strong>：允许在类和接口中定义嵌套枚举，提高了代码的可读性和简洁性。</li>
 <li>改进的 switch 语句：允许在 switch 语句中使用 case 标签作为表达式，提供更灵活的写法。</li>
@@ -384,7 +390,6 @@
 <li>增强的垃圾回收器：提高了性能和可靠性，增加了可配置参数。</li>
 <li>其他改进：包括新的内存管理和性能优化，增强的 JIT 编译器等。</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/17u-relnotes.html">Java Development Kit 17 Release Notes (oracle.com)</a></p>
 <h3><span id="java-se-18java-182">Java SE 18（Java 18）[2]</span><a href="#java-se-18java-182" class="header-anchor">#</a></h3><p>400：默认使用 UTF-8<br>408：简易 Web 服务器<br>413：Java API 文档中的代码片段<br>416：使用方法句柄重新实现核心反射<br>417：矢量 API<br>418：网络地址解析 SPI<br>419：<strong>外部函数和内存 API</strong><br>420：switch 的模式匹配<br>421：废弃对象终止机制 </p>
 <h3><span id="java-se-19java-19-3">Java SE 19（Java 19） [3]</span><a href="#java-se-19java-19-3" class="header-anchor">#</a></h3><p>405: 	Record Patterns (Preview)<br>422: 	Linux&#x2F;RISC-V Port<br>424: 	Foreign Function &amp; Memory API (Preview)<br>425: 	<strong>Virtual Threads (Preview)</strong><br>426: 	Vector API (Fourth Incubator)<br>427: 	Pattern Matching for switch (Third Preview)<br>428: 	<strong>Structured Concurrency (Incubator)</strong></p>
 <h3><span id="java-se-20java-20-4">Java SE 20（Java 20） [4]</span><a href="#java-se-20java-20-4" class="header-anchor">#</a></h3><p>429: 	<strong>Scoped Values (Incubator)</strong><br>432: 	Record Patterns (Second Preview)<br>433: 	Pattern Matching for switch (Fourth Preview)<br>434: 	Foreign Function &amp; Memory API (Second Preview)<br>436: 	Virtual Threads (Second Preview)<br>437: 	Structured Concurrency (Second Incubator)<br>438: 	Vector API (Fifth Incubator)</p>
@@ -412,8 +417,9 @@
 </ul>
 <h3><span id="外部函数接口取代java本地接口-jdk-17-">外部函数接口[取代Java本地接口] |  JDK 17-?</span><a href="#外部函数接口取代java本地接口-jdk-17-" class="header-anchor">#</a></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorld</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">ResourceScope</span> <span class="variable">scope</span> <span class="operator">=</span> ResourceScope.newConfinedScope()) &#123;</span><br><span class="line">            <span class="type">CLinker</span> <span class="variable">cLinker</span> <span class="operator">=</span> CLinker.getInstance();</span><br><span class="line">            <span class="type">MemorySegment</span> <span class="variable">helloWorld</span> <span class="operator">=</span></span><br><span class="line">            		CLinker.toCString(<span class="string">&quot;Hello, world!\n&quot;</span>, scope);</span><br><span class="line">            <span class="type">MethodHandle</span> <span class="variable">cPrintf</span> <span class="operator">=</span> cLinker.downcallHandle(</span><br><span class="line">            		CLinker.systemLookup().lookup(<span class="string">&quot;printf&quot;</span>).get(),</span><br><span class="line">            		MethodType.methodType(<span class="type">int</span>.class, MemoryAddress.class),</span><br><span class="line">            		FunctionDescriptor.of(CLinker.C_INT, CLinker.C_POINTER));</span><br><span class="line">            cPrintf.invoke(helloWorld.address());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h3><span id="gc">GC</span><a href="#gc" class="header-anchor">#</a></h3><p>G1,<br>ZGC, 分代式 ZGC </p>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a target="_blank" rel="noopener" href="http://justzqq.com/2023/03/23/java%E5%90%84%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84%E4%B8%BB%E8%A6%81%E7%89%B9%E6%80%A7%E6%95%B4%E7%90%86%EF%BC%81/">Java各个版本发布时间和主要特性整理！</a></li>
+<li><a target="_blank" rel="noopener" href="http://justzqq.com/2023/03/23/java%E5%90%84%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84%E4%B8%BB%E8%A6%81%E7%89%B9%E6%80%A7%E6%95%B4%E7%90%86%EF%BC%81/">Java各个版本发布时间和主要特性整理！</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/wcdunf/article/details/129861244">Java 历史大版本及其详细特性介绍:</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv16596828">Java 18 的新特性</a></li>
 <li><a target="_blank" rel="noopener" href="https://openjdk.org/projects/jdk/19/">JDK 19</a></li>
 <li><a target="_blank" rel="noopener" href="https://openjdk.org/projects/jdk/20/">JDK 20</a></li>
@@ -421,6 +427,7 @@
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lewyu521/article/details/127649776">Java19 虚拟线程原理介绍及实现</a> ***</li>
 <li><a target="_blank" rel="noopener" href="https://www.jdon.com/63445.html">Java虚拟线程：异步编程之死</a></li>
 <li>《深入剖析 Java 新特性》  范学雷<br> 02,03,04,05,06,07,08,09,12, 13</li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv13542498">从Java 11升级到Java 17 </a> V 未</li>
 </ol>
 
     </div>
