@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2023/06/10/javaFeature/version.jpg">
 <meta property="article:published_time" content="2023-06-10T02:14:03.000Z">
-<meta property="article:modified_time" content="2023-06-10T04:32:42.026Z">
+<meta property="article:modified_time" content="2023-06-10T08:58:40.569Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Java基础">
 <meta name="twitter:card" content="summary">
@@ -220,7 +220,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-06-10 10:14:03 / 修改时间：12:32:42" itemprop="dateCreated datePublished" datetime="2023-06-10T10:14:03+08:00">2023-06-10</time>
+              <time title="创建时间：2023-06-10 10:14:03 / 修改时间：16:58:40" itemprop="dateCreated datePublished" datetime="2023-06-10T10:14:03+08:00">2023-06-10</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -280,6 +280,8 @@
 <li><a href="#%E7%B1%BB%E5%9E%8B%E5%8C%B9%E9%85%8D-%E5%88%87%E9%99%A4%E8%87%83%E8%82%BF%E7%9A%84%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2-jdk-14-jdk-16">类型匹配 [切除臃肿的强制转换] | JDK 14-JDK 16</a></li>
 <li><a href="#switch-%E8%A1%A8%E8%BE%BE%E5%BC%8F-%E7%AE%80%E5%8C%96%E5%A4%9A%E6%83%85%E6%99%AF%E6%93%8D%E4%BD%9C-jdk-12-jdk-14">switch 表达式 [简化多情景操作] |  JDK 12-JDK 14</a></li>
 <li><a href="#switch%E5%8C%B9%E9%85%8D-%E9%80%82%E9%85%8D%E4%B8%8D%E5%90%8C%E7%9A%84%E7%B1%BB%E5%9E%8B-jdk-17-21">switch匹配 [适配不同的类型]  |  JDK 17-21</a></li>
+<li><a href="#%E5%A4%96%E9%83%A8%E5%86%85%E5%AD%98%E6%8E%A5%E5%8F%A3-jdk18-">外部内存接口 | JDK18-?</a></li>
+<li><a href="#%E5%A4%96%E9%83%A8%E5%87%BD%E6%95%B0%E6%8E%A5%E5%8F%A3%E5%8F%96%E4%BB%A3java%E6%9C%AC%E5%9C%B0%E6%8E%A5%E5%8F%A3-jdk-17-">外部函数接口[取代Java本地接口] |  JDK 17-?</a></li>
 </ul>
 </li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
@@ -304,10 +306,6 @@
 <tr>
 <td>JDK 20</td>
 <td>2023 年 3 月 21 日</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
 </tr>
 </tbody></table>
 <h1><span id="版本特性">版本+特性</span><a href="#版本特性" class="header-anchor">#</a></h1><h3><span id="java-se-8java-8-lts长期支持版本">Java SE 8（Java 8）- LTS长期支持版本</span><a href="#java-se-8java-8-lts长期支持版本" class="header-anchor">#</a></h3><ul>
@@ -403,6 +401,17 @@
 
 <h3><span id="switch匹配-适配不同的类型-jdk-17-21">switch匹配 [适配不同的类型]  |  JDK 17-21</span><a href="#switch匹配-适配不同的类型-jdk-17-21" class="header-anchor">#</a></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isSquare</span><span class="params">(Shape shape)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">switch</span> (shape) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="literal">null</span>, Shape.Circle c -&gt; <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">case</span> Shape.Square s -&gt; <span class="literal">true</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h3><span id="外部内存接口-jdk18-">外部内存接口 | JDK18-?</span><a href="#外部内存接口-jdk18-" class="header-anchor">#</a></h3><ul>
+<li><p>ByteBuffer &amp;&amp; 零拷贝<br>  使用堆外存储最常用的办法，就是使用 ByteBuffer 这个类来分配<strong>直接存储空间（direct</strong><br>  <strong>buffer）</strong>。JVM 虚拟机会尽最大努力直接在直接存储空间上执行 IO 操作，避免数据在本<br>  地和 JVM 之间的拷贝。<br>  由于频繁的内存拷贝是性能的主要障碍之一。所以为了极致的性能，应用程序通常也会尽<br>  量避免内存的拷贝。理想的状况下，一份数据只需要一份内存空间，这就是我们常说的<strong>零<br>  拷贝</strong>。</p>
+<p>  用 ByteBuffer 这个类来分配直接存储空间的方法</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> ByteBuffer <span class="title function_">allocateDirect</span><span class="params">(<span class="type">int</span> capacity)</span>;</span><br></pre></td></tr></table></figure>
+<p>  第一个缺陷是没有资源释放的接口。<br>  第二个缺陷是存储空间尺寸的限制。</p>
+</li>
+<li><p>外部内存接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">ResourceScope</span> <span class="variable">scope</span> <span class="operator">=</span> ResourceScope.newConfinedScope()) &#123;</span><br><span class="line">    <span class="type">MemorySegment</span> <span class="variable">segment</span> <span class="operator">=</span> MemorySegment.allocateNative(<span class="number">4</span>, scope);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">    	MemoryAccess.setByteAtOffset(segment, i, (<span class="type">byte</span>)<span class="string">&#x27;A&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3><span id="外部函数接口取代java本地接口-jdk-17-">外部函数接口[取代Java本地接口] |  JDK 17-?</span><a href="#外部函数接口取代java本地接口-jdk-17-" class="header-anchor">#</a></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorld</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">ResourceScope</span> <span class="variable">scope</span> <span class="operator">=</span> ResourceScope.newConfinedScope()) &#123;</span><br><span class="line">            <span class="type">CLinker</span> <span class="variable">cLinker</span> <span class="operator">=</span> CLinker.getInstance();</span><br><span class="line">            <span class="type">MemorySegment</span> <span class="variable">helloWorld</span> <span class="operator">=</span></span><br><span class="line">            		CLinker.toCString(<span class="string">&quot;Hello, world!\n&quot;</span>, scope);</span><br><span class="line">            <span class="type">MethodHandle</span> <span class="variable">cPrintf</span> <span class="operator">=</span> cLinker.downcallHandle(</span><br><span class="line">            		CLinker.systemLookup().lookup(<span class="string">&quot;printf&quot;</span>).get(),</span><br><span class="line">            		MethodType.methodType(<span class="type">int</span>.class, MemoryAddress.class),</span><br><span class="line">            		FunctionDescriptor.of(CLinker.C_INT, CLinker.C_POINTER));</span><br><span class="line">            cPrintf.invoke(helloWorld.address());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a target="_blank" rel="noopener" href="http://justzqq.com/2023/03/23/java%E5%90%84%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84%E4%B8%BB%E8%A6%81%E7%89%B9%E6%80%A7%E6%95%B4%E7%90%86%EF%BC%81/">Java各个版本发布时间和主要特性整理！</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv16596828">Java 18 的新特性</a></li>
@@ -411,7 +420,7 @@
 <li><a target="_blank" rel="noopener" href="https://openjdk.org/projects/jdk/21/">JDK 21</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lewyu521/article/details/127649776">Java19 虚拟线程原理介绍及实现</a> ***</li>
 <li><a target="_blank" rel="noopener" href="https://www.jdon.com/63445.html">Java虚拟线程：异步编程之死</a></li>
-<li>《深入剖析 Java 新特性》  范学雷</li>
+<li>《深入剖析 Java 新特性》  范学雷<br> 02,03,04,05,06,07,08,09,12, 13</li>
 </ol>
 
     </div>
