@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Java Feature">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2023/06/10/javaFeature/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2023/06/10/javaFeature/version.jpg">
+<meta property="article:published_time" content="2023-06-10T02:14:03.000Z">
+<meta property="article:modified_time" content="2023-06-10T04:32:42.026Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="Java基础">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2023/06/10/javaFeature/version.jpg">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2023/06/10/javaFeature/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Java Feature | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2023/06/10/javaFeature/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java Feature
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-06-10 10:14:03 / 修改时间：12:32:42" itemprop="dateCreated datePublished" datetime="2023-06-10T10:14:03+08:00">2023-06-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/Java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">Java基础</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/Java%E5%9F%BA%E7%A1%80/Feature/" itemprop="url" rel="index"><span itemprop="name">Feature</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p></p>
+<span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E7%89%88%E6%9C%AC">版本</a></li>
+<li><a href="#%E7%89%88%E6%9C%AC%E7%89%B9%E6%80%A7">版本+特性</a><ul>
+<li><a href="#java-se-8java-8-lts%E9%95%BF%E6%9C%9F%E6%94%AF%E6%8C%81%E7%89%88%E6%9C%AC">Java SE 8（Java 8）- LTS长期支持版本</a></li>
+<li><a href="#java-se-9java-9">Java SE 9（Java 9）</a></li>
+<li><a href="#java-se-10java-10">Java SE 10（Java 10）</a></li>
+<li><a href="#java-se-11java-11-lts%E9%95%BF%E6%9C%9F%E6%94%AF%E6%8C%81%E7%89%88%E6%9C%AC">Java SE 11（Java 11）-LTS长期支持版本</a></li>
+<li><a href="#java-se-12java-12">Java SE 12（Java 12）</a></li>
+<li><a href="#java-se-13-java-13">Java SE 13 （Java 13）</a></li>
+<li><a href="#java-se-14-java-14">Java SE 14 （Java 14）</a></li>
+<li><a href="#java-se-15-java-15">Java SE 15 （Java 15）</a></li>
+<li><a href="#java-se-16-java-16">Java SE 16 （Java 16）</a></li>
+<li><a href="#java-se-17java-17-lts%E9%95%BF%E6%9C%9F%E6%94%AF%E6%8C%81%E7%89%88%E6%9C%AC">Java SE 17（Java 17）-LTS长期支持版本</a></li>
+<li><a href="#java-se-18java-182">Java SE 18（Java 18）[2]</a></li>
+<li><a href="#java-se-19java-19-3">Java SE 19（Java 19） [3]</a></li>
+<li><a href="#java-se-20java-20-4">Java SE 20（Java 20） [4]</a></li>
+<li><a href="#java-se-21java-21-5">Java SE 21（Java 21） [5]</a></li>
+</ul>
+</li>
+<li><a href="#%E7%89%B9%E6%80%A7-8">特性 [8]</a><ul>
+<li><a href="#%E6%96%87%E5%AD%97%E5%9D%97-text-blocks-jdk-13-jdk-15">文字块 text blocks |  JDK 13-JDK 15</a></li>
+<li><a href="#record-%E6%A1%A3%E6%A1%88%E7%B1%BB-%E4%B8%8D%E5%8F%AF%E5%8F%98-jdk14-jdk16">record 档案类 [不可变] |  JDK14-JDK16</a></li>
+<li><a href="#sealed-classes-%E5%B0%81%E9%97%AD%E7%B1%BB-%E6%89%A9%E5%B1%95%E6%80%A7-jdk-15-jdk-17">sealed classes 封闭类   [扩展性] |   JDK 15-JDK 17</a></li>
+<li><a href="#%E7%B1%BB%E5%9E%8B%E5%8C%B9%E9%85%8D-%E5%88%87%E9%99%A4%E8%87%83%E8%82%BF%E7%9A%84%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2-jdk-14-jdk-16">类型匹配 [切除臃肿的强制转换] | JDK 14-JDK 16</a></li>
+<li><a href="#switch-%E8%A1%A8%E8%BE%BE%E5%BC%8F-%E7%AE%80%E5%8C%96%E5%A4%9A%E6%83%85%E6%99%AF%E6%93%8D%E4%BD%9C-jdk-12-jdk-14">switch 表达式 [简化多情景操作] |  JDK 12-JDK 14</a></li>
+<li><a href="#switch%E5%8C%B9%E9%85%8D-%E9%80%82%E9%85%8D%E4%B8%8D%E5%90%8C%E7%9A%84%E7%B1%BB%E5%9E%8B-jdk-17-21">switch匹配 [适配不同的类型]  |  JDK 17-21</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="版本">版本</span><a href="#版本" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2023/06/10/javaFeature/version.jpg" class>
+
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>发布日期</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JDK 19</td>
+<td>2022&#x2F;09&#x2F;20</td>
+</tr>
+<tr>
+<td>JDK 20</td>
+<td>2023 年 3 月 21 日</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1><span id="版本特性">版本+特性</span><a href="#版本特性" class="header-anchor">#</a></h1><h3><span id="java-se-8java-8-lts长期支持版本">Java SE 8（Java 8）- LTS长期支持版本</span><a href="#java-se-8java-8-lts长期支持版本" class="header-anchor">#</a></h3><ul>
+<li><strong>Lambda 表达式</strong>：简化函数式编程。允许以更简洁的语法编写函数式接口的实例，使代码更加简洁。</li>
+<li><strong>Stream API</strong>：用于处理集合，支持函数式操作，如过滤、映射和聚合。</li>
+<li>方法引用：允许直接引用现有方法或构造函数，避免了重复编写类似的代码。</li>
+<li><strong>接口的默认方法</strong>：在接口中提供默认实现，提高接口的灵活性。</li>
+<li>时间 API：提供了一组强大的时间操作类，简化了日期和时间的操作。</li>
+<li>重复注解：允许在同一个地方多次声明同一个注解，提高了代码的可读性。</li>
+<li><strong>CompletableFuture 类</strong>：简化异步编程，提供更好的错误处理和异常处理机制。</li>
+<li>Nashorn 引擎：提供了一种基于 JavaScript 的解决方案，允许将 JavaScript 代码嵌入到 Java 应用程序中。</li>
+<li><strong>Optional 类</strong>：减少空指针异常，提高代码可读性。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/8u-relnotes.html">JDK 8 Update Release Notes (oracle.com)</a></p>
+<h3><span id="java-se-9java-9">Java SE 9（Java 9）</span><a href="#java-se-9java-9" class="header-anchor">#</a></h3><ul>
+<li><strong>模块系统（Project Jigsaw）</strong>：将 Java 的庞大代码库划分为可重用的模块，简化大型应用的构建和维护。</li>
+<li>JShell：Java 的交互式命令行工具，用于快速尝试和测试 Java 代码片段。</li>
+<li>新的集合工厂方法：方便地创建不可变集合，如 List.of()、Set.of() 和 Map.of()。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/9u-relnotes.html">Java Development Kit 9 Update Release Notes (oracle.com)</a></p>
+<h3><span id="java-se-10java-10">Java SE 10（Java 10）</span><a href="#java-se-10java-10" class="header-anchor">#</a></h3><ul>
+<li><strong>局部变量类型推断</strong>：使用 var 关键字自动推断局部变量的类型，简化代码。</li>
+<li>垃圾收集器接口改进：提高了垃圾收集器的可插拔性和灵活性。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/10u-relnotes.html">Java Development Kit 10 Update Release Notes (oracle.com)</a></p>
+<h3><span id="java-se-11java-11-lts长期支持版本">Java SE 11（Java 11）-LTS长期支持版本</span><a href="#java-se-11java-11-lts长期支持版本" class="header-anchor">#</a></h3><ul>
+<li>新的 HTTP 客户端 API：支持 HTTP&#x2F;2 和 WebSocket，提供了更现代化的编程方式。</li>
+<li>改进的垃圾收集：引入了 <strong>ZGC</strong> 和 Epsilon 垃圾收集器。</li>
+<li>String 类的新方法：如 lines()、isBlank()、strip() 等。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/11u-relnotes.html">Java Development Kit 11 Release Notes (oracle.com)</a></p>
+<h3><span id="java-se-12java-12">Java SE 12（Java 12）</span><a href="#java-se-12java-12" class="header-anchor">#</a></h3><ul>
+<li><strong>switch 表达式</strong>：允许在 switch 语句中使用表达式，提高了代码的可读性和简洁性。</li>
+<li>改进的字符串类：提供了一些新的方法，使得字符串的操作更加方便和高效。</li>
+<li>Shenandoah 垃圾回收器：提供了一种低停顿时间的垃圾回收器，适用于大型堆内存的应用程序。</li>
+<li>微基准测试套件：提供了一种用于快速测试性能的微基准测试框架。</li>
+<li>JDK 源代码重构：对 JDK 源代码进行了重构，提高了代码的可读性和维护性。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/12u-relnotes.html">Java Development Kit 12 Update Release Notes (oracle.com)</a></p>
+<h3><span id="java-se-13-java-13">Java SE 13 （Java 13）</span><a href="#java-se-13-java-13" class="header-anchor">#</a></h3><ul>
+<li><strong>文本块</strong>：允许以更简洁的语法创建多行字符串，提高了代码的可读性和简洁性。</li>
+<li>改进的 switch 表达式：允许在 switch 语句中使用表达式，提供更好的类型推断和更灵活的写法。</li>
+<li>ZGC 垃圾回收器改进：提高了 ZGC 垃圾回收器的性能和可靠性。</li>
+<li>应用程序类数据共享改进：提高了应用程序类数据共享的性能和效率。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/13u-relnotes.html">Java Development Kit 13 Update Release Notes (oracle.com)</a></p>
+<h3><span id="java-se-14-java-14">Java SE 14 （Java 14）</span><a href="#java-se-14-java-14" class="header-anchor">#</a></h3><p>2020年3月17日</p>
+<ul>
+<li>instanceof 模式匹配：允许在 instanceof 操作符中使用模式匹配，提高了代码的简洁性和可读性。</li>
+<li><strong>Records 类</strong>：提供了一种更简单和安全的数据类的定义方式。</li>
+<li>Switch 表达式增强：允许使用箭头操作符(-&gt;)作为 lambda 表达式的简写语法。</li>
+<li>文本块增强：允许在文本块中使用嵌入式表达式，使得文本块更加灵活和强大。</li>
+<li>改进的 NullPointerException 信息：提供更详细的 NullPointerException 信息。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/14u-relnotes.html">Java Development Kit 14 Update Release Notes (oracle.com)</a></p>
+<h3><span id="java-se-15-java-15">Java SE 15 （Java 15）</span><a href="#java-se-15-java-15" class="header-anchor">#</a></h3><ul>
+<li><strong>隐式的类文件</strong>：允许在 Java 源代码中定义多个类，而不需要单独的类文件。</li>
+<li>改进的文本块：允许在文本块中使用转义字符和 Unicode 转义，提高了文本块的灵活性和可读性。</li>
+<li>改进的 switch 表达式：允许在 switch 语句中使用多个匹配项，提供更灵活的写法。</li>
+<li><strong>Sealed 类和接口</strong>：允许控制哪些类或接口可以继承或实现该类或接口，提高了代码的安全性和可维护性。</li>
+<li>其他改进：包括增强的 ZGC 垃圾回收器、改进的内存管理、新增的 Unix 域套接字 API 等。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/15u-relnotes.html">Java Development Kit 15 Release Notes (oracle.com)</a></p>
+<h3><span id="java-se-16-java-16">Java SE 16 （Java 16）</span><a href="#java-se-16-java-16" class="header-anchor">#</a></h3><ul>
+<li>增强的文本块：允许在文本块中使用转义字符和嵌入式表达式。</li>
+<li>移除了废弃的 ParallelScavenge 垃圾回收器。</li>
+<li>改进的 ZGC 垃圾回收器：提高了性能和可靠性，增加了可配置参数。</li>
+<li>Records 类的增强：允许在 records 类中添加静态方法和私有构造函数。</li>
+<li><strong>Vector API</strong>：提供了一种新的 API，用于高效地执行矢量化操作。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/16u-relnotes.html">Java Development Kit 16 Release Notes (oracle.com)</a></p>
+<h3><span id="java-se-17java-17-lts长期支持版本">Java SE 17（Java 17）-LTS长期支持版本</span><a href="#java-se-17java-17-lts长期支持版本" class="header-anchor">#</a></h3><ul>
+<li><strong>嵌套枚举</strong>：允许在类和接口中定义嵌套枚举，提高了代码的可读性和简洁性。</li>
+<li>改进的 switch 语句：允许在 switch 语句中使用 case 标签作为表达式，提供更灵活的写法。</li>
+<li>预览性功能：包括<strong>模式匹配</strong>、嵌套枚举、记录类的序列化等新特性。</li>
+<li>增强的垃圾回收器：提高了性能和可靠性，增加了可配置参数。</li>
+<li>其他改进：包括新的内存管理和性能优化，增强的 JIT 编译器等。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/17u-relnotes.html">Java Development Kit 17 Release Notes (oracle.com)</a></p>
+<h3><span id="java-se-18java-182">Java SE 18（Java 18）[2]</span><a href="#java-se-18java-182" class="header-anchor">#</a></h3><p>400：默认使用 UTF-8<br>408：简易 Web 服务器<br>413：Java API 文档中的代码片段<br>416：使用方法句柄重新实现核心反射<br>417：矢量 API<br>418：网络地址解析 SPI<br>419：<strong>外部函数和内存 API</strong><br>420：switch 的模式匹配<br>421：废弃对象终止机制 </p>
+<h3><span id="java-se-19java-19-3">Java SE 19（Java 19） [3]</span><a href="#java-se-19java-19-3" class="header-anchor">#</a></h3><p>405: 	Record Patterns (Preview)<br>422: 	Linux&#x2F;RISC-V Port<br>424: 	Foreign Function &amp; Memory API (Preview)<br>425: 	<strong>Virtual Threads (Preview)</strong><br>426: 	Vector API (Fourth Incubator)<br>427: 	Pattern Matching for switch (Third Preview)<br>428: 	<strong>Structured Concurrency (Incubator)</strong></p>
+<h3><span id="java-se-20java-20-4">Java SE 20（Java 20） [4]</span><a href="#java-se-20java-20-4" class="header-anchor">#</a></h3><p>429: 	<strong>Scoped Values (Incubator)</strong><br>432: 	Record Patterns (Second Preview)<br>433: 	Pattern Matching for switch (Fourth Preview)<br>434: 	Foreign Function &amp; Memory API (Second Preview)<br>436: 	Virtual Threads (Second Preview)<br>437: 	Structured Concurrency (Second Incubator)<br>438: 	Vector API (Fifth Incubator)</p>
+<h3><span id="java-se-21java-21-5">Java SE 21（Java 21） [5]</span><a href="#java-se-21java-21-5" class="header-anchor">#</a></h3><p>430: 	String Templates (Preview)<br>431: 	Sequenced Collections<br>439: 	<strong>Generational ZGC</strong><br>440: 	Record Patterns<br>441: 	<strong>Pattern Matching for switch</strong><br>442: 	Foreign Function &amp; Memory API (Third Preview)<br>443: 	Unnamed Patterns and Variables (Preview)<br>444: 	<strong>Virtual Threads</strong> [6][7]<br>445: 	Unnamed Classes and Instance Main Methods (Preview)<br>446: 	Scoped Values (Preview)<br>448: 	Vector API (Sixth Incubator)<br>449: 	Deprecate the Windows 32-bit x86 Port for Removal<br>451: 	Prepare to Disallow the Dynamic Loading of Agents<br>452: 	Key Encapsulation Mechanism API<br>453: 	Structured Concurrency (Preview)</p>
+<h1><span id="特性-8">特性 [8]</span><a href="#特性-8" class="header-anchor">#</a></h1><h3><span id="文字块-text-blocks-jdk-13-jdk-15">文字块 text blocks |  JDK 13-JDK 15</span><a href="#文字块-text-blocks-jdk-13-jdk-15" class="header-anchor">#</a></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">textBlock</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        &lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="string">        &lt;html&gt;</span></span><br><span class="line"><span class="string">            &lt;body&gt;</span></span><br><span class="line"><span class="string">            	&lt;h1&gt;&quot;Hello World!&quot;&lt;/h1&gt;</span></span><br><span class="line"><span class="string">            &lt;/body&gt;</span></span><br><span class="line"><span class="string">        &lt;/html&gt;</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span>;</span><br><span class="line">System.out.println(</span><br><span class="line">		<span class="string">&quot;Here is the text block:\n&quot;</span> + textBlock);</span><br></pre></td></tr></table></figure>
+
+<h3><span id="record-档案类-不可变-jdk14-jdk16">record  档案类 [不可变] |  JDK14-JDK16</span><a href="#record-档案类-不可变-jdk14-jdk16" class="header-anchor">#</a></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">record</span> <span class="title class_">Circle</span><span class="params">(<span class="type">double</span> radius)</span> <span class="keyword">implements</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">area</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Math.PI * radius * radius;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3><span id="sealed-classes-封闭类-扩展性-jdk-15-jdk-17">sealed classes 封闭类   [扩展性] |   JDK 15-JDK 17</span><a href="#sealed-classes-封闭类-扩展性-jdk-15-jdk-17" class="header-anchor">#</a></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="title class_">Shape</span> <span class="keyword">permits</span> Circle, Square &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> String id;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Shape</span><span class="params">(String id)</span> &#123;</span><br><span class="line">    	<span class="built_in">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="type">double</span> <span class="title function_">area</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3><span id="类型匹配-切除臃肿的强制转换-jdk-14-jdk-16">类型匹配 [切除臃肿的强制转换] | JDK 14-JDK 16</span><a href="#类型匹配-切除臃肿的强制转换-jdk-14-jdk-16" class="header-anchor">#</a></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (shape <span class="keyword">instanceof</span> Rectangle rect) &#123;</span><br><span class="line">	<span class="keyword">return</span> (rect.length == rect.width);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3><span id="switch-表达式-简化多情景操作-jdk-12-jdk-14">switch 表达式 [简化多情景操作] |  JDK 12-JDK 14</span><a href="#switch-表达式-简化多情景操作-jdk-12-jdk-14" class="header-anchor">#</a></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">daysInMonth</span> <span class="operator">=</span> <span class="keyword">switch</span> (month) &#123;</span><br><span class="line">    <span class="keyword">case</span> Calendar.JANUARY,</span><br><span class="line">        Calendar.MARCH,</span><br><span class="line">        Calendar.MAY,</span><br><span class="line">        Calendar.JULY,</span><br><span class="line">        Calendar.AUGUST,</span><br><span class="line">        Calendar.OCTOBER,</span><br><span class="line">        Calendar.DECEMBER -&gt; <span class="number">31</span>;</span><br><span class="line">    <span class="keyword">case</span> Calendar.APRIL,</span><br><span class="line">        Calendar.JUNE,</span><br><span class="line">        Calendar.SEPTEMBER,</span><br><span class="line">        Calendar.NOVEMBER -&gt; <span class="number">30</span>;</span><br><span class="line">    <span class="keyword">case</span> Calendar.FEBRUARY -&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (((year % <span class="number">4</span> == <span class="number">0</span>) &amp;&amp; !(year % <span class="number">100</span> == <span class="number">0</span>))</span><br><span class="line">        		|| (year % <span class="number">400</span> == <span class="number">0</span>)) &#123;</span><br><span class="line">        	<span class="keyword">yield</span> <span class="number">29</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        	<span class="keyword">yield</span> <span class="number">28</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">default</span> -&gt; <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(</span><br><span class="line">    	<span class="string">&quot;Calendar in JDK does not work&quot;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3><span id="switch匹配-适配不同的类型-jdk-17-21">switch匹配 [适配不同的类型]  |  JDK 17-21</span><a href="#switch匹配-适配不同的类型-jdk-17-21" class="header-anchor">#</a></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isSquare</span><span class="params">(Shape shape)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">switch</span> (shape) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="literal">null</span>, Shape.Circle c -&gt; <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">case</span> Shape.Square s -&gt; <span class="literal">true</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a target="_blank" rel="noopener" href="http://justzqq.com/2023/03/23/java%E5%90%84%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84%E4%B8%BB%E8%A6%81%E7%89%B9%E6%80%A7%E6%95%B4%E7%90%86%EF%BC%81/">Java各个版本发布时间和主要特性整理！</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv16596828">Java 18 的新特性</a></li>
+<li><a target="_blank" rel="noopener" href="https://openjdk.org/projects/jdk/19/">JDK 19</a></li>
+<li><a target="_blank" rel="noopener" href="https://openjdk.org/projects/jdk/20/">JDK 20</a></li>
+<li><a target="_blank" rel="noopener" href="https://openjdk.org/projects/jdk/21/">JDK 21</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lewyu521/article/details/127649776">Java19 虚拟线程原理介绍及实现</a> ***</li>
+<li><a target="_blank" rel="noopener" href="https://www.jdon.com/63445.html">Java虚拟线程：异步编程之死</a></li>
+<li>《深入剖析 Java 新特性》  范学雷</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2023/06/10/javaFeature/" title="Java Feature">https://www6v.github.io/www6vHomeHexo/2023/06/10/javaFeature/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/Java%E5%9F%BA%E7%A1%80/" rel="tag"># Java基础</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2023/06/05/globalSecondaryIndex/" rel="prev" title="全局二级索引-GSI">
+      <i class="fa fa-chevron-left"></i> 全局二级索引-GSI
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">436</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">259</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">133</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
