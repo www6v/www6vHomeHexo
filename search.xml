@@ -45,6 +45,7 @@
 <li><a href="#%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B">领域模型</a></li>
 </ul>
 </li>
+<li><a href="#%E6%A8%A1%E5%BC%8F-3">模式 [3]</a></li>
 <li><a href="#%E8%90%BD%E5%9C%B0">落地</a><ul>
 <li><a href="#%E5%9F%BA%E4%BA%8Eddd%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84%E7%9A%84%E6%A0%B8%E5%BF%83">基于DDD应用架构的核心</a></li>
 <li><a href="#%E5%88%86%E5%B1%82">分层</a></li>
@@ -52,7 +53,10 @@
 </ul>
 </li>
 <li><a href="#%E6%A1%86%E6%9E%B6">框架</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
+<li><a href="#%E8%B5%84%E6%BA%90">资源</a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 
@@ -78,6 +82,9 @@
 <li><p>领域建模方法论：<br>UML用例分析、 UML用例分析法<br>四色建模法<br><a href="https://www.eventstorming.com/">事件风暴</a></p>
 </li>
 </ul>
+<h1><span id="模式-3">模式 [3]</span><a href="#模式-3" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2020/05/22/DDD/ddd.png" class>
+
+
 <h1><span id="落地">落地</span><a href="#落地" class="header-anchor">#</a></h1><h3><span id="基于ddd应用架构的核心">基于DDD应用架构的核心</span><a href="#基于ddd应用架构的核心" class="header-anchor">#</a></h3><p>分离业务复杂度和技术复杂度</p>
 <h3><span id="分层">分层</span><a href="#分层" class="header-anchor">#</a></h3><ul>
 <li>用户接口层(Controller层) </li>
@@ -123,12 +130,15 @@
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li>《DDD（Domain Driven Design)的精髓》  直播+ppt  阿里张建飞  钉钉2020.05.21视频</li>
 <li><a href>DDD实战课进入课程 - 代码模型（上）：如何使用DDD设计微服务代码模型？</a> 欧创新</li>
-<li>《领域驱动设计精粹》 未 </li>
-<li>《实现领域驱动设计》 未</li>
-<li>《领域专用语言实战》 未</li>
+<li><a href="https://www.cnblogs.com/netfocus/archive/2011/10/10/2204949.html">领域驱动设计之领域模型</a> ***</li>
+</ol>
+<h3><span id="资源">资源</span><a href="#资源" class="header-anchor">#</a></h3><ol>
+<li>《实现领域驱动设计》 B  *** </li>
+<li>《领域专用语言实战》 B  没纸质</li>
+<li>《领域驱动设计精粹》B  没纸质 </li>
 <li><a href="https://developer.aliyun.com/live/2874">事件风暴和领域建模在阿里巴巴的落地实践</a>  未</li>
-<li>《mksz541-DDD（领域驱动设计）思想解读及优秀实践~4》 V  未</li>
-<li>《lg2061-DDD 微服务落地实战-拉钩专栏》 V  *** 未</li>
+<li>《mksz541-DDD（领域驱动设计）思想解读及优秀实践~4》 V  </li>
+<li>《lg2061-DDD 微服务落地实战-拉钩专栏》 V  ***</li>
 </ol>
 ]]></content>
       <categories>
