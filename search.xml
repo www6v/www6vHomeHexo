@@ -5574,11 +5574,15 @@ MySQL MVCC 快照读 vs 当前读 </li>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h2><span id="platform">Platform</span><a href="#platform" class="header-anchor">#</a></h2><p><a href="https://poe.com/ChatGPT">Poe</a> ***</p>
+<h2><span id="platform">Platform</span><a href="#platform" class="header-anchor">#</a></h2><ul>
+<li>国外<br><a href="https://poe.com/ChatGPT">Poe</a> ***</li>
+<li>国内<br><a href="https://www.feijix.com/n/y0BnXI">ChatGPT使用指南！</a> ***</li>
+</ul>
 <h2><span id="tools-amp-mix">Tools &amp; Mix</span><a href="#tools-amp-mix" class="header-anchor">#</a></h2><ul>
 <li>GPT学习宝典<br><a href="https://gpt.candobear.com/toolbox">GPT  工具箱</a><br><a href="https://gpt.candobear.com/prompt">Prompt 大全</a><br><a href="https://gpt.candobear.com/courses">学习资料</a></li>
 <li><a href="https://www.ailookme.com/">AI 工具箱</a>  ***</li>
 </ul>
+<h2><span id="思维导图">思维导图</span><a href="#思维导图" class="header-anchor">#</a></h2><p><a href="https://albus.org/">albus</a></p>
 <h2><span id="文档分析amp科研">文档分析&amp;科研</span><a href="#文档分析amp科研" class="header-anchor">#</a></h2><ul>
 <li><p>在线文档分析<br>Microsoft Edge Dev + new Bing  ***</p>
 </li>
@@ -13541,6 +13545,22 @@ func new(Type) *Type
       </categories>
       <tags>
         <tag>olap</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前端技术</title>
+    <url>/www6vHomeHexo/2021/06/13/frontend/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p><a href="https://github.com/liyupi/code-roadmap/blob/main/docs/roadmap/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF.md">前端学习路线</a><br><a href="https://objtube.gitee.io/front-end-roadmap/#/">前端学习路线</a></p>
+]]></content>
+      <categories>
+        <category>前端技术</category>
+      </categories>
+      <tags>
+        <tag>前端技术</tag>
       </tags>
   </entry>
   <entry>
