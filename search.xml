@@ -5704,6 +5704,7 @@ MySQL MVCC 快照读 vs 当前读 </li>
 </ul>
 </li>
 </ul>
+<h2><span id="学习资料">学习资料</span><a href="#学习资料" class="header-anchor">#</a></h2><p><a href="https://time.geekbang.org/opencourse/videointro/100541101">ChatGPT 从 0 到 1</a>  基础<br><a href="https://time.geekbang.org/opencourse/videointro/100541201">ChatGPT 和预训练模型实战课</a></p>
 ]]></content>
       <categories>
         <category>AI</category>
@@ -13998,7 +13999,8 @@ func new(Type) *Type
 <li><p>Writing git commands<br>一个分支中的代码合并到另一个分支中</p>
 </li>
 <li><p><strong>Improve code</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">  How do i improve this code?</span><br><span class="line">  fruits = [<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;cherry&quot;</span>]</span><br><span class="line">  newlist = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> fruits:</span><br><span class="line">  <span class="keyword">if</span> <span class="string">&quot;a&quot;</span> <span class="keyword">in</span> x:</span><br><span class="line">    newlist.append(x)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(newlist)</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">  How do i improve this code?</span><br><span class="line">  fruits = [<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;cherry&quot;</span>]</span><br><span class="line">  newlist = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> fruits:</span><br><span class="line">  <span class="keyword">if</span> <span class="string">&quot;a&quot;</span> <span class="keyword">in</span> x:</span><br><span class="line">    newlist.append(x)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(newlist)</span><br></pre></td></tr></table></figure>
+</li>
 <li><p><strong>Translating Code</strong> 代码转换</p>
 <ul>
 <li>Convert this Python code to Javascript    </li>
@@ -14028,7 +14030,10 @@ func new(Type) *Type
 </ul>
 </li>
 </ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://www.bilibili.com/video/BV1Z84y1G7nY/">【ChatGPT】面向程序员的ChatGPT使用教程38种方式来提升生产力</a></p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://www.bilibili.com/video/BV1Z84y1G7nY/">【ChatGPT】面向程序员的ChatGPT使用教程38种方式来提升生产力</a></li>
+</ol>
+<h1><span id="学习资源">学习资源</span><a href="#学习资源" class="header-anchor">#</a></h1><p><a href="https://time.geekbang.org/opencourse/videointro/100540901">GitHub Copilot 实践课</a></p>
 ]]></content>
       <categories>
         <category>AI</category>
