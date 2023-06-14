@@ -3437,6 +3437,32 @@
       </tags>
   </entry>
   <entry>
+    <title>DevOps  配置管理</title>
+    <url>/www6vHomeHexo/2022/06/14/devopsConfigManage/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h2><span id="配置管理的时机1">配置管理的时机[1]</span><a href="#配置管理的时机1" class="header-anchor">#</a></h2><ul>
+<li>构建阶段<br>不推荐</li>
+<li>部署阶段</li>
+<li>启动阶段</li>
+<li>运行时阶段</li>
+<li>发布阶段</li>
+</ul>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li>《09 -配置管理：实现一包到底的必胜手段》  lg2064-DevOps 落地笔记-拉钩专栏</li>
+</ol>
+]]></content>
+      <categories>
+        <category>devops</category>
+        <category>配置管理</category>
+      </categories>
+      <tags>
+        <tag>devops</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Paper-LSM Tree Survey</title>
     <url>/www6vHomeHexo/2022/06/12/paperlsmTreeSurvey/</url>
     <content><![CDATA[<p></p>
