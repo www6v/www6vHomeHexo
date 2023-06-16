@@ -751,6 +751,8 @@
 
 <h2><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2018/11/21/performance/" title="性能优化总结">性能优化总结</a>  ***</li>
+<li><a href="/www6vHomeHexo/2022/06/16/performanceAnalysis/" title="性能分析">性能分析</a></li>
+<li><a href="/www6vHomeHexo/2022/06/15/performanceTest/" title="性能测试">性能测试</a></li>
 </ul>
 <h2><span id="linux">Linux</span><a href="#linux" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2019/08/08/linuxPerformance/" title="Linux性能优化">Linux性能优化</a>   cpu， memory， io</li>
@@ -3439,6 +3441,53 @@
       </tags>
   </entry>
   <entry>
+    <title>Kafka SLO</title>
+    <url>/www6vHomeHexo/2022/06/16/kafkaSLO/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<img src="/www6vHomeHexo/2022/06/16/kafkaSLO/kafkaSLO.jpg" class>
+
+
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://time.geekbang.org/column/article/628498">15｜组件监控：Kafka的关键指标及采集方法有哪些？</a></p>
+]]></content>
+      <categories>
+        <category>消息系统</category>
+        <category>Kafka</category>
+      </categories>
+      <tags>
+        <tag>Kafka</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>性能分析</title>
+    <url>/www6vHomeHexo/2022/06/16/performanceAnalysis/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h3><span id="性能分析-7步法-1">性能分析 7步法 [1]</span><a href="#性能分析-7步法-1" class="header-anchor">#</a></h3><p>第一步：压力场景数据。<br>第二步：分析架构图。<br>第三步：拆分响应时间。<br>第四步：全局监控分析。 [3]<br>第五步：定向监控分析。 [3]<br>第六步：判断性能瓶颈点。<br>第七步：确定解决方案。</p>
+<h3><span id="性能测试场景-2">性能测试场景 [2]</span><a href="#性能测试场景-2" class="header-anchor">#</a></h3><p>基准场景<br>容量场景<br>稳定性场景<br>异常场景</p>
+<img src="/www6vHomeHexo/2022/06/16/performanceAnalysis/p1.png" class width="100" height="50">
+
+
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li>《03 | 核心分析逻辑：所有的性能分析，靠这七步都能搞定》    高楼</li>
+<li>《10 | 设计基准场景需要注意哪些关键点？ 》 高楼</li>
+<li>《15丨性能测试场景：如何进行监控设计？》  ***  高楼 </li>
+<li>06丨倾囊相授：我毕生所学的性能分析思路都在这里了   高楼 未</li>
+</ol>
+]]></content>
+      <categories>
+        <category>性能</category>
+        <category>性能测试</category>
+      </categories>
+      <tags>
+        <tag>性能</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>性能测试</title>
     <url>/www6vHomeHexo/2022/06/15/performanceTest/</url>
     <content><![CDATA[<p></p>
@@ -3462,9 +3511,7 @@
 <p>仔细搜索之后发现会发现这两个公式的出处是 2004 年一个叫 Eric Man Wong 的人写的一篇名叫《Method for Estimating the Number of Concurrent Users》的文章。中英文我都反复看到很多篇。同时也会网上看到有些文章中把这个文章描述成“业界公认”的计算方法。</p>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li>02丨性能综述：TPS和响应时间之间是什么关系？  高楼</li>
-<li>03丨性能综述：怎么理解TPS、QPS、RT、吞吐量这些性能指标？ 高楼</li>
-<li>15丨性能测试场景：如何进行监控设计？ ***  高楼 未</li>
-<li>06丨倾囊相授：我毕生所学的性能分析思路都在这里了   高楼 未</li>
+<li>03丨性能综述：怎么理解TPS、QPS、RT、吞吐量这些性能指标？ 高楼s</li>
 </ol>
 ]]></content>
       <categories>
@@ -6509,8 +6556,10 @@ BGP 协议传输的消息
 </ul>
 </li>
 </ul>
-<h5><span id="数据服务的slo">数据服务的SLO</span><a href="#数据服务的slo" class="header-anchor">#</a></h5><a href="/www6vHomeHexo/2022/04/27/redisSLO/" title="Redis SLO">Redis SLO</a>
-
+<h5><span id="数据服务的slo">数据服务的SLO</span><a href="#数据服务的slo" class="header-anchor">#</a></h5><ul>
+<li><a href="/www6vHomeHexo/2022/04/27/redisSLO/" title="Redis SLO">Redis SLO</a></li>
+<li><a href="/www6vHomeHexo/2022/06/16/kafkaSLO/" title="Kafka SLO">Kafka SLO</a></li>
+</ul>
 <h5><span id="sli">SLI</span><a href="#sli" class="header-anchor">#</a></h5><table>
 <thead>
 <tr>
@@ -14838,18 +14887,18 @@ func new(Type) *Type
       </tags>
   </entry>
   <entry>
-    <title>Kafka 学习资料&amp;案例</title>
-    <url>/www6vHomeHexo/2021/05/19/kafkaStudy/</url>
+    <title>MQ 学习资料&amp;案例</title>
+    <url>/www6vHomeHexo/2021/05/19/mqStudy/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h2><span id="个人">个人</span><a href="#个人" class="header-anchor">#</a></h2><ul>
+<h1><span id="kafka">Kafka</span><a href="#kafka" class="header-anchor">#</a></h1><h3><span id="个人">个人</span><a href="#个人" class="header-anchor">#</a></h3><ul>
 <li>朱忠华 ***</li>
 <li>胡夕  kafka contributor  ***</li>
 <li><a href="http://www.jasongj.com/">郭俊 Jason</a>   kafka spark  停更</li>
 <li><a href="https://www.szzdzhp.com/">石臻臻的杂货铺</a> 石臻臻 kafka contributor  ***<br><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzg4ODY1NTcxNg==&action=getalbum&album_id=1966026980307304450">石臻臻的杂货铺</a><br><a href="https://www.szzdzhp.com/kafka/">Kafka大全</a> 石臻臻<br><a href="https://www.processon.com/view/link/618b2f20e0b34d73f7ed3fd5">Kafka 思维导图</a>  ***</li>
 </ul>
-<h2><span id="问题">问题</span><a href="#问题" class="header-anchor">#</a></h2><ul>
+<h3><span id="问题">问题</span><a href="#问题" class="header-anchor">#</a></h3><ul>
 <li><p><a href="https://mp.weixin.qq.com/s?__biz=Mzg4ODY1NTcxNg==&mid=2247493695&idx=1&sn=88d97fa5463f1d18a42d40c7981c2ba0">生产者客户端常见异常Case及其解决方案集锦(强烈建议收藏) </a></p>
 </li>
 <li><p><a href="https://mp.weixin.qq.com/s?__biz=Mzg4ODY1NTcxNg==&mid=2247490197&idx=1&sn=5853a44b227b75b33c34f2cfccbf630e">【读者答疑】为啥我创建的topic分区分配不均匀？</a></p>
@@ -14865,14 +14914,15 @@ func new(Type) *Type
 <li><p><a href="https://zhuanlan.zhihu.com/p/517244997">Kafka 万亿级消息实践之资源组流量掉零故障排查分析</a><br> 若发送消息的时候指定了key，并使用的是 Kafka producer默认的分区分配器请款下会出现 Kafka producer 客户端缓冲区资源被耗尽而出现topic所有分区雪崩效应。</p>
 </li>
 </ul>
+<h1><span id="rocketmq">RocketMQ</span><a href="#rocketmq" class="header-anchor">#</a></h1><p><a href="https://time.geekbang.org/opencourse/videointro/100546401">深度剖析 RocketMQ5.0
+</a>  林清山</p>
 ]]></content>
       <categories>
         <category>消息系统</category>
-        <category>Kafka</category>
         <category>学习资料</category>
       </categories>
       <tags>
-        <tag>Kafka</tag>
+        <tag>MQ</tag>
       </tags>
   </entry>
   <entry>
@@ -16736,7 +16786,7 @@ func new(Type) *Type
 <ul>
 <li>实现<br> <strong>业务逻辑放到领域对象中(实体对象中有实现方法)</strong></li>
 <li>开闭原则<br> 保持了对象的封装性，使得领域模型在面临多态、继承等复杂结构时，易于变更</li>
-<li>适用场景<br> 类似继承、多态的情况<br> 在软件设计的过程中需要将一些类型或者编码进行转换<br> 更好地表现领域对象之间的关系<br> “聚合”，也就是在真实世界中那些代表整体与部分的事</li>
+<li>适用场景<br> 类似继承、多态的情况<br>在软件设计的过程中需要将一些类型或者编码进行转换<br>更好地表现领域对象之间的关系<br>“聚合”，也就是在真实世界中那些代表整体与部分的事</li>
 </ul>
 </li>
 <li><p>比较</p>
@@ -16807,11 +16857,13 @@ func new(Type) *Type
 <li><a href="https://www.cnblogs.com/netfocus/archive/2011/10/10/2204949.html">领域驱动设计之领域模型</a> *** </li>
 <li>《04  领域模型是如何指导程序设计的？》 DDD 微服务落地实战-拉钩专栏</li>
 <li>《05  聚合、仓库与工厂：傻傻分不清楚》  DDD 微服务落地实战-拉钩专栏</li>
+<li><a href="/www6vHomeHexo/2018/03/17/DomainLogicAndSQL/" title="领域逻辑和SQL">领域逻辑和SQL</a>  self</li>
 </ol>
 <h3><span id="资源">资源</span><a href="#资源" class="header-anchor">#</a></h3><ol>
 <li>《实现领域驱动设计》 B  *** </li>
 <li>《领域专用语言实战》 B  没纸质</li>
 <li>《领域驱动设计精粹》B  没纸质 </li>
+<li>《中台架构与实现 : 基于DDD和微服务》 B  没纸质</li>
 <li><a href="https://developer.aliyun.com/live/2874">事件风暴和领域建模在阿里巴巴的落地实践</a>  未</li>
 <li>《DDD实战课》 </li>
 <li>《mksz541-DDD（领域驱动设计）思想解读及优秀实践~4》 V  </li>
