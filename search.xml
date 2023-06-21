@@ -3253,6 +3253,46 @@
       </tags>
   </entry>
   <entry>
+    <title>Go Framework</title>
+    <url>/www6vHomeHexo/2022/06/21/goFramework/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h1><span id="framework">Framework</span><a href="#framework" class="header-anchor">#</a></h1><ul>
+<li><p>Httprouter<br>radix tree </p>
+</li>
+<li><p>chi</p>
+<ul>
+<li>最简单的框架<br>适合作为web框架入门项目<br>核心代码1200行+</li>
+</ul>
+</li>
+<li><p>Gin</p>
+<ul>
+<li>主要组件<br>router 支持分组<br>middleware<br>binding-decoder和validator<br>logger<br>context</li>
+<li>老牌框架<br>核心代码3000行</li>
+</ul>
+</li>
+<li><p>echo</p>
+</li>
+<li><p>Fiber</p>
+<ul>
+<li>基于fasthttp</li>
+</ul>
+</li>
+<li><p>beego</p>
+</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>《17 直播：社区优秀开源框架对比》</p>
+]]></content>
+      <categories>
+        <category>Golang</category>
+        <category>Framework</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Golang 内存模型</title>
     <url>/www6vHomeHexo/2022/06/21/golangMemoryModel/</url>
     <content><![CDATA[<p></p>
