@@ -373,7 +373,7 @@
 <h2><span id="故障模型-ampamp-故障排查">故障模型 &amp;&amp; 故障排查</span><a href="#故障模型-ampamp-故障排查" class="header-anchor">#</a></h2><h5><span id="java-core-ampamp-应用">Java Core &amp;&amp; 应用</span><a href="#java-core-ampamp-应用" class="header-anchor">#</a></h5><ul>
 <li><a href="/www6vHomeHexo/2018/10/27/faultModel1/" title="故障模型-应用层">故障模型-应用层</a>
 <ul>
-<li><a href="/www6vHomeHexo/2014/02/02/memoryLeak/" title="内存泄漏的案例和解决方案">内存泄漏的案例和解决方案</a> </li>
+<li><a href="/www6vHomeHexo/2014/02/02/javaMemoryLeak/" title="Java内存泄漏的案例和解决方案">Java内存泄漏的案例和解决方案</a> </li>
 <li><a href="/www6vHomeHexo/2014/07/21/twoGCcase/" title="两个GC案例">两个GC案例</a></li>
 <li><a href="/www6vHomeHexo/2017/08/09/interrupted/" title="关于任务取消相关异常的排查">关于任务取消相关异常的排查</a></li>
 <li><a href="/www6vHomeHexo/2014/09/06/classloader/" title="Classloader相关的故障排查">Classloader相关的故障排查</a></li>
@@ -542,8 +542,6 @@
 <li><a href="/www6vHomeHexo/2021/05/16/kafkaReplica/" title="Kafka Replication-副本机制">Kafka Replication-副本机制</a></li>
 <li><a href="/www6vHomeHexo/2021/05/16/kafkaElection/" title="Kafka 中的选主">Kafka 中的选主</a></li>
 <li><a href="/www6vHomeHexo/2019/05/15/kafkaQ-A/" title="Kafka  Q&amp;A">Kafka  Q&amp;A</a></li>
-<li><a href="/www6vHomeHexo/2021/05/19/kafkaStudy/" title="Kafka 学习资料&amp;案例">Kafka 学习资料&amp;案例</a> 
-</li>
 <li><a href="/www6vHomeHexo/2022/05/04/kafkaTransaction/" title="Kafka 幂等性和事务">Kafka 幂等性和事务</a>  #2</li>
 </ul>
 <h2><span id="rocketmq">RocketMQ</span><a href="#rocketmq" class="header-anchor">#</a></h2><ul>
@@ -555,6 +553,9 @@
 <li><a href="/www6vHomeHexo/2022/05/31/mqPulsar/" title="Pulsar">Pulsar</a>  </li>
 <li><a href="/www6vHomeHexo/2022/06/18/mqPulsarSync/" title="Pulsar-数据同步">Pulsar-数据同步</a>  </li>
 <li><a href="/www6vHomeHexo/2022/06/10/mqComparePulsarVsKafka/" title="Pulsar vs. Kafka">Pulsar vs. Kafka</a></li>
+</ul>
+<h2><span id="resource">Resource</span><a href="#resource" class="header-anchor">#</a></h2><ul>
+<li><a href="/www6vHomeHexo/2021/05/19/mqStudy/" title="MQ 学习资料&amp;案例">MQ 学习资料&amp;案例</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -3252,10 +3253,61 @@
       </tags>
   </entry>
   <entry>
+    <title>Golang 内存模型</title>
+    <url>/www6vHomeHexo/2022/06/21/golangMemoryModel/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h1><span id="现代计算机的多级存储结构1">现代计算机的多级存储结构[1]</span><a href="#现代计算机的多级存储结构1" class="header-anchor">#</a></h1><ul>
+<li>cacheline</li>
+</ul>
+<h1><span id="多核带来的问题-1">多核带来的问题 [1]</span><a href="#多核带来的问题-1" class="header-anchor">#</a></h1><ul>
+<li>单变量的并发操作也必须用同步手段,  比如atomic</li>
+<li>全局视角下观察到的多变量读写的顺序 可能会乱序</li>
+</ul>
+<h1><span id="单变量-12">单变量 [1][2]</span><a href="#单变量-12" class="header-anchor">#</a></h1><p>单变量的原子读&#x2F;写,   多核使用MESI协议保证正确性</p>
+<h1><span id="多变量-1">多变量 [1]</span><a href="#多变量-1" class="header-anchor">#</a></h1><ul>
+<li><p>问题<br>乱序执行  内存重排</p>
+</li>
+<li><p>解决方案<br>Memory barrier</p>
+</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li>《15 辅导 + 案例分析 + 答疑-更多课程》  体系课_Go高级工程师实战营(完结)  ***</li>
+<li><a href="https://www.scss.tcd.ie/Jeremy.Jones/VivioJS/caches/MESIHelp.htm">MESI</a></li>
+<li><a href="/www6vHomeHexo/2014/01/03/javaMemoryModel/" title="Java内存模型">Java内存模型</a> self</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Golang</category>
+        <category>内存模型</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Golang 并发Bug</title>
     <url>/www6vHomeHexo/2022/06/20/golangConcurrencyBug/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E6%AD%BB%E9%94%81-1">死锁 [1]</a><ul>
+<li><a href="#example1-1">example1 [1]</a></li>
+<li><a href="#example2">example2</a></li>
+</ul>
+</li>
+<li><a href="#bugs-12">bugs [1][2]</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
 
 <h1><span id="死锁-1">死锁 [1]</span><a href="#死锁-1" class="header-anchor">#</a></h1><ul>
 <li>通过pprof进入goroutine页面查看</li>
@@ -3281,7 +3333,7 @@
 
 
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li>《15 辅导 + 案例分析 + 答疑-更多课程》  体系课_Go高级工程师实战营(完结) </li>
+<li>《15 辅导 + 案例分析 + 答疑-更多课程》  体系课_Go高级工程师实战营(完结)  ***</li>
 <li><a href="https://cseweb.ucsd.edu/~yiying/GoStudy-ASPLOS19.pdf">Understanding Real-World Concurrency Bugs in Go</a> </li>
 <li><a href="https://zhuanlan.zhihu.com/p/400948709">规避 Go 中的常见并发 bug</a> 未</li>
 <li><a href="https://cloud.tencent.com/developer/article/2211893">理解真实项目中的 Go 并发 Bug</a> 未</li>
@@ -21468,8 +21520,8 @@ nq： 不排队调度
         <category>serviceMesh</category>
       </categories>
       <tags>
-        <tag>k8s</tag>
         <tag>istio</tag>
+        <tag>k8s</tag>
       </tags>
   </entry>
   <entry>
@@ -26222,18 +26274,32 @@ table th:first-of-type {
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h2><span id="一-概念">一. 概念</span><a href="#一-概念" class="header-anchor">#</a></h2><div style="text-align: center;">
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E6%A6%82%E5%BF%B5">概念</a></li>
+<li><a href="#%E5%BA%94%E7%94%A8">应用</a></li>
+<li><a href="#%E4%BC%AA%E5%85%B1%E4%BA%AB%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81">伪共享测试代码</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考：</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h2><span id="概念">概念</span><a href="#概念" class="header-anchor">#</a></h2><div style="text-align: center;">
 
 <p><img src="https://user-images.githubusercontent.com/5608425/64919353-6c399200-d7dc-11e9-8506-50583042d91a.png" alt="FalseSharing"><br>伪共享 FalseSharing</p>
 </div>
 
-<h2><span id="二-应用">二. 应用</span><a href="#二-应用" class="header-anchor">#</a></h2><ol>
+<h2><span id="应用">应用</span><a href="#应用" class="header-anchor">#</a></h2><ol>
 <li><p>jdk8 LongAdder的Cell类</p>
 </li>
 <li><p>Disruptor</p>
 </li>
 </ol>
-<h2><span id="三-伪共享测试代码">三. 伪共享测试代码</span><a href="#三-伪共享测试代码" class="header-anchor">#</a></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">package test;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">-- 有cache line padding 测试结果</span><br><span class="line">1. duration = 22344563916  </span><br><span class="line">2. duration = 22012580114  </span><br><span class="line">3. duration = 11167549431  </span><br><span class="line">4. duration = 19736854183  </span><br><span class="line"></span><br><span class="line">avg: 18815386911</span><br><span class="line"></span><br><span class="line">-- 没有cache line padding 测试结果</span><br><span class="line">1. duration = 23658423881  </span><br><span class="line">2. duration = 33335707670  </span><br><span class="line">3. duration = 35890190024  </span><br><span class="line">4. duration = 29516958769  </span><br><span class="line">5. duration = 35027213671</span><br><span class="line"></span><br><span class="line">avg:  31485698803</span><br><span class="line"></span><br><span class="line">result： 性能相差一倍左右  </span><br><span class="line">*/</span><br><span class="line">public final class FalseSharing</span><br><span class="line">    implements Runnable</span><br><span class="line">&#123;</span><br><span class="line">    public final static int NUM_THREADS = 4; // change</span><br><span class="line">    public final static long ITERATIONS = 500L * 1000L * 1000L;</span><br><span class="line">    private final int arrayIndex;</span><br><span class="line"> </span><br><span class="line">    private static VolatileLong[] longs = new VolatileLong[NUM_THREADS];</span><br><span class="line">    static</span><br><span class="line">    &#123;</span><br><span class="line">        for (int i = 0; i &lt; longs.length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            longs[i] = new VolatileLong();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public FalseSharing(final int arrayIndex)</span><br><span class="line">    &#123;</span><br><span class="line">        this.arrayIndex = arrayIndex;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public static void main(final String[] args) throws Exception</span><br><span class="line">    &#123;</span><br><span class="line">        final long start = System.nanoTime();</span><br><span class="line">        runTest();</span><br><span class="line">        System.out.println(&quot;duration = &quot; + (System.nanoTime() - start));</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    private static void runTest() throws InterruptedException</span><br><span class="line">    &#123;</span><br><span class="line">        Thread[] threads = new Thread[NUM_THREADS];</span><br><span class="line"> </span><br><span class="line">        for (int i = 0; i &lt; threads.length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            threads[i] = new Thread(new FalseSharing(i));</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        for (Thread t : threads)</span><br><span class="line">        &#123;</span><br><span class="line">            t.start();</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        for (Thread t : threads)</span><br><span class="line">        &#123;</span><br><span class="line">            t.join();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public void run()</span><br><span class="line">    &#123;</span><br><span class="line">        long i = ITERATIONS + 1;</span><br><span class="line">        while (0 != --i)</span><br><span class="line">        &#123;</span><br><span class="line">            longs[arrayIndex].value = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public final static class VolatileLong</span><br><span class="line">    &#123;</span><br><span class="line">        public volatile long value = 0L;</span><br><span class="line">        //public long p1, p2, p3, p4, p5, p6;   comment out </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="伪共享测试代码">伪共享测试代码</span><a href="#伪共享测试代码" class="header-anchor">#</a></h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">-- 有cache line padding 测试结果</span></span><br><span class="line"><span class="comment">1. duration = 22344563916  </span></span><br><span class="line"><span class="comment">2. duration = 22012580114  </span></span><br><span class="line"><span class="comment">3. duration = 11167549431  </span></span><br><span class="line"><span class="comment">4. duration = 19736854183  </span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">avg: 18815386911</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">-- 没有cache line padding 测试结果</span></span><br><span class="line"><span class="comment">1. duration = 23658423881  </span></span><br><span class="line"><span class="comment">2. duration = 33335707670  </span></span><br><span class="line"><span class="comment">3. duration = 35890190024  </span></span><br><span class="line"><span class="comment">4. duration = 29516958769  </span></span><br><span class="line"><span class="comment">5. duration = 35027213671</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">avg:  31485698803</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">result： 性能相差一倍左右  </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">class</span> <span class="title class_">FalseSharing</span></span><br><span class="line">    <span class="keyword">implements</span> <span class="title class_">Runnable</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">NUM_THREADS</span> <span class="operator">=</span> <span class="number">4</span>; <span class="comment">// change</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="type">long</span> <span class="variable">ITERATIONS</span> <span class="operator">=</span> <span class="number">500L</span> * <span class="number">1000L</span> * <span class="number">1000L</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> arrayIndex;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> VolatileLong[] longs = <span class="keyword">new</span> <span class="title class_">VolatileLong</span>[NUM_THREADS];</span><br><span class="line">    <span class="keyword">static</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; longs.length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            longs[i] = <span class="keyword">new</span> <span class="title class_">VolatileLong</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">FalseSharing</span><span class="params">(<span class="keyword">final</span> <span class="type">int</span> arrayIndex)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">this</span>.arrayIndex = arrayIndex;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(<span class="keyword">final</span> String[] args)</span> <span class="keyword">throws</span> Exception</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="type">long</span> <span class="variable">start</span> <span class="operator">=</span> System.nanoTime();</span><br><span class="line">        runTest();</span><br><span class="line">        System.out.println(<span class="string">&quot;duration = &quot;</span> + (System.nanoTime() - start));</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">runTest</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException</span><br><span class="line">    &#123;</span><br><span class="line">        Thread[] threads = <span class="keyword">new</span> <span class="title class_">Thread</span>[NUM_THREADS];</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; threads.length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            threads[i] = <span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">FalseSharing</span>(i));</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">for</span> (Thread t : threads)</span><br><span class="line">        &#123;</span><br><span class="line">            t.start();</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">for</span> (Thread t : threads)</span><br><span class="line">        &#123;</span><br><span class="line">            t.join();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">i</span> <span class="operator">=</span> ITERATIONS + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">0</span> != --i)</span><br><span class="line">        &#123;</span><br><span class="line">            longs[arrayIndex].value = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">VolatileLong</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">volatile</span> <span class="type">long</span> <span class="variable">value</span> <span class="operator">=</span> <span class="number">0L</span>;</span><br><span class="line">        <span class="comment">//public long p1, p2, p3, p4, p5, p6;   comment out </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>测试环境： 笔记本电脑 – Intel（R）Core(TM) i3-3120M CPU @2.50GHz 2.50GHz 内存 10.0GB</p>
 <h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
@@ -26253,8 +26319,8 @@ table th:first-of-type {
       </tags>
   </entry>
   <entry>
-    <title>内存泄漏的案例和解决方案</title>
-    <url>/www6vHomeHexo/2014/02/02/memoryLeak/</url>
+    <title>Java内存泄漏的案例和解决方案</title>
+    <url>/www6vHomeHexo/2014/02/02/javaMemoryLeak/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
@@ -26318,11 +26384,11 @@ table th:first-of-type {
   </entry>
   <entry>
     <title>Java内存模型</title>
-    <url>/www6vHomeHexo/2014/01/03/memoryModel/</url>
+    <url>/www6vHomeHexo/2014/01/03/javaMemoryModel/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<img src="/www6vHomeHexo/2014/01/03/memoryModel/memoryModel.jpg" class title="Java内存模型">
+<img src="/www6vHomeHexo/2014/01/03/javaMemoryModel/memoryModel.jpg" class title="Java内存模型">
 
 <h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li>JVM内部原理 原文作者：James D Bloom 翻译：梅小西</li>
@@ -26331,7 +26397,7 @@ table th:first-of-type {
 <li>java自定义classloader引发的思考 editice</li>
 <li>《深入理解java虚拟机》 第二章 周志明</li>
 <li>浅谈Java String内幕 占小狼</li>
-<li><a href="https://www.jianshu.com/p/8a58d8335270">JMM和底层实现原理</a>  王侦 未</li>
+<li><a href="https://www.jianshu.com/p/8a58d8335270">JMM和底层实现原理</a>  王侦 *** 未</li>
 </ol>
 ]]></content>
       <categories>
