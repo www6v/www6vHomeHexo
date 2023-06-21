@@ -3258,7 +3258,7 @@
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h1><span id="framework">Framework</span><a href="#framework" class="header-anchor">#</a></h1><ul>
+<h1><span id="web-1">Web [1]</span><a href="#web-1" class="header-anchor">#</a></h1><ul>
 <li><p>Httprouter<br>radix tree </p>
 </li>
 <li><p>chi</p>
@@ -3282,7 +3282,27 @@
 <li><p>beego</p>
 </li>
 </ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>《17 直播：社区优秀开源框架对比》</p>
+<h1><span id="微服务1">微服务[1]</span><a href="#微服务1" class="header-anchor">#</a></h1><h3><span id="组件">组件</span><a href="#组件" class="header-anchor">#</a></h3><ul>
+<li>config</li>
+<li>logger</li>
+<li>metrics<br>Prometheus</li>
+<li>tracing<br>OpenTelemetry</li>
+<li>registry</li>
+<li>MQ</li>
+<li>依赖注入<br>wire，dig</li>
+</ul>
+<h3><span id="框架">框架</span><a href="#框架" class="header-anchor">#</a></h3><ul>
+<li>GoMicro [2] + </li>
+<li>Go-Zero</li>
+<li>YOYOGO</li>
+<li>Dubbo GO</li>
+<li>Kratos[bili开源]</li>
+<li>goframe</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li>《17 直播：社区优秀开源框架对比》</li>
+<li><a href="https://magodo.github.io/micro-go-src-server-client/">go-micro 源码解析 - server &amp; client</a></li>
+</ol>
 ]]></content>
       <categories>
         <category>Golang</category>
