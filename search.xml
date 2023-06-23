@@ -21582,8 +21582,8 @@ nq： 不排队调度
         <category>serviceMesh</category>
       </categories>
       <tags>
-        <tag>istio</tag>
         <tag>k8s</tag>
+        <tag>istio</tag>
       </tags>
   </entry>
   <entry>
@@ -24747,10 +24747,9 @@ nq： 不排队调度
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="限流总结">限流总结</span><a href="#限流总结" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2016/09/26/ratelimit/ratelimit.jpg" class title="限流总结">
 
-<img src="/www6vHomeHexo/2016/09/26/ratelimit/ratelimit.jpg" class title="限流总结">
-
-<table>
+<h2><span id="限流算法">限流算法</span><a href="#限流算法" class="header-anchor">#</a></h2><table>
 <thead>
 <tr>
 <th align="center">流控算法</th>
@@ -24802,14 +24801,26 @@ nq： 不排队调度
 <td align="center"></td>
 </tr>
 </tbody></table>
+<h2><span id="分布式限流">分布式限流</span><a href="#分布式限流" class="header-anchor">#</a></h2><ul>
+<li><p>分布式计数器</p>
+<ul>
+<li>实现<br>Redis(服务端)+Lua(客户端)</li>
+</ul>
+</li>
+<li><p>限流网关</p>
+<ul>
+<li>缺陷<br>服务之间的调用不一定走网关</li>
+</ul>
+</li>
+</ul>
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol start="0">
 <li><a href="https://github.com/www6v/jDemo/blob/master/src/main/java/middleware/rateLimiter/FunnelRateLimiter.java">漏桶算法实现</a></li>
 <li><a href="https://yq.aliyun.com/articles/4225">限流系统如何发现系统的热点</a>  中间件小哥  ***</li>
 <li>接口限流算法总结     夜有所思，日有所梦</li>
 <li><a href="https://www.iteye.com/blog/jinnianshilongnian-2305117">聊聊高并发系统之限流特技</a>  张开涛</li>
 <li><a href="http://calvin1978.blogcn.com/articles/ratelimiter.html">服务化体系之－限流</a>  江南白衣  失效</li>
-<li>Redis 深度历险：核心原理与应用实践 应用 6：断尾求生 —— 简单限流       钱文品</li>
-<li>Redis 深度历险：核心原理与应用实践 应用 7：一毛不拔 —— 漏斗限流       钱文品  有代码实现</li>
+<li>《应用 6：断尾求生 —— 简单限流  》 Redis 深度历险：核心原理与应用实践 </li>
+<li>《应用 7：一毛不拔 —— 漏斗限流》 Redis 深度历险：核心原理与应用实践      有代码实现</li>
 <li><a href="https://segmentfault.com/a/1190000012875897">Guava RateLimiter源码解析</a>  林舍  manerfan</li>
 <li><a href="https://mp.weixin.qq.com/s/RM3ffBCJqoQ2JMPKHgmv0Q">淘宝应用柔性架构的探索</a> 自适应负载调节</li>
 </ol>
