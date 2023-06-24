@@ -3161,6 +3161,54 @@
       </tags>
   </entry>
   <entry>
+    <title>Golang 基础-Linter</title>
+    <url>/www6vHomeHexo/2022/06/24/golangBasicLinter/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+
+<h2><span id="linter-1">linter [1]</span><a href="#linter-1" class="header-anchor">#</a></h2><ul>
+<li><p>单个</p>
+<ul>
+<li>golint</li>
+<li>go vet </li>
+<li>gocyclo</li>
+<li>代码覆盖率<br>codecov</li>
+<li>检查错误是否被处理<br>errcheck</li>
+<li>bodyclose </li>
+<li>sqlrows</li>
+</ul>
+</li>
+<li><p>集合</p>
+<ul>
+<li>golangci-lint  标准</li>
+<li>sonarqube</li>
+<li>deepsource</li>
+</ul>
+</li>
+<li><p>golangci-lint + reviewdog  [3]</p>
+<ul>
+<li>给项目提pr时，自动执行linter，自动CI？</li>
+<li>github支持, gitlab也支持<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">actions</span></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">master</span></span><br><span class="line">  <span class="attr">pull_request:</span></span><br><span class="line">    <span class="attr">types:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">opened</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">reopened</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">synchronize</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ready_for_review</span></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">golangci-lint:</span></span><br><span class="line">    <span class="attr">if:</span> <span class="string">$&#123;&#123;</span> <span class="type">!github.event.pull_request.draft</span> <span class="string">&#125;&#125;</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">runner</span> <span class="string">/</span> <span class="string">golangci-lint</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Check</span> <span class="string">out</span> <span class="string">code</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v3</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">golangci-lint</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">reviewdog/action-golangci-lint@v2</span></span><br><span class="line">        <span class="attr">if:</span> <span class="string">github.event_name</span> <span class="string">==</span> <span class="string">&#x27;pull_request&#x27;</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">golangci_lint_flags:</span> <span class="string">&quot;--skip-dirs=mtls/crypto,module/http2 --enable-all --timeout=10m --exclude-use-default=false --tests=false --disable=gochecknoinits,gochecknoglobals,exhaustive,exhaustruct,exhaustivestruct,nakedret,ireturn,interfacer,tagliatelle,varnamelen&quot;</span></span><br><span class="line">          <span class="attr">workdir:</span> <span class="string">pkg</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li>《25 直播：如何写出优雅的 Go 代码》</li>
+<li><a href="https://github.com/analysis-tools-dev/static-analysis"> static-analysis</a><br><a href="https://analysis-tools.dev/">analysis-tools</a></li>
+<li><a href="https://github.com/mosn/mosn/blob/master/.github/workflows/reviewdog.yml">mosn的reviewdog</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Golang</category>
+        <category>Linter</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>AWS Management</title>
     <url>/www6vHomeHexo/2022/06/23/awsManagement/</url>
     <content><![CDATA[<p></p>
@@ -9170,7 +9218,6 @@ BGP 协议传输的消息
 <ul>
 <li><a href="#%E5%9F%BA%E7%A1%80">基础</a><br>- <a href="#new-vs-make">New vs Make</a><br>- <a href="#array%E5%92%8Cslice">array和slice</a><br>- <a href="#slice%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0">slice底层实现</a><br>- <a href="#%E5%80%BC%E4%BC%A0%E9%80%92-%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92">值传递、引用传递</a><br>- <a href="#select-vs-switch">select vs. switch</a></li>
 <li><a href="#%E5%86%85%E5%AD%98">内存</a><br>- <a href="#%E5%86%85%E5%AD%98%E9%80%83%E9%80%B8">内存逃逸</a><br>- <a href="#%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F">内存泄漏</a><br>- <a href="#%E5%A0%86%E5%92%8C%E6%A0%88">堆和栈</a><br>- <a href="#%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D">内存分配</a></li>
-<li><a href="#linter-3">linter [3]</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
@@ -9245,42 +9292,10 @@ BGP 协议传输的消息
 </ul>
 </li>
 </ul>
-<h2><span id="linter-3">linter [3]</span><a href="#linter-3" class="header-anchor">#</a></h2><ul>
-<li><p>单个</p>
-<ul>
-<li>golint</li>
-<li>go vet </li>
-<li>gocyclo</li>
-<li>代码覆盖率<br>codecov</li>
-<li>检查错误是否被处理<br>errcheck</li>
-<li>bodyclose </li>
-<li>sqlrows</li>
-</ul>
-</li>
-<li><p>集合</p>
-<ul>
-<li>golangci-lint  标准</li>
-<li>sonarqube</li>
-<li>deepsource</li>
-</ul>
-</li>
-<li><p>golangci-lint + reviewdog<br>给项目提pr时，自动执行linter，自动CI？</p>
-</li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ul>
-<li><ol>
-<li><a href="https://www.golangroadmap.com/class/gointerview/">GOLANG ROADMAP</a><br><a href="https://www.golangroadmap.com/">GOLANG ROADMAP</a><br>邀请码：caspar<br>邀请码：Gopher-10645-1382</li>
-</ol>
-</li>
-<li><ol start="2">
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li><a href="https://www.golangroadmap.com/class/gointerview/">GOLANG ROADMAP</a><br> <a href="https://www.golangroadmap.com/">GOLANG ROADMAP</a><br> 邀请码：caspar<br> 邀请码：Gopher-10645-1382</li>
 <li>极客时间 《Go 并发编程实战课》  鸟窝</li>
 </ol>
-</li>
-<li><ol start="3">
-<li>《25 直播：如何写出优雅的 Go 代码》</li>
-</ol>
-</li>
-</ul>
 ]]></content>
       <categories>
         <category>Golang</category>
