@@ -27,8 +27,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/03/08/golangGMP/goroutine.JPG">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/03/08/golangGMP/GMP.jpg">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/03/08/golangGMP/producer.JPG">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/03/08/golangGMP/consumer.JPG">
 <meta property="article:published_time" content="2022-03-08T04:15:08.000Z">
-<meta property="article:modified_time" content="2023-06-25T02:46:59.376Z">
+<meta property="article:modified_time" content="2023-06-25T03:25:35.131Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Golang">
 <meta name="twitter:card" content="summary">
@@ -227,7 +229,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-25 10:46:59" itemprop="dateModified" datetime="2023-06-25T10:46:59+08:00">2023-06-25</time>
+                <time title="修改时间：2023-06-25 11:25:35" itemprop="dateModified" datetime="2023-06-25T11:25:35+08:00">2023-06-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -257,6 +259,18 @@
         <p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#goroutine%E7%9A%84%E8%B0%83%E5%BA%A6">Goroutine的调度</a><br>- <a href="#%E7%94%9F%E4%BA%A7%E7%AB%AF-2">生产端 [2]</a><br>- <a href="#%E6%B6%88%E8%B4%B9%E7%AB%AF-2">消费端 [2]</a><br>- <a href="#%E8%B0%83%E5%BA%A6%E5%99%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5">调度器的设计策略</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
 <h2><span id="goroutine的调度">Goroutine的调度</span><a href="#goroutine的调度" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/03/08/golangGMP/goroutine.JPG" class title="goroutine的调度">
 <p><strong>System Thread</strong> : kernel entity<br><strong>Processor</strong> : go实现的协程处理器<br><strong>Goroutine</strong> : 协程</p>
 <p>Processor在不同的系统线程里, 每个Processor挂载着一个协程队列，Processor依次调用Gorouine，<br>只有一个Gorouine是正在运行状态的。<br>case1: <strong>一个协程运行时间运行的特别长</strong>。 守护线程计数， 如果processor完成的goroutine数量一直不变。在这个协程的任务栈里插入一个中断的标记，读到这个中断标记后，goroutine会把自己中断下来插入到等待队列的队尾。<br>case2: <strong>某个协程被io中断后</strong>， Processer会把自己移动到另一个可用的系统线程当中， 执行队列里的任务。<br>       当这个协程io中断被唤醒后，会把自己加入到某个Processor的队列里， 或者加入到全局的等待队列里。</p>
@@ -269,17 +283,19 @@
 <ul>
 <li>协程跟线程是有区别的，线程由 CPU 调度是抢占式的，协程由用户态调度是协作式的，一个协程让出 CPU 后，才执行下一个协程。</li>
 </ul>
+<h5><span id="生产端-2">生产端 [2]</span><a href="#生产端-2" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2022/03/08/golangGMP/producer.JPG" class>
+
+<h5><span id="消费端-2">消费端 [2]</span><a href="#消费端-2" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2022/03/08/golangGMP/consumer.JPG" class>
+
 <h5><span id="调度器的设计策略">调度器的设计策略</span><a href="#调度器的设计策略" class="header-anchor">#</a></h5><ul>
 <li>work stealing 机制</li>
 <li>hand off 机制</li>
 </ul>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44205272/article/details/111565957">Golang的GMP原理与调度</a> ***</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1oE411y7qG/">#64 深入浅出 Golang Runtime 【 Go 夜读 】</a>  goroutine ,  go network , gc *** 未</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV19r4y1w7Nx?spm_id_from=333.880.my_history.page.click">Golang深入理解GPM模型</a>  *** 未</p>
-</li>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44205272/article/details/111565957">Golang的GMP原理与调度</a> ***</li>
+<li>《04 Go 程序是怎么跑起来的》  *** </li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1oE411y7qG/">#64 深入浅出 Golang Runtime 【 Go 夜读 】</a>  goroutine ,  go network , gc *** 未</li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV19r4y1w7Nx?spm_id_from=333.880.my_history.page.click">Golang深入理解GPM模型</a>  *** 未</li>
 </ol>
 
     </div>
