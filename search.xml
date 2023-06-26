@@ -9222,7 +9222,7 @@ table th:first-of-type {
 <!-- toc -->
 
 <ul>
-<li><a href="#%E5%B9%B6%E5%8F%91-21">并发 [2][1]</a><br>- <a href="#%E5%B9%B6%E5%8F%91%E5%8E%9F%E8%AF%AD">并发原语</a><br>- <a href="#%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F-34">并发编程模式 [3][4]</a><br>- <a href="#%E6%89%A9%E5%B1%95%E5%B9%B6%E5%8F%91%E5%8E%9F%E8%AF%AD">扩展并发原语</a><br>- <a href="#channel">channel</a><br>- <a href="#context">Context</a></li>
+<li><a href="#%E5%B9%B6%E5%8F%91-21">并发 [2][1]</a><br>- <a href="#%E5%B9%B6%E5%8F%91%E5%8E%9F%E8%AF%AD">并发原语</a><br>- <a href="#%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F-34">并发编程模式 [3][4]</a><br>- <a href="#%E6%89%A9%E5%B1%95%E5%B9%B6%E5%8F%91%E5%8E%9F%E8%AF%AD">扩展并发原语</a><br>- <a href="#context">Context</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
@@ -9323,58 +9323,6 @@ table th:first-of-type {
 <li>pipeline<br> 串联在一起的channel</li>
 </ul>
 <h5><span id="扩展并发原语">扩展并发原语</span><a href="#扩展并发原语" class="header-anchor">#</a></h5><p>errgroup<br>Semaphore<br>SingleFlight</p>
-<h5><span id="channel">channel</span><a href="#channel" class="header-anchor">#</a></h5><ul>
-<li><p>channel的读写</p>
-<ul>
-<li>向关闭的channel中写入数据会panic</li>
-<li>关闭的channel中读数据<br>有数据会读到数据，没数据会是nil</li>
-</ul>
-</li>
-<li><p>buffer channel vs. 非buffered channel  </p>
-<table>
-<thead>
-<tr>
-<th align="center">&#x2F;</th>
-<th align="center">无缓冲</th>
-<th align="center">有缓冲</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">创建方式</td>
-<td align="center">make(chan TYPE)</td>
-<td align="center">make(chan TYPE, SIZE)</td>
-</tr>
-<tr>
-<td align="center">发送阻塞</td>
-<td align="center">数据接收前发送阻塞</td>
-<td align="center">缓冲满时发送阻塞</td>
-</tr>
-<tr>
-<td align="center">接收阻塞</td>
-<td align="center">数据发送前接收阻塞</td>
-<td align="center">缓冲空时接收阻塞</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-<p><a href="https://www.golangroadmap.com/class/gointerview/4-3.html">3.Go channel有无缓冲的区别？</a>  </p>
-<p>[gpt]<br>prompt: Golang的 Channel closing principle是什么？</p>
-<p>在Golang中，关闭一个Channel是一种重要的操作，如果不正确地关闭Channel，可能会导致程序出现死锁或其他问题。下面是Golang中Channel关闭的原则和细则：</p>
-<ol>
-<li><p>只有发送方才能关闭Channel。<br>发送方是指向Channel发送数据的goroutine，而接收方是指从Channel接收数据的goroutine。在Golang中，只有发送方才能关闭Channel，因为发送方知道何时不再需要发送数据，从而触发关闭Channel的操作。</p>
-</li>
-<li><p>关闭Channel后，接收方仍然可以接收Channel中的数据。<br>当一个Channel被关闭后，接收方仍然可以从Channel中接收已经存在的数据，直到Channel中的所有数据都被接收完毕。这使得接收方可以在不知道Channel何时被关闭的情况下，安全地从Channel中接收数据。</p>
-</li>
-<li><p>关闭一个已经关闭的Channel会导致panic。<br>如果尝试关闭一个已经关闭的Channel，会导致panic，因此在关闭Channel之前，应该先检查Channel是否已经关闭。</p>
-</li>
-<li><p>关闭一个nil的Channel会导致panic。<br>如果尝试关闭一个nil的Channel，也会导致panic，因此在关闭Channel之前，应该先检查Channel是否为nil。</p>
-</li>
-<li><p>关闭一个有缓冲的Channel时，仍然可以向其中发送数据。<br>当一个有缓冲的Channel被关闭时，发送方仍然可以向其中发送数据，直到Channel被填满。因此，在关闭一个有缓冲的Channel之后，可能还有一些数据需要被发送。</p>
-</li>
-<li><p>关闭一个Channel会使Channel上的所有阻塞操作立即解除阻塞并返回。<br>当一个Channel被关闭时，Channel上的所有阻塞操作（包括接收和发送操作）都会立即解除阻塞并返回。对于接收操作，返回的值为Channel中剩余的数据，如果Channel已经为空，则返回类型的零值。对于发送操作，返回的结果通常为false，表示数据没有被发送成功。</p>
-</li>
-</ol>
-<p>总之，关闭Channel是一项重要的操作，需要遵循一些原则和细则来保证程序的正确性和稳定性。在使用Channel的过程中，应该注意遵循这些原则和细则。<br>[&#x2F;gpt]</p>
 <h5><span id="context">Context</span><a href="#context" class="header-anchor">#</a></h5><p>进行上下文信息传递、提供超时和取消机制、控制子 goroutine 的执行</p>
 <figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">WithCancel</span><span class="params">(parent Context)</span></span> (ctx Context, cancel CancelFunc) </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">WithDeadline</span><span class="params">(parent Context, d time.Time)</span></span> (Context, CancelFunc) </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">WithTimeout</span><span class="params">(parent Context, timeout time.Duration)</span></span> (Context, CancelFunc) </span><br></pre></td></tr></table></figure>
 
@@ -9519,7 +9467,7 @@ table th:first-of-type {
       </tags>
   </entry>
   <entry>
-    <title>Golang Map</title>
+    <title>Golang内置类型-Map</title>
     <url>/www6vHomeHexo/2022/09/22/golangMap/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -32826,6 +32774,86 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       <categories>
         <category>Golang</category>
         <category>Linter</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Golang内置类型-Channel</title>
+    <url>/www6vHomeHexo/2022/06/26/golangChannel/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%AE%9E%E7%8E%B0-1">实现 [1]</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8">使用</a><br>- <a href="#buffer-channel-vs-%E9%9D%9Ebuffered-channel">buffer channel vs. 非buffered channel</a><br>- <a href="#channel%E7%9A%84%E8%AF%BB%E5%86%99">channel的读写</a><br>- <a href="#channel-closing-principle">Channel closing principle</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h2><span id="实现-1">实现 [1]</span><a href="#实现-1" class="header-anchor">#</a></h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> hchan <span class="keyword">struct</span> &#123;</span><br><span class="line">   qcount   <span class="type">uint</span>           <span class="comment">// total data in the queue</span></span><br><span class="line">   dataqsiz <span class="type">uint</span>           <span class="comment">// size of the circular queue</span></span><br><span class="line">   buf      unsafe.Pointer <span class="comment">// points to an array of dataqsiz elements</span></span><br><span class="line">   elemsize <span class="type">uint16</span></span><br><span class="line">   closed   <span class="type">uint32</span></span><br><span class="line">   elemtype *_type <span class="comment">// element type</span></span><br><span class="line">   sendx    <span class="type">uint</span>   <span class="comment">// send index</span></span><br><span class="line">   recvx    <span class="type">uint</span>   <span class="comment">// receive index</span></span><br><span class="line">   recvq    waitq  <span class="comment">// list of recv waiters</span></span><br><span class="line">   sendq    waitq  <span class="comment">// list of send waiters</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">// lock protects all fields in hchan, as well as several</span></span><br><span class="line">   <span class="comment">// fields in sudogs blocked on this channel.</span></span><br><span class="line">   <span class="comment">//</span></span><br><span class="line">   <span class="comment">// Do not change another G&#x27;s status while holding this lock</span></span><br><span class="line">   <span class="comment">// (in particular, do not ready a G), as this can deadlock</span></span><br><span class="line">   <span class="comment">// with stack shrinking.</span></span><br><span class="line">   lock mutex</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> waitq <span class="keyword">struct</span> &#123;</span><br><span class="line">    first *sudog</span><br><span class="line">    last  *sudog</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2><span id="使用">使用</span><a href="#使用" class="header-anchor">#</a></h2><h5><span id="buffer-channel-vs-非buffered-channel">buffer channel vs. 非buffered channel</span><a href="#buffer-channel-vs-非buffered-channel" class="header-anchor">#</a></h5><table>
+<thead>
+<tr>
+<th align="center">&#x2F;</th>
+<th align="center">无缓冲</th>
+<th align="center">有缓冲</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">创建方式</td>
+<td align="center">make(chan TYPE)</td>
+<td align="center">make(chan TYPE, SIZE)</td>
+</tr>
+<tr>
+<td align="center">发送阻塞</td>
+<td align="center">数据接收前发送阻塞</td>
+<td align="center">缓冲满时发送阻塞</td>
+</tr>
+<tr>
+<td align="center">接收阻塞</td>
+<td align="center">数据发送前接收阻塞</td>
+<td align="center">缓冲空时接收阻塞</td>
+</tr>
+</tbody></table>
+<p><a href="https://www.golangroadmap.com/class/gointerview/4-3.html">3.Go channel有无缓冲的区别？</a>  </p>
+<h5><span id="channel的读写">channel的读写</span><a href="#channel的读写" class="header-anchor">#</a></h5><ul>
+<li>向关闭的channel中写入数据会panic</li>
+<li>关闭的channel中读数据<br>有数据会读到数据，没数据会是nil</li>
+</ul>
+<h5><span id="channel-closing-principle">Channel closing principle</span><a href="#channel-closing-principle" class="header-anchor">#</a></h5><p>[gpt]<br>prompt: Golang的 Channel closing principle是什么？</p>
+<p>在Golang中，关闭一个Channel是一种重要的操作，如果不正确地关闭Channel，可能会导致程序出现死锁或其他问题。下面是Golang中Channel关闭的原则和细则：</p>
+<ol>
+<li><p>只有发送方才能关闭Channel。<br>发送方是指向Channel发送数据的goroutine，而接收方是指从Channel接收数据的goroutine。在Golang中，只有发送方才能关闭Channel，因为发送方知道何时不再需要发送数据，从而触发关闭Channel的操作。</p>
+</li>
+<li><p>关闭Channel后，接收方仍然可以接收Channel中的数据。<br>当一个Channel被关闭后，接收方仍然可以从Channel中接收已经存在的数据，直到Channel中的所有数据都被接收完毕。这使得接收方可以在不知道Channel何时被关闭的情况下，安全地从Channel中接收数据。</p>
+</li>
+<li><p>关闭一个已经关闭的Channel会导致panic。<br>如果尝试关闭一个已经关闭的Channel，会导致panic，因此在关闭Channel之前，应该先检查Channel是否已经关闭。</p>
+</li>
+<li><p>关闭一个nil的Channel会导致panic。<br>如果尝试关闭一个nil的Channel，也会导致panic，因此在关闭Channel之前，应该先检查Channel是否为nil。</p>
+</li>
+<li><p>关闭一个有缓冲的Channel时，仍然可以向其中发送数据。<br>当一个有缓冲的Channel被关闭时，发送方仍然可以向其中发送数据，直到Channel被填满。因此，在关闭一个有缓冲的Channel之后，可能还有一些数据需要被发送。</p>
+</li>
+<li><p>关闭一个Channel会使Channel上的所有阻塞操作立即解除阻塞并返回。<br>当一个Channel被关闭时，Channel上的所有阻塞操作（包括接收和发送操作）都会立即解除阻塞并返回。对于接收操作，返回的值为Channel中剩余的数据，如果Channel已经为空，则返回类型的零值。对于发送操作，返回的结果通常为false，表示数据没有被发送成功。</p>
+</li>
+</ol>
+<p>总之，关闭Channel是一项重要的操作，需要遵循一些原则和细则来保证程序的正确性和稳定性。在使用Channel的过程中，应该注意遵循这些原则和细则。<br>[&#x2F;gpt]</p>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li><a href="https://www.cnblogs.com/haiyux/p/15161495.html">golang channel原理 </a> *** </li>
+<li>《09 神奇的内置数据结构》  channel 看动画 ***</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Golang</category>
+        <category>内置类型</category>
       </categories>
       <tags>
         <tag>Golang</tag>
