@@ -9399,7 +9399,7 @@ BGP 协议传输的消息
 <!-- toc -->
 
 <ul>
-<li><a href="#goroutine%E7%9A%84%E8%B0%83%E5%BA%A6">Goroutine的调度</a><br>- <a href="#%E7%94%9F%E4%BA%A7%E7%AB%AF-2">生产端 [2]</a><br>- <a href="#%E6%B6%88%E8%B4%B9%E7%AB%AF-2">消费端 [2]</a><br>- <a href="#%E8%B0%83%E5%BA%A6%E5%99%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5-1">调度器的设计策略 [1]</a></li>
+<li><a href="#goroutine%E7%9A%84%E8%B0%83%E5%BA%A6">Goroutine的调度</a><br>- <a href="#%E7%BB%84%E4%BB%B6">组件</a><br>- <a href="#%E5%9C%BA%E6%99%AF">场景</a><br>- <a href="#%E7%94%9F%E4%BA%A7%E7%AB%AF-2">生产端 [2]</a><br>- <a href="#%E6%B6%88%E8%B4%B9%E7%AB%AF-2">消费端 [2]</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
@@ -9407,10 +9407,10 @@ BGP 协议传输的消息
 </div>
 
 <h2><span id="goroutine的调度">Goroutine的调度</span><a href="#goroutine的调度" class="header-anchor">#</a></h2><ul>
-<li><p>Overview</p>
-<img src="/www6vHomeHexo/2022/03/08/golangGMP/goroutine.JPG" class title="goroutine的调度">
-<p><strong>System Thread</strong> : kernel entity<br><strong>Processor</strong> : go实现的协程处理器<br><strong>Goroutine</strong> : 协程</p>
-</li>
+<li>Overview<img src="/www6vHomeHexo/2022/03/08/golangGMP/goroutine.JPG" class title="goroutine的调度">
+<strong>System Thread</strong> : kernel entity<br><strong>Processor</strong> : go实现的协程处理器<br><strong>Goroutine</strong> : 协程</li>
+</ul>
+<h5><span id="组件">组件</span><a href="#组件" class="header-anchor">#</a></h5><ul>
 <li><p>组件<br>G:  goroutine, 一个计算任务。 由需要<strong>执行的代码和其上下文组成</strong>, 上下文包括:  当前代码位置,  栈顶、 栈底地址，状态等。<br>M: machine,  <strong>系统线程</strong>, 执行实体,  想要在CPU上执行代码, 必须有线程<br>P:  processor, <strong>虚拟处理器</strong>,  <strong>M必须获得P才能执行代码</strong>, 否则必须陷入休眠(后台监控线程除外).</p>
 </li>
 <li><p>组件之间的关系<br>Processor在不同的系统线程里, 每个Processor挂载着一个协程队列，Processor依次调用Gorouine，<br>只有一个Gorouine是正在运行状态的。</p>
@@ -9428,12 +9428,6 @@ BGP 协议传输的消息
 <li>M 何时创建<br><strong>没有足够的 M 来关联 P 并运行其中的可运行的 G。</strong> 比如所有的 M 此时都阻塞住了，而 P 中还有很多就绪任务，就会去寻找空闲的 M，而没有空闲的，就会去创建新的 M</li>
 </ul>
 </li>
-<li><p>case</p>
-<ul>
-<li>case1<br><strong>一个协程运行时间运行的特别长</strong>。 守护线程计数， 如果processor完成的goroutine数量一直不变。在这个协程的任务栈里插入一个中断的标记，读到这个中断标记后，goroutine会把自己中断下来插入到等待队列的队尾。</li>
-<li>case2<br><strong>某个协程被io中断后</strong>， Processer会把自己移动到另一个可用的系统线程当中， 执行队列里的任务。<br>当这个协程io中断被唤醒后，会把自己加入到某个Processor的队列里， 或者加入到全局的等待队列里。</li>
-</ul>
-</li>
 <li><p>看参考文档里的图</p>
 <img src="/www6vHomeHexo/2022/03/08/golangGMP/GMP.jpg" class title="GMP">
 
@@ -9441,14 +9435,45 @@ BGP 协议传输的消息
 <li><p>协程跟线程是有区别的，线程由 CPU 调度是抢占式的，协程由用户态调度是协作式的，一个协程让出 CPU 后，才执行下一个协程。</p>
 </li>
 </ul>
+<h5><span id="场景">场景</span><a href="#场景" class="header-anchor">#</a></h5><ul>
+<li><p><strong>处理阻塞[能被runtime拦截到的阻塞-非阻塞]</strong>  [2]</p>
+<ul>
+<li>在线程发生阻塞的时候，不会无限制的创建线程</li>
+<li>以下这些情况,  会把goroutine挂起，让g先进某个数据结构，待ready后再继续执行<br>不会占用线程， 线程会进入schedule，继续消费队列，执行其他的g<img src="/www6vHomeHexo/2022/03/08/golangGMP/feizusai.jpg" class></li>
+</ul>
+</li>
+<li><p><strong>处理阻塞[不能被runtime拦截到的阻塞-阻塞]</strong>  [2]</p>
+<ul>
+<li>两种情况<ul>
+<li>CGO</li>
+<li>阻塞在syscall上时,  必须占用一个线程</li>
+</ul>
+</li>
+<li><strong>sysmon</strong>,  在专有线程中执行, 不需要绑定P就可以执行<ul>
+<li>checkdead<br>常见误解 这个可以检查死锁</li>
+<li>netpoll<br>inject g list to global runqueue</li>
+<li>retake<br>如果syscall卡了很久，就把p剥离(<strong>handoffp</strong>)  #1<br>如果用户g运行了很久, 就发信号SIGURG抢占</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>case</p>
+<ul>
+<li>case1<br><strong>一个协程运行时间运行的特别长</strong>。 守护线程计数， 如果processor完成的goroutine数量一直不变。在这个协程的任务栈里插入一个中断的标记，读到这个中断标记后，goroutine会把自己中断下来插入到等待队列的队尾。</li>
+<li>case2<br><strong>某个协程被io中断后</strong>， Processer会把自己移动到另一个可用的系统线程当中， 执行队列里的任务。<br>当这个协程io中断被唤醒后，会把自己加入到某个Processor的队列里， 或者加入到全局的等待队列里。</li>
+</ul>
+</li>
+<li><p>调度器的设计策略 [1]</p>
+<ul>
+<li>work stealing 机制</li>
+<li>hand off 机制  #1</li>
+</ul>
+</li>
+</ul>
 <h5><span id="生产端-2">生产端 [2]</span><a href="#生产端-2" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2022/03/08/golangGMP/producer.JPG" class>
 
 <h5><span id="消费端-2">消费端 [2]</span><a href="#消费端-2" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2022/03/08/golangGMP/consumer.JPG" class>
 
-<h5><span id="调度器的设计策略-1">调度器的设计策略 [1]</span><a href="#调度器的设计策略-1" class="header-anchor">#</a></h5><ul>
-<li>work stealing 机制</li>
-<li>hand off 机制</li>
-</ul>
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><a href="https://blog.csdn.net/qq_44205272/article/details/111565957">Golang的GMP原理与调度</a> ***</li>
 <li>《04 Go 程序是怎么跑起来的》  *** </li>
