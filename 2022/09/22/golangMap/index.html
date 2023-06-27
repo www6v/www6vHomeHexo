@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/09/22/golangMap/golang-map.jpg">
 <meta property="article:published_time" content="2022-09-22T06:05:36.000Z">
-<meta property="article:modified_time" content="2023-06-26T02:03:44.333Z">
+<meta property="article:modified_time" content="2023-06-27T02:50:45.938Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Golang">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-26 10:03:44" itemprop="dateModified" datetime="2023-06-26T10:03:44+08:00">2023-06-26</time>
+                <time title="修改时间：2023-06-27 10:50:45" itemprop="dateModified" datetime="2023-06-27T10:50:45+08:00">2023-06-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -256,11 +256,22 @@
         <p></p>
 <span id="more"></span>
 
-<h2><span id="map">Map</span><a href="#map" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/09/22/golangMap/golang-map.jpg" class title="Golang Map">
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
 
 <ul>
-<li><p>map的内部实现</p>
-<ul>
+<li><a href="#map-%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0">Map 内部实现</a><br>- <a href="#map%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84">map的内部结构</a><br>- <a href="#map%E7%9A%84%E5%86%85%E9%83%A8%E5%87%BD%E6%95%B0-4">map的内部函数 [4]</a><br>- <a href="#%E6%89%A9%E5%AE%B9-2">扩容 [2]</a><br>- <a href="#%E6%89%A9%E5%AE%B9-4">扩容 [4]</a><br>- <a href="#map-%E8%A7%A3%E5%86%B3-hash-%E5%86%B2%E7%AA%81-3">map 解决 hash 冲突 [3]</a><br>- <a href="#%E7%BC%BA%E9%99%B7-4">缺陷 [4]</a></li>
+<li><a href="#map%E7%9A%84%E4%BD%BF%E7%94%A8">map的使用</a><br>- <a href="#map%E7%9A%84%E4%BD%BF%E7%94%A8-1">map的使用</a><br>- <a href="#%E5%B9%B6%E5%8F%91">并发</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h2><span id="map-内部实现">Map 内部实现</span><a href="#map-内部实现" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/09/22/golangMap/golang-map.jpg" class title="Golang Map">
+
+<h5><span id="map的内部结构">map的内部结构</span><a href="#map的内部结构" class="header-anchor">#</a></h5><ul>
 <li>hmap<ul>
 <li>bucket<ul>
 <li>topHash<br><strong>快速定位key,以空间换时间</strong><br>每个 bucket 的 tophash 区域其实是用来快速定位 key 位置的. 这是一种以空间换时间的思路。</li>
@@ -273,16 +284,12 @@
 </li>
 <li>bmap</li>
 </ul>
-</li>
-<li><p>map的使用<br>value没有任何的限制, key有严格的限制</p>
-</li>
-<li><p>并发</p>
-<ul>
-<li>不可以并发读写<br>可以并发读</li>
+<h5><span id="map的内部函数-4">map的内部函数 [4]</span><a href="#map的内部函数-4" class="header-anchor">#</a></h5><ul>
+<li>mapassign 写</li>
+<li>mapdelete 删</li>
+<li>mapaccess 读</li>
 </ul>
-</li>
-<li><p>扩容 [2]</p>
-<ul>
+<h5><span id="扩容-2">扩容 [2]</span><a href="#扩容-2" class="header-anchor">#</a></h5><ul>
 <li>buckets &amp;&amp; oldbuckets </li>
 <li><strong>两种扩容方式 [渐进式扩容, 类似redis rehash]</strong><ul>
 <li>因为 overflow bucket 过多导致的“扩容”，实际上运行时会新建一个和现有规模一样的 bucket 数组，然后在 assign 和 delete 时做排空和迁移。</li>
@@ -290,12 +297,34 @@
 </ul>
 </li>
 </ul>
+<h5><span id="扩容-4">扩容 [4]</span><a href="#扩容-4" class="header-anchor">#</a></h5><p>触发:  mapassign<br>时机: load factor 过大  OR overflow bucket 过多<br>搬运过程:  渐进式</p>
+<ul>
+<li>mapassign<ul>
+<li>elem cout &gt; bucket*6.5  -&gt; bigger size grow</li>
+<li>overflow too many  –&gt; same size grow <ul>
+<li>noverflow &gt;&#x3D;2^15</li>
+<li>nvoerflow &lt; 2^15 &amp;&amp; nvoerflow &gt; bucket count</li>
+</ul>
 </li>
 </ul>
-<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ul>
-<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1194y1o77s/?spm_id_from=pageDriver&vd_source=f6e8c1128f9f264c5ab8d9411a644036">Go面试题系列：Go map的底层实现原理</a></li>
-<li><a href>16|复合数据类型：原始map类型的实现机制是这样的？</a> TonyBai</li>
+</li>
 </ul>
+<h5><span id="map-解决-hash-冲突-3">map 解决 hash 冲突 [3]</span><a href="#map-解决-hash-冲突-3" class="header-anchor">#</a></h5><p>在 map 解决 hash &#x2F;分桶 冲突问题时，实际上结合了拉链法和开放寻址法两种思路. 以 map 的插入写流程为例，进行思路阐述：<br>（1）桶数组中的每个桶，严格意义上是一个单向桶链表，以桶为节点进行串联；<br>（2）每个桶固定可以存放 8 个 key-value 对；<br>（3）当 key 命中一个桶时，首先根据开放寻址法，在桶的 8 个位置中寻找空位进行插入；<br>（4）倘若桶的 8 个位置都已被占满，则基于桶的溢出桶指针，找到下一个桶，重复第（3）步；<br>（5）倘若遍历到链表尾部，仍未找到空位，则基于拉链法，在桶链表尾部续接新桶，并插入 key-value 对.</p>
+<h5><span id="缺陷-4">缺陷 [4]</span><a href="#缺陷-4" class="header-anchor">#</a></h5><ul>
+<li>已经扩容的map, 无法 缩容</li>
+<li>保证并发安全时, 要手动读写锁，易出错</li>
+<li>多核心下表现差</li>
+</ul>
+<h2><span id="map的使用">map的使用</span><a href="#map的使用" class="header-anchor">#</a></h2><h5><span id="map的使用">map的使用</span><a href="#map的使用" class="header-anchor">#</a></h5><p>  value没有任何的限制, key有严格的限制</p>
+<h5><span id="并发">并发</span><a href="#并发" class="header-anchor">#</a></h5><ul>
+<li>不可以并发读写<br>可以并发读</li>
+</ul>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1194y1o77s/?spm_id_from=pageDriver&vd_source=f6e8c1128f9f264c5ab8d9411a644036">Go面试题系列：Go map的底层实现原理</a></li>
+<li>《16|复合数据类型：原始map类型的实现机制是这样的？》 TonyBai</li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/597483155">Golang map 实现原理</a></li>
+<li>《09 神奇的内置数据结构》 V</li>
+</ol>
 
     </div>
 
