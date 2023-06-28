@@ -14177,6 +14177,22 @@ BGP 协议传输的消息
       </tags>
   </entry>
   <entry>
+    <title>重构</title>
+    <url>/www6vHomeHexo/2021/06/28/refactor/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="bad-smell">Bad Smell</span><a href="#bad-smell" class="header-anchor">#</a></h2><h2><span id="refactor">Refactor</span><a href="#refactor" class="header-anchor">#</a></h2><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p><a href="https://refactoring.guru/refactoring/smells">Code Smells</a> ***<br><a href="https://refactoring.guru/refactoring/techniques">Refactor</a> ***</p>
+]]></content>
+      <categories>
+        <category>架构</category>
+        <category>重构</category>
+      </categories>
+      <tags>
+        <tag>重构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>阿里云-云迁移Migrate</title>
     <url>/www6vHomeHexo/2021/06/27/aliyunCloudMigrate/</url>
     <content><![CDATA[<p></p>
