@@ -2582,7 +2582,7 @@
 </li>
 <li><p>Go 源码分析<br><a href="https://github.com/cch123/golang-notes">Go source code analysis(zh-cn) </a>  曹大 滴滴 *** </p>
 </li>
-<li><p>book<br><a href="https://chai2010.cn/advanced-go-programming-book/">Go语言高级编程(Advanced Go Programming)</a></p>
+<li><p>book<br><a href="https://github.com/gopl-zh/gopl-zh.github.com">Go语言圣经中文版</a><br><a href="https://gopl-zh.github.io/">Go语言圣经（中文版）</a><br><a href="https://chai2010.cn/advanced-go-programming-book/">Go语言高级编程(Advanced Go Programming)</a></p>
 </li>
 </ul>
 <h2><span id="golang-个人blog">Golang 个人blog</span><a href="#golang-个人blog" class="header-anchor">#</a></h2><ul>
@@ -10854,6 +10854,7 @@ BGP 协议传输的消息
 <li>工具<br>GitHub的PR<br>GitHub的MR</li>
 </ul>
 </li>
+<li>CodeView<br>工具 <strong>Gerrit</strong></li>
 </ul>
 <h5><span id="编程工具">编程工具</span><a href="#编程工具" class="header-anchor">#</a></h5><ul>
 <li>codota<br>codota是以色列人开发的一个软件,以深度学习为技术背景</li>
