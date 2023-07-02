@@ -21,7 +21,7 @@
   </script>
 
   <meta property="og:type" content="article">
-<meta property="og:title" content="istio数据面-sidecar">
+<meta property="og:title" content="istio数据平面-sidecar">
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2019/11/21/istioDataplane/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://user-images.githubusercontent.com/5608425/69417029-dded0980-0d52-11ea-96a1-4c14e08aadf8.jpg">
 <meta property="og:image" content="https://user-images.githubusercontent.com/5608425/69950671-b81feb80-152e-11ea-96ba-6261b7f4c09f.png">
 <meta property="article:published_time" content="2019-11-21T09:05:08.000Z">
-<meta property="article:modified_time" content="2023-07-02T04:17:59.410Z">
+<meta property="article:modified_time" content="2023-07-02T06:43:27.848Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="istio">
 <meta name="twitter:card" content="summary">
@@ -51,7 +51,7 @@
   };
 </script>
 
-  <title>istio数据面-sidecar | www6v的博客</title>
+  <title>istio数据平面-sidecar | www6v的博客</title>
   
 
 
@@ -208,7 +208,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          istio数据面-sidecar
+          istio数据平面-sidecar
         </h1>
 
         <div class="post-meta">
@@ -231,7 +231,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-02 12:17:59" itemprop="dateModified" datetime="2023-07-02T12:17:59+08:00">2023-07-02</time>
+                <time title="修改时间：2023-07-02 14:43:27" itemprop="dateModified" datetime="2023-07-02T14:43:27+08:00">2023-07-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -260,6 +260,22 @@
       
         <p></p>
 <span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#sidecar%E6%B3%A8%E5%85%A5%E5%92%8C%E8%B7%AF%E7%94%B1%E8%BD%AC%E5%8F%91">sidecar注入和路由转发</a><br>- <a href="#sidecar%E6%B3%A8%E5%85%A5">sidecar注入</a><br>- <a href="#envoy-sidecar-%E4%BB%A3%E7%90%86%E7%9A%84%E8%B7%AF%E7%94%B1%E8%BD%AC%E5%8F%91-78">Envoy Sidecar 代理的路由转发 [7][8]</a></li>
+<li><a href="#envoy-proxy%E7%9A%84%E6%9E%B6%E6%9E%84-18">Envoy proxy的架构 [18]</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E9%9D%A2%E6%A0%87%E5%87%86apixds%E5%8D%8F%E8%AE%AE">数据面标准API&#x2F;xDS协议</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E9%9D%A2">数据面</a><br>- <a href="#istio-%E6%B3%A8%E5%85%A5sidecar%E5%AE%9E%E7%8E%B0">Istio 注入sidecar实现</a><br>- <a href="#%E6%B3%A8%E5%85%A5pod%E5%86%85%E5%AE%B9">注入Pod内容</a></li>
+<li><a href="#envoy%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B%E5%92%8C%E9%85%8D%E7%BD%AE">Envoy启动过程和配置</a></li>
+<li><a href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-2">性能优化 [2]</a><br>- <a href="#proxyless-%E6%A8%A1%E5%BC%8F-v111">Proxyless 模式  (v1.11)</a><br>- <a href="#%E4%BD%BF%E7%94%A8-ebpf-%E4%BC%98%E5%8C%96%E6%B5%81%E9%87%8F%E5%8A%AB%E6%8C%81">使用 eBPF 优化流量劫持</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
 
 <h2><span id="sidecar注入和路由转发">sidecar注入和路由转发</span><a href="#sidecar注入和路由转发" class="header-anchor">#</a></h2><h5><span id="sidecar注入">sidecar注入</span><a href="#sidecar注入" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2019/11/21/istioDataplane/istio-data.jpg" class title="istio数据面-sidecar注入">
 
@@ -296,7 +312,7 @@
 <li><a target="_blank" rel="noopener" href="https://www.servicemesher.com/blog/service-mesh-the-microservices-in-post-kubernetes-era/">Service Mesh——后 Kubernetes 时代的微服务</a></li>
 </ol>
 <hr>
-<h2><span id="数据面">数据面</span><a href="#数据面" class="header-anchor">#</a></h2><h5><span id="istio-注入sidecar实现">Istio 注入sidecar实现:</span><a href="#istio-注入sidecar实现" class="header-anchor">#</a></h5><ul>
+<h2><span id="数据面">数据面</span><a href="#数据面" class="header-anchor">#</a></h2><h5><span id="istio-注入sidecar实现">Istio 注入sidecar实现</span><a href="#istio-注入sidecar实现" class="header-anchor">#</a></h5><ul>
 <li>自动注入: 利用 Kubernetes Dynamic Admission Webhooks 对 新建的pod 进行注入: init container + sidecar<br><a target="_blank" rel="noopener" href="https://cloudnative.to/blog/istio-sidecar-injection-method/">一种灵活注入 Istio Sidecar 的方案探索</a></li>
 <li>手动注入: 使用 istioctl kube-inject</li>
 </ul>
@@ -317,7 +333,7 @@
 <h2><span id="性能优化-2">性能优化 [2]</span><a href="#性能优化-2" class="header-anchor">#</a></h2><h5><span id="proxyless-模式-v111">Proxyless 模式  (v1.11)</span><a href="#proxyless-模式-v111" class="header-anchor">#</a></h5><h5><span id="使用-ebpf-优化流量劫持">使用 eBPF 优化流量劫持</span><a href="#使用-ebpf-优化流量劫持" class="header-anchor">#</a></h5><p>参考</p>
 <ol>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/437194208">基于 gRPC 和 Istio 的无 Sidecar 代理的服务网格</a></li>
-<li><a target="_blank" rel="noopener" href="https://jimmysong.io/blog/beyond-istio-oss/#performance-optimizing">Beyond Istio OSS —— Istio 服务网格的现状与未来</a> good<br><a target="_blank" rel="noopener" href="https://docs.qq.com/pdf/DRWxETHNDZmRsS0l5">Beyond Istio OSS</a></li>
+<li><a target="_blank" rel="noopener" href="https://jimmysong.io/blog/beyond-istio-oss/#performance-optimizing">Beyond Istio OSS —— Istio 服务网格的现状与未来</a> ***<br><a target="_blank" rel="noopener" href="https://docs.qq.com/pdf/DRWxETHNDZmRsS0l5">Beyond Istio OSS</a></li>
 </ol>
 
     </div>
@@ -334,7 +350,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www6v.github.io/www6vHomeHexo/2019/11/21/istioDataplane/" title="istio数据面-sidecar">https://www6v.github.io/www6vHomeHexo/2019/11/21/istioDataplane/</a>
+    <a href="https://www6v.github.io/www6vHomeHexo/2019/11/21/istioDataplane/" title="istio数据平面-sidecar">https://www6v.github.io/www6vHomeHexo/2019/11/21/istioDataplane/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
