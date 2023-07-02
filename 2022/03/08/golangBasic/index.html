@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-08T15:07:50.000Z">
-<meta property="article:modified_time" content="2023-07-02T03:43:22.683Z">
+<meta property="article:modified_time" content="2023-07-02T14:16:08.061Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Golang">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-02 11:43:22" itemprop="dateModified" datetime="2023-07-02T11:43:22+08:00">2023-07-02</time>
+                <time title="修改时间：2023-07-02 22:16:08" itemprop="dateModified" datetime="2023-07-02T22:16:08+08:00">2023-07-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,15 +268,67 @@
 <li><a href="#gc">GC</a></li>
 </ul>
 </li>
-<li><a href="#%E5%9F%BA%E7%A1%80">基础</a><br>- <a href="#new-vs-make">New vs Make</a><br>- <a href="#array%E5%92%8Cslice">array和slice</a><br>- <a href="#slice%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0">slice底层实现</a><br>- <a href="#%E5%80%BC%E4%BC%A0%E9%80%92-%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92">值传递、引用传递</a><br>- <a href="#select-vs-switch">select vs. switch</a><br>- <a href="#method-function">Method &amp;  Function</a><br>- <a href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-4">异常处理 [4]</a></li>
+<li><a href="#%E5%9F%BA%E7%A1%80">基础</a><ul>
+<li><a href="#%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0">内建函数</a><ul>
+<li><a href="#new-vs-make">New vs Make</a></li>
+</ul>
+</li>
+<li><a href="#array%E5%92%8Cslice">array和slice</a></li>
+<li><a href="#slice%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0">slice底层实现</a></li>
+<li><a href="#%E5%80%BC%E4%BC%A0%E9%80%92-%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92">值传递、引用传递</a></li>
+<li><a href="#select-vs-switch">select vs. switch</a></li>
+<li><a href="#method-function">Method &amp;  Function</a></li>
+<li><a href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-4">异常处理 [4]</a></li>
+</ul>
+<ul>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 
 </div>
 
-<h2><span id="rumtime-3">Rumtime [3]</span><a href="#rumtime-3" class="header-anchor">#</a></h2><h3><span id="scheduler">Scheduler</span><a href="#scheduler" class="header-anchor">#</a></h3><p>GMP</p>
-<h3><span id="netpoll">Netpoll</span><a href="#netpoll" class="header-anchor">#</a></h3><h3><span id="memory">Memory</span><a href="#memory" class="header-anchor">#</a></h3><h3><span id="gc">GC</span><a href="#gc" class="header-anchor">#</a></h3><h2><span id="基础">基础</span><a href="#基础" class="header-anchor">#</a></h2><h5><span id="new-vs-make">New vs Make</span><a href="#new-vs-make" class="header-anchor">#</a></h5><ul>
+<h1><span id="rumtime-3">Rumtime [3]</span><a href="#rumtime-3" class="header-anchor">#</a></h1><h3><span id="scheduler">Scheduler</span><a href="#scheduler" class="header-anchor">#</a></h3><p>GMP</p>
+<h3><span id="netpoll">Netpoll</span><a href="#netpoll" class="header-anchor">#</a></h3><h3><span id="memory">Memory</span><a href="#memory" class="header-anchor">#</a></h3><h3><span id="gc">GC</span><a href="#gc" class="header-anchor">#</a></h3><h1><span id="基础">基础</span><a href="#基础" class="header-anchor">#</a></h1><h3><span id="内建函数">内建函数</span><a href="#内建函数" class="header-anchor">#</a></h3><ul>
+<li>init<ul>
+<li>make()</li>
+<li>new()</li>
+</ul>
+</li>
+<li>slice  <ul>
+<li>append()<br>用于切片(slice) 追加元素</li>
+<li>copy()<br>只能用于数组切片内容赋值</li>
+</ul>
+</li>
+<li>size <ul>
+<li>len()<br> 计算数组(包括数组指针)、切片(slice)、map、channel、字符串等数据类型的长度</li>
+<li>cap()<br> 返回指定类型的容量</li>
+</ul>
+</li>
+<li>print() &amp; println()</li>
+<li>resource reclaim<ul>
+<li>close()</li>
+<li>delete()</li>
+</ul>
+</li>
+<li>num<ul>
+<li>complex()</li>
+<li>real() &amp; imag()</li>
+</ul>
+</li>
+<li>error handle<ul>
+<li>panic()</li>
+<li>recover()</li>
+</ul>
+</li>
+<li>others [6]<ul>
+<li>clear()<br> 对于map对象: clear函数清空map对象的所有的元素<br> 对于slice对象： clear函数将所有的元素设置为元素类型的零值，长度不变，容量不变</li>
+<li>min()  &amp;&amp;  max()</li>
+</ul>
+</li>
+</ul>
+<h5><span id="new-vs-make">New vs Make</span><a href="#new-vs-make" class="header-anchor">#</a></h5><ul>
 <li>new和make是内置函数,主要用来分配内存空间</li>
 <li>make<br>make 仅用于 slice、map和 channel 的初始化，返回值为类型本身，而不是指针</li>
 <li>new<br>  只用于内存分配，且把内存清零<br>  返回一个指向对应类型零值的指针<br>  new() 一般 显示返回指针</li>
@@ -284,13 +336,13 @@
 <figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">make</span><span class="params">(t Type, size ...IntegerType)</span></span> Type </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">new</span><span class="params">(Type)</span></span> *Type </span><br></pre></td></tr></table></figure>
 
 <p><a target="_blank" rel="noopener" href="https://www.golangroadmap.com/class/gointerview/1-9.html">9.Go 内置函数make和new的区别？</a></p>
-<h5><span id="array和slice">array和slice</span><a href="#array和slice" class="header-anchor">#</a></h5><ul>
+<h3><span id="array和slice">array和slice</span><a href="#array和slice" class="header-anchor">#</a></h3><ul>
 <li>数组长度是固定的， slice长度是可变的</li>
 </ul>
-<h5><span id="slice底层实现">slice底层实现</span><a href="#slice底层实现" class="header-anchor">#</a></h5><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> slice <span class="keyword">struct</span> &#123;</span><br><span class="line">    array unsafe.Pointer</span><br><span class="line">    <span class="built_in">len</span>   <span class="type">int</span></span><br><span class="line">    <span class="built_in">cap</span>   <span class="type">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="slice底层实现">slice底层实现</span><a href="#slice底层实现" class="header-anchor">#</a></h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> slice <span class="keyword">struct</span> &#123;</span><br><span class="line">    array unsafe.Pointer</span><br><span class="line">    <span class="built_in">len</span>   <span class="type">int</span></span><br><span class="line">    <span class="built_in">cap</span>   <span class="type">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><a target="_blank" rel="noopener" href="https://www.golangroadmap.com/class/gointerview/2-1.html">1.Go slice的底层实现原理?</a></p>
-<h5><span id="值传递-引用传递">值传递、引用传递</span><a href="#值传递-引用传递" class="header-anchor">#</a></h5><ul>
+<h3><span id="值传递-引用传递">值传递、引用传递</span><a href="#值传递-引用传递" class="header-anchor">#</a></h3><ul>
 <li><p>Go语言中所有的传参都是<strong>值传递（传值），都是一个副本，一个拷贝</strong>。</p>
 </li>
 <li><p>是否可以修改原内容数据，和传值、传引用没有必然的关系。在C++中，传引用肯定是可以修改原内容数据的，在Go语言里，虽然只有传值，但是我们也可以修改原内容数据，因为参数是引用类型</p>
@@ -313,20 +365,21 @@
 </li>
 </ul>
 <p><a target="_blank" rel="noopener" href="https://www.golangroadmap.com/class/gointerview/1-7.html">Go 函数参数传递到底是值传递还是引用传递？</a>  </p>
-<h5><span id="select-vs-switch">select vs. switch</span><a href="#select-vs-switch" class="header-anchor">#</a></h5><ul>
+<h3><span id="select-vs-switch">select vs. switch</span><a href="#select-vs-switch" class="header-anchor">#</a></h3><ul>
 <li>select只能应用于channel的操作<br>则会随机选取其中一个满足条件的分支</li>
 <li>switch 分支是顺序执行的</li>
 </ul>
-<h5><span id="method-amp-function">Method &amp;  Function</span><a href="#method-amp-function" class="header-anchor">#</a></h5><ul>
+<h3><span id="method-amp-function">Method &amp;  Function</span><a href="#method-amp-function" class="header-anchor">#</a></h3><ul>
 <li>Method<br>方法(Method)是一个带有receiver的函数Function</li>
 <li>Receiver[5]</li>
 </ul>
-<h5><span id="异常处理-4">异常处理 [4]</span><a href="#异常处理-4" class="header-anchor">#</a></h5><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h3><span id="异常处理-4">异常处理 [4]</span><a href="#异常处理-4" class="header-anchor">#</a></h3><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><a target="_blank" rel="noopener" href="https://www.golangroadmap.com/class/gointerview/">GOLANG ROADMAP</a><br> <a target="_blank" rel="noopener" href="https://www.golangroadmap.com/">GOLANG ROADMAP</a><br> 邀请码：caspar<br> 邀请码：Gopher-10645-1382</li>
 <li>极客时间 《Go 并发编程实战课》  鸟窝</li>
 <li>《04 Go 程序是怎么跑起来的》</li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wanglei19891210/article/details/128092331">【go实战系列五】 go1.19.2与pkg中error如何wrap与unwrap Errors | 将error进行wrap向上处理思想 | pkg&#x2F;errors</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/522568859">golang 方法接收者</a>  mycode-go</li>
+<li><a target="_blank" rel="noopener" href="https://colobu.com/2023/05/28/go1-21-whats-new-builtin/">你知道吗？Go新增加了三个内建函数 </a></li>
 </ol>
 
     </div>

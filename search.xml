@@ -3456,7 +3456,7 @@
   </entry>
   <entry>
     <title>Go Framework</title>
-    <url>/www6vHomeHexo/2022/06/21/goFramework/</url>
+    <url>/www6vHomeHexo/2022/06/21/golangFramework/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
@@ -3506,12 +3506,15 @@
 <li>bigcache</li>
 <li>fastcache</li>
 </ul>
-<img src="/www6vHomeHexo/2022/06/21/goFramework/cache.jpg" class>
+<img src="/www6vHomeHexo/2022/06/21/golangFramework/cache.jpg" class>
 
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+
+
+<h1><span id="time-ampamp-cron4">Time &amp;&amp; cron[4]</span><a href="#time-ampamp-cron4" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li>《17 直播：社区优秀开源框架对比》</li>
 <li><a href="https://magodo.github.io/micro-go-src-server-client/">go-micro 源码解析 - server &amp; client</a></li>
 <li><a href="https://blog.csdn.net/weixin_52183917/article/details/127704265">Golang 本地缓存选型对比及原理总结</a></li>
+<li><a href="https://colobu.com/2022/11/26/some-time-and-cron-libs/">一些关于时间和定时任务的库 </a></li>
 <li><a href="https://talkgo.org/t/topic/3519">Go 开源本地缓存组件选型对比（freecache、bigcache、fastcache 等）</a>  未</li>
 </ol>
 ]]></content>
@@ -3540,6 +3543,7 @@
 <li><a href="#%E5%86%85%E5%AD%98%E9%80%83%E9%80%B8-6">内存逃逸 [6]</a></li>
 <li><a href="#%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F">内存泄漏</a></li>
 <li><a href="#%E5%A0%86%E5%92%8C%E6%A0%88">堆和栈</a></li>
+<li><a href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8-9-2">垃圾回收器 [9] #2</a></li>
 </ul>
 </li>
 <li><a href="#%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-1">系统结构 [1]</a><ul>
@@ -3572,17 +3576,14 @@
 </li>
 </ul>
 </li>
-<li>Collector</li>
+<li>Collector  #2</li>
 </ul>
 </li>
 <li><p>栈内存管理</p>
 <ul>
 <li>malloc<ul>
-<li>&lt;128KB<br>program break</li>
-<li><blockquote>
-<p>&#x3D;128KB<br>mmap</p>
-</blockquote>
-</li>
+<li>‘&lt;128KB’<br>program break</li>
+<li>‘&gt;&#x3D;128KB’<br>mmap</li>
 </ul>
 </li>
 </ul>
@@ -3650,7 +3651,8 @@
 <li><p><strong>常规分析手段</strong> [8]<br>可以利用pprof对程序进行分析从而定位内存泄漏地址</p>
 </li>
 </ul>
-<h3><span id="堆和栈">堆和栈</span><a href="#堆和栈" class="header-anchor">#</a></h3><h1><span id="系统结构-1">系统结构 [1]</span><a href="#系统结构-1" class="header-anchor">#</a></h1><h3><span id="现代计算机的多级存储结构">现代计算机的多级存储结构</span><a href="#现代计算机的多级存储结构" class="header-anchor">#</a></h3><ul>
+<h3><span id="堆和栈">堆和栈</span><a href="#堆和栈" class="header-anchor">#</a></h3><h3><span id="垃圾回收器-9-2">垃圾回收器 [9] #2</span><a href="#垃圾回收器-9-2" class="header-anchor">#</a></h3><p> Go语言的GC使用了**标记(mark)—清除(sweep)**技术</p>
+<h1><span id="系统结构-1">系统结构 [1]</span><a href="#系统结构-1" class="header-anchor">#</a></h1><h3><span id="现代计算机的多级存储结构">现代计算机的多级存储结构</span><a href="#现代计算机的多级存储结构" class="header-anchor">#</a></h3><ul>
 <li>cacheline</li>
 </ul>
 <h3><span id="多核带来的问题">多核带来的问题</span><a href="#多核带来的问题" class="header-anchor">#</a></h3><ul>
@@ -3674,6 +3676,7 @@
 <li><a href="https://www.golangroadmap.com/class/gointerview/8-2.html#%E6%A6%82%E5%BF%B5">2.Go 内存逃逸机制？</a></li>
 <li><a href="https://cloud.tencent.com/developer/article/2134737">浅谈Golang内存泄漏</a>  code in git</li>
 <li><a href="https://cloud.tencent.com/developer/article/2279678">golang：快来抓住让我内存泄漏的“真凶”！</a>  cgo引起的内存泄漏+常规分析手段</li>
+<li><a href="https://colobu.com/2022/07/16/A-Guide-to-the-Go-Garbage-Collector/">Go 垃圾回收器指南</a> </li>
 <li><a href="/www6vHomeHexo/2014/01/03/javaMemoryModel/" title="Java内存模型">Java内存模型</a> self</li>
 </ol>
 ]]></content>
@@ -9474,15 +9477,67 @@ BGP 协议传输的消息
 <li><a href="#gc">GC</a></li>
 </ul>
 </li>
-<li><a href="#%E5%9F%BA%E7%A1%80">基础</a><br>- <a href="#new-vs-make">New vs Make</a><br>- <a href="#array%E5%92%8Cslice">array和slice</a><br>- <a href="#slice%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0">slice底层实现</a><br>- <a href="#%E5%80%BC%E4%BC%A0%E9%80%92-%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92">值传递、引用传递</a><br>- <a href="#select-vs-switch">select vs. switch</a><br>- <a href="#method-function">Method &amp;  Function</a><br>- <a href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-4">异常处理 [4]</a></li>
+<li><a href="#%E5%9F%BA%E7%A1%80">基础</a><ul>
+<li><a href="#%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0">内建函数</a><ul>
+<li><a href="#new-vs-make">New vs Make</a></li>
+</ul>
+</li>
+<li><a href="#array%E5%92%8Cslice">array和slice</a></li>
+<li><a href="#slice%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0">slice底层实现</a></li>
+<li><a href="#%E5%80%BC%E4%BC%A0%E9%80%92-%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92">值传递、引用传递</a></li>
+<li><a href="#select-vs-switch">select vs. switch</a></li>
+<li><a href="#method-function">Method &amp;  Function</a></li>
+<li><a href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-4">异常处理 [4]</a></li>
+</ul>
+<ul>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 
 </div>
 
-<h2><span id="rumtime-3">Rumtime [3]</span><a href="#rumtime-3" class="header-anchor">#</a></h2><h3><span id="scheduler">Scheduler</span><a href="#scheduler" class="header-anchor">#</a></h3><p>GMP</p>
-<h3><span id="netpoll">Netpoll</span><a href="#netpoll" class="header-anchor">#</a></h3><h3><span id="memory">Memory</span><a href="#memory" class="header-anchor">#</a></h3><h3><span id="gc">GC</span><a href="#gc" class="header-anchor">#</a></h3><h2><span id="基础">基础</span><a href="#基础" class="header-anchor">#</a></h2><h5><span id="new-vs-make">New vs Make</span><a href="#new-vs-make" class="header-anchor">#</a></h5><ul>
+<h1><span id="rumtime-3">Rumtime [3]</span><a href="#rumtime-3" class="header-anchor">#</a></h1><h3><span id="scheduler">Scheduler</span><a href="#scheduler" class="header-anchor">#</a></h3><p>GMP</p>
+<h3><span id="netpoll">Netpoll</span><a href="#netpoll" class="header-anchor">#</a></h3><h3><span id="memory">Memory</span><a href="#memory" class="header-anchor">#</a></h3><h3><span id="gc">GC</span><a href="#gc" class="header-anchor">#</a></h3><h1><span id="基础">基础</span><a href="#基础" class="header-anchor">#</a></h1><h3><span id="内建函数">内建函数</span><a href="#内建函数" class="header-anchor">#</a></h3><ul>
+<li>init<ul>
+<li>make()</li>
+<li>new()</li>
+</ul>
+</li>
+<li>slice  <ul>
+<li>append()<br>用于切片(slice) 追加元素</li>
+<li>copy()<br>只能用于数组切片内容赋值</li>
+</ul>
+</li>
+<li>size <ul>
+<li>len()<br> 计算数组(包括数组指针)、切片(slice)、map、channel、字符串等数据类型的长度</li>
+<li>cap()<br> 返回指定类型的容量</li>
+</ul>
+</li>
+<li>print() &amp; println()</li>
+<li>resource reclaim<ul>
+<li>close()</li>
+<li>delete()</li>
+</ul>
+</li>
+<li>num<ul>
+<li>complex()</li>
+<li>real() &amp; imag()</li>
+</ul>
+</li>
+<li>error handle<ul>
+<li>panic()</li>
+<li>recover()</li>
+</ul>
+</li>
+<li>others [6]<ul>
+<li>clear()<br> 对于map对象: clear函数清空map对象的所有的元素<br> 对于slice对象： clear函数将所有的元素设置为元素类型的零值，长度不变，容量不变</li>
+<li>min()  &amp;&amp;  max()</li>
+</ul>
+</li>
+</ul>
+<h5><span id="new-vs-make">New vs Make</span><a href="#new-vs-make" class="header-anchor">#</a></h5><ul>
 <li>new和make是内置函数,主要用来分配内存空间</li>
 <li>make<br>make 仅用于 slice、map和 channel 的初始化，返回值为类型本身，而不是指针</li>
 <li>new<br>  只用于内存分配，且把内存清零<br>  返回一个指向对应类型零值的指针<br>  new() 一般 显示返回指针</li>
@@ -9490,13 +9545,13 @@ BGP 协议传输的消息
 <figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">make</span><span class="params">(t Type, size ...IntegerType)</span></span> Type </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">new</span><span class="params">(Type)</span></span> *Type </span><br></pre></td></tr></table></figure>
 
 <p><a href="https://www.golangroadmap.com/class/gointerview/1-9.html">9.Go 内置函数make和new的区别？</a></p>
-<h5><span id="array和slice">array和slice</span><a href="#array和slice" class="header-anchor">#</a></h5><ul>
+<h3><span id="array和slice">array和slice</span><a href="#array和slice" class="header-anchor">#</a></h3><ul>
 <li>数组长度是固定的， slice长度是可变的</li>
 </ul>
-<h5><span id="slice底层实现">slice底层实现</span><a href="#slice底层实现" class="header-anchor">#</a></h5><figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> slice <span class="keyword">struct</span> &#123;</span><br><span class="line">    array unsafe.Pointer</span><br><span class="line">    <span class="built_in">len</span>   <span class="type">int</span></span><br><span class="line">    <span class="built_in">cap</span>   <span class="type">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="slice底层实现">slice底层实现</span><a href="#slice底层实现" class="header-anchor">#</a></h3><figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> slice <span class="keyword">struct</span> &#123;</span><br><span class="line">    array unsafe.Pointer</span><br><span class="line">    <span class="built_in">len</span>   <span class="type">int</span></span><br><span class="line">    <span class="built_in">cap</span>   <span class="type">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><a href="https://www.golangroadmap.com/class/gointerview/2-1.html">1.Go slice的底层实现原理?</a></p>
-<h5><span id="值传递-引用传递">值传递、引用传递</span><a href="#值传递-引用传递" class="header-anchor">#</a></h5><ul>
+<h3><span id="值传递-引用传递">值传递、引用传递</span><a href="#值传递-引用传递" class="header-anchor">#</a></h3><ul>
 <li><p>Go语言中所有的传参都是<strong>值传递（传值），都是一个副本，一个拷贝</strong>。</p>
 </li>
 <li><p>是否可以修改原内容数据，和传值、传引用没有必然的关系。在C++中，传引用肯定是可以修改原内容数据的，在Go语言里，虽然只有传值，但是我们也可以修改原内容数据，因为参数是引用类型</p>
@@ -9519,20 +9574,21 @@ BGP 协议传输的消息
 </li>
 </ul>
 <p><a href="https://www.golangroadmap.com/class/gointerview/1-7.html">Go 函数参数传递到底是值传递还是引用传递？</a>  </p>
-<h5><span id="select-vs-switch">select vs. switch</span><a href="#select-vs-switch" class="header-anchor">#</a></h5><ul>
+<h3><span id="select-vs-switch">select vs. switch</span><a href="#select-vs-switch" class="header-anchor">#</a></h3><ul>
 <li>select只能应用于channel的操作<br>则会随机选取其中一个满足条件的分支</li>
 <li>switch 分支是顺序执行的</li>
 </ul>
-<h5><span id="method-amp-function">Method &amp;  Function</span><a href="#method-amp-function" class="header-anchor">#</a></h5><ul>
+<h3><span id="method-amp-function">Method &amp;  Function</span><a href="#method-amp-function" class="header-anchor">#</a></h3><ul>
 <li>Method<br>方法(Method)是一个带有receiver的函数Function</li>
 <li>Receiver[5]</li>
 </ul>
-<h5><span id="异常处理-4">异常处理 [4]</span><a href="#异常处理-4" class="header-anchor">#</a></h5><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h3><span id="异常处理-4">异常处理 [4]</span><a href="#异常处理-4" class="header-anchor">#</a></h3><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><a href="https://www.golangroadmap.com/class/gointerview/">GOLANG ROADMAP</a><br> <a href="https://www.golangroadmap.com/">GOLANG ROADMAP</a><br> 邀请码：caspar<br> 邀请码：Gopher-10645-1382</li>
 <li>极客时间 《Go 并发编程实战课》  鸟窝</li>
 <li>《04 Go 程序是怎么跑起来的》</li>
 <li><a href="https://blog.csdn.net/wanglei19891210/article/details/128092331">【go实战系列五】 go1.19.2与pkg中error如何wrap与unwrap Errors | 将error进行wrap向上处理思想 | pkg&#x2F;errors</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/522568859">golang 方法接收者</a>  mycode-go</li>
+<li><a href="https://colobu.com/2023/05/28/go1-21-whats-new-builtin/">你知道吗？Go新增加了三个内建函数 </a></li>
 </ol>
 ]]></content>
       <categories>
