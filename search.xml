@@ -2762,9 +2762,15 @@
 <li><a href="#%E4%BE%9B%E5%BA%94%E9%93%BE">供应链</a></li>
 </ul>
 <ul>
-<li><a href="#%E4%BE%9B%E5%BA%94%E9%93%BEoms-1">供应链OMS [1]</a><ul>
-<li><a href="#%E5%AE%9A%E4%B9%89">定义</a></li>
+<li><a href="#%E4%BE%9B%E5%BA%94%E9%93%BEoms">供应链OMS</a><ul>
+<li><a href="#%E5%AE%9A%E4%B9%891">定义[1]</a></li>
+<li><a href="#%E5%8A%9F%E8%83%BD1">功能[1]</a></li>
+</ul>
+</li>
+<li><a href="#baisheng-%E4%BE%9B%E5%BA%94%E9%93%BEoms">baisheng-供应链OMS</a><ul>
+<li><a href="#%E6%9E%B6%E6%9E%84">架构</a></li>
 <li><a href="#%E5%8A%9F%E8%83%BD">功能</a></li>
+<li><a href="#%E9%9B%86%E6%88%90">集成</a></li>
 </ul>
 </li>
 <li><a href="#%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F">电商系统</a></li>
@@ -2787,14 +2793,58 @@
 <li>tms</li>
 <li>bms</li>
 </ul>
-<h1><span id="供应链oms-1">供应链OMS [1]</span><a href="#供应链oms-1" class="header-anchor">#</a></h1><h3><span id="定义">定义</span><a href="#定义" class="header-anchor">#</a></h3><p>供应链OMS（Order Management System）是一种用于管理订单处理、库存管理、物流配送等业务流程的信息系统。它可以帮助企业完整地管理订单处理流程，从订单接收到交货的整个过程中提高效率、降低成本、增强客户服务体验。</p>
-<h3><span id="功能">功能</span><a href="#功能" class="header-anchor">#</a></h3><p>供应链OMS的功能包括订单管理、库存管理、物流配送、客户服务等。具体来说，它可以实现以下功能：</p>
+<h1><span id="供应链oms">供应链OMS</span><a href="#供应链oms" class="header-anchor">#</a></h1><h3><span id="定义1">定义[1]</span><a href="#定义1" class="header-anchor">#</a></h3><p>供应链OMS（Order Management System）是一种用于管理订单处理、库存管理、物流配送等业务流程的信息系统。它可以帮助企业完整地管理订单处理流程，从订单接收到交货的整个过程中提高效率、降低成本、增强客户服务体验。</p>
+<h3><span id="功能1">功能[1]</span><a href="#功能1" class="header-anchor">#</a></h3><p>供应链OMS的功能包括订单管理、库存管理、物流配送、客户服务等。具体来说，它可以实现以下功能：</p>
 <ul>
 <li><strong>订单管理</strong>：包括订单接收、订单处理、订单跟踪等。</li>
 <li><strong>库存管理</strong>：包括库存监控、库存调配、库存预警等。</li>
 <li><strong>物流配送</strong>：包括物流规划、运输管理、配送调度等。</li>
 <li><strong>客户服务</strong>：包括客户查询、客户反馈、客户投诉等。</li>
 </ul>
+<h1><span id="baisheng-供应链oms">baisheng-供应链OMS</span><a href="#baisheng-供应链oms" class="header-anchor">#</a></h1><ul>
+<li><p>入库流程</p>
+</li>
+<li><p>出库流程</p>
+</li>
+<li><p>调拨流程</p>
+</li>
+<li><p>库存调整管理</p>
+</li>
+<li><p>主数据管理</p>
+</li>
+<li><p>空白订单管理</p>
+</li>
+<li><p>订单解析管理</p>
+</li>
+<li><p>分配订单管理</p>
+</li>
+<li><p>控制量管理</p>
+</li>
+<li><p>库比管理</p>
+</li>
+<li><p>销售订单管理</p>
+</li>
+<li><p>调拨订单管理</p>
+</li>
+<li><p>入库订单管理</p>
+</li>
+<li><p>物流单管理</p>
+</li>
+<li><p>物流指令管理</p>
+</li>
+<li><p>发货班表管理</p>
+</li>
+<li><p>订单差异处理管理</p>
+</li>
+<li><p>规则管理</p>
+</li>
+</ul>
+<h3><span id="架构">架构</span><a href="#架构" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/07/03/supplyChain/supplyChain-bs-2.png" class>
+
+<h3><span id="功能">功能</span><a href="#功能" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/07/03/supplyChain/supplyChain-bs-1.png" class>
+
+<h3><span id="集成">集成</span><a href="#集成" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/07/03/supplyChain/supplyChain-bs.jpg" class>
+
 <h1><span id="电商系统">电商系统</span><a href="#电商系统" class="header-anchor">#</a></h1><p><a href="https://github.com/macrozheng/mall">mall</a> git<br><a href="https://www.macrozheng.com/admin/index.html">mall</a> admin&#x2F;macro123</p>
 <h1><span id="订单系统">订单系统</span><a href="#订单系统" class="header-anchor">#</a></h1><h3><span id="上下游-3">上下游 [3]</span><a href="#上下游-3" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/07/03/supplyChain/supplyChain.png" class>
 
