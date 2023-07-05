@@ -6615,7 +6615,8 @@ MySQL MVCC 快照读 vs 当前读 </li>
 </ul>
 <h2><span id="tools-amp-mix">Tools &amp; Mix</span><a href="#tools-amp-mix" class="header-anchor">#</a></h2><ul>
 <li>GPT学习宝典<br><a href="https://gpt.candobear.com/toolbox">GPT  工具箱</a><br><a href="https://gpt.candobear.com/prompt">Prompt 大全</a><br><a href="https://gpt.candobear.com/courses">学习资料</a></li>
-<li><a href="https://www.ailookme.com/">AI 工具箱</a>  ***</li>
+<li><a href="https://www.ailookme.com/">AI 工具箱</a>  *** </li>
+<li><a href="https://gp477l8icq.feishu.cn/wiki/JUXnwzSuviL5E9kh6jUc8FRinHe">极客时间 AIGC 知识库</a> ***</li>
 </ul>
 <h2><span id="思维导图">思维导图</span><a href="#思维导图" class="header-anchor">#</a></h2><p><a href="https://albus.org/">albus</a></p>
 <h2><span id="文档分析amp科研">文档分析&amp;科研</span><a href="#文档分析amp科研" class="header-anchor">#</a></h2><ul>
@@ -9610,12 +9611,14 @@ BGP 协议传输的消息
 <li><a href="#%E5%80%BC%E4%BC%A0%E9%80%92-%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92">值传递、引用传递</a></li>
 <li><a href="#select-vs-switch">select vs. switch</a></li>
 <li><a href="#method-function">Method &amp;  Function</a></li>
-<li><a href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-4">异常处理 [4]</a></li>
-</ul>
-<ul>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 </li>
+<li><a href="#%E5%BC%82%E5%B8%B8bugs">异常&amp;Bugs</a><ul>
+<li><a href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-4">异常处理 [4]</a></li>
+<li><a href="#bugs">Bugs</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
 
@@ -9655,7 +9658,7 @@ BGP 协议传输的消息
 </ul>
 </li>
 <li>others [6]<ul>
-<li>clear()<br> 对于map对象: clear函数清空map对象的所有的元素<br> 对于slice对象： clear函数将所有的元素设置为元素类型的零值，长度不变，容量不变</li>
+<li>clear()<br> 对于map对象: clear函数清空map对象的所有的元素<br>对于slice对象： clear函数将所有的元素设置为元素类型的零值，长度不变，容量不变</li>
 <li>min()  &amp;&amp;  max()</li>
 </ul>
 </li>
@@ -9665,7 +9668,7 @@ BGP 协议传输的消息
 <li>make<br>make 仅用于 slice、map和 channel 的初始化，返回值为类型本身，而不是指针</li>
 <li>new<br>  只用于内存分配，且把内存清零<br>  返回一个指向对应类型零值的指针<br>  new() 一般 显示返回指针</li>
 </ul>
-<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">make</span><span class="params">(t Type, size ...IntegerType)</span></span> Type </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">new</span><span class="params">(Type)</span></span> *Type </span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">make</span><span class="params">(t Type, size ...IntegerType)</span></span> Type </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">new</span><span class="params">(Type)</span></span> *Type </span><br></pre></td></tr></table></figure>
 
 <p><a href="https://www.golangroadmap.com/class/gointerview/1-9.html">9.Go 内置函数make和new的区别？</a></p>
 <h3><span id="array和slice">array和slice</span><a href="#array和slice" class="header-anchor">#</a></h3><ul>
@@ -9705,13 +9708,17 @@ BGP 协议传输的消息
 <li>Method<br>方法(Method)是一个带有receiver的函数Function</li>
 <li>Receiver[5]</li>
 </ul>
-<h3><span id="异常处理-4">异常处理 [4]</span><a href="#异常处理-4" class="header-anchor">#</a></h3><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h1><span id="异常ampbugs">异常&amp;Bugs</span><a href="#异常ampbugs" class="header-anchor">#</a></h1><h3><span id="异常处理-4">异常处理 [4]</span><a href="#异常处理-4" class="header-anchor">#</a></h3><h3><span id="bugs">Bugs</span><a href="#bugs" class="header-anchor">#</a></h3><ul>
+<li>Golang 循环变量引用问题[7]</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://www.golangroadmap.com/class/gointerview/">GOLANG ROADMAP</a><br> <a href="https://www.golangroadmap.com/">GOLANG ROADMAP</a><br> 邀请码：caspar<br> 邀请码：Gopher-10645-1382</li>
 <li>极客时间 《Go 并发编程实战课》  鸟窝</li>
 <li>《04 Go 程序是怎么跑起来的》</li>
 <li><a href="https://blog.csdn.net/wanglei19891210/article/details/128092331">【go实战系列五】 go1.19.2与pkg中error如何wrap与unwrap Errors | 将error进行wrap向上处理思想 | pkg&#x2F;errors</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/522568859">golang 方法接收者</a>  mycode-go</li>
 <li><a href="https://colobu.com/2023/05/28/go1-21-whats-new-builtin/">你知道吗？Go新增加了三个内建函数 </a></li>
+<li><a href="https://cloud.tencent.com/developer/article/2240620">随笔：Golang 循环变量引用问题以及官方语义修复</a></li>
 </ol>
 ]]></content>
       <categories>
