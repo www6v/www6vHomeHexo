@@ -21369,10 +21369,9 @@ nq： 不排队调度
       </tags>
   </entry>
   <entry>
-    <title>HTTPS总结</title>
+    <title>HTTP和HTTPS总结</title>
     <url>/www6vHomeHexo/2019/08/14/https/</url>
-    <content><![CDATA[<p hidden>https</p>
-
+    <content><![CDATA[<p></p>
 <span id="more"></span>
 
 <div style="width: 70%; height: 70%">
@@ -21383,15 +21382,17 @@ nq： 不排队调度
 
 <h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li>&lt;&lt;趣谈网络协议 - 第15讲 HTTPS协议：点外卖的过程原来这么复杂&gt;&gt; 刘超</li>
+<li><a href="https://github.com/bagder/http2-explained/">http2</a>  未</li>
+<li><a href="https://github.com/bagder/http3-explained/">http3</a> 未</li>
 </ol>
 ]]></content>
       <categories>
         <category>分布式</category>
         <category>基础</category>
-        <category>https</category>
+        <category>http</category>
       </categories>
       <tags>
-        <tag>https</tag>
+        <tag>http</tag>
       </tags>
   </entry>
   <entry>
@@ -23922,21 +23923,38 @@ nq： 不排队调度
 <h5><span id="tomcat线程池">Tomcat线程池</span><a href="#tomcat线程池" class="header-anchor">#</a></h5><p>Tomcat 使用的线程池就不是 JDK 原生的线程池，而是做了一些改造，<strong>当线程数超过 coreThreadCount 之后会优先创建线程，直到线程数到达maxThreadCount</strong>，这样就比较适合于 Web 系统<strong>大量 IO 操作的场景</strong>了。</p>
 <h5><span id="最佳实践">最佳实践</span><a href="#最佳实践" class="header-anchor">#</a></h5><p>大量的任务堆积会占用大量的内存空间，一旦内存空间被占满就会<strong>频繁地触发 Full GC</strong>，造成服务不可用，我之前排查过的一次 GC 引起的宕机，起因就是系统中的一个<strong>线程池使用了无界队列</strong>.</p>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a href="http://dwz.cn/4SrP4L">高性能高并发系统的稳定性保障</a> 京东</li>
-<li><a href="https://time.geekbang.org/column/intro/140">Linux性能优化实战</a>  极客时间</li>
-<li><a href="https://coolshell.cn/articles/17381.html">性能测试应该怎么做？</a> </li>
-<li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>  self</li>
-<li><a href="http://blog.jobbole.com/88958/">关于容量预估&#x2F;性能压测的思考</a></li>
-<li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>   self  重复的</li>
-<li>&lt;&lt;性能之巅：洞悉系统、企业与云计算  Brendan Gregg&gt;&gt;</li>
-<li><a href="https://coolshell.cn/articles/7490.html/comment-page-1">性能调优攻略</a>  *** </li>
-<li><a href="/www6vHomeHexo/2014/07/02/threadNum/" title="线程池最佳线程数">线程池最佳线程数</a>  self</li>
-<li><a href="http://www.codeceo.com/article/algorithm-complexity-table.html">每个程序员都应该收藏的算法复杂度速查表</a></li>
-<li>《编程珠玑 第2版》 Jon Bentley</li>
-<li><a href="https://yq.aliyun.com/articles/25487">wordcount设计与优化</a>  竞赛题</li>
-<li><a href="/www6vHomeHexo/2019/09/10/mysqlIndex/" title="MySQL的索引和优化">MySQL的索引和优化</a>    索引优化 self 未</li>
-<li><a href="/www6vHomeHexo/2020/03/26/nginxOptimize/" title="Nginx优化">Nginx优化</a>   self 未</li>
-<li>《高并发系统设计40问 - 07 | 池化技术：如何减少频繁创建数据库连接的性能损耗？》 唐扬</li>
+<li><p><a href="http://dwz.cn/4SrP4L">高性能高并发系统的稳定性保障</a> 京东</p>
+</li>
+<li><p><a href="https://time.geekbang.org/column/intro/140">Linux性能优化实战</a>  极客时间</p>
+</li>
+<li><p><a href="https://coolshell.cn/articles/17381.html">性能测试应该怎么做？</a> </p>
+</li>
+<li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>  self
+</li>
+<li><p><a href="http://blog.jobbole.com/88958/">关于容量预估&#x2F;性能压测的思考</a></p>
+</li>
+<li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>   self  重复的
+</li>
+<li><p>《性能之巅：洞悉系统、企业与云计算》 Brendan Gregg</p>
+</li>
+<li><p><a href="https://coolshell.cn/articles/7490.html/comment-page-1">性能调优攻略</a>  *** </p>
+</li>
+<li><a href="/www6vHomeHexo/2014/07/02/threadNum/" title="线程池最佳线程数">线程池最佳线程数</a>  self
+</li>
+<li><p><a href="http://www.codeceo.com/article/algorithm-complexity-table.html">每个程序员都应该收藏的算法复杂度速查表</a></p>
+</li>
+<li><p>《编程珠玑 第2版》 Jon Bentley</p>
+</li>
+<li><p><a href="https://yq.aliyun.com/articles/25487">wordcount设计与优化</a>  竞赛题</p>
+</li>
+<li><a href="/www6vHomeHexo/2019/09/10/mysqlIndex/" title="MySQL的索引和优化">MySQL的索引和优化</a>    索引优化 self 未
+</li>
+<li><a href="/www6vHomeHexo/2020/03/26/nginxOptimize/" title="Nginx优化">Nginx优化</a>   self 未
+</li>
+<li><p>《高并发系统设计40问 - 07 | 池化技术：如何减少频繁创建数据库连接的性能损耗？》 唐扬</p>
+</li>
+<li><p><a href="https://colin-scott.github.io/personal_website/research/interactive_latency.html">latency</a>  未</p>
+</li>
 </ol>
 ]]></content>
       <categories>
