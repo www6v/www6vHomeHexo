@@ -17780,7 +17780,8 @@ BGP 协议传输的消息
 <li><p>聚合根<br> 外部访问的唯一入口</p>
 </li>
 </ul>
-<h1><span id="架构">架构</span><a href="#架构" class="header-anchor">#</a></h1><h3><span id="六边形架构">六边形架构</span><a href="#六边形架构" class="header-anchor">#</a></h3><h1><span id="整洁架构-clean-architecture">整洁架构 Clean Architecture</span><a href="#整洁架构-clean-architecture" class="header-anchor">#</a></h1><ul>
+<h1><span id="架构">架构</span><a href="#架构" class="header-anchor">#</a></h1><h3><span id="六边形架构">六边形架构</span><a href="#六边形架构" class="header-anchor">#</a></h3><p>又被称之为<strong>Ports and Adapters（端口和适配器架构）</strong></p>
+<h1><span id="整洁架构-clean-architecture">整洁架构 Clean Architecture</span><a href="#整洁架构-clean-architecture" class="header-anchor">#</a></h1><ul>
 <li><p>核心观点 [7][8]</p>
 <ul>
 <li>不与框架绑定<br>java-spring, Quarkus</li>
