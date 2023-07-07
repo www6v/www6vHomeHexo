@@ -2898,6 +2898,59 @@
       </tags>
   </entry>
   <entry>
+    <title>Golang 基础-Errors&amp;Bugs</title>
+    <url>/www6vHomeHexo/2022/07/07/golangBugs/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#errors">Errors</a><ul>
+<li><a href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-4">异常处理 [4]</a></li>
+</ul>
+</li>
+<li><a href="#bugs">Bugs</a></li>
+<li><a href="#%E6%95%85%E9%9A%9C-20">故障 [20]</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+
+<h1><span id="errors">Errors</span><a href="#errors" class="header-anchor">#</a></h1><h3><span id="异常处理-4">异常处理 [4]</span><a href="#异常处理-4" class="header-anchor">#</a></h3><h1><span id="bugs">Bugs</span><a href="#bugs" class="header-anchor">#</a></h1><ul>
+<li>Golang 循环变量引用问题[7]</li>
+</ul>
+<h1><span id="故障-20">故障 [20]</span><a href="#故障-20" class="header-anchor">#</a></h1><p>CPU 用爆了？ 90%？<br>内存用爆了？OOM？<br>Goroutine 用爆了？ 80w？<br>线程数爆了？<br>延迟太高？</p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ul>
+<li><ol start="4">
+<li><a href="https://blog.csdn.net/wanglei19891210/article/details/128092331">【go实战系列五】 go1.19.2与pkg中error如何wrap与unwrap Errors | 将error进行wrap向上处理思想 | pkg&#x2F;errors</a></li>
+</ol>
+</li>
+<li><ol start="7">
+<li><a href="https://cloud.tencent.com/developer/article/2240620">随笔：Golang 循环变量引用问题以及官方语义修复</a></li>
+</ol>
+</li>
+<li><ol start="20">
+<li>《28 直播：服务上线后 - 成为 Go 语言性能调优专家》</li>
+</ol>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Golang</category>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>供应链</title>
     <url>/www6vHomeHexo/2022/07/03/supplyChain/</url>
     <content><![CDATA[<p></p>
@@ -9762,11 +9815,6 @@ BGP 协议传输的消息
 <li><a href="#method-function">Method &amp;  Function</a></li>
 </ul>
 </li>
-<li><a href="#%E5%BC%82%E5%B8%B8bugs">异常&amp;Bugs</a><ul>
-<li><a href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-4">异常处理 [4]</a></li>
-<li><a href="#bugs">Bugs</a></li>
-</ul>
-</li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
@@ -9857,17 +9905,13 @@ BGP 协议传输的消息
 <li>Method<br>方法(Method)是一个带有receiver的函数Function</li>
 <li>Receiver[5]</li>
 </ul>
-<h1><span id="异常ampbugs">异常&amp;Bugs</span><a href="#异常ampbugs" class="header-anchor">#</a></h1><h3><span id="异常处理-4">异常处理 [4]</span><a href="#异常处理-4" class="header-anchor">#</a></h3><h3><span id="bugs">Bugs</span><a href="#bugs" class="header-anchor">#</a></h3><ul>
-<li>Golang 循环变量引用问题[7]</li>
-</ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://www.golangroadmap.com/class/gointerview/">GOLANG ROADMAP</a><br> <a href="https://www.golangroadmap.com/">GOLANG ROADMAP</a><br> 邀请码：caspar<br> 邀请码：Gopher-10645-1382</li>
 <li>极客时间 《Go 并发编程实战课》  鸟窝</li>
 <li>《04 Go 程序是怎么跑起来的》</li>
-<li><a href="https://blog.csdn.net/wanglei19891210/article/details/128092331">【go实战系列五】 go1.19.2与pkg中error如何wrap与unwrap Errors | 将error进行wrap向上处理思想 | pkg&#x2F;errors</a></li>
+<li>xxx</li>
 <li><a href="https://zhuanlan.zhihu.com/p/522568859">golang 方法接收者</a>  mycode-go</li>
 <li><a href="https://colobu.com/2023/05/28/go1-21-whats-new-builtin/">你知道吗？Go新增加了三个内建函数 </a></li>
-<li><a href="https://cloud.tencent.com/developer/article/2240620">随笔：Golang 循环变量引用问题以及官方语义修复</a></li>
 </ol>
 ]]></content>
       <categories>
