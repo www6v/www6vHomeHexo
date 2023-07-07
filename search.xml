@@ -462,7 +462,7 @@
 <h2><span id="应用架构">应用架构</span><a href="#应用架构" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2019/11/01/apiDesign/" title="OpenAPI 设计">OpenAPI 设计</a></li>
 <li><a href="/www6vHomeHexo/2018/02/25/cqrs/" title="CQRS 简介和案例分析">CQRS 简介和案例分析</a></li>
-<li><a href="/www6vHomeHexo/2020/05/22/DDD/" title="DDD  领域驱动设计">DDD  领域驱动设计</a></li>
+<li><a href="/www6vHomeHexo/2020/05/22/ddd/" title="DDD  领域驱动设计">DDD  领域驱动设计</a></li>
 <li><a href="/www6vHomeHexo/2018/04/07/EAI/" title="应用集成方式">应用集成方式</a></li>
 <li><a href="/www6vHomeHexo/2018/03/17/DomainLogicAndSQL/" title="领域逻辑和SQL">领域逻辑和SQL</a></li>
 </ul>
@@ -1119,6 +1119,20 @@
 <ul>
 <li>实现<br><strong>业务逻辑放到Service中</strong></li>
 <li>缺点 [7]<br><strong>业务逻辑被埋没在存储业务中</strong></li>
+<li>贫血模型的<strong>缺陷</strong>  [21]<ul>
+<li>无法保护模型对象的完整性和一致性</li>
+<li>对象操作的可发现性极差</li>
+<li>代码逻辑重复</li>
+<li>代码的健壮性差</li>
+<li>强依赖底层实现</li>
+</ul>
+</li>
+<li><strong>99%的代码都是基于贫血模型</strong>  [21]<ul>
+<li>数据库思维</li>
+<li>贫血模型“简单”</li>
+<li>脚本思维</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p><strong>充血模型</strong></p>
@@ -1173,9 +1187,9 @@
 <li><strong>工厂模式（Factory）</strong></li>
 </ul>
 </li>
-<li>event （<strong>事件实体</strong>以及<strong>与事件活动相关的业务逻辑代码</strong>）</li>
-<li>repository（所在聚合的查询或持久化领域对象的代码，通常包括仓储接口和仓储实现方法）</li>
-<li>service（领域服务是多个实体组合出来的一段业务逻辑）</li>
+<li>event<br><strong>事件实体</strong>以及<strong>与事件活动相关的业务逻辑代码</strong></li>
+<li>repository<br>所在聚合的查询或持久化领域对象的代码，通常包括仓储接口和仓储实现方法<br><strong>Data Model只存在于数据层，而Domain Model在领域层，而链接了这两层的关键对象，就是Repository</strong> [7]</li>
+<li>service<br>领域服务是多个实体组合出来的一段业务逻辑</li>
 </ul>
 </li>
 </ul>
@@ -1205,6 +1219,10 @@
 </li>
 <li><ol start="20">
 <li><a href="https://zhuanlan.zhihu.com/p/343388831">阿里技术专家详解DDD系列 第二讲 - 应用架构</a><br><a href="https://github.com/www6v/jExamples/tree/master/src/main/java/ddd/transactionScript">refactor 之前的Transaction Script</a> git<br><a href="https://github.com/www6v/jExamples/tree/master/src/main/java/ddd/refactor">refactor 之后的DDD</a></li>
+</ol>
+</li>
+<li><ol start="21">
+<li><a href="https://zhuanlan.zhihu.com/p/348706530">阿里技术专家详解DDD系列 第三讲 - Repository模式</a></li>
 </ol>
 </li>
 </ul>
