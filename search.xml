@@ -2898,6 +2898,32 @@
       </tags>
   </entry>
   <entry>
+    <title>Golang基础-Slice</title>
+    <url>/www6vHomeHexo/2022/07/09/golangSlice/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h3><span id="array和slice">array和slice</span><a href="#array和slice" class="header-anchor">#</a></h3><ul>
+<li>数组长度是固定的， slice长度是可变的</li>
+</ul>
+<h3><span id="slice底层实现-2">slice底层实现 [2]</span><a href="#slice底层实现-2" class="header-anchor">#</a></h3><figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> slice <span class="keyword">struct</span> &#123;</span><br><span class="line">    array unsafe.Pointer</span><br><span class="line">    <span class="built_in">len</span>   <span class="type">int</span></span><br><span class="line">    <span class="built_in">cap</span>   <span class="type">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3><span id="slice-初始化-1">slice 初始化 [1]</span><a href="#slice-初始化-1" class="header-anchor">#</a></h3><p>对于 make 来说，它可以初始化 slice 的 length 和 capacity，<strong>如果我们能确定 slice 里面会存放多少元素，从性能的角度考虑最好使用 make 初始化好</strong>，因为对于一个空的 slice append 元素进去每次达到阈值都需要进行<strong>扩容</strong></p>
+<h3><span id="code-example-1">Code Example [1]</span><a href="#code-example-1" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://www.luozhiyun.com/archives/797">[长文]从《100 Go Mistakes》我总结了什么？</a><br>gExamples slice_test.go</li>
+<li><a href="https://www.golangroadmap.com/class/gointerview/2-1.html">1.Go slice的底层实现原理?</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Golang</category>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Golang 基础-Errors&amp;Bugs</title>
     <url>/www6vHomeHexo/2022/07/07/golangBugs/</url>
     <content><![CDATA[<p></p>
@@ -9923,8 +9949,6 @@ BGP 协议传输的消息
 <li><a href="#new-vs-make">New vs Make</a></li>
 </ul>
 </li>
-<li><a href="#array%E5%92%8Cslice">array和slice</a></li>
-<li><a href="#slice%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0">slice底层实现</a></li>
 <li><a href="#%E5%80%BC%E4%BC%A0%E9%80%92-%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92">值传递、引用传递</a></li>
 <li><a href="#select-vs-switch">select vs. switch</a></li>
 <li><a href="#method-function">Method &amp;  Function</a></li>
@@ -9983,12 +10007,6 @@ BGP 协议传输的消息
 <figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">make</span><span class="params">(t Type, size ...IntegerType)</span></span> Type </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">new</span><span class="params">(Type)</span></span> *Type </span><br></pre></td></tr></table></figure>
 
 <p><a href="https://www.golangroadmap.com/class/gointerview/1-9.html">9.Go 内置函数make和new的区别？</a></p>
-<h3><span id="array和slice">array和slice</span><a href="#array和slice" class="header-anchor">#</a></h3><ul>
-<li>数组长度是固定的， slice长度是可变的</li>
-</ul>
-<h3><span id="slice底层实现">slice底层实现</span><a href="#slice底层实现" class="header-anchor">#</a></h3><figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> slice <span class="keyword">struct</span> &#123;</span><br><span class="line">    array unsafe.Pointer</span><br><span class="line">    <span class="built_in">len</span>   <span class="type">int</span></span><br><span class="line">    <span class="built_in">cap</span>   <span class="type">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://www.golangroadmap.com/class/gointerview/2-1.html">1.Go slice的底层实现原理?</a></p>
 <h3><span id="值传递-引用传递">值传递、引用传递</span><a href="#值传递-引用传递" class="header-anchor">#</a></h3><ul>
 <li><p>Go语言中所有的传参都是<strong>值传递（传值），都是一个副本，一个拷贝</strong>。</p>
 </li>
