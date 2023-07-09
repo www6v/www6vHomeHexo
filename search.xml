@@ -3017,7 +3017,7 @@
 <li>goroutine栈占用过多内存<ul>
 <li>减少goroutine数量<ul>
 <li>如每个连接一读一写  -&gt; 合并为一个连接一个goroutine</li>
-<li>goroutine pool 限制最大 goroutine数量</li>
+<li>goroutine pool 限制最大 goroutine数量[21]</li>
 <li>使用裸 epoll库(evio, gev等) 修改网络编程方式(只适用于对延迟不敏感的业务)</li>
 </ul>
 </li>
@@ -3049,6 +3049,10 @@
 </li>
 <li><ol start="20">
 <li>《28 直播：服务上线后 - 成为 Go 语言性能调优专家》</li>
+</ol>
+</li>
+<li><ol start="21">
+<li><a href="/www6vHomeHexo/2022/06/19/golangConcurrency/" title="Golang Concurrency">Golang Concurrency</a> self</li>
 </ol>
 </li>
 </ul>
