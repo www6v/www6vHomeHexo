@@ -17947,6 +17947,8 @@ BGP 协议传输的消息
 <li>DSL - Domain Specific Language</li>
 </ul>
 <h3><span id="领域划分">领域划分</span><a href="#领域划分" class="header-anchor">#</a></h3><ul>
+<li>领域</li>
+<li>子域</li>
 <li>边界上下文（Bounded Context）</li>
 <li>上下文映射（Context Mapping)<br>共享内核（Shared Kernel）<br>防腐层（Anti-Corruption）： 类似adaptor、facade， 对内部领域模型的隔离和屏蔽。</li>
 </ul>
@@ -20629,7 +20631,7 @@ nq： 不排队调度
 </ul>
 </li>
 <li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">微服务设计模式</a><ul>
-<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-1">微服务设计模式</a></li>
+<li><a href="#overview">Overview</a></li>
 <li><a href="#sidecar-11">Sidecar [11]</a></li>
 </ul>
 </li>
@@ -20706,11 +20708,8 @@ nq： 不排队调度
 </code></pre>
 <h5><span id="下层-基础服务核心领域服务-公共服务">下层: 基础服务（核心领域服务， 公共服务）</span><a href="#下层-基础服务核心领域服务-公共服务" class="header-anchor">#</a></h5><pre><code>比如：电商的商品服务， 目录服务， 订单服务
 </code></pre>
-<h1><span id="微服务设计模式">微服务设计模式</span><a href="#微服务设计模式" class="header-anchor">#</a></h1><h3><span id="微服务设计模式">微服务设计模式</span><a href="#微服务设计模式" class="header-anchor">#</a></h3><div style="text-align: center;">
+<h1><span id="微服务设计模式">微服务设计模式</span><a href="#微服务设计模式" class="header-anchor">#</a></h1><h3><span id="overview">Overview</span><a href="#overview" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2019/09/09/microservice/MicroservicePatternLanguage.jpg" class>
 
-<p><img src="https://user-images.githubusercontent.com/5608425/66229516-8ea43880-e714-11e9-8f56-0a70cc695882.jpg" alt="PatternsRelatedToMicroservices"><br>微服务设计模式    </p>
-</div>    
-    
 <h3><span id="sidecar-11">Sidecar [11]</span><a href="#sidecar-11" class="header-anchor">#</a></h3><p>分离业务逻辑与路由，流控，熔断，幂等，服务发现，鉴权等控制组件。</p>
 <p>适用场景：<br>老系统改造扩展，Sidebar 进程与服务进程部署在同一个节点；<br>多语言混合分布式系统扩展；</p>
 <p>Eg. k8s pod中日志采集sidecar</p>
