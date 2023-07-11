@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Redis Cluster Spec">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/07/11/redisClusterSpec/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-11T05:15:05.000Z">
+<meta property="article:modified_time" content="2023-07-11T05:36:05.018Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="KV">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/07/11/redisClusterSpec/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Redis Cluster Spec | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2022/07/11/redisClusterSpec/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redis Cluster Spec
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-07-11 13:15:05" itemprop="dateCreated datePublished" datetime="2022-07-11T13:15:05+08:00">2022-07-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-11 13:36:05" itemprop="dateModified" datetime="2023-07-11T13:36:05+08:00">2023-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/KV/" itemprop="url" rel="index"><span itemprop="name">KV</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/KV/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p></p>
+<span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E8%AE%BE%E8%AE%A1%E7%9B%AE%E6%A0%87%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86bing">设计目标和基本原理[bing]</a><ul>
+<li><a href="#%E9%AB%98%E6%80%A7%E8%83%BD%E5%92%8C%E7%BA%BF%E6%80%A7%E6%89%A9%E5%B1%95">高性能和线性扩展</a></li>
+<li><a href="#%E5%8F%AF%E6%8E%A5%E5%8F%97%E7%9A%84%E5%86%99%E5%AE%89%E5%85%A8%E6%80%A7">可接受的写安全性</a></li>
+<li><a href="#%E5%8F%AF%E7%94%A8%E6%80%A7">可用性</a></li>
+<li><a href="#%E5%93%88%E5%B8%8C%E6%A7%BD%E5%88%86%E9%85%8D">哈希槽分配</a></li>
+<li><a href="#%E8%8A%82%E7%82%B9%E9%97%B4%E9%80%9A%E4%BF%A1">节点间通信</a></li>
+<li><a href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%87%8D%E5%AE%9A%E5%90%91">客户端重定向</a></li>
+<li><a href="#%E5%93%88%E5%B8%8C%E6%A7%BD%E8%BF%81%E7%A7%BB">哈希槽迁移</a></li>
+<li><a href="#%E6%95%85%E9%9A%9C%E6%A3%80%E6%B5%8B%E5%92%8C%E5%89%AF%E6%9C%AC%E6%8F%90%E5%8D%87">故障检测和副本提升</a></li>
+</ul>
+</li>
+<li><a href="#%E5%89%AF%E6%9C%AC%E9%80%89%E4%B8%BE%E5%92%8C%E9%85%8D%E7%BD%AE%E4%BC%A0%E6%92%AD%E7%9A%84%E6%9C%BA%E5%88%B6bing">副本选举和配置传播的机制[bing]</a><ul>
+<li><a href="#%E5%89%AF%E6%9C%AC%E9%80%89%E4%B8%BE">副本选举</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE%E4%BC%A0%E6%92%AD">配置传播</a></li>
+<li><a href="#%E8%8A%82%E7%82%B9%E9%87%8D%E7%BD%AE%E5%92%8C%E9%81%97%E5%BF%98">节点重置和遗忘</a></li>
+<li><a href="#%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85">发布订阅</a></li>
+<li><a href="#crc16%E7%AE%97%E6%B3%95">CRC16算法</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="设计目标和基本原理bing">设计目标和基本原理[bing]</span><a href="#设计目标和基本原理bing" class="header-anchor">#</a></h1><h3><span id="高性能和线性扩展">高性能和线性扩展</span><a href="#高性能和线性扩展" class="header-anchor">#</a></h3><p>  Redis集群可以支持到<strong>1000个节点</strong>，使用异步复制和无代理的架构，避免了值合并的开销。</p>
+<h3><span id="可接受的写安全性">可接受的写安全性</span><a href="#可接受的写安全性" class="header-anchor">#</a></h3><p>  Redis集群尽力保留与大多数主节点连接的客户端的写操作，但在<strong>分区窗口期内</strong>可能会<strong>丢失已确认的写操作</strong>。</p>
+<h3><span id="可用性">可用性</span><a href="#可用性" class="header-anchor">#</a></h3><p>  Redis集群可以在大多数主节点可达且每个不可达主节点至少有一个可达副本的情况下存活，并且可以通过副本迁移来提高抗故障能力。</p>
+<h3><span id="哈希槽分配">哈希槽分配</span><a href="#哈希槽分配" class="header-anchor">#</a></h3><p>Redis集群将<strong>16384个哈希槽</strong>分配给不同的主节点，每个主节点负责存储和服务一部分哈希槽。客户端可以通过计算键的CRC16值对16384取模来得到对应的哈希槽。也可以使用哈希标签来强制将多个键分配到同一个哈希槽，以支持多键操作。</p>
+<h3><span id="节点间通信">节点间通信</span><a href="#节点间通信" class="header-anchor">#</a></h3><p>  Redis集群节点之间使用一个TCP端口和一个二进制协议进行通信，称为集群总线。每个节点都与其他所有节点连接，使用<strong>gossip协议</strong>来传播集群的信息，如新节点、故障节点、配置变化等。</p>
+<h3><span id="客户端重定向">客户端重定向</span><a href="#客户端重定向" class="header-anchor">#</a></h3><p>  Redis集群节点不会代理请求，而是根据自己的哈希槽映射表，将客户端重定向到正确的节点。客户端可能收到<strong>MOVED或ASK错误</strong>，表示需要重新发送请求到另一个节点。MOVED表示哈希槽被永久地分配给了另一个节点，ASK表示哈希槽正在被迁移，需要发送ASKING命令后再发送请求。</p>
+<h3><span id="哈希槽迁移">哈希槽迁移</span><a href="#哈希槽迁移" class="header-anchor">#</a></h3><p>  Redis集群支持在运行时添加和删除节点，这是通过将哈希槽从一个节点移动到另一个节点来实现的。迁移过程中，源节点会将接收到的关于该哈希槽的请求重定向到目标节点，或者直接处理已存在键的请求。目标节点会接收到源节点通过MIGRATE命令发送过来的键，并在迁移完成后更新自己的配置。</p>
+<h3><span id="故障检测和副本提升">故障检测和副本提升</span><a href="#故障检测和副本提升" class="header-anchor">#</a></h3><p>  Redis集群使用心跳包和gossip协议来检测节点是否可达，并使用<strong>PFAIL和FAIL</strong>两种标志来表示故障状态。当一个主节点被大多数主节点标记为FAIL时，它的一个副本会发起选举并请求投票。如果获得了大多数主节点的授权，该副本会提升为主节点，并生成一个新的配置版本号（configEpoch）。</p>
+<h1><span id="副本选举和配置传播的机制bing">副本选举和配置传播的机制[bing]</span><a href="#副本选举和配置传播的机制bing" class="header-anchor">#</a></h1><h3><span id="副本选举">副本选举</span><a href="#副本选举" class="header-anchor">#</a></h3><p>  当一个主节点失效时，它的一个副本会尝试发起选举，向其他主节点发送授权请求。如果获得了大多数主节点的回复，它就赢得了选举，并获得了一个新的唯一的配置版本号（configEpoch）。它会开始以主节点的身份广播心跳包，并通知其他节点更新配置。</p>
+<h3><span id="配置传播">配置传播</span><a href="#配置传播" class="header-anchor">#</a></h3><p>  当一个节点收到一个心跳包或UPDATE消息时，它会根据一些规则来更新自己的哈希槽映射表。如果一个哈希槽是未分配的，或者有一个新的节点使用更高的configEpoch来声明它，那么接收者会将该哈希槽绑定到新的节点。这样可以保证最后一次故障转移胜出，并且所有节点最终会达成一致。</p>
+<h3><span id="节点重置和遗忘">节点重置和遗忘</span><a href="#节点重置和遗忘" class="header-anchor">#</a></h3><p>  当一个节点需要从一个集群中移除或加入到另一个集群时，可以使用CLUSTER RESET命令来重置它的状态。这个命令有两种模式：软重置和硬重置。软重置会保留当前的configEpoch，而硬重置会将其设置为0。当一个节点被移除后，其他节点需要使用CLUSTER FORGET命令来删除它在节点表中的条目，并设置一个60秒的禁止期，防止因为gossip协议而重新添加它。</p>
+<h3><span id="发布订阅">发布订阅</span><a href="#发布订阅" class="header-anchor">#</a></h3><p>  Redis集群支持发布订阅功能，客户端可以向任何节点发送SUBSCRIBE或PUBLISH命令。集群会将发布的消息转发到所有其他节点。Redis 7.0及以后版本还支持分片发布订阅功能，其中分片频道根据与键相同的算法分配到哈希槽。分片消息必须发送到拥有该哈希槽的节点，集群会将发布的分片消息转发到该哈希槽所在的分片中的所有节点。</p>
+<h3><span id="crc16算法">CRC16算法</span><a href="#crc16算法" class="header-anchor">#</a></h3><p>  这篇文章最后给出了计算键对应哈希槽的CRC16算法的C语言实现代码。这个算法使用了1021作为多项式，并且不反转输入输出字节。</p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a target="_blank" rel="noopener" href="https://redis.io/docs/reference/cluster-spec/">Redis cluster specification</a> ***</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2022/07/11/redisClusterSpec/" title="Redis Cluster Spec">https://www6v.github.io/www6vHomeHexo/2022/07/11/redisClusterSpec/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/KV/" rel="tag"># KV</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2022/07/11/chatgptPromptResearch/" rel="prev" title="Chatgpt  Prompt-学术研究">
+      <i class="fa fa-chevron-left"></i> Chatgpt  Prompt-学术研究
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2022/08/12/k8sCalico1/" rel="next" title="Calico">
+      Calico <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">460</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">271</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">138</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
