@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/03/28/ratelimitSentinel/SlidingWindows.png">
 <meta property="article:published_time" content="2022-03-28T08:06:26.000Z">
-<meta property="article:modified_time" content="2023-03-29T04:06:42.745Z">
+<meta property="article:modified_time" content="2023-07-13T09:57:05.592Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="限流">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-29 12:06:42" itemprop="dateModified" datetime="2023-03-29T12:06:42+08:00">2023-03-29</time>
+                <time title="修改时间：2023-07-13 17:57:05" itemprop="dateModified" datetime="2023-07-13T17:57:05+08:00">2023-07-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -257,34 +257,147 @@
 <span id="more"></span>
 
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
-<h2><span id="sentinel">Sentinel</span><a href="#sentinel" class="header-anchor">#</a></h2><ul>
-<li><p>限流 类型 [2]</p>
+<!-- toc -->
+
 <ul>
+<li><a href="#sentinel">Sentinel</a><ul>
+<li><a href="#%E9%99%90%E6%B5%81-api-4">限流 API [4]</a></li>
+<li><a href="#%E9%99%90%E6%B5%81-%E7%B1%BB%E5%9E%8B-2">限流 类型 [2]</a></li>
+<li><a href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%99%90%E6%B5%81-1">分布式限流 [1]</a></li>
+<li><a href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-2">滑动窗口 [2]</a></li>
+</ul>
+</li>
+<li><a href="#sentinel-vs-hystrix-vs-resilience4j-3">Sentinel vs. Hystrix vs. resilience4j [3]</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="sentinel">Sentinel</span><a href="#sentinel" class="header-anchor">#</a></h1><h3><span id="限流-api-4">限流 API [4]</span><a href="#限流-api-4" class="header-anchor">#</a></h3><ol>
+<li><p>定义资源<br>资源：可以是任何东西，一个服务，服务里的方法，甚至是一段代码。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">Entry</span> <span class="variable">entry</span> <span class="operator">=</span> SphU.entry(<span class="string">&quot;HelloWorld&quot;</span>)) &#123;</span><br><span class="line">    <span class="comment">// Your business logic here.</span></span><br><span class="line">    System.out.println(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (BlockException e) &#123;</span><br><span class="line">    <span class="comment">// Handle rejected request.</span></span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// try-with-resources auto exit</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SentinelResource(&quot;HelloWorld&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">helloWorld</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 资源中的逻辑</span></span><br><span class="line">    System.out.println(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义规则<br>规则：Sentinel 支持以下几种规则：<br>流量控制规则、熔断降级规则、系统保护规则、来源访问控制规则和 热点参数规则。  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">initSystemRule</span><span class="params">()</span> &#123;</span><br><span class="line">    List&lt;SystemRule&gt; rules = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="type">SystemRule</span> <span class="variable">rule</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SystemRule</span>();  <span class="comment">// 规则</span></span><br><span class="line">    rule.setHighestSystemLoad(<span class="number">10</span>);</span><br><span class="line">    rules.add(rule);</span><br><span class="line">    SystemRuleManager.loadRules(rules);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FlowRuleManager.loadRules(List&lt;FlowRule&gt; rules); <span class="comment">// 流控规则</span></span><br><span class="line">DegradeRuleManager.loadRules(List&lt;DegradeRule&gt; rules); <span class="comment">// 降级规则</span></span><br><span class="line">SystemRuleManager.loadRules(List&lt;SystemRule&gt; rules); <span class="comment">// 系统规则</span></span><br><span class="line">AuthorityRuleManager.loadRules(List&lt;AuthorityRule&gt; rules); <span class="comment">// 授权规则</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3><span id="限流-类型-2">限流 类型 [2]</span><a href="#限流-类型-2" class="header-anchor">#</a></h3><ul>
 <li>直接失败  [滑动时间窗口]</li>
 <li>Warmup 预热 [令牌桶算法]</li>
 <li>限流排队  [漏桶算法]</li>
 </ul>
-</li>
-<li><p>分布式限流 [1]</p>
-</li>
-<li><p>滑动窗口  [2]</p>
-</li>
-</ul>
-<img src="/www6vHomeHexo/2022/03/28/ratelimitSentinel/SlidingWindows.png" class>
+<h3><span id="分布式限流-1">分布式限流 [1]</span><a href="#分布式限流-1" class="header-anchor">#</a></h3><h3><span id="滑动窗口-2">滑动窗口  [2]</span><a href="#滑动窗口-2" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/03/28/ratelimitSentinel/SlidingWindows.png" class>
 
 <details><summary>核心代码 LeapArray.java</summary><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Get bucket item at given time from the array.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * (1) Bucket is absent, then just create a new bucket and CAS update to circular array.</span></span><br><span class="line"><span class="comment">     * (2) Bucket is up-to-date, then just return the bucket.</span></span><br><span class="line"><span class="comment">     * (3) Bucket is deprecated, then reset current bucket.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        WindowWrap&lt;T&gt; old = array.get(idx);</span><br><span class="line">        <span class="keyword">if</span> (old == <span class="literal">null</span>) &#123; <span class="comment">/// 初始化一个窗口</span></span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             *     B0       B1      B2    NULL      B4</span></span><br><span class="line"><span class="comment">             * ||_______|_______|_______|_______|_______||___</span></span><br><span class="line"><span class="comment">             * 200     400     600     800     1000    1200  timestamp</span></span><br><span class="line"><span class="comment">             *                             ^</span></span><br><span class="line"><span class="comment">             *                          time=888</span></span><br><span class="line"><span class="comment">             *            bucket is empty, so create new and update</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             * If the old bucket is absent, then we create a new bucket at &#123;@code windowStart&#125;,</span></span><br><span class="line"><span class="comment">             * then try to update circular array via a CAS operation. Only one thread can</span></span><br><span class="line"><span class="comment">             * succeed to update, while other threads yield its time slice.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            WindowWrap&lt;T&gt; window = <span class="keyword">new</span> <span class="title class_">WindowWrap</span>&lt;T&gt;(windowLengthInMs, windowStart, newEmptyBucket(timeMillis));</span><br><span class="line">            <span class="keyword">if</span> (array.compareAndSet(idx, <span class="literal">null</span>, window)) &#123;</span><br><span class="line">                <span class="comment">// Successfully updated, return the created bucket.</span></span><br><span class="line">                <span class="keyword">return</span> window;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// Contention failed, the thread will yield its time slice to wait for bucket available.</span></span><br><span class="line">                Thread.<span class="keyword">yield</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (windowStart == old.windowStart()) &#123; <span class="comment">/// 返回老的窗口</span></span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             *     B0       B1      B2     B3      B4</span></span><br><span class="line"><span class="comment">             * ||_______|_______|_______|_______|_______||___</span></span><br><span class="line"><span class="comment">             * 200     400     600     800     1000    1200  timestamp</span></span><br><span class="line"><span class="comment">             *                             ^</span></span><br><span class="line"><span class="comment">             *                          time=888</span></span><br><span class="line"><span class="comment">             *            startTime of Bucket 3: 800, so it&#x27;s up-to-date</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             * If current &#123;@code windowStart&#125; is equal to the start timestamp of old bucket,</span></span><br><span class="line"><span class="comment">             * that means the time is within the bucket, so directly return the bucket.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="keyword">return</span> old;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (windowStart &gt; old.windowStart()) &#123;  <span class="comment">/// 滚动: 重置老的窗口, 增加新的窗口</span></span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             *   (old)</span></span><br><span class="line"><span class="comment">             *             B0       B1      B2    NULL      B4</span></span><br><span class="line"><span class="comment">             * |_______||_______|_______|_______|_______|_______||___</span></span><br><span class="line"><span class="comment">             * ...    1200     1400    1600    1800    2000    2200  timestamp</span></span><br><span class="line"><span class="comment">             *                              ^</span></span><br><span class="line"><span class="comment">             *                           time=1676</span></span><br><span class="line"><span class="comment">             *          startTime of Bucket 2: 400, deprecated, should be reset</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             * If the start timestamp of old bucket is behind provided time, that means</span></span><br><span class="line"><span class="comment">             * the bucket is deprecated. We have to reset the bucket to current &#123;@code windowStart&#125;.</span></span><br><span class="line"><span class="comment">             * Note that the reset and clean-up operations are hard to be atomic,</span></span><br><span class="line"><span class="comment">             * so we need a update lock to guarantee the correctness of bucket update.</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             * The update lock is conditional (tiny scope) and will take effect only when</span></span><br><span class="line"><span class="comment">             * bucket is deprecated, so in most cases it won&#x27;t lead to performance loss.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="keyword">if</span> (updateLock.tryLock()) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="comment">// Successfully get the update lock, now we reset the bucket.</span></span><br><span class="line">                    <span class="keyword">return</span> resetWindowTo(old, windowStart);  <span class="comment">/// 清零重置old窗口</span></span><br><span class="line">                &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                    updateLock.unlock();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// Contention failed, the thread will yield its time slice to wait for bucket available.</span></span><br><span class="line">                Thread.<span class="keyword">yield</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (windowStart &lt; old.windowStart()) &#123;  <span class="comment">/// 时钟回拨</span></span><br><span class="line">            <span class="comment">// Should not go through here, as the provided time is already behind.</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">WindowWrap</span>&lt;T&gt;(windowLengthInMs, windowStart, newEmptyBucket(timeMillis));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </details>
 
 
 
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a target="_blank" rel="noopener" href="https://sentinelguard.io/zh-cn/docs/cluster-flow-control.html">集群流量控制</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1MP4y1176q?p=11">【图灵学院】2022最新B站独家分布式限流算法原理与应用讲解视频短合集</a>   V</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/www6v/StabilityGuide/blob/master/docs/prevention/resilience/%E6%B5%81%E6%8E%A7%E9%99%8D%E7%BA%A7%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5.md">流控降级最佳实践</a>  阿里 未</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/alibaba/Sentinel/wiki/%E5%B8%B8%E7%94%A8%E9%99%90%E6%B5%81%E9%99%8D%E7%BA%A7%E7%BB%84%E4%BB%B6%E5%AF%B9%E6%AF%94">常用限流降级组件对比</a> Sentinel vs. Hystrix  未</li>
+<h1><span id="sentinel-vs-hystrix-vs-resilience4j-3">Sentinel vs. Hystrix vs. resilience4j [3]</span><a href="#sentinel-vs-hystrix-vs-resilience4j-3" class="header-anchor">#</a></h1><table>
+<thead>
+<tr>
+<th></th>
+<th>Sentinel</th>
+<th>Hystrix</th>
+<th>resilience4j</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>隔离策略</td>
+<td>信号量隔离（并发线程数限流）</td>
+<td>线程池隔离&#x2F;信号量隔离</td>
+<td>信号量隔离</td>
+</tr>
+<tr>
+<td>熔断降级策略</td>
+<td>基于响应时间、异常比率、异常数等</td>
+<td>异常比率模式、超时熔断</td>
+<td>基于异常比率、响应时间</td>
+</tr>
+<tr>
+<td>实时统计实现</td>
+<td>滑动窗口（LeapArray）</td>
+<td>滑动窗口（基于 RxJava）</td>
+<td>Ring Bit Buffer</td>
+</tr>
+<tr>
+<td>动态规则配置</td>
+<td>支持<a target="_blank" rel="noopener" href="https://github.com/alibaba/Sentinel/wiki/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%99%E6%89%A9%E5%B1%95#datasource-%E6%89%A9%E5%B1%95">多种配置源</a></td>
+<td>支持多种数据源</td>
+<td>有限支持</td>
+</tr>
+<tr>
+<td>扩展性</td>
+<td>丰富的 SPI 扩展接口</td>
+<td>插件的形式</td>
+<td>接口的形式</td>
+</tr>
+<tr>
+<td>基于注解的支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>限流</td>
+<td>基于 QPS，支持基于调用关系的限流</td>
+<td>有限的支持</td>
+<td>Rate Limiter</td>
+</tr>
+<tr>
+<td>集群流量控制</td>
+<td>支持</td>
+<td>不支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>流量整形</td>
+<td>支持预热模式、匀速排队模式等多种复杂场景</td>
+<td>不支持</td>
+<td>简单的 Rate Limiter 模式</td>
+</tr>
+<tr>
+<td>系统自适应保护</td>
+<td>支持</td>
+<td>不支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>控制台</td>
+<td>提供开箱即用的控制台，可配置规则、查看秒级监控、机器发现等</td>
+<td>简单的监控查看</td>
+<td>不提供控制台，可对接其它监控系统</td>
+</tr>
+<tr>
+<td>多语言支持</td>
+<td>Java &#x2F; C++</td>
+<td>Java</td>
+<td>Java</td>
+</tr>
+<tr>
+<td>开源社区状态</td>
+<td>活跃</td>
+<td>停止维护</td>
+<td>较活跃</td>
+</tr>
+</tbody></table>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><p><a target="_blank" rel="noopener" href="https://sentinelguard.io/zh-cn/docs/cluster-flow-control.html">集群流量控制</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1MP4y1176q?p=11">【图灵学院】2022最新B站独家分布式限流算法原理与应用讲解视频短合集</a>   V</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/alibaba/Sentinel/wiki/%E5%B8%B8%E7%94%A8%E9%99%90%E6%B5%81%E9%99%8D%E7%BA%A7%E7%BB%84%E4%BB%B6%E5%AF%B9%E6%AF%94">常用限流降级组件对比</a> Sentinel vs. Hystrix</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/crazymakercircle/p/14285001.html">sentinel （史上最全+入门教程）</a> ***      </p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/www6v/StabilityGuide/blob/master/docs/prevention/resilience/%E6%B5%81%E6%8E%A7%E9%99%8D%E7%BA%A7%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5.md">流控降级最佳实践</a>  阿里 未</p>
+</li>
+<li><a href="/www6vHomeHexo/2016/09/26/ratelimit/" title="限流-总结">限流-总结</a>  self</li>
 </ol>
-<a href="/www6vHomeHexo/2016/09/26/ratelimit/" title="限流-总结">限流-总结</a>  self
 
     </div>
 
