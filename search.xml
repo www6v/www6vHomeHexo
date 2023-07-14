@@ -2978,12 +2978,12 @@
 <!-- toc -->
 
 <ul>
-<li><a href="#overview">Overview</a><ul>
+<li><a href="#overview-1">Overview [1]</a><ul>
 <li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF">数据库 使用场景</a></li>
 <li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B9%8B%E9%97%B4%E7%9A%84%E5%90%8C%E6%AD%A5">数据库之间的同步</a></li>
 </ul>
 </li>
-<li><a href="#%E9%98%BF%E9%87%8C%E4%BA%91-%E6%95%B0%E6%8D%AE%E5%BA%93">阿里云 数据库</a><ul>
+<li><a href="#%E9%98%BF%E9%87%8C%E4%BA%91-%E6%95%B0%E6%8D%AE%E5%BA%93-1">阿里云 数据库 [1]</a><ul>
 <li><a href="#mysql">MySQL</a></li>
 <li><a href="#polardb">PolarDB</a></li>
 <li><a href="#redis">Redis</a></li>
@@ -2992,17 +2992,30 @@
 <li><a href="#mongodb">MongoDB</a></li>
 </ul>
 </li>
+<li><a href="#mysql%E5%AE%B9%E7%81%BE-1">MySQL容灾 [1]</a><ul>
+<li><a href="#%E5%9C%BA%E6%99%AF-%E5%A4%8D%E5%88%B6">场景: 复制</a></li>
+<li><a href="#%E5%9C%BA%E6%99%AF-%E4%B8%A4%E5%9C%B0n%E4%B8%AD%E5%BF%83">场景: 两地N中心</a></li>
+<li><a href="#%E5%9C%BA%E6%99%AF-%E5%8F%8C%E8%8A%82%E7%82%B9%E6%9C%8D%E5%8A%A1%E5%8F%AF%E7%94%A8%E6%80%A7%E6%9C%BA%E6%88%BF%E7%BA%A7">场景: 双节点服务可用性(机房级)</a></li>
+<li><a href="#%E5%9C%BA%E6%99%AF-%E5%8F%8C%E8%8A%82%E7%82%B9%E6%9C%8D%E5%8A%A1%E5%8F%AF%E7%94%A8%E6%80%A7%E5%9C%B0%E5%9F%9F%E7%BA%A7">场景: 双节点服务可用性(地域级)</a></li>
+</ul>
+</li>
+<li><a href="#mysql%E6%89%A9%E5%B1%951">MySQL扩展[1]</a><ul>
+<li><a href="#%E6%B7%BB%E5%8A%A0%E5%8F%AA%E8%AF%BB%E5%AE%9E%E4%BE%8B">(添加)只读实例</a></li>
+<li><a href="#%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB">读写分离</a></li>
+<li><a href="#mysql%E6%A8%AA%E5%90%91%E6%89%A9%E5%B1%95">MySQL横向扩展</a></li>
+</ul>
+</li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
 
 </div>
 
-<h1><span id="overview">Overview</span><a href="#overview" class="header-anchor">#</a></h1><h3><span id="数据库-使用场景">数据库 使用场景</span><a href="#数据库-使用场景" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/07/13/aliyunDB/changjing.JPG" class>
+<h1><span id="overview-1">Overview [1]</span><a href="#overview-1" class="header-anchor">#</a></h1><h3><span id="数据库-使用场景">数据库 使用场景</span><a href="#数据库-使用场景" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/07/13/aliyunDB/changjing.JPG" class>
 
 <h3><span id="数据库之间的同步">数据库之间的同步</span><a href="#数据库之间的同步" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/07/13/aliyunDB/db-sync.JPG" class>
 
-<h1><span id="阿里云-数据库">阿里云 数据库</span><a href="#阿里云-数据库" class="header-anchor">#</a></h1><h3><span id="mysql">MySQL</span><a href="#mysql" class="header-anchor">#</a></h3><ul>
+<h1><span id="阿里云-数据库-1">阿里云 数据库 [1]</span><a href="#阿里云-数据库-1" class="header-anchor">#</a></h1><h3><span id="mysql">MySQL</span><a href="#mysql" class="header-anchor">#</a></h3><ul>
 <li>类型<ul>
 <li>单机版</li>
 <li>高可用版</li>
@@ -3022,7 +3035,14 @@
 
 <h3><span id="hbase">Hbase</span><a href="#hbase" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/07/13/aliyunDB/hbase.JPG" class>
 
-<h3><span id="hybriddb">HybridDB</span><a href="#hybriddb" class="header-anchor">#</a></h3><h3><span id="mongodb">MongoDB</span><a href="#mongodb" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<h3><span id="hybriddb">HybridDB</span><a href="#hybriddb" class="header-anchor">#</a></h3><h3><span id="mongodb">MongoDB</span><a href="#mongodb" class="header-anchor">#</a></h3><h1><span id="mysql容灾-1">MySQL容灾 [1]</span><a href="#mysql容灾-1" class="header-anchor">#</a></h1><h3><span id="场景-复制">场景: 复制</span><a href="#场景-复制" class="header-anchor">#</a></h3><ul>
+<li>异步复制</li>
+<li>半同步复制</li>
+</ul>
+<h3><span id="场景-两地n中心">场景: 两地N中心</span><a href="#场景-两地n中心" class="header-anchor">#</a></h3><p>DTS同步数据</p>
+<h3><span id="场景-双节点服务可用性机房级">场景: 双节点服务可用性(机房级)</span><a href="#场景-双节点服务可用性机房级" class="header-anchor">#</a></h3><h3><span id="场景-双节点服务可用性地域级">场景: 双节点服务可用性(地域级)</span><a href="#场景-双节点服务可用性地域级" class="header-anchor">#</a></h3><h1><span id="mysql扩展1">MySQL扩展[1]</span><a href="#mysql扩展1" class="header-anchor">#</a></h1><h3><span id="添加只读实例">(添加)只读实例</span><a href="#添加只读实例" class="header-anchor">#</a></h3><h3><span id="读写分离">读写分离</span><a href="#读写分离" class="header-anchor">#</a></h3><p>Proxy 层</p>
+<h3><span id="mysql横向扩展">MySQL横向扩展</span><a href="#mysql横向扩展" class="header-anchor">#</a></h3><p>MySQL 用DTS迁移到  HybridDB</p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://www.bilibili.com/video/BV1ky4y1a7Sk?p=3">课时3: 云上数据库架构设计及解决方案</a></li>
 </ol>
 ]]></content>
