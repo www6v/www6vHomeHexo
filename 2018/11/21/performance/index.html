@@ -27,9 +27,8 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2018/11/21/performance/performance.jpg">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2018/11/21/performance/performance2.jpg">
-<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2018/11/21/performance/jdk-threadpool.PNG">
 <meta property="article:published_time" content="2018-11-21T04:11:33.000Z">
-<meta property="article:modified_time" content="2023-07-14T03:41:12.592Z">
+<meta property="article:modified_time" content="2023-07-14T04:25:34.006Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="基础">
 <meta property="article:tag" content="性能">
@@ -230,7 +229,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-14 11:41:12" itemprop="dateModified" datetime="2023-07-14T11:41:12+08:00">2023-07-14</time>
+                <time title="修改时间：2023-07-14 12:25:34" itemprop="dateModified" datetime="2023-07-14T12:25:34+08:00">2023-07-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -265,30 +264,138 @@
 
 <img src="/www6vHomeHexo/2018/11/21/performance/performance2.jpg" class title="性能优化总结">
 
-<h1><span id="连接池优化">连接池优化</span><a href="#连接池优化" class="header-anchor">#</a></h1><h3><span id="分类">分类</span><a href="#分类" class="header-anchor">#</a></h3><ul>
-<li>数据库连接池 </li>
-<li>redis连接池 </li>
-<li>http连接池</li>
-</ul>
-<h3><span id="数据库连接池">数据库连接池</span><a href="#数据库连接池" class="header-anchor">#</a></h3><ul>
-<li>最小连接数， 最大连接数<br> 建议<strong>最小连接数控制在 10 左右</strong>，<strong>最大连接数控制在 20～30 左右</strong></li>
-<li>连接的可用性<br> 使用连接发送<strong>“select 1”</strong>的命令给数据库看是否会抛出异常，如果抛出异常则将这个连接从连接池中移除，并且尝试关闭.</li>
-</ul>
-<h3><span id="线程池">线程池</span><a href="#线程池" class="header-anchor">#</a></h3><h5><span id="jdk线程池">JDK线程池</span><a href="#jdk线程池" class="header-anchor">#</a></h5><p>重要参数： <strong>coreThreadCount</strong> 和 <strong>maxThreadCount</strong>，</p>
-<img src="/www6vHomeHexo/2018/11/21/performance/jdk-threadpool.PNG" class title="JDK线程池">
 
-<p>[chat]<br>当大量请求进入线程池时，ThreadPoolExecutor 会根据其内部的线程池参数来处理请求。具体来说，当请求进入线程池时，ThreadPoolExecutor 会首先尝试将请求放入工作队列中，如果工作队列已满，则会根据线程池的配置来执行饱和策略，例如抛出异常、直接拒绝请求、阻塞等待或调用调用者运行等待任务。</p>
-<ul>
-<li>线程池中的线程会根据核心线程数和最大线程数的设置进行扩缩容。<ul>
-<li><strong>当有新的任务提交到线程池时，如果当前线程数小于核心线程数，线程池会创建新的线程来处理该任务。</strong></li>
-<li><strong>如果当前线程数已经达到核心线程数，线程池会将任务放入工作队列中，如果工作队列已满，则线程池会创建新的线程来处理该任务，直到达到最大线程数为止。</strong></li>
-<li>当线程池中的线程数量超过核心线程数时，空闲的线程会根据线程空闲时间的超时时间来自动销毁，以保证线程池中的线程数量不会无限制增长。</li>
+<h1><span id="应用优化">应用优化</span><a href="#应用优化" class="header-anchor">#</a></h1><ul>
+<li>应用<ul>
+<li>锁[4]<ul>
+<li>粒度<ul>
+<li>粗化</li>
+</ul>
+</li>
+<li>最小化锁范围</li>
+<li>Eg， 单线程写文件</li>
+<li>锁拆分，分散锁<ul>
+<li>减少竞争，race condition</li>
+<li>eg. ConcurrentHashMap，LongAdder</li>
+</ul>
+</li>
+<li>分离锁<ul>
+<li>读写锁</li>
+<li>队头队尾， 两把锁</li>
+</ul>
+</li>
+<li>乐观锁<ul>
+<li>CAS</li>
+</ul>
+</li>
+<li>读写锁<ul>
+<li>读多写少的场景</li>
 </ul>
 </li>
 </ul>
-<p>需要注意的是，在ThreadPoolExecutor中，线程池的线程数应该设置为适当的值，如果<strong>设置过小</strong>，则可能会导致线程饱和，影响任务的处理效率；如果<strong>设置过大</strong>，则会浪费系统资源，同时可能会导致线程竞争和锁的争用，影响系统的性能。因此，在使用ThreadPoolExecutor时，需要根据系统的负载和任务特性来合理地设置线程池的参数，以达到最佳的性能和效率。<br>[&#x2F;chat]</p>
-<h5><span id="tomcat线程池">Tomcat线程池</span><a href="#tomcat线程池" class="header-anchor">#</a></h5><p>Tomcat 使用的线程池就不是 JDK 原生的线程池，而是做了一些改造，<strong>当线程数超过 coreThreadCount 之后会优先创建线程，直到线程数到达maxThreadCount</strong>，这样就比较适合于 Web 系统<strong>大量 IO 操作的场景</strong>了。</p>
-<h5><span id="最佳实践">最佳实践</span><a href="#最佳实践" class="header-anchor">#</a></h5><p>大量的任务堆积会占用大量的内存空间，一旦内存空间被占满就会<strong>频繁地触发 Full GC</strong>，造成服务不可用，我之前排查过的一次 GC 引起的宕机，起因就是系统中的一个<strong>线程池使用了无界队列</strong>.</p>
+</li>
+<li>并行[1]<ul>
+<li>多线程<ul>
+<li>fork-join模式【2】</li>
+<li>本地化 Eg. ThreadLocal</li>
+</ul>
+</li>
+<li>Actor<ul>
+<li>Eg. Akka</li>
+</ul>
+</li>
+<li>CSP<ul>
+<li>Eg. Goroutie</li>
+</ul>
+</li>
+<li>函数式范性<ul>
+<li>不可变对象</li>
+</ul>
+</li>
+<li>单核单线程<ul>
+<li>Eg. Redis, Nginx</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>工具<ul>
+<li>btrace， 慢响应，生产用</li>
+<li>排查占cpu最多的线程</li>
+<li>JVM 工具</li>
+</ul>
+</li>
+<li>池化(重用)<ul>
+<li>Eg. 线程池，数据库连接池</li>
+</ul>
+</li>
+<li>代码调优<ul>
+<li>字符串操作</li>
+<li>多线程调优<ul>
+<li>锁[4]</li>
+<li>线程个数【参考9】</li>
+</ul>
+</li>
+<li>异步操作[3]</li>
+<li>简化代码</li>
+<li>热点[5]</li>
+<li>数值精度<ul>
+<li>Eg. 双精度 单精度</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>算法调优<ul>
+<li>分而治之[6]<ul>
+<li>fork-join【2】</li>
+<li>Map-Reduce</li>
+</ul>
+</li>
+<li>哈希算法</li>
+<li>预处理<ul>
+<li>提前计算(预处理)，最后合并</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>算法和数据结构<ul>
+<li>算法复杂度 大O表示【参考10】<ul>
+<li>时间复杂度<ul>
+<li>O(1)<ul>
+<li>数组访问</li>
+<li>栈、链表的插入&#x2F;删除</li>
+<li>Hash Table</li>
+</ul>
+</li>
+<li>O(log(n))<ul>
+<li>二叉搜索树<ul>
+<li>自平衡二叉搜索树<br>  AVL树<br>  红黑树</li>
+</ul>
+</li>
+<li>B树(多路树)</li>
+</ul>
+</li>
+<li>O(n log(n))<ul>
+<li>快排、归并、堆<br>  快排(分治算法[6])</li>
+</ul>
+</li>
+<li>O(n)</li>
+<li>O(n^2)<ul>
+<li>选择、插入、冒泡</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据结构<ul>
+<li>树，链表，栈，队列</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><p><a target="_blank" rel="noopener" href="http://dwz.cn/4SrP4L">高性能高并发系统的稳定性保障</a> 京东</p>
 </li>
@@ -302,7 +409,7 @@
 </li>
 <li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>   self  重复的
 </li>
-<li><p>《性能之巅：洞悉系统、企业与云计算》 Brendan Gregg</p>
+<li><p>《性能之巅：洞悉系统、企业与云计算》 </p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://coolshell.cn/articles/7490.html/comment-page-1">性能调优攻略</a>  *** </p>
 </li>
@@ -310,18 +417,14 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="http://www.codeceo.com/article/algorithm-complexity-table.html">每个程序员都应该收藏的算法复杂度速查表</a></p>
 </li>
-<li><p>《编程珠玑 第2版》 Jon Bentley</p>
+<li><p>《编程珠玑 第2版》 </p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/25487">wordcount设计与优化</a>  竞赛题</p>
 </li>
-<li><a href="/www6vHomeHexo/2019/09/10/mysqlIndex/" title="MySQL的索引和优化">MySQL的索引和优化</a>     self 未
+<li><p><a target="_blank" rel="noopener" href="https://colin-scott.github.io/personal_website/research/interactive_latency.html">latency</a>  未  </p>
 </li>
-<li><a href="/www6vHomeHexo/2020/03/26/nginxOptimize/" title="Nginx优化">Nginx优化</a>   self 未
-</li>
-<li><p>《高并发系统设计40问 - 07 | 池化技术：如何减少频繁创建数据库连接的性能损耗？》 唐扬</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://colin-scott.github.io/personal_website/research/interactive_latency.html">latency</a>  未</p>
-</li>
+<li><a href="/www6vHomeHexo/2019/09/10/mysqlIndex/" title="MySQL的索引和优化">MySQL的索引和优化</a>     self 未</li>
+<li><a href="/www6vHomeHexo/2020/03/26/nginxOptimize/" title="Nginx优化">Nginx优化</a>   self 未</li>
 </ol>
 
     </div>
@@ -438,14 +541,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">462</span>
+          <span class="site-state-item-count">463</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/www6vHomeHexo/categories/">
           
-        <span class="site-state-item-count">273</span>
+        <span class="site-state-item-count">274</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
