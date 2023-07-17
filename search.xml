@@ -20010,10 +20010,7 @@ nq： 不排队调度
 
 </div>
 
-<h1><span id="数据库分类">数据库分类</span><a href="#数据库分类" class="header-anchor">#</a></h1><h3><span id="全景图-1">全景图 [1]</span><a href="#全景图-1" class="header-anchor">#</a></h3><div style="text-align: center;">
-
-<p><img src="https://user-images.githubusercontent.com/5608425/67636314-55717980-f90a-11e9-8506-2051221f245b.png" alt="dbClassify"><br>结构化数据库分类</p>
-</div>
+<h1><span id="数据库分类">数据库分类</span><a href="#数据库分类" class="header-anchor">#</a></h1><h3><span id="全景图-1">全景图 [1]</span><a href="#全景图-1" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2019/10/27/dbClassify/overviw.jpg" class title="结构化数据库分类">
 
 
 <h3><span id="数据库分类">数据库分类</span><a href="#数据库分类" class="header-anchor">#</a></h3><ul>
@@ -20037,6 +20034,8 @@ nq： 不排队调度
 </ul>
 </li>
 </ul>
+<img src="/www6vHomeHexo/2019/10/27/dbClassify/classify.JPG" class>
+
 <h1><span id="选型-3">选型 [3]</span><a href="#选型-3" class="header-anchor">#</a></h1><h3><span id="关注点">关注点</span><a href="#关注点" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2019/10/27/dbClassify/xuqiu.JPG" class>
 
 <h3><span id="关系型数据库选型">关系型数据库选型</span><a href="#关系型数据库选型" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2019/10/27/dbClassify/rmdb.JPG" class>
@@ -20047,7 +20046,7 @@ nq： 不排队调度
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://blog.csdn.net/icycode/article/details/81008607">5分钟理解数据库全景图(SQL,NoSQL,NewSQL,OLAP,OLTP)</a> icycode</li>
 <li><a href="/www6vHomeHexo/2018/07/19/NoSQL/" title="NoSQL总结">NoSQL总结</a>  self</li>
-<li>《数据库架构选型指南》 pdf</li>
+<li>《爱奇艺实用数据库选型树：不同场景如何快速选择<br>数据库？》 数据库架构选型指南 pdf</li>
 </ol>
 ]]></content>
       <categories>
