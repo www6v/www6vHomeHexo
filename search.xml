@@ -3006,6 +3006,47 @@
       </tags>
   </entry>
   <entry>
+    <title>Flink SQL</title>
+    <url>/www6vHomeHexo/2022/07/18/flinkSQL/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://xie.infoq.cn/article/b3adcb53fb87e66a613326f19">最佳实践｜如何写出简单高效的 Flink SQL？</a></li>
+<li><a href="https://baijiahao.baidu.com/s?id=1709543568363038743">深入分析 Flink SQL 工作机制</a><br><a href="https://blog.csdn.net/weixin_44904816/article/details/106678639">深入分析 Flink SQL 工作机制</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>计算</category>
+        <category>流式计算</category>
+        <category>flink</category>
+      </categories>
+      <tags>
+        <tag>流式计算</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Flink 实时数仓</title>
+    <url>/www6vHomeHexo/2022/07/18/flinkRealtimeWarehouse/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://xie.infoq.cn/article/3c80a350e06d88e85d34f4008">美团买菜基于 Flink 的实时数仓建设</a><br><a href="https://xie.infoq.cn/article/acf64bbe900ec426b8699f094">小米基于 Flink 的实时数仓建设实践</a></p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>计算</category>
+        <category>流式计算</category>
+        <category>flink</category>
+      </categories>
+      <tags>
+        <tag>流式计算</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>可观测性-Prometheus业务监控</title>
     <url>/www6vHomeHexo/2022/07/17/observabilityPrometheusBiz/</url>
     <content><![CDATA[<p></p>
@@ -11900,7 +11941,8 @@ BGP 协议传输的消息
 <li><a href="https://www.shuzhiduo.com/A/xl56qQM9Jr/">Flink Checkpoint 参数详解</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/112876846">有赞实时任务优化：Flink Checkpoint 异常解析与应用实践</a></li>
 <li><a href="https://developer.aliyun.com/learning/course/58/detail/1071">课时5: 《 Fault-tolerance in Flink》</a>  阿里云  《Apache Flink 入门》 ***</li>
-<li><a href="https://zhuanlan.zhihu.com/p/43536305">(十)简单解释: 分布式数据流的异步快照(Flink的核心)</a> 原理 - aws SDE - 未 ***</li>
+<li><a href="https://zhuanlan.zhihu.com/p/43536305">(十)简单解释: 分布式数据流的异步快照(Flink的核心)</a> 原理 - aws SDE - 未 *** </li>
+<li><a href="https://xie.infoq.cn/article/f89ea4c1e06004f617b7ae0a7">基于 Log 的通用增量 Checkpoint</a>  未  阿里</li>
 </ol>
 ]]></content>
       <categories>
@@ -23401,8 +23443,8 @@ nq： 不排队调度
         <category>serviceMesh</category>
       </categories>
       <tags>
-        <tag>istio</tag>
         <tag>k8s</tag>
+        <tag>istio</tag>
       </tags>
   </entry>
   <entry>
