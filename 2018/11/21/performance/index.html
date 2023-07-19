@@ -26,9 +26,8 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2018/11/21/performance/performance.jpg">
-<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2018/11/21/performance/performance2.jpg">
 <meta property="article:published_time" content="2018-11-21T04:11:33.000Z">
-<meta property="article:modified_time" content="2023-07-14T05:40:38.281Z">
+<meta property="article:modified_time" content="2023-07-19T03:46:32.135Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="基础">
 <meta property="article:tag" content="性能">
@@ -229,7 +228,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-14 13:40:38" itemprop="dateModified" datetime="2023-07-14T13:40:38+08:00">2023-07-14</time>
+                <time title="修改时间：2023-07-19 11:46:32" itemprop="dateModified" datetime="2023-07-19T11:46:32+08:00">2023-07-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -259,15 +258,30 @@
         <p></p>
 <span id="more"></span>
 
-<p>关键词： 锁优化，池化，数据库优化，架构优化， 系统优化，性能测试， 监控 </p>
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%85%B3%E9%94%AE%E8%AF%8D">关键词</a></li>
+<li><a href="#%E5%BA%94%E7%94%A8%E4%BC%98%E5%8C%96">应用优化</a></li>
+<li><a href="#%E9%80%9A%E7%94%A8%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95">通用优化方法</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96">数据库优化</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
+<li><a href="#%E5%85%B6%E4%BB%96">其他</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="关键词">关键词</span><a href="#关键词" class="header-anchor">#</a></h1><p>锁优化，池化，数据库优化，架构优化， 系统优化，性能测试， 监控 </p>
 <img src="/www6vHomeHexo/2018/11/21/performance/performance.jpg" class title="性能优化总结">
-
-<img src="/www6vHomeHexo/2018/11/21/performance/performance2.jpg" class title="性能优化总结">
-
 
 <h1><span id="应用优化">应用优化</span><a href="#应用优化" class="header-anchor">#</a></h1><ul>
 <li>应用<ul>
-<li>锁[4]<ul>
+<li>锁 【4】<ul>
 <li>粒度<ul>
 <li>粗化</li>
 </ul>
@@ -332,7 +346,7 @@
 <li>字符串操作</li>
 <li>多线程调优<ul>
 <li>锁[4]</li>
-<li>线程个数【参考9】</li>
+<li>线程个数【9】</li>
 </ul>
 </li>
 <li>异步操作[3]</li>
@@ -345,7 +359,7 @@
 </ul>
 </li>
 <li>算法调优<ul>
-<li>分而治之[6]<ul>
+<li>分而治之 【6】<ul>
 <li>fork-join【2】</li>
 <li>Map-Reduce</li>
 </ul>
@@ -358,7 +372,7 @@
 </ul>
 </li>
 <li>算法和数据结构<ul>
-<li>算法复杂度 大O表示【参考10】<ul>
+<li>算法复杂度 大O表示【10】<ul>
 <li>时间复杂度<ul>
 <li>O(1)<ul>
 <li>数组访问</li>
@@ -375,7 +389,7 @@
 </ul>
 </li>
 <li>O(n log(n))<ul>
-<li>快排、归并、堆<br>  快排(分治算法[6])</li>
+<li>快排、归并、堆<br>  快排(分治算法【6】)</li>
 </ul>
 </li>
 <li>O(n)</li>
@@ -396,6 +410,37 @@
 </ul>
 </li>
 </ul>
+<h1><span id="通用优化方法">通用优化方法</span><a href="#通用优化方法" class="header-anchor">#</a></h1><ul>
+<li>通用方法<ul>
+<li>异步化  【3】<ul>
+<li>消息<ul>
+<li>进程内<br> Eg.  Disruptor, EventBus</li>
+<li>Broker</li>
+</ul>
+</li>
+<li>事件<br>Eg. EventSource</li>
+<li>服务异步化<br>Eg. 异步网关</li>
+</ul>
+</li>
+<li>Batch<ul>
+<li>Eg. redis pipeline</li>
+<li>buffer io</li>
+</ul>
+</li>
+<li>Copy on Write<ul>
+<li>Eg. mysql MVCC, CopyOnWriteArrayList</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>​	</p>
+<h1><span id="数据库优化">数据库优化</span><a href="#数据库优化" class="header-anchor">#</a></h1><ul>
+<li>索引优化</li>
+<li>大表优化</li>
+<li>慢SQL优化</li>
+<li>乐观锁</li>
+</ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><p><a target="_blank" rel="noopener" href="http://dwz.cn/4SrP4L">高性能高并发系统的稳定性保障</a> 京东</p>
 </li>
@@ -405,11 +450,11 @@
 </li>
 <li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>  self  deleted
 </li>
-<li><p><a target="_blank" rel="noopener" href="http://blog.jobbole.com/88958/">关于容量预估&#x2F;性能压测的思考</a>  deleted</p>
+<li><p><a target="_blank" rel="noopener" href="http://blog.jobbole.com/88958/">关于容量预估&#x2F;性能压测的思考</a>  deleted  失效</p>
 </li>
 <li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>   self  重复的 deleted
 </li>
-<li><p>《性能之巅：洞悉系统、企业与云计算》 </p>
+<li><p>xxx</p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://coolshell.cn/articles/7490.html/comment-page-1">性能调优攻略</a>  *** </p>
 </li>

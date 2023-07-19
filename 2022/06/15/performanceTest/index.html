@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/06/15/performanceTest/performance1.jpg">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/06/15/performanceTest/performance5.png">
 <meta property="article:published_time" content="2022-06-15T11:36:37.000Z">
-<meta property="article:modified_time" content="2023-07-19T01:56:55.626Z">
+<meta property="article:modified_time" content="2023-07-19T03:55:40.249Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="性能">
 <meta name="twitter:card" content="summary">
@@ -227,7 +227,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-19 09:56:55" itemprop="dateModified" datetime="2023-07-19T09:56:55+08:00">2023-07-19</time>
+                <time title="修改时间：2023-07-19 11:55:40" itemprop="dateModified" datetime="2023-07-19T11:55:40+08:00">2023-07-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -265,6 +265,7 @@
 <li><a href="#tps%E5%92%8C%E5%93%8D%E5%BA%94%E6%97%B6%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB1">TPS和响应时间的关系[1]</a></li>
 <li><a href="#%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87%E7%9A%84%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F-2">性能指标的计算方式 [2]</a></li>
 <li><a href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95">性能测试</a></li>
+<li><a href="#%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7">性能监控</a></li>
 <li><a href="#%E5%8E%8B%E6%B5%8B%E5%B7%A5%E5%85%B7">压测工具</a><ul>
 <li><a href="#%E7%BD%91%E7%BB%9C">网络</a></li>
 </ul>
@@ -292,7 +293,7 @@
 <h1><span id="性能测试">性能测试</span><a href="#性能测试" class="header-anchor">#</a></h1><ul>
 <li>性能测试<ul>
 <li>环境假设<ul>
-<li>负载模型【参考4，5】<ul>
+<li>负载模型【4，5】<ul>
 <li><ol>
 <li>人为模拟请求</li>
 </ol>
@@ -307,7 +308,7 @@
 </li>
 </ul>
 </li>
-<li>故障模拟【参考6】<ul>
+<li>故障模拟【6】<ul>
 <li>Eg. tcpkill</li>
 </ul>
 </li>
@@ -315,13 +316,13 @@
 </li>
 <li>结果分析<ul>
 <li>瓶颈分析</li>
-<li>热点[5]<ul>
+<li>热点  【5】<ul>
 <li>20%代码影响了80%</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>类型【参考5】<ul>
+<li>类型【5】<ul>
 <li>benchmark</li>
 <li>性能测试，负载测试，压力测试</li>
 <li>稳定性测试</li>
@@ -375,8 +376,51 @@
 </ul>
 </li>
 </ul>
+<h1><span id="性能监控">性能监控</span><a href="#性能监控" class="header-anchor">#</a></h1><ul>
+<li>性能优化<ul>
+<li>监控<ul>
+<li>分层<ul>
+<li>链路跟踪，APM</li>
+<li>中间件监控<br>  Eg.Tomcat 线程池</li>
+<li>基础设施监控<br>  Eg. cpu使用率，负载</li>
+</ul>
+</li>
+<li>数据可视化，可观察性<ul>
+<li>折线图</li>
+<li>散点图</li>
+<li>热图</li>
+</ul>
+</li>
+<li>告警通知<ul>
+<li>阈值 Eg. 比如大于TP99%</li>
+</ul>
+</li>
+<li>性能指标<ul>
+<li>响应时间，吞吐量，成功率【5】</li>
+<li>低延迟，会有高吞吐</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>方法论【7-&gt;2.5节】<ul>
+<li>工具法</li>
+<li>USE，识别系统瓶颈<ul>
+<li>Utilization(使用率)</li>
+<li>Saturation(饱和度, 负载)</li>
+<li>Errors(错误)</li>
+</ul>
+</li>
+<li>工作负载特征归纳</li>
+<li>延迟分析</li>
+<li>静态性能调整</li>
+<li>缓存调优</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h1><span id="压测工具">压测工具</span><a href="#压测工具" class="header-anchor">#</a></h1><p>ab<br>Jmeter<br>wrk</p>
-<h3><span id="网络">网络</span><a href="#网络" class="header-anchor">#</a></h3><p>httpstat [7]</p>
+<h3><span id="网络">网络</span><a href="#网络" class="header-anchor">#</a></h3><p>httpstat [20]</p>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li>02丨性能综述：TPS和响应时间之间是什么关系？  高楼</li>
 <li>03丨性能综述：怎么理解TPS、QPS、RT、吞吐量这些性能指标？ 高楼</li>
@@ -385,9 +429,10 @@
 <ol start="3">
 <li><a target="_blank" rel="noopener" href="https://coolshell.cn/articles/17381.html">性能测试应该怎么做？</a> </li>
 <li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>  self</li>
-<li><a target="_blank" rel="noopener" href="http://blog.jobbole.com/88958/">关于容量预估&#x2F;性能压测的思考</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.jobbole.com/88958/">关于容量预估&#x2F;性能压测的思考</a> 失效</li>
 <li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>   self  重复的</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/davecheney/httpstat"> httpstat</a>  go<br><a target="_blank" rel="noopener" href="https://github.com/reorx/httpstat"> httpstat</a> python</li>
+<li>《性能之巅：洞悉系统、企业与云计算》 </li>
+<li><a target="_blank" rel="noopener" href="https://github.com/davecheney/httpstat"> httpstat</a>  go<br>  <a target="_blank" rel="noopener" href="https://github.com/reorx/httpstat"> httpstat</a> python</li>
 </ol>
 
     </div>
