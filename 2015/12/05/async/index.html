@@ -27,9 +27,8 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2015/12/05/async/async.jpg">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2015/12/05/async/CSP.jpg">
-<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2015/12/05/async/reactor.jpeg">
 <meta property="article:published_time" content="2015-12-05T04:11:22.000Z">
-<meta property="article:modified_time" content="2023-07-21T03:35:41.852Z">
+<meta property="article:modified_time" content="2023-07-21T05:53:46.605Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="异步">
 <meta name="twitter:card" content="summary">
@@ -228,7 +227,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-21 11:35:41" itemprop="dateModified" datetime="2023-07-21T11:35:41+08:00">2023-07-21</time>
+                <time title="修改时间：2023-07-21 13:53:46" itemprop="dateModified" datetime="2023-07-21T13:53:46+08:00">2023-07-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -280,8 +279,7 @@
 </ul>
 </li>
 <li><a href="#%E5%B9%B6%E8%A1%8C-%E8%8C%83%E5%BC%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B">并行 范式&#x2F;编程模型</a></li>
-<li><a href="#java8-rxjava-reactor%E6%AF%94%E8%BE%8311">Java8、RxJava、Reactor比较[11]</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a><br>  * <a href="#reactivereactivex">Reactive，ReactiveX</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
 
@@ -334,14 +332,6 @@
 <td align="center">RxJava<br> Flux (Reactor Core)<br> RSocket</td>
 </tr>
 </tbody></table>
-<blockquote>
-<p>ReactiveX: An API for asynchronous programming  with observable streams<br>响应式流（Reactive Stream）: 具备“异步非阻塞”特性和“流量控制”能力的数据流.<br>RSocket 是一个支持 reactive-stream 语义的开源网络通信协议，它将 reactive 语义的复杂逻辑封装了起来，使得上层可以方便实现网络程序。</p>
-</blockquote>
-<h1><span id="java8-rxjava-reactor比较11">Java8、RxJava、Reactor比较[11]</span><a href="#java8-rxjava-reactor比较11" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2015/12/05/async/reactor.jpeg" class title="Java8、RxJava、Reactor比较">
-
-<ul>
-<li>核心特性 async，back-pressure(Stream)</li>
-</ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="0">
 <li><a target="_blank" rel="noopener" href="http://ericfu.me/several-ways-to-aync/">异步编程的几种方式 </a> *** </li>
 <li><a target="_blank" rel="noopener" href="http://ifeve.com/google-guava-listenablefuture/">google Guava包的ListenableFuture解析</a> 罗立树 </li>
@@ -351,19 +341,6 @@
 <li>Java中的纤程库 - Quasar 鸟窝</li>
 <li><a target="_blank" rel="noopener" href="https://www.researchgate.net/publication/2391753_SEDA_An_Architecture_for_Well-Conditioned_Scalable_Internet_Services">SEDA: An Architecture for Well-Conditioned, Scalable Internet Services</a></li>
 <li>《七周七并发》</li>
-</ol>
-<hr>
-<h5><span id="reactivereactivex">Reactive，ReactiveX</span><a href="#reactivereactivex" class="header-anchor">#</a></h5><ol start="7">
-<li><a target="_blank" rel="noopener" href="https://github.com/benjycui/introrx-chinese-edition?utm_source=tuicool&utm_medium=referral">The introduction to Reactive Programming</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Cfg-7MzabvPOLWrrlTVXzA">全面异步化：淘宝反应式架构升级探索</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.baeldung.com/rsocket">Introduction to RSocket</a></li>
-<li><a target="_blank" rel="noopener" href="https://juejin.im/post/5cd04b6e51882540e53fdfa2">我为什么不再推荐RxJava</a></li>
-<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1356284">八个层面比较 Java 8, RxJava, Reactor</a> good</li>
-<li><a target="_blank" rel="noopener" href="http://reactivex.io/">reactivex 官网</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/www6v/reactive-streams-jvm">reactive-streams-jvm git</a></li>
-<li><a target="_blank" rel="noopener" href="http://www.reactive-streams.org/">Reactive Streams</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/get_set/article/details/79455258">（1）什么是响应式编程——响应式Spring的道法术器</a> 未</li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/get_set/article/details/79466402">（2）响应式流——响应式Spring的道法术器</a> 未</li>
 </ol>
 
     </div>
@@ -478,7 +455,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">469</span>
+          <span class="site-state-item-count">470</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -491,7 +468,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/www6vHomeHexo/tags/">
           
-        <span class="site-state-item-count">142</span>
+        <span class="site-state-item-count">143</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
