@@ -299,11 +299,11 @@
 <p>请注意，这两种方法或多或少是等效的，尽管它们在多阶段流水线的情况下略有不同：在触发器版本中，多阶段流水线将独立地在每个阶段切片处理时间“窗口”，因此例如，一个阶段的窗口<em>N</em>中的数据可能会在下一个阶段中代替窗口<em>N</em>-1或<em>N</em>+1;在进入时间版本中，在将数据合并到窗口<em>N</em>后，由于通过水位线（在Cloud Dataflow情况下）、微批边界（在Spark Streaming情况下）或其他协调因素在引擎级别涉及的进展同步，它将在整个流水线的持续时间内保留在窗口<em>N</em>中。</p>
 <p>正如我一再指出的那样，处理时间窗口的一个重大缺点是当输入的观察顺序发生变化时，窗口的内容也会发生变化。为了更具体地说明这一点，我们将查看以下三种用例：<em>事件时间</em>窗口、通过触发器的<em>处理时间</em>窗口和通过进入时间的<em>处理时间</em>窗口。</p>
 <p>每个将应用于两个不同的输入集（因此总共有六个变体）。两个输入集将是完全相同的事件（即相同的值，在相同的事件时间发生），但是观察顺序不同。第一个集将是我们一直看到的观察顺序，标为白色；第二个则将所有值在处理时间轴上向右移动，如图4-1所示，标为紫色。您可以简单地想象，如果风从东边吹而不是从西边吹（即底层的复杂分布式系统以稍微不同的顺序进行了处理），那么紫色示例就是另一种现实可能发生的方式。</p>
-<div id="dplayer16" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer16"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0401.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer10" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer10"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0401.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><em>图4-1。在处理时间中移动输入观察顺序，保持值和事件时间不变</em></p>
 <h3><span id="事件时间窗口">事件时间窗口</span><a href="#事件时间窗口" class="header-anchor">#</a></h3><p>为了建立一个基准，让我们先比较事件时间中固定窗口和基于启发式水位线的两种观察顺序。我们将重用示例2-7&#x2F;图2-10中的早期&#x2F;晚期代码，以获得图4-2中所示的结果。左边实质上是我们之前看到的；右边是第二个观察顺序的结果。这里需要注意的重要事情是，即使输出的总体形状不同（由于处理时间中的不同观察顺序），<em>四个窗口的最终结果仍然相同</em>：14、18、3和12。</p>
-<div id="dplayer17" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer17"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0402.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer11" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer11"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0402.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><em>图4-2. 对相同输入的两个不同处理时间顺序的事件时间窗口</em></p>
 <h3><span id="触发器的处理时间窗口">触发器的处理时间窗口</span><a href="#触发器的处理时间窗口" class="header-anchor">#</a></h3><p>现在，我们将此与刚刚描述的两种处理时间方法进行比较。首先，我们将尝试触发器方法。 实现处理时间“窗口化”的方式有三个方面：|</p>
@@ -325,7 +325,7 @@
 <li>因为处理时间窗口对输入数据的遇到顺序很敏感，所以每个“窗口”的结果对于两个观察顺序中的每一个都不同，尽管事件本身在每个版本中都在技术上相同时发生。</li>
 </ul>
 <p>在左侧，我们得到12、18、18，而在右侧，我们得到7、36、5。</p>
-<div id="dplayer18" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer18"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0403.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer12" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer12"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0403.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><em>图4-3. 通过触发器的处理时间“窗口”，针对相同输入数据的两种不同处理时间排序</em></p>
 <h3><span id="通过进入时间进行处理时间窗口化">通过进入时间进行处理时间窗口化 |</span><a href="#通过进入时间进行处理时间窗口化" class="header-anchor">#</a></h3><p>最后，让我们看一下通过将输入数据的事件时间映射为它们的进入时间来实现的处理时间窗口。在代码方面，这里有四个值得一提的方面：</p>
@@ -352,7 +352,7 @@
 <ul>
 <li>由于在使用进入时间时可以获得完美的水位线，因此实际水位线与理想水位线匹配，向右上方以1的斜率上升。</li>
 </ul>
-<div id="dplayer19" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer19"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0404.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer13" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer13"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0404.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图4-4。通过使用进入时间进行处理时间窗口，在相同输入的两个不同处理时间顺序上</em></p>
 <p>虽然看到了不同实现处理时间窗口的方法是有趣的，但其中的重要教训自第一章以来一直是我一直在强调的：事件时间窗口是无序的，至少在极限情况下（在输入完成之前，实际窗格可能会有所不同）；处理时间窗口则不是。<strong>如果您关心事件实际发生的时间，您必须使用事件时间窗口，否则您的结果将毫无意义。</strong>现在我将结束我的演讲。</p>
 <h1><span id="何地会话窗口">何地：会话窗口</span><a href="#何地会话窗口" class="header-anchor">#</a></h1><p>处理时间窗口已经够了。现在我们回到了经过验证的事件时间窗口，但现在我们将看看我最喜欢的动态数据驱动窗口之一：<em>会话</em>。</p>
@@ -376,7 +376,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team，Integer&gt;&gt;  totals=input</span><br><span class="line">  .apply（Window.into（Sessions.withGapDuration（ONE_MINUTE）)</span><br><span class="line">                .triggering（</span><br><span class="line">                 AfterWatermark（）</span><br><span class="line">                   .withEarlyFirings（AlignedDelay（ONE_MINUTE））</span><br><span class="line">                   .withLateFirings（AfterCount（1））））</span><br><span class="line">  .apply（Sum.integersPerKey（））;</span><br></pre></td></tr></table></figure>
 
 <p>在流引擎上执行，您将获得类似于图4-7所示的内容（请注意，我已经留下了用虚线黑线注释的预期最终会话以供参考）。</p>
-<div id="dplayer20" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer20"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0407.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script>
+<div id="dplayer14" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer14"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0407.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script>
 <p><em>图4-7。使用会话窗口和缩回的早期和后期引发的流引擎</em></p>
 <p>这里有很多事情要做，所以我会向您介绍一些：</p>
 <ul>
@@ -418,7 +418,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</span><br><span class="line">  .apply(Window.into(FixedWindows.of(TWO_MINUTES))</span><br><span class="line">                .triggering(AfterWatermark()))</span><br><span class="line">  .apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
 
 <p>但在这种情况下，我们将并行查看来自相同数据集的两个不同键（见图4-8）。我们将看到这两个键的输出都对齐，因为窗口在所有键上都是对齐的。因此，每次水位线通过窗口的末尾时，我们就会获得<em>N</em>个窗格的实现，其中<em>N</em>是在该窗口中有更新的键的数量。在这个例子中，当<em>N</em>开始以千计、百万或更多来排序时，这种同步的突发性可能会变得有问题。</p>
-<div id="dplayer21" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer21"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0408.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer15" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer15"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0408.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图4-8. 对齐的固定窗口</em></p>
 <p>在不需要跨窗口比较的情况下，通常更希望在时间上均匀地分布窗口完成负载。这使系统负载更可预测，可以减少处理峰值负载的资源预配要求。然而，在大多数系统中，如果系统不支持它们，非对齐的固定窗口是不可用的。但是，通过自定义窗口支持，将默认固定窗口实现进行相对简单的修改即可提供非对齐的固定窗口支持。我们想要做的是继续保证所有被分组在一起的元素的窗口（即具有相同键的元素）具有相同的对齐方式，同时放宽跨不同键的对齐限制。默认的固定窗口策略的代码更改如示例4-6所示。</p>
 <p><em>示例4-6. 简略的UnalignedFixedWindows实现</em></p>
@@ -429,7 +429,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</span><br><span class="line">  .apply(Window.into(UnalignedFixedWindows.of(TWO_MINUTES))</span><br><span class="line">               .triggering(AfterWatermark()))</span><br><span class="line">  .apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
 
 <p>然后，您可以通过比较与之前相同数据集的不同固定窗口对齐方式来查看图4-9的结果（在这种情况下，我选择了两个对齐之间的最大相位移，以最清楚地说明好处，因为在大量键的随机选择相位将产生类似的效果）。</p>
-<div id="dplayer22" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer22"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0409.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer16" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer16"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0409.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图4-9. 非对齐的固定窗口</em></p>
 <p>请注意，我们没有在同时发出多个键的多个窗格的情况。相反，窗格以更均匀的节奏单独到达。这是另一个例子，在用例允许的情况下，在一个维度上进行权衡（跨键比较的能力）以换取另一个维度上的好处（减少峰值资源预配要求）。当您试图尽可能高效地处理大量数据时，这种灵活性至关重要。</p>
 <p>现在让我们看一下固定窗口的第二个变体，它与正在处理的数据更紧密地联系在一起。</p>
@@ -444,7 +444,7 @@
 <p><em>示例4-9。单个水位线触发器的每个元素固定窗口大小</em></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</span><br><span class="line">  .apply(Window.into(PerElementFixedWindows.of(TWO_MINUTES))</span><br><span class="line">               .triggering(AfterWatermark()))</span><br><span class="line">  .apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
 <p>然后查看此管道的实际执行情况（图4-10），很容易看出键A的元素都具有两分钟的窗口大小，而键B的元素具有一分钟的窗口大小。</p>
-<div id="dplayer23" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer23"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0410.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer17" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer17"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0410.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图4-10。每个键的自定义大小固定窗口</em></p>
 <p>这确实不是您可以合理期望系统为您提供的东西；窗口大小偏好存储的性质对于尝试构建到标准API中来说过于特定于用例，因此不合理。尽管如此，正如该客户的需求所展示的那样，这样的用例确实存在。这就是自定义分窗提供的灵活性如此强大的原因。</p>
 <hr>
@@ -469,7 +469,7 @@
 <p><em>示例4-12。通过早期&#x2F;准时&#x2F;延迟API进行早期、准时和延迟触发</em></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</span><br><span class="line">  .apply(Window.into(BoundedSessions</span><br><span class="line">                       .withGapDuration(ONE_MINUTE)</span><br><span class="line">                       .withMaxSize(THREE_MINUTES))</span><br><span class="line">               .triggering(</span><br><span class="line">                 AfterWatermark()</span><br><span class="line">                   .withEarlyFirings(AlignedDelay(ONE_MINUTE))</span><br><span class="line">                   .withLateFirings(AfterCount(1))))</span><br><span class="line">   .apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
 <p>并在我们的运行示例上执行，它可能看起来像图4-11。</p>
-<div id="dplayer24" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer24"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0411.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer18" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer18"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0411.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图4-11。每个键的自定义大小的固定窗口</em></p>
 <p>请注意，值为36且跨越[12:00.26,12:05.20)的大会话，在未经界限的会话实现中从图2-7中现在被分成两个较短的长度为2分钟和2分53秒的会话。</p>
 <p>鉴于目前很少有系统提供自定义窗口支持，值得指出的是，如果使用仅支持无界会话实现的系统来实现这样的东西，将需要更多的工作量。您唯一的真正手段就是编写会话分组逻辑之后的代码，该代码查看生成的会话并在超过长度限制时将其切分。这将需要在事后分解会话的能力，这将取消增量聚合的好处（我们在第7章中更详细地查看），增加成本。它还会消除任何希望通过限制会话长度获得的垃圾邮件保护好处，因为会话首先需要增长到其完整大小，然后才能被切割或截断。</p>
@@ -607,14 +607,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">470</span>
+          <span class="site-state-item-count">471</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/www6vHomeHexo/categories/">
           
-        <span class="site-state-item-count">275</span>
+        <span class="site-state-item-count">276</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
