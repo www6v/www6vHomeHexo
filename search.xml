@@ -3043,6 +3043,72 @@
       </tags>
   </entry>
   <entry>
+    <title>电商 总结</title>
+    <url>/www6vHomeHexo/2022/07/24/eCommerce/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h1><span id="模式">模式</span><a href="#模式" class="header-anchor">#</a></h1><ul>
+<li>B2B(经济组织对经济组织)<ul>
+<li>平台<br>阿里巴巴， 慧聪网, 中国制造网</li>
+<li>工业类<br>震坤行， 1688工业品牌</li>
+</ul>
+</li>
+<li>B2C(经济组织对消费者)<br>当当、京东</li>
+<li>B2B2C(企业对企业对消费者)<ul>
+<li>定义<br>  第一个B指广义的卖方（即成品、半成品、材料提供商等），第二个B指交易平台，即提供卖方与买方的联系平台，同时提供优质的附加服务，C即指买方。</li>
+<li>平台<br>  天猫商城   京东商城   亚马逊中国</li>
+</ul>
+</li>
+<li>C2C(消费者对消费者)<br>淘宝的小店铺</li>
+<li>O2O(网上与网下相结合)<br>大众点评 O2O</li>
+<li>M2C(生产厂商对消费者)</li>
+</ul>
+<h1><span id="用户">用户</span><a href="#用户" class="header-anchor">#</a></h1><ul>
+<li>每天新增注册用户数＝UV*1%(参考数据)</li>
+<li>活跃用户＝注册用户&#x2F;10(参考数据)</li>
+<li>最高同时在线＝活跃用户*20%(参考数据)</li>
+<li>收费交易客户数＝活跃用户*5%(参考数据)</li>
+<li>销售额：收费交易客户数*商品平均价格</li>
+<li>客单价: per customer transaction零售术语又称ATV，即每位顾客平均购买商品金额</li>
+</ul>
+<h1><span id="商品物流及客户管理">商品物流及客户管理</span><a href="#商品物流及客户管理" class="header-anchor">#</a></h1><ul>
+<li><p>QC：即英文Quality Control的简称，中文意义是品质控制，又称质检</p>
+</li>
+<li><p>SKU：即英文Stock Keeping Unit的简称，即库存进出计量的单位</p>
+</li>
+<li><p>3PL：即第三方物流(Third Party Logistics)</p>
+</li>
+<li><p>实际库存：实际仓库中的实际库存量。</p>
+</li>
+<li><p>虚拟库存：即网站前台展示的库存数量，是电商行业特定属性的产物</p>
+</li>
+<li><p>库存预警：库存预警是指设置一个库存警戒线</p>
+</li>
+<li><p>ITO库存周转率：Inventory turn over，一般缩写为ITO，一种衡量材料在工厂里或是整条价值流中，流动快慢的标准。</p>
+</li>
+<li><p>SRM是Supplier Relationship Management的缩写，即供应商关系管理。</p>
+</li>
+<li><p>ERP是Enterprise Resource Planning的缩写，即企业资源计划。</p>
+</li>
+<li><p>OMS是Order Management System的缩写，即订单管理系统。</p>
+</li>
+<li><p>CRM：是Customer Relationship Management的缩写，即客户关系管理。</p>
+</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://note.youdao.com/s/1FbvLSjw">【扫盲】史上最全的互联网专业词语汇总，小白必备，人手一套！</a></p>
+]]></content>
+      <categories>
+        <category>架构</category>
+        <category>应用架构</category>
+        <category>电商</category>
+      </categories>
+      <tags>
+        <tag>应用架构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>整洁架构</title>
     <url>/www6vHomeHexo/2022/07/22/cleanCode/</url>
     <content><![CDATA[<p></p>
@@ -5509,12 +5575,38 @@
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
-<h3><span id="性能分析-7步法-1">性能分析 7步法 [1]</span><a href="#性能分析-7步法-1" class="header-anchor">#</a></h3><p>第一步：压力场景数据。<br>第二步：分析架构图。<br>第三步：拆分响应时间。<br>第四步：全局监控分析。 [3]<br>第五步：定向监控分析。 [3]<br>第六步：判断性能瓶颈点。<br>第七步：确定解决方案。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E6%96%B9%E6%B3%95">方法</a><ul>
+<li><a href="#%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90-7%E6%AD%A5%E6%B3%95-1">性能分析 7步法 [1]</a></li>
+<li><a href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%9C%BA%E6%99%AF-2">性能测试场景 [2]</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B7%A5%E5%85%B7">工具</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="方法">方法</span><a href="#方法" class="header-anchor">#</a></h1><h3><span id="性能分析-7步法-1">性能分析 7步法 [1]</span><a href="#性能分析-7步法-1" class="header-anchor">#</a></h3><p>第一步：压力场景数据。<br>第二步：分析架构图。<br>第三步：拆分响应时间。<br>第四步：全局监控分析。 [3]<br>第五步：定向监控分析。 [3]<br>第六步：判断性能瓶颈点。<br>第七步：确定解决方案。</p>
 <h3><span id="性能测试场景-2">性能测试场景 [2]</span><a href="#性能测试场景-2" class="header-anchor">#</a></h3><p>基准场景<br>容量场景<br>稳定性场景<br>异常场景</p>
 <img src="/www6vHomeHexo/2022/06/16/performanceAnalysis/p1.png" class width="100" height="50">
 
-
+<h1><span id="工具">工具</span><a href="#工具" class="header-anchor">#</a></h1><ul>
+<li>Java性能分析<ul>
+<li>工具<ul>
+<li>btrace， 慢响应，生产用</li>
+<li>排查占cpu最多的线程</li>
+<li>JVM 工具</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li>《03 | 核心分析逻辑：所有的性能分析，靠这七步都能搞定》    高楼</li>
 <li>《10 | 设计基准场景需要注意哪些关键点？ 》 高楼</li>
@@ -25405,15 +25497,20 @@ nq： 不排队调度
 <li>粗化</li>
 </ul>
 </li>
-<li>最小化锁范围</li>
+<li>最小化锁范围<ul>
 <li>Eg， 单线程写文件</li>
+</ul>
+</li>
 <li>锁拆分，分散锁<ul>
 <li>减少竞争，race condition</li>
 <li>eg. ConcurrentHashMap，LongAdder</li>
 </ul>
 </li>
 <li>分离锁<ul>
-<li>读写锁</li>
+<li>读写锁<ul>
+<li>读多写少的场景</li>
+</ul>
+</li>
 <li>队头队尾， 两把锁</li>
 </ul>
 </li>
@@ -25421,13 +25518,10 @@ nq： 不排队调度
 <li>CAS</li>
 </ul>
 </li>
-<li>读写锁<ul>
-<li>读多写少的场景</li>
 </ul>
+<p>	  </p>
 </li>
-</ul>
-</li>
-<li>并行[1]<ul>
+<li>并行  【1】<ul>
 <li>多线程<ul>
 <li>fork-join模式【2】</li>
 <li>本地化 Eg. ThreadLocal</li>
@@ -25451,12 +25545,6 @@ nq： 不排队调度
 </li>
 </ul>
 </li>
-<li>工具<ul>
-<li>btrace， 慢响应，生产用</li>
-<li>排查占cpu最多的线程</li>
-<li>JVM 工具</li>
-</ul>
-</li>
 <li>池化(重用)<ul>
 <li>Eg. 线程池，数据库连接池</li>
 </ul>
@@ -25470,7 +25558,7 @@ nq： 不排队调度
 </li>
 <li>异步操作  【8】</li>
 <li>简化代码</li>
-<li>热点[5]</li>
+<li>热点优化  【5】</li>
 <li>数值精度<ul>
 <li>Eg. 双精度 单精度</li>
 </ul>
@@ -25560,7 +25648,11 @@ nq： 不排队调度
 </ul>
 <h1><span id="数据库优化">数据库优化</span><a href="#数据库优化" class="header-anchor">#</a></h1><ul>
 <li>索引优化</li>
-<li>大表优化</li>
+<li>大表优化<ul>
+<li>水平拆分</li>
+<li>垂直拆分</li>
+</ul>
+</li>
 <li>慢SQL优化</li>
 <li>乐观锁</li>
 </ul>
@@ -25577,8 +25669,8 @@ nq： 不排队调度
 </ul>
 </li>
 <li>分布式<ul>
-<li>并行[1]</li>
-<li>延迟<br>  Eg. 跨IDC网络延迟 上海&lt;-&gt;北京  50ms</li>
+<li>并行 【1】</li>
+<li>延迟<br>Eg.  跨IDC网络延迟 上海&lt;-&gt;北京  50ms</li>
 </ul>
 </li>
 <li>节省空间&#x2F;时间换空间【8、11】<ul>
@@ -25595,7 +25687,7 @@ nq： 不排队调度
 </ul>
 </li>
 <li>系统结构<ul>
-<li>大型系统分解成模块<br>  “粗略估算”，性能分析</li>
+<li>大型系统分解成模块<br>“粗略估算”，性能分析</li>
 </ul>
 </li>
 <li>系统软件<ul>
@@ -25608,7 +25700,7 @@ nq： 不排队调度
 <h1><span id="linux系统优化">Linux系统优化</span><a href="#linux系统优化" class="header-anchor">#</a></h1><ul>
 <li>系统<ul>
 <li>文件系统<ul>
-<li>pageCache, 预读<br>  Eg. Rocketmq</li>
+<li>pageCache, 预读<br>Eg. Rocketmq</li>
 <li>顺序写，随机读</li>
 <li>大块读优于小块读</li>
 </ul>
@@ -25616,18 +25708,18 @@ nq： 不排队调度
 <li>CPU<ul>
 <li>CPU绑定</li>
 <li>CPU上下文切换<ul>
-<li>Eg. Redis单线程<br>  CPU不是Redis的瓶颈，<br>  瓶颈可能是内存的大小或者网络带宽</li>
+<li>Eg. Redis单线程<br>CPU不是Redis的瓶颈，<br>瓶颈可能是内存的大小或者网络带宽</li>
 </ul>
 </li>
 <li>CPU缓存<ul>
-<li>问题：伪共享<br>  解决：cacheline padding</li>
+<li>问题：伪共享<br>解决：cacheline padding</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>网络I&#x2F;O<ul>
 <li>NIO,非阻塞I&#x2F;O，epoll</li>
-<li>协议调优<br>  TCP参数</li>
+<li>协议调优<br>TCP参数</li>
 </ul>
 </li>
 <li>内存<ul>

@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-11-21T04:11:33.000Z">
-<meta property="article:modified_time" content="2023-07-24T01:35:07.889Z">
+<meta property="article:modified_time" content="2023-07-24T03:06:47.481Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="性能">
 <meta property="article:tag" content="基础">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-24 09:35:07" itemprop="dateModified" datetime="2023-07-24T09:35:07+08:00">2023-07-24</time>
+                <time title="修改时间：2023-07-24 11:06:47" itemprop="dateModified" datetime="2023-07-24T11:06:47+08:00">2023-07-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -285,15 +285,20 @@
 <li>粗化</li>
 </ul>
 </li>
-<li>最小化锁范围</li>
+<li>最小化锁范围<ul>
 <li>Eg， 单线程写文件</li>
+</ul>
+</li>
 <li>锁拆分，分散锁<ul>
 <li>减少竞争，race condition</li>
 <li>eg. ConcurrentHashMap，LongAdder</li>
 </ul>
 </li>
 <li>分离锁<ul>
-<li>读写锁</li>
+<li>读写锁<ul>
+<li>读多写少的场景</li>
+</ul>
+</li>
 <li>队头队尾， 两把锁</li>
 </ul>
 </li>
@@ -301,13 +306,10 @@
 <li>CAS</li>
 </ul>
 </li>
-<li>读写锁<ul>
-<li>读多写少的场景</li>
 </ul>
+<p>	  </p>
 </li>
-</ul>
-</li>
-<li>并行[1]<ul>
+<li>并行  【1】<ul>
 <li>多线程<ul>
 <li>fork-join模式【2】</li>
 <li>本地化 Eg. ThreadLocal</li>
@@ -331,12 +333,6 @@
 </li>
 </ul>
 </li>
-<li>工具<ul>
-<li>btrace， 慢响应，生产用</li>
-<li>排查占cpu最多的线程</li>
-<li>JVM 工具</li>
-</ul>
-</li>
 <li>池化(重用)<ul>
 <li>Eg. 线程池，数据库连接池</li>
 </ul>
@@ -350,7 +346,7 @@
 </li>
 <li>异步操作  【8】</li>
 <li>简化代码</li>
-<li>热点[5]</li>
+<li>热点优化  【5】</li>
 <li>数值精度<ul>
 <li>Eg. 双精度 单精度</li>
 </ul>
@@ -440,7 +436,11 @@
 </ul>
 <h1><span id="数据库优化">数据库优化</span><a href="#数据库优化" class="header-anchor">#</a></h1><ul>
 <li>索引优化</li>
-<li>大表优化</li>
+<li>大表优化<ul>
+<li>水平拆分</li>
+<li>垂直拆分</li>
+</ul>
+</li>
 <li>慢SQL优化</li>
 <li>乐观锁</li>
 </ul>
@@ -457,8 +457,8 @@
 </ul>
 </li>
 <li>分布式<ul>
-<li>并行[1]</li>
-<li>延迟<br>  Eg. 跨IDC网络延迟 上海&lt;-&gt;北京  50ms</li>
+<li>并行 【1】</li>
+<li>延迟<br>Eg.  跨IDC网络延迟 上海&lt;-&gt;北京  50ms</li>
 </ul>
 </li>
 <li>节省空间&#x2F;时间换空间【8、11】<ul>
@@ -475,7 +475,7 @@
 </ul>
 </li>
 <li>系统结构<ul>
-<li>大型系统分解成模块<br>  “粗略估算”，性能分析</li>
+<li>大型系统分解成模块<br>“粗略估算”，性能分析</li>
 </ul>
 </li>
 <li>系统软件<ul>
@@ -488,7 +488,7 @@
 <h1><span id="linux系统优化">Linux系统优化</span><a href="#linux系统优化" class="header-anchor">#</a></h1><ul>
 <li>系统<ul>
 <li>文件系统<ul>
-<li>pageCache, 预读<br>  Eg. Rocketmq</li>
+<li>pageCache, 预读<br>Eg. Rocketmq</li>
 <li>顺序写，随机读</li>
 <li>大块读优于小块读</li>
 </ul>
@@ -496,18 +496,18 @@
 <li>CPU<ul>
 <li>CPU绑定</li>
 <li>CPU上下文切换<ul>
-<li>Eg. Redis单线程<br>  CPU不是Redis的瓶颈，<br>  瓶颈可能是内存的大小或者网络带宽</li>
+<li>Eg. Redis单线程<br>CPU不是Redis的瓶颈，<br>瓶颈可能是内存的大小或者网络带宽</li>
 </ul>
 </li>
 <li>CPU缓存<ul>
-<li>问题：伪共享<br>  解决：cacheline padding</li>
+<li>问题：伪共享<br>解决：cacheline padding</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>网络I&#x2F;O<ul>
 <li>NIO,非阻塞I&#x2F;O，epoll</li>
-<li>协议调优<br>  TCP参数</li>
+<li>协议调优<br>TCP参数</li>
 </ul>
 </li>
 <li>内存<ul>
@@ -652,14 +652,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">471</span>
+          <span class="site-state-item-count">472</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/www6vHomeHexo/categories/">
           
-        <span class="site-state-item-count">276</span>
+        <span class="site-state-item-count">277</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
