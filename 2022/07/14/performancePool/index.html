@@ -25,11 +25,13 @@
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/07/14/performancePool/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/07/14/performancePool/jdk-threadpool.PNG">
 <meta property="article:published_time" content="2022-07-14T03:56:50.000Z">
 <meta property="article:modified_time" content="2023-07-14T04:05:35.046Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="性能">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2022/07/14/performancePool/jdk-threadpool.PNG">
 
 <link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/07/14/performancePool/">
 
@@ -286,7 +288,7 @@
 <li>连接的可用性<br> 使用连接发送<strong>“select 1”</strong>的命令给数据库看是否会抛出异常，如果抛出异常则将这个连接从连接池中移除，并且尝试关闭.</li>
 </ul>
 <h1><span id="线程池">线程池</span><a href="#线程池" class="header-anchor">#</a></h1><h3><span id="jdk线程池">JDK线程池</span><a href="#jdk线程池" class="header-anchor">#</a></h3><p>重要参数： <strong>coreThreadCount</strong> 和 <strong>maxThreadCount</strong>，</p>
-
+<img src="/www6vHomeHexo/2022/07/14/performancePool/jdk-threadpool.PNG" class title="JDK线程池">
 
 <p>[chat]<br>当大量请求进入线程池时，ThreadPoolExecutor 会根据其内部的线程池参数来处理请求。具体来说，当请求进入线程池时，ThreadPoolExecutor 会首先尝试将请求放入工作队列中，如果工作队列已满，则会根据线程池的配置来执行饱和策略，例如抛出异常、直接拒绝请求、阻塞等待或调用调用者运行等待任务。</p>
 <ul>

@@ -25,15 +25,13 @@
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2018/11/21/performance/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2018/11/21/performance/performance.jpg">
 <meta property="article:published_time" content="2018-11-21T04:11:33.000Z">
-<meta property="article:modified_time" content="2023-07-19T03:46:32.135Z">
+<meta property="article:modified_time" content="2023-07-24T01:35:07.889Z">
 <meta property="article:author" content="Wang Wei">
-<meta property="article:tag" content="基础">
 <meta property="article:tag" content="性能">
+<meta property="article:tag" content="基础">
 <meta property="article:tag" content="性能优化">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2018/11/21/performance/performance.jpg">
 
 <link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2018/11/21/performance/">
 
@@ -228,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-19 11:46:32" itemprop="dateModified" datetime="2023-07-19T11:46:32+08:00">2023-07-19</time>
+                <time title="修改时间：2023-07-24 09:35:07" itemprop="dateModified" datetime="2023-07-24T09:35:07+08:00">2023-07-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -265,8 +263,11 @@
 <ul>
 <li><a href="#%E5%85%B3%E9%94%AE%E8%AF%8D">关键词</a></li>
 <li><a href="#%E5%BA%94%E7%94%A8%E4%BC%98%E5%8C%96">应用优化</a></li>
-<li><a href="#%E9%80%9A%E7%94%A8%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95">通用优化方法</a></li>
+<li><a href="#%E7%AE%97%E6%B3%95%E4%BC%98%E5%8C%96">算法优化</a></li>
+<li><a href="#%E9%80%9A%E7%94%A8%E4%BC%98%E5%8C%96">通用优化</a></li>
 <li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96">数据库优化</a></li>
+<li><a href="#%E6%9E%B6%E6%9E%84%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96">架构&#x2F;系统优化</a></li>
+<li><a href="#linux%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96">Linux系统优化</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
 <li><a href="#%E5%85%B6%E4%BB%96">其他</a></li>
 </ul>
@@ -277,8 +278,6 @@
 </div>
 
 <h1><span id="关键词">关键词</span><a href="#关键词" class="header-anchor">#</a></h1><p>锁优化，池化，数据库优化，架构优化， 系统优化，性能测试， 监控 </p>
-<img src="/www6vHomeHexo/2018/11/21/performance/performance.jpg" class title="性能优化总结">
-
 <h1><span id="应用优化">应用优化</span><a href="#应用优化" class="header-anchor">#</a></h1><ul>
 <li>应用<ul>
 <li>锁 【4】<ul>
@@ -345,11 +344,11 @@
 <li>代码调优<ul>
 <li>字符串操作</li>
 <li>多线程调优<ul>
-<li>锁[4]</li>
+<li>锁 【4】</li>
 <li>线程个数【9】</li>
 </ul>
 </li>
-<li>异步操作[3]</li>
+<li>异步操作  【8】</li>
 <li>简化代码</li>
 <li>热点[5]</li>
 <li>数值精度<ul>
@@ -358,6 +357,11 @@
 </li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+<h1><span id="算法优化">算法优化</span><a href="#算法优化" class="header-anchor">#</a></h1><ul>
+<li>算法<ul>
 <li>算法调优<ul>
 <li>分而治之 【6】<ul>
 <li>fork-join【2】</li>
@@ -410,9 +414,9 @@
 </ul>
 </li>
 </ul>
-<h1><span id="通用优化方法">通用优化方法</span><a href="#通用优化方法" class="header-anchor">#</a></h1><ul>
+<h1><span id="通用优化">通用优化</span><a href="#通用优化" class="header-anchor">#</a></h1><ul>
 <li>通用方法<ul>
-<li>异步化  【3】<ul>
+<li>异步化  【8】<ul>
 <li>消息<ul>
 <li>进程内<br> Eg.  Disruptor, EventBus</li>
 <li>Broker</li>
@@ -434,38 +438,99 @@
 </ul>
 </li>
 </ul>
-<p>​	</p>
 <h1><span id="数据库优化">数据库优化</span><a href="#数据库优化" class="header-anchor">#</a></h1><ul>
 <li>索引优化</li>
 <li>大表优化</li>
 <li>慢SQL优化</li>
 <li>乐观锁</li>
 </ul>
+<h1><span id="架构x2f系统优化">架构&#x2F;系统优化</span><a href="#架构x2f系统优化" class="header-anchor">#</a></h1><ul>
+<li>架构&#x2F;系统优化<ul>
+<li>弹性&#x2F;伸缩<ul>
+<li>资源调度 Eg. k8s</li>
+<li>资源扩容</li>
+</ul>
+</li>
+<li>可扩展<ul>
+<li>垂直拆分</li>
+<li>水平拆分</li>
+</ul>
+</li>
+<li>分布式<ul>
+<li>并行[1]</li>
+<li>延迟<br>  Eg. 跨IDC网络延迟 上海&lt;-&gt;北京  50ms</li>
+</ul>
+</li>
+<li>节省空间&#x2F;时间换空间【8、11】<ul>
+<li>不存储，重新计算</li>
+<li>稀疏数据结构<br>  Eg. 稀疏矩阵</li>
+<li>数据压缩传输<br>  RSYNC 的核心算法<br>  Huffman 编码压缩算法</li>
+<li>动态分配策略<br>  Eg. ArrayList(10)，HashMap(16)的动态扩展</li>
+<li>垃圾回收</li>
+</ul>
+</li>
+<li>空间换时间<ul>
+<li>缓存</li>
+<li>数据冗余，replication</li>
+</ul>
+</li>
+<li>系统结构<ul>
+<li>大型系统分解成模块<br>  “粗略估算”，性能分析</li>
+</ul>
+</li>
+<li>系统软件<ul>
+<li>替换更快的操作系统、中间件、数据库、编译器</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1><span id="linux系统优化">Linux系统优化</span><a href="#linux系统优化" class="header-anchor">#</a></h1><ul>
+<li>系统<ul>
+<li>文件系统<ul>
+<li>pageCache, 预读<br>  Eg. Rocketmq</li>
+<li>顺序写，随机读</li>
+<li>大块读优于小块读</li>
+</ul>
+</li>
+<li>CPU<ul>
+<li>CPU绑定</li>
+<li>CPU上下文切换<ul>
+<li>Eg. Redis单线程<br>  CPU不是Redis的瓶颈，<br>  瓶颈可能是内存的大小或者网络带宽</li>
+</ul>
+</li>
+<li>CPU缓存<ul>
+<li>问题：伪共享<br>  解决：cacheline padding</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>网络I&#x2F;O<ul>
+<li>NIO,非阻塞I&#x2F;O，epoll</li>
+<li>协议调优<br>  TCP参数</li>
+</ul>
+</li>
+<li>内存<ul>
+<li>zeroCopy</li>
+<li>HugePage</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><p><a target="_blank" rel="noopener" href="http://dwz.cn/4SrP4L">高性能高并发系统的稳定性保障</a> 京东</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/intro/140">Linux性能优化实战</a>  极客时间</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://coolshell.cn/articles/17381.html">性能测试应该怎么做？</a>  deleted</p>
-</li>
-<li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>  self  deleted
-</li>
-<li><p><a target="_blank" rel="noopener" href="http://blog.jobbole.com/88958/">关于容量预估&#x2F;性能压测的思考</a>  deleted  失效</p>
-</li>
-<li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>   self  重复的 deleted
-</li>
-<li><p>xxx</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://coolshell.cn/articles/7490.html/comment-page-1">性能调优攻略</a>  *** </p>
-</li>
-<li><a href="/www6vHomeHexo/2014/07/02/threadNum/" title="线程池最佳线程数">线程池最佳线程数</a>  self
-</li>
-<li><p><a target="_blank" rel="noopener" href="http://www.codeceo.com/article/algorithm-complexity-table.html">每个程序员都应该收藏的算法复杂度速查表</a></p>
-</li>
-<li><p>《编程珠玑 第2版》 </p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/25487">wordcount设计与优化</a>  竞赛题</p>
-</li>
+<li><a target="_blank" rel="noopener" href="http://dwz.cn/4SrP4L">高性能高并发系统的稳定性保障</a> 京东</li>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/intro/140">Linux性能优化实战</a>  极客时间</li>
+<li><a target="_blank" rel="noopener" href="https://coolshell.cn/articles/17381.html">性能测试应该怎么做？</a>  coolshell  deleted</li>
+<li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>  self  deleted</li>
+<li><a target="_blank" rel="noopener" href="http://blog.jobbole.com/88958/">关于容量预估&#x2F;性能压测的思考</a>  deleted  失效</li>
+<li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>   self  重复的 deleted</li>
+<li>xxx</li>
+<li><a target="_blank" rel="noopener" href="https://coolshell.cn/articles/7490.html/comment-page-1">性能调优攻略</a>  coolshell  *** </li>
+<li><a href="/www6vHomeHexo/2014/07/02/threadNum/" title="线程池最佳线程数">线程池最佳线程数</a>  self</li>
+<li><a target="_blank" rel="noopener" href="http://www.codeceo.com/article/algorithm-complexity-table.html">每个程序员都应该收藏的算法复杂度速查表</a></li>
+<li>《编程珠玑 第2版》 </li>
+<li><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/25487">wordcount设计与优化</a>  竞赛题</li>
 </ol>
 <h3><span id="其他">其他</span><a href="#其他" class="header-anchor">#</a></h3><ol start="100">
 <li><a target="_blank" rel="noopener" href="https://colin-scott.github.io/personal_website/research/interactive_latency.html">latency</a>  未  </li>
@@ -498,8 +563,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/www6vHomeHexo/tags/%E5%9F%BA%E7%A1%80/" rel="tag"># 基础</a>
               <a href="/www6vHomeHexo/tags/%E6%80%A7%E8%83%BD/" rel="tag"># 性能</a>
+              <a href="/www6vHomeHexo/tags/%E5%9F%BA%E7%A1%80/" rel="tag"># 基础</a>
               <a href="/www6vHomeHexo/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag"># 性能优化</a>
           </div>
 
