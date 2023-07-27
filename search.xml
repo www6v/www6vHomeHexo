@@ -935,7 +935,11 @@
 </li>
 </ul>
 <ul>
-<li><a href="../../../../categories/%E6%9E%B6%E6%9E%84/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/">系统架构</a>  category</li>
+<li><a href="../../../../categories/%E6%9E%B6%E6%9E%84/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/">系统架构</a>  category<ul>
+<li><a href="/www6vHomeHexo/2022/06/26/available/" title="高可用 Available">高可用 Available</a> </li>
+<li><a href="/www6vHomeHexo/2017/06/17/multiLive/" title="异地多活总结">异地多活总结</a></li>
+</ul>
+</li>
 </ul>
 <h2><span id="sre">SRE</span><a href="#sre" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/03/13/sre/" title="SRE 总结">SRE 总结</a></li>
@@ -18085,8 +18089,9 @@ BGP 协议传输的消息
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h1><span id="phd-certificate">PH.D Certificate</span><a href="#phd-certificate" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2020/11/08/phdOffer/certificate.JPG" class title="Ph.D. Certificate">
 
-<img src="/www6vHomeHexo/2020/11/08/phdOffer/phdOffer.JPG" class title="Ph.D. Offer">]]></content>
+<h1><span id="phd-offer">PH.D Offer</span><a href="#phd-offer" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2020/11/08/phdOffer/phdOffer.JPG" class title="Ph.D. Offer">]]></content>
       <categories>
         <category>PhD</category>
       </categories>
@@ -26858,9 +26863,51 @@ nq： 不排队调度
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<img src="/www6vHomeHexo/2017/06/17/multiLive/multiLive.jpg" class title="异地多活总结">
 
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h1><span id="异地多活">异地多活</span><a href="#异地多活" class="header-anchor">#</a></h1><ul>
+<li>异地多活<ul>
+<li>阿里 【1】<ul>
+<li>基于Userid的单元化异地多活</li>
+<li>主要改造整个交易链路</li>
+<li>交易链路（单元）和非交易链路（中心）之间通过DRC同步数据。单元里的数据是全量、只读的</li>
+</ul>
+</li>
+<li>饿了么 【2】<ul>
+<li>思路+原则<ul>
+<li>基于地理位置的异地多活。用户、商家、骑手都会在相同的机房</li>
+<li>可用性优先，放宽数据一致性</li>
+</ul>
+</li>
+<li>主要组件<ul>
+<li>GZS（元数据）+APIRouter（流量路由）</li>
+<li>SOA Proxy：内部网关、IDC之间调用</li>
+<li>Data Replication Center：数据库复制、数据库和cache之间的一致性</li>
+<li>Data Access Layer</li>
+<li>zk,mq在IDC之间的同步</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据一致性<ul>
+<li>强一致场景<ul>
+<li>都读主节点</li>
+</ul>
+</li>
+<li>最终一致性场景<ul>
+<li>DRC异步同步数据</li>
+<li>业务层异步分发数据</li>
+</ul>
+</li>
+<li>数据丢失<ul>
+<li>通过算法在不同机房都能生成相同的</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li>《尽在双11:阿里巴巴技术演进与超越》 1.2节</li>
 <li><a href="https://zhuanlan.zhihu.com/p/32009822">饿了么异地多活技术实现（一）总体介绍</a>   饿了么框架工具部  知乎专栏</li>
 <li><a href="https://blog.csdn.net/lql_h/article/details/95588996">SET化架构设计</a>  lql_h  未</li>
