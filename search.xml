@@ -14153,6 +14153,21 @@ BGP 协议传输的消息
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E6%A6%82%E5%BF%B5">概念</a></li>
+<li><a href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD">核心功能</a><br>- <a href="#%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9%E5%8A%A0%E9%80%9F">动态内容加速</a><br>- <a href="#%E9%9D%99%E6%80%81%E5%86%85%E5%AE%B9%E5%8A%A0%E9%80%9F">静态内容加速</a><br>- <a href="#%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4">安全防护</a></li>
+<li><a href="#%E6%A0%B8%E5%BF%83%E5%AD%90%E7%B3%BB%E7%BB%9F">核心子系统</a><br>- <a href="#%E8%B0%83%E5%BA%A6%E7%B3%BB%E7%BB%9F">调度系统</a><br>- <a href="#%E8%8A%82%E7%82%B9%E7%B3%BB%E7%BB%9F">节点系统</a><br>- <a href="#%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93">网络传输</a><br>- <a href="#%E8%BF%90%E8%90%A5%E6%94%AF%E6%92%91">运营支撑</a></li>
+<li><a href="#%E5%8A%A8%E6%80%81%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F">动态加速系统</a><br>- <a href="#%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6">核心组件</a><br>- <a href="#%E5%9B%9B%E5%B1%82%E5%8A%A8%E6%80%81%E5%8A%A0%E9%80%9F">四层动态加速</a><br>- <a href="#%E4%B8%83%E5%B1%82%E5%8A%A8%E6%80%81%E5%8A%A0%E9%80%9F">七层动态加速</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
 <h2><span id="概念">概念</span><a href="#概念" class="header-anchor">#</a></h2><p>边缘服务器<br>降低用户访问时延， 减少公网流量</p>
 <h2><span id="核心功能">核心功能</span><a href="#核心功能" class="header-anchor">#</a></h2><h5><span id="动态内容加速">动态内容加速</span><a href="#动态内容加速" class="header-anchor">#</a></h5><ul>
 <li>对于动态内容(不可缓存的内容), 可以优化路由来加速</li>
@@ -14192,7 +14207,7 @@ BGP 协议传输的消息
 <li>基础数据管理组件</li>
 <li>离线日志组件</li>
 </ul>
-<h5><span id="四层动态加速">四层动态加速</span><a href="#四层动态加速" class="header-anchor">#</a></h5><h5><span id="七层动态加速">七层动态加速</span><a href="#七层动态加速" class="header-anchor">#</a></h5><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>《CDN技术架构》  阿里云</p>
+<h5><span id="四层动态加速">四层动态加速</span><a href="#四层动态加速" class="header-anchor">#</a></h5><h5><span id="七层动态加速">七层动态加速</span><a href="#七层动态加速" class="header-anchor">#</a></h5><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>《CDN技术架构》  阿里云  有pdf</p>
 ]]></content>
       <categories>
         <category>云计算</category>
@@ -24727,7 +24742,9 @@ nq： 不排队调度
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h1><span id="多级缓存-5">多级缓存 [5?]</span><a href="#多级缓存-5" class="header-anchor">#</a></h1><h3><span id="二级缓存">二级缓存</span><a href="#二级缓存" class="header-anchor">#</a></h3><ul>
+<h1><span id="overview">Overview</span><a href="#overview" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2019/05/25/cacheMultiLayer/arch.jpg" class>
+
+<h1><span id="多级缓存-5">多级缓存 [5?]</span><a href="#多级缓存-5" class="header-anchor">#</a></h1><h3><span id="二级缓存本地缓存远程缓存">二级缓存（本地缓存+远程缓存）</span><a href="#二级缓存本地缓存远程缓存" class="header-anchor">#</a></h3><ul>
 <li>二级缓存（本地缓存+远程缓存）<ul>
 <li>远端Cache推全量或者部分的数据到本地cache，并设置过期时间【初始化】</li>
 <li>查询流程<ul>
@@ -24764,8 +24781,10 @@ nq： 不排队调度
 </ul>
 </li>
 </ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="5">
-<li>移动选购线缓存实践 赵思奇 ***</li>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://blog.csdn.net/lee_nacl/article/details/127860463">多级缓存架构</a><br>《架构实战营-第25节课：计算架构模式之多级缓存架构》 V</li>
+<li><a href="http://wed.xjx100.cn/news/154282.html">jetcache：阿里这款多级缓存框架一定要掌握</a> 未</li>
+<li>《移动选购线缓存实践》 赵思奇 ***</li>
 </ol>
 ]]></content>
       <categories>
