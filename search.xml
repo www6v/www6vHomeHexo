@@ -470,7 +470,13 @@
 <h2><span id="系统架构">系统架构</span><a href="#系统架构" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2019/05/02/middleStage/" title="中台战略">中台战略</a></li>
 <li><a href="/www6vHomeHexo/2022/02/02/disaggregationOfComputeAndStorage/" title="存算分离-数据应用">存算分离-数据应用</a></li>
-<li><a href="/www6vHomeHexo/2019/04/28/haSummary/" title="高可用架构  汇总">高可用架构  汇总</a></li>
+<li><a href="/www6vHomeHexo/2019/04/28/haSummary/" title="高可用架构  汇总">高可用架构  汇总</a>
+<ul>
+<li><a href="/www6vHomeHexo/2022/06/26/available/" title="高可用 Available">高可用 Available</a></li>
+</ul>
+</li>
+<li><a href="/www6vHomeHexo/2023/05/13/unifyModel/" title="统一模型">统一模型</a> </li>
+<li><a href="/www6vHomeHexo/2017/06/17/multiLive/" title="异地多活总结">异地多活总结</a></li>
 </ul>
 <h2><span id="系统设计">系统设计</span><a href="#系统设计" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2019/09/13/feed/" title="Feed流 总结">Feed流 总结</a></li>
@@ -479,13 +485,9 @@
 <li><a href="/www6vHomeHexo/2018/05/06/seckill/" title="秒杀系统和商品详情页系统(培训讲义)">秒杀系统和商品详情页系统(培训讲义)</a></li>
 </ul>
 <h2><span id="设计原则">设计原则</span><a href="#设计原则" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2018/09/28/designPrinciple/" title="设计原则">设计原则</a>
-</li>
+<li><a href="/www6vHomeHexo/2018/09/28/designPrinciple/" title="设计原则">设计原则</a></li>
 <li><a href="/www6vHomeHexo/2023/04/02/designOCPspi/" title="开闭原则 - SPI">开闭原则 - SPI</a></li>
 </ul>
-<p>​    </p>
-<p>​    </p>
-<p>​</p>
 ]]></content>
       <categories>
         <category>汇总</category>
@@ -617,7 +619,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Redis[KV]-汇总</title>
+    <title>Redis+缓存 汇总</title>
     <url>/www6vHomeHexo/2021/02/07/nosqlRedisSummary/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -627,7 +629,7 @@
 <!-- toc -->
 
 <ul>
-<li><a href="#%E5%9F%BA%E7%A1%80">基础</a><ul>
+<li><a href="#redis-%E5%9F%BA%E7%A1%80">Redis 基础</a><ul>
 <li><a href="#overviw">overviw</a></li>
 <li><a href="#arch-redis-cluster">Arch &amp; Redis Cluster</a></li>
 <li><a href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">数据类型</a></li>
@@ -637,16 +639,16 @@
 <li><a href="#%E5%85%B6%E4%BB%96">其他</a></li>
 </ul>
 </li>
-<li><a href="#%E6%95%85%E9%9A%9C%E4%BC%98%E5%8C%96">故障&amp;优化</a></li>
-<li><a href="#%E5%BA%94%E7%94%A8">应用</a></li>
-<li><a href="#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90">学习资源</a></li>
+<li><a href="#redis-%E6%95%85%E9%9A%9C%E4%BC%98%E5%8C%96">Redis 故障&amp;优化</a></li>
+<li><a href="#redis-%E5%BA%94%E7%94%A8">Redis 应用</a></li>
+<li><a href="#redis-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90">Redis 学习资源</a></li>
 <li><a href="#%E7%BC%93%E5%AD%98">缓存</a></li>
 </ul>
 <!-- tocstop -->
 
 </div>
 
-<h1><span id="基础">基础</span><a href="#基础" class="header-anchor">#</a></h1><h3><span id="overviw">overviw</span><a href="#overviw" class="header-anchor">#</a></h3><ul>
+<h1><span id="redis-基础">Redis 基础</span><a href="#redis-基础" class="header-anchor">#</a></h1><h3><span id="overviw">overviw</span><a href="#overviw" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2016/11/12/redis/" title="Redis 总结">Redis 总结</a></li>
 <li><a href="/www6vHomeHexo/2022/01/18/redisIO/" title="Redis 的IO模型">Redis 的IO模型</a></li>
 </ul>
@@ -679,13 +681,13 @@
 <h3><span id="其他">其他</span><a href="#其他" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2022/05/14/redisNVM/" title="Redis NVM">Redis NVM</a></li>
 </ul>
-<h1><span id="故障amp优化">故障&amp;优化</span><a href="#故障amp优化" class="header-anchor">#</a></h1><ul>
+<h1><span id="redis-故障amp优化">Redis 故障&amp;优化</span><a href="#redis-故障amp优化" class="header-anchor">#</a></h1><ul>
 <li><a href="/www6vHomeHexo/2021/05/21/redisBigKey/" title="Redis 大Key">Redis 大Key</a> </li>
 <li><a href="/www6vHomeHexo/2022/05/23/redisNodeId/" title="Redis 集群扩容时NodeId问题">Redis 集群扩容时NodeId问题</a></li>
 <li><a href="/www6vHomeHexo/2021/05/24/redisOptimize/" title="Redis 优化建议">Redis 优化建议</a></li>
 <li><a href="/www6vHomeHexo/2022/04/27/redisSLO/" title="Redis SLO">Redis SLO</a></li>
 </ul>
-<h1><span id="应用">应用</span><a href="#应用" class="header-anchor">#</a></h1><ul>
+<h1><span id="redis-应用">Redis 应用</span><a href="#redis-应用" class="header-anchor">#</a></h1><ul>
 <li><a href="/www6vHomeHexo/2021/06/29/redisUseCase/" title="Redis 使用场景UseCase">Redis 使用场景UseCase</a></li>
 <li><a href="/www6vHomeHexo/2022/05/05/redisDistKey/" title="Redis 分布式锁">Redis 分布式锁</a></li>
 <li><a href="/www6vHomeHexo/2022/03/28/redisReliability-1/" title="Redis雪崩、击穿、穿透">Redis雪崩、击穿、穿透</a></li>
@@ -693,7 +695,7 @@
 <li><a href="/www6vHomeHexo/2022/03/25/redisSlowResponse/" title="Redis 慢查询排查">Redis 慢查询排查</a> </li>
 <li><a href="/www6vHomeHexo/2022/06/03/redisHotkey/" title="Redis Hotkey">Redis Hotkey</a></li>
 </ul>
-<h1><span id="学习资源">学习资源</span><a href="#学习资源" class="header-anchor">#</a></h1><ul>
+<h1><span id="redis-学习资源">Redis 学习资源</span><a href="#redis-学习资源" class="header-anchor">#</a></h1><ul>
 <li><a href="/www6vHomeHexo/2021/05/24/redisStudy/" title="Redis 学习资源">Redis 学习资源</a></li>
 </ul>
 <h1><span id="缓存">缓存</span><a href="#缓存" class="header-anchor">#</a></h1><ul>
@@ -14159,9 +14161,10 @@ BGP 协议传输的消息
 
 <ul>
 <li><a href="#%E6%A6%82%E5%BF%B5">概念</a></li>
-<li><a href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD">核心功能</a><br>- <a href="#%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9%E5%8A%A0%E9%80%9F">动态内容加速</a><br>- <a href="#%E9%9D%99%E6%80%81%E5%86%85%E5%AE%B9%E5%8A%A0%E9%80%9F">静态内容加速</a><br>- <a href="#%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4">安全防护</a></li>
-<li><a href="#%E6%A0%B8%E5%BF%83%E5%AD%90%E7%B3%BB%E7%BB%9F">核心子系统</a><br>- <a href="#%E8%B0%83%E5%BA%A6%E7%B3%BB%E7%BB%9F">调度系统</a><br>- <a href="#%E8%8A%82%E7%82%B9%E7%B3%BB%E7%BB%9F">节点系统</a><br>- <a href="#%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93">网络传输</a><br>- <a href="#%E8%BF%90%E8%90%A5%E6%94%AF%E6%92%91">运营支撑</a></li>
-<li><a href="#%E5%8A%A8%E6%80%81%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F">动态加速系统</a><br>- <a href="#%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6">核心组件</a><br>- <a href="#%E5%9B%9B%E5%B1%82%E5%8A%A8%E6%80%81%E5%8A%A0%E9%80%9F">四层动态加速</a><br>- <a href="#%E4%B8%83%E5%B1%82%E5%8A%A8%E6%80%81%E5%8A%A0%E9%80%9F">七层动态加速</a></li>
+<li><a href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD-1">核心功能 [1]</a><br>- <a href="#%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9%E5%8A%A0%E9%80%9F">动态内容加速</a><br>- <a href="#%E9%9D%99%E6%80%81%E5%86%85%E5%AE%B9%E5%8A%A0%E9%80%9F">静态内容加速</a><br>- <a href="#%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4">安全防护</a></li>
+<li><a href="#%E6%95%B4%E4%BD%93%E6%A1%86%E6%9E%B6-1">整体框架 [1]</a></li>
+<li><a href="#%E6%A0%B8%E5%BF%83%E5%AD%90%E7%B3%BB%E7%BB%9F-1">核心子系统 [1]</a><br>- <a href="#%E8%B0%83%E5%BA%A6%E7%B3%BB%E7%BB%9F">调度系统</a><br>- <a href="#%E8%8A%82%E7%82%B9%E7%B3%BB%E7%BB%9F">节点系统</a><br>- <a href="#%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93">网络传输</a><br>- <a href="#%E8%BF%90%E8%90%A5%E6%94%AF%E6%92%91">运营支撑</a></li>
+<li><a href="#%E5%8A%A8%E6%80%81%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F-1">动态加速系统 [1]</a><br>- <a href="#%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6">核心组件</a><br>- <a href="#%E5%9B%9B%E5%B1%82%E5%8A%A8%E6%80%81%E5%8A%A0%E9%80%9F">四层动态加速</a><br>- <a href="#%E4%B8%83%E5%B1%82%E5%8A%A8%E6%80%81%E5%8A%A0%E9%80%9F">七层动态加速</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
@@ -14169,7 +14172,7 @@ BGP 协议传输的消息
 </div>
 
 <h2><span id="概念">概念</span><a href="#概念" class="header-anchor">#</a></h2><p>边缘服务器<br>降低用户访问时延， 减少公网流量</p>
-<h2><span id="核心功能">核心功能</span><a href="#核心功能" class="header-anchor">#</a></h2><h5><span id="动态内容加速">动态内容加速</span><a href="#动态内容加速" class="header-anchor">#</a></h5><ul>
+<h2><span id="核心功能-1">核心功能 [1]</span><a href="#核心功能-1" class="header-anchor">#</a></h2><h5><span id="动态内容加速">动态内容加速</span><a href="#动态内容加速" class="header-anchor">#</a></h5><ul>
 <li>对于动态内容(不可缓存的内容), 可以优化路由来加速</li>
 <li>核心技术<ul>
 <li>应用层路由路径优化</li>
@@ -14177,7 +14180,10 @@ BGP 协议传输的消息
 </ul>
 </li>
 </ul>
-<h5><span id="静态内容加速">静态内容加速</span><a href="#静态内容加速" class="header-anchor">#</a></h5><h5><span id="安全防护">安全防护</span><a href="#安全防护" class="header-anchor">#</a></h5><h2><span id="核心子系统">核心子系统</span><a href="#核心子系统" class="header-anchor">#</a></h2><h5><span id="调度系统">调度系统</span><a href="#调度系统" class="header-anchor">#</a></h5><ul>
+<h5><span id="静态内容加速">静态内容加速</span><a href="#静态内容加速" class="header-anchor">#</a></h5><h5><span id="安全防护">安全防护</span><a href="#安全防护" class="header-anchor">#</a></h5><h2><span id="整体框架-1">整体框架 [1]</span><a href="#整体框架-1" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/01/15/aliyunCDN/arch.JPG" class>
+
+
+<h2><span id="核心子系统-1">核心子系统 [1]</span><a href="#核心子系统-1" class="header-anchor">#</a></h2><h5><span id="调度系统">调度系统</span><a href="#调度系统" class="header-anchor">#</a></h5><ul>
 <li>DNS调度解析服务</li>
 <li>节点资源调度服务</li>
 <li>调度策略维护</li>
@@ -14197,7 +14203,7 @@ BGP 协议传输的消息
 <li>传输协议</li>
 <li>选路方式</li>
 </ul>
-<h5><span id="运营支撑">运营支撑</span><a href="#运营支撑" class="header-anchor">#</a></h5><h2><span id="动态加速系统">动态加速系统</span><a href="#动态加速系统" class="header-anchor">#</a></h2><h5><span id="核心组件">核心组件</span><a href="#核心组件" class="header-anchor">#</a></h5><ul>
+<h5><span id="运营支撑">运营支撑</span><a href="#运营支撑" class="header-anchor">#</a></h5><h2><span id="动态加速系统-1">动态加速系统  [1]</span><a href="#动态加速系统-1" class="header-anchor">#</a></h2><h5><span id="核心组件">核心组件</span><a href="#核心组件" class="header-anchor">#</a></h5><ul>
 <li>节点探测组件<br> 链路质量探测</li>
 <li>路径计算组件<ul>
 <li>计算最优的传输路径</li>
@@ -14207,7 +14213,9 @@ BGP 协议传输的消息
 <li>基础数据管理组件</li>
 <li>离线日志组件</li>
 </ul>
-<h5><span id="四层动态加速">四层动态加速</span><a href="#四层动态加速" class="header-anchor">#</a></h5><h5><span id="七层动态加速">七层动态加速</span><a href="#七层动态加速" class="header-anchor">#</a></h5><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>《CDN技术架构》  阿里云  有pdf</p>
+<h5><span id="四层动态加速">四层动态加速</span><a href="#四层动态加速" class="header-anchor">#</a></h5><h5><span id="七层动态加速">七层动态加速</span><a href="#七层动态加速" class="header-anchor">#</a></h5><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li>《CDN技术架构》  阿里云  有pdf</li>
+</ol>
 ]]></content>
       <categories>
         <category>云计算</category>
@@ -24783,8 +24791,10 @@ nq： 不排队调度
 </ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://blog.csdn.net/lee_nacl/article/details/127860463">多级缓存架构</a><br>《架构实战营-第25节课：计算架构模式之多级缓存架构》 V</li>
+<li>《移动选购线缓存实践》 赵思奇 *** </li>
 <li><a href="http://wed.xjx100.cn/news/154282.html">jetcache：阿里这款多级缓存框架一定要掌握</a> 未</li>
-<li>《移动选购线缓存实践》 赵思奇 ***</li>
+<li><a href="https://blog.51cto.com/u_15989526/6287632">聊聊微服务架构中的多级缓存设计（建议收藏）</a> 未</li>
+<li><a href="https://zhuanlan.zhihu.com/p/606469614">Java分布式缓存一篇文章让你明白你多级缓存的分层架构原理分析</a> 未</li>
 </ol>
 ]]></content>
       <categories>
