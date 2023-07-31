@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Redis 集群  容灾（同城多活）">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/07/31/redisHA/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-31T03:37:41.000Z">
+<meta property="article:modified_time" content="2023-07-31T04:33:29.710Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="KV">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/07/31/redisHA/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Redis 集群  容灾（同城多活） | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2022/07/31/redisHA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redis 集群  容灾（同城多活）
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-07-31 11:37:41" itemprop="dateCreated datePublished" datetime="2022-07-31T11:37:41+08:00">2022-07-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-31 12:33:29" itemprop="dateModified" datetime="2023-07-31T12:33:29+08:00">2023-07-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/KV/" itemprop="url" rel="index"><span itemprop="name">KV</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/KV/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p></p>
+<span id="more"></span>
+
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#1-%E8%83%8C%E6%99%AF">1. 背景</a></li>
+<li><a href="#2-%E7%9B%AE%E6%A0%87">2. 目标</a></li>
+<li><a href="#3-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">3. 解决方案</a><ul>
+<li><a href="#31-%E6%A0%B8%E5%BF%83%E8%83%BD%E5%8A%9B">3.1 核心能力</a></li>
+<li><a href="#32-%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F">3.2 工作模式</a><ul>
+<li><a href="#321-%E6%96%B9%E6%A1%88%E4%B8%80%E8%B7%A8%E6%9C%BA%E6%88%BF%E6%B7%B7%E5%90%88%E9%83%A8%E7%BD%B2"><strong>3.2.1 方案一：跨机房混合部署</strong></a><ul>
+<li><a href="#3211-%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F"><strong>3.2.1.1 部署方式</strong></a></li>
+<li><a href="#3212-%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><strong>3.2.1.2 工作机制</strong></a></li>
+</ul>
+</li>
+<li><a href="#322-%E6%96%B9%E6%A1%88%E4%BA%8C%E4%BC%AA%E4%BB%8E%E8%8A%82%E7%82%B9%E5%8D%95%E5%90%91%E5%90%8C%E6%AD%A5"><strong>3.2.2 方案二：伪从节点+单向同步</strong></a><ul>
+<li><a href="#3221-%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F"><strong>3.2.2.1 部署方式</strong></a></li>
+<li><a href="#3222-%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><strong>3.2.2.2 工作机制</strong></a></li>
+</ul>
+</li>
+<li><a href="#323-%E6%96%B9%E6%A1%88%E4%B8%89%E4%BC%AA%E4%BB%8E%E8%8A%82%E7%82%B9%E5%8F%8C%E5%90%91%E5%90%8C%E6%AD%A5"><strong>3.2.3 方案三：伪从节点+双向同步</strong></a><ul>
+<li><a href="#3231-%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F"><strong>3.2.3.1 部署方式</strong></a></li>
+<li><a href="#3232-%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><strong>3.2.3.2 工作机制</strong></a></li>
+</ul>
+</li>
+<li><a href="#324-%E6%96%B9%E6%A1%88%E5%9B%9B%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%8F%8C%E5%86%99%E5%86%99%E7%9B%91%E5%90%AC%E6%9C%8D%E5%8A%A1mq%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><strong>3.2.4 方案四：客户端双写+写监听服务+MQ消息队列</strong></a><ul>
+<li><a href="#3241-%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F"><strong>3.2.4.1 部署方式</strong></a></li>
+<li><a href="#3242-%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><strong>3.2.4.2 工作机制</strong></a></li>
+</ul>
+</li>
+<li><a href="#33-%E6%88%90%E6%9C%AC%E6%AF%94%E8%BE%83">3.3 成本比较</a></li>
+<li><a href="#34-%E5%9C%BA%E6%99%AF%E5%BB%BA%E8%AE%AE">3.4 场景建议</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#4-%E9%87%8C%E7%A8%8B%E7%A2%91">4. 里程碑</a></li>
+<li><a href="#5-%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3">5. 相关文档</a></li>
+<li><a href="#6-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">6. 参考资料</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="1-背景">1. 背景</span><a href="#1-背景" class="header-anchor">#</a></h1><ul>
+<li>Redis 集群自身已经具备了高可用的特性，即使几个Redis节点异常或者挂掉，Redis 集群也会实现故障自动转移，对应用方来说也可以在很短时间内恢复故障。</li>
+<li>但是，如果发生了机房故障(断电、断网等极端情况)，Redis集群节点全部挂掉（过半主节点挂掉），会造成集群服务不可用，对于核心业务来说是不可接受的。</li>
+<li>为了应对机房故障情况，保障在这种极端情况下，核心业务仍然可以正常访问 Redis 服务，本文将给出适合我司的 Redis 跨机房高可用解决方案。</li>
+</ul>
+<h1><span id="2-目标">2. 目标</span><a href="#2-目标" class="header-anchor">#</a></h1><ul>
+<li>保障单机房整体故障时 Redis 缓存服务正常运行。</li>
+<li>单机房故障 RTO：30s，RPO：1s</li>
+</ul>
+<h1><span id="3-解决方案">3. 解决方案</span><a href="#3-解决方案" class="header-anchor">#</a></h1><h2><span id="31-核心能力">3.1 核心能力</span><a href="#31-核心能力" class="header-anchor">#</a></h2><ul>
+<li>客户端流量路由：支持按一定的策略，把流量分流到不同机房；机房故障后，流量自动流向其他机房。</li>
+<li>服务端故障转移：支持机房故障后，当前机房原来主节点的从节点，通过选举自动倒换成新的主节点。</li>
+<li>管理平台正常服务：任一机房故障，Renault 管理平台使用不受影响。</li>
+</ul>
+<h2><span id="32-工作模式">3.2 工作模式</span><a href="#32-工作模式" class="header-anchor">#</a></h2><p>组件在机房高可用场景下一般有多种工作模式，典型的有单集群模式及多集群模式。本节描述组件在各种工作模式下的部署方式及工作机制。</p>
+<table>
+<thead>
+<tr>
+<th>部署方案</th>
+<th>方案说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>跨机房混合部署</td>
+<td>将Redis集群主节点平均分配到各个机房，主从节点在不同机房</td>
+</tr>
+<tr>
+<td>各机房独立部署集群 + 数据单向同步</td>
+<td>各机房均独立部署集群，集群为热备模式，写请求均写入同一个集群，然后同步到其他集群</td>
+</tr>
+<tr>
+<td>各机房独立部署集群 + 数据双向同步</td>
+<td>每个机房部署一套Redis集群，同步核心业务写请求</td>
+</tr>
+</tbody></table>
+<p>数据同步方法：</p>
+<table>
+<thead>
+<tr>
+<th>数据同步方案</th>
+<th>方案说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>客户端双写</td>
+<td>客户端同时写入到各个集群</td>
+</tr>
+<tr>
+<td>客户端代理</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/Netflix/dynomite">Netflix开源实现的Dynomite</a>，通过代理层接受数据后写入各个需要同步的节点<br><a target="_blank" rel="noopener" href="https://github.com/Netflix/dynomite">改造难度大</a><br><a target="_blank" rel="noopener" href="https://github.com/Netflix/dynomite">客户端需要优化添加Dyno Client</a><br><a target="_blank" rel="noopener" href="https://github.com/Netflix/dynomite">服务端每个节点需要部署Dyno Node</a><br><a target="_blank" rel="noopener" href="https://github.com/Netflix/dynomite">read&#x2F;write性能较原生差异较大，</a>主要体现在write上，之间的差异随着node节点数越多越严重</td>
+</tr>
+<tr>
+<td>伪从节点</td>
+<td>基于Redis的Master-Slave复制协议，实现低延时、高可用的Redis多数据中心、跨公网数据复制<br>携程开源系统：<a target="_blank" rel="noopener" href="https://github.com/ctripcorp/x-pipe">https://github.com/ctripcorp/x-pipe</a><br>阿里RedisShake同步工具</td>
+</tr>
+<tr>
+<td>写事件监听+MQ跨集群消息同步</td>
+<td>读写在本机房，监听写事件 + MQ消息同步到其他机房<br>需要开启事件通知（PUB），修改Redis配置文件中的 notify-keyspace-events 配置（默认的redis并没有开启这个功能）<br>需要独立服务订阅写事件（SUB），并同步到其他集群<br>依赖MQ组件</td>
+</tr>
+</tbody></table>
+<p>不考虑客户端代理、发布订阅写事件</p>
+<p>下面详细比较如下四种方案</p>
+<ul>
+<li>方案一：跨机房混合部署</li>
+<li>方案二：伪从节点+单向同步</li>
+<li>方案三：伪从节点+双向同步</li>
+<li>方案四：客户端双写+写监听服务+MQ消息队列</li>
+</ul>
+<h3><span id="321-方案一跨机房混合部署"><strong>3.2.1 方案一：跨机房混合部署</strong></span><a href="#321-方案一跨机房混合部署" class="header-anchor">#</a></h3><h5><span id="3211-部署方式"><strong>3.2.1.1 部署方式</strong></span><a href="#3211-部署方式" class="header-anchor">#</a></h5><p>Redis集群主节点平均分配到各个机房，每个机房都有一个分片的副本；单个机房主节点数据占比不能过半。</p>
+<p>[pic]</p>
+<p>跨机房部署注意事项</p>
+<ul>
+<li>从节点选举需要过半主节点投票，因此不适合双机房部署，至少需要3机房</li>
+<li>业务请求访问响应时间会不稳定，同机房请求延迟在0.1ms，跨机房请求在1-3ms</li>
+</ul>
+<h5><span id="3212-工作机制"><strong>3.2.1.2 工作机制</strong></span><a href="#3212-工作机制" class="header-anchor">#</a></h5><ul>
+<li><p>流量路由</p>
+</li>
+<li><ul>
+<li>默认读主节点（ReadFrom：Master）</li>
+<li>读从节点（ReadFrom: Replication）</li>
+<li>随机读主从（ReadFrom: Any）</li>
+<li>优先读本地机房（ReadFrom：LocalDC）— TODO：新增路由策略</li>
+</ul>
+</li>
+<li><p>故障切换</p>
+</li>
+<li><ul>
+<li>机房故障后，Redis 集群高可用机制，会将集群在30s内自动倒换并恢复正常访问</li>
+<li>同城机房间网络传输响应延迟2ms内，几乎不影响集群故障判定</li>
+<li>Redis 集群故障转移后，客户端30s内自动刷新集群拓扑关系</li>
+</ul>
+</li>
+<li><p>故障恢复</p>
+</li>
+<li><ul>
+<li>机房恢复后，故障节点 Redis 会以从节点角色自动启动，并全量同步主节点数据（数据同步流量风暴 – 会在机房间路由器端口上限速控制）</li>
+</ul>
+</li>
+<li><p>迁移方案</p>
+</li>
+<li><ul>
+<li>服务核心业务 Redis 集群将会改造成跨三机房部署模式，不影响客户端正常使用</li>
+<li>业务根据实际情况，可将读请求路由策略修改为优先从本地机房读</li>
+</ul>
+</li>
+</ul>
+<p>Redis 故障恢复机制</p>
+<ul>
+<li><p>投票选主：只有持有槽的主节点才会处理故障选举消息，获得N&#x2F;2+1以上选票的从节点将为新主。</p>
+</li>
+<li><p>替换主节点：取消复制 → clusterDelSlot&#x2F;clusterAddSlot把槽委派给自己 → 向集群广播通知变为主节点并接管了故障主节点的槽信息。</p>
+</li>
+<li><ul>
+<li>全量同步过程</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>从服务器连接主服务器，发送SYNC命令；</li>
+<li>主服务器接收到SYNC命名后，开始执行BGSAVE命令生成RDB文件，并使用缓冲区记录此后执行的所有写命令；</li>
+<li>主服务器BGSAVE执行完后，向所有从服务器发送RDB文件；</li>
+<li>从服务器收到快照文件后丢弃所有旧数据，载入收到的RDB快照；</li>
+<li>主服务器快照发送完毕后，开始向从服务器发送缓冲区中的写命令；</li>
+<li>从服务器完成对快照的载入，开始接收命令请求，并执行来自主服务器缓冲区的写命令。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>全量同步数据评估，假如100GRedis集群，三机房，一主二从</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>根据Renault公共集群统计，8G使用容量的Redis，生成RDB文件大小约3G左右，生成时间75s</li>
+<li>RDB传输，单一机房故障恢复时，将有10台Redis执行主从同步，约有30G流量从其他两个机房流入。</li>
+<li>RDB加载，3G RDB数据加载时间约90s</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3><span id="322-方案二伪从节点单向同步"><strong>3.2.2 方案二：伪从节点+单向同步</strong></span><a href="#322-方案二伪从节点单向同步" class="header-anchor">#</a></h3><h5><span id="3221-部署方式"><strong>3.2.2.1 部署方式</strong></span><a href="#3221-部署方式" class="header-anchor">#</a></h5><p>双机房部署，业务读写默认集群，开发部署 Renault 复制服务（<strong>RRS</strong>, Renault Replicate Service），伪装从节点实时将默认集群数据同步到备用集群。</p>
+<p>[pic]</p>
+<h5><span id="3222-工作机制"><strong>3.2.2.2 工作机制</strong></span><a href="#3222-工作机制" class="header-anchor">#</a></h5><ul>
+<li><p>流量路由</p>
+</li>
+<li><ul>
+<li>双机房独立部署，均访问默认集群（热），故障后访问备用集群（冷）</li>
+</ul>
+</li>
+<li><p>故障切换</p>
+</li>
+<li><ul>
+<li>默认集群故障时，SDK熔断默认集群请求，并将流量切换到备用集群</li>
+</ul>
+</li>
+<li><p>故障恢复</p>
+</li>
+<li><ul>
+<li>机房故障恢复后，原默认集群将被reset，RRS 服务将反向同步</li>
+</ul>
+</li>
+<li><p>迁移方案</p>
+</li>
+<li><ul>
+<li>服务核心业务 Redis 集群将会搭建备用集群，并实时同步默认集群数据</li>
+<li>业务客户端需要升级 SDK，支持自动故障切换功能</li>
+</ul>
+</li>
+</ul>
+<p>DC2机房业务客户端自动故障切换：</p>
+<p>[pic]</p>
+<p>故障恢复后（反向同步）：</p>
+<p>[pic]</p>
+<h3><span id="323-方案三伪从节点双向同步"><strong>3.2.3 方案三：伪从节点+双向同步</strong></span><a href="#323-方案三伪从节点双向同步" class="header-anchor">#</a></h3><h5><span id="3231-部署方式"><strong>3.2.3.1 部署方式</strong></span><a href="#3231-部署方式" class="header-anchor">#</a></h5><p>双机房独立部署，均访问本地集群；开发部署 Renault 复制服务（<strong>RRS</strong>, Renault Replicate Service），伪装从节点实时双向同步。</p>
+<p>[pic]</p>
+<h5><span id="3232-工作机制"><strong>3.2.3.2 工作机制</strong></span><a href="#3232-工作机制" class="header-anchor">#</a></h5><ul>
+<li><p>流量路由</p>
+</li>
+<li><ul>
+<li>双机房独立部署，业务优先访问本地机房集群（TODO：需要开发一种集群选择策略）</li>
+<li>RRS 服务双向同步数据（需要解决双向同步成环问题）</li>
+</ul>
+</li>
+<li><p>故障切换</p>
+</li>
+<li><ul>
+<li>DC1机房集群故障时候，上层流量自动切换到DC2机房，Redis层不需要处理</li>
+</ul>
+</li>
+<li><p>故障恢复</p>
+</li>
+<li><ul>
+<li>DC1机房集群故障恢复，首先通过RRS服务从DC2全量同步数据，之后增量同步</li>
+</ul>
+</li>
+<li><p>迁移方案</p>
+</li>
+<li><ul>
+<li>服务核心业务 Redis 集群将会搭建双活集群，并通过 RRS 服务实时双向同步</li>
+<li>业务客户端需要升级 SDK，支持启动时选择哪个集群</li>
+</ul>
+</li>
+</ul>
+<p>数据库层面的多活，双向同步存在以下困难：</p>
+<ul>
+<li><p><strong>两边都改了如何解决冲突？</strong></p>
+</li>
+<li><ul>
+<li>跨机房双写无法保证缓存的一致性，需要应用侧可以容忍对应的缓存不一致场景</li>
+</ul>
+</li>
+<li><p><strong>RRS复制中断或者故障如何处理？</strong></p>
+</li>
+<li><p><strong>数据同步如何防环？</strong></p>
+</li>
+<li><ul>
+<li>方法1：通常需要应用方配置使用，按业务类型分流（不能为通用解决方案）</li>
+<li>方法2：数据层面添加字段标识数据源（带来一定开销，并且对于数值计算类数据不能添加标识）</li>
+<li>方法3：x-pipe - 定制Redis，在内容分发上做处理，服务端能够识别不同的链接类型，在同步数据之初便加以控制在内容分发上做处理，服务端能够识别不同的链接类型，从而做到有的放矢，在同步数据之初便加以控制</li>
+</ul>
+</li>
+</ul>
+<h3><span id="324-方案四客户端双写写监听服务mq消息队列"><strong>3.2.4 方案四：客户端双写+写监听服务+MQ消息队列</strong></span><a href="#324-方案四客户端双写写监听服务mq消息队列" class="header-anchor">#</a></h3><h5><span id="3241-部署方式"><strong>3.2.4.1 部署方式</strong></span><a href="#3241-部署方式" class="header-anchor">#</a></h5><p>双机房&#x2F;三机房每个独立部署，应用客户端均访问本地集群；借助MQ通过异步双写机制双写同步到其他集群。</p>
+<p>[pic]</p>
+<h5><span id="3242-工作机制"><strong>3.2.4.2 工作机制</strong></span><a href="#3242-工作机制" class="header-anchor">#</a></h5><ul>
+<li><p>流量路由</p>
+</li>
+<li><ul>
+<li>多机房独立部署，业务优先访问本地机房集群（同方案三）</li>
+<li>MQ中间件+写事件监听服务做双写同步</li>
+</ul>
+</li>
+<li><p>故障切换</p>
+</li>
+<li><ul>
+<li>DC1机房集群故障时候，上层流量自动切换到DC2机房，Redis层不需要处理（同方案三）</li>
+</ul>
+</li>
+<li><p>故障恢复</p>
+</li>
+<li><ul>
+<li>DC1机房集群故障恢复，首先通过RRS服务从DC2全量同步数据，之后增量同步（同方案三）</li>
+</ul>
+</li>
+<li><p>迁移方案</p>
+</li>
+<li><ul>
+<li>服务核心业务 Redis 集群将会搭建多活集群，并通过 MQ 发布订阅方式实现多集群间双向同步</li>
+<li>业务客户端需要升级 SDK，支持启动时选择哪个集群</li>
+</ul>
+</li>
+</ul>
+<p>双机房&#x2F;三机房每个独立部署，多活部署主要问题：</p>
+<ul>
+<li><p><strong>两边都改了如何解决冲突？</strong></p>
+</li>
+<li><p>跨机房双写<strong>无法保证缓存的一致性</strong>，需要<strong>应用侧</strong>可以<strong>容忍对应的缓存不一致场景</strong>，应用如果依赖缓存强一致性，则不合适该方案。</p>
+</li>
+<li><ul>
+<li>DC1和DC2两边都写了同一个Key，最终互相覆盖</li>
+</ul>
+</li>
+<li><p>如何保证消息的顺序？如何保证消息成功发送及消费？</p>
+</li>
+</ul>
+<h3><span id="33-成本比较">3.3 成本比较</span><a href="#33-成本比较" class="header-anchor">#</a></h3><table>
+<thead>
+<tr>
+<th></th>
+<th>部署成本</th>
+<th>改造成本</th>
+<th>使用成本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>方案一：跨机房混合部署</strong></td>
+<td>成本-低<br>适用于三机房及以上<br>2副本，增加50%容量</td>
+<td>改造成本-低<br>只用按照要求部署集群<br>SDK路由-优先读本地机房</td>
+<td>性能有下降<br>本机房访问不受影响，跨机房访问延迟1-3ms</td>
+</tr>
+<tr>
+<td><strong>方案二：伪从节点+单向同步</strong></td>
+<td>成本-中<br>新增备用集群，增加100%容量<br>部署同步服务</td>
+<td>改造成本-中<br>需要开发集群间数据同步服务（已有待完善）<br>读写分离</td>
+<td>性能有下降<br>本机房访问不受影响，跨机房访问延迟1-3ms<br>读可优化成读本地机房，性能不受影响</td>
+</tr>
+<tr>
+<td><strong>方案三：伪从节点+双向同步</strong></td>
+<td>成本-中<br>各机房均新增集群，双机房增加100%容量，三机房增加200%<br>容量部署同步服务</td>
+<td>改造成本-高<br>双向复制成环很难解决，需要定制Redis<br>两边都写，冲突问题难解决<br>需要开发集群间数据同步服务（已有待完善）</td>
+<td>性能不受影响<br>读写本地机房</td>
+</tr>
+<tr>
+<td><strong>方案四：客户端双写+写监听+MQ消息同步</strong></td>
+<td>成本-高<br>各机房均新增集群，双机房增加100%容量，三机房增加200%容量<br>部署写监听服务<br>部署MQ消息集群</td>
+<td>改造成本-中<br>依赖MQ中间件</td>
+<td>性能稍有下降<br>同步写跨机房访问，性能会严重下降<br>异步写性能稍有下降<br>应用能容忍两边不一致场景</td>
+</tr>
+</tbody></table>
+<p>方案选定：</p>
+<ul>
+<li>目前同城多活选用方案一（<strong>跨机房混合部署</strong>）</li>
+<li>未来异地多活再考虑方案三和四</li>
+</ul>
+<h3><span id="34-场景建议">3.4 场景建议</span><a href="#34-场景建议" class="header-anchor">#</a></h3><p>方案一适应场景</p>
+<ul>
+<li>适用于三机房及以上【两机房故障时候无法成功选举】</li>
+<li>要能接受写缓存时间在1-2ms内【不可避免跨集群写数据，目前sh1读写tx1时延约1.3ms，sh1读写sh1时延约0.2ms】</li>
+<li>配置优先读本地机房的话，能接收读数据时延【主从数据同步毫秒级时延】</li>
+</ul>
+<p>其他场景建议</p>
+<ul>
+<li><p>不接受写缓存慢场景、不接受读从节点数据延迟场景</p>
+</li>
+<li><ul>
+<li>服务端：每个机房都要独立部署Redis集群，并且双向同步数，推荐方案三</li>
+<li>SDK改造：需要支持优先读写本地Redis集群路由策略</li>
+<li>业务端：升级SDK版本</li>
+</ul>
+</li>
+</ul>
+<h1><span id="4-里程碑">4. 里程碑</span><a href="#4-里程碑" class="header-anchor">#</a></h1><p><em>描述组件为了达成机房高可用需要做的事情，包括事项、优先级、预期完成时间、负责人等信息。</em></p>
+<p><em>对于中间件，一般有如下重要时间点：</em></p>
+<ul>
+<li><em>服务端机房高可用方案设计完成</em></li>
+<li><em>服务端机房高可用方案在测试集群验证通过</em></li>
+<li><em>客户端机房高可用方案设计开发完成</em></li>
+<li><em>业务集群机房高可用方案验证：明确 RPO 和 RTO</em></li>
+</ul>
+<p>方案一跨机房混合部署改造事项：</p>
+<ul>
+<li><p>管理平台：</p>
+</li>
+<li><ul>
+<li>搭建核心集群</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>机器添加机房标识 (Done)，</li>
+<li>机架标识，是否属于同一机架，</li>
+<li>机房高可用校验 （Done）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li><ul>
+<li>主从节点数至少3个，且分布在不同机房</li>
+<li>单机房主节点数不能过半</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>集群调整，确保核心集群Redis实例机房按大集群要求部署，</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>核心应用识别及迁移</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>核心缓存标识 - 源于用户？核心应用标识？</li>
+<li>新增核心缓存将绑定到核心集群，非核心缓存绑定到公共集群</li>
+<li>缓存客户端监控（CAT QPS）集成到管理平台 - 便于缓存迁移时，从技术角度判定是否需要迁移 </li>
+<li>核心缓存迁移</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li><ul>
+<li>已迁移（arch-100%，cl-100%）</li>
+<li>待迁移（md、mkt、yw）（需要推动升级客户端并迁移）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>客户端：</p>
+</li>
+<li><ul>
+<li>读写分离，优先读本机房实例 ，</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>熟悉Lettuce 读写分离相关源码，确定可行方案（方案可行 - 选择NEAREST或者自定义ReadFrom）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li><ul>
+<li><a target="_blank" rel="noopener" href="https://lettuce.io/core/release/reference/">NEAREST：Read from any node of the cluster with the lowest latency. https://lettuce.io/core/release/reference/</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>自定义ReadFrom，优先从本机房读，本机房无实例则从Master节点读 （done）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li><ul>
+<li>用户在 Apollo 配置读取数据方式（Master&#x2F;Slaver&#x2F;Any&#x2F;Nearest&#x2F;LocalZone）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Redis集群：</p>
+</li>
+<li><ul>
+<li>故障演练，</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>repl-timeout 60s适当大小；</li>
+<li>完整操作机房Redis实例下线、Redis实例恢复操作</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>缓存恢复时的数据同步抑制方法， （Done，需要时在交换机端口上限速）</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>机房故障后，强制下线故障机房Redis实例</li>
+<li>机房恢复后，重新部署Redis实例，逐一添加到集群，并调整合理主从关系</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>ZK &amp; Apollo ， </p>
+</li>
+<li><ul>
+<li>切换演练 </li>
+<li>在线客户端列表对比（老zk的会清零，新zk临时节点数目和原来的一致）</li>
+<li>将线上ZK从zk1切换到zk3</li>
+</ul>
+</li>
+</ul>
+<p>2021-11-30 Redis 集群机房高可用方案整体设计完成</p>
+<p>2021-12-31 客户端路由开发、跨集群测试验证通过</p>
+<p>2022-2-28 推广接入试点，及真实数据故障演练</p>
+<p>2022-3-31 业务集群机房高可用方案验证</p>
+<h1><span id="5-相关文档">5. 相关文档</span><a href="#5-相关文档" class="header-anchor">#</a></h1><ul>
+<li><a target="_blank" rel="noopener" href="https://wiki.tuhu.cn/pages/createpage.action?spaceKey=~wangwei18&title=2.+%E6%9C%BA%E6%88%BF%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88&linkCreation=true&fromPageId=250252290">途虎机房高可用方案</a></li>
+<li><a target="_blank" rel="noopener" href="https://wiki.tuhu.cn/pages/createpage.action?spaceKey=~wangwei18&title=%E5%90%8C%E5%9F%8E%E5%A4%9A%E6%B4%BB%E8%B5%84%E6%BA%90%E6%88%90%E6%9C%AC%E9%9C%80%E6%B1%82&linkCreation=true&fromPageId=250252290">同城多活资源成本需求调研</a></li>
+</ul>
+<h1><span id="6-参考资料">6. 参考资料</span><a href="#6-参考资料" class="header-anchor">#</a></h1><ul>
+<li><p><a target="_blank" rel="noopener" href="https://tehub.com/a/3Rr1UcvLty">美团KV存储架构及实践</a> *** </p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://support.huaweicloud.com/productdesc-dcs/GlobalDRPolicy.html">华为容灾多活策略</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/96917394">Redis异地多活行业方案</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/ctripcorp/x-pipe#%E6%9C%BA%E6%88%BF%E5%88%87%E6%8D%A2">携程Redis多数据中心复制管理系统</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/144527180">携程异地多活-MySQL实时双向（多向）复制实践</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://cachecloud.github.io/2016/11/03/Redis%20Cluster%E5%A4%9A%E6%9C%BA%E6%88%BF%E9%AB%98%E5%8F%AF%E7%94%A8%E5%AE%9E%E7%8E%B0/">Redis Cluster多机房高可用实现–基于客户端</a>  </p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.modb.pro/db/37775">同城双活-Redis篇</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/34958596">饿了么实时双向复制工具</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/449398741">CKV+异地容灾探索和实践</a> *** 未</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2022/07/31/redisHA/" title="Redis 集群  容灾（同城多活）">https://www6v.github.io/www6vHomeHexo/2022/07/31/redisHA/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/KV/" rel="tag"># KV</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2022/07/24/eCommerce/" rel="prev" title="电商 总结">
+      <i class="fa fa-chevron-left"></i> 电商 总结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2022/08/12/k8sCalico1/" rel="next" title="Calico">
+      Calico <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">474</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">279</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">144</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
