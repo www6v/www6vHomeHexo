@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2019/05/25/cacheMultiLayer/arch.jpg">
 <meta property="article:published_time" content="2019-05-25T06:08:00.000Z">
-<meta property="article:modified_time" content="2023-07-28T02:56:07.522Z">
+<meta property="article:modified_time" content="2023-07-31T08:55:06.657Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="缓存">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-28 10:56:07" itemprop="dateModified" datetime="2023-07-28T10:56:07+08:00">2023-07-28</time>
+                <time title="修改时间：2023-07-31 16:55:06" itemprop="dateModified" datetime="2023-07-31T16:55:06+08:00">2023-07-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,6 +255,29 @@
       
         <p></p>
 <span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98-5">多级缓存 [5?]</a><ul>
+<li><a href="#%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%E8%BF%9C%E7%A8%8B%E7%BC%93%E5%AD%98">二级缓存（本地缓存+远程缓存）</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BC%93%E5%AD%98%E5%88%86%E5%B1%82-%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98">缓存分层 多级缓存</a><ul>
+<li><a href="#%E8%BE%B9%E7%BC%98cache">边缘cache</a></li>
+<li><a href="#%E9%A1%B5%E9%9D%A2%E7%BA%A7%E7%BC%93%E5%AD%98">页面级缓存</a></li>
+<li><a href="#%E8%AE%A1%E7%AE%97%E7%BB%93%E6%9E%9C%E7%9A%84%E7%BC%93%E5%AD%98">计算结果的缓存</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E6%BA%90%E7%BA%A7%E7%BC%93%E5%AD%98-%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%E6%BA%90%E7%BB%93%E6%9E%9C%E9%9B%86">数据源级缓存： 缓存数据源结果集</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
 
 <h1><span id="overview">Overview</span><a href="#overview" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2019/05/25/cacheMultiLayer/arch.jpg" class>
 
@@ -295,6 +318,20 @@
 </ul>
 </li>
 </ul>
+<h1><span id="缓存分层-多级缓存">缓存分层  多级缓存</span><a href="#缓存分层-多级缓存" class="header-anchor">#</a></h1><h3><span id="边缘cache">边缘cache</span><a href="#边缘cache" class="header-anchor">#</a></h3><p>可用CDN实现，往往是服务器端缓存，存静态数据。<br>可以存Html页面， 脚本， 样式， 图片，页面片段等。</p>
+<h3><span id="页面级缓存">页面级缓存</span><a href="#页面级缓存" class="header-anchor">#</a></h3><p>往往是本地缓存， 数据相对动态。</p>
+<h3><span id="计算结果的缓存">计算结果的缓存</span><a href="#计算结果的缓存" class="header-anchor">#</a></h3><p>可以存储索引聚合数据，比如  BI里的数据聚合表。也可以存储耗时查询数据 ，比如搜索的结果。也可以存储业务相关数据， 比如对象模型的有向图可以整个缓存起来。在微博系统中，所有@你的微博是相对耗时， 可以 考虑作为逻辑缓存。</p>
+<h3><span id="数据源级缓存-缓存数据源结果集">数据源级缓存： 缓存数据源结果集</span><a href="#数据源级缓存-缓存数据源结果集" class="header-anchor">#</a></h3><p><del>比如Hibernate缓存中的QueryCache用来缓存查询语句, 及查询结果集中对象的Id与Type. 当再次使用已缓存的Query时, 就可以通过对象的Id与Type在二级缓存中查找实际的对象.</del></p>
+<p><del>Hibernate提供了短生命周期的缓存， 也叫事务级别的缓存。长生命周期的缓存，也叫应用级别的缓存。</del></p>
+<p>  缓存分层之间的失效方式： 1. 映射关系  2. 日志 ＋ 重试</p>
+<p><del>## 缓存对象的粒度</del>  </p>
+<p><del>有一种缓存的误用是缓存大量的数据集合，而读取其中一部分。 在很多时候，我们往往会缓存一个对象的集合，但是，我们在读取的时候，只是每次读取其中一部分。 在更新缓存时， 读出整个集合， 改变其中一部分后， 在存回去， 这样序列化与反序列化的代价相当大</del></p>
+<p><del>针对这个情况， jboss cache提供了两种粒度的对象存储：核心缓存（粗粒度的），POJO 缓存（细粒度的）</del></p>
+<p><del>核心缓存会直接把您传递给它的数据存储在一个树型结构中。键／值对被存储在树的节点上，出于复制或持续性的需要它们都被序列化了。</del></p>
+<p><del>POJO 缓存则采用比较复杂的机制——利用字节码编织来内省（introspecting）用户类，并向用户类的域添加侦听器，一旦域值有任何变化，侦听器会立刻 通知缓存。例如，如果要在POJO缓存中存储一个庞大、复杂的对象，会导致POJO缓存内省对象的字节码，最终只把该对象的原始域存储到树结构中。一旦域 值有所变化，缓存只复制这个改变了的域值而不会去复制整个用户类，这是高效的细粒度复制。</del></p>
+<p><del>在缓存了细粒度的对象后， 造成的一个问题是数据的冗余。 例如查询条件1的返回的是model1, model2, model3, 查询条件2返回的是model2, model3, model4. model2, model3在缓存里就存了两份， 造成了冗余。这时可以分离出一个索引层，索引层存储缓存对象的地址， 这样可以节约大量的存储空间。 例如可以存储model1- model4的索引， 再从缓存中取得到实际的model.  在数据库中， 这种方式叫look up table. 如果系统更复杂， 可以采取缓存的partition加多级索引的方式</del></p>
+<p><del>## 缓存与一致性</del></p>
+<p>  <del>缓存多副本之间的同步：</del><br>  <del>可分为replication和invalidaiton机制。 Replication机制表示一旦有数据的更新， 其余副本都会同步复制一份更新后的数据。Replication机制复制时slave会对master节点有拖累， 这时可以考虑采取invalidation机制。 Invalidation机制在jboss cache里已有实现, 一旦有更新， 广播消息， 失效所有其他的副本，让其重新去获得该值。 可通过这种方式缓存大对象以减少在实例中复制对象的代价。根据用户在一定时间段内上网地点固定不变的规律，用户始终都是访问同一个机房， 针对主节点的本地缓存在有更新时可以异步发invalidation消息，副本节点可以慢慢的再加载回这个大对象， 这样可以提高用户响应度。这种方式也可用在边缘缓存中。对于无法分组的数据， 比如在某时间段的用户认证数据需要保证副本同步，最好的方式是清除相应的副本， 让它在下次使用时初始化</del></p>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lee_nacl/article/details/127860463">多级缓存架构</a><br>《架构实战营-第25节课：计算架构模式之多级缓存架构》 V</li>
 <li>《移动选购线缓存实践》 赵思奇 *** </li>
@@ -415,7 +452,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">474</span>
+          <span class="site-state-item-count">475</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
