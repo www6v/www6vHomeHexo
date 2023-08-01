@@ -3127,6 +3127,30 @@
       </tags>
   </entry>
   <entry>
+    <title>分库分表-分页</title>
+    <url>/www6vHomeHexo/2022/08/01/dbShardingPaging/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h1><span id="方案">方案</span><a href="#方案" class="header-anchor">#</a></h1><h3><span id="全局查询法">全局查询法</span><a href="#全局查询法" class="header-anchor">#</a></h3><p>简单</p>
+<h3><span id="业务折衷法">业务折衷法</span><a href="#业务折衷法" class="header-anchor">#</a></h3><h5><span id="禁止跳页查询">禁止跳页查询</span><a href="#禁止跳页查询" class="header-anchor">#</a></h5><h5><span id="允许数据精度损失">允许数据精度损失</span><a href="#允许数据精度损失" class="header-anchor">#</a></h5><h3><span id="二次查询法推荐">二次查询法（推荐）</span><a href="#二次查询法推荐" class="header-anchor">#</a></h3><p>复杂</p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://juejin.cn/post/7141194628472487972">分库分表必会-跨库分页查询看此一篇就够了</a></li>
+<li><a href="https://juejin.cn/post/6981996965353488415">分表分页&#x2F;跨库分页 难玩却不代表没有玩法 </a></li>
+<li><a href="https://www.cnblogs.com/yizhiamumu/p/16803364.html">千万级别mysql 分库分表后表分页查询优化方案初探</a></li>
+<li><a href="https://mp.weixin.qq.com/s/h99sXP4mvVFsJw6Oh3aU5A">业界难题-“跨库分页”的四种方案 </a> ***  58沈剑</li>
+</ol>
+]]></content>
+      <categories>
+        <category>中间件</category>
+        <category>DAL</category>
+        <category>分库分表</category>
+      </categories>
+      <tags>
+        <tag>DAL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Redis  命中率</title>
     <url>/www6vHomeHexo/2022/07/31/redisHitRate/</url>
     <content><![CDATA[<p></p>
@@ -17632,7 +17656,7 @@ BGP 协议传输的消息
       </tags>
   </entry>
   <entry>
-    <title>数据库-分库分表</title>
+    <title>分库分表</title>
     <url>/www6vHomeHexo/2021/05/26/dbSharding/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
