@@ -470,7 +470,7 @@
 <h2><span id="系统架构">系统架构</span><a href="#系统架构" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2019/05/02/middleStage/" title="中台战略">中台战略</a></li>
 <li><a href="/www6vHomeHexo/2022/02/02/disaggregationOfComputeAndStorage/" title="存算分离-数据应用">存算分离-数据应用</a></li>
-<li><a href="/www6vHomeHexo/2019/04/28/haSummary/" title="高可用架构  汇总">高可用架构  汇总</a>
+<li><a href="/www6vHomeHexo/2019/04/28/haSummary/" title="高可用+容灾  汇总">高可用+容灾  汇总</a>
 <ul>
 <li><a href="/www6vHomeHexo/2022/06/26/available/" title="高可用 Available">高可用 Available</a></li>
 </ul>
@@ -8822,17 +8822,39 @@ MySQL MVCC 快照读 vs 当前读 </li>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h2><span id="platform">Platform</span><a href="#platform" class="header-anchor">#</a></h2><ul>
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#platform">Platform</a></li>
+<li><a href="#tools-mix">Tools &amp; Mix</a></li>
+<li><a href="#%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE">思维导图</a></li>
+<li><a href="#%E6%96%87%E6%A1%A3%E5%88%86%E6%9E%90%E7%A7%91%E7%A0%94">文档分析&amp;科研</a></li>
+<li><a href="#%E5%AE%A2%E6%88%B7%E7%AB%AF">客户端</a></li>
+<li><a href="#chrome-plugin">Chrome plugin</a></li>
+<li><a href="#%E5%88%9B%E4%B8%9A">创业</a></li>
+<li><a href="#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99">学习资料</a><ul>
+<li><a href="#chatgpt">Chatgpt</a></li>
+<li><a href="#code">Code</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="platform">Platform</span><a href="#platform" class="header-anchor">#</a></h1><ul>
 <li>国外<br><a href="https://poe.com/ChatGPT">Poe</a> ***</li>
 <li>国内<br><a href="https://www.feijix.com/n/y0BnXI">ChatGPT使用指南！</a> ***</li>
 </ul>
-<h2><span id="tools-amp-mix">Tools &amp; Mix</span><a href="#tools-amp-mix" class="header-anchor">#</a></h2><ul>
+<h1><span id="tools-amp-mix">Tools &amp; Mix</span><a href="#tools-amp-mix" class="header-anchor">#</a></h1><ul>
 <li>GPT学习宝典<br><a href="https://gpt.candobear.com/toolbox">GPT  工具箱</a><br><a href="https://gpt.candobear.com/prompt">Prompt 大全</a><br><a href="https://gpt.candobear.com/courses">学习资料</a></li>
 <li><a href="https://www.ailookme.com/">AI 工具箱</a>  *** </li>
 <li><a href="https://gp477l8icq.feishu.cn/wiki/JUXnwzSuviL5E9kh6jUc8FRinHe">极客时间 AIGC 知识库</a> ***</li>
 </ul>
-<h2><span id="思维导图">思维导图</span><a href="#思维导图" class="header-anchor">#</a></h2><p><a href="https://albus.org/">albus</a></p>
-<h2><span id="文档分析amp科研">文档分析&amp;科研</span><a href="#文档分析amp科研" class="header-anchor">#</a></h2><ul>
+<h1><span id="思维导图">思维导图</span><a href="#思维导图" class="header-anchor">#</a></h1><p><a href="https://albus.org/">albus</a></p>
+<h1><span id="文档分析amp科研">文档分析&amp;科研</span><a href="#文档分析amp科研" class="header-anchor">#</a></h1><ul>
 <li><p>在线文档分析<br>Microsoft Edge Dev + new Bing  ***</p>
 </li>
 <li><p>文献查找 + 润色<br>Skype + new Bing  ***</p>
@@ -8846,10 +8868,10 @@ MySQL MVCC 快照读 vs 当前读 </li>
 </ul>
 </li>
 </ul>
-<h2><span id="客户端">客户端</span><a href="#客户端" class="header-anchor">#</a></h2><ul>
+<h1><span id="客户端">客户端</span><a href="#客户端" class="header-anchor">#</a></h1><ul>
 <li>ChatGPT 客户端<br> windows， mac</li>
 </ul>
-<h2><span id="chrome-plugin">Chrome plugin</span><a href="#chrome-plugin" class="header-anchor">#</a></h2><ul>
+<h1><span id="chrome-plugin">Chrome plugin</span><a href="#chrome-plugin" class="header-anchor">#</a></h1><ul>
 <li><p>WebChatGPT[instatlled]</p>
 </li>
 <li><p>AIPRM for ChatGPT[instatlled]</p>
@@ -8861,7 +8883,7 @@ MySQL MVCC 快照读 vs 当前读 </li>
 <li><p>OpenAI Translator<br><a href="https://github.com/yetone/openai-translator">openai-translator</a><br>要注册账号, 需要api token</p>
 </li>
 </ul>
-<h2><span id="创业">创业</span><a href="#创业" class="header-anchor">#</a></h2><ul>
+<h1><span id="创业">创业</span><a href="#创业" class="header-anchor">#</a></h1><ul>
 <li><a href="https://gpt3demo.com/map">GPT-3 Demo</a><ul>
 <li>聊天机器人</li>
 <li>代码辅助</li>
@@ -8870,7 +8892,8 @@ MySQL MVCC 快照读 vs 当前读 </li>
 </ul>
 </li>
 </ul>
-<h2><span id="学习资料">学习资料</span><a href="#学习资料" class="header-anchor">#</a></h2><p><a href="https://time.geekbang.org/opencourse/videointro/100541101">ChatGPT 从 0 到 1</a>  基础<br><a href="https://time.geekbang.org/opencourse/videointro/100541201">ChatGPT 和预训练模型实战课</a></p>
+<h1><span id="学习资料">学习资料</span><a href="#学习资料" class="header-anchor">#</a></h1><h3><span id="chatgpt">Chatgpt</span><a href="#chatgpt" class="header-anchor">#</a></h3><p><a href="https://time.geekbang.org/opencourse/videointro/100541101">ChatGPT 从 0 到 1</a>  基础<br><a href="https://time.geekbang.org/opencourse/videointro/100541201">ChatGPT 和预训练模型实战课</a> </p>
+<h3><span id="code">Code</span><a href="#code" class="header-anchor">#</a></h3><p><a href="https://time.geekbang.org/opencourse/videointro/100540901">GitHub Copilot 实践课</a></p>
 ]]></content>
       <categories>
         <category>AI</category>
@@ -17428,6 +17451,28 @@ BGP 协议传输的消息
 <span id="more"></span>
 
 
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%B7%A5%E5%85%B7">工具</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3-%E7%AE%80%E5%8D%95%E4%BB%BB%E5%8A%A1-1">代码相关-简单任务 [1]</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3-%E7%B9%81%E7%90%90%E5%B7%A5%E4%BD%9C-1">代码相关- 繁琐工作 [1]</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+
+<h1><span id="工具">工具</span><a href="#工具" class="header-anchor">#</a></h1><ul>
+<li>Copilot ***</li>
+<li>AWS CodeWhispter</li>
+<li>Cursor</li>
+<li>tabnine 免费</li>
+</ul>
 <h1><span id="代码相关-简单任务-1">代码相关-简单任务 [1]</span><a href="#代码相关-简单任务-1" class="header-anchor">#</a></h1><ul>
 <li><p><strong>注释</strong><br> 你作为一名程序员，请解释一下下面这段代码</p>
 </li>
@@ -17483,10 +17528,9 @@ BGP 协议传输的消息
 </ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://www.bilibili.com/video/BV1Z84y1G7nY/">【ChatGPT】面向程序员的ChatGPT使用教程38种方式来提升生产力</a> V</li>
-<li><a href="https://time.geekbang.org/opencourse/videointro/100540901">GitHub Copilot 实践课</a><br>03, 04, 06</li>
+<li><a href="https://time.geekbang.org/opencourse/videointro/100540901">GitHub Copilot 实践课</a><br>03, 04, 06<br><a href="https://github.com/www6v/AICoder">AICoder</a> git</li>
 <li><a href="https://www.geeksforgeeks.org/chatgpt-prompts-for-software-developers/">Top 20 ChatGPT Prompts For Software Developers</a> 未</li>
 </ol>
-<h1><span id="学习资源">学习资源</span><a href="#学习资源" class="header-anchor">#</a></h1><p><a href="https://time.geekbang.org/opencourse/videointro/100540901">GitHub Copilot 实践课</a></p>
 ]]></content>
       <categories>
         <category>AI</category>
