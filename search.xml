@@ -3127,6 +3127,24 @@
       </tags>
   </entry>
   <entry>
+    <title>GPT  学习资源</title>
+    <url>/www6vHomeHexo/2022/08/01/gptStudy/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h1><span id="学习资料">学习资料</span><a href="#学习资料" class="header-anchor">#</a></h1><h3><span id="chatgpt">Chatgpt</span><a href="#chatgpt" class="header-anchor">#</a></h3><p><a href="https://time.geekbang.org/opencourse/videointro/100541101">ChatGPT 从 0 到 1</a>  基础<br><a href="https://time.geekbang.org/opencourse/videointro/100541201">ChatGPT 和预训练模型实战课</a> </p>
+<h3><span id="code">Code</span><a href="#code" class="header-anchor">#</a></h3><p><a href="https://time.geekbang.org/opencourse/videointro/100540901">GitHub Copilot 实践课</a></p>
+]]></content>
+      <categories>
+        <category>AI</category>
+        <category>chatgpt</category>
+      </categories>
+      <tags>
+        <tag>AI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>分库分表-分页</title>
     <url>/www6vHomeHexo/2022/08/01/dbShardingPaging/</url>
     <content><![CDATA[<p></p>
@@ -4456,12 +4474,12 @@
   </entry>
   <entry>
     <title>Chatgpt  Prompt-学术研究</title>
-    <url>/www6vHomeHexo/2022/07/11/chatgptPromptResearch/</url>
+    <url>/www6vHomeHexo/2022/07/11/gptPromptResearch/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
 
-<img src="/www6vHomeHexo/2022/07/11/chatgptPromptResearch/newBing.jpg" class>
+<img src="/www6vHomeHexo/2022/07/11/gptPromptResearch/newBing.jpg" class>
 
 <h1><span id="学术prompt">学术Prompt</span><a href="#学术prompt" class="header-anchor">#</a></h1><ul>
 <li>在线文献全文分析 [new Bing] <ul>
@@ -6899,11 +6917,12 @@
 <li>原因: 使用了full mesh的模式</li>
 <li>解决: 换成RR模式 和 ipip模式</li>
 </ul>
-<h2><span id="reference">Reference</span><a href="#reference" class="header-anchor">#</a></h2><ol>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li>模块六</li>
 <li>模块八-Kubernetes 控制平面组件：生命周期管理和服务发现</li>
 <li>模块九：生产化集群的管理   chapter5 </li>
 <li>模块七</li>
+<li><a href="https://github.com/www6v/netshoot">netshoot</a> git<br>a Docker + Kubernetes network trouble-shooting swiss-army container</li>
 </ol>
 ]]></content>
       <categories>
@@ -8842,7 +8861,7 @@ MySQL MVCC 快照读 vs 当前读 </li>
   </entry>
   <entry>
     <title>chatGPT</title>
-    <url>/www6vHomeHexo/2022/05/09/chatgpt/</url>
+    <url>/www6vHomeHexo/2022/05/09/gpt/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
@@ -8858,11 +8877,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
 <li><a href="#%E5%AE%A2%E6%88%B7%E7%AB%AF">客户端</a></li>
 <li><a href="#chrome-plugin">Chrome plugin</a></li>
 <li><a href="#%E5%88%9B%E4%B8%9A">创业</a></li>
-<li><a href="#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99">学习资料</a><ul>
-<li><a href="#chatgpt">Chatgpt</a></li>
-<li><a href="#code">Code</a></li>
-</ul>
-</li>
 </ul>
 <!-- tocstop -->
 
@@ -8873,9 +8887,40 @@ MySQL MVCC 快照读 vs 当前读 </li>
 <li>国内<br><a href="https://www.feijix.com/n/y0BnXI">ChatGPT使用指南！</a> ***</li>
 </ul>
 <h1><span id="tools-amp-mix">Tools &amp; Mix</span><a href="#tools-amp-mix" class="header-anchor">#</a></h1><ul>
-<li>GPT学习宝典<br><a href="https://gpt.candobear.com/toolbox">GPT  工具箱</a><br><a href="https://gpt.candobear.com/prompt">Prompt 大全</a><br><a href="https://gpt.candobear.com/courses">学习资料</a></li>
-<li><a href="https://www.ailookme.com/">AI 工具箱</a>  *** </li>
-<li><a href="https://gp477l8icq.feishu.cn/wiki/JUXnwzSuviL5E9kh6jUc8FRinHe">极客时间 AIGC 知识库</a> ***</li>
+<li><p>GPT学习宝典</p>
+<ul>
+<li>聚合<ul>
+<li><a href="https://gpt.candobear.com/toolbox">GPT  工具箱</a></li>
+</ul>
+</li>
+<li>prompt<ul>
+<li><a href="https://gpt.candobear.com/prompt">Prompt 大全</a></li>
+</ul>
+</li>
+<li>教程<ul>
+<li><a href="https://gpt.candobear.com/courses">学习资料</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="https://gp477l8icq.feishu.cn/wiki/JUXnwzSuviL5E9kh6jUc8FRinHe">极客时间 AIGC 知识库</a> *** </p>
+<ul>
+<li>聚合<ul>
+<li><a href="https://gp477l8icq.feishu.cn/wiki/M1uCwFNjkiAGC7k30TaclZqknPh">AI工具大全</a></li>
+<li><a href="https://gp477l8icq.feishu.cn/wiki/RpabwPG9niFEu9kwJAQcAGxenDg">AI主流工具精选</a></li>
+<li><a href="https://gp477l8icq.feishu.cn/wiki/VJ9ewqfOgiyrbQksbyLcrODtnkb">AI经典项目</a></li>
+<li><a href="https://gp477l8icq.feishu.cn/wiki/QVV6w3XstiR7hlkK53Bc8f9DnMf">AI导航站</a></li>
+</ul>
+</li>
+<li>prompt<ul>
+<li><a href="https://gp477l8icq.feishu.cn/wiki/ZYkUwbXgzi5eqYkHl0MceNrSnhb">提示指令库</a></li>
+</ul>
+</li>
+<li><a href="https://longalong.feishu.cn/wiki/wikcneAKpN3u473N7J9EAC4Ga0b">应用与变现案例</a></li>
+</ul>
+</li>
+<li><p><a href="https://www.ailookme.com/">AI 工具箱</a>  ***</p>
+</li>
 </ul>
 <h1><span id="思维导图">思维导图</span><a href="#思维导图" class="header-anchor">#</a></h1><p><a href="https://albus.org/">albus</a></p>
 <h1><span id="文档分析amp科研">文档分析&amp;科研</span><a href="#文档分析amp科研" class="header-anchor">#</a></h1><ul>
@@ -8886,7 +8931,7 @@ MySQL MVCC 快照读 vs 当前读 </li>
 <li><p>本地文档分析</p>
 <ul>
 <li>chatpdf  收费  ***<br><a href="https://www.chatpdf.com/">Chat with any PDF</a> 总结文献</li>
-<li><a href="https://chatpaper.org/">ChatPaper</a><br><a href="https://github.com/kaixindelele/ChatPaper">ChatPaper</a></li>
+<li><a href="https://chatpaper.org/">ChatPaper</a>  中文<br><a href="https://github.com/kaixindelele/ChatPaper">ChatPaper</a> git</li>
 <li><a href="https://chatdoc.com/">Chat with documents</a></li>
 <li><a href="https://chat2doc.cn/">阅读文档的好帮手</a>  免费</li>
 </ul>
@@ -8916,8 +8961,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
 </ul>
 </li>
 </ul>
-<h1><span id="学习资料">学习资料</span><a href="#学习资料" class="header-anchor">#</a></h1><h3><span id="chatgpt">Chatgpt</span><a href="#chatgpt" class="header-anchor">#</a></h3><p><a href="https://time.geekbang.org/opencourse/videointro/100541101">ChatGPT 从 0 到 1</a>  基础<br><a href="https://time.geekbang.org/opencourse/videointro/100541201">ChatGPT 和预训练模型实战课</a> </p>
-<h3><span id="code">Code</span><a href="#code" class="header-anchor">#</a></h3><p><a href="https://time.geekbang.org/opencourse/videointro/100540901">GitHub Copilot 实践课</a></p>
 ]]></content>
       <categories>
         <category>AI</category>
@@ -17470,7 +17513,7 @@ BGP 协议传输的消息
   </entry>
   <entry>
     <title>chatgpt Prompt-Code</title>
-    <url>/www6vHomeHexo/2021/05/28/chatgptPromptCode/</url>
+    <url>/www6vHomeHexo/2021/05/28/gptPromptCode/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
@@ -17566,7 +17609,7 @@ BGP 协议传输的消息
   </entry>
   <entry>
     <title>chatgpt  Prompt</title>
-    <url>/www6vHomeHexo/2021/05/26/chatgptPrompt/</url>
+    <url>/www6vHomeHexo/2021/05/26/gptPrompt/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
