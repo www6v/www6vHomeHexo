@@ -3730,23 +3730,28 @@
 <li><a href="https://wiki.tuhu.cn/pages/createpage.action?spaceKey=~wangwei18&title=%E5%90%8C%E5%9F%8E%E5%A4%9A%E6%B4%BB%E8%B5%84%E6%BA%90%E6%88%90%E6%9C%AC%E9%9C%80%E6%B1%82&linkCreation=true&fromPageId=250252290">同城多活资源成本需求调研</a></li>
 </ul>
 <h1><span id="6-参考资料">6. 参考资料</span><a href="#6-参考资料" class="header-anchor">#</a></h1><ul>
-<li><p><a href="https://tehub.com/a/3Rr1UcvLty">美团KV存储架构及实践</a> *** </p>
-</li>
-<li><p><a href="https://support.huaweicloud.com/productdesc-dcs/GlobalDRPolicy.html">华为容灾多活策略</a></p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/96917394">Redis异地多活行业方案</a></p>
-</li>
-<li><p><a href="https://github.com/ctripcorp/x-pipe#%E6%9C%BA%E6%88%BF%E5%88%87%E6%8D%A2">携程Redis多数据中心复制管理系统</a></p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/144527180">携程异地多活-MySQL实时双向（多向）复制实践</a></p>
-</li>
-<li><p><a href="https://cachecloud.github.io/2016/11/03/Redis%20Cluster%E5%A4%9A%E6%9C%BA%E6%88%BF%E9%AB%98%E5%8F%AF%E7%94%A8%E5%AE%9E%E7%8E%B0/">Redis Cluster多机房高可用实现–基于客户端</a>  </p>
-</li>
-<li><p><a href="https://www.modb.pro/db/37775">同城双活-Redis篇</a></p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/34958596">饿了么实时双向复制工具</a></p>
-</li>
+<li><a href="https://tehub.com/a/3Rr1UcvLty">美团KV存储架构及实践</a> *** </li>
+<li><a href="https://support.huaweicloud.com/productdesc-dcs/GlobalDRPolicy.html">华为容灾多活策略</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/96917394">Redis异地多活行业方案</a></li>
+<li><a href="https://github.com/ctripcorp/x-pipe#%E6%9C%BA%E6%88%BF%E5%88%87%E6%8D%A2">携程Redis多数据中心复制管理系统</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/144527180">携程异地多活-MySQL实时双向（多向）复制实践</a></li>
+<li><a href="https://cachecloud.github.io/2016/11/03/Redis%20Cluster%E5%A4%9A%E6%9C%BA%E6%88%BF%E9%AB%98%E5%8F%AF%E7%94%A8%E5%AE%9E%E7%8E%B0/">Redis Cluster多机房高可用实现–基于客户端</a>  </li>
+<li><a href="https://www.modb.pro/db/37775">同城双活-Redis篇</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/34958596">饿了么实时双向复制工具</a></li>
+</ul>
+<hr>
+<ul>
 <li><p><a href="https://zhuanlan.zhihu.com/p/449398741">CKV+异地容灾探索和实践</a> *** 未</p>
+</li>
+<li><p><a href="https://mp.weixin.qq.com/s/jb_NnI6pnvJ2eWO6HUrWHg">干货 | 携程Redis跨IDC多向同步实践</a> 未</p>
+</li>
+<li><p><a href="https://mp.weixin.qq.com/s/54RX6nSGLBZJxQoaADf6Jw">干货 | 五大实例详解，携程 Redis 跨机房双向同步实践</a> 未</p>
+</li>
+<li><p><a href="https://mp.weixin.qq.com/s/trFXXlrel0RmTOCCZjmsWQ">阿里云数据库全新功能Redis读写分离，全维度技术解析</a> 未</p>
+</li>
+<li><p><a href="https://mp.weixin.qq.com/s/LA7EaOnaxKjBSTOoCKJSmQ">企业打开Redis的正确方式，来自阿里云云数据库团队的解读</a> 未<br>Figure 2：Redis异地多活架构方案示意图</p>
+</li>
+<li><p><a href="https://github.com/ctripcorp/x-pipe">https://github.com/ctripcorp/x-pipe</a>  未</p>
 </li>
 </ul>
 ]]></content>
@@ -27729,13 +27734,51 @@ nq： 不排队调度
       </tags>
   </entry>
   <entry>
-    <title>异地多活总结</title>
+    <title>异地多活 总结</title>
     <url>/www6vHomeHexo/2017/06/17/multiLive/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
-<h1><span id="异地多活">异地多活</span><a href="#异地多活" class="header-anchor">#</a></h1><ul>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%90%8C%E5%9F%8E%E5%8F%8C%E6%B4%BB-3">同城双活 [3]</a></li>
+<li><a href="#%E5%BC%82%E5%9C%B0%E5%A4%9A%E6%B4%BB-3">异地多活 [3]</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93-3">总结 [3]</a></li>
+<li><a href="#%E6%A1%88%E4%BE%8B">案例</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7-12">数据一致性 [1][2]</a></li>
+<li><a href="#%E5%8F%82%E8%80%83-%E5%8F%82%E8%80%83">参考 # 参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+
+
+<h1><span id="同城双活-3">同城双活 [3]</span><a href="#同城双活-3" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2017/06/17/multiLive/r-ha1.png" class>
+
+<p>【跨机房写，同机房读】</p>
+<h1><span id="异地多活-3">异地多活 [3]</span><a href="#异地多活-3" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2017/06/17/multiLive/r-ha2.png" class>
+
+<p><strong>一般来说，数据同步的方案有两种：</strong></p>
+<ol>
+<li>一种基于存储系统的主从复制，比如 MySQL 和 Redis。也就是在一个机房部署主库，<br>在异地机房部署从库，两者同步主从复制, 实现数据的同步。</li>
+<li>另一种是基于消息队列的方式。一个机房产生写入请求后，会写一条消息到消息队列，<br>另一个机房的应用消费这条消息后，再执行业务处理逻辑，写入到存储服务中。</li>
+</ol>
+<p>【异步方式同步数据】</p>
+<p>无论是采取哪种方案，<strong>数据从一个机房，传输到另一个机房都会有延迟，所以，你需要尽量</strong><br><strong>保证用户在读取自己的数据时，读取数据主库所在的机房</strong>。为了达到这一点，你需要对用户<br>做分片，让一个用户每次的读写都尽量在同一个机房中。同时，在数据读取和服务调用时，<br>也要尽量调用本机房的服务。</p>
+<p>【单元化，流量调度】</p>
+<h1><span id="总结-3">总结 [3]</span><a href="#总结-3" class="header-anchor">#</a></h1><ul>
+<li><p>不同机房的数据传输延迟，是造成多机房部署困难的主要原因，你需要知道，<strong>同城多机</strong><br><strong>房的延迟一般在 1ms~3ms，异地机房的延迟在 50ms 以下，而跨国机房的延迟在200ms 以下。</strong></p>
+</li>
+<li><p><strong>同城多机房方案可以允许有跨机房数据写入的发生</strong>，<strong>但是数据的读取，和服务的调用应该尽量保证在同一个机房中。</strong></p>
+</li>
+<li><p>异地多活方案则应该避免跨机房同步的数据写入和读取，而是采取异步的方式，将数据从一个机房同步到另一个机房。</p>
+</li>
+</ul>
+<h1><span id="案例">案例</span><a href="#案例" class="header-anchor">#</a></h1><ul>
 <li>异地多活<ul>
 <li>阿里 【1】<ul>
 <li>基于Userid的单元化异地多活</li>
@@ -27759,6 +27802,10 @@ nq： 不排队调度
 </li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+<h1><span id="数据一致性-12">数据一致性 [1][2]</span><a href="#数据一致性-12" class="header-anchor">#</a></h1><ul>
 <li>数据一致性<ul>
 <li>强一致场景<ul>
 <li>都读主节点</li>
@@ -27776,12 +27823,15 @@ nq： 不排队调度
 </ul>
 </li>
 </ul>
+<h1><span id="参考-参考">参考  # 参考</span><a href="#参考-参考" class="header-anchor">#</a></h1><ol>
+<li><p>《尽在双11:阿里巴巴技术演进与超越》 1.2节</p>
 </li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li>《尽在双11:阿里巴巴技术演进与超越》 1.2节</li>
-<li><a href="https://zhuanlan.zhihu.com/p/32009822">饿了么异地多活技术实现（一）总体介绍</a>   饿了么框架工具部  知乎专栏</li>
-<li><a href="https://blog.csdn.net/lql_h/article/details/95588996">SET化架构设计</a>  lql_h  未</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/32009822">饿了么异地多活技术实现（一）总体介绍</a>   饿了么框架工具部  知乎专栏</p>
+</li>
+<li><p>《28 | 多机房部署：跨地域的分布式系统如何做？》  唐扬</p>
+</li>
+<li><p><a href="https://blog.csdn.net/lql_h/article/details/95588996">SET化架构设计</a>  lql_h  未</p>
+</li>
 </ol>
 ]]></content>
       <categories>
