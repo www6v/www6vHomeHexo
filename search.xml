@@ -17613,7 +17613,7 @@ BGP 协议传输的消息
 <h1><span id="工具">工具</span><a href="#工具" class="header-anchor">#</a></h1><ul>
 <li>Copilot ***</li>
 <li>AWS CodeWhispter</li>
-<li>Cursor</li>
+<li>Cursor ***</li>
 <li>tabnine 免费</li>
 </ul>
 <h1><span id="代码相关-简单任务-1">代码相关-简单任务 [1]</span><a href="#代码相关-简单任务-1" class="header-anchor">#</a></h1><ul>
@@ -17668,10 +17668,13 @@ BGP 协议传输的消息
 </li>
 <li><p>CronJob [2]</p>
 </li>
+<li><p>K8s</p>
+</li>
 </ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://www.bilibili.com/video/BV1Z84y1G7nY/">【ChatGPT】面向程序员的ChatGPT使用教程38种方式来提升生产力</a> V</li>
 <li><a href="https://time.geekbang.org/opencourse/videointro/100540901">GitHub Copilot 实践课</a><br>03, 04, 06<br><a href="https://github.com/www6v/AICoder">AICoder</a> git</li>
+<li><a href="https://cloud.tencent.com/developer/article/2207540">ChatGPT 帮我跑了一个完整的 DevOps 流水线，离了个大谱…</a><br><a href="https://github.com/www6v/AICoder/tree/master/Cursor/">Gin on K8s</a> git</li>
 <li><a href="https://www.geeksforgeeks.org/chatgpt-prompts-for-software-developers/">Top 20 ChatGPT Prompts For Software Developers</a> 未</li>
 </ol>
 ]]></content>
