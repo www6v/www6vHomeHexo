@@ -1213,58 +1213,6 @@
       </tags>
   </entry>
   <entry>
-    <title>基金</title>
-    <url>/www6vHomeHexo/2023/07/29/fund/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#%E7%B1%BB%E5%9E%8B">类型</a><ul>
-<li><a href="#%E8%B4%A7%E5%B8%81">货币</a></li>
-<li><a href="#%E5%80%BA%E5%9F%BA">债基</a></li>
-<li><a href="#%E6%B7%B7%E5%90%88">混合</a></li>
-<li><a href="#%E6%8C%87%E6%95%B0-1">指数 [1]</a></li>
-</ul>
-</li>
-<li><a href="#%E9%A3%8E%E9%99%A9%E6%94%B6%E7%9B%8A">风险收益</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="类型">类型</span><a href="#类型" class="header-anchor">#</a></h1><h3><span id="货币">货币</span><a href="#货币" class="header-anchor">#</a></h3><h3><span id="债基">债基</span><a href="#债基" class="header-anchor">#</a></h3><h3><span id="混合">混合</span><a href="#混合" class="header-anchor">#</a></h3><h3><span id="指数-1">指数 [1]</span><a href="#指数-1" class="header-anchor">#</a></h3><ul>
-<li><p>被动型基金</p>
-<ul>
-<li>完全被动型（√）</li>
-<li>增强型<br>加上基金经理的投资风格</li>
-</ul>
-</li>
-<li><p>类型  </p>
-<ul>
-<li>宽基指数 (风险低) （√）</li>
-<li>窄基指数<br>行业指数(风险高)</li>
-</ul>
-</li>
-</ul>
-<h1><span id="风险收益">风险收益</span><a href="#风险收益" class="header-anchor">#</a></h1><p>货基&lt;债基&lt; 固收+&lt;股基</p>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a href="https://www.bilibili.com/video/BV1GK4y1U7v7">基金投资入门必看合集，全部免费，建议收藏 &#x2F; 从基金概念到实用投资策略，一网打尽！</a>   1.1 P5</li>
-</ol>
-]]></content>
-      <categories>
-        <category>金融</category>
-        <category>基金</category>
-      </categories>
-      <tags>
-        <tag>基金</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Redis 混合持久化</title>
     <url>/www6vHomeHexo/2023/07/10/redisBothAofAndRDB/</url>
     <content><![CDATA[<p></p>
@@ -30512,6 +30460,58 @@ table th:first-of-type {
       </categories>
       <tags>
         <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基金</title>
+    <url>/www6vHomeHexo/2000/07/29/fund/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E7%B1%BB%E5%9E%8B">类型</a><ul>
+<li><a href="#%E8%B4%A7%E5%B8%81">货币</a></li>
+<li><a href="#%E5%80%BA%E5%9F%BA">债基</a></li>
+<li><a href="#%E6%B7%B7%E5%90%88">混合</a></li>
+<li><a href="#%E6%8C%87%E6%95%B0-1">指数 [1]</a></li>
+</ul>
+</li>
+<li><a href="#%E9%A3%8E%E9%99%A9%E6%94%B6%E7%9B%8A">风险收益</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="类型">类型</span><a href="#类型" class="header-anchor">#</a></h1><h3><span id="货币">货币</span><a href="#货币" class="header-anchor">#</a></h3><h3><span id="债基">债基</span><a href="#债基" class="header-anchor">#</a></h3><h3><span id="混合">混合</span><a href="#混合" class="header-anchor">#</a></h3><h3><span id="指数-1">指数 [1]</span><a href="#指数-1" class="header-anchor">#</a></h3><ul>
+<li><p>被动型基金</p>
+<ul>
+<li>完全被动型（√）</li>
+<li>增强型<br>加上基金经理的投资风格</li>
+</ul>
+</li>
+<li><p>类型  </p>
+<ul>
+<li>宽基指数 (风险低) （√）</li>
+<li>窄基指数<br>行业指数(风险高)</li>
+</ul>
+</li>
+</ul>
+<h1><span id="风险收益">风险收益</span><a href="#风险收益" class="header-anchor">#</a></h1><p>货基&lt;债基&lt; 固收+&lt;股基</p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://www.bilibili.com/video/BV1GK4y1U7v7">基金投资入门必看合集，全部免费，建议收藏 &#x2F; 从基金概念到实用投资策略，一网打尽！</a>   1.1 P5</li>
+</ol>
+]]></content>
+      <categories>
+        <category>金融</category>
+        <category>基金</category>
+      </categories>
+      <tags>
+        <tag>基金</tag>
       </tags>
   </entry>
   <entry>
