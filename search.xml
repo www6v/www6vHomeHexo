@@ -17602,7 +17602,10 @@ BGP 协议传输的消息
 <ul>
 <li><a href="#%E5%B7%A5%E5%85%B7">工具</a></li>
 <li><a href="#%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3-%E7%AE%80%E5%8D%95%E4%BB%BB%E5%8A%A1-1">代码相关-简单任务 [1]</a></li>
-<li><a href="#%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3-%E7%B9%81%E7%90%90%E5%B7%A5%E4%BD%9C-1">代码相关- 繁琐工作 [1]</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3-%E7%B9%81%E7%90%90%E5%B7%A5%E4%BD%9C-1">代码相关- 繁琐工作 [1]</a><ul>
+<li><a href="#%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-vs-%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80">编程语言 vs 自然语言</a></li>
+</ul>
+</li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
@@ -17671,12 +17674,39 @@ BGP 协议传输的消息
 <li><p>K8s</p>
 </li>
 </ul>
+<h2><span id="编程语言-vs-自然语言">编程语言 vs 自然语言</span><a href="#编程语言-vs-自然语言" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th>语言类型</th>
+<th>执行原理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>C++语言</td>
+<td>C++语言 –&gt; 编译器&#x2F;链接器 –&gt; 既定任务</td>
+</tr>
+<tr>
+<td>Java语言</td>
+<td>Java语言 –&gt; 编译器&#x2F;虚拟机 –&gt; 既定任务</td>
+</tr>
+<tr>
+<td>Python语言</td>
+<td>Python语言 –&gt; 解释器 –&gt; 既定任务</td>
+</tr>
+<tr>
+<td>人类自然语言</td>
+<td>人类自然语言 –&gt; LLMs –&gt; 各种后端组件 –&gt; 既定任务</td>
+</tr>
+</tbody></table>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://www.bilibili.com/video/BV1Z84y1G7nY/">【ChatGPT】面向程序员的ChatGPT使用教程38种方式来提升生产力</a> V</li>
 <li><a href="https://time.geekbang.org/opencourse/videointro/100540901">GitHub Copilot 实践课</a><br>03, 04, 06<br><a href="https://github.com/www6v/AICoder">AICoder</a> git</li>
 <li><a href="https://cloud.tencent.com/developer/article/2207540">ChatGPT 帮我跑了一个完整的 DevOps 流水线，离了个大谱…</a><br><a href="https://github.com/www6v/AICoder/tree/master/Cursor/">Gin on K8s</a> git</li>
 <li><a href="https://www.geeksforgeeks.org/chatgpt-prompts-for-software-developers/">Top 20 ChatGPT Prompts For Software Developers</a> 未</li>
 </ol>
+<pre><code>
+
+</code></pre>
 ]]></content>
       <categories>
         <category>AI</category>
@@ -19862,7 +19892,7 @@ BGP 协议传输的消息
       </tags>
   </entry>
   <entry>
-    <title>MySQL的高可靠和高可用</title>
+    <title>MySQL的主从 高可用 容灾</title>
     <url>/www6vHomeHexo/2020/06/21/mysqlReliability/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -19876,6 +19906,7 @@ BGP 协议传输的消息
 <li><a href="#%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88-master%E9%AB%98%E5%8F%AF%E7%94%A85">高可用方案-Master高可用[5]</a><br>- <a href="#mmm">MMM</a><br>- <a href="#mha-%E5%8D%95%E4%B8%BB">MHA - 单主 +</a><br>- <a href="#mysql-group-replicatoinmgr-%E5%8D%95%E4%B8%BB-6">MySQL Group Replicatoin(MGR) - 单主 [6]+</a><br>- <a href="#mysql-cluster-%E5%A4%9A%E4%B8%BB">MySQL Cluster - 多主</a><br>- <a href="#galera-cluster-%E5%A4%9A%E4%B8%BB">Galera Cluster - 多主 +</a><br>- <a href="#percona-xtradbpxc-%E5%A4%9A%E4%B8%BB">Percona XtraDB(PXC) -多主</a></li>
 <li><a href="#%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88-%E6%95%B0%E6%8D%AE%E5%8F%AF%E9%9D%A0%E6%80%A75">高可用方案 - 数据可靠性[5]</a><br>- <a href="#raid10-raid-10">Raid10( Raid 1+0 )</a><br>- <a href="#san%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8-%E8%B4%B5">SAN共享存储- 贵</a><br>- <a href="#drbd%E7%A3%81%E7%9B%98%E5%A4%8D%E5%88%B6-%E7%B3%BB%E7%BB%9F%E8%87%AA%E5%B8%A6">DRBD磁盘复制-系统自带 +</a></li>
 <li><a href="#mysql-log%E5%92%8C%E5%8F%AF%E9%9D%A0%E6%80%A7">MySQL Log和可靠性</a></li>
+<li><a href="#%E5%AE%B9%E7%81%BE-7">容灾 [7]</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
@@ -19991,14 +20022,14 @@ BGP 协议传输的消息
 
 
 
-
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h2><span id="容灾-7">容灾 [7]</span><a href="#容灾-7" class="header-anchor">#</a></h2><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li>《MySQL是怎么保证主备一致的？》 MySQL实战45讲  丁奇</li>
 <li>《MySQL是怎么保证高可用的？》 MySQL实战45讲 丁奇</li>
 <li>《备库为什么会延迟好几个小时？》MySQL实战45讲  丁奇</li>
 <li>xxx</li>
 <li><a href="https://www.bilibili.com/video/BV1m44y1Q7ZF/">【IT老齐245】综合对比九种MySQL高可用方案</a></li>
 <li><a href="https://www.bilibili.com/video/BV1HL411T7C8/">【IT老齐099】哎，MySQL高可用架构选型要慎重啊！</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/451693431">腾讯云原生数据库 TDSQL-C异地容灾核心能力构建</a>  </li>
 <li><a href="https://zhuanlan.zhihu.com/p/620697440">MySQL主从复制原理剖析与应用实践</a> vivo team 未</li>
 </ol>
 ]]></content>

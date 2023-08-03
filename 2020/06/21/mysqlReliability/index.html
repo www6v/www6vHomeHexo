@@ -21,7 +21,7 @@
   </script>
 
   <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL的高可靠和高可用">
+<meta property="og:title" content="MySQL的主从 高可用 容灾">
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2020/06/21/mysqlReliability/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2020/06/21/mysqlReliability/mysqlMasterSlave-reliable.PNG">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2020/06/21/mysqlReliability/mysqlMasterSlave-reliable-fault.PNG">
 <meta property="article:published_time" content="2020-06-21T10:14:49.000Z">
-<meta property="article:modified_time" content="2023-05-24T04:34:08.375Z">
+<meta property="article:modified_time" content="2023-08-03T03:40:00.559Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary">
@@ -50,7 +50,7 @@
   };
 </script>
 
-  <title>MySQL的高可靠和高可用 | www6v的博客</title>
+  <title>MySQL的主从 高可用 容灾 | www6v的博客</title>
   
 
 
@@ -207,7 +207,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          MySQL的高可靠和高可用
+          MySQL的主从 高可用 容灾
         </h1>
 
         <div class="post-meta">
@@ -230,7 +230,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-24 12:34:08" itemprop="dateModified" datetime="2023-05-24T12:34:08+08:00">2023-05-24</time>
+                <time title="修改时间：2023-08-03 11:40:00" itemprop="dateModified" datetime="2023-08-03T11:40:00+08:00">2023-08-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,6 +273,7 @@
 <li><a href="#%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88-master%E9%AB%98%E5%8F%AF%E7%94%A85">高可用方案-Master高可用[5]</a><br>- <a href="#mmm">MMM</a><br>- <a href="#mha-%E5%8D%95%E4%B8%BB">MHA - 单主 +</a><br>- <a href="#mysql-group-replicatoinmgr-%E5%8D%95%E4%B8%BB-6">MySQL Group Replicatoin(MGR) - 单主 [6]+</a><br>- <a href="#mysql-cluster-%E5%A4%9A%E4%B8%BB">MySQL Cluster - 多主</a><br>- <a href="#galera-cluster-%E5%A4%9A%E4%B8%BB">Galera Cluster - 多主 +</a><br>- <a href="#percona-xtradbpxc-%E5%A4%9A%E4%B8%BB">Percona XtraDB(PXC) -多主</a></li>
 <li><a href="#%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88-%E6%95%B0%E6%8D%AE%E5%8F%AF%E9%9D%A0%E6%80%A75">高可用方案 - 数据可靠性[5]</a><br>- <a href="#raid10-raid-10">Raid10( Raid 1+0 )</a><br>- <a href="#san%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8-%E8%B4%B5">SAN共享存储- 贵</a><br>- <a href="#drbd%E7%A3%81%E7%9B%98%E5%A4%8D%E5%88%B6-%E7%B3%BB%E7%BB%9F%E8%87%AA%E5%B8%A6">DRBD磁盘复制-系统自带 +</a></li>
 <li><a href="#mysql-log%E5%92%8C%E5%8F%AF%E9%9D%A0%E6%80%A7">MySQL Log和可靠性</a></li>
+<li><a href="#%E5%AE%B9%E7%81%BE-7">容灾 [7]</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
@@ -388,14 +389,14 @@
 
 
 
-
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h2><span id="容灾-7">容灾 [7]</span><a href="#容灾-7" class="header-anchor">#</a></h2><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li>《MySQL是怎么保证主备一致的？》 MySQL实战45讲  丁奇</li>
 <li>《MySQL是怎么保证高可用的？》 MySQL实战45讲 丁奇</li>
 <li>《备库为什么会延迟好几个小时？》MySQL实战45讲  丁奇</li>
 <li>xxx</li>
 <li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1m44y1Q7ZF/">【IT老齐245】综合对比九种MySQL高可用方案</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1HL411T7C8/">【IT老齐099】哎，MySQL高可用架构选型要慎重啊！</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/451693431">腾讯云原生数据库 TDSQL-C异地容灾核心能力构建</a>  </li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/620697440">MySQL主从复制原理剖析与应用实践</a> vivo team 未</li>
 </ol>
 
@@ -413,7 +414,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www6v.github.io/www6vHomeHexo/2020/06/21/mysqlReliability/" title="MySQL的高可靠和高可用">https://www6v.github.io/www6vHomeHexo/2020/06/21/mysqlReliability/</a>
+    <a href="https://www6v.github.io/www6vHomeHexo/2020/06/21/mysqlReliability/" title="MySQL的主从 高可用 容灾">https://www6v.github.io/www6vHomeHexo/2020/06/21/mysqlReliability/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
