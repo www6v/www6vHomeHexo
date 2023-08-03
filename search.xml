@@ -25949,8 +25949,8 @@ nq： 不排队调度
 <ul>
 <li><a href="#%E4%B8%AD%E5%8F%B0%E5%85%A8%E6%99%AF%E5%9B%BE">中台全景图</a></li>
 <li><a href="#%E4%B8%9A%E5%8A%A1%E4%B8%AD%E5%8F%B0">业务中台</a><ul>
-<li><a href="#%E6%8A%80%E6%9C%AF%E4%B8%AD%E5%8F%B0-123">技术中台 [1][2][3]</a></li>
 <li><a href="#%E4%B8%9A%E5%8A%A1%E4%B8%AD%E5%8F%B0-1">业务中台</a></li>
+<li><a href="#%E6%8A%80%E6%9C%AF%E4%B8%AD%E5%8F%B0-123">技术中台 [1][2][3]</a></li>
 </ul>
 </li>
 <li><a href="#%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0">数据中台</a><ul>
@@ -25983,15 +25983,16 @@ nq： 不排队调度
 <li><p>理念<br>  阿里提出： 大中台， 小前台</p>
 </li>
 </ul>
-<h1><span id="业务中台">业务中台</span><a href="#业务中台" class="header-anchor">#</a></h1><h3><span id="技术中台-123">技术中台 [1][2][3]</span><a href="#技术中台-123" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2019/05/02/middleStage/middleStage-it.jpg" class title="技术中台">
+<h1><span id="业务中台">业务中台</span><a href="#业务中台" class="header-anchor">#</a></h1><h3><span id="业务中台">业务中台</span><a href="#业务中台" class="header-anchor">#</a></h3><ul>
+<li><p>阿里共享服务 [6]<br>淘宝 天猫  <strong>共享</strong> 商品，交易，店铺等服务</p>
+<img src="/www6vHomeHexo/2019/05/02/middleStage/middleStage-biz-ali.jpeg" class title="业务中台">
 
-<h3><span id="业务中台">业务中台</span><a href="#业务中台" class="header-anchor">#</a></h3><ul>
-<li><p>京东业务中台 [5]</p>
-<img src="/www6vHomeHexo/2019/05/02/middleStage/middleStage-biz.jpeg" class title="业务中台">
 </li>
-<li><p>阿里共享服务 [6]</p>
-<img src="/www6vHomeHexo/2019/05/02/middleStage/middleStage-biz-ali.jpeg" class title="业务中台"></li>
+<li><p>京东业务中台 [5]</p>
+<img src="/www6vHomeHexo/2019/05/02/middleStage/middleStage-biz.jpeg" class title="业务中台"></li>
 </ul>
+<h3><span id="技术中台-123">技术中台 [1][2][3]</span><a href="#技术中台-123" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2019/05/02/middleStage/middleStage-it.jpg" class title="技术中台">
+
 <h1><span id="数据中台">数据中台</span><a href="#数据中台" class="header-anchor">#</a></h1><h3><span id="数据中台全景">数据中台全景</span><a href="#数据中台全景" class="header-anchor">#</a></h3><ul>
 <li><p>数据中台全景[6]</p>
 <img src="/www6vHomeHexo/2019/05/02/middleStage/middleStage-data.jpg" class>
