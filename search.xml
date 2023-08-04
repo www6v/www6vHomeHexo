@@ -476,7 +476,7 @@
 </ul>
 </li>
 <li><a href="/www6vHomeHexo/2023/05/13/unifyModel/" title="统一模型">统一模型</a> </li>
-<li><a href="/www6vHomeHexo/2017/06/17/multiLive/" title="异地多活总结">异地多活总结</a></li>
+<li><a href="/www6vHomeHexo/2017/06/17/multiLive/" title="异地多活 总结">异地多活 总结</a></li>
 </ul>
 <h2><span id="系统设计">系统设计</span><a href="#系统设计" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2019/09/13/feed/" title="Feed流 总结">Feed流 总结</a></li>
@@ -591,7 +591,7 @@
 <h2><span id="单机">单机</span><a href="#单机" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2020/08/14/mysqlTransactionAndLock/" title="MySQL 事务-隔离性和锁">MySQL 事务-隔离性和锁</a></li>
 <li><a href="/www6vHomeHexo/2020/06/26/mysqlUpdate/" title="MySQL中的SQL更新语句">MySQL中的SQL更新语句</a></li>
-<li><a href="/www6vHomeHexo/2020/06/21/mysqlReliability/" title="MySQL的高可靠和高可用">MySQL的高可靠和高可用</a></li>
+<li><a href="/www6vHomeHexo/2020/06/21/mysqlReliability/" title="MySQL的主从 高可用 容灾">MySQL的主从 高可用 容灾</a></li>
 <li><a href="/www6vHomeHexo/2019/09/10/mysqlIndex/" title="MySQL的索引和优化">MySQL的索引和优化</a></li>
 <li><a href="/www6vHomeHexo/2015/02/21/mysqlTransaction/" title="MySQL事务-总结">MySQL事务-总结</a>   </li>
 <li><a href="/www6vHomeHexo/2022/02/27/mysqlLog/" title="MySQL Logs">MySQL Logs</a></li>
@@ -952,7 +952,7 @@
 <ul>
 <li><a href="../../../../categories/%E6%9E%B6%E6%9E%84/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/">系统架构</a>  category<ul>
 <li><a href="/www6vHomeHexo/2022/06/26/available/" title="高可用 Available">高可用 Available</a> </li>
-<li><a href="/www6vHomeHexo/2017/06/17/multiLive/" title="异地多活总结">异地多活总结</a></li>
+<li><a href="/www6vHomeHexo/2017/06/17/multiLive/" title="异地多活 总结">异地多活 总结</a></li>
 </ul>
 </li>
 </ul>
@@ -1134,7 +1134,7 @@
 <li><a href="/www6vHomeHexo/2021/05/16/kafkaController/" title="Kafka Controller-控制器">Kafka Controller-控制器</a></li>
 </ul>
 <h3><span id="数据服务">数据服务</span><a href="#数据服务" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2020/06/21/mysqlReliability/" title="MySQL的高可靠和高可用">MySQL的高可靠和高可用</a></li>
+<li><a href="/www6vHomeHexo/2020/06/21/mysqlReliability/" title="MySQL的主从 高可用 容灾">MySQL的主从 高可用 容灾</a></li>
 <li><a href="/www6vHomeHexo/2019/10/27/dbTradeoff/" title="分布式数据库中一致性和可用性的权衡">分布式数据库中一致性和可用性的权衡</a></li>
 </ul>
 <h3><span id="k8s-高可用">K8S  高可用</span><a href="#k8s-高可用" class="header-anchor">#</a></h3><ul>
@@ -1142,7 +1142,7 @@
 <li><a href="/www6vHomeHexo/2022/04/05/k8sAvailable/" title="K8S高可用-零停机">K8S高可用-零停机</a></li>
 </ul>
 <h1><span id="容灾amp多活">容灾&amp;多活</span><a href="#容灾amp多活" class="header-anchor">#</a></h1><h3><span id="服务amp应用容灾">服务&amp;应用容灾</span><a href="#服务amp应用容灾" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2017/06/17/multiLive/" title="异地多活总结">异地多活总结</a> </li>
+<li><a href="/www6vHomeHexo/2017/06/17/multiLive/" title="异地多活 总结">异地多活 总结</a> </li>
 <li><a href="/www6vHomeHexo/2019/07/20/istio-k8s-service/" title="Istio、Kubernetes和Spring Cloud中服务的比对">Istio、Kubernetes和Spring Cloud中服务的比对</a></li>
 </ul>
 <h3><span id="数据容灾">数据容灾</span><a href="#数据容灾" class="header-anchor">#</a></h3><ul>
@@ -13191,13 +13191,13 @@ BGP 协议传输的消息
 <td>Master-Slave<br>(最终一致性)</td>
 <td></td>
 <td>延迟低，吞吐高<br>主动推送&#x2F;被动拉取</td>
-<td><a href="/www6vHomeHexo/2020/06/21/mysqlReliability/" title="MySQL的高可靠和高可用">MySQL的高可靠和高可用</a> self</td>
+<td><a href="/www6vHomeHexo/2020/06/21/mysqlReliability/" title="MySQL的主从 高可用 容灾">MySQL的主从 高可用 容灾</a> self</td>
 </tr>
 <tr>
 <td>Master-Master<br>(最终一致性)</td>
 <td><a href="/www6vHomeHexo/2022/05/14/multiMasterCRDT/" title="多主-CRDT">CRDT</a> self</td>
 <td>延迟低，吞吐高</td>
-<td><a href="/www6vHomeHexo/2020/06/21/mysqlReliability/" title="MySQL的高可靠和高可用">MySQL的高可靠和高可用</a> self</td>
+<td><a href="/www6vHomeHexo/2020/06/21/mysqlReliability/" title="MySQL的主从 高可用 容灾">MySQL的主从 高可用 容灾</a> self</td>
 </tr>
 <tr>
 <td>弱一致性</td>
@@ -13344,7 +13344,7 @@ BGP 协议传输的消息
 <ul>
 <li>PolarDB [7]<br><strong>基于Redo Log物理复制实现的一写多读共享存储集群</strong></li>
 </ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>[1] 《04 | 架构风格：NewSQL和PGXC到底有啥不一样？》  王磊<br>[2]  <a href="https://docs.opengauss.org/zh/docs/3.1.1/docs/Description/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.html">opengauss系统架构</a><br>[3]  PolarDB Serverless: A Cloud Native Database for Disaggregated Data Centers<br>[4]  <a href="https://blog.csdn.net/devcloud/article/details/118360126">GaussDB(for Redis)揭秘：Redis存算分离架构最全解析</a><br>[5] <a href="https://zhuanlan.zhihu.com/p/42754631">阿里推出PolarFS分布式文件系统，存储与计算分开！附论文</a><br>[6] <a href="/www6vHomeHexo/2020/06/21/mysqlReliability/" title="MySQL的高可靠和高可用">MySQL的高可靠和高可用</a> self<br>[7] &lt;&lt;云原生数据库 原理与实践&gt;&gt; 5.2  5.3<br>[10] VERBITSKI A，GUPTA A，SAHA D，et al. Amazon aurora：design considerations for high throughput cloud-native relational databases ［C］. Proceedings of the 2017 ACM International Conference on Man⁃ agement of Data，2017 ：1041-1052.</p>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>[1] 《04 | 架构风格：NewSQL和PGXC到底有啥不一样？》  王磊<br>[2]  <a href="https://docs.opengauss.org/zh/docs/3.1.1/docs/Description/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.html">opengauss系统架构</a><br>[3]  PolarDB Serverless: A Cloud Native Database for Disaggregated Data Centers<br>[4]  <a href="https://blog.csdn.net/devcloud/article/details/118360126">GaussDB(for Redis)揭秘：Redis存算分离架构最全解析</a><br>[5] <a href="https://zhuanlan.zhihu.com/p/42754631">阿里推出PolarFS分布式文件系统，存储与计算分开！附论文</a><br>[6] <a href="/www6vHomeHexo/2020/06/21/mysqlReliability/" title="MySQL的主从 高可用 容灾">MySQL的主从 高可用 容灾</a> self<br>[7] &lt;&lt;云原生数据库 原理与实践&gt;&gt; 5.2  5.3<br>[10] VERBITSKI A，GUPTA A，SAHA D，et al. Amazon aurora：design considerations for high throughput cloud-native relational databases ［C］. Proceedings of the 2017 ACM International Conference on Man⁃ agement of Data，2017 ：1041-1052.</p>
 ]]></content>
       <categories>
         <category>架构</category>
@@ -13628,6 +13628,9 @@ BGP 协议传输的消息
 <li><a href="https://cloud.tencent.com/developer/article/1352666?ivk_sa=1024320u">LSM-Tree 的写放大写放大、读放大、空间放大RockDB 写放大简单分析参考文档</a></li>
 <li><a href="/www6vHomeHexo/2022/04/05/rocksdbLsm/" title="RocksDB- LSM-Tree">RocksDB- LSM-Tree</a> self</li>
 <li><a href="https://www.infoq.cn/article/u3leu3EmGJjWflQLtJHs">字节跳动在 RocksDB 存储引擎上的改进实践</a> *** 未</li>
+<li><a href="https://www.cnblogs.com/lygin/p/17158774.html">Rocksdb 调优指南</a> 像是翻译 未</li>
+<li><a href="https://zhuanlan.zhihu.com/p/616209332">深入RocksDB原理</a> *** 未</li>
+<li><a href="https://gaomf.cn/2021/11/28/Paper_RocksDB_Developemnt/">【读读论文】RocksDB 发展回顾及展望 </a>  论文 未</li>
 </ol>
 ]]></content>
       <categories>
@@ -24722,8 +24725,8 @@ nq： 不排队调度
         <category>serviceMesh</category>
       </categories>
       <tags>
-        <tag>k8s</tag>
         <tag>istio</tag>
+        <tag>k8s</tag>
       </tags>
   </entry>
   <entry>
