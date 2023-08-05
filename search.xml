@@ -775,6 +775,7 @@
 </li>
 <li><a href="#spark">Spark</a></li>
 <li><a href="#beam">Beam</a></li>
+<li><a href="#%E6%89%B9%E6%B5%81%E4%B8%80%E4%BD%93">批流一体</a></li>
 <li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
 <li><a href="#streaming-system%E7%BF%BB%E8%AF%91">《Streaming System》翻译</a></li>
 </ul>
@@ -804,6 +805,9 @@
 </ul>
 <h1><span id="beam">Beam</span><a href="#beam" class="header-anchor">#</a></h1><ul>
 <li><a href="/www6vHomeHexo/2022/04/21/streamingBeam/" title="流计算-Beam">流计算-Beam</a></li>
+</ul>
+<h1><span id="批流一体">批流一体</span><a href="#批流一体" class="header-anchor">#</a></h1><ul>
+<li><a href="/www6vHomeHexo/2022/08/04/streamingBatchIntegration/" title="批流一体">批流一体</a></li>
 </ul>
 <h1><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h1><ul>
 <li><a href="/www6vHomeHexo/2019/07/19/streamComputing/" title="流式计算[Flink Beam Spark]">流式计算[Flink Beam Spark]</a></li>
@@ -3077,6 +3081,70 @@
       </tags>
   </entry>
   <entry>
+    <title>批流一体</title>
+    <url>/www6vHomeHexo/2022/08/04/streamingBatchIntegration/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+
+<h1><span id="数据湖-vs-数据仓库1">数据湖  vs 数据仓库[1]</span><a href="#数据湖-vs-数据仓库1" class="header-anchor">#</a></h1><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>数据仓库</th>
+<th>数据湖</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>数据</strong></td>
+<td>来自事务系统、运营数据库和业务线应用程序的关系数据</td>
+<td>来自 IoT 设备、网站、移动应用程序、社交媒体和企业应用程序的非关系和关系数据</td>
+</tr>
+<tr>
+<td><strong>Schema</strong></td>
+<td>设计在数据仓库实施之前（写入型 Schema）</td>
+<td>写入在分析时（读取型 Schema）</td>
+</tr>
+<tr>
+<td><strong>性价比</strong></td>
+<td>更快查询结果会带来较高存储成本</td>
+<td>更快查询结果只需较低存储成本</td>
+</tr>
+<tr>
+<td><strong>数据质量</strong></td>
+<td>可作为重要事实依据的高度监管数据</td>
+<td>任何可以或无法进行监管的数据（例如原始数据）</td>
+</tr>
+<tr>
+<td><strong>用户</strong></td>
+<td>业务分析师</td>
+<td>数据科学家、数据开发人员和业务分析师（使用监管数据）</td>
+</tr>
+<tr>
+<td><strong>分析</strong></td>
+<td>批处理报告、BI 和可视化</td>
+<td>机器学习、预测分析、数据发现和分析</td>
+</tr>
+</tbody></table>
+<h1><span id="湖仓一体">湖仓一体</span><a href="#湖仓一体" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://aws.amazon.com/cn/big-data/datalakes-and-analytics/what-is-a-data-lake/">什么是数据湖？</a> AWS</li>
+<li><a href="https://zhuanlan.zhihu.com/p/523028640">[数据湖] 基于flink hudi的批流一体实践</a> 未</li>
+<li><a href="https://tech.meituan.com/2021/08/26/data-warehouse-in-meituan-waimai.html">美团外卖实时数仓建设实践</a> 未</li>
+<li><a href="https://developer.aliyun.com/article/706954">大数据架构如何做到流批一体？</a> 未</li>
+</ol>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>计算</category>
+        <category>流式计算</category>
+        <category>批流一体</category>
+      </categories>
+      <tags>
+        <tag>流式计算</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>可观测性-系统构建</title>
     <url>/www6vHomeHexo/2022/08/04/observabilityBuilding/</url>
     <content><![CDATA[<p></p>
@@ -3117,6 +3185,7 @@
 </li>
 <li><a href="#15-six-common-qualitative-research-designs">1.5. Six Common Qualitative Research Designs</a><ul>
 <li><a href="#151-basic-qualitative-research">1.5.1. Basic Qualitative Research</a></li>
+<li><a href="#152-phenomenology">1.5.2. Phenomenology</a></li>
 </ul>
 </li>
 </ul>
@@ -3154,6 +3223,8 @@
 <p>在定性研究中，存在着各种不同的方法和设计，不同的作者提出了不同的分类方式。其中六种常见的定性研究设计包括基础定性研究、现象学、扎根理论、民族志学、叙事分析和定性案例研究。这些设计具有共同的特点，但在研究问题的制定、样本选择、数据收集和分析以及报告方面存在着不同的重点和变化。研究者也可以结合多种设计，例如在民族志案例研究中。</p>
 <h3><span id="151-basic-qualitative-research">1.5.1. Basic Qualitative Research</span><a href="#151-basic-qualitative-research" class="header-anchor">#</a></h3><p>Basic qualitative research is the most common type of qualitative research in applied fields such as education, administration, health, social work, counseling, and business. It is characterized by a constructivist approach, where researchers aim to understand the meaning a phenomenon holds for those involved in it. The focus is on how individuals interpret their experiences, construct their world, and attribute meaning to their experiences. Data collection methods include interviews, observations, and document analysis. The analysis involves identifying recurrent patterns in the data, and the interpretation is based on the researcher’s understanding of the participants’ perspectives. The main goal of basic qualitative research is to uncover and interpret the constructed meanings of individuals’ lives and worlds.</p>
 <p>在教育、行政管理、健康、社会工作、咨询和商业等应用领域，基础定性研究是最常见的定性研究类型。它以建构主义方法为特点，研究人员旨在理解现象对相关参与者的意义。研究关注个体如何解释他们的经历、构建他们的世界，并赋予经历以意义。数据收集方法包括访谈、观察和文件分析。分析过程涉及识别数据中的重复模式，并根据研究人员对参与者观点的理解进行解释。基础定性研究的主要目标是揭示和解释个体生活和世界中构建的意义。</p>
+<h3><span id="152-phenomenology">1.5.2. Phenomenology</span><a href="#152-phenomenology" class="header-anchor">#</a></h3><p>Phenomenology is a philosophy that underlies qualitative research, focusing on the experience itself and how it transforms into consciousness. It is interested in our “lived experience” rather than categorizing and simplifying phenomena. Phenomenological research is based on the assumption that there is an essence to shared experiences. The key task of a phenomenologist is to depict the essence or basic structure of a phenomenon, suspending prior beliefs to avoid interference. The study begins with a phenomenological interview, with the researcher exploring their own experiences to become aware of personal biases. The process of epoche, or refraining from judgment, is commonly undertaken by researchers. Other strategies unique to phenomenological research include phenomenological reduction, horizontalization, and imaginative variation. The end product is a composite description presenting the ‘essence’ of the phenomenon. There are variations in how a phenomenological study is conducted.</p>
+<p>现象学是一种哲学，它是定性研究的基础，关注的是经验本身以及它如何转化为意识。它对我们的”生活经验”感兴趣，而不是对现象进行分类和简化。现象学研究基于一个假设，即共享经验有其本质。现象学家的主要任务是描绘现象的本质或基本结构，暂停先前的信念以避免干扰。研究开始于现象学访谈，研究者探索自己的经验以意识到个人偏见。研究者通常会进行的过程包括epoche，即避免判断。现象学研究的其他独特策略包括现象学还原，横向化和想象变化。最终的产品是呈现现象’本质’的综合描述。现象学研究的进行方式有多种变化。</p>
 ]]></content>
       <categories>
         <category>PhD</category>
@@ -17191,14 +17262,18 @@ BGP 协议传输的消息
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-
-<ul>
-<li>Apache Kylin - MOLAP， 预计算</li>
+<h1><span id="存储">存储</span><a href="#存储" class="header-anchor">#</a></h1><ul>
+<li>Apache Kylin - MOLAP， 预计算<br>hadoop体系</li>
 <li>Apache Doris </li>
 <li>Clickhouse - ROLAP</li>
-<li>Kudu</li>
+<li>Apache Kudu</li>
+<li>Iceberg<br>tables</li>
 </ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p><a href="https://blog.csdn.net/qq_39945938/article/details/114013486">1.OLAP 技术选型 Apache Kylin、Apache Doris、Clickhouse对比</a><br><a href="https://cloud.tencent.com/developer/article/1477234">Apache Kylin VS Apache Doris全方位对比</a><br><a href="https://www.zhihu.com/question/303991599/answer/1555185339">有人说下kudu,kylin,druid,clickhouse的区别,使用场景么?</a><br><a href="https://blog.csdn.net/u013256816/article/details/108271371">Kylin、Druid、ClickHouse核心技术对比</a></p>
+<h1><span id="查询引擎">查询引擎</span><a href="#查询引擎" class="header-anchor">#</a></h1><ul>
+<li>Presto</li>
+<li>Impala</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://blog.csdn.net/qq_39945938/article/details/114013486">1.OLAP 技术选型 Apache Kylin、Apache Doris、Clickhouse对比</a><br><a href="https://cloud.tencent.com/developer/article/1477234">Apache Kylin VS Apache Doris全方位对比</a><br><a href="https://www.zhihu.com/question/303991599/answer/1555185339">有人说下kudu,kylin,druid,clickhouse的区别,使用场景么?</a><br><a href="https://blog.csdn.net/u013256816/article/details/108271371">Kylin、Druid、ClickHouse核心技术对比</a><br><a href="https://blog.csdn.net/qq_43376286/article/details/117953122">Kylin基础</a></p>
 ]]></content>
       <categories>
         <category>大数据</category>
@@ -25014,7 +25089,7 @@ nq： 不排队调度
 <li><a href="https://www.iteblog.com/archives/2417.html">Apache Flink状态管理和容错机制介绍</a></li>
 <li><a href="https://yq.aliyun.com/articles/674450">Streaming System 第二章：The What- Where- When- and How of Data Processing</a> 未</li>
 <li><a href="https://yq.aliyun.com/articles/682873">Streaming System 第三章：Watermarks</a> 未</li>
-<li><a href="https://yq.aliyun.com/articles/706954">大数据架构如何做到流批一体？</a> 未</li>
+<li>xxx</li>
 <li>&lt;&lt;Spark大数据处理技术&gt;&gt; 10.2节</li>
 <li><a href="https://www.cnblogs.com/zlslch/p/7609417.html">Apache Beam是什么？</a></li>
 </ol>
@@ -25088,7 +25163,7 @@ nq： 不排队调度
 </ul>
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><a href="/www6vHomeHexo/2019/09/09/microservice/" title="微服务 总结">微服务 总结</a>  self</li>
-<li><a href="/www6vHomeHexo/2019/08/31/observability/" title="可观测性">可观测性</a>  self   </li>
+<li><a href="/www6vHomeHexo/2019/08/31/observability/" title="可观测性 总结">可观测性 总结</a>  self   </li>
 <li>《RPC实战与核心原理进 - 19 | 分布式环境下如何快速定位问题？》   何小锋</li>
 <li>《SRE实战手册 - 07｜故障处理：一切以恢复业务为最高优先级 》   方法论</li>
 <li>《云原生下的可观察性》 阿里张城  ***</li>
