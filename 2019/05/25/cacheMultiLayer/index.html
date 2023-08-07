@@ -26,8 +26,10 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2019/05/25/cacheMultiLayer/arch.jpg">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2019/05/25/cacheMultiLayer/query.png">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2019/05/25/cacheMultiLayer/update.png">
 <meta property="article:published_time" content="2019-05-25T06:08:00.000Z">
-<meta property="article:modified_time" content="2023-07-31T08:55:06.657Z">
+<meta property="article:modified_time" content="2023-08-07T03:06:35.263Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="缓存">
 <meta name="twitter:card" content="summary">
@@ -226,7 +228,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-31 16:55:06" itemprop="dateModified" datetime="2023-07-31T16:55:06+08:00">2023-07-31</time>
+                <time title="修改时间：2023-08-07 11:06:35" itemprop="dateModified" datetime="2023-08-07T11:06:35+08:00">2023-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -266,6 +268,8 @@
 <li><a href="#%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%E8%BF%9C%E7%A8%8B%E7%BC%93%E5%AD%98">二级缓存（本地缓存+远程缓存）</a></li>
 </ul>
 </li>
+<li><a href="#%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%E6%9F%A5%E8%AF%A2-2">多级缓存查询 [2]</a></li>
+<li><a href="#%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%E6%9B%B4%E6%96%B0-2">多级缓存更新 [2]</a></li>
 <li><a href="#%E7%BC%93%E5%AD%98%E5%88%86%E5%B1%82-%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98">缓存分层 多级缓存</a><ul>
 <li><a href="#%E8%BE%B9%E7%BC%98cache">边缘cache</a></li>
 <li><a href="#%E9%A1%B5%E9%9D%A2%E7%BA%A7%E7%BC%93%E5%AD%98">页面级缓存</a></li>
@@ -318,6 +322,10 @@
 </ul>
 </li>
 </ul>
+<h1><span id="多级缓存查询-2">多级缓存查询 [2]</span><a href="#多级缓存查询-2" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2019/05/25/cacheMultiLayer/query.png" class>
+
+<h1><span id="多级缓存更新-2">多级缓存更新 [2]</span><a href="#多级缓存更新-2" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2019/05/25/cacheMultiLayer/update.png" class>
+
 <h1><span id="缓存分层-多级缓存">缓存分层  多级缓存</span><a href="#缓存分层-多级缓存" class="header-anchor">#</a></h1><h3><span id="边缘cache">边缘cache</span><a href="#边缘cache" class="header-anchor">#</a></h3><p>可用CDN实现，往往是服务器端缓存，存静态数据。<br>可以存Html页面， 脚本， 样式， 图片，页面片段等。</p>
 <h3><span id="页面级缓存">页面级缓存</span><a href="#页面级缓存" class="header-anchor">#</a></h3><p>往往是本地缓存， 数据相对动态。</p>
 <h3><span id="计算结果的缓存">计算结果的缓存</span><a href="#计算结果的缓存" class="header-anchor">#</a></h3><p>可以存储索引聚合数据，比如  BI里的数据聚合表。也可以存储耗时查询数据 ，比如搜索的结果。也可以存储业务相关数据， 比如对象模型的有向图可以整个缓存起来。在微博系统中，所有@你的微博是相对耗时， 可以 考虑作为逻辑缓存。</p>
@@ -333,11 +341,18 @@
 <p><del>## 缓存与一致性</del></p>
 <p>  <del>缓存多副本之间的同步：</del><br>  <del>可分为replication和invalidaiton机制。 Replication机制表示一旦有数据的更新， 其余副本都会同步复制一份更新后的数据。Replication机制复制时slave会对master节点有拖累， 这时可以考虑采取invalidation机制。 Invalidation机制在jboss cache里已有实现, 一旦有更新， 广播消息， 失效所有其他的副本，让其重新去获得该值。 可通过这种方式缓存大对象以减少在实例中复制对象的代价。根据用户在一定时间段内上网地点固定不变的规律，用户始终都是访问同一个机房， 针对主节点的本地缓存在有更新时可以异步发invalidation消息，副本节点可以慢慢的再加载回这个大对象， 这样可以提高用户响应度。这种方式也可用在边缘缓存中。对于无法分组的数据， 比如在某时间段的用户认证数据需要保证副本同步，最好的方式是清除相应的副本， 让它在下次使用时初始化</del></p>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lee_nacl/article/details/127860463">多级缓存架构</a><br>《架构实战营-第25节课：计算架构模式之多级缓存架构》 V</li>
-<li>《移动选购线缓存实践》 赵思奇 *** </li>
-<li><a target="_blank" rel="noopener" href="http://wed.xjx100.cn/news/154282.html">jetcache：阿里这款多级缓存框架一定要掌握</a> 未</li>
-<li><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_15989526/6287632">聊聊微服务架构中的多级缓存设计（建议收藏）</a> 未</li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/606469614">Java分布式缓存一篇文章让你明白你多级缓存的分层架构原理分析</a> 未</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lee_nacl/article/details/127860463">多级缓存架构</a><br>《架构实战营-第25节课：计算架构模式之多级缓存架构》 V</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/497029871">解析分布式系统的缓存设计</a></p>
+</li>
+<li><p>《移动选购线缓存实践》 赵思奇 *** </p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://wed.xjx100.cn/news/154282.html">jetcache：阿里这款多级缓存框架一定要掌握</a> 未</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_15989526/6287632">聊聊微服务架构中的多级缓存设计（建议收藏）</a> 未</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/606469614">Java分布式缓存一篇文章让你明白你多级缓存的分层架构原理分析</a> 未</p>
+</li>
 </ol>
 
     </div>
