@@ -3126,7 +3126,23 @@
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h1><span id="观察什么">观察什么</span><a href="#观察什么" class="header-anchor">#</a></h1><h1><span id="怎么观察">怎么观察</span><a href="#怎么观察" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://zhuanlan.zhihu.com/p/594928812">vivo 服务端监控体系建设实践</a> ***<br><a href="https://zhuanlan.zhihu.com/p/529671344">vivo 容器集群监控系统架构与实践</a></p>
+<h1><span id="观察什么1">观察什么[1]</span><a href="#观察什么1" class="header-anchor">#</a></h1><ul>
+<li><p>监控能力矩阵<br><img src="https://pic1.zhimg.com/80/v2-ba3823ec17a362eb2cacf406def9ccf8_720w.webp" alt="监控能力矩阵"></p>
+</li>
+<li><p>监控对象范围<br><img src="https://pic3.zhimg.com/80/v2-fa62d533ac4c097db57dc8562f28cf5a_720w.webp" alt="监控对象范围"></p>
+</li>
+</ul>
+<h1><span id="怎么观察1">怎么观察[1]</span><a href="#怎么观察1" class="header-anchor">#</a></h1><ul>
+<li><p>产品架构<br><img src="https://pic1.zhimg.com/80/v2-d74e6fdbee5d2a32c8c035f118adbd54_720w.webp" alt="产品架构"> </p>
+</li>
+<li><p>技术架构<br><img src="https://pic3.zhimg.com/80/v2-75c71d8c126018976e74014ab3258636_720w.webp" alt="技术架构"></p>
+</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://zhuanlan.zhihu.com/p/594928812">vivo 服务端监控体系建设实践</a> ***</li>
+<li><a href="https://zhuanlan.zhihu.com/p/529671344">vivo 容器集群监控系统架构与实践</a> </li>
+<li><a href="https://zhuanlan.zhihu.com/p/596697068">vivo 故障定位平台的探索与实践</a></li>
+</ol>
 ]]></content>
       <categories>
         <category>可观测性</category>
@@ -17500,7 +17516,7 @@ BGP 协议传输的消息
 
 <img src="/www6vHomeHexo/2021/05/30/distributedDatabaseJoinQuery/join.jpg" class>
 
-<h2><span id="tidb-的-join-算法2">TiDB 的 Join 算法[2]</span><a href="#tidb-的-join-算法2" class="header-anchor">#</a></h2><ul>
+<h2><span id="tidb-的-join-算法25">TiDB 的 Join 算法[2][5]</span><a href="#tidb-的-join-算法25" class="header-anchor">#</a></h2><ul>
 <li><p>TiDB 的 Join 算法包括如下几类：</p>
 <ul>
 <li>Hash Join</li>
@@ -17522,6 +17538,7 @@ BGP 协议传输的消息
 <li><a href="https://cn.pingcap.com/blog/tidb-query-optimization-and-tuning-2">TiDB 查询优化及调优系列（二）TiDB 查询计划简介</a>  <strong>查看 Join 的执行计划</strong></li>
 <li><a href="https://cn.pingcap.com/blog/?tag=TiDB%20%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB">TiDB 源码阅读系列</a></li>
 <li><a href="https://cn.pingcap.com/blog/tidb-query-optimization-and-tuning-4">TiDB 查询优化及调优系列（四）查询执行计划的调整及优化原理</a></li>
+<li><a href="https://tidb.net/blog/cf459d89">JOIN 查询的执行计划 比较</a></li>
 </ol>
 ]]></content>
       <categories>
