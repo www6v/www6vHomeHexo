@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/05/15/kafkaProducer/kafka-producer1.jpg">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/05/15/kafkaProducer/kafka-producer.jpg">
 <meta property="article:published_time" content="2022-05-15T15:05:40.000Z">
-<meta property="article:modified_time" content="2023-05-18T11:04:12.220Z">
+<meta property="article:modified_time" content="2023-08-09T03:22:49.350Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="kafka">
 <meta name="twitter:card" content="summary">
@@ -227,7 +227,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-18 19:04:12" itemprop="dateModified" datetime="2023-05-18T19:04:12+08:00">2023-05-18</time>
+                <time title="修改时间：2023-08-09 11:22:49" itemprop="dateModified" datetime="2023-08-09T11:22:49+08:00">2023-08-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,9 +268,11 @@
 <li>UniformStickyPartitioner 纯粹的粘性分区策略</li>
 <li>RoundRobinPartitioner 分区策略</li>
 </ul>
+<h2><span id="kafka-生产者-里的buffer3">kafka 生产者 里的buffer[3]</span><a href="#kafka-生产者-里的buffer3" class="header-anchor">#</a></h2><p>kafka producer中配置的 buffer.memory （参数在文末有详细说明）参数是缓冲区的大小，这个缓存区大家也就是RecordAccmulator所用的内存大小。默认是32MB。</p>
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg4ODY1NTcxNg==&mid=2247493639&idx=1&sn=4bd43c8137a701e73dddd9ccdf58ad45&c">图解kafka生产者流程,超详细！</a>  石臻臻   kafka contributor  </li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg4ODY1NTcxNg==&mid=2247493592&idx=1&sn=4a4f536b21f1b6b1d506dd1bdfa07e80">Kafka生产者的3种分区策略 </a> 石臻臻   kafka contributor</li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg4ODY1NTcxNg==&mid=2247493592&idx=1&sn=4a4f536b21f1b6b1d506dd1bdfa07e80">Kafka生产者的3种分区策略 </a> 石臻臻   kafka contributor  </li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xixiqiuqiu/article/details/122806693">Kafka Producer全流程分析和思考</a></li>
 </ol>
 
     </div>
@@ -398,7 +400,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/www6vHomeHexo/tags/">
           
-        <span class="site-state-item-count">137</span>
+        <span class="site-state-item-count">138</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

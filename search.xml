@@ -136,7 +136,7 @@
 <h2><span id="存储">存储</span><a href="#存储" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2019/09/01/k8sStorage/" title="Kubernetes存储">Kubernetes存储</a> </li>
 <li><a href="/www6vHomeHexo/2022/01/12/k8sRook/" title="Kubernetes Rook">Kubernetes Rook</a> </li>
-<li><a href="/www6vHomeHexo/2022/01/08/ceph/" title="Ceph">Ceph</a> </li>
+<li><a href="/www6vHomeHexo/2022/01/08/ceph/" title="Ceph 总结">Ceph 总结</a> </li>
 <li><a href="/www6vHomeHexo/2022/04/06/etcd/" title="etcd 总结">etcd 总结</a></li>
 </ul>
 <h2><span id="调度">调度</span><a href="#调度" class="header-anchor">#</a></h2><ul>
@@ -8600,9 +8600,11 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <li>UniformStickyPartitioner 纯粹的粘性分区策略</li>
 <li>RoundRobinPartitioner 分区策略</li>
 </ul>
+<h2><span id="kafka-生产者-里的buffer3">kafka 生产者 里的buffer[3]</span><a href="#kafka-生产者-里的buffer3" class="header-anchor">#</a></h2><p>kafka producer中配置的 buffer.memory （参数在文末有详细说明）参数是缓冲区的大小，这个缓存区大家也就是RecordAccmulator所用的内存大小。默认是32MB。</p>
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><a href="https://mp.weixin.qq.com/s?__biz=Mzg4ODY1NTcxNg==&mid=2247493639&idx=1&sn=4bd43c8137a701e73dddd9ccdf58ad45&c">图解kafka生产者流程,超详细！</a>  石臻臻   kafka contributor  </li>
-<li><a href="https://mp.weixin.qq.com/s?__biz=Mzg4ODY1NTcxNg==&mid=2247493592&idx=1&sn=4a4f536b21f1b6b1d506dd1bdfa07e80">Kafka生产者的3种分区策略 </a> 石臻臻   kafka contributor</li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=Mzg4ODY1NTcxNg==&mid=2247493592&idx=1&sn=4a4f536b21f1b6b1d506dd1bdfa07e80">Kafka生产者的3种分区策略 </a> 石臻臻   kafka contributor  </li>
+<li><a href="https://blog.csdn.net/xixiqiuqiu/article/details/122806693">Kafka Producer全流程分析和思考</a></li>
 </ol>
 ]]></content>
       <categories>
@@ -28379,20 +28381,95 @@ nq： 不排队调度
       </tags>
   </entry>
   <entry>
-    <title>Hystrix实现和容错模式</title>
-    <url>/www6vHomeHexo/2016/10/07/Hystrix/</url>
+    <title>容错框架</title>
+    <url>/www6vHomeHexo/2016/10/07/soaTolerateFramework/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<img src="/www6vHomeHexo/2016/10/07/Hystrix/Hystrix.png" class title="Hystrix实现和容错模式">
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
+<!-- toc -->
 
+<ul>
+<li><a href="#hystrix%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%AE%B9%E9%94%99%E6%A8%A1%E5%BC%8F">Hystrix实现和容错模式</a></li>
+<li><a href="#resilience4j-1">Resilience4j [1]</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
+<li><a href="#hystrix">Hystrix</a></li>
+<li><a href="#resilience4j">Resilience4j</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
 
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+</div>
+
+<h1><span id="hystrix实现和容错模式">Hystrix实现和容错模式</span><a href="#hystrix实现和容错模式" class="header-anchor">#</a></h1><ul>
+<li>Hystrix实现和容错模式<ul>
+<li>熔断【熔断器模式】<ul>
+<li>三个状态<ul>
+<li>开</li>
+<li>闭</li>
+<li>半开</li>
+</ul>
+</li>
+<li>模块<ul>
+<li>熔断请求判断机制算法<ul>
+<li>维护10个bucket,每秒一个bucket,每个blucket记录成功,失败,超时,拒绝的状态。<ul>
+<li>超时【超时与重试模式】</li>
+<li>失败（异常）</li>
+<li>成功</li>
+<li>拒绝<br>  线程池拒绝【1】<br>  信号量拒绝【2】</li>
+</ul>
+</li>
+<li>默认错误超过50%且10秒内超过20个请求进行中断拦截</li>
+</ul>
+</li>
+<li>熔断恢复<ul>
+<li>每隔5s允许部分请求通过，若请求都是健康的（RT&lt;250ms）则对请求健康恢复</li>
+</ul>
+</li>
+<li>熔断报警和Metric上报</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>流控【限流模式】<ul>
+<li>控制速率</li>
+<li>控制并发</li>
+</ul>
+</li>
+<li>隔离【舱壁隔离模式】<ul>
+<li>Hystrix实现<ul>
+<li>线程池隔离 【1】</li>
+<li>信号量隔离【2】</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>回退【回退模式】<ul>
+<li>快速失败（Fail Fast ）</li>
+<li>无声失败（Fail Silent ）</li>
+<li>返回默认值（Fallback  Static ）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1><span id="resilience4j-1">Resilience4j [1]</span><a href="#resilience4j-1" class="header-anchor">#</a></h1><ul>
+<li>断路器（Circuit Breaker）</li>
+<li>重试（Retry）</li>
+<li>限时器（Time Limiter） </li>
+<li>限流器（Rate Limiter）</li>
+<li>隔板（BulkHead）</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="hystrix">Hystrix</span><a href="#hystrix" class="header-anchor">#</a></h3><ol>
 <li>微服务熔断与隔离 楚岩</li>
 <li>Hystrix技术解析 王新栋</li>
 <li>&lt;&lt;亿级流量网站架构核心技术&gt;&gt; 5.8节 张开涛</li>
 <li>Hystrix 使用与分析 zhangyijun</li>
+</ol>
+<h3><span id="resilience4j">Resilience4j</span><a href="#resilience4j" class="header-anchor">#</a></h3><ol>
+<li><a href="https://www.zhihu.com/question/365162958">Resilience4j 比 Hystrix 好在哪里？</a></li>
 </ol>
 ]]></content>
       <categories>
@@ -28400,7 +28477,7 @@ nq： 不排队调度
         <category>容错</category>
       </categories>
       <tags>
-        <tag>可用性</tag>
+        <tag>服务治理</tag>
       </tags>
   </entry>
   <entry>
@@ -29420,15 +29497,31 @@ table th:first-of-type {
       </tags>
   </entry>
   <entry>
-    <title>分布式服务框架容错机制</title>
+    <title>分布式服务框架 容错机制</title>
     <url>/www6vHomeHexo/2015/06/17/soaTolerate/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<p><strong>关键词</strong>： 容错, 降级, 隔离, 超时, 重试, 高可用, 监控, 开关</p>
-<img src="/www6vHomeHexo/2015/06/17/soaTolerate/soaTolerate.jpg" class title="分布式服务框架容错机制">
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
-<table>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E9%99%8D%E7%BA%A7">降级</a></li>
+<li><a href="#%E8%B6%85%E6%97%B6%E5%92%8C%E9%87%8D%E8%AF%95-retry">超时和重试 Retry</a></li>
+<li><a href="#%E9%9B%86%E7%BE%A4%E5%AE%B9%E9%94%99">集群容错</a></li>
+<li><a href="#%E9%9A%94%E7%A6%BB-bulkhead">隔离 BulkHead</a></li>
+<li><a href="#%E6%A1%86%E6%9E%B6">框架</a></li>
+<li><a href="#%E7%8A%B6%E6%80%81%E7%9B%91%E6%B5%8B">状态监测</a></li>
+<li><a href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95-rate-limiter">流量控制（算法） Rate Limiter</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<p><strong>关键词</strong>： 容错, 降级, 隔离, 超时, 重试, 高可用, 监控, 开关</p>
+<h1><span id="降级">降级</span><a href="#降级" class="header-anchor">#</a></h1><table>
 <thead>
 <tr>
 <th align="center"><strong>降级策略</strong></th>
@@ -29452,12 +29545,95 @@ table th:first-of-type {
 <td align="center">1. 统计失败次数降级-不稳定的api<br> 2. 限流降级-大促秒杀<br> 3. 实现-熔断器</td>
 </tr>
 </tbody></table>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="../../../../2016/02/09/consistent/">分布式一致性总结</a>  self</li>
-</ol>
-<p>​	</p>
-<p>​	<br>​		<br>​		<br>​</p>
-]]></content>
+<h1><span id="超时和重试-retry">超时和重试 Retry</span><a href="#超时和重试-retry" class="header-anchor">#</a></h1><ul>
+<li>超时和重试<ul>
+<li>网络连接&#x2F;读&#x2F;写的超时时间（重要）</li>
+<li>服务<ul>
+<li>读服务 - 可重试</li>
+<li>写服务 - 幂等可重试</li>
+</ul>
+</li>
+<li>服务<ul>
+<li>客户端超时与重试</li>
+<li>服务端超时 - 业务超时<br>  任务型<br>  服务调用型</li>
+</ul>
+</li>
+<li>超时后策略<ul>
+<li>failover<br>  其它分组<br>  其它机房</li>
+<li>failcache</li>
+<li>托底默认数据</li>
+<li>等待页&#x2F;错误页</li>
+<li>降级</li>
+</ul>
+</li>
+<li>超时时间<ul>
+<li>太短<br>  调用成功率降低</li>
+<li>太长<br>  后续正常请求挤压</li>
+<li>经验值<br>  稍微大于tp99的响应时间</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1><span id="集群容错">集群容错</span><a href="#集群容错" class="header-anchor">#</a></h1><ul>
+<li>集群容错 <ul>
+<li>Fail over（重试其他节点）<br>  超时异常</li>
+<li>Fail fast（快速失败）</li>
+<li>Fail cache（重试故障节点）（hedwig）<br>  网路异常</li>
+<li>Fail back（回退）</li>
+</ul>
+</li>
+</ul>
+<h1><span id="隔离-bulkhead">隔离 BulkHead</span><a href="#隔离-bulkhead" class="header-anchor">#</a></h1><ul>
+<li>隔离<ul>
+<li>线程池隔离(hystirx)</li>
+<li>vm隔离（资源隔离）</li>
+<li>物理机隔离</li>
+<li>集群隔离 分组隔离</li>
+<li>机房隔离</li>
+</ul>
+</li>
+</ul>
+<h1><span id="框架">框架</span><a href="#框架" class="header-anchor">#</a></h1><ul>
+<li>框架<ul>
+<li>淘宝Dubbo</li>
+<li>一号店Hedwig</li>
+<li>京东JSF</li>
+<li>点评pegion</li>
+<li>唯品会OSP</li>
+</ul>
+</li>
+</ul>
+<h1><span id="状态监测">状态监测</span><a href="#状态监测" class="header-anchor">#</a></h1><ul>
+<li>状态监测<ul>
+<li>服务注册中心状态监测（hedwig）</li>
+<li>服务提供者和消费者之间的链路有效性检测（pegion）</li>
+<li>服务健康检查（打分）<br>  反推回消费者的路由表</li>
+</ul>
+</li>
+</ul>
+<h1><span id="流量控制算法-rate-limiter">流量控制（算法） Rate Limiter</span><a href="#流量控制算法-rate-limiter" class="header-anchor">#</a></h1><ul>
+<li>流量控制（算法）　<ul>
+<li>限流算法<ul>
+<li>令牌桶（控制入口）</li>
+<li>漏桶（控制出口）</li>
+<li>计数器(hedwig)</li>
+</ul>
+</li>
+<li>接口的总请求数（hedwig客户端）</li>
+<li>接口的时间窗口请求数（hedwig服务端）</li>
+<li>平滑限流,整形（netty）</li>
+<li>整体流控<ul>
+<li>静态流控(整体qps固定)<br>  预先分配<br>  动态配额分配置（推）<br>  动态配额申请制（拉）</li>
+<li>动态流控<br>  分级流控-拒绝流量</li>
+</ul>
+</li>
+<li>连接控制</li>
+<li>并发控制（线程的并发执行数）</li>
+</ul>
+</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1>]]></content>
       <categories>
         <category>服务治理</category>
         <category>容错</category>
