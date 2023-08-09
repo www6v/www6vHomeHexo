@@ -522,9 +522,9 @@
 </li>
 </ul>
 <h3><span id="非功能性">非功能性</span><a href="#非功能性" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2015/06/17/soaTolerate/" title="分布式服务框架容错机制">分布式服务框架容错机制</a></li>
-<li><a href="/www6vHomeHexo/2016/10/07/Hystrix/" title="Hystrix实现和容错模式">Hystrix实现和容错模式</a></li>
-<li><a href="/www6vHomeHexo/2016/01/17/timeout/" title="超时和重试总结">超时和重试总结</a></li>
+<li><a href="/www6vHomeHexo/2015/06/17/soaTolerate/" title="分布式服务框架 容错机制">分布式服务框架 容错机制</a></li>
+<li><a href="/www6vHomeHexo/2016/10/07/soaTolerateFramework/" title="容错框架">容错框架</a></li>
+<li><a href="/www6vHomeHexo/2016/01/17/soaTimeout/" title="超时和重试总结">超时和重试总结</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -949,7 +949,7 @@
 <li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a></li>
 <li><a href="/www6vHomeHexo/2016/09/26/ratelimit/" title="限流-总结">限流-总结</a>
 <ul>
-<li><a href="/www6vHomeHexo/2016/10/07/Hystrix/" title="Hystrix实现和容错模式">Hystrix实现和容错模式</a></li>
+<li><a href="/www6vHomeHexo/2016/10/07/soaTolerateFramework/" title="容错框架">容错框架</a></li>
 <li><a href="/www6vHomeHexo/2022/03/28/ratelimitSentinel/" title="限流-Sentinel">限流-Sentinel</a></li>
 </ul>
 </li>
@@ -14482,7 +14482,7 @@ BGP 协议传输的消息
 </tr>
 </thead>
 <tbody><tr>
-<td>apisix[4]</td>
+<td><a href="/www6vHomeHexo/2022/03/22/apiGatawayApisix/" title="API 网关-apisix">apisix</a> self</td>
 <td>lua + Nginx</td>
 </tr>
 <tr>
@@ -14494,7 +14494,7 @@ BGP 协议传输的消息
 <td>Spring Cloud Netflix</td>
 </tr>
 <tr>
-<td>Gateway[5]</td>
+<td><a href="/www6vHomeHexo/2022/03/22/apiGatawaySpringGateway/" title="API 网关-SpringCloud Gateway">Gateway</a> self</td>
 <td>Spring Cloud</td>
 </tr>
 <tr>
@@ -14506,8 +14506,6 @@ BGP 协议传输的消息
 <li>1.<a href="https://www.infoq.cn/article/construct-micro-service-using-api-gateway/">使用 API 网关构建微服务</a></li>
 <li>2.<a href="https://tech.meituan.com/2021/05/20/shepherd-api-gateway.html">百亿规模API网关服务Shepherd的设计与实现</a> 点评 未</li>
 <li>3.<a href="/www6vHomeHexo/2022/02/10/k8sIngressNginx/" title="Kubernetes Nginx Ingress">Kubernetes Nginx Ingress</a> self</li>
-<li>4.<a href="/www6vHomeHexo/2022/03/22/apiGatawayApisix/" title="API 网关-apisix">API 网关-apisix</a> self</li>
-<li>5.<a href="/www6vHomeHexo/2022/03/22/apiGatawaySpringGateway/" title="API 网关-SpringCloud Gateway">API 网关-SpringCloud Gateway</a> self</li>
 </ul>
 ]]></content>
       <categories>
@@ -24836,8 +24834,8 @@ nq： 不排队调度
         <category>serviceMesh</category>
       </categories>
       <tags>
-        <tag>istio</tag>
         <tag>k8s</tag>
+        <tag>istio</tag>
       </tags>
   </entry>
   <entry>
@@ -26936,7 +26934,7 @@ nq： 不排队调度
         - 压测 + 容量规划
         - 熔断 &amp;&amp; 降级
 </code></pre>
-<p>参考:<br>15. <a href="/www6vHomeHexo/2016/10/07/Hystrix/" title="Hystrix实现和容错模式">Hystrix实现和容错模式</a>  self<br>16. <a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>  self</p>
+<p>参考:<br>15. <a href="/www6vHomeHexo/2016/10/07/soaTolerateFramework/" title="容错框架">容错框架</a>  self<br>16. <a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>  self</p>
 <h3><span id="业务线程池满">业务线程池满</span><a href="#业务线程池满" class="header-anchor">#</a></h3><pre><code>    + 最佳实践:【4】
     + 案例：【14】
         - 问题：使用blockingQueue.put
@@ -27293,8 +27291,8 @@ nq： 不排队调度
         <category>HDFS</category>
       </categories>
       <tags>
-        <tag>可用性</tag>
         <tag>HDFS</tag>
+        <tag>可用性</tag>
       </tags>
   </entry>
   <entry>
@@ -29125,15 +29123,30 @@ table th:first-of-type {
       </tags>
   </entry>
   <entry>
-    <title>超时和重试总结</title>
-    <url>/www6vHomeHexo/2016/01/17/timeout/</url>
+    <title>超时和重试 总结</title>
+    <url>/www6vHomeHexo/2016/01/17/soaTimeout/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
 <p><strong>关键词</strong>： 超时, 降级, 重试 </p>
-<img src="/www6vHomeHexo/2016/01/17/timeout/timeout.jpg" class title="超时总结">
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
 
 <ul>
+<li><a href="#%E8%B6%85%E6%97%B6-%E5%92%8C-%E9%87%8D%E8%AF%95">超时 和 重试</a></li>
+<li><a href="#%E8%B6%85%E6%97%B6%E7%B1%BB%E5%9E%8B">超时类型</a></li>
+<li><a href="#%E8%B6%85%E6%97%B6%E5%90%8E%E7%AD%96%E7%95%A5">超时后策略</a></li>
+<li><a href="#%E9%99%8D%E7%BA%A7">降级</a></li>
+<li><a href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">最佳实践</a></li>
+<li><a href="#%E9%87%8D%E8%AF%95">重试</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="超时-和-重试">超时 和 重试</span><a href="#超时-和-重试" class="header-anchor">#</a></h1><ul>
 <li>超时和延迟的原因:</li>
 </ul>
 <ol>
@@ -29143,7 +29156,90 @@ table th:first-of-type {
 <ul>
 <li>重试方式:<br>指数级退避 Exponential Blackoff[3][4]</li>
 </ul>
-<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h1><span id="超时类型">超时类型</span><a href="#超时类型" class="header-anchor">#</a></h1><ul>
+<li>类型<ul>
+<li>客户端调用超时</li>
+<li>服务器端调用超时</li>
+<li>提供端&#x2F;消费端与注册中心之间超时</li>
+</ul>
+</li>
+</ul>
+<h1><span id="超时后策略">超时后策略</span><a href="#超时后策略" class="header-anchor">#</a></h1><ul>
+<li>超时后策略<ul>
+<li>超时+快速失败<br>  超时后不重试</li>
+<li>超时+降级failback<br>  返回托底（返回历史数据&#x2F;静态数据&#x2F;缓存数据）数据，等待页或者错误页</li>
+<li>超时+熔断<br>  超时后重试，重试不行后熔断服务</li>
+</ul>
+</li>
+</ul>
+<h1><span id="降级">降级</span><a href="#降级" class="header-anchor">#</a></h1><ul>
+<li>降级<ul>
+<li>非核心服务在超时后可以自动降级</li>
+<li>超时时间和超时重试次数</li>
+</ul>
+</li>
+</ul>
+<h1><span id="最佳实践">最佳实践</span><a href="#最佳实践" class="header-anchor">#</a></h1><ul>
+<li>最佳实践<ul>
+<li>不设置超时<br>  慢请求累积导致连锁反应，甚至造成应用雪崩</li>
+<li>推荐值<ul>
+<li>稍大于压测或者线上监控看到的TP99的响应时间</li>
+<li>超时时间太长-不恰当设置<br>  导致本应成功的调用却失败了。超时的时候服务资源没有释放</li>
+<li>超时时间太短- 不恰当设置<br>  服务调用成功率降低</li>
+</ul>
+<p>		</p>
+</li>
+<li>最重要：网络连接&#x2F;读&#x2F;写的超时</li>
+<li>用户能忍受的最长超时时间 - 用户体验<br>  最坏情况下的响应时间&#x3D;重试次数*单次超时时间</li>
+<li>依赖<ul>
+<li>service重启时大量超时的问题<br>  服务预热功能。延迟发布</li>
+<li>客户端的超时时间&lt;服务端的超时<br>  可以在服务端实施限流&#x2F;降级</li>
+<li>多级依赖关系<br>  如A调用B，B调用C<br>  超时设置应该是A&gt;B&gt;C,否则可能会一直重试，引起DDos攻击效果</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1><span id="重试">重试</span><a href="#重试" class="header-anchor">#</a></h1><ul>
+<li>重试<ul>
+<li>客户端<ul>
+<li>心跳超时<ul>
+<li>关闭链路，然后由客户端发起重新连接的操作，保证链路能恢复到正常的状态</li>
+<li>有负载均衡的中间件，要考虑配置心跳&#x2F;存活检查</li>
+</ul>
+</li>
+<li>客户端调用超时<ul>
+<li>重试策略,保证服务调用成功 - failover<ul>
+<li>摘掉不存活节点</li>
+<li>尝试其他分组服务</li>
+<li>尝试其他机房服务</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>	</p>
+</li>
+<li>服务端 	<ul>
+<li>读服务天然适合重试</li>
+<li>写服务大多不能重试<ul>
+<li>幂等</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Zookeeper客户端会话超时 - 服务注册反注册<ul>
+<li>Zookeeper服务端，将该会话对应的Node删除，删除事件通知到所有监听该Node的消费者</li>
+</ul>
+<p>		</p>
+</li>
+<li>重试次数太多<br>导致多倍请求流量，模拟了DDos攻击</li>
+</ul>
+</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li>《亿级流量网站架构核心技术》 张开涛</li>
 <li>Hedwig文档</li>
 <li><a href="https://www.jianshu.com/p/0a6ee8c13522">网络重试中的 指数退避抖动 算法 Exponential Backoff And Jitter</a></li>
