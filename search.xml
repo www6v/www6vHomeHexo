@@ -9107,8 +9107,13 @@ MySQL MVCC 快照读 vs 当前读 </li>
 <ul>
 <li><a href="#platform">Platform</a></li>
 <li><a href="#tools-mix">Tools &amp; Mix</a></li>
+<li><a href="#%E7%BB%86%E5%88%86">细分</a><ul>
 <li><a href="#%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE">思维导图</a></li>
 <li><a href="#%E6%96%87%E6%A1%A3%E5%88%86%E6%9E%90%E7%A7%91%E7%A0%94">文档分析&amp;科研</a></li>
+<li><a href="#%E8%A7%86%E9%A2%91">视频</a></li>
+<li><a href="#%E8%8B%B1%E8%AF%AD">英语</a></li>
+</ul>
+</li>
 <li><a href="#%E5%AE%A2%E6%88%B7%E7%AB%AF">客户端</a></li>
 <li><a href="#chrome-plugin">Chrome plugin</a></li>
 <li><a href="#%E5%88%9B%E4%B8%9A">创业</a></li>
@@ -9119,7 +9124,7 @@ MySQL MVCC 快照读 vs 当前读 </li>
 
 <h1><span id="platform">Platform</span><a href="#platform" class="header-anchor">#</a></h1><ul>
 <li>国外<br><a href="https://poe.com/ChatGPT">Poe</a> ***</li>
-<li>国内<br><a href="https://www.feijix.com/n/y0BnXI">ChatGPT使用指南！</a> ***</li>
+<li>国内<br><a href="https://saas.edu360.cn/system/chatgpt">实战云</a> gpt3.5  gpt4<br><a href="https://www.feijix.com/n/y0BnXI">ChatGPT使用指南！</a>   ***<br><a href="https://www.1888ai.com/base/chat">灵犀百通</a>  gpt3.5</li>
 </ul>
 <h1><span id="tools-amp-mix">Tools &amp; Mix</span><a href="#tools-amp-mix" class="header-anchor">#</a></h1><ul>
 <li><p>GPT学习宝典</p>
@@ -9154,24 +9159,38 @@ MySQL MVCC 快照读 vs 当前读 </li>
 <li><a href="https://longalong.feishu.cn/wiki/wikcneAKpN3u473N7J9EAC4Ga0b">应用与变现案例</a></li>
 </ul>
 </li>
-<li><p><a href="https://www.ailookme.com/">AI 工具箱</a>  ***</p>
+<li><p><a href="https://www.ailookme.com/">AI 工具箱</a>  *** </p>
+</li>
+<li><p><a href="https://gptdoc.sparkai.chat/">ChatGPT Tutorial 101</a></p>
 </li>
 </ul>
-<h1><span id="思维导图">思维导图</span><a href="#思维导图" class="header-anchor">#</a></h1><p><a href="https://albus.org/">albus</a></p>
-<h1><span id="文档分析amp科研">文档分析&amp;科研</span><a href="#文档分析amp科研" class="header-anchor">#</a></h1><ul>
+<h1><span id="细分">细分</span><a href="#细分" class="header-anchor">#</a></h1><h3><span id="思维导图">思维导图</span><a href="#思维导图" class="header-anchor">#</a></h3><p><a href="https://albus.org/">albus</a></p>
+<h3><span id="文档分析amp科研">文档分析&amp;科研</span><a href="#文档分析amp科研" class="header-anchor">#</a></h3><ul>
 <li><p>在线文档分析<br>Microsoft Edge Dev + new Bing  ***</p>
 </li>
 <li><p>文献查找 + 润色<br>Skype + new Bing  ***</p>
 </li>
 <li><p>本地文档分析</p>
 <ul>
+<li><p>VPN</p>
+<ul>
 <li>chatpdf  收费  ***<br><a href="https://www.chatpdf.com/">Chat with any PDF</a> 总结文献</li>
-<li><a href="https://chatpaper.org/">ChatPaper</a>  中文<br><a href="https://github.com/kaixindelele/ChatPaper">ChatPaper</a> git</li>
 <li><a href="https://chatdoc.com/">Chat with documents</a></li>
-<li><a href="https://chat2doc.cn/">阅读文档的好帮手</a>  免费</li>
+</ul>
+</li>
+<li><p>非VPN</p>
+<ul>
+<li><a href="https://chatpaper.org/">ChatPaper</a>  Paper 中文<br><a href="https://github.com/kaixindelele/ChatPaper">ChatPaper</a> git</li>
+<li><a href="https://chat2doc.cn/">阅读文档的好帮手</a>  收费</li>
+<li><a href="https://lightpdf.com/chatdoc">LightPDF AI Tools</a> *** </li>
+<li><a href="https://docalysis.com/files/hwylw4">docalysis</a> ***</li>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
+<h3><span id="视频">视频</span><a href="#视频" class="header-anchor">#</a></h3><p><a href="https://b.jimmylv.cn/">BibiGPT</a></p>
+<h3><span id="英语">英语</span><a href="#英语" class="header-anchor">#</a></h3><p><a href="https://callannie.ai/signin">callannie</a></p>
 <h1><span id="客户端">客户端</span><a href="#客户端" class="header-anchor">#</a></h1><ul>
 <li>ChatGPT 客户端<br> windows， mac</li>
 </ul>
@@ -17785,7 +17804,8 @@ BGP 协议传输的消息
 <ul>
 <li><a href="#%E5%B7%A5%E5%85%B7">工具</a></li>
 <li><a href="#%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3-%E7%AE%80%E5%8D%95%E4%BB%BB%E5%8A%A1-1">代码相关-简单任务 [1]</a></li>
-<li><a href="#%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3-%E7%B9%81%E7%90%90%E5%B7%A5%E4%BD%9C-1">代码相关- 繁琐工作 [1]</a><ul>
+<li><a href="#%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3-%E7%B9%81%E7%90%90%E5%B7%A5%E4%BD%9C-1">代码相关- 繁琐工作 [1]</a></li>
+<li><a href="#%E8%BF%90%E7%BB%B4-ops-4">运维 Ops [4]</a><ul>
 <li><a href="#%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80-vs-%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80">编程语言 vs 自然语言</a></li>
 </ul>
 </li>
@@ -17857,7 +17877,7 @@ BGP 协议传输的消息
 <li><p>K8s</p>
 </li>
 </ul>
-<h2><span id="编程语言-vs-自然语言">编程语言 vs 自然语言</span><a href="#编程语言-vs-自然语言" class="header-anchor">#</a></h2><table>
+<h1><span id="运维-ops-4">运维 Ops [4]</span><a href="#运维-ops-4" class="header-anchor">#</a></h1><h2><span id="编程语言-vs-自然语言">编程语言 vs 自然语言</span><a href="#编程语言-vs-自然语言" class="header-anchor">#</a></h2><table>
 <thead>
 <tr>
 <th>语言类型</th>
@@ -17885,6 +17905,7 @@ BGP 协议传输的消息
 <li><a href="https://www.bilibili.com/video/BV1Z84y1G7nY/">【ChatGPT】面向程序员的ChatGPT使用教程38种方式来提升生产力</a> V</li>
 <li><a href="https://time.geekbang.org/opencourse/videointro/100540901">GitHub Copilot 实践课</a><br>03, 04, 06<br><a href="https://github.com/www6v/AICoder">AICoder</a> git</li>
 <li><a href="https://cloud.tencent.com/developer/article/2207540">ChatGPT 帮我跑了一个完整的 DevOps 流水线，离了个大谱…</a><br><a href="https://github.com/www6v/AICoder/tree/master/Cursor/">Gin on K8s</a> git</li>
+<li><a href="https://www.promptops.com/">PromptOps</a>    </li>
 <li><a href="https://www.geeksforgeeks.org/chatgpt-prompts-for-software-developers/">Top 20 ChatGPT Prompts For Software Developers</a> 未</li>
 </ol>
 <pre><code>
