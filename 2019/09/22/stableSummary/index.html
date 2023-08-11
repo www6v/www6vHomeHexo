@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-09-22T01:20:33.000Z">
-<meta property="article:modified_time" content="2023-08-09T08:45:13.895Z">
+<meta property="article:modified_time" content="2023-08-11T02:13:45.281Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="稳定性">
 <meta name="twitter:card" content="summary">
@@ -228,7 +228,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-09 16:45:13" itemprop="dateModified" datetime="2023-08-09T16:45:13+08:00">2023-08-09</time>
+                <time title="修改时间：2023-08-11 10:13:45" itemprop="dateModified" datetime="2023-08-11T10:13:45+08:00">2023-08-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -263,31 +263,38 @@
 <!-- toc -->
 
 <ul>
-<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
-<li><a href="#sre">SRE</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a><ul>
+<li><a href="#%E7%A8%B3%E5%AE%9A%E6%80%A7">稳定性</a></li>
+<li><a href="#%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84">系统架构</a></li>
+</ul>
+</li>
+<li><a href="#sre">SRE</a><ul>
+<li><a href="#sre-1">SRE</a></li>
+<li><a href="#%E6%95%85%E9%9A%9C%E6%A8%A1%E5%9E%8B">故障模型</a></li>
+<li><a href="#%E5%AE%B9%E9%87%8F%E4%BF%9D%E9%9A%9C">容量保障</a></li>
+<li><a href="#%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B">混沌工程</a></li>
+<li><a href="#%E5%8F%AF%E8%A7%82%E6%B5%8B">可观测</a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 
 </div>
 
-<h2><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h2><ul>
+<h1><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h1><h3><span id="稳定性">稳定性</span><a href="#稳定性" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a></li>
-<li><a href="/www6vHomeHexo/2016/09/26/ratelimit/" title="限流-总结">限流-总结</a>
-<ul>
-<li><a href="/www6vHomeHexo/2016/10/07/soaTolerateFramework/" title="容错框架">容错框架</a></li>
-<li><a href="/www6vHomeHexo/2022/03/28/ratelimitSentinel/" title="限流-Sentinel">限流-Sentinel</a></li>
 </ul>
-</li>
-</ul>
-<ul>
+<h3><span id="系统架构">系统架构</span><a href="#系统架构" class="header-anchor">#</a></h3><ul>
 <li><a href="../../../../categories/%E6%9E%B6%E6%9E%84/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/">系统架构</a>  category<ul>
 <li><a href="/www6vHomeHexo/2022/06/26/available/" title="高可用 Available">高可用 Available</a> </li>
 <li><a href="/www6vHomeHexo/2017/06/17/multiLive/" title="异地多活 总结">异地多活 总结</a></li>
 </ul>
 </li>
 </ul>
-<h2><span id="sre">SRE</span><a href="#sre" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2022/03/13/sre/" title="SRE 总结">SRE 总结</a></li>
+<h1><span id="sre">SRE</span><a href="#sre" class="header-anchor">#</a></h1><h3><span id="sre">SRE</span><a href="#sre" class="header-anchor">#</a></h3><ul>
+<li><a href="/www6vHomeHexo/2022/03/13/sre/" title="SRE 总结">SRE 总结</a>
+
+</li>
 <li><a href="/www6vHomeHexo/2023/02/01/sreWorkbook/" title="《SRE 工作手册》">《SRE 工作手册》</a>
 <ul>
 <li><a href="/www6vHomeHexo/2022/04/27/sreWorkbookBasic/" title="SRE 五大根基">SRE 五大根基</a> </li>
@@ -295,8 +302,15 @@
 <li><a href="/www6vHomeHexo/2022/05/02/sreWorkbookBasicAlert/" title="SRE 五大根基-报警">SRE 五大根基-报警</a></li>
 </ul>
 </li>
+</ul>
+<h3><span id="故障模型">故障模型</span><a href="#故障模型" class="header-anchor">#</a></h3><p> <a href="../../../../2018/10/27/fault/">故障模型</a></p>
+<h3><span id="容量保障">容量保障</span><a href="#容量保障" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2022/03/13/capacityGuarantee/" title="容量保障与全链路压测">容量保障与全链路压测</a></li>
+</ul>
+<h3><span id="混沌工程">混沌工程</span><a href="#混沌工程" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2019/09/24/chaosEngineering/" title="混沌工程">混沌工程</a></li>
+</ul>
+<h3><span id="可观测">可观测</span><a href="#可观测" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2020/07/17/observabilitySummary/" title="可观察性  汇总">可观察性  汇总</a></li>
 </ul>
 
@@ -419,13 +433,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/www6vHomeHexo/categories/">
           
-        <span class="site-state-item-count">275</span>
+        <span class="site-state-item-count">276</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/www6vHomeHexo/tags/">
           
-        <span class="site-state-item-count">138</span>
+        <span class="site-state-item-count">139</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -514,7 +514,7 @@
 <li><a href="#config">Config</a></li>
 <li><a href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1">负载均衡</a></li>
 <li><a href="#%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B">线程模型</a></li>
-<li><a href="#%E5%AE%B9%E9%94%99">容错</a></li>
+<li><a href="#%E5%AE%B9%E9%94%99%E9%99%90%E6%B5%81">容错&amp;限流</a></li>
 </ul>
 <ul>
 <li><a href="#%E5%AE%89%E5%85%A8">安全</a></li>
@@ -545,9 +545,11 @@
 <h3><span id="线程模型">线程模型</span><a href="#线程模型" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2015/07/09/jsfThreadModel/" title="京东服务框架JSF服务提供者线程模型">京东服务框架JSF服务提供者线程模型</a></li>
 </ul>
-<h3><span id="容错">容错</span><a href="#容错" class="header-anchor">#</a></h3><ul>
+<h3><span id="容错amp限流">容错&amp;限流</span><a href="#容错amp限流" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2015/06/17/soaTolerate/" title="分布式服务框架 容错机制">分布式服务框架 容错机制</a></li>
 <li><a href="/www6vHomeHexo/2016/10/07/soaTolerateFramework/" title="容错框架">容错框架</a></li>
+<li><a href="/www6vHomeHexo/2016/09/26/ratelimit/" title="限流-总结">限流-总结</a></li>
+<li><a href="/www6vHomeHexo/2022/03/28/ratelimitSentinel/" title="流量治理-Sentinel">流量治理-Sentinel</a></li>
 <li><a href="/www6vHomeHexo/2016/01/17/soaTimeout/" title="超时和重试 总结">超时和重试 总结</a></li>
 </ul>
 <h2><span id="安全">安全</span><a href="#安全" class="header-anchor">#</a></h2><ul>
@@ -966,31 +968,38 @@
 <!-- toc -->
 
 <ul>
-<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
-<li><a href="#sre">SRE</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a><ul>
+<li><a href="#%E7%A8%B3%E5%AE%9A%E6%80%A7">稳定性</a></li>
+<li><a href="#%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84">系统架构</a></li>
+</ul>
+</li>
+<li><a href="#sre">SRE</a><ul>
+<li><a href="#sre-1">SRE</a></li>
+<li><a href="#%E6%95%85%E9%9A%9C%E6%A8%A1%E5%9E%8B">故障模型</a></li>
+<li><a href="#%E5%AE%B9%E9%87%8F%E4%BF%9D%E9%9A%9C">容量保障</a></li>
+<li><a href="#%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B">混沌工程</a></li>
+<li><a href="#%E5%8F%AF%E8%A7%82%E6%B5%8B">可观测</a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 
 </div>
 
-<h2><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h2><ul>
+<h1><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h1><h3><span id="稳定性">稳定性</span><a href="#稳定性" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a></li>
-<li><a href="/www6vHomeHexo/2016/09/26/ratelimit/" title="限流-总结">限流-总结</a>
-<ul>
-<li><a href="/www6vHomeHexo/2016/10/07/soaTolerateFramework/" title="容错框架">容错框架</a></li>
-<li><a href="/www6vHomeHexo/2022/03/28/ratelimitSentinel/" title="限流-Sentinel">限流-Sentinel</a></li>
 </ul>
-</li>
-</ul>
-<ul>
+<h3><span id="系统架构">系统架构</span><a href="#系统架构" class="header-anchor">#</a></h3><ul>
 <li><a href="../../../../categories/%E6%9E%B6%E6%9E%84/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/">系统架构</a>  category<ul>
 <li><a href="/www6vHomeHexo/2022/06/26/available/" title="高可用 Available">高可用 Available</a> </li>
 <li><a href="/www6vHomeHexo/2017/06/17/multiLive/" title="异地多活 总结">异地多活 总结</a></li>
 </ul>
 </li>
 </ul>
-<h2><span id="sre">SRE</span><a href="#sre" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2022/03/13/sre/" title="SRE 总结">SRE 总结</a></li>
+<h1><span id="sre">SRE</span><a href="#sre" class="header-anchor">#</a></h1><h3><span id="sre">SRE</span><a href="#sre" class="header-anchor">#</a></h3><ul>
+<li><a href="/www6vHomeHexo/2022/03/13/sre/" title="SRE 总结">SRE 总结</a>
+
+</li>
 <li><a href="/www6vHomeHexo/2023/02/01/sreWorkbook/" title="《SRE 工作手册》">《SRE 工作手册》</a>
 <ul>
 <li><a href="/www6vHomeHexo/2022/04/27/sreWorkbookBasic/" title="SRE 五大根基">SRE 五大根基</a> </li>
@@ -998,8 +1007,15 @@
 <li><a href="/www6vHomeHexo/2022/05/02/sreWorkbookBasicAlert/" title="SRE 五大根基-报警">SRE 五大根基-报警</a></li>
 </ul>
 </li>
+</ul>
+<h3><span id="故障模型">故障模型</span><a href="#故障模型" class="header-anchor">#</a></h3><p> <a href="../../../../2018/10/27/fault/">故障模型</a></p>
+<h3><span id="容量保障">容量保障</span><a href="#容量保障" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2022/03/13/capacityGuarantee/" title="容量保障与全链路压测">容量保障与全链路压测</a></li>
+</ul>
+<h3><span id="混沌工程">混沌工程</span><a href="#混沌工程" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2019/09/24/chaosEngineering/" title="混沌工程">混沌工程</a></li>
+</ul>
+<h3><span id="可观测">可观测</span><a href="#可观测" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2020/07/17/observabilitySummary/" title="可观察性  汇总">可观察性  汇总</a></li>
 </ul>
 ]]></content>
@@ -11202,7 +11218,7 @@ BGP 协议传输的消息
       </tags>
   </entry>
   <entry>
-    <title>限流-Sentinel</title>
+    <title>流量治理-Sentinel</title>
     <url>/www6vHomeHexo/2022/03/28/ratelimitSentinel/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -11351,11 +11367,11 @@ BGP 协议传输的消息
 </ol>
 ]]></content>
       <categories>
-        <category>稳定性</category>
-        <category>限流</category>
+        <category>服务治理</category>
+        <category>流量治理</category>
       </categories>
       <tags>
-        <tag>限流</tag>
+        <tag>流量治理</tag>
       </tags>
   </entry>
   <entry>
@@ -24962,8 +24978,8 @@ nq： 不排队调度
         <category>serviceMesh</category>
       </categories>
       <tags>
-        <tag>k8s</tag>
         <tag>istio</tag>
+        <tag>k8s</tag>
       </tags>
   </entry>
   <entry>
@@ -28158,9 +28174,9 @@ nq： 不排队调度
 <p><strong>关键词</strong>:  容量规划, 压测, 强弱依赖,<br><strong>关键词</strong>:  故障模型, 故障演练, 故障注入</p>
 <h2><span id="稳定性总结">稳定性总结</span><a href="#稳定性总结" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2017/05/09/stability/stability.jpg" class title="稳定性总结">
 
-<h2><span id="容量保障">容量保障</span><a href="#容量保障" class="header-anchor">#</a></h2><p><a href="../../../../2022/03/13/capacityGuarantee/">容量保障</a></p>
-<h2><span id="混沌工程">混沌工程</span><a href="#混沌工程" class="header-anchor">#</a></h2><p><a href="../../../../2019/09/24/chaosEngineering/">混沌工程</a></p>
-<h2><span id="故障模型">故障模型</span><a href="#故障模型" class="header-anchor">#</a></h2><p> <a href="../../../../2018/10/27/fault/">故障模型</a></p>
+
+
+
 <h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><a href="https://developer.aliyun.com/article/105551">超全总结 | 阿里如何应对电商故障？神秘演练细节曝光   阿里巴巴-周洋（花名中亭）</a> 故障注入， 故障演练</li>
 <li><a href="http://jm.taobao.org/2012/10/31/stability-considerations-dependent-strength/">稳定性思考-强弱依赖</a>  阿里中间件团队博客   </li>
@@ -28691,7 +28707,7 @@ nq： 不排队调度
 </ol>
 ]]></content>
       <categories>
-        <category>稳定性</category>
+        <category>服务治理</category>
         <category>限流</category>
       </categories>
       <tags>
