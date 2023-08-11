@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-09T04:03:41.000Z">
-<meta property="article:modified_time" content="2023-05-11T09:28:00.282Z">
+<meta property="article:modified_time" content="2023-08-11T07:50:16.514Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="网络">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-11 17:28:00" itemprop="dateModified" datetime="2023-05-11T17:28:00+08:00">2023-05-11</time>
+                <time title="修改时间：2023-08-11 15:50:16" itemprop="dateModified" datetime="2023-08-11T15:50:16+08:00">2023-08-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -274,6 +274,11 @@
 <li><a href="#%E5%89%AF%E4%BD%9C%E7%94%A8%E5%92%8C%E4%BC%98%E5%8C%96">副作用和优化</a></li>
 </ul>
 </li>
+<li><a href="#%E5%A4%A7%E9%87%8Ftime_wait%E7%9A%84%E9%97%AE%E9%A2%98gpt">大量TIME_WAIT的问题[gpt]</a><ul>
+<li><a href="#%E9%97%AE%E9%A2%98">问题</a></li>
+<li><a href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">解决方案</a></li>
+</ul>
+</li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
@@ -310,6 +315,10 @@
 <li><p>副作用2  优化<br>服务器端程序，都应该设置 <strong>SO_REUSEADDR 套接字选项</strong>，以便服务端程序可以在极短时间内<strong>复用同一个端口启动</strong>。</p>
 </li>
 </ul>
+<h2><span id="大量time_wait的问题gpt">大量TIME_WAIT的问题[gpt]</span><a href="#大量time_wait的问题gpt" class="header-anchor">#</a></h2><h3><span id="问题">问题</span><a href="#问题" class="header-anchor">#</a></h3><p>  RPC客户端A调用服务端C有很多time-wait，客户端B调用服务端C会有什么问题 </p>
+<h3><span id="解决方案">解决方案</span><a href="#解决方案" class="header-anchor">#</a></h3><p>在RPC客户端A调用服务端C时出现多个TIME_WAIT状态的情况下，如果RPC客户端B也调用相同的服务端C，可能会面临以下<strong>问题</strong>：<br>    1. <strong>端口耗尽</strong>：每个TCP连接会占用一个本地端口号，如果RPC客户端A和B同时发起大量的请求，由于TIME_WAIT状态的存在，可能会导致本地端口耗尽，无法建立新的连接。<br>    2. <strong>连接超时</strong>：由于服务端C处于TIME_WAIT状态，即使RPC客户端B发起请求，也需要等待TIME_WAIT状态消失后才能建立连接，这会导致连接的延迟增加，可能会触发连接超时，导致B无法正常与服务端C建立连接。<br>    3. <strong>并发性能下降</strong>：当RPC客户端A和B同时发起大量请求时，如果每个请求都需要等待TIME_WAIT状态消失后才能建立连接，会导致连接的建立速度变慢，从而降低系统的并发性能。</p>
+<p>为了避免这些问题，可以采取以下<strong>措施</strong>：<br>    1. 避免端口耗尽：可以通过增加可用端口数、增加端口重用的时间等方式来缓解端口耗尽的问题。在操作系统级别上，可以通过调整端口范围或增加可用端口的数量来解决。<br>    2. 优化连接复用：可以使用连接池来管理TCP连接，以便复用连接，避免频繁地创建和关闭连接。这样可以减少TIME_WAIT状态的产生，并提高连接的复用率和性能。<br>    3. 调整TIME_WAIT时间：可以在服务端C上调整TIME_WAIT状态的时间，在合理的范围内降低TIME_WAIT状态的持续时间，从而缩短等待时间，提高连接的可用性和性能。</p>
+<p>  总结: 最佳的解决方案取决于具体的应用场景和系统配置，需要综合考虑性能、资源消耗和可维护性等因素来做出合理的决策。</p>
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><a href>网络编程实战 - 10 | TIME_WAIT：隐藏在细节下的魔鬼</a> 盛延敏  </li>
 <li><a href>网络编程实战 - 15 | 怎么老是出现“地址已经被使用”？</a> 盛延敏</li>
