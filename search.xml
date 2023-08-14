@@ -551,7 +551,8 @@
 <li><a href="/www6vHomeHexo/2016/09/26/ratelimit/" title="限流-总结">限流-总结</a></li>
 <li><a href="/www6vHomeHexo/2022/03/28/ratelimitSentinel/" title="流量治理-Sentinel">流量治理-Sentinel</a></li>
 <li><a href="/www6vHomeHexo/2016/01/17/soaTimeout/" title="超时和重试 总结">超时和重试 总结</a></li>
-<li><a href="/www6vHomeHexo/2022/08/14/soaGracefulStart/" title="优雅启动">优雅启动</a></li>
+<li><a href="/www6vHomeHexo/2022/08/14/soaGracefulStart/" title="优雅启动">优雅启动</a> </li>
+<li><a href="/www6vHomeHexo/2022/08/14/soaGracefulClose/" title="优雅关闭">优雅关闭</a></li>
 </ul>
 <h2><span id="安全">安全</span><a href="#安全" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/08/10/soaAuth/" title="服务治理-鉴权">服务治理-鉴权</a></li>
@@ -3024,6 +3025,37 @@
       </categories>
       <tags>
         <tag>学习资源</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>优雅关闭</title>
+    <url>/www6vHomeHexo/2022/08/14/soaGracefulClose/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+
+<h2><span id="关闭流程">关闭流程</span><a href="#关闭流程" class="header-anchor">#</a></h2><p>关闭流程的优雅处理可以通过以下步骤实现 [gpt 总结]</p>
+<ol>
+<li>服务提供方在关闭时设置一个<strong>请求挡板</strong>，告知调用方正在关闭并不能处理新的请求。</li>
+<li>当服务提供方收到新的业务请求时，直接<strong>返回一个特定的异常（如ShutdownException）给调用方</strong>。</li>
+<li><strong>调用方收到异常响应后，将该节点从健康列表中挪出，并自动将请求重试到其他节点，保证业务无损。</strong></li>
+<li>除了等待被动调用外，可以加上主动通知流程，提高实时性并避免通知失败的情况。</li>
+<li>通过捕获操作系统的进程信号，如使用Java语言中的Runtime.addShutdownHook方法，在关闭钩子中进行关闭标识的设置和服务对象的安全关闭。</li>
+<li>在调用链中加入挡板处理器，当新的请求到来时，判断关闭标识，如果正在关闭，则抛出特定异常。</li>
+<li>为了完成正在处理的请求，可以在服务对象上添加引用计数器，在开始处理请求前加一，完成处理后减一，根据引用计数器判断是否有正在处理的请求。</li>
+<li>服务对象在关闭过程中拒绝新的请求，并根据引用计数器等待正在处理的请求全部结束后真正关闭。</li>
+<li>为避免无法正常退出应用，可以在ShutdownHook中添加超时时间控制，当超过指定时间仍未结束，则强制退出应用。</li>
+</ol>
+<p>通过以上步骤，实现了服务提供方的优雅关闭，保证业务正常处理并最大限度地完成正在处理的请求。</p>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>《13 | 优雅关闭：如何避免服务停机带来的业务损失？》</p>
+]]></content>
+      <categories>
+        <category>服务治理</category>
+        <category>优雅关闭</category>
+      </categories>
+      <tags>
+        <tag>优雅关闭</tag>
       </tags>
   </entry>
   <entry>
