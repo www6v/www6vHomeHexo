@@ -27,8 +27,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2023/01/28/observabilityTracing/apm1.JPG">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2023/01/28/observabilityTracing/apm.JPG">
+<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/66256533-43942f00-e7c1-11e9-8fe8-80565025c792.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/5608425/66256535-4727b600-e7c1-11e9-82c9-cd2222fce9bb.png">
 <meta property="article:published_time" content="2023-01-28T14:42:30.000Z">
-<meta property="article:modified_time" content="2023-02-25T02:57:47.503Z">
+<meta property="article:modified_time" content="2023-08-14T14:06:30.060Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="可观测性">
 <meta name="twitter:card" content="summary">
@@ -227,7 +229,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-25 10:57:47" itemprop="dateModified" datetime="2023-02-25T10:57:47+08:00">2023-02-25</time>
+                <time title="修改时间：2023-08-14 22:06:30" itemprop="dateModified" datetime="2023-08-14T22:06:30+08:00">2023-08-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -257,12 +259,34 @@
         <p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
-<h2><span id="apm-产品">APM 产品</span><a href="#apm-产品" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2023/01/28/observabilityTracing/apm1.JPG" class title="APM产品比对 [5]">
+<!-- toc -->
 
-<img src="/www6vHomeHexo/2023/01/28/observabilityTracing/apm.JPG" class title="APM产品比对 [6]">
+<ul>
+<li><a href="#apm-%E4%BA%A7%E5%93%81">APM 产品</a><ul>
+<li><a href="#apm%E4%BA%A7%E5%93%81%E6%AF%94%E5%AF%B9-5">APM产品比对 [5]</a></li>
+<li><a href="#apm%E4%BA%A7%E5%93%81%E6%AF%94%E5%AF%B9-6">APM产品比对 [6]</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BD%BF%E7%94%A8-9">使用 [9]</a><ul>
+<li><a href="#apm-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5">APM 故障排查</a></li>
+<li><a href="#apm-%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%8C%87%E6%A0%87">APM 稳定性指标</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a><br>  * <a href="#%E6%A0%87%E5%87%86%E5%8E%9F%E7%90%86">标准&amp;原理</a><br>  * <a href="#%E4%B8%9A%E7%95%8C">业界</a><br>  * <a href="#%E4%BD%BF%E7%94%A8">使用</a></li>
+</ul>
+<!-- tocstop -->
 
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><h5><span id="标准amp原理">标准&amp;原理</span><a href="#标准amp原理" class="header-anchor">#</a></h5><ol>
+</div>
+
+<h1><span id="apm-产品">APM 产品</span><a href="#apm-产品" class="header-anchor">#</a></h1><h3><span id="apm产品比对-5">APM产品比对 [5]</span><a href="#apm产品比对-5" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2023/01/28/observabilityTracing/apm1.JPG" class>
+
+<h3><span id="apm产品比对-6">APM产品比对 [6]</span><a href="#apm产品比对-6" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2023/01/28/observabilityTracing/apm.JPG" class>
+
+<h1><span id="使用-9">使用 [9]</span><a href="#使用-9" class="header-anchor">#</a></h1><h3><span id="apm-故障排查">APM 故障排查</span><a href="#apm-故障排查" class="header-anchor">#</a></h3><p>   <img src="https://user-images.githubusercontent.com/5608425/66256533-43942f00-e7c1-11e9-8fe8-80565025c792.png" alt="apm-fault"></p>
+<h3><span id="apm-稳定性指标">APM 稳定性指标</span><a href="#apm-稳定性指标" class="header-anchor">#</a></h3><p>   <img src="https://user-images.githubusercontent.com/5608425/66256535-4727b600-e7c1-11e9-82c9-cd2222fce9bb.png" alt="apm-tracing"></p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h5><span id="标准amp原理">标准&amp;原理</span><a href="#标准amp原理" class="header-anchor">#</a></h5><ol>
 <li><a target="_blank" rel="noopener" href="https://github.com/opentracing-contrib/opentracing-specification-zh/blob/master/specification.md">OpenTracing语义标准</a>  archived</li>
 <li><a target="_blank" rel="noopener" href="https://wu-sheng.gitbooks.io/opentracing-io/content/pages/spec.html">opentracing文档中文版</a> archived</li>
 <li><a target="_blank" rel="noopener" href="http://bigbully.github.io/Dapper-translation/">Dapper，大规模分布式系统的跟踪系统</a>  论文</li>
@@ -275,6 +299,7 @@
 </ol>
 <h5><span id="使用">使用</span><a href="#使用" class="header-anchor">#</a></h5><ol start="8">
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/QA_BTF1D3GJJ7_nYQ6oAzQ">如何检测 Web 服务请求丢失问题</a> 问题排查 应用： Nginx tracing + Tomcat tracing</li>
+<li><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/60994?spm=5176.100239.blogcont61320.29.6SwFH6">鹰眼跟踪、限流降级，EDAS的微服务解决之道</a></li>
 </ol>
 
     </div>

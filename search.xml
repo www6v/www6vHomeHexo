@@ -2092,12 +2092,34 @@
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
-<h2><span id="apm-产品">APM 产品</span><a href="#apm-产品" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2023/01/28/observabilityTracing/apm1.JPG" class title="APM产品比对 [5]">
+<!-- toc -->
 
-<img src="/www6vHomeHexo/2023/01/28/observabilityTracing/apm.JPG" class title="APM产品比对 [6]">
+<ul>
+<li><a href="#apm-%E4%BA%A7%E5%93%81">APM 产品</a><ul>
+<li><a href="#apm%E4%BA%A7%E5%93%81%E6%AF%94%E5%AF%B9-5">APM产品比对 [5]</a></li>
+<li><a href="#apm%E4%BA%A7%E5%93%81%E6%AF%94%E5%AF%B9-6">APM产品比对 [6]</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BD%BF%E7%94%A8-9">使用 [9]</a><ul>
+<li><a href="#apm-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5">APM 故障排查</a></li>
+<li><a href="#apm-%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%8C%87%E6%A0%87">APM 稳定性指标</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a><br>  * <a href="#%E6%A0%87%E5%87%86%E5%8E%9F%E7%90%86">标准&amp;原理</a><br>  * <a href="#%E4%B8%9A%E7%95%8C">业界</a><br>  * <a href="#%E4%BD%BF%E7%94%A8">使用</a></li>
+</ul>
+<!-- tocstop -->
 
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><h5><span id="标准amp原理">标准&amp;原理</span><a href="#标准amp原理" class="header-anchor">#</a></h5><ol>
+</div>
+
+<h1><span id="apm-产品">APM 产品</span><a href="#apm-产品" class="header-anchor">#</a></h1><h3><span id="apm产品比对-5">APM产品比对 [5]</span><a href="#apm产品比对-5" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2023/01/28/observabilityTracing/apm1.JPG" class>
+
+<h3><span id="apm产品比对-6">APM产品比对 [6]</span><a href="#apm产品比对-6" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2023/01/28/observabilityTracing/apm.JPG" class>
+
+<h1><span id="使用-9">使用 [9]</span><a href="#使用-9" class="header-anchor">#</a></h1><h3><span id="apm-故障排查">APM 故障排查</span><a href="#apm-故障排查" class="header-anchor">#</a></h3><p>   <img src="https://user-images.githubusercontent.com/5608425/66256533-43942f00-e7c1-11e9-8fe8-80565025c792.png" alt="apm-fault"></p>
+<h3><span id="apm-稳定性指标">APM 稳定性指标</span><a href="#apm-稳定性指标" class="header-anchor">#</a></h3><p>   <img src="https://user-images.githubusercontent.com/5608425/66256535-4727b600-e7c1-11e9-82c9-cd2222fce9bb.png" alt="apm-tracing"></p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h5><span id="标准amp原理">标准&amp;原理</span><a href="#标准amp原理" class="header-anchor">#</a></h5><ol>
 <li><a href="https://github.com/opentracing-contrib/opentracing-specification-zh/blob/master/specification.md">OpenTracing语义标准</a>  archived</li>
 <li><a href="https://wu-sheng.gitbooks.io/opentracing-io/content/pages/spec.html">opentracing文档中文版</a> archived</li>
 <li><a href="http://bigbully.github.io/Dapper-translation/">Dapper，大规模分布式系统的跟踪系统</a>  论文</li>
@@ -2110,6 +2132,7 @@
 </ol>
 <h5><span id="使用">使用</span><a href="#使用" class="header-anchor">#</a></h5><ol start="8">
 <li><a href="https://mp.weixin.qq.com/s/QA_BTF1D3GJJ7_nYQ6oAzQ">如何检测 Web 服务请求丢失问题</a> 问题排查 应用： Nginx tracing + Tomcat tracing</li>
+<li><a href="https://yq.aliyun.com/articles/60994?spm=5176.100239.blogcont61320.29.6SwFH6">鹰眼跟踪、限流降级，EDAS的微服务解决之道</a></li>
 </ol>
 ]]></content>
       <categories>
@@ -23242,7 +23265,7 @@ nq： 不排队调度
 
 <ul>
 <li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1-%E5%AE%9A%E4%B9%89">微服务 定义</a></li>
-<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9B%B8%E5%85%B3%E7%9A%84%E9%97%AE%E9%A2%98">微服务相关的问题</a><ul>
+<li><a href="#core">Core</a><ul>
 <li><a href="#api%E7%BD%91%E5%85%B3">API网关</a></li>
 <li><a href="#%E6%9C%8D%E5%8A%A1%E5%AE%B9%E9%94%99">服务容错</a></li>
 <li><a href="#%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E5%92%8C%E5%8F%91%E7%8E%B0">服务注册和发现</a></li>
@@ -23252,7 +23275,9 @@ nq： 不排队调度
 </ul>
 </li>
 <li><a href="#%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2%E5%92%8C%E5%8F%91%E5%B8%83">服务部署和发布</a></li>
-<li><a href="#%E5%8F%AF%E8%A7%82%E5%AF%9F%E6%80%A7">可观察性</a></li>
+</ul>
+</li>
+<li><a href="#design">Design</a><ul>
 <li><a href="#%E6%9C%8D%E5%8A%A1%E5%88%92%E5%88%86%E5%92%8C%E7%BB%84%E5%90%88">服务划分和组合</a></li>
 <li><a href="#%E6%9C%8D%E5%8A%A1%E5%88%86%E5%B1%82">服务分层</a><ul>
 <li><a href="#%E4%B8%8A%E5%B1%82-%E8%81%9A%E5%90%88%E6%9C%8D%E5%8A%A1%E9%80%82%E9%85%8D%E6%9C%8D%E5%8A%A1-%E8%BE%B9%E7%95%8C%E6%9C%8D%E5%8A%A1">上层: 聚合服务（适配服务， 边界服务）</a></li>
@@ -23261,7 +23286,7 @@ nq： 不排队调度
 </li>
 </ul>
 </li>
-<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">微服务设计模式</a><ul>
+<li><a href="#design-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">Design-微服务设计模式</a><ul>
 <li><a href="#overview">Overview</a></li>
 <li><a href="#sidecar-11">Sidecar [11]</a></li>
 </ul>
@@ -23277,7 +23302,7 @@ nq： 不排队调度
 </div>
 
 <h1><span id="微服务-定义">微服务 定义</span><a href="#微服务-定义" class="header-anchor">#</a></h1><p>In short, the microservice architectural style [1] is an approach to developing a single application as a suite of <strong>small services</strong>, <strong>each running in its own process</strong> and <strong>communicating with lightweight mechanisms</strong>, often an HTTP resource API. These services are built around business capabilities and <strong>independently deployable</strong> by fully automated deployment machinery. There is a bare minimum of centralized management of these services, which may be written in different programming languages and use different data storage technologies.   –  [Martin Fowler]</p>
-<h1><span id="微服务相关的问题">微服务相关的问题</span><a href="#微服务相关的问题" class="header-anchor">#</a></h1><h3><span id="api网关">API网关</span><a href="#api网关" class="header-anchor">#</a></h3><a href="/www6vHomeHexo/2021/03/03/serviceGovernanceSummary/" title="服务治理  汇总">服务治理  汇总</a>  self     
+<h1><span id="core">Core</span><a href="#core" class="header-anchor">#</a></h1><h3><span id="api网关">API网关</span><a href="#api网关" class="header-anchor">#</a></h3><a href="/www6vHomeHexo/2021/03/03/serviceGovernanceSummary/" title="服务治理  汇总">服务治理  汇总</a>  self     
 
 <h3><span id="服务容错">服务容错</span><a href="#服务容错" class="header-anchor">#</a></h3><a href="/www6vHomeHexo/2021/03/03/serviceGovernanceSummary/" title="服务治理  汇总">服务治理  汇总</a>  self
 
@@ -23306,11 +23331,7 @@ nq： 不排队调度
 <li>Single Service per Host  </li>
 <li>Multiple Services per Host patterns</li>
 </ul>
-<h3><span id="可观察性">可观察性</span><a href="#可观察性" class="header-anchor">#</a></h3><p>   <a href="https://yq.aliyun.com/articles/60994?spm=5176.100239.blogcont61320.29.6SwFH6">鹰眼跟踪、限流降级，EDAS的微服务解决之道</a><br>   <a href="../../../../2019/08/31/observability/">可观察性</a> self</p>
-   <div style="text-align: center;">
-
-<p>   <img src="https://user-images.githubusercontent.com/5608425/66256533-43942f00-e7c1-11e9-8fe8-80565025c792.png" alt="apm-fault"><br>   APM 故障<br>   <img src="https://user-images.githubusercontent.com/5608425/66256535-4727b600-e7c1-11e9-82c9-cd2222fce9bb.png" alt="apm-tracing"><br>   APM 稳定性<br>   </p></div><p></p>
-<h3><span id="服务划分和组合">服务划分和组合</span><a href="#服务划分和组合" class="header-anchor">#</a></h3><blockquote>
+<h1><span id="design">Design</span><a href="#design" class="header-anchor">#</a></h1><h3><span id="服务划分和组合">服务划分和组合</span><a href="#服务划分和组合" class="header-anchor">#</a></h3><blockquote>
 <p>微服务不是指”微小”的服务, 而是如何”拆分”服务,然后”组合”服务.</p>
 </blockquote>
 <ul>
@@ -23322,7 +23343,7 @@ nq： 不排队调度
 </code></pre>
 <h5><span id="下层-基础服务核心领域服务-公共服务">下层: 基础服务（核心领域服务， 公共服务）</span><a href="#下层-基础服务核心领域服务-公共服务" class="header-anchor">#</a></h5><pre><code>比如：电商的商品服务， 目录服务， 订单服务
 </code></pre>
-<h1><span id="微服务设计模式">微服务设计模式</span><a href="#微服务设计模式" class="header-anchor">#</a></h1><h3><span id="overview">Overview</span><a href="#overview" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2019/09/09/microservice/MicroservicePatternLanguage.jpg" class>
+<h1><span id="design-微服务设计模式">Design-微服务设计模式</span><a href="#design-微服务设计模式" class="header-anchor">#</a></h1><h3><span id="overview">Overview</span><a href="#overview" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2019/09/09/microservice/MicroservicePatternLanguage.jpg" class>
 
 <h3><span id="sidecar-11">Sidecar [11]</span><a href="#sidecar-11" class="header-anchor">#</a></h3><p>分离业务逻辑与路由，流控，熔断，幂等，服务发现，鉴权等控制组件。</p>
 <p>适用场景：<br>老系统改造扩展，Sidebar 进程与服务进程部署在同一个节点；<br>多语言混合分布式系统扩展；</p>
@@ -23474,7 +23495,6 @@ nq： 不排队调度
 <li><a href="https://mp.weixin.qq.com/s?__biz=MzUzNzYxNjAzMg==&mid=2247486600&idx=1&sn=0ad92a1fe535f141fe2e8c87ffbd1229&chksm=fae50747cd928e51c05c41d2cc206069babbe9dfdba5957c52ac6e77cb754192169bb6b3e898&scene=0&xtrack=1#rd">云原生时代，分布式系统设计必备知识图谱（内含22个知识点）</a> 杨泽强（竹涧） ***</li>
 <li><a href="https://www.servicemesher.com/blog/202003-gitops-progressive-delivery-with-asm/">使用托管服务网格实现应用在多集群中的 GitOps 全自动化渐进式发布</a>  郝树伟 阿里云容器服务</li>
 </ol>
-<p>​</p>
 ]]></content>
       <categories>
         <category>服务治理</category>
@@ -28415,7 +28435,7 @@ nq： 不排队调度
 <li><a href="https://www.cnblogs.com/hzmark/p/mq-delay-msg.html">如何在MQ中实现支持任意延迟的消息？</a></li>
 <li><a href="https://www.cnblogs.com/haoxinyue/p/6663720.html">延迟任务的实现总结</a>  nick hao</li>
 <li><a href="https://www.jianshu.com/p/33aa208ea058">rocketMq-延迟消息介绍</a>   晴天哥_王志 *</li>
-<li><a href>RPC实战与核心原理进 - 20 | 详解时钟轮在RPC中的应用</a>   何小锋</li>
+<li>《20 | 详解时钟轮在RPC中的应用》 何小锋</li>
 <li><a href="https://zhuanlan.zhihu.com/p/488730353">时间轮原理及其在框架中的应用</a>  未<br>Dubbo 心跳检测</li>
 </ol>
 ]]></content>
