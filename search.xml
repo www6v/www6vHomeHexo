@@ -1267,13 +1267,109 @@
       </tags>
   </entry>
   <entry>
-    <title>MySQL  死锁</title>
+    <title>MySQL  锁和死锁</title>
     <url>/www6vHomeHexo/2023/08/15/mysqlDeadLock/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
+<!-- toc -->
 
+<ul>
+<li><a href="#%E9%94%81">锁</a><ul>
+<li><a href="#%E8%A1%8C%E9%94%81-%E9%94%81%E4%BC%98%E5%8C%96-3">行锁， 锁优化 [3]</a></li>
+<li><a href="#%E9%9A%90%E5%BC%8F%E9%94%81%E5%92%8C%E6%98%BE%E7%A4%BA%E9%94%81">隐式锁和显示锁</a></li>
+</ul>
+</li>
+<li><a href="#%E6%AD%BB%E9%94%81">死锁</a><ul>
+<li><a href="#%E6%AD%BB%E9%94%81%E5%92%8C%E6%AD%BB%E9%94%81%E6%A3%80%E6%B5%8B-5">死锁和死锁检测 [5]</a></li>
+<li><a href="#%E9%A2%84%E9%98%B2%E6%AD%BB%E9%94%81-7">预防死锁 [7]</a></li>
+<li><a href="#%E6%AD%BB%E9%94%81%E7%9A%84%E6%8E%92%E6%9F%A5%E5%92%8C%E8%A7%A3%E5%86%B3-7">死锁的排查和解决 [7]</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A1%88%E4%BE%8B">案例</a><ul>
+<li><a href="#case-1">Case [1]</a></li>
+<li><a href="#%E5%8E%9F%E5%9B%A0">原因</a></li>
+<li><a href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">解决方案</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="锁">锁</span><a href="#锁" class="header-anchor">#</a></h1><h3><span id="行锁-锁优化-3">行锁， 锁优化 [3]</span><a href="#行锁-锁优化-3" class="header-anchor">#</a></h3><ul>
+<li><p>在InnoDB事务中，<strong>行锁</strong>是在需要的时候才加上的，但并不是不需要了就立刻释放，而是要等到事务结束时才释放。这个就是<strong>两阶段锁协议</strong>。<br>知道了这个设定，对我们使用事务有什么帮助呢？那就是，<strong>如果你的事务中需要锁多个行，要把最可能造成锁冲突、最可能影响并发度的锁尽量往后放.</strong>[todo 加个例子]</p>
+</li>
+<li><p><strong>行锁是通过索引实现的</strong>，如果不通过索引条件检索数据，那么 InnoDB 将对表中所有的记录进行加锁。</p>
+</li>
+<li><p><strong>行锁</strong>的具体实现算法有三种：record lock、gap lock 以及 next-key lock。</p>
+<ul>
+<li><strong>record lock</strong>是专门对索引项加锁；</li>
+<li><strong>gap lock</strong> 是对索引项之间的间隙加锁；</li>
+<li><strong>next-key lock</strong> 则是前面两种的组合，对索引项以其之间的间隙加锁。<br>只在可重复读或以上隔离级别下的特定操作才会取得 gap lock 或 next-key lock，在Select 、Update 和 Delete 时，除了基于唯一索引的查询之外，其他索引查询时都会获取gap lock 或 next-key lock，即锁住其扫描的范围。</li>
+</ul>
+</li>
+</ul>
+<h3><span id="隐式锁和显示锁">隐式锁和显示锁</span><a href="#隐式锁和显示锁" class="header-anchor">#</a></h3><p>显示锁<br>SELECT … LOCK IN SHARE MODE(加共享锁);<br>SELECT … FOR UPDATE(加排他锁);</p>
+<h1><span id="死锁">死锁</span><a href="#死锁" class="header-anchor">#</a></h1><h3><span id="死锁和死锁检测-5">死锁和死锁检测 [5]</span><a href="#死锁和死锁检测-5" class="header-anchor">#</a></h3><p>当出现死锁以后，有两种策略：</p>
+<ul>
+<li><p>一种策略是，直接进入等待，直到超时。这个超时时间可以通过参数<br><strong>innodb_lock_wait_timeout</strong>来设置。<br>innodb_lock_wait_timeout的默认值是50s。 实际中不用这种策略。</p>
+</li>
+<li><p>另一种策略是，发起<strong>死锁检测</strong>，发现死锁后，主动回滚死锁链条中的某一个事务，让其他事<br>务得以继续执行。将参数 <strong>innodb_deadlock_detect</strong> 设置为on，表示开启这个逻辑。</p>
+<ul>
+<li><p>带来的问题：每个新来的被堵住的线程，都要判断会不会由于自己的加入导致了死锁，这是一个时间复杂度是O(n)的操作。假设有1000个并发线程要同时更新同一行，那么死锁检测操作就是100万这个量级的。虽然最终检测的结果是没有死锁，但是这期间要<strong>消耗大量的CPU资源</strong>。</p>
+</li>
+<li><p>一种解决思路是<strong>控制并发度</strong>：并发控制要做在数据库服务端。如果有中间件，可以考虑在中间件实现；如果-团队有能修改MySQL源码的人，也可以做在MySQL里面。基本思路就是，<strong>对于相同行的更新，-在进入引擎之前排队</strong>。这样在InnoDB内部就不会有大量的死锁检测工作了。</p>
+</li>
+<li><p>另一种解决思路是<strong>在应用层上优化</strong>:你可以考虑通过将一行改成逻辑上的多行来减少锁冲突。 比如，一个账户1条记录变10条记录。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3><span id="预防死锁-7">预防死锁 [7]</span><a href="#预防死锁-7" class="header-anchor">#</a></h3><ul>
+<li>减少长事务</li>
+<li>大事务拆成小事务</li>
+<li>保证加锁顺序一直</li>
+<li>业务允许的情况下，降低隔离级别<br>RR几倍下会有间隙锁，会提高死锁发生的概率</li>
+</ul>
+<h3><span id="死锁的排查和解决-7">死锁的排查和解决 [7]</span><a href="#死锁的排查和解决-7" class="header-anchor">#</a></h3><ul>
+<li>通过日志系统及时<strong>通知</strong>死锁事件<br> 通过ELK做通知</li>
+<li>结合业务代码与<strong>死锁日志</strong> 进行分析<ul>
+<li>通过 pt-deadlock-logger 监控死锁 </li>
+<li>查看最近一次的死锁日志<br><code>show engine innodb status</code></li>
+</ul>
+</li>
+</ul>
+<h1><span id="案例">案例</span><a href="#案例" class="header-anchor">#</a></h1><h3><span id="case-1">Case [1]</span><a href="#case-1" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2023/08/15/mysqlDeadLock/case.jpg" class>
+
+<h3><span id="原因">原因</span><a href="#原因" class="header-anchor">#</a></h3><p>死锁是在并发环境下，两个或多个事务互相等待对方持有的资源而无法继续执行的情况。在上文中，死锁的产生是因为两个事务A和事务B都持有间隙(4,+∞）的gap锁，并且两个事务都在等待对方释放锁，导致循环等待而造成死锁。</p>
+<h3><span id="解决方案">解决方案</span><a href="#解决方案" class="header-anchor">#</a></h3><ul>
+<li><p>innodb_lock_wait_timeout 超时时间 - 通用<br>避免死锁最直观的方法就是在两个事务相互等待时，<strong>当一个事务的等待时间超过设置的某一<br>阈值，就对这个事务进行回滚，另一个事务就可以继续执行了。</strong>这种方法简单有效，在<br>InnoDB 中，参数 innodb_lock_wait_timeout 是用来设置超时时间的。</p>
+</li>
+<li><p>替换  幂等性校验 - 非通用<br>我们还可以<strong>使用其它的方式来代替数据库实现幂等性校验</strong>。例如，使用 Redis 以及<br>ZooKeeper 来实现，运行效率比数据库更佳。</p>
+</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ul>
+<li><ol>
+<li>《35 | 记一次线上SQL死锁事故：如何避免死锁？》 刘超</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>《33 | MySQL调优之事务：高并发场景下的数据库事务调优》   刘超</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>《07 | 行锁功过：怎么减少行锁对性能的影响？》 MySQL实战45讲  丁奇</li>
+</ol>
+</li>
+<li><ol start="7">
+<li><a href="https://www.bilibili.com/video/BV1V3411z7Hj/">MYSQL死锁的检测与预防</a></li>
+</ol>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>数据库</category>
@@ -19631,7 +19727,7 @@ BGP 协议传输的消息
       </tags>
   </entry>
   <entry>
-    <title>MySQL 事务-隔离性和锁</title>
+    <title>MySQL 事务-隔离性</title>
     <url>/www6vHomeHexo/2020/08/14/mysqlTransactionAndLock/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -19650,14 +19746,6 @@ BGP 协议传输的消息
 <li><a href="#mvcc">MVCC</a><ul>
 <li><a href="#%E5%8E%9F%E7%90%86-23">原理 [2][3]</a></li>
 <li><a href="#%E5%AE%9E%E7%8E%B0">实现</a></li>
-</ul>
-</li>
-<li><a href="#%E9%94%81">锁</a><ul>
-<li><a href="#%E8%A1%8C%E9%94%81-%E9%94%81%E4%BC%98%E5%8C%96-3">行锁， 锁优化 [3]</a></li>
-<li><a href="#%E6%AD%BB%E9%94%81%E5%92%8C%E6%AD%BB%E9%94%81%E6%A3%80%E6%B5%8B-5">死锁和死锁检测 [5]</a></li>
-<li><a href="#%E9%A2%84%E9%98%B2%E6%AD%BB%E9%94%81-7">预防死锁 [7]</a></li>
-<li><a href="#%E6%AD%BB%E9%94%81%E7%9A%84%E6%8E%92%E6%9F%A5%E5%92%8C%E8%A7%A3%E5%86%B3-7">死锁的排查和解决 [7]</a></li>
-<li><a href="#%E9%9A%90%E5%BC%8F%E9%94%81%E5%92%8C%E6%98%BE%E7%A4%BA%E9%94%81">隐式锁和显示锁</a></li>
 </ul>
 </li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
@@ -19806,49 +19894,6 @@ BGP 协议传输的消息
 </ul>
 </li>
 </ul>
-<h1><span id="锁">锁</span><a href="#锁" class="header-anchor">#</a></h1><h3><span id="行锁-锁优化-3">行锁， 锁优化 [3]</span><a href="#行锁-锁优化-3" class="header-anchor">#</a></h3><ul>
-<li><p>在InnoDB事务中，<strong>行锁</strong>是在需要的时候才加上的，但并不是不需要了就立刻释放，而是要等到事务结束时才释放。这个就是<strong>两阶段锁协议</strong>。<br>知道了这个设定，对我们使用事务有什么帮助呢？那就是，<strong>如果你的事务中需要锁多个行，要把最可能造成锁冲突、最可能影响并发度的锁尽量往后放.</strong>[todo 加个例子]</p>
-</li>
-<li><p><strong>行锁是通过索引实现的</strong>，如果不通过索引条件检索数据，那么 InnoDB 将对表中所有的记录进行加锁。</p>
-</li>
-<li><p><strong>行锁</strong>的具体实现算法有三种：record lock、gap lock 以及 next-key lock。</p>
-<ul>
-<li><strong>record lock</strong>是专门对索引项加锁；</li>
-<li><strong>gap lock</strong> 是对索引项之间的间隙加锁；</li>
-<li><strong>next-key lock</strong> 则是前面两种的组合，对索引项以其之间的间隙加锁。<br>只在可重复读或以上隔离级别下的特定操作才会取得 gap lock 或 next-key lock，在Select 、Update 和 Delete 时，除了基于唯一索引的查询之外，其他索引查询时都会获取gap lock 或 next-key lock，即锁住其扫描的范围。</li>
-</ul>
-</li>
-</ul>
-<h3><span id="死锁和死锁检测-5">死锁和死锁检测 [5]</span><a href="#死锁和死锁检测-5" class="header-anchor">#</a></h3><p>当出现死锁以后，有两种策略：</p>
-<ul>
-<li><p>一种策略是，直接进入等待，直到超时。这个超时时间可以通过参数<br><strong>innodb_lock_wait_timeout</strong>来设置。<br>innodb_lock_wait_timeout的默认值是50s。 实际中不用这种策略。</p>
-</li>
-<li><p>另一种策略是，发起<strong>死锁检测</strong>，发现死锁后，主动回滚死锁链条中的某一个事务，让其他事<br>务得以继续执行。将参数 <strong>innodb_deadlock_detect</strong> 设置为on，表示开启这个逻辑。</p>
-<ul>
-<li><p>带来的问题：每个新来的被堵住的线程，都要判断会不会由于自己的加入导致了死锁，这是一个时间复杂度是O(n)的操作。假设有1000个并发线程要同时更新同一行，那么死锁检测操作就是100万这个量级的。虽然最终检测的结果是没有死锁，但是这期间要<strong>消耗大量的CPU资源</strong>。</p>
-</li>
-<li><p>一种解决思路是<strong>控制并发度</strong>：并发控制要做在数据库服务端。如果有中间件，可以考虑在中间件实现；如果-团队有能修改MySQL源码的人，也可以做在MySQL里面。基本思路就是，<strong>对于相同行的更新，-在进入引擎之前排队</strong>。这样在InnoDB内部就不会有大量的死锁检测工作了。</p>
-</li>
-<li><p>另一种解决思路是<strong>在应用层上优化</strong>:你可以考虑通过将一行改成逻辑上的多行来减少锁冲突。 比如，一个账户1条记录变10条记录。</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3><span id="预防死锁-7">预防死锁 [7]</span><a href="#预防死锁-7" class="header-anchor">#</a></h3><ul>
-<li>减少长事务</li>
-<li>大事务拆成小事务</li>
-<li>保证加锁顺序一直</li>
-<li>业务允许的情况下，降低隔离级别<br>RR几倍下会有间隙锁，会提高死锁发生的概率</li>
-</ul>
-<h3><span id="死锁的排查和解决-7">死锁的排查和解决 [7]</span><a href="#死锁的排查和解决-7" class="header-anchor">#</a></h3><ul>
-<li>通过日志系统及时<strong>通知</strong>死锁事件<br> 通过ELK做通知</li>
-<li>结合业务代码与<strong>死锁日志</strong> 进行分析<ul>
-<li>通过 pt-deadlock-logger 监控死锁 </li>
-<li>查看最近一次的死锁日志<br><code>show engine innodb status</code></li>
-</ul>
-</li>
-</ul>
-<h3><span id="隐式锁和显示锁">隐式锁和显示锁</span><a href="#隐式锁和显示锁" class="header-anchor">#</a></h3><p>显示锁<br>SELECT … LOCK IN SHARE MODE(加共享锁);<br>SELECT … FOR UPDATE(加排他锁);</p>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="0">
 <li><p><a href="https://www.bilibili.com/video/BV1Kr4y1i7ru?p=78">黑马程序员 MySQL数据库入门到精通</a>  P141-P144<br><a href="https://github.com/www6v/mysql_note">mysql_note</a> 笔记1<br><a href="https://frxcat.fun/database/MySQL/MySQL_Advanced_index/">MySQL 索引</a> 笔记2 ***</p>
 </li>
@@ -19856,20 +19901,18 @@ BGP 协议传输的消息
 </li>
 <li><p>《03 | 事务隔离：为什么你改了我还看不见？ 》MySQL实战45讲  丁奇</p>
 </li>
-<li><p>《33 | MySQL调优之事务：高并发场景下的数据库事务调优》 Java性能调优实战  进入课程  刘超</p>
+<li><p>《33 | MySQL调优之事务：高并发场景下的数据库事务调优》 Java性能调优实战    刘超 deleted</p>
 </li>
 <li><p><a href="https://segmentfault.com/a/1190000019619667">可能是全网最好的MySQL重要知识点</a>  </p>
 </li>
-<li><p>《07 | 行锁功过：怎么减少行锁对性能的影响？》 MySQL实战45讲  丁奇</p>
+<li><p>《07 | 行锁功过：怎么减少行锁对性能的影响？》 MySQL实战45讲  丁奇  deleted</p>
 </li>
 <li><p>《18 | 为什么这些SQL语句逻辑相同性能却差异巨大？》MySQL实战45讲  丁奇</p>
 </li>
-<li><p><a href="https://www.bilibili.com/video/BV1V3411z7Hj/">MYSQL死锁的检测与预防</a></p>
+<li><p><a href="https://www.bilibili.com/video/BV1V3411z7Hj/">MYSQL死锁的检测与预防</a>  deleted</p>
 </li>
-</ol>
-<ul>
 <li><a href="/www6vHomeHexo/2015/02/21/mysqlTransaction/" title="MySQL事务-总结">MySQL事务-总结</a>  self</li>
-</ul>
+</ol>
 ]]></content>
       <categories>
         <category>数据库</category>
