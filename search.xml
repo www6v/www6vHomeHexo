@@ -421,6 +421,7 @@
 <li>数据库<ul>
 <li><a href="/www6vHomeHexo/2021/06/05/tidbTroubleshooting/" title="TiDB  故障排查">TiDB  故障排查</a>   </li>
 <li><a href="/www6vHomeHexo/2020/06/21/mysqlBestPractice/" title="使用MySQL的性能问题和紧急处理手段">使用MySQL的性能问题和紧急处理手段</a></li>
+<li><a href="/www6vHomeHexo/2023/08/15/mysqlDeadLock/" title="MySQL  死锁">MySQL  死锁</a>  ***</li>
 </ul>
 </li>
 <li><a href="/www6vHomeHexo/2017/02/19/splitBrain/" title="Split Brain">Split Brain</a></li>
@@ -627,7 +628,8 @@
 <li><a href="/www6vHomeHexo/2020/06/21/mysqlReliability/" title="MySQL的主从 高可用 容灾">MySQL的主从 高可用 容灾</a></li>
 <li><a href="/www6vHomeHexo/2019/09/10/mysqlIndex/" title="MySQL的索引和优化">MySQL的索引和优化</a></li>
 <li><a href="/www6vHomeHexo/2015/02/21/mysqlTransaction/" title="MySQL事务-总结">MySQL事务-总结</a>   </li>
-<li><a href="/www6vHomeHexo/2022/02/27/mysqlLog/" title="MySQL Logs">MySQL Logs</a></li>
+<li><a href="/www6vHomeHexo/2022/02/27/mysqlLog/" title="MySQL Logs">MySQL Logs</a>   </li>
+<li><a href="/www6vHomeHexo/2023/08/15/mysqlDeadLock/" title="MySQL  死锁">MySQL  死锁</a></li>
 </ul>
 <h2><span id="分布式">分布式</span><a href="#分布式" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/02/09/distributedDatabase/" title="分布式 数据库 总结">分布式 数据库 总结</a>
@@ -1262,6 +1264,24 @@
       </categories>
       <tags>
         <tag>汇总</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL  死锁</title>
+    <url>/www6vHomeHexo/2023/08/15/mysqlDeadLock/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>关系型</category>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
