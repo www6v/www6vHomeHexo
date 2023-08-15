@@ -25,11 +25,13 @@
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/01/21/apiGateway/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/01/21/apiGateway/apiGateway.JPG">
 <meta property="article:published_time" content="2022-01-21T02:31:46.000Z">
-<meta property="article:modified_time" content="2023-08-09T09:21:55.375Z">
+<meta property="article:modified_time" content="2023-08-15T03:07:38.067Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="API Gateway">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2022/01/21/apiGateway/apiGateway.JPG">
 
 <link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/01/21/apiGateway/">
 
@@ -224,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-09 17:21:55" itemprop="dateModified" datetime="2023-08-09T17:21:55+08:00">2023-08-09</time>
+                <time title="修改时间：2023-08-15 11:07:38" itemprop="dateModified" datetime="2023-08-15T11:07:38+08:00">2023-08-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -254,7 +256,27 @@
         <p></p>
 <span id="more"></span>
 
-<h2><span id="api网关特性">API网关特性</span><a href="#api网关特性" class="header-anchor">#</a></h2><ul>
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E7%89%B9%E6%80%A7">特性</a></li>
+<li><a href="#%E5%88%86%E7%B1%BB">分类</a></li>
+<li><a href="#%E6%A1%86%E6%9E%B6">框架</a></li>
+<li><a href="#%E5%AE%9E%E7%8E%B0-3">实现 [3]</a></li>
+<li><a href="#api-gatewaybff">API Gateway+BFF</a><ul>
+<li><a href="#api-gateway-bff-3">API Gateway + BFF [3]</a></li>
+<li><a href="#bff-%E8%81%9A%E5%90%88%E7%BD%91%E5%85%B3-2">BFF 聚合网关 [2]</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="特性">特性</span><a href="#特性" class="header-anchor">#</a></h1><ul>
 <li>路由</li>
 <li>灰度发布</li>
 <li>反向代理,负载均衡</li>
@@ -263,7 +285,11 @@
 <li>监控</li>
 <li>缓存</li>
 </ul>
-<h2><span id="相关产品">相关产品</span><a href="#相关产品" class="header-anchor">#</a></h2><table>
+<h1><span id="分类">分类</span><a href="#分类" class="header-anchor">#</a></h1><ul>
+<li>入口网关 </li>
+<li>出口网关</li>
+</ul>
+<h1><span id="框架">框架</span><a href="#框架" class="header-anchor">#</a></h1><table>
 <thead>
 <tr>
 <th>产品</th>
@@ -291,11 +317,21 @@
 <td>Golang</td>
 </tr>
 </tbody></table>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ul>
-<li>1.<a target="_blank" rel="noopener" href="https://www.infoq.cn/article/construct-micro-service-using-api-gateway/">使用 API 网关构建微服务</a></li>
-<li>2.<a target="_blank" rel="noopener" href="https://tech.meituan.com/2021/05/20/shepherd-api-gateway.html">百亿规模API网关服务Shepherd的设计与实现</a> 点评 未</li>
-<li>3.<a href="/www6vHomeHexo/2022/02/10/k8sIngressNginx/" title="Kubernetes Nginx Ingress">Kubernetes Nginx Ingress</a> self</li>
+<h1><span id="实现-3">实现 [3]</span><a href="#实现-3" class="header-anchor">#</a></h1><ul>
+<li>扩展性<br> 责任链模式 - Zuul filter, Envoy filter</li>
+<li>性能<br>  多路 I&#x2F;O 复用模型  和  线程池</li>
+<li>可用性<br>线程池  服务隔离</li>
 </ul>
+<h1><span id="api-gatewaybff">API Gateway+BFF</span><a href="#api-gatewaybff" class="header-anchor">#</a></h1><h3><span id="api-gateway-bff-3">API Gateway + BFF [3]</span><a href="#api-gateway-bff-3" class="header-anchor">#</a></h3><p>流量网关 + 业务网关</p>
+<h3><span id="bff-聚合网关-2">BFF 聚合网关 [2]</span><a href="#bff-聚合网关-2" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/01/21/apiGateway/apiGateway.JPG" class>
+
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/construct-micro-service-using-api-gateway/">使用 API 网关构建微服务</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903806208049159">微服务架构：BFF和网关是如何演化出来的？</a></li>
+<li>《27 | API网关：系统的门面要如何做呢？》</li>
+<li><a target="_blank" rel="noopener" href="https://tech.meituan.com/2021/05/20/shepherd-api-gateway.html">百亿规模API网关服务Shepherd的设计与实现</a> 点评 未</li>
+<li><a href="/www6vHomeHexo/2022/02/10/k8sIngressNginx/" title="Kubernetes Nginx Ingress">Kubernetes Nginx Ingress</a> self</li>
+</ol>
 
     </div>
 
