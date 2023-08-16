@@ -422,6 +422,7 @@
 <li><a href="/www6vHomeHexo/2021/06/05/tidbTroubleshooting/" title="TiDB  故障排查">TiDB  故障排查</a>   </li>
 <li><a href="/www6vHomeHexo/2020/06/21/mysqlBestPractice/" title="使用MySQL的性能问题和紧急处理手段">使用MySQL的性能问题和紧急处理手段</a></li>
 <li><a href="/www6vHomeHexo/2023/08/15/mysqlDeadLock/" title="MySQL  锁和死锁">MySQL  锁和死锁</a>  ***</li>
+<li><a href="/www6vHomeHexo/2022/08/16/mysqlMasterSlaveDelay/" title="MySQL 主从延迟">MySQL 主从延迟</a></li>
 </ul>
 </li>
 <li><a href="/www6vHomeHexo/2017/02/19/splitBrain/" title="Split Brain">Split Brain</a></li>
@@ -629,7 +630,8 @@
 <li><a href="/www6vHomeHexo/2019/09/10/mysqlIndex/" title="MySQL的索引和优化">MySQL的索引和优化</a></li>
 <li><a href="/www6vHomeHexo/2015/02/21/mysqlTransaction/" title="MySQL事务-总结">MySQL事务-总结</a>   </li>
 <li><a href="/www6vHomeHexo/2022/02/27/mysqlLog/" title="MySQL Logs">MySQL Logs</a>   </li>
-<li><a href="/www6vHomeHexo/2023/08/15/mysqlDeadLock/" title="MySQL  锁和死锁">MySQL  锁和死锁</a></li>
+<li><a href="/www6vHomeHexo/2023/08/15/mysqlDeadLock/" title="MySQL  锁和死锁">MySQL  锁和死锁</a>  </li>
+<li><a href="/www6vHomeHexo/2022/08/16/mysqlMasterSlaveDelay/" title="MySQL 主从延迟">MySQL 主从延迟</a></li>
 </ul>
 <h2><span id="分布式">分布式</span><a href="#分布式" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/02/09/distributedDatabase/" title="分布式 数据库 总结">分布式 数据库 总结</a>
@@ -3169,6 +3171,23 @@
       </categories>
       <tags>
         <tag>学习资源</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL 主从延迟</title>
+    <url>/www6vHomeHexo/2022/08/16/mysqlMasterSlaveDelay/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://blog.csdn.net/mingongge/article/details/90310672">高可用数据库主从复制延时的解决方案</a></p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>关系型</category>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -18380,25 +18399,28 @@ BGP 协议传输的消息
 <li>分片的选择应该取决于最频繁的查询 SQL 的条件，避免不带 where 语句的查询 SQL。</li>
 </ol>
 <h1><span id="问题amp解决方案">问题&amp;解决方案</span><a href="#问题amp解决方案" class="header-anchor">#</a></h1><h3><span id="分库分表带来的问题-1">分库分表带来的问题 [1]</span><a href="#分库分表带来的问题-1" class="header-anchor">#</a></h3><ul>
-<li>事务性问题<ul>
+<li><strong>事务性问题</strong><ul>
 <li>方案一：尽可能保证一个事务所操作的表分布在一个库中 [规避]</li>
-<li>方案二：业务层引入分布式事务组件，如事务性消息、TCC、Seata等</li>
+<li>方案二：业务层<strong>引入分布式事务组件</strong>，如事务性消息、TCC、Seata等</li>
 </ul>
 </li>
-<li>主键唯一性问题<ul>
+<li><strong>主键唯一性问题</strong><ul>
 <li>方案一：设置自增步长，采用等差数列递增</li>
-<li>方案二：采用全局统一ID生成机制，如UUID、雪花算法、数据库号段等方式</li>
+<li>方案二：采用<strong>全局统一ID生成机制</strong>，如UUID、雪花算法、数据库号段等方式</li>
 </ul>
 </li>
 <li><strong>跨库多表join问题</strong><ul>
-<li>建议尽可能避免表join操作，可以采用多次查询业务层进行数据组装 [规避]</li>
+<li>建议尽可能避免表join操作，可以采用多次查询业务层进行数据组装  [规避]</li>
+<li><strong>冗余表或冗余字段</strong>来优化跨库 JOIN 查询 [规避] [4]</li>
 </ul>
 </li>
-<li><strong>跨库聚合查询问题</strong><ul>
-<li>方案一：赛道赛马机制，每次从N个库表中查询出TOP N数据，然后在业务层代码中进行聚合合并操作</li>
-<li>方案二：将经常使用到groupby、orderby字段存储到一个单一库表中，先到单一表中查询出相应数据，然后根据查询到的主键ID，到分库分表中查询详情进行返回</li>
+<li><strong>跨库聚合查询问题</strong> [5]<ul>
+<li>方案一：赛道赛马机制，每次从N个库表中查询出TOP N数据，然后在业务层代码中进行聚合合并操作 [全局视野法]</li>
+<li>方案二：将经常使用到groupby、orderby字段存储到一个单一库表中，先到单一表中查询出相应数据，然后根据查询到的主键ID，到分库分表中查询详情进行返回 [二次查询法]</li>
 </ul>
 </li>
+<li><strong>跨节点分页查询问题</strong>  [5]<br>跨节点分页查询问题是指在分库分表的环境下，通过某些非分库分表字段进行查询时，可能需要跨多个库或表进行查询，这会带来性能问题。解决这个问题的一种方法是<strong>使用两套数据</strong>，一套是<strong>基于分库分表的用户查询数据</strong>，另一套是<strong>基于Elasticsearch或Solr的订单数据，主要用于运营人员进行分页查询。</strong> 为了不影响订单业务性能，可以使用<strong>异步消息来实现Elasticsearch或Solr订单数据的新增和修改。</strong>  [gpt 总结] [4]</li>
+<li><strong>扩容问题 [4]</strong><br>一旦动态增加表了，就会涉及到<strong>数据迁移问题</strong><br>在最开始设计表数据量时，尽量使用 2 的倍数来设置表数量。当需要扩容时，也<br>同样按照 2 的倍数来扩容，这样可以减少数据的迁移量。</li>
 </ul>
 <h3><span id="shardingsphere-分布式事务-2">ShardingSphere-分布式事务 [2]</span><a href="#shardingsphere-分布式事务-2" class="header-anchor">#</a></h3><table>
 <thead>
@@ -18445,6 +18467,7 @@ BGP 协议传输的消息
 <li><a href="https://shardingsphere.apache.org/document/5.3.2/cn/features/transaction/">ShardingSphere-分布式事务</a></li>
 <li><a href="https://mp.weixin.qq.com/s/cVwyE7_oZ0F8Q1Mg7zClmQ">MySQL 大表优化方案（长文）</a></li>
 <li>《36 | 什么时候需要分表分库？》</li>
+<li><a href="/www6vHomeHexo/2022/08/01/dbShardingPaging/" title="分库分表-分页">分库分表-分页</a> self</li>
 </ol>
 ]]></content>
       <categories>
