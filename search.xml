@@ -421,7 +421,7 @@
 <li>数据库<ul>
 <li><a href="/www6vHomeHexo/2021/06/05/tidbTroubleshooting/" title="TiDB  故障排查">TiDB  故障排查</a>   </li>
 <li><a href="/www6vHomeHexo/2020/06/21/mysqlBestPractice/" title="使用MySQL的性能问题和紧急处理手段">使用MySQL的性能问题和紧急处理手段</a></li>
-<li><a href="/www6vHomeHexo/2023/08/15/mysqlDeadLock/" title="MySQL  死锁">MySQL  死锁</a>  ***</li>
+<li><a href="/www6vHomeHexo/2023/08/15/mysqlDeadLock/" title="MySQL  锁和死锁">MySQL  锁和死锁</a>  ***</li>
 </ul>
 </li>
 <li><a href="/www6vHomeHexo/2017/02/19/splitBrain/" title="Split Brain">Split Brain</a></li>
@@ -623,13 +623,13 @@
 <span id="more"></span>
 
 <h2><span id="单机">单机</span><a href="#单机" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2020/08/14/mysqlTransactionAndLock/" title="MySQL 事务-隔离性和锁">MySQL 事务-隔离性和锁</a></li>
+<li><a href="/www6vHomeHexo/2020/08/14/mysqlTransactionAndLock/" title="MySQL 事务-隔离性">MySQL 事务-隔离性</a></li>
 <li><a href="/www6vHomeHexo/2020/06/26/mysqlUpdate/" title="MySQL中的SQL更新语句">MySQL中的SQL更新语句</a></li>
 <li><a href="/www6vHomeHexo/2020/06/21/mysqlReliability/" title="MySQL的主从 高可用 容灾">MySQL的主从 高可用 容灾</a></li>
 <li><a href="/www6vHomeHexo/2019/09/10/mysqlIndex/" title="MySQL的索引和优化">MySQL的索引和优化</a></li>
 <li><a href="/www6vHomeHexo/2015/02/21/mysqlTransaction/" title="MySQL事务-总结">MySQL事务-总结</a>   </li>
 <li><a href="/www6vHomeHexo/2022/02/27/mysqlLog/" title="MySQL Logs">MySQL Logs</a>   </li>
-<li><a href="/www6vHomeHexo/2023/08/15/mysqlDeadLock/" title="MySQL  死锁">MySQL  死锁</a></li>
+<li><a href="/www6vHomeHexo/2023/08/15/mysqlDeadLock/" title="MySQL  锁和死锁">MySQL  锁和死锁</a></li>
 </ul>
 <h2><span id="分布式">分布式</span><a href="#分布式" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/02/09/distributedDatabase/" title="分布式 数据库 总结">分布式 数据库 总结</a>
@@ -9229,7 +9229,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <h3><span id="mysql中的mvcc-3">MySQL中的MVCC [3]</span><a href="#mysql中的mvcc-3" class="header-anchor">#</a></h3><h3><span id="分布式数据库中mvcc5">分布式数据库中MVCC[5]</span><a href="#分布式数据库中mvcc5" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://jiekun.dev/posts/mvcc/">Paper Reading：聊一聊MVCC</a> ***</li>
 <li>[1] Y. Wu, An Empirical Evaluation of In-Memory Multi-Version Concurrency Control. In VLDB 2017.</li>
-<li><a href="/www6vHomeHexo/2020/08/14/mysqlTransactionAndLock/" title="MySQL 事务-隔离性和锁">MySQL 事务-隔离性和锁</a> self 
+<li><a href="/www6vHomeHexo/2020/08/14/mysqlTransactionAndLock/" title="MySQL 事务-隔离性">MySQL 事务-隔离性</a> self 
 MySQL MVCC 快照读 vs 当前读 </li>
 <li><a href="https://www.zhihu.com/question/27876575">乐观锁和 MVCC 的区别？</a> </li>
 <li><a href="/www6vHomeHexo/2023/04/10/tikvMVCCTransaction/" title="TiKV Transaction-MVCC+TSO">TiKV Transaction-MVCC+TSO</a> self</li>
@@ -18300,8 +18300,86 @@ BGP 协议传输的消息
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
-<h3><span id="分库分表带来的问题-1">分库分表带来的问题 [1]</span><a href="#分库分表带来的问题-1" class="header-anchor">#</a></h3><ul>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8">分库分表</a><ul>
+<li><a href="#%E5%9E%82%E7%9B%B4%E5%88%87%E5%88%86-%E6%B0%B4%E5%B9%B3%E5%88%87%E5%88%86-4">垂直切分 &amp; 水平切分 [4]</a></li>
+<li><a href="#%E5%88%86%E7%89%87%E5%8E%9F%E5%88%99%E7%9A%84%E6%80%BB%E7%BB%93-3">分片原则的总结 [3]</a></li>
+</ul>
+</li>
+<li><a href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">问题&amp;解决方案</a><ul>
+<li><a href="#%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98-1">分库分表带来的问题 [1]</a></li>
+<li><a href="#shardingsphere-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1-2">ShardingSphere-分布式事务 [2]</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="分库分表">分库分表</span><a href="#分库分表" class="header-anchor">#</a></h1><h3><span id="垂直切分-amp-水平切分-4">垂直切分 &amp; 水平切分 [4]</span><a href="#垂直切分-amp-水平切分-4" class="header-anchor">#</a></h3><ul>
+<li><p>垂直切分</p>
+<ul>
+<li>垂直分库<br>不同的业务使用不同的数据库.    eg.订单库和促销活动库</li>
+<li>垂直分表<br>  根据一张表中的字段，将一张表划分为两张表</li>
+</ul>
+</li>
+<li><p>水平切分</p>
+<ul>
+<li>水平分表<br>将表中的某一列作为切分的条件，按照某种规则（Range 或 Hash 取模）来<br>切分为更小的表</li>
+<li>水平分库分表<br>水平切换的表分布到不同机器的库中</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>切分方式</th>
+<th>数据量</th>
+<th>访问特点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单库单表</td>
+<td>较小</td>
+<td>xxx</td>
+<td>小规模业务</td>
+</tr>
+<tr>
+<td>表分区</td>
+<td>较大</td>
+<td>热点数据比较集中</td>
+<td>数据量大、历史访问少</td>
+</tr>
+<tr>
+<td>单库多表</td>
+<td>较大</td>
+<td>访问热点数据分散，所有数据都会访问</td>
+<td>数据量较大</td>
+</tr>
+<tr>
+<td>多库多表</td>
+<td>极大</td>
+<td>并发量高、海量数据</td>
+<td>高并发、大数据量</td>
+</tr>
+</tbody></table>
+<h3><span id="分片原则的总结-3">分片原则的总结 [3]</span><a href="#分片原则的总结-3" class="header-anchor">#</a></h3><ol>
+<li>尽可能不要使用分片，优先考虑单表优化。[规避]</li>
+<li>如果必须使用分片，分片数量应该尽量少，均匀分布在多个数据节点上。</li>
+<li>分片规则应提前规划选择，考虑数据增长模式、访问模式、关联性和扩容问题。</li>
+<li>避免在一个事务中跨越多个分片。 [规避]</li>
+<li>查询条件要优化，避免使用 “SELECT *” 的方式，尽量避免返回大量结果集，并为频繁使用的查询语句建立索引。</li>
+<li>通过数据冗余和表分区等方式降低跨库 joins 的可能性。 [规避]</li>
+<li>对于有时间特征的数据表，采用时间范围分片，当前活跃数据采用短跨度分片，历史数据采用长跨度分片。</li>
+<li>分片的选择应该取决于最频繁的查询 SQL 的条件，避免不带 where 语句的查询 SQL。</li>
+</ol>
+<h1><span id="问题amp解决方案">问题&amp;解决方案</span><a href="#问题amp解决方案" class="header-anchor">#</a></h1><h3><span id="分库分表带来的问题-1">分库分表带来的问题 [1]</span><a href="#分库分表带来的问题-1" class="header-anchor">#</a></h3><ul>
 <li>事务性问题<ul>
 <li>方案一：尽可能保证一个事务所操作的表分布在一个库中 [规避]</li>
 <li>方案二：业务层引入分布式事务组件，如事务性消息、TCC、Seata等</li>
@@ -18362,20 +18440,11 @@ BGP 协议传输的消息
 <td>长事务 &amp; 高并发</td>
 </tr>
 </tbody></table>
-<h3><span id="分片原则的总结-3">分片原则的总结 [3]</span><a href="#分片原则的总结-3" class="header-anchor">#</a></h3><ol>
-<li>尽可能不要使用分片，优先考虑单表优化。[规避]</li>
-<li>如果必须使用分片，分片数量应该尽量少，均匀分布在多个数据节点上。</li>
-<li>分片规则应提前规划选择，考虑数据增长模式、访问模式、关联性和扩容问题。</li>
-<li>避免在一个事务中跨越多个分片。 [规避]</li>
-<li>查询条件要优化，避免使用 “SELECT *” 的方式，尽量避免返回大量结果集，并为频繁使用的查询语句建立索引。</li>
-<li>通过数据冗余和表分区等方式降低跨库 joins 的可能性。 [规避]</li>
-<li>对于有时间特征的数据表，采用时间范围分片，当前活跃数据采用短跨度分片，历史数据采用长跨度分片。</li>
-<li>分片的选择应该取决于最频繁的查询 SQL 的条件，避免不带 where 语句的查询 SQL。</li>
-</ol>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://zhuanlan.zhihu.com/p/535713197">一文读懂数据库分库分表</a></li>
 <li><a href="https://shardingsphere.apache.org/document/5.3.2/cn/features/transaction/">ShardingSphere-分布式事务</a></li>
 <li><a href="https://mp.weixin.qq.com/s/cVwyE7_oZ0F8Q1Mg7zClmQ">MySQL 大表优化方案（长文）</a></li>
+<li>《36 | 什么时候需要分表分库？》</li>
 </ol>
 ]]></content>
       <categories>
@@ -25177,8 +25246,8 @@ nq： 不排队调度
         <category>serviceMesh</category>
       </categories>
       <tags>
-        <tag>istio</tag>
         <tag>k8s</tag>
+        <tag>istio</tag>
       </tags>
   </entry>
   <entry>
