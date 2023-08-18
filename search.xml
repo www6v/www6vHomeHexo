@@ -936,7 +936,7 @@
 <li><a href="/www6vHomeHexo/2014/07/02/threadNum/" title="线程池最佳线程数">线程池最佳线程数</a>  线程  ***</li>
 <li><a href="/www6vHomeHexo/2017/12/07/cache/" title="缓存(cache)机制">缓存(cache)机制</a>  内存</li>
 <li><a href="/www6vHomeHexo/2014/03/05/falseSharing/" title="伪共享 FalseSharing">伪共享 FalseSharing</a>  内存</li>
-<li><a href="/www6vHomeHexo/2022/07/14/performancePool/" title="性能优化-Pool">性能优化-Pool</a></li>
+<li><a href="/www6vHomeHexo/2022/07/14/performancePool/" title="性能优化-池化Pool">性能优化-池化Pool</a></li>
 </ul>
 <h2><span id="mysql">MySQL</span><a href="#mysql" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2019/09/10/mysqlIndex/" title="MySQL的索引和优化">MySQL的索引和优化</a>  ***</li>
@@ -22077,7 +22077,7 @@ nq： 不排队调度
 </tr>
 <tr>
 <td align="center"><a href="http://blog.zephyrleaves.net/">黄若慧 高级技术专家 淘宝文通</a></td>
-<td align="center"></td>
+<td align="center">已失效</td>
 </tr>
 <tr>
 <td align="center"><a href="https://www.sczyh30.com/">Software Engineer @ Alibaba Middleware Team</a></td>
@@ -22085,11 +22085,11 @@ nq： 不排队调度
 </tr>
 <tr>
 <td align="center"><a href="http://blog.yufeng.info/">系统技术非业余研究</a></td>
-<td align="center"></td>
+<td align="center">不写技术了</td>
 </tr>
 <tr>
 <td align="center"><a href="http://arebya.com/">arebya</a> 质量不高</td>
-<td align="center"></td>
+<td align="center">2018 停更</td>
 </tr>
 <tr>
 <td align="center"><a href="https://agapple.iteye.com/">canal作者 agapple</a></td>
@@ -22097,7 +22097,7 @@ nq： 不排队调度
 </tr>
 <tr>
 <td align="center"><a href="https://www.jianshu.com/u/b230a86fb7ad">阿里加多</a></td>
-<td align="center"></td>
+<td align="center"><strong>更新-2023.01</strong></td>
 </tr>
 <tr>
 <td align="center"><a href="https://yq.aliyun.com/users/6bmpl5rdwpqu4">乒乓狂魔</a></td>
@@ -22105,23 +22105,23 @@ nq： 不排队调度
 </tr>
 <tr>
 <td align="center"><a href="https://yq.aliyun.com/users/ejn34jbxf5evs">冯嘉 rocketmq</a></td>
-<td align="center"></td>
+<td align="center">已失效</td>
 </tr>
 <tr>
 <td align="center"><a href="https://yq.aliyun.com/users/jwbhxydfk6qyi/article">木洛 阿里云技术专家，表格存储</a></td>
-<td align="center"></td>
+<td align="center">已失效</td>
 </tr>
 <tr>
 <td align="center"><a href="https://yq.aliyun.com/users/u3vivzisyg2pc/">成喆 阿里云存储服务</a></td>
-<td align="center"></td>
+<td align="center">已失效</td>
 </tr>
 <tr>
 <td align="center"><a href="https://yq.aliyun.com/users/zh5kxxfngqw2m">文意 阿里云存储服务产品</a>  serverless 场景</td>
-<td align="center"></td>
+<td align="center">已失效</td>
 </tr>
 <tr>
 <td align="center"><a href="https://yq.aliyun.com/users/fbt6ovijrs2zi">scorpion 阿里云函数计算研发经理</a> 函数计算</td>
-<td align="center"></td>
+<td align="center">已失效</td>
 </tr>
 <tr>
 <td align="center"><a href="https://www.cnblogs.com/bodhitree/default.html">Freewill 阿里云的人 SDN ceph</a></td>
@@ -22129,11 +22129,11 @@ nq： 不排队调度
 </tr>
 <tr>
 <td align="center"><a href="http://www.seflerzhou.net/">阿里  周遥（玄胤）</a></td>
-<td align="center"></td>
+<td align="center">一般</td>
 </tr>
 <tr>
 <td align="center">入境繁华  蚂蚁金服中间件团队 <br> <a href="http://zhengjianglong.cn/">http://zhengjianglong.cn</a> <br> <a href="http://blog.leanote.com/along">http://blog.leanote.com/along</a></td>
-<td align="center"></td>
+<td align="center">失效</td>
 </tr>
 <tr>
 <td align="center">阿里人的博客 canel <br> <a href="http://agapple.iteye.com/">http://agapple.iteye.com/</a> <br>  <a href="https://github.com/agapple">https://github.com/agapple</a></td>
@@ -26821,6 +26821,10 @@ nq： 不排队调度
 <td></td>
 </tr>
 <tr>
+<td><a href="https://www.jianshu.com/u/5000b3e8bd79"><a href="https://www.jianshu.com/u/5000b3e8bd79">得物技术</a></a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="http://mysql.taobao.org/monthly/">数据库内核月报 淘宝数据库组</a>   ***</td>
 <td></td>
 </tr>
@@ -28495,6 +28499,8 @@ nq： 不排队调度
 <li><p>《28 | 多机房部署：跨地域的分布式系统如何做？》  唐扬</p>
 </li>
 <li><p><a href="https://blog.csdn.net/lql_h/article/details/95588996">SET化架构设计</a>  lql_h  未</p>
+</li>
+<li><p><a href="https://www.jianshu.com/p/0012b44ed7c6">看完这篇异地多活的改造，我决定和架构师battle一下｜得物技术</a>  未</p>
 </li>
 </ol>
 ]]></content>
