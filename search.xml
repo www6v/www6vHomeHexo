@@ -2307,82 +2307,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Paper 学习资源</title>
-    <url>/www6vHomeHexo/2022/11/30/paperStudy/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<h2><span id="paper-distributed-systems">Paper - distributed systems</span><a href="#paper-distributed-systems" class="header-anchor">#</a></h2><ul>
-<li><a href="https://github.com/aphyr/distsys-class">An introduction to distributed systems</a> good</li>
-<li><a href="http://book.mixu.net/distsys/single-page.html">Distributed systems for fun and profit</a> good</li>
-<li><a href="http://cidrdb.org/cidr2015/Papers/CIDR15_Paper16.pdf">Immutability Changes Everything</a></li>
-<li><a href="https://snarfed.org/transactions_across_datacenters_io.html">Transactions Across Datacenters</a>  Google IO</li>
-<li><a href="https://coolshell.cn/articles/10910.html">分布式系统的事务处理</a></li>
-<li><a href="http://www.rgoarchitects.com/Files/fallacies.pdf">Fallacies of Distributed Computing Explained</a> 8种错误的认知</li>
-<li><a href="https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf">Dynamo: Amazon’s Highly Available Key-value Store </a></li>
-<li><a href="https://www.microsoft.com/en-us/research/uploads/prod/2016/12/Time-Clocks-and-the-Ordering-of-Events-in-a-Distributed-System.pdf">Time, Clocks, and the Ordering of Events ina Distributed System </a> good 逻辑时钟</li>
-<li><a href="http://nettee.github.io/posts/2016/Scalable-Web-Architecture-and-Distributed-Systems/">Scalable Web Architecture</a></li>
-</ul>
-<h2><span id="reading-list-distributed-systems">Reading list - distributed systems</span><a href="#reading-list-distributed-systems" class="header-anchor">#</a></h2><ul>
-<li><a href="https://www.the-paper-trail.org/post/2014-08-09-distributed-systems-theory-for-the-distributed-systems-engineer/">Distributed systems theory for the distributed systems engineer</a> paper trail</li>
-<li><a href="http://christophermeiklejohn.com/distributed/systems/2013/07/12/readings-in-distributed-systems.html">Readings in distributed systems</a></li>
-</ul>
-<h2><span id="paper-storage">Paper - Storage</span><a href="#paper-storage" class="header-anchor">#</a></h2><ul>
-<li><a href="https://docs.ceph.com/docs/jewel/architecture/">ceph ARCHITECTURE</a></li>
-</ul>
-<h2><span id="paper-streaming">Paper - Streaming</span><a href="#paper-streaming" class="header-anchor">#</a></h2><ul>
-<li><a href="https://github.com/www6v/streaming-readings">Streaming Readings</a></li>
-<li>The Dataflow Model: A Practical Approach to Balancing Correctness, Latency, and Cost in Massive-Scale, Unbounded, Out-of-Order Data Processing (VLDB)</li>
-<li>Apache Flink: Stream and Batch Processing in a Single Engine</li>
-<li>Lightweight asynchronous snapshots for distributed dataflowss</li>
-<li>MillWheel: Fault-Tolerant Stream Processing at Internet Scale (VLDB)</li>
-</ul>
-<h2><span id="paper-个人">Paper - 个人</span><a href="#paper-个人" class="header-anchor">#</a></h2><ul>
-<li><a href="https://learn-sys.github.io/cn/reading/">论文阅读小组</a>   大佬们</li>
-<li><a href="http://blog.shunzi.tech/">Elvis Zhang</a>  存储 数据库 方向，交大大佬</li>
-<li><a href="http://loopjump.com/"> LoopJump </a>   关注数据存储与计算</li>
-<li><a href="https://blog.acolyer.org/">the morning paper</a>  ***<br>Adrian Colyer,   over 1,000 papers,  computer science</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Paper</category>
-        <category>学习资源</category>
-      </categories>
-      <tags>
-        <tag>学习资源</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Paper-The Tail at Scale</title>
-    <url>/www6vHomeHexo/2022/11/30/paperTailAtScale/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="the-tail-at-scale">The Tail at Scale</span><a href="#the-tail-at-scale" class="header-anchor">#</a></h2><ul>
-<li>文章重点列了七种工程上的解决方案<ul>
-<li>hedged requests（最快请求），</li>
-<li>tied requests（最快请求完成后取消其他请求），</li>
-<li>micro-partition（微分区），</li>
-<li>selectively increase replication factors（增加读分区），</li>
-<li>put slow machines on probation（隔离慢速机器），</li>
-<li>‘good enough’ responses（不完美但是足够好的结果），</li>
-<li>canary requests（试探性请求）</li>
-</ul>
-</li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p><a href="https://v.youku.com/v_show/id_XNzIyMzMyMzEy.html">The Tail at Scale_ Achieving Rapid Response Times in Larg</a>  ***</p>
-<p><a href="https://zhuanlan.zhihu.com/p/562489856">[CACM2013] The Tail at Scale</a></p>
-]]></content>
-      <categories>
-        <category>Paper</category>
-        <category>Distributed</category>
-      </categories>
-      <tags>
-        <tag>Distributed</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>AWS Network-Direct Connect</title>
     <url>/www6vHomeHexo/2022/10/30/awsNetworkDX/</url>
     <content><![CDATA[<p></p>
@@ -7267,43 +7191,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Paper-LSM Tree Survey</title>
-    <url>/www6vHomeHexo/2022/06/12/paperlsmTreeSurvey/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="lsm-tree-basics">LSM-tree basics</span><a href="#lsm-tree-basics" class="header-anchor">#</a></h2><h5><span id="lsm-tree基础">LSM Tree基础</span><a href="#lsm-tree基础" class="header-anchor">#</a></h5><ul>
-<li>Merge有两个典型的策略：Leveling Merge Policy和 Tiering Merge Policy<img src="/www6vHomeHexo/2022/06/12/paperlsmTreeSurvey/merge.png" class width="720" height="576"></li>
-</ul>
-<p>Leveling Merge：每层维护一个component，层之间数据量比例为T。<br>Tiering Merge：每层维护最多T个component，满T个就整体合并成下一层的一个component。</p>
-<h5><span id="一些经典的优化手段">一些经典的优化手段</span><a href="#一些经典的优化手段" class="header-anchor">#</a></h5><ul>
-<li>优化一：Bloom filter<br>[eg. Bloom filter in Hbase]</li>
-<li>优化二：Partitioning<br>这样带来的好处很多：<br>merge操作可以打散成多个小的merge操作。更精细的merge能够使merge的耗时和临时空间占用更加可控。<br>对于顺序插入（每次都是插入更大的key，例如业务存储按时间排序类型的数据）和skewed update的情况，有可能大部分分区不需要merge，只需要merge少量的分区。<br>注意到，partition优化和merge policy是<strong>正交的</strong>，但是<strong>工业界基本上只有leveling merge policy用了partition优化</strong>。<br>[eg.  Minor Compaction in HBase]</li>
-</ul>
-<h2><span id="lsm-tree-improvements">LSM-tree improvements</span><a href="#lsm-tree-improvements" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/06/12/paperlsmTreeSurvey/improvement.png" class>
-
-<ul>
-<li>降低写放大<ul>
-<li>tiering</li>
-<li>Merge skipping<br>[skip-list in HBase]</li>
-<li>Expliointing data skew</li>
-</ul>
-</li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li>LSM-based storage techniques: a survey （VLDBJ 2020）</li>
-<li><a href="http://loopjump.com/pr-lsmtree-survey/">LSMTree综述</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>Paper</category>
-        <category>LSM-Tree</category>
-      </categories>
-      <tags>
-        <tag>LSM-Tree</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Deep Learning</title>
     <url>/www6vHomeHexo/2022/06/11/aiDeepLearning/</url>
     <content><![CDATA[<p></p>
@@ -7333,30 +7220,6 @@
       </categories>
       <tags>
         <tag>AI</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Serverless Optimize</title>
-    <url>/www6vHomeHexo/2022/06/10/paperServerlessOptimize/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="optimization-chances-of-severless-function-start-time123">Optimization chances of severless function start time[1][2][3]</span><a href="#optimization-chances-of-severless-function-start-time123" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/06/10/paperServerlessOptimize/serverless-optimize.jpg" class title="Serverless Optimize">
-
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p><strong>video</strong><br><a href="https://www.bilibili.com/video/BV1Hy4y1g7DQ/">系统论文阅读研讨会week15：serverless &amp; SAND</a></p>
-<p><strong>Paper</strong></p>
-<ol>
-<li>InfiniCache: Exploiting Ephemeral Serverless Functions to Build a Cost-Effective Memory Cache</li>
-<li>Serverless in the Wild: Characterizing and Optimizing the Serverless Workload at a Large Cloud Provider</li>
-<li>SAND: Towards High-Performance Serverless Computing</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Paper</category>
-        <category>Serverless</category>
-      </categories>
-      <tags>
-        <tag>Serverless</tag>
       </tags>
   </entry>
   <entry>
@@ -12896,30 +12759,6 @@ BGP 协议传输的消息
       </categories>
       <tags>
         <tag>认证</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HTAP 综述</title>
-    <url>/www6vHomeHexo/2022/03/03/dbHTAP/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="htap">HTAP</span><a href="#htap" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/03/03/dbHTAP/arch.jpg" class>
-<img src="/www6vHomeHexo/2022/03/03/dbHTAP/summary.jpg" class>
-
-<h2><span id="关键技术">关键技术</span><a href="#关键技术" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/03/03/dbHTAP/tech1.jpg" class>
-<img src="/www6vHomeHexo/2022/03/03/dbHTAP/tech2.jpg" class>
-
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ul>
-<li><a href="https://www.bilibili.com/video/BV1wG411b7MC?spm_id_from=333.880.my_history.page.click&vd_source=f6e8c1128f9f264c5ab8d9411a644036">【论文分享】清华大学张超：SIGMOD 2022 HTAP Tutorial</a> 有ppt(已下载)<br> <a href="http://www.jos.org.cn/jos/article/abstract/6713?bsh_bid=5787477056">HTAP数据库关键技术综述. 软件学报, 2022</a> 未</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Paper</category>
-        <category>HTAP</category>
-      </categories>
-      <tags>
-        <tag>HTAP</tag>
       </tags>
   </entry>
   <entry>
@@ -22000,49 +21839,6 @@ nq： 不排队调度
       </tags>
   </entry>
   <entry>
-    <title>分布式数据库中一致性和可用性的权衡</title>
-    <url>/www6vHomeHexo/2019/10/27/dbTradeoff/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<div style="text-align: center;">
-
-<p><img src="https://user-images.githubusercontent.com/5608425/67635359-14c13280-f901-11e9-93f2-50720186ad33.jpg" alt="trade-off"><br>基于一致性、可用性的系统分类</p>
-</div>
-
-<blockquote>
-<p>I. nosql: BigTable，Hbase (CP + 无事务一致性)<br>  提供强一致性, 但不支持事务.<br>  BigTable能够做到服务级高可用性, 这主要得益于Chubby和GFS提供的高可用性保障.</p>
-</blockquote>
-<blockquote>
-<p>II. nosql: Dynamo, Cassandra （AP）<br>  较弱的操作一致性, 并且也不提供事务一致性保证. 以提升系统的可用性为第一要务</p>
-</blockquote>
-<blockquote>
-<p>III. newsql: Spanner, Tidb  （CP + 高事务一致性）<br>  既提供最强的操作一致性, 也提供最强的事务一致性, 与此同时, 还提供服务级高可用性.以事务一致性作为设计的首要目标.<br>  难以提供最高级别的可用性(即节点级高可用), 但可以利用共识机制达到较高级别的可用性——服务级高可用.</p>
-</blockquote>
-<blockquote>
-<p>Ⅳ. 基于主从复制技术的RMDB; NewSQL: VoltDB; (C + 事务)<br>  较强的操作一致性和事务一致性, 但在可用性上作了一定妥协, 只提供人工介入下的可用性.</p>
-</blockquote>
-<blockquote>
-<p>V.  Balis HAT</p>
-</blockquote>
-<blockquote>
-<p>观点: 数据不可靠，但服务可以可靠。</p>
-</blockquote>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="../../../../2018/07/19/NoSQL/">NoSQL总结</a> self</li>
-<li><a href="../../../..//2019/10/27/dbClassify/">结构化数据库分类</a> self</li>
-</ol>
-<h3><span id="paper">Paper</span><a href="#paper" class="header-anchor">#</a></h3><p>朱涛, 郭进伟, 周欢, 周烜, 周傲英. 分布式数据库中一致性与可用性的关系[J]. 软件学报, 2018, 29(1): 131-149.<a href="http://www.jos.org.cn/1000-9825/5433.htm">http://www.jos.org.cn/1000-9825/5433.htm</a></p>
-]]></content>
-      <categories>
-        <category>Paper</category>
-        <category>分布式数据库</category>
-      </categories>
-      <tags>
-        <tag>分布式数据库</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>分布式系统学习资源-个人</title>
     <url>/www6vHomeHexo/2019/10/13/distributedStudy/</url>
     <content><![CDATA[<p></p>
@@ -25320,8 +25116,8 @@ nq： 不排队调度
         <category>serviceMesh</category>
       </categories>
       <tags>
-        <tag>k8s</tag>
         <tag>istio</tag>
+        <tag>k8s</tag>
       </tags>
   </entry>
   <entry>
@@ -27328,8 +27124,8 @@ nq： 不排队调度
         <category>总结</category>
       </categories>
       <tags>
-        <tag>基础</tag>
         <tag>性能</tag>
+        <tag>基础</tag>
         <tag>性能优化</tag>
       </tags>
   </entry>
@@ -27559,22 +27355,6 @@ nq： 不排队调度
       </categories>
       <tags>
         <tag>设计原则</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>研究生论文(非最终版)</title>
-    <url>/www6vHomeHexo/2018/08/21/yan/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<p><a href="http://www6v.github.io/www6vHome/yan/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86%E6%A1%86%E6%9E%B6%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0-%E9%9D%9E%E6%9C%80%E7%BB%88%E7%89%88.docx">分布式服务治理框架的原理与实现-非最终版</a></p>
-]]></content>
-      <categories>
-        <category>Paper</category>
-      </categories>
-      <tags>
-        <tag>研究生论文</tag>
       </tags>
   </entry>
   <entry>
