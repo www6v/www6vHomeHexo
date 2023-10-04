@@ -440,8 +440,8 @@
 </ul>
 <h5><span id="k8s">K8s</span><a href="#k8s" class="header-anchor">#</a></h5><ul>
 <li><a href="/www6vHomeHexo/2022/06/08/k8sTroubleshoot/" title="kubernetes 问题Troubleshoot">kubernetes 问题Troubleshoot</a>  </li>
-<li><a href="/www6vHomeHexo/2022/04/03/k8sProblem/" title="Kubernetes问题排查-troubleshooting">Kubernetes问题排查-troubleshooting</a>     </li>
-<li><a href="/www6vHomeHexo/2022/01/23/k8sBestPractice/" title="Kubernetes最佳实践-BestPractice">Kubernetes最佳实践-BestPractice</a></li>
+<li><a href="/www6vHomeHexo/2022/04/03/k8sProblem/" title="Kubernetes问题排查-troubleshooting">Kubernetes问题排查-troubleshooting</a>      ***</li>
+<li><a href="/www6vHomeHexo/2022/01/23/k8sBestPractice/" title="Kubernetes最佳实践-BestPractice">Kubernetes最佳实践-BestPractice</a>   ***</li>
 </ul>
 <h5><span id="basic">Basic</span><a href="#basic" class="header-anchor">#</a></h5><ul>
 <li><a href="/www6vHomeHexo/2020/08/08/tcpFault/" title="TCP故障模式">TCP故障模式</a></li>
@@ -466,6 +466,7 @@
 <li><a href="/www6vHomeHexo/2019/11/01/apiDesign/" title="OpenAPI 设计">OpenAPI 设计</a></li>
 <li><a href="/www6vHomeHexo/2018/02/25/cqrs/" title="CQRS 简介和案例分析">CQRS 简介和案例分析</a></li>
 <li><a href="/www6vHomeHexo/2020/05/22/ddd/" title="DDD  领域驱动设计">DDD  领域驱动设计</a></li>
+<li><a href="/www6vHomeHexo/2023/07/06/dddPractice/" title="DDD-落地实战 Practice">DDD-落地实战 Practice</a> </li>
 <li><a href="/www6vHomeHexo/2018/04/07/EAI/" title="应用集成方式">应用集成方式</a></li>
 <li><a href="/www6vHomeHexo/2018/03/17/DomainLogicAndSQL/" title="领域逻辑和SQL">领域逻辑和SQL</a></li>
 </ul>
@@ -544,6 +545,7 @@
 <h3><span id="负载均衡">负载均衡</span><a href="#负载均衡" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2022/05/06/loadBalance/" title="负载均衡-算法">负载均衡-算法</a></li>
 <li><a href="/www6vHomeHexo/2019/08/22/nginx/" title="Nginx总结">Nginx总结</a></li>
+<li><a href="/www6vHomeHexo/2020/03/26/nginxOptimize/" title="Nginx优化">Nginx优化</a></li>
 </ul>
 <h3><span id="线程模型">线程模型</span><a href="#线程模型" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2015/07/09/jsfThreadModel/" title="京东服务框架JSF服务提供者线程模型">京东服务框架JSF服务提供者线程模型</a></li>
@@ -727,7 +729,7 @@
 <li><a href="/www6vHomeHexo/2022/03/28/redisReliability-1/" title="Redis雪崩、击穿、穿透">Redis雪崩、击穿、穿透</a></li>
 <li><a href="/www6vHomeHexo/2022/02/21/redisDbConsistent/" title="Redis和数据库之间的一致性">Redis和数据库之间的一致性</a></li>
 <li><a href="/www6vHomeHexo/2022/03/25/redisSlowResponse/" title="Redis 慢查询排查">Redis 慢查询排查</a> </li>
-<li><a href="/www6vHomeHexo/2022/06/03/redisHotkey/" title="Redis Hotkey">Redis Hotkey</a></li>
+<li><a href="/www6vHomeHexo/2022/06/03/redisHotkey/" title="Redis 热点Hotkey">Redis 热点Hotkey</a></li>
 <li><a href="/www6vHomeHexo/2022/07/31/redisHitRate/" title="Redis  命中率">Redis  命中率</a></li>
 </ul>
 </li>
@@ -751,6 +753,51 @@
       <categories>
         <category>汇总</category>
         <category>Redis</category>
+      </categories>
+      <tags>
+        <tag>汇总</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>大数据  汇总</title>
+    <url>/www6vHomeHexo/2020/09/19/bigDataSummary/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h1><span id="存储">存储</span><a href="#存储" class="header-anchor">#</a></h1><ul>
+<li><a href="/www6vHomeHexo/2022/09/07/clickhouse/" title="Clickhouse">Clickhouse</a>
+</li>
+<li><a href="/www6vHomeHexo/2022/01/08/elasticsearchModel/" title="Elasticsearch 数据模型Model">Elasticsearch 数据模型Model</a></li>
+<li><a href="/www6vHomeHexo/2019/08/03/elasticsearchDistributed/" title="Elasticsearch 分布式集群">Elasticsearch 分布式集群</a></li>
+<li><a href="/www6vHomeHexo/2019/08/02/elasticsearch/" title="Elasticsearch基础(ES)">Elasticsearch基础(ES)</a>
+</li>
+<li><a href="/www6vHomeHexo/2023/04/02/hbaselsmTree/" title="HBase - LSM-Tree">HBase - LSM-Tree</a></li>
+<li><a href="/www6vHomeHexo/2021/06/07/hbaseHotkey/" title="HBase Hotkey-预分区和Rowkey设计">HBase Hotkey-预分区和Rowkey设计</a></li>
+<li><a href="/www6vHomeHexo/2020/09/04/hbase/" title="HBase总结">HBase总结</a>
+</li>
+<li><a href="/www6vHomeHexo/2018/06/07/hdfs/" title="HDFS NameNode HA 解决方案">HDFS NameNode HA 解决方案</a>
+</li>
+<li><a href="/www6vHomeHexo/2022/09/01/iceberg/" title="Iceberg">Iceberg</a>
+</li>
+<li><a href="/www6vHomeHexo/2022/09/08/bigDataMetaMgt/" title="大数据 元数据管理">大数据 元数据管理</a>
+</li>
+<li><a href="/www6vHomeHexo/2019/09/15/bigDataStorage/" title="大数据存储">大数据存储</a></li>
+</ul>
+<h1><span id="平台">平台</span><a href="#平台" class="header-anchor">#</a></h1><ul>
+<li><a href="/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/" title="实时数仓">实时数仓</a></li>
+<li><a href="/www6vHomeHexo/2022/08/04/streamingBatchIntegration/" title="批流一体">批流一体</a></li>
+<li><a href="/www6vHomeHexo/2022/09/15/userBehaviorAnalysis/" title="用户行为分析">用户行为分析</a></li>
+<li><a href="/www6vHomeHexo/2021/06/15/olap/" title="OLAP 在线分析处理">OLAP 在线分析处理</a></li>
+<li><a href="/www6vHomeHexo/2022/09/21/personProflie/" title="用户画像">用户画像</a></li>
+</ul>
+<h1><span id="计算">计算</span><a href="#计算" class="header-anchor">#</a></h1><ul>
+<li><a href="/www6vHomeHexo/2022/06/17/bigDataComputing/" title="大数据 计算Computing">大数据 计算Computing</a></li>
+<li><a href="/www6vHomeHexo/2022/09/08/bigDataSchedule/" title="大数据 调度">大数据 调度</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>汇总</category>
+        <category>大数据</category>
       </categories>
       <tags>
         <tag>汇总</tag>
@@ -821,11 +868,13 @@
 </div>
 
 <h1><span id="flink">Flink</span><a href="#flink" class="header-anchor">#</a></h1><h3><span id="basic">Basic</span><a href="#basic" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2019/07/29/streamingFlink/" title="Flink 总结">Flink 总结</a></li>
-<li><a href="/www6vHomeHexo/2022/03/31/streamingFlinkWindow/" title="Flink-Window">Flink-Window</a></li>
-<li><a href="/www6vHomeHexo/2022/03/29/streamingFlinkWatermarkWindow/" title="Flink中的Watermark &amp; Window">Flink中的Watermark &amp; Window</a></li>
+<li><a href="/www6vHomeHexo/2019/07/29/streamingFlink/" title="Flink 总结">Flink 总结</a>
+</li>
+<li><a href="/www6vHomeHexo/2022/03/31/streamingFlinkWindow/" title="Flink-Window">Flink-Window</a>
+</li>
+<li><a href="/www6vHomeHexo/2022/03/29/streamingFlinkWatermarkWindow/" title="Flink中的Watermark &amp; Window">Flink中的Watermark &amp; Window</a>
+</li>
 <li><a href="/www6vHomeHexo/2022/03/31/streamingFlinkDeploy/" title="Flink-部署方式">Flink-部署方式</a></li>
-<li><a href="/www6vHomeHexo/2022/07/18/flinkRealtimeWarehouse/" title="Flink 实时数仓">Flink 实时数仓</a></li>
 </ul>
 <h3><span id="checkpoint">Checkpoint</span><a href="#checkpoint" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2022/02/03/streamingFlinkCheckpoint/" title="Flink Checkpoint-分布式快照方法">Flink Checkpoint-分布式快照方法</a></li>
@@ -1410,6 +1459,7 @@
 
 <p>在这种情况下，  <strong>当redis重启的时候会优先载入AOF文件来恢复原始的数据</strong>  ，因为在通常情况下AOF文件保存的数据集要比RDB文件保存的数据集要完整。</p>
 <p>RDB和AOF共存时会优先加载AOF文件</p>
+<p><strong>【主从切换   优先加载  RDB  -&gt;  速度】</strong><br><strong>【redis重启 优先加载 AOF -&gt; 数据完整性】</strong></p>
 <h3><span id="开启">开启</span><a href="#开启" class="header-anchor">#</a></h3>  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">aof-use-rdb-preamble no -&gt; yes</span><br></pre></td></tr></table></figure>
 
 <h3><span id="原理-3">原理 [3]</span><a href="#原理-3" class="header-anchor">#</a></h3><p>RDB镜像做全量持久化，AOF做增量持久化 先使用RDB进行快照存储，然后使用AOF持久化记录所有的写操作，当重写策略满足或手动触发重写的时候，将最新的数据存储为新的RDB记录。<br>这样的话，重启服务的时候会从RDB和AOF两部分恢复数据，既保证了数据完整性，又提高了恢复数据的性能。简单来说:混合持久化方式产生的文件一部分是RDB格式，一部分是AOF格式。</p>
@@ -3012,6 +3062,268 @@
       </tags>
   </entry>
   <entry>
+    <title>用户画像</title>
+    <url>/www6vHomeHexo/2022/09/21/personProflie/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F-3">用户画像 [3]</a></li>
+<li><a href="#%E6%9E%B6%E6%9E%84-1">架构 [1]</a></li>
+<li><a href="#%E7%94%A8%E6%88%B7%E6%A0%87%E7%AD%BE-2">用户标签 [2]</a><ul>
+<li><a href="#%E5%9F%BA%E7%A1%80%E6%A0%87%E7%AD%BE-3">基础标签 [3]</a></li>
+<li><a href="#%E8%A1%8C%E4%B8%BA%E6%A0%87%E7%AD%BE">行为标签</a></li>
+<li><a href="#%E5%81%8F%E5%A5%BD%E6%A0%87%E7%AD%BE-3">偏好标签 [3]</a></li>
+<li><a href="#%E9%A2%84%E6%B5%8B%E6%A0%87%E7%AD%BE">预测标签</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%B3%E6%B3%A8%E7%82%B9">关注点</a><ul>
+<li><a href="#%E6%A0%87%E7%AD%BE%E7%9A%84%E7%B2%92%E5%BA%A6-3">标签的粒度 [3]</a></li>
+<li><a href="#%E9%9D%99%E6%80%81%E5%8A%A8%E6%80%81%E6%A0%87%E7%AD%BE-3">静态&#x2F;动态标签 [3]</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9C%88%E4%BA%BA-%E5%9F%BA%E4%BA%8E%E6%A0%87%E7%AD%BE%E8%81%9A%E7%B1%BB%E7%9A%84%E4%BA%BA%E7%BE%A4%E7%94%9F%E6%88%90-3">圈人-基于标签聚类的人群生成 [3]</a><ul>
+<li><a href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F">实现方式</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%B3%E7%B3%BB%E5%BA%93-id-mapping-2">关系库 ID-Mapping [2]</a></li>
+<li><a href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF3">应用场景[3]</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="用户画像-3">用户画像 [3]</span><a href="#用户画像-3" class="header-anchor">#</a></h1><p>用户画像就是与该用户相关联的数据的可视化的展现，一句话来总结就是<strong>用户信息标签化</strong>.</p>
+<p>这些标签的来源就是一些<strong>用户的行为</strong>.</p>
+<h1><span id="架构-1">架构 [1]</span><a href="#架构-1" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/09/21/personProflie/process.jpg" class>
+
+<img src="/www6vHomeHexo/2022/09/21/personProflie/arch.jpg" class>
+
+
+<h1><span id="用户标签-2">用户标签 [2]</span><a href="#用户标签-2" class="header-anchor">#</a></h1><h3><span id="基础标签-3">基础标签 [3]</span><a href="#基础标签-3" class="header-anchor">#</a></h3><ul>
+<li>人口属性<br>性别 年龄 职业 等</li>
+<li>购买能力<br>收入及购买能力、购买频次和渠道</li>
+<li>用户等级<br>高级会员<br>VIP会员</li>
+<li>上课情况<ul>
+<li>下粉批次</li>
+<li>直播间类型</li>
+<li>完课率</li>
+<li>听课阶段</li>
+</ul>
+</li>
+</ul>
+<h3><span id="行为标签">行为标签</span><a href="#行为标签" class="header-anchor">#</a></h3><ul>
+<li><p>绑定手机号</p>
+</li>
+<li><p>添加微信</p>
+</li>
+<li><p>删除微信</p>
+</li>
+<li><p>回复问候</p>
+</li>
+<li><p>下载软件</p>
+</li>
+<li><p>购买课程</p>
+<ul>
+<li>购买9.9直播</li>
+<li>接听dayN直播报名电话</li>
+<li>报名dayN直播</li>
+<li>进入dayN直播间</li>
+<li>观看dayN预习视频</li>
+<li>回复dayN预习作业</li>
+<li>回复dayN作业</li>
+<li>购买高级会员</li>
+<li>购买VIP</li>
+</ul>
+</li>
+</ul>
+<h3><span id="偏好标签-3">偏好标签 [3]</span><a href="#偏好标签-3" class="header-anchor">#</a></h3><ul>
+<li><p>时间偏好<br>PC端活跃时间<br>App端活跃时间<br>Web端活跃时间</p>
+</li>
+<li><p>渠道偏好<br>常用PC端<br>常用App端<br>常用Web端</p>
+</li>
+<li><p>板块关注偏好<br>科技类<br>汽车类<br>电力能源</p>
+</li>
+<li><p>消费需求<br>消费习惯和消费偏好</p>
+</li>
+<li><p>风险偏好</p>
+</li>
+</ul>
+<h3><span id="预测标签">预测标签</span><a href="#预测标签" class="header-anchor">#</a></h3><h1><span id="关注点">关注点</span><a href="#关注点" class="header-anchor">#</a></h1><h3><span id="标签的粒度-3">标签的粒度 [3]</span><a href="#标签的粒度-3" class="header-anchor">#</a></h3><p>比如年龄标签是20-30岁和21岁，就是明显不同粒度的标签<br>比如活跃时间是白天或者晚上和下午3点，就是明显不同粒度的标签</p>
+<h3><span id="静态x2f动态标签-3">静态&#x2F;动态标签 [3]</span><a href="#静态x2f动态标签-3" class="header-anchor">#</a></h3><ul>
+<li><p>静态标签<br>性别、年龄、地域、收入 相对是静态标签</p>
+</li>
+<li><p>动态标签<br>用户访问设备、用户的48小时是否活跃、内容访问偏好、消费偏好等属于时常在发生变动的，这些动态特征可以变成动态标签</p>
+</li>
+</ul>
+<h1><span id="圈人-基于标签聚类的人群生成-3">圈人-基于标签聚类的人群生成 [3]</span><a href="#圈人-基于标签聚类的人群生成-3" class="header-anchor">#</a></h1><h3><span id="实现方式">实现方式</span><a href="#实现方式" class="header-anchor">#</a></h3><ul>
+<li>按维度(n天内)加权汇总某类主题和实体(买家)在某种对象(课程)上的相关行为(点击 买课)，然后归一化到[0,1]之间，取TopN或全部输出。</li>
+<li>调整的可以是维度（天数）, 实体（买家），对象（课程）， 行为(点击 买课)，权重等。</li>
+</ul>
+<h1><span id="关系库-id-mapping-2">关系库 ID-Mapping [2]</span><a href="#关系库-id-mapping-2" class="header-anchor">#</a></h1><ul>
+<li><p>关系库主要是 IDMapping<br>IDMapping主要指用户设备的打通，用于识别用户的唯一性</p>
+</li>
+<li><p>ID-Mapping的存储<br>JanusGraph</p>
+</li>
+</ul>
+<h1><span id="应用场景3">应用场景[3]</span><a href="#应用场景3" class="header-anchor">#</a></h1><ul>
+<li>精细化运营</li>
+<li>商业分析</li>
+<li>搜索</li>
+<li>精准广告营销<br>人群圈选，做定向投放</li>
+<li>个性化推荐<br>千人千面</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247499260&idx=2&sn=5c6f1fb40cd90edd63ea7974284af09b">日处理数据量超10亿：友信金服基于Flink构建实时用户画像系统的实践</a></li>
+<li><a href="https://mp.weixin.qq.com/s/jyiDWiK0zczEaZKY5Hy5xg">网易大数据用户画像实践 </a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzU1NTMyOTI4Mw==&mid=2247500642&idx=1&sn=15b22586962cee5c58bb58d898c9a465">用户画像技术及方法论</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>用户画像</category>
+      </categories>
+      <tags>
+        <tag>用户画像</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>用户行为分析</title>
+    <url>/www6vHomeHexo/2022/09/15/userBehaviorAnalysis/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E6%9E%B6%E6%9E%84-5">架构 [5]</a></li>
+<li><a href="#%E5%AE%8C%E6%95%B4%E9%93%BE%E8%B7%AF-4">完整链路 [4]</a></li>
+<li><a href="#%E6%8C%87%E6%A0%87-2">指标 [2]</a><ul>
+<li><a href="#%E7%B2%98%E6%80%A7%E6%8C%87%E6%A0%87">粘性指标</a></li>
+<li><a href="#%E6%B4%BB%E8%B7%83%E6%8C%87%E6%A0%87">活跃指标</a></li>
+<li><a href="#%E4%BA%A7%E5%87%BA%E6%8C%87%E6%A0%87">产出指标</a></li>
+</ul>
+</li>
+<li><a href="#%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90">用户行为分析</a><ul>
+<li><a href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95-1-2-4-6">常用方法 [1] [2] [4] [6]</a></li>
+</ul>
+</li>
+<li><a href="#%E6%BC%8F%E6%96%97%E6%A8%A1%E5%9E%8B%E5%88%86%E6%9E%90">漏斗模型分析</a><ul>
+<li><a href="#%E9%9C%80%E6%B1%82%E5%9C%BA%E6%99%AF-9">需求场景 [9]</a></li>
+<li><a href="#%E6%BC%8F%E6%96%97%E7%B1%BB%E5%9E%8B">漏斗类型</a></li>
+<li><a href="#%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B">整体流程</a></li>
+<li><a href="#aarrr%E6%BC%8F%E6%96%97%E6%A8%A1%E5%9E%8B-1-3">AARRR漏斗模型 [1] [3]</a></li>
+</ul>
+</li>
+<li><a href="#%E8%B7%AF%E5%BE%84%E5%88%86%E6%9E%90">路径分析</a><ul>
+<li><a href="#%E8%BD%AC%E5%8C%96%E7%8E%87%E8%AE%A1%E7%AE%97">转化率计算</a></li>
+</ul>
+</li>
+<li><a href="#%E9%87%87%E9%9B%86%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%95%B0%E6%8D%AE-2">采集用户行为数据 [2]</a><ul>
+<li><a href="#%E5%B9%B3%E5%8F%B0%E8%AE%BE%E7%BD%AE%E5%9F%8B%E7%82%B9-6-10">平台设置埋点 [6] [10]</a></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E6%96%B9%E7%BB%9F%E8%AE%A1%E5%B7%A5%E5%85%B7">第三方统计工具</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+
+
+<h1><span id="架构-5">架构 [5]</span><a href="#架构-5" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/09/15/userBehaviorAnalysis/arch.jpg" class>
+
+<p>图中底层蓝色的部分是数据处理计算部分，依托于存储与计算分离的特性以及预计算能力， 很好地满足在海量数据场景下的数据高效计算能力。同时提供了完善的企业级平台运维处理能力，支持多种架构满足各类客户的场景需求。</p>
+<p>往上，通过多维数据模型框架，对用户基础数据进行语义分类和转化，提供多种维度分类的数据主题模型。基于这些数据主题模型，就可以直接对接应用分析端进行常用的事件分析，漏斗分析，留存分析。</p>
+<h1><span id="完整链路-4">完整链路 [4]</span><a href="#完整链路-4" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/09/15/userBehaviorAnalysis/flow.jpg" class>
+
+<p>埋点 -&gt; 使用app -&gt; 数据上报 -&gt; 数据模型 -&gt; 行为分析 </p>
+<h1><span id="指标-2">指标 [2]</span><a href="#指标-2" class="header-anchor">#</a></h1><h3><span id="粘性指标">粘性指标</span><a href="#粘性指标" class="header-anchor">#</a></h3><ul>
+<li>关注用户周期内持续访问的情况<br>新用户数与比例、活跃用户数与比例、用户转化率、用户留存率、用户流失率、用户访问率</li>
+</ul>
+<h3><span id="活跃指标">活跃指标</span><a href="#活跃指标" class="header-anchor">#</a></h3><ul>
+<li>用户访问的参与度<br>活跃用户、新增用户、回访用户、流失用户、平均停留时长、使用频率</li>
+</ul>
+<h3><span id="产出指标">产出指标</span><a href="#产出指标" class="header-anchor">#</a></h3><ul>
+<li>用户创造的直接价值输出<br>页面浏览数PV、独立访客数UV、点击次数、消费频次、消费金额</li>
+</ul>
+<h1><span id="用户行为分析">用户行为分析</span><a href="#用户行为分析" class="header-anchor">#</a></h1><h3><span id="常用方法-1-2-4-6">常用方法 [1] [2] [4] [6]</span><a href="#常用方法-1-2-4-6" class="header-anchor">#</a></h3><ul>
+<li><p>动作分析</p>
+<ul>
+<li>行为事件分析</li>
+<li>页面点击分析</li>
+</ul>
+</li>
+<li><p>转化分析</p>
+<ul>
+<li><strong>漏斗模型分析</strong> [7] [9]</li>
+<li><strong>用户行为路径分析</strong> [7][11]</li>
+</ul>
+</li>
+<li><p>用户分析</p>
+<ul>
+<li><strong>用户留存分析</strong> [7] [8]</li>
+<li><strong>用户分群分析</strong><br>用户画像（基本属性、用户偏好、生活习惯、用户行为等）的标签信息将用户分群</li>
+</ul>
+</li>
+<li><p>福格模型分析</p>
+</li>
+</ul>
+<img src="/www6vHomeHexo/2022/09/15/userBehaviorAnalysis/application.jpg" class>
+
+
+<h1><span id="漏斗模型分析">漏斗模型分析</span><a href="#漏斗模型分析" class="header-anchor">#</a></h1><h3><span id="需求场景-9">需求场景 [9]</span><a href="#需求场景-9" class="header-anchor">#</a></h3><p>定位用户流失具体原因</p>
+<p>针对不同版本，转化率情况对比</p>
+<p>检测某个专题活动效果</p>
+<h3><span id="漏斗类型">漏斗类型</span><a href="#漏斗类型" class="header-anchor">#</a></h3><p>无序漏斗：在漏斗的周期内，不限定漏斗多个步骤之间事件发生的顺序。<br>有序漏斗：在漏斗的周期内，严格限定漏斗每个步骤之间的发生顺序。</p>
+<h3><span id="整体流程">整体流程</span><a href="#整体流程" class="header-anchor">#</a></h3><ul>
+<li>确定转化路径</li>
+<li>分析流失原因</li>
+<li>优化关键因子</li>
+</ul>
+<h3><span id="aarrr漏斗模型-1-3">AARRR漏斗模型 [1] [3]</span><a href="#aarrr漏斗模型-1-3" class="header-anchor">#</a></h3><ul>
+<li>实现用户增长的5个指标<ul>
+<li>Acquisition（获取）：指的是用户从各种渠道进入产品的过程。</li>
+<li>Activation（激活）：指的是用户开始使用产品，并完成核心操作的过程。</li>
+<li>Retention（留存）：指的是用户在完成激活后，继续使用产品，并形成一定程度的用户粘性。</li>
+<li>Revenue（收入）：指的是用户在使用产品后，产生的实际收益。</li>
+<li>Referral（自传播）：指的是用户在使用产品后，愿意将产品推荐给他人，形成口碑和自然增长。</li>
+</ul>
+</li>
+</ul>
+<h1><span id="路径分析">路径分析</span><a href="#路径分析" class="header-anchor">#</a></h1><h3><span id="转化率计算">转化率计算</span><a href="#转化率计算" class="header-anchor">#</a></h3><p>页面转化率<br>路径转化率</p>
+<h1><span id="采集用户行为数据-2">采集用户行为数据 [2]</span><a href="#采集用户行为数据-2" class="header-anchor">#</a></h1><h3><span id="平台设置埋点-6-10">平台设置埋点 [6] [10]</span><a href="#平台设置埋点-6-10" class="header-anchor">#</a></h3><h3><span id="第三方统计工具">第三方统计工具</span><a href="#第三方统计工具" class="header-anchor">#</a></h3><p>国内： 百度统计,  CNZZ统计,  GrowingIO,  诸葛IO,  神策IO,  友盟<br>国外：Google Analytics,   Thinking Analytics, Mixpanel, Heap </p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://blog.csdn.net/Sake360/article/details/120350080">用户行为分析</a></li>
+<li><a href="https://baijiahao.baidu.com/s?id=1653670195355016641&wfr=spider&for=pc">用户研究：如何做用户行为分析？</a></li>
+<li><a href="https://blog.csdn.net/WindyQCF/article/details/123911538">万字详解用户行为分析</a></li>
+<li><a href="https://baijiahao.baidu.com/s?id=1663323869315685791&wfr=spider&for=pc">用户行为分析是什么？怎么做？</a></li>
+<li><a href="https://www.infoq.cn/article/xZYe1DUopNA9CzLwau3O">数十亿用户数据，上千个用户标签维度，用户分析怎么做？</a> ***<br><a href="https://mp.weixin.qq.com/s?__biz=MzIyNTIyNTYwOA==&mid=2651010996&idx=1&sn=f7ba207a991d595036a11fc3b6797bac">活动回顾 | 数十亿用户数据，上千个用户标签维度，用户分析怎么做？</a>  kylin</li>
+<li><a href="https://www.infoq.cn/article/yGOh38XjpYdTKMJjzjoH">如何实现用户行为的动态采集与分析</a></li>
+<li><a href="https://www.infoq.cn/article/ecmRgdfrjFl1U3hAd59b">如何基于 Apache Doris 构建简易高效的用户行为分析平台？</a><br><a href="https://www.infoq.cn/article/SoCIclCLD8f4vSzLB4dX">如何基于 Apache Doris 构建简易高效的用户行为分析平台？</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzI4NjY4MTU5Nw==&mid=2247490504&idx=1&sn=9827b136fa5cfc81467cb1b795f7bc41">用户行为分析模型实践（一）—— 路径分析模型</a>  vivo</li>
+<li><a href="https://xie.infoq.cn/article/f305ea8be1935540432aca0d0">用户行为分析模型实践（二）—— 漏斗分析模型</a>  vivo</li>
+<li><a href="https://xie.infoq.cn/article/1163e5781f37b4e55a2c43c70">用户行为分析模型实践（三）——H5 通用分析模型</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247486360&idx=1&sn=85504543498dfc82e5e720b77faa602d">基于Spark的用户行为路径分析的产品化实践</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>用户行为分析</category>
+      </categories>
+      <tags>
+        <tag>用户行为分析</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Golang 学习资源</title>
     <url>/www6vHomeHexo/2022/09/09/golangStudy/</url>
     <content><![CDATA[<p></p>
@@ -3068,6 +3380,200 @@
       </categories>
       <tags>
         <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>大数据 调度</title>
+    <url>/www6vHomeHexo/2022/09/08/bigDataSchedule/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<ul>
+<li><p>Airflow</p>
+</li>
+<li><p>DolphinScheduler</p>
+</li>
+<li><p>Azkaban</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>计算</category>
+        <category>调度</category>
+      </categories>
+      <tags>
+        <tag>调度</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>大数据 元数据管理</title>
+    <url>/www6vHomeHexo/2022/09/08/bigDataMetaMgt/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<ul>
+<li><p>Apache  Atlas<br>HortonWorks<br>管理Hadoop项目里面的元数据</p>
+</li>
+<li><p>datahub<br>Linkedin开源<br>The Metadata Platform for the Modern Data Stack</p>
+</li>
+<li><p>Amundsen<br>Lyft 开源<br>致力于成为现代数据栈中的数据目录产品</p>
+</li>
+<li><p>Metacat<br>Netflix开源</p>
+</li>
+<li><p>OpenMetadata</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>存储</category>
+        <category>元数据</category>
+      </categories>
+      <tags>
+        <tag>元数据</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Clickhouse</title>
+    <url>/www6vHomeHexo/2022/09/07/clickhouse/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h1><span id="数据库引擎">数据库引擎</span><a href="#数据库引擎" class="header-anchor">#</a></h1><p>默认情况下，ClickHouse使用<strong>Atomic</strong>数据库引擎</p>
+<ul>
+<li><a href="https://clickhouse.com/docs/zh/engines/database-engines/mysql">MySQL</a></li>
+<li><a href="https://clickhouse.com/docs/zh/engines/database-engines/materialized-mysql">MaterializeMySQL</a></li>
+<li><a href="https://clickhouse.com/docs/zh/engines/database-engines/lazy">Lazy</a></li>
+<li><a href="https://clickhouse.com/docs/zh/engines/database-engines/atomic">Atomic</a></li>
+<li><a href="https://clickhouse.com/docs/zh/engines/database-engines/postgresql">PostgreSQL</a></li>
+<li><a href="https://clickhouse.com/docs/zh/engines/database-engines/materialized-postgresql">MaterializedPostgreSQL</a></li>
+<li><a href="https://clickhouse.com/docs/zh/engines/database-engines/replicated">Replicated</a></li>
+<li><a href="https://clickhouse.com/docs/zh/engines/database-engines/sqlite">SQLite</a></li>
+</ul>
+<h1><span id="表引擎">表引擎</span><a href="#表引擎" class="header-anchor">#</a></h1><h2><span id="mergetree">MergeTree</span><a href="#mergetree" class="header-anchor">#</a></h2><ul>
+<li><a href="https://clickhouse.com/docs/zh/engines/table-engines/mergetree-family/mergetree#mergetree">MergeTree</a></li>
+<li><a href="https://clickhouse.com/docs/zh/engines/table-engines/mergetree-family/replacingmergetree#replacingmergetree">ReplacingMergeTree</a></li>
+<li><a href="https://clickhouse.com/docs/zh/engines/table-engines/mergetree-family/summingmergetree#summingmergetree">SummingMergeTree</a></li>
+<li><a href="https://clickhouse.com/docs/zh/engines/table-engines/mergetree-family/aggregatingmergetree#aggregatingmergetree">AggregatingMergeTree</a></li>
+<li><a href="https://clickhouse.com/docs/zh/engines/table-engines/mergetree-family/collapsingmergetree#table_engine-collapsingmergetree">CollapsingMergeTree</a></li>
+<li><a href="https://clickhouse.com/docs/zh/engines/table-engines/mergetree-family/versionedcollapsingmergetree#versionedcollapsingmergetree">VersionedCollapsingMergeTree</a></li>
+<li><a href="https://clickhouse.com/docs/zh/engines/table-engines/mergetree-family/graphitemergetree#graphitemergetree">GraphiteMergeTree</a></li>
+</ul>
+<h2><span id="日志">日志</span><a href="#日志" class="header-anchor">#</a></h2><ul>
+<li><a href="https://clickhouse.com/docs/zh/engines/table-engines/log-family/tinylog#tinylog">TinyLog</a></li>
+<li><a href="https://clickhouse.com/docs/zh/engines/table-engines/log-family/stripelog#stripelog">StripeLog</a></li>
+<li><a href="https://clickhouse.com/docs/zh/engines/table-engines/log-family/log#log">Log</a></li>
+</ul>
+<h2><span id="集成引擎">集成引擎</span><a href="#集成引擎" class="header-anchor">#</a></h2><ul>
+<li><a href="https://clickhouse.com/docs/zh/engines/table-engines/integrations/kafka#kafka">Kafka</a></li>
+<li><a href="https://clickhouse.com/docs/zh/engines/table-engines/integrations/mysql#mysql">MySQL</a></li>
+<li><a href="https://clickhouse.com/docs/zh/engines/table-engines/integrations/odbc#table-engine-odbc">ODBC</a></li>
+<li><a href="https://clickhouse.com/docs/zh/engines/table-engines/integrations/jdbc#table-engine-jdbc">JDBC</a></li>
+<li><a href="https://clickhouse.com/docs/zh/engines/table-engines/integrations/hdfs#hdfs">HDFS</a></li>
+</ul>
+<h2><span id="用于其他特定功能的引擎">用于其他特定功能的引擎</span><a href="#用于其他特定功能的引擎" class="header-anchor">#</a></h2><ul>
+<li><p><a href="https://clickhouse.com/docs/zh/engines/table-engines/special/distributed#distributed">Distributed</a></p>
+</li>
+<li><p><a href="https://clickhouse.com/docs/zh/engines/table-engines/special/materializedview#materializedview">MaterializedView</a></p>
+</li>
+</ul>
+<h1><span id="主键索引-3">主键索引 [3]</span><a href="#主键索引-3" class="header-anchor">#</a></h1><h1><span id="稀疏索引-4">稀疏索引 [4]</span><a href="#稀疏索引-4" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><p><a href="https://clickhouse.com/docs/zh/engines/database-engines">数据库引擎</a></p>
+</li>
+<li><p><a href="https://clickhouse.com/docs/zh/engines/table-engines">表引擎</a></p>
+</li>
+<li><p><a href="https://clickhouse.com/docs/zh/guides/best-practices">ClickHouse主键索引最佳实践</a></p>
+</li>
+<li><p><a href="https://clickhouse.com/docs/zh/guides/improving-query-performance/skipping-indexes">深入理解ClickHouse跳数索引</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/wmq880204/article/details/124224992">ClickHouse 深度解析第二篇</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/98135840">ClickHouse深度揭秘</a></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>存储</category>
+        <category>Clickhouse</category>
+      </categories>
+      <tags>
+        <tag>Clickhouse</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Iceberg</title>
+    <url>/www6vHomeHexo/2022/09/01/iceberg/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+
+<h2><span id="特性-1-2">特性 [1] [2]</span><a href="#特性-1-2" class="header-anchor">#</a></h2><ul>
+<li><p>基于快照的读写分离和回溯</p>
+<ul>
+<li><strong>快照控制</strong>：可实现使用完全相同的表快照的可重复查询，或者使用户轻松检查更改</li>
+<li><strong>Time Travel</strong> </li>
+<li><strong>行级更新</strong>  [4]<br>V1版本-Copy On Write（COW）模式<br>V2版本-Copy On Write，还增加了Merge On Read（MOR）</li>
+</ul>
+</li>
+<li><p>流批统一的写入和读取</p>
+<ul>
+<li>兼容性好：可以存储在任意的云存储系统和HDFS中</li>
+<li>快速扫描数据：无需使用分布式SQL引擎即可读取表或查找文件</li>
+<li>数据修剪优化：使用表元数据使用分区和列级统计信息修剪数据文件</li>
+</ul>
+</li>
+<li><p>ACID 语义及数据多版本</p>
+<ul>
+<li>支持<strong>事务</strong>：序列化隔离,表更改是原子性的，读者永远不会看到部分更改或未提交的更改</li>
+<li>高并发：<strong>高并发写入</strong>器使用乐观并发，即使写入冲突，也会重试以确保兼容更新成功</li>
+<li><strong>版本回滚 Version rollback</strong>：使用户可以通过将表重置为良好状态来快速纠正问题</li>
+</ul>
+</li>
+<li><p>表, 模式及分区的变更</p>
+<ul>
+<li><strong>模式演化 Schema evolution</strong>：支持添加，删除，更新或重命名，并且没有副作用</li>
+<li><strong>隐藏分区 Hidden Partition</strong>：可以防止导致错误提示或非常慢查询的用户错误</li>
+<li><strong>分区布局演变 Partition layout evolution</strong>：可以随着数据量或查询模式的变化而更新表的布局</li>
+</ul>
+</li>
+<li><p>不强绑定计算存储引擎</p>
+</li>
+</ul>
+<h2><span id="整体架构-3">整体架构 [3]</span><a href="#整体架构-3" class="header-anchor">#</a></h2><ul>
+<li>数据<br>普通的 Parquet 文件</li>
+<li>元数据<ul>
+<li>catalog<br>version-hint.txt 文件 	</li>
+<li>metadata file<br>json 文件</li>
+<li>manifestlist file  [snapshot]<br>以 snap- 开头的 avro 文件	</li>
+<li>manifest file<br>16db143c,18ce4c4a 开头的 avro 文件</li>
+</ul>
+</li>
+</ul>
+<h2><span id="读写过程">读写过程</span><a href="#读写过程" class="header-anchor">#</a></h2><ul>
+<li>读写</li>
+<li>增量读</li>
+<li>实时小文件合并</li>
+</ul>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li><a href="https://zhuanlan.zhihu.com/p/347660549">Flink + Iceberg 全场景实时数仓的建设实践</a>  腾讯数据平台</li>
+<li><a href="https://cloud.tencent.com/developer/article/2290397">5分钟入门数据湖IceBerg</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/488467438">Iceberg 原理分析</a></li>
+<li><a href="https://z.itpub.net/article/detail/7B5B8C89CC5244F94A0C5FDF7DC83DFB">数据湖Iceberg技术在小米的落地与场景应用</a></li>
+</ol>
+<p><a href="https://zhuanlan.zhihu.com/p/636273850">Iceberg实时湖仓数据分析性能优化</a><br><a href="https://blog.csdn.net/weixin_46399686/article/details/131308217">火山引擎 Iceberg 数据湖的应用与实践</a><br><a href="https://mp.weixin.qq.com/s?__biz=MzI1MjQ2OTQ3Ng==&mid=2247562593&idx=2&sn=a41a5202c21118b1f17619a80eff651f">陈梁：腾讯数据湖查询优化实践 </a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/110748218">深度对比delta、iceberg和hudi三大开源数据湖方案</a>  ***<br><a href="https://baijiahao.baidu.com/s?id=1776240000826938540&wfr=spider&for=pc">Apache Iceberg 在严选批流一体的实践</a></p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>存储</category>
+        <category>Iceberg</category>
+      </categories>
+      <tags>
+        <tag>Kubernetes</tag>
       </tags>
   </entry>
   <entry>
@@ -3544,21 +4050,18 @@
 </tr>
 </tbody></table>
 <h1><span id="湖仓一体">湖仓一体</span><a href="#湖仓一体" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a href="https://aws.amazon.com/cn/big-data/datalakes-and-analytics/what-is-a-data-lake/">什么是数据湖？</a> AWS</li>
-<li><a href="https://zhuanlan.zhihu.com/p/523028640">[数据湖] 基于flink hudi的批流一体实践</a> 腾讯 未</li>
-<li><a href="https://tech.meituan.com/2021/08/26/data-warehouse-in-meituan-waimai.html">美团外卖实时数仓建设实践</a>  美团 未</li>
-<li><a href="https://developer.aliyun.com/article/706954">大数据架构如何做到流批一体？</a> 未</li>
-<li><a href="https://zhuanlan.zhihu.com/p/594928870">vivo 实时计算平台建设实践</a>  vivo 未</li>
+<li><p><a href="https://aws.amazon.com/cn/big-data/datalakes-and-analytics/what-is-a-data-lake/">什么是数据湖？</a> AWS</p>
+</li>
+<li><p><a href="https://developer.aliyun.com/article/706954">大数据架构如何做到流批一体？</a></p>
+</li>
 </ol>
 ]]></content>
       <categories>
         <category>大数据</category>
-        <category>计算</category>
-        <category>流式计算</category>
         <category>批流一体</category>
       </categories>
       <tags>
-        <tag>流式计算</tag>
+        <tag>批流一体</tag>
       </tags>
   </entry>
   <entry>
@@ -3601,11 +4104,12 @@
 
 
 <h1><span id="学习资料">学习资料</span><a href="#学习资料" class="header-anchor">#</a></h1><h3><span id="chatgpt">Chatgpt</span><a href="#chatgpt" class="header-anchor">#</a></h3><p><a href="https://time.geekbang.org/opencourse/videointro/100541101">ChatGPT 从 0 到 1</a>  基础<br><a href="https://time.geekbang.org/opencourse/videointro/100541201">ChatGPT 和预训练模型实战课</a> </p>
+<h3><span id="大模型">大模型</span><a href="#大模型" class="header-anchor">#</a></h3><p><a href="https://shimo.im/docs/47kgM6NewnSO613V">尚硅谷×极客时间《AI 大模型实战训练营》大纲</a><br><a href="https://shimo.im/docs/XKq42v7061SxZ2AN/read">AI 大模型应用开发实战营1期大纲</a><br><a href="https://agiclass.feishu.cn/docx/DDzxdQZBooXw9Jx4DdWcLZjLnHd">《AI 大模型全栈工程师》课程表（第 02 期） </a></p>
 <h3><span id="code">Code</span><a href="#code" class="header-anchor">#</a></h3><p><a href="https://time.geekbang.org/opencourse/videointro/100540901">GitHub Copilot 实践课</a></p>
 ]]></content>
       <categories>
         <category>AI</category>
-        <category>chatgpt</category>
+        <category>gpt</category>
       </categories>
       <tags>
         <tag>AI</tag>
@@ -4477,6 +4981,7 @@
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://xie.infoq.cn/article/b3adcb53fb87e66a613326f19">最佳实践｜如何写出简单高效的 Flink SQL？</a></li>
 <li><a href="https://baijiahao.baidu.com/s?id=1709543568363038743">深入分析 Flink SQL 工作机制</a><br><a href="https://blog.csdn.net/weixin_44904816/article/details/106678639">深入分析 Flink SQL 工作机制</a></li>
+<li><a href="https://flink.apache.org/2020/07/28/flink-sql-demo-building-an-end-to-end-streaming-application/">Flink SQL Demo: Building an End-to-End Streaming Application</a>   做过</li>
 </ol>
 ]]></content>
       <categories>
@@ -4490,22 +4995,194 @@
       </tags>
   </entry>
   <entry>
-    <title>Flink 实时数仓</title>
-    <url>/www6vHomeHexo/2022/07/18/flinkRealtimeWarehouse/</url>
+    <title>实时数仓</title>
+    <url>/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://xie.infoq.cn/article/3c80a350e06d88e85d34f4008">美团买菜基于 Flink 的实时数仓建设</a><br><a href="https://xie.infoq.cn/article/acf64bbe900ec426b8699f094">小米基于 Flink 的实时数仓建设实践</a></p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E6%9E%B6%E6%9E%84">架构</a><ul>
+<li><a href="#%E5%8F%82%E8%80%83%E6%9E%B6%E6%9E%84">参考架构</a><ul>
+<li><a href="#%E5%8F%82%E8%80%83%E6%9E%B6%E6%9E%84-%E5%BF%AB%E6%89%8B-%E5%9F%BA%E4%BA%8Ekafkahive-lambda%E6%9E%B6%E6%9E%84-6">参考架构-快手 基于Kafka+Hive-Lambda架构   [6]</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%9E%B6%E6%9E%84-vivo-%E5%9F%BA%E4%BA%8Ehudi-%E6%89%B9%E6%B5%81%E4%B8%80%E4%BD%93%E6%9E%B6%E6%9E%84-4">参考架构-vivo 基于Hudi-批流一体架构   [4]</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%9E%B6%E6%9E%84-%E8%85%BE%E8%AE%AF-%E5%9F%BA%E4%BA%8Ehudi-%E6%89%B9%E6%B5%81%E4%B8%80%E4%BD%93%E6%9E%B6%E6%9E%84-3">参考架构-腾讯 基于Hudi-批流一体架构 [3]</a></li>
+<li><a href="#%E7%BE%8E%E5%9B%A2-%E5%9F%BA%E4%BA%8Edoris-1">美团 基于Doris [1]</a></li>
+</ul>
+</li>
+<li><a href="#%E7%97%9B%E7%82%B9-5">痛点 [5]</a><ul>
+<li><a href="#%E4%BC%A0%E7%BB%9F-t1-%E4%BB%BB%E5%8A%A1">传统 T+1 任务</a></li>
+<li><a href="#lambda-%E6%9E%B6%E6%9E%84%E7%97%9B%E7%82%B9">Lambda 架构痛点</a></li>
+<li><a href="#kappa-%E6%9E%B6%E6%9E%84%E7%97%9B%E7%82%B9">Kappa 架构痛点</a></li>
+</ul>
+</li>
+<li><a href="#tradeoff-%E6%80%BB%E7%BB%93-5">Tradeoff 总结 [5]</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E6%97%B6%E6%95%B0%E4%BB%93-%E5%88%86%E5%B1%82-1">实时数仓-分层 [1]</a><ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E6%BA%90-ods">数据源 ODS</a></li>
+<li><a href="#%E6%98%8E%E7%BB%86%E5%B1%82-dmd">明细层 DMD</a></li>
+<li><a href="#%E6%B1%87%E6%80%BB%E5%B1%82-dms">汇总层 DMS</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E6%97%B6%E6%95%B0%E4%BB%93-%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B-1">实时数仓-构建流程 [1]</a></li>
+<li><a href="#%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1">数仓建模</a><ul>
+<li><a href="#%E4%BA%8B%E5%AE%9E%E8%A1%A8-2">事实表 [2]</a></li>
+<li><a href="#%E7%BB%B4%E5%BA%A6%E8%A1%A8-dim-2">维度表 DIM [2]</a></li>
+<li><a href="#%E7%BB%B4%E5%BA%A6%E5%85%B3%E8%81%94-6">维度关联 [6]</a></li>
+<li><a href="#ads-%E5%B1%82-%E4%BB%A5%E7%AA%97%E5%8F%A3%E4%B8%BA%E6%A0%B8%E5%BF%83%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-6">ADS 层 - 以窗口为核心的解决方案 [6]</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="架构">架构</span><a href="#架构" class="header-anchor">#</a></h1><h3><span id="参考架构">参考架构</span><a href="#参考架构" class="header-anchor">#</a></h3><h5><span id="参考架构-快手-基于kafkahive-lambda架构-6">参考架构-快手 基于Kafka+Hive-Lambda架构   [6]</span><a href="#参考架构-快手-基于kafkahive-lambda架构-6" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/kuaishou-arch.jpg" class>
+
+
+<h5><span id="参考架构-vivo-基于hudi-批流一体架构-4">参考架构-vivo 基于Hudi-批流一体架构   [4]</span><a href="#参考架构-vivo-基于hudi-批流一体架构-4" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/vivo-arch.jpg" class>
+
+
+<h5><span id="参考架构-腾讯-基于hudi-批流一体架构-3">参考架构-腾讯 基于Hudi-批流一体架构 [3]</span><a href="#参考架构-腾讯-基于hudi-批流一体架构-3" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/tencent-arch.jpg" class>
+
+<h5><span id="美团-基于doris-1">美团 基于Doris [1]</span><a href="#美团-基于doris-1" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/arch.png" class>
+
+<img src="/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/arch1.png" class>
+
+<h3><span id="痛点-5">痛点 [5]</span><a href="#痛点-5" class="header-anchor">#</a></h3><h5><span id="传统-t1-任务">传统 T+1 任务</span><a href="#传统-t1-任务" class="header-anchor">#</a></h5><ul>
+<li>海量的TB级 T+ 1 任务延迟导致下游数据产出时间不稳定。</li>
+<li>任务遇到故障重试恢复代价昂贵</li>
+<li>数据架构在处理去重和 exactly-once语义能力方面比较吃力</li>
+<li>架构复杂，涉及多个系统协调，靠调度系统来构建任务依赖关系</li>
+</ul>
+<h5><span id="lambda-架构痛点">Lambda 架构痛点</span><a href="#lambda-架构痛点" class="header-anchor">#</a></h5><ul>
+<li>同时维护<strong>实时平台和离线平台两套引擎</strong>，运维成本高</li>
+<li>实时离线两个平台需要维护两套框架不同但业务逻辑相同代码，开发成本高</li>
+<li>数据有两条不同链路，<strong>容易造成数据的不一致性</strong></li>
+<li><strong>数据更新成本大</strong>，需要重跑链路</li>
+</ul>
+<h5><span id="kappa-架构痛点">Kappa 架构痛点</span><a href="#kappa-架构痛点" class="header-anchor">#</a></h5><ul>
+<li>对消息队列存储要求高，<strong>消息队列的回溯能力不及离线存储</strong></li>
+<li><strong>消息队列本身对数据存储有时效性</strong>，<strong>且当前无法使用 OLAP 引擎直接分析消息队列中的数据</strong></li>
+<li>全链路依赖消息队列的实时计算可能因为<strong>数据的时序性</strong>导致结果不正确</li>
+</ul>
+<h3><span id="tradeoff-总结-5">Tradeoff   总结 [5]</span><a href="#tradeoff-总结-5" class="header-anchor">#</a></h3><p>总的来说，数据湖 替换 Kafka 的<strong>优势</strong>主要包括：</p>
+<ul>
+<li>实现存储层的<strong>流批统一</strong></li>
+<li><strong>中间层支持 OLAP 分析</strong></li>
+<li>完美支持高效<strong>回溯</strong></li>
+<li>存储成本降低</li>
+</ul>
+<p>当然，也存在一定的<strong>缺陷</strong>，如：</p>
+<ul>
+<li>数据延迟从<strong>实时</strong>变成<strong>近实时</strong></li>
+<li>对接其他数据系统需要额外开发工作</li>
+</ul>
+<h1><span id="实时数仓-分层-1">实时数仓-分层 [1]</span><a href="#实时数仓-分层-1" class="header-anchor">#</a></h1><h3><span id="数据源-ods">数据源  ODS</span><a href="#数据源-ods" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/basic.png" class>
+
+
+
+<h3><span id="明细层-dmd">明细层 DMD</span><a href="#明细层-dmd" class="header-anchor">#</a></h3><ul>
+<li>目的是给下游提供直接可用的数据</li>
+<li>要对基础层进行统一的加工，比如清洗、过滤、扩维等</li>
+<li>按照主题进行管理</li>
+</ul>
+<h3><span id="汇总层-dms">汇总层 DMS</span><a href="#汇总层-dms" class="header-anchor">#</a></h3><ul>
+<li>所有的指标都统一在汇总层加工</li>
+<li>汇总指标池<br>按照统一的规范管理建设，形成可复用的汇总结果</li>
+</ul>
+<h1><span id="实时数仓-构建流程-1">实时数仓-构建流程 [1]</span><a href="#实时数仓-构建流程-1" class="header-anchor">#</a></h1><ul>
+<li><p>搭框架<br>数据建设的层次化</p>
+</li>
+<li><p>定规范<br>每一层加工到什么程度，每一层用什么样的方式</p>
+</li>
+<li><p>时效性<br>设计的时候，层次不能太多</p>
+</li>
+</ul>
+<h1><span id="数仓建模">数仓建模</span><a href="#数仓建模" class="header-anchor">#</a></h1><h3><span id="事实表-2">事实表  [2]</span><a href="#事实表-2" class="header-anchor">#</a></h3><ul>
+<li>事务事实表   </li>
+<li>周期快照事实表 </li>
+<li>累积快照事实表</li>
+</ul>
+<h3><span id="维度表-dim-2">维度表 DIM [2]</span><a href="#维度表-dim-2" class="header-anchor">#</a></h3><ul>
+<li><p>类型</p>
+<ul>
+<li>星型模型<br>维表只和事实表关联，维表之间没有关联，查询性能好，但冗余度高<br>一般而言，我们都使用星型模型。</li>
+<li>雪花模型<br>雪花模型是星型模式中的维度表进行规范化处理，进一步分解到附加表（维表）中冗余度小，但是查询性能差。<br>将一个维表拆成核心表和拓展表</li>
+</ul>
+</li>
+<li><p>存储</p>
+<ul>
+<li>HBase</li>
+<li>Redis</li>
+<li>MySQL</li>
+</ul>
+</li>
+</ul>
+<h3><span id="维度关联-6">维度关联 [6]</span><a href="#维度关联-6" class="header-anchor">#</a></h3><p>在 DWD 层的实战中，DWD 表需要进行<strong>维度扩展</strong>是非常常见的需求。在我们的实战中，维表扩展会基于维表的具体情况选择不同的关联方式。</p>
+<ul>
+<li>在大多数情况下<strong>维表变化比较稳定</strong>，我们会选择借助<strong>第三方 KV 存储</strong>，使用 UDF 直接访问 KV 存储来实现维表扩展。但在选择第三方 KV 存储时，当维表内容特别大时选择 kiwi、当 QPS 较高时选择 Kcatch。</li>
+<li>当<strong>维表变化频繁且对时效性要求较高时</strong>，<strong>选择 interval join</strong>。借助 interval 时间范围的特性来达到合理控制状态大小的目的。</li>
+<li>当<strong>维表关联逻辑比较复杂</strong>，为了任务的稳定性和扩展性，我们会<strong>通过自定义维表进行关联</strong>，手动维护状态管理的过程，实现 DWD 维表的扩展。</li>
+</ul>
+<p>实时数仓的 <strong>DWS 层只有在数据量特别大且聚合后的数据量有明显减少的场景下才会构建</strong>。<strong>如果 DWD 层的 QPS 比较小，一般会直接省去 DWS 层的建设</strong>。这样的做法不仅可以保证数据的<strong>及时性</strong>，同时也<strong>缩短了指标产出的链路</strong>，进而保证了任务的稳定性。</p>
+<h3><span id="ads-层-以窗口为核心的解决方案-6">ADS 层 - 以窗口为核心的解决方案 [6]</span><a href="#ads-层-以窗口为核心的解决方案-6" class="header-anchor">#</a></h3><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>窗口</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>在针对当日累计的场景，即要求每分钟实时产出从当天 0 点开始到当前统计时间分钟截止的总指标值的需求，</td>
+<td>cumulate window。</td>
+</tr>
+<tr>
+<td>针对活动累计场景，即活动一般会持续 n 天，则需求要求每分钟实时产出从活动开始到当前统计时刻为止的总指标值。</td>
+<td>infinity_cumulate window。</td>
+</tr>
+<tr>
+<td>在针对分布类的指标需求时，即需求指标会随着时间的推移出现波动。同一粒度下我们需先拿到最新的数据状态，再进行下一步汇总的统计。</td>
+<td>unbounded+infinity_cumulate window。</td>
+</tr>
+<tr>
+<td>在针对单直播间累计的场景下，</td>
+<td>dynamic_cumulate。</td>
+</tr>
+</tbody></table>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://tech.meituan.com/2021/08/26/data-warehouse-in-meituan-waimai.html">美团外卖实时数仓建设实践</a>  美团 </li>
+<li><a href="https://notomato.blog.csdn.net/article/details/110635856">一篇文章搞懂数据仓库：三种事实表（设计原则，设计方法、对比）</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/523028640">[数据湖] 基于flink hudi的批流一体实践</a> 腾讯  </li>
+<li><a href="https://zhuanlan.zhihu.com/p/594928870">vivo 实时计算平台建设实践</a>  vivo </li>
+<li><a href="https://zhuanlan.zhihu.com/p/347660549">Flink + Iceberg 全场景实时数仓的建设实践</a>  腾讯数据平台</li>
+</ol>
+<ul>
+<li><a href="https://flink-learning.org.cn/activity/detail/9075f73ecfd2b87c6c7fbe7d79ad58ca">FFA 2022 实时湖仓</a>  ***<ul>
+<li><a href="https://xie.infoq.cn/article/3c80a350e06d88e85d34f4008">美团买菜基于 Flink 的实时数仓建设</a>  未</li>
+<li><ol start="6">
+<li><a href="https://flink-learning.org.cn/article/detail/de3aa90d2f02195e65e721c1f2a434e1">快手基于 Apache Flink 的实时数仓建设实践</a>  ***</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><a href="https://flink-learning.org.cn/activity/detail/d3d092c45467c40fb8526c4ec2141be2">FFA 2022 平台建设</a>  ***<ul>
+<li><a href="https://xie.infoq.cn/article/acf64bbe900ec426b8699f094">小米基于 Flink 的实时数仓建设实践</a> 未</li>
+</ul>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>大数据</category>
-        <category>计算</category>
-        <category>流式计算</category>
-        <category>flink</category>
+        <category>实时数仓</category>
       </categories>
       <tags>
-        <tag>流式计算</tag>
+        <tag>实时数仓</tag>
       </tags>
   </entry>
   <entry>
@@ -4940,7 +5617,7 @@
 <h3><span id="故障检测和副本提升">故障检测和副本提升</span><a href="#故障检测和副本提升" class="header-anchor">#</a></h3><p>  Redis集群使用心跳包和gossip协议来检测节点是否可达，并使用<strong>PFAIL和FAIL</strong>两种标志来表示故障状态。当一个主节点被大多数主节点标记为FAIL时，它的一个副本会发起选举并请求投票。如果获得了大多数主节点的授权，该副本会提升为主节点，并生成一个新的配置版本号（configEpoch）。</p>
 <h1><span id="副本选举和配置传播的机制bing">副本选举和配置传播的机制[bing]</span><a href="#副本选举和配置传播的机制bing" class="header-anchor">#</a></h1><h3><span id="副本选举">副本选举</span><a href="#副本选举" class="header-anchor">#</a></h3><p>  当一个主节点失效时，它的一个副本会尝试发起选举，向其他主节点发送授权请求。如果获得了大多数主节点的回复，它就赢得了选举，并获得了一个新的唯一的配置版本号（configEpoch）。它会开始以主节点的身份广播心跳包，并通知其他节点更新配置。</p>
 <h3><span id="配置传播">配置传播</span><a href="#配置传播" class="header-anchor">#</a></h3><p>  当一个节点收到一个心跳包或UPDATE消息时，它会根据一些规则来更新自己的哈希槽映射表。如果一个哈希槽是未分配的，或者有一个新的节点使用更高的configEpoch来声明它，那么接收者会将该哈希槽绑定到新的节点。这样可以保证最后一次故障转移胜出，并且所有节点最终会达成一致。</p>
-<h3><span id="节点重置和遗忘">节点重置和遗忘</span><a href="#节点重置和遗忘" class="header-anchor">#</a></h3><p>  当一个节点需要从一个集群中移除或加入到另一个集群时，可以使用CLUSTER RESET命令来重置它的状态。这个命令有两种模式：软重置和硬重置。软重置会保留当前的configEpoch，而硬重置会将其设置为0。当一个节点被移除后，其他节点需要使用CLUSTER FORGET命令来删除它在节点表中的条目，并设置一个60秒的禁止期，防止因为gossip协议而重新添加它。</p>
+<h3><span id="节点重置和遗忘">节点重置和遗忘</span><a href="#节点重置和遗忘" class="header-anchor">#</a></h3><p>  当一个节点需要从一个集群中移除或加入到另一个集群时，可以使用<strong>CLUSTER RESET</strong>命令来重置它的状态。这个命令有<strong>两种模式：软重置和硬重置</strong>。软重置会保留当前的configEpoch，而硬重置会将其设置为0。当一个节点被移除后，其他节点需要使用<strong>CLUSTER FORGET</strong>命令来删除它在节点表中的条目，并设置一个60秒的禁止期，防止因为gossip协议而重新添加它。</p>
 <h3><span id="发布订阅">发布订阅</span><a href="#发布订阅" class="header-anchor">#</a></h3><p>  Redis集群支持发布订阅功能，客户端可以向任何节点发送SUBSCRIBE或PUBLISH命令。集群会将发布的消息转发到所有其他节点。Redis 7.0及以后版本还支持分片发布订阅功能，其中分片频道根据与键相同的算法分配到哈希槽。分片消息必须发送到拥有该哈希槽的节点，集群会将发布的分片消息转发到该哈希槽所在的分片中的所有节点。</p>
 <h3><span id="crc16算法">CRC16算法</span><a href="#crc16算法" class="header-anchor">#</a></h3><p>  这篇文章最后给出了计算键对应哈希槽的CRC16算法的C语言实现代码。这个算法使用了1021作为多项式，并且不反转输入输出字节。</p>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://redis.io/docs/reference/cluster-spec/">Redis cluster specification</a> ***</p>
@@ -4955,7 +5632,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Chatgpt  Prompt-学术研究</title>
+    <title>gpt  Prompt-学术研究</title>
     <url>/www6vHomeHexo/2022/07/11/gptPromptResearch/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -4978,10 +5655,10 @@
 ]]></content>
       <categories>
         <category>AI</category>
-        <category>chatgpt</category>
+        <category>gpt</category>
       </categories>
       <tags>
-        <tag>chatgpt</tag>
+        <tag>gpt</tag>
       </tags>
   </entry>
   <entry>
@@ -7302,6 +7979,22 @@
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#kubectl-get-pod-%E8%BF%94%E5%9B%9E%E7%8A%B6%E6%80%81">kubectl get pod 返回状态</a></li>
+<li><a href="#%E8%BF%90%E8%90%A5%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98-%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%981">运营过程中出现的问题 - 权限问题[1]</a></li>
+<li><a href="#taint-%E5%92%8C-tolerance%E7%9A%84%E9%97%AE%E9%A2%98-4">taint 和 tolerance的问题 [4]</a></li>
+<li><a href="#%E5%85%B6%E4%BB%96">其他</a></li>
+<li><a href="#troubleshoot-calico-self">Troubleshoot - calico [self]</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
 <h2><span id="kubectl-get-pod-返回状态">kubectl get pod 返回状态</span><a href="#kubectl-get-pod-返回状态" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/06/08/k8sTroubleshoot/podStatus.png" class width="700" height="500" title="返回状态">
 
 
@@ -7549,7 +8242,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
-    <title>Redis Hotkey</title>
+    <title>Redis 热点Hotkey</title>
     <url>/www6vHomeHexo/2022/06/03/redisHotkey/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -9283,7 +9976,7 @@ MySQL MVCC 快照读 vs 当前读 </li>
       </tags>
   </entry>
   <entry>
-    <title>ChatGPT 总结</title>
+    <title>GPT 总结</title>
     <url>/www6vHomeHexo/2022/05/09/gpt/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -9294,6 +9987,11 @@ MySQL MVCC 快照读 vs 当前读 </li>
 
 <ul>
 <li><a href="#platform">Platform</a></li>
+<li><a href="#%E6%A8%A1%E5%9E%8B">模型</a><ul>
+<li><a href="#%E9%9D%9E%E5%BC%80%E6%BA%90">非开源</a></li>
+<li><a href="#%E5%BC%80%E6%BA%90">开源</a></li>
+</ul>
+</li>
 <li><a href="#tools-mix">Tools &amp; Mix</a></li>
 <li><a href="#%E7%BB%86%E5%88%86">细分</a><ul>
 <li><a href="#%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE">思维导图</a></li>
@@ -9312,8 +10010,10 @@ MySQL MVCC 快照读 vs 当前读 </li>
 
 <h1><span id="platform">Platform</span><a href="#platform" class="header-anchor">#</a></h1><ul>
 <li>国外<br><a href="https://poe.com/ChatGPT">Poe</a> ***</li>
-<li>国内<br><a href="https://saas.edu360.cn/system/chatgpt">实战云</a> gpt3.5  gpt4<br><a href="https://www.feijix.com/n/y0BnXI">ChatGPT使用指南！</a>   ***<br><a href="https://www.1888ai.com/base/chat">灵犀百通</a>  gpt3.5</li>
+<li>国内<br><a href="https://saas.edu360.cn/system/chatgpt">实战云</a> gpt3.5  gpt4<br><a href="https://www.feijix.com/n/y0BnXI">ChatGPT使用指南！</a>   ***<br><a href="https://www.1888ai.com/base/chat">灵犀百通</a>  gpt3.5<br><a href="https://gpt.91chat-ai.cn/chat">ChatGpt PLUS</a><br><a href="https://yiyan.baidu.com/">文心一言</a></li>
 </ul>
+<h1><span id="模型">模型</span><a href="#模型" class="header-anchor">#</a></h1><h3><span id="非开源">非开源</span><a href="#非开源" class="header-anchor">#</a></h3><p>  Chatgpt<br>  文心一言</p>
+<h3><span id="开源">开源</span><a href="#开源" class="header-anchor">#</a></h3><p>  LLaMA<br>  Baichuan2<br>  通义千问（Qwen-7B）<br>  ChatGLM</p>
 <h1><span id="tools-amp-mix">Tools &amp; Mix</span><a href="#tools-amp-mix" class="header-anchor">#</a></h1><ul>
 <li><p>GPT学习宝典</p>
 <ul>
@@ -9406,7 +10106,7 @@ MySQL MVCC 快照读 vs 当前读 </li>
 ]]></content>
       <categories>
         <category>AI</category>
-        <category>chatgpt</category>
+        <category>gpt</category>
       </categories>
       <tags>
         <tag>AI</tag>
@@ -9462,6 +10162,26 @@ MySQL MVCC 快照读 vs 当前读 </li>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AE%97%E6%B3%95">负载均衡算法</a><ul>
+<li><a href="#lvs12">LVS[1][2]</a></li>
+<li><a href="#nginx-3">Nginx [3]</a></li>
+<li><a href="#haproxy">HAproxy</a></li>
+</ul>
+</li>
+<li><a href="#lvs%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F11-16">LVS工作模式[11-16]</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
+<li><a href="#lvs%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F">LVS工作模式</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
 
 <h1><span id="负载均衡算法">负载均衡算法</span><a href="#负载均衡算法" class="header-anchor">#</a></h1><h3><span id="lvs12">LVS[1][2]</span><a href="#lvs12" class="header-anchor">#</a></h3><table>
 <thead>
@@ -11133,9 +11853,7 @@ BGP 协议传输的消息
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<img src="/www6vHomeHexo/2022/03/31/streamingFlinkWindow/window.JPG" class>
-
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>《Flink核心技术与实战》  第三章</p>
+<h1><span id="time-window">Time Window</span><a href="#time-window" class="header-anchor">#</a></h1><h3><span id="滚动窗口tumble">滚动窗口（TUMBLE）</span><a href="#滚动窗口tumble" class="header-anchor">#</a></h3><h3><span id="滑动窗口hop">滑动窗口（HOP）</span><a href="#滑动窗口hop" class="header-anchor">#</a></h3><h3><span id="会话窗口session">会话窗口（SESSION）</span><a href="#会话窗口session" class="header-anchor">#</a></h3><h3><span id="全局窗口global">全局窗口(GLOBAL)</span><a href="#全局窗口global" class="header-anchor">#</a></h3><h3><span id="渐进式窗口cumulate">渐进式窗口（CUMULATE）</span><a href="#渐进式窗口cumulate" class="header-anchor">#</a></h3><h1><span id="count-window">Count Window</span><a href="#count-window" class="header-anchor">#</a></h1><h3><span id="滚动-count">滚动 count</span><a href="#滚动-count" class="header-anchor">#</a></h3><h3><span id="滑动-count">滑动 count</span><a href="#滑动-count" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>1.《Flink核心技术与实战》  第三章<br>2. <a href="https://blog.csdn.net/WindyQCF/article/details/125093370">万字详述 Flink SQL 4 种时间窗口语义！（收藏）</a></p>
 ]]></content>
       <categories>
         <category>大数据</category>
@@ -15008,7 +15726,7 @@ BGP 协议传输的消息
 </tr>
 <tr>
 <td align="center">原子性 A</td>
-<td align="center">命令语法无误时，能保证</td>
+<td align="center">能保证(命令语法无误时)</td>
 </tr>
 <tr>
 <td align="center">持久性 D</td>
@@ -15016,7 +15734,7 @@ BGP 协议传输的消息
 </tr>
 </tbody></table>
 <p> 【redis  cluster 没有事务】</p>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><p>31 | 事务机制:Redis能实现ACID属性吗?<br><a href="https://www.liangzl.com/get-article-detail-129391.html">[redis]redis集群不支持事务multi、exec</a></p>
+<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><p>31 | 事务机制:Redis能实现ACID属性吗?<br><a href="https://www.liangzl.com/get-article-detail-129391.html">[redis]redis集群不支持事务multi、exec</a>   失效</p>
 ]]></content>
       <categories>
         <category>数据库</category>
@@ -17591,6 +18309,19 @@ BGP 协议传输的消息
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E8%A7%A6%E5%8F%91-rehash">什么时候触发 rehash？</a></li>
+<li><a href="#rehash-%E6%89%A9%E5%AE%B9%E6%89%A9%E5%A4%9A%E5%A4%A7">rehash 扩容扩多大？</a></li>
+<li><a href="#rehash-%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C">rehash 如何执行？</a></li>
+<li><a href="#dictrehash-%E7%9A%84%E4%B8%BB%E8%A6%81%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B">dictRehash 的主要执行流程</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
 
 <h3><span id="什么时候触发-rehash">什么时候触发 rehash？</span><a href="#什么时候触发-rehash" class="header-anchor">#</a></h3><p>，_dictExpandIfNeeded 函数中定义了三个扩容条件。<br>下面的代码就展示了 _dictExpandIfNeeded 函数对这三个条件的定义，你可以看下。<br>条件一：ht[0]的大小为 0。<br>条件二：ht[0]承载的元素个数已经超过了 ht[0]的大小，同时 Hash 表可以进行扩容。<br>条件三：ht[0]承载的元素个数，是 ht[0]的大小的 dict_force_resize_ratio 倍，其中，<br><strong>dict_force_resize_ratio 的默认值是 5</strong>。</p>
 <h3><span id="rehash-扩容扩多大">rehash 扩容扩多大？</span><a href="#rehash-扩容扩多大" class="header-anchor">#</a></h3><p>对 Hash表扩容的思路也很简单，就是如果当前表的已用空间大小为 size，<strong>那么就将表扩容到</strong> size*2 <strong>的大小</strong>。</p>
@@ -17627,7 +18358,6 @@ BGP 协议传输的消息
 ]]></content>
       <categories>
         <category>大数据</category>
-        <category>计算</category>
         <category>olap</category>
       </categories>
       <tags>
@@ -17982,7 +18712,7 @@ BGP 协议传输的消息
       </tags>
   </entry>
   <entry>
-    <title>chatgpt Prompt-Code</title>
+    <title>gpt Prompt-Code</title>
     <url>/www6vHomeHexo/2021/05/28/gptPromptCode/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -18009,10 +18739,11 @@ BGP 协议传输的消息
 
 
 <h1><span id="工具">工具</span><a href="#工具" class="header-anchor">#</a></h1><ul>
-<li>Copilot ***</li>
+<li>Copilot *** - 收费</li>
 <li>AWS CodeWhispter</li>
 <li>Cursor ***</li>
 <li>tabnine 免费</li>
+<li>Code Llama  - 开源</li>
 </ul>
 <h1><span id="代码相关-简单任务-1">代码相关-简单任务 [1]</span><a href="#代码相关-简单任务-1" class="header-anchor">#</a></h1><ul>
 <li><p><strong>注释</strong><br> 你作为一名程序员，请解释一下下面这段代码</p>
@@ -18106,14 +18837,14 @@ BGP 协议传输的消息
 ]]></content>
       <categories>
         <category>AI</category>
-        <category>chatgpt</category>
+        <category>gpt</category>
       </categories>
       <tags>
-        <tag>chatgpt</tag>
+        <tag>gpt</tag>
       </tags>
   </entry>
   <entry>
-    <title>chatgpt  Prompt</title>
+    <title>gpt  Prompt</title>
     <url>/www6vHomeHexo/2021/05/26/gptPrompt/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -18197,10 +18928,10 @@ BGP 协议传输的消息
 ]]></content>
       <categories>
         <category>AI</category>
-        <category>chatgpt</category>
+        <category>gpt</category>
       </categories>
       <tags>
-        <tag>chatgpt</tag>
+        <tag>gpt</tag>
       </tags>
   </entry>
   <entry>
@@ -20692,7 +21423,7 @@ BGP 协议传输的消息
 <li><a href="#nginx-%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96">Nginx 参数优化</a><ul>
 <li><a href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86">反向代理</a></li>
 <li><a href="#tls-ssl">tls ssl</a></li>
-<li><a href="#%E9%9D%9E%E5%AE%89%E5%85%A8%E8%AF%B7%E6%B1%82%E9%87%8D%E5%AE%9A%E5%90%91">非安全请求重定向：</a></li>
+<li><a href="#%E9%9D%9E%E5%AE%89%E5%85%A8%E8%AF%B7%E6%B1%82%E9%87%8D%E5%AE%9A%E5%90%91">非安全请求重定向</a></li>
 <li><a href="#gzip">gzip</a></li>
 <li><a href="#worker">worker</a></li>
 <li><a href="#%E5%87%8F%E5%B0%91%E8%BF%9B%E7%A8%8B%E9%97%B4%E5%88%87%E6%8D%A2">减少进程间切换</a></li>
@@ -20717,7 +21448,7 @@ BGP 协议传输的消息
 
 <h3><span id="tls-ssl">tls ssl</span><a href="#tls-ssl" class="header-anchor">#</a></h3><figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ssl_session_cache</span> builtin:<span class="number">1000</span> shared:SSL:<span class="number">10m</span>;  /// 一天内连接上的用户， 不需要再协商秘钥</span><br><span class="line"><span class="attribute">ssl_session_cache</span> builtin:<span class="number">1000</span> shared:SSL:<span class="number">10m</span>;  /// 1<span class="attribute">m</span> -&gt; <span class="number">4000</span>个https连接</span><br><span class="line">ssl_session_timeout <span class="number">10m</span>; /// 10分钟</span><br><span class="line"><span class="attribute">ssl_protocols</span> TLSv1.<span class="number">2</span>;  /// 版本号</span><br></pre></td></tr></table></figure>
 
-<h3><span id="非安全请求重定向">非安全请求重定向：</span><a href="#非安全请求重定向" class="header-anchor">#</a></h3><figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">No</span> <span class="literal">redirect</span>:  无重定向 </span><br><span class="line">Redirect： <span class="number">301</span>-<span class="number">302</span> -》 转到https站点 </span><br></pre></td></tr></table></figure>
+<h3><span id="非安全请求重定向">非安全请求重定向</span><a href="#非安全请求重定向" class="header-anchor">#</a></h3><figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">No</span> <span class="literal">redirect</span>:  无重定向 </span><br><span class="line">Redirect： <span class="number">301</span>-<span class="number">302</span> -》 转到https站点 </span><br></pre></td></tr></table></figure>
 
 <h3><span id="gzip">gzip</span><a href="#gzip" class="header-anchor">#</a></h3><figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">gzip</span> <span class="literal">on</span>;</span><br><span class="line"><span class="attribute">gzip_comp_level</span> <span class="number">5</span>;</span><br><span class="line"><span class="attribute">gzip_http_version</span> <span class="number">1</span>.<span class="number">1</span>;   /// 注意：<span class="attribute">gzip</span> 在<span class="number">1</span>.<span class="number">1</span>上有效， http2.<span class="number">0</span>上是无效的</span><br><span class="line">gzip_min_length <span class="number">256</span>;</span><br><span class="line"><span class="attribute">gzip_types</span> application/atom+xml ... </span><br><span class="line">gzip_proxied any;</span><br><span class="line"><span class="attribute">gzip_vary</span> <span class="literal">on</span>;</span><br></pre></td></tr></table></figure>
 
@@ -24140,14 +24871,36 @@ nq： 不排队调度
   <entry>
     <title>Nginx总结</title>
     <url>/www6vHomeHexo/2019/08/22/nginx/</url>
-    <content><![CDATA[<p hidden></p>
+    <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<div style="text-align: center;">
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
-<p><img src="https://user-images.githubusercontent.com/5608425/64508349-cedbeb00-d30f-11e9-836c-2f920725e1bb.jpg" alt="Nginx总结"><br>Nginx总结</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#nginx%E6%80%BB%E7%BB%93">Nginx总结</a></li>
+<li><a href="#nginx%E6%9E%B6%E6%9E%84">Nginx架构</a></li>
+<li><a href="#nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86">Nginx反向代理</a><ul>
+<li><a href="#%E7%B1%BB%E5%9E%8B">类型</a></li>
+<li><a href="#%E5%8F%AF%E6%89%A9%E5%B1%95%E7%AB%8B%E6%96%B9%E4%BD%93">可扩展立方体</a></li>
+<li><a href="#%E5%A4%9A%E7%A7%8D%E5%8D%8F%E8%AE%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86">多种协议反向代理</a></li>
+<li><a href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%B5%81%E7%A8%8B">反向代理流程</a></li>
+</ul>
+</li>
+<li><a href="#%E8%8A%82%E7%82%B9%E7%83%AD%E6%9B%B4%E6%96%B0">节点热更新</a><ul>
+<li><a href="#master%E8%8A%82%E7%82%B9%E7%83%AD%E6%9B%B4%E6%96%B0">master节点热更新</a></li>
+<li><a href="#worker%E8%8A%82%E7%82%B9%E7%83%AD%E6%9B%B4%E6%96%B0">worker节点热更新</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%9F%E5%90%8D%E8%BD%AC%E5%8F%91%E5%88%B0%E5%85%B6%E4%BB%96%E5%9F%9F%E5%90%8D2">域名转发到其他域名[2]</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考:</a></li>
+</ul>
+<!-- tocstop -->
+
 </div>
 
+<h2><span id="nginx总结">Nginx总结</span><a href="#nginx总结" class="header-anchor">#</a></h2><p><img src="https://user-images.githubusercontent.com/5608425/64508349-cedbeb00-d30f-11e9-836c-2f920725e1bb.jpg" alt="Nginx总结"></p>
 <h2><span id="nginx架构">Nginx架构</span><a href="#nginx架构" class="header-anchor">#</a></h2><ol>
 <li>共享内存 Slab<br>分页 4K， 8K， 16K</li>
 </ol>
@@ -27691,7 +28444,7 @@ nq： 不排队调度
 <li><a href="https://developer.aliyun.com/article/105551">超全总结 | 阿里如何应对电商故障？神秘演练细节曝光</a> 阿里巴巴  周洋</li>
 </ol>
 <h3><span id="runtime-amp-middleware-amp-os">Runtime &amp; Middleware &amp; OS</span><a href="#runtime-amp-middleware-amp-os" class="header-anchor">#</a></h3><ol>
-<li><a href="/www6vHomeHexo/2022/06/03/redisHotkey/" title="Redis Hotkey">Redis Hotkey</a>  self
+<li><a href="/www6vHomeHexo/2022/06/03/redisHotkey/" title="Redis 热点Hotkey">Redis 热点Hotkey</a>  self
 </li>
 <li><p><a href="https://www.admin5.com/article/20190404/902952.shtml">UCloud高可用数据库UDB主从复制延时的解决</a></p>
 </li>

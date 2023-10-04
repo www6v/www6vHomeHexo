@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="实时数仓">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/index.html">
+<meta property="og:site_name" content="www6v的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/kuaishou-arch.jpg">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/vivo-arch.jpg">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/tencent-arch.jpg">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/arch.png">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/arch1.png">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/basic.png">
+<meta property="article:published_time" content="2022-07-18T03:46:42.000Z">
+<meta property="article:modified_time" content="2023-09-17T07:23:28.749Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="实时数仓">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/kuaishou-arch.jpg">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>实时数仓 | www6v的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">www6v的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="www6v的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          实时数仓
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-07-18 11:46:42" itemprop="dateCreated datePublished" datetime="2022-07-18T11:46:42+08:00">2022-07-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-17 15:23:28" itemprop="dateModified" datetime="2023-09-17T15:23:28+08:00">2023-09-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%AE%9E%E6%97%B6%E6%95%B0%E4%BB%93/" itemprop="url" rel="index"><span itemprop="name">实时数仓</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p></p>
+<span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E6%9E%B6%E6%9E%84">架构</a><ul>
+<li><a href="#%E5%8F%82%E8%80%83%E6%9E%B6%E6%9E%84">参考架构</a><ul>
+<li><a href="#%E5%8F%82%E8%80%83%E6%9E%B6%E6%9E%84-%E5%BF%AB%E6%89%8B-%E5%9F%BA%E4%BA%8Ekafkahive-lambda%E6%9E%B6%E6%9E%84-6">参考架构-快手 基于Kafka+Hive-Lambda架构   [6]</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%9E%B6%E6%9E%84-vivo-%E5%9F%BA%E4%BA%8Ehudi-%E6%89%B9%E6%B5%81%E4%B8%80%E4%BD%93%E6%9E%B6%E6%9E%84-4">参考架构-vivo 基于Hudi-批流一体架构   [4]</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%9E%B6%E6%9E%84-%E8%85%BE%E8%AE%AF-%E5%9F%BA%E4%BA%8Ehudi-%E6%89%B9%E6%B5%81%E4%B8%80%E4%BD%93%E6%9E%B6%E6%9E%84-3">参考架构-腾讯 基于Hudi-批流一体架构 [3]</a></li>
+<li><a href="#%E7%BE%8E%E5%9B%A2-%E5%9F%BA%E4%BA%8Edoris-1">美团 基于Doris [1]</a></li>
+</ul>
+</li>
+<li><a href="#%E7%97%9B%E7%82%B9-5">痛点 [5]</a><ul>
+<li><a href="#%E4%BC%A0%E7%BB%9F-t1-%E4%BB%BB%E5%8A%A1">传统 T+1 任务</a></li>
+<li><a href="#lambda-%E6%9E%B6%E6%9E%84%E7%97%9B%E7%82%B9">Lambda 架构痛点</a></li>
+<li><a href="#kappa-%E6%9E%B6%E6%9E%84%E7%97%9B%E7%82%B9">Kappa 架构痛点</a></li>
+</ul>
+</li>
+<li><a href="#tradeoff-%E6%80%BB%E7%BB%93-5">Tradeoff 总结 [5]</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E6%97%B6%E6%95%B0%E4%BB%93-%E5%88%86%E5%B1%82-1">实时数仓-分层 [1]</a><ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E6%BA%90-ods">数据源 ODS</a></li>
+<li><a href="#%E6%98%8E%E7%BB%86%E5%B1%82-dmd">明细层 DMD</a></li>
+<li><a href="#%E6%B1%87%E6%80%BB%E5%B1%82-dms">汇总层 DMS</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E6%97%B6%E6%95%B0%E4%BB%93-%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B-1">实时数仓-构建流程 [1]</a></li>
+<li><a href="#%E6%95%B0%E4%BB%93%E5%BB%BA%E6%A8%A1">数仓建模</a><ul>
+<li><a href="#%E4%BA%8B%E5%AE%9E%E8%A1%A8-2">事实表 [2]</a></li>
+<li><a href="#%E7%BB%B4%E5%BA%A6%E8%A1%A8-dim-2">维度表 DIM [2]</a></li>
+<li><a href="#%E7%BB%B4%E5%BA%A6%E5%85%B3%E8%81%94-6">维度关联 [6]</a></li>
+<li><a href="#ads-%E5%B1%82-%E4%BB%A5%E7%AA%97%E5%8F%A3%E4%B8%BA%E6%A0%B8%E5%BF%83%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-6">ADS 层 - 以窗口为核心的解决方案 [6]</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="架构">架构</span><a href="#架构" class="header-anchor">#</a></h1><h3><span id="参考架构">参考架构</span><a href="#参考架构" class="header-anchor">#</a></h3><h5><span id="参考架构-快手-基于kafkahive-lambda架构-6">参考架构-快手 基于Kafka+Hive-Lambda架构   [6]</span><a href="#参考架构-快手-基于kafkahive-lambda架构-6" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/kuaishou-arch.jpg" class>
+
+
+<h5><span id="参考架构-vivo-基于hudi-批流一体架构-4">参考架构-vivo 基于Hudi-批流一体架构   [4]</span><a href="#参考架构-vivo-基于hudi-批流一体架构-4" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/vivo-arch.jpg" class>
+
+
+<h5><span id="参考架构-腾讯-基于hudi-批流一体架构-3">参考架构-腾讯 基于Hudi-批流一体架构 [3]</span><a href="#参考架构-腾讯-基于hudi-批流一体架构-3" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/tencent-arch.jpg" class>
+
+<h5><span id="美团-基于doris-1">美团 基于Doris [1]</span><a href="#美团-基于doris-1" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/arch.png" class>
+
+<img src="/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/arch1.png" class>
+
+<h3><span id="痛点-5">痛点 [5]</span><a href="#痛点-5" class="header-anchor">#</a></h3><h5><span id="传统-t1-任务">传统 T+1 任务</span><a href="#传统-t1-任务" class="header-anchor">#</a></h5><ul>
+<li>海量的TB级 T+ 1 任务延迟导致下游数据产出时间不稳定。</li>
+<li>任务遇到故障重试恢复代价昂贵</li>
+<li>数据架构在处理去重和 exactly-once语义能力方面比较吃力</li>
+<li>架构复杂，涉及多个系统协调，靠调度系统来构建任务依赖关系</li>
+</ul>
+<h5><span id="lambda-架构痛点">Lambda 架构痛点</span><a href="#lambda-架构痛点" class="header-anchor">#</a></h5><ul>
+<li>同时维护<strong>实时平台和离线平台两套引擎</strong>，运维成本高</li>
+<li>实时离线两个平台需要维护两套框架不同但业务逻辑相同代码，开发成本高</li>
+<li>数据有两条不同链路，<strong>容易造成数据的不一致性</strong></li>
+<li><strong>数据更新成本大</strong>，需要重跑链路</li>
+</ul>
+<h5><span id="kappa-架构痛点">Kappa 架构痛点</span><a href="#kappa-架构痛点" class="header-anchor">#</a></h5><ul>
+<li>对消息队列存储要求高，<strong>消息队列的回溯能力不及离线存储</strong></li>
+<li><strong>消息队列本身对数据存储有时效性</strong>，<strong>且当前无法使用 OLAP 引擎直接分析消息队列中的数据</strong></li>
+<li>全链路依赖消息队列的实时计算可能因为<strong>数据的时序性</strong>导致结果不正确</li>
+</ul>
+<h3><span id="tradeoff-总结-5">Tradeoff   总结 [5]</span><a href="#tradeoff-总结-5" class="header-anchor">#</a></h3><p>总的来说，数据湖 替换 Kafka 的<strong>优势</strong>主要包括：</p>
+<ul>
+<li>实现存储层的<strong>流批统一</strong></li>
+<li><strong>中间层支持 OLAP 分析</strong></li>
+<li>完美支持高效<strong>回溯</strong></li>
+<li>存储成本降低</li>
+</ul>
+<p>当然，也存在一定的<strong>缺陷</strong>，如：</p>
+<ul>
+<li>数据延迟从<strong>实时</strong>变成<strong>近实时</strong></li>
+<li>对接其他数据系统需要额外开发工作</li>
+</ul>
+<h1><span id="实时数仓-分层-1">实时数仓-分层 [1]</span><a href="#实时数仓-分层-1" class="header-anchor">#</a></h1><h3><span id="数据源-ods">数据源  ODS</span><a href="#数据源-ods" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/basic.png" class>
+
+
+
+<h3><span id="明细层-dmd">明细层 DMD</span><a href="#明细层-dmd" class="header-anchor">#</a></h3><ul>
+<li>目的是给下游提供直接可用的数据</li>
+<li>要对基础层进行统一的加工，比如清洗、过滤、扩维等</li>
+<li>按照主题进行管理</li>
+</ul>
+<h3><span id="汇总层-dms">汇总层 DMS</span><a href="#汇总层-dms" class="header-anchor">#</a></h3><ul>
+<li>所有的指标都统一在汇总层加工</li>
+<li>汇总指标池<br>按照统一的规范管理建设，形成可复用的汇总结果</li>
+</ul>
+<h1><span id="实时数仓-构建流程-1">实时数仓-构建流程 [1]</span><a href="#实时数仓-构建流程-1" class="header-anchor">#</a></h1><ul>
+<li><p>搭框架<br>数据建设的层次化</p>
+</li>
+<li><p>定规范<br>每一层加工到什么程度，每一层用什么样的方式</p>
+</li>
+<li><p>时效性<br>设计的时候，层次不能太多</p>
+</li>
+</ul>
+<h1><span id="数仓建模">数仓建模</span><a href="#数仓建模" class="header-anchor">#</a></h1><h3><span id="事实表-2">事实表  [2]</span><a href="#事实表-2" class="header-anchor">#</a></h3><ul>
+<li>事务事实表   </li>
+<li>周期快照事实表 </li>
+<li>累积快照事实表</li>
+</ul>
+<h3><span id="维度表-dim-2">维度表 DIM [2]</span><a href="#维度表-dim-2" class="header-anchor">#</a></h3><ul>
+<li><p>类型</p>
+<ul>
+<li>星型模型<br>维表只和事实表关联，维表之间没有关联，查询性能好，但冗余度高<br>一般而言，我们都使用星型模型。</li>
+<li>雪花模型<br>雪花模型是星型模式中的维度表进行规范化处理，进一步分解到附加表（维表）中冗余度小，但是查询性能差。<br>将一个维表拆成核心表和拓展表</li>
+</ul>
+</li>
+<li><p>存储</p>
+<ul>
+<li>HBase</li>
+<li>Redis</li>
+<li>MySQL</li>
+</ul>
+</li>
+</ul>
+<h3><span id="维度关联-6">维度关联 [6]</span><a href="#维度关联-6" class="header-anchor">#</a></h3><p>在 DWD 层的实战中，DWD 表需要进行<strong>维度扩展</strong>是非常常见的需求。在我们的实战中，维表扩展会基于维表的具体情况选择不同的关联方式。</p>
+<ul>
+<li>在大多数情况下<strong>维表变化比较稳定</strong>，我们会选择借助<strong>第三方 KV 存储</strong>，使用 UDF 直接访问 KV 存储来实现维表扩展。但在选择第三方 KV 存储时，当维表内容特别大时选择 kiwi、当 QPS 较高时选择 Kcatch。</li>
+<li>当<strong>维表变化频繁且对时效性要求较高时</strong>，<strong>选择 interval join</strong>。借助 interval 时间范围的特性来达到合理控制状态大小的目的。</li>
+<li>当<strong>维表关联逻辑比较复杂</strong>，为了任务的稳定性和扩展性，我们会<strong>通过自定义维表进行关联</strong>，手动维护状态管理的过程，实现 DWD 维表的扩展。</li>
+</ul>
+<p>实时数仓的 <strong>DWS 层只有在数据量特别大且聚合后的数据量有明显减少的场景下才会构建</strong>。<strong>如果 DWD 层的 QPS 比较小，一般会直接省去 DWS 层的建设</strong>。这样的做法不仅可以保证数据的<strong>及时性</strong>，同时也<strong>缩短了指标产出的链路</strong>，进而保证了任务的稳定性。</p>
+<h3><span id="ads-层-以窗口为核心的解决方案-6">ADS 层 - 以窗口为核心的解决方案 [6]</span><a href="#ads-层-以窗口为核心的解决方案-6" class="header-anchor">#</a></h3><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>窗口</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>在针对当日累计的场景，即要求每分钟实时产出从当天 0 点开始到当前统计时间分钟截止的总指标值的需求，</td>
+<td>cumulate window。</td>
+</tr>
+<tr>
+<td>针对活动累计场景，即活动一般会持续 n 天，则需求要求每分钟实时产出从活动开始到当前统计时刻为止的总指标值。</td>
+<td>infinity_cumulate window。</td>
+</tr>
+<tr>
+<td>在针对分布类的指标需求时，即需求指标会随着时间的推移出现波动。同一粒度下我们需先拿到最新的数据状态，再进行下一步汇总的统计。</td>
+<td>unbounded+infinity_cumulate window。</td>
+</tr>
+<tr>
+<td>在针对单直播间累计的场景下，</td>
+<td>dynamic_cumulate。</td>
+</tr>
+</tbody></table>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a target="_blank" rel="noopener" href="https://tech.meituan.com/2021/08/26/data-warehouse-in-meituan-waimai.html">美团外卖实时数仓建设实践</a>  美团 </li>
+<li><a target="_blank" rel="noopener" href="https://notomato.blog.csdn.net/article/details/110635856">一篇文章搞懂数据仓库：三种事实表（设计原则，设计方法、对比）</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/523028640">[数据湖] 基于flink hudi的批流一体实践</a> 腾讯  </li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/594928870">vivo 实时计算平台建设实践</a>  vivo </li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/347660549">Flink + Iceberg 全场景实时数仓的建设实践</a>  腾讯数据平台</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://flink-learning.org.cn/activity/detail/9075f73ecfd2b87c6c7fbe7d79ad58ca">FFA 2022 实时湖仓</a>  ***<ul>
+<li><a target="_blank" rel="noopener" href="https://xie.infoq.cn/article/3c80a350e06d88e85d34f4008">美团买菜基于 Flink 的实时数仓建设</a>  未</li>
+<li><ol start="6">
+<li><a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/de3aa90d2f02195e65e721c1f2a434e1">快手基于 Apache Flink 的实时数仓建设实践</a>  ***</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://flink-learning.org.cn/activity/detail/d3d092c45467c40fb8526c4ec2141be2">FFA 2022 平台建设</a>  ***<ul>
+<li><a target="_blank" rel="noopener" href="https://xie.infoq.cn/article/acf64bbe900ec426b8699f094">小米基于 Flink 的实时数仓建设实践</a> 未</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/" title="实时数仓">https://www6v.github.io/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/%E5%AE%9E%E6%97%B6%E6%95%B0%E4%BB%93/" rel="tag"># 实时数仓</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2022/07/17/observabilityPrometheusBiz/" rel="prev" title="可观测性-Prometheus业务监控">
+      <i class="fa fa-chevron-left"></i> 可观测性-Prometheus业务监控
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2022/07/18/flinkSQL/" rel="next" title="Flink SQL">
+      Flink SQL <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">475</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">280</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">142</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

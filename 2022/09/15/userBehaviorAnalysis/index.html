@@ -21,17 +21,21 @@
   </script>
 
   <meta property="og:type" content="article">
-<meta property="og:title" content="Flink 实时数仓">
-<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/07/18/flinkRealtimeWarehouse/index.html">
+<meta property="og:title" content="用户行为分析">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/09/15/userBehaviorAnalysis/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-07-18T03:46:42.000Z">
-<meta property="article:modified_time" content="2023-07-18T03:54:49.354Z">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/09/15/userBehaviorAnalysis/arch.jpg">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/09/15/userBehaviorAnalysis/flow.jpg">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/09/15/userBehaviorAnalysis/application.jpg">
+<meta property="article:published_time" content="2022-09-15T05:30:09.000Z">
+<meta property="article:modified_time" content="2023-09-23T01:42:12.716Z">
 <meta property="article:author" content="Wang Wei">
-<meta property="article:tag" content="流式计算">
+<meta property="article:tag" content="用户行为分析">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2022/09/15/userBehaviorAnalysis/arch.jpg">
 
-<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/07/18/flinkRealtimeWarehouse/">
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/09/15/userBehaviorAnalysis/">
 
 
 <script id="page-configurations">
@@ -44,7 +48,7 @@
   };
 </script>
 
-  <title>Flink 实时数仓 | www6v的博客</title>
+  <title>用户行为分析 | www6v的博客</title>
   
 
 
@@ -188,7 +192,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2022/07/18/flinkRealtimeWarehouse/">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2022/09/15/userBehaviorAnalysis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
@@ -201,7 +205,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Flink 实时数仓
+          用户行为分析
         </h1>
 
         <div class="post-meta">
@@ -217,14 +221,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-07-18 11:46:42" itemprop="dateCreated datePublished" datetime="2022-07-18T11:46:42+08:00">2022-07-18</time>
+              <time title="创建时间：2022-09-15 13:30:09" itemprop="dateCreated datePublished" datetime="2022-09-15T13:30:09+08:00">2022-09-15</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-18 11:54:49" itemprop="dateModified" datetime="2023-07-18T11:54:49+08:00">2023-07-18</time>
+                <time title="修改时间：2023-09-23 09:42:12" itemprop="dateModified" datetime="2023-09-23T09:42:12+08:00">2023-09-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,15 +240,7 @@
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/www6vHomeHexo/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">计算</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/www6vHomeHexo/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E8%AE%A1%E7%AE%97/%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">流式计算</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/www6vHomeHexo/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E8%AE%A1%E7%AE%97/%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
+                  <a href="/www6vHomeHexo/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/" itemprop="url" rel="index"><span itemprop="name">用户行为分析</span></a>
                 </span>
             </span>
 
@@ -262,8 +258,122 @@
         <p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a target="_blank" rel="noopener" href="https://xie.infoq.cn/article/3c80a350e06d88e85d34f4008">美团买菜基于 Flink 的实时数仓建设</a><br><a target="_blank" rel="noopener" href="https://xie.infoq.cn/article/acf64bbe900ec426b8699f094">小米基于 Flink 的实时数仓建设实践</a></p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E6%9E%B6%E6%9E%84-5">架构 [5]</a></li>
+<li><a href="#%E5%AE%8C%E6%95%B4%E9%93%BE%E8%B7%AF-4">完整链路 [4]</a></li>
+<li><a href="#%E6%8C%87%E6%A0%87-2">指标 [2]</a><ul>
+<li><a href="#%E7%B2%98%E6%80%A7%E6%8C%87%E6%A0%87">粘性指标</a></li>
+<li><a href="#%E6%B4%BB%E8%B7%83%E6%8C%87%E6%A0%87">活跃指标</a></li>
+<li><a href="#%E4%BA%A7%E5%87%BA%E6%8C%87%E6%A0%87">产出指标</a></li>
+</ul>
+</li>
+<li><a href="#%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90">用户行为分析</a><ul>
+<li><a href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95-1-2-4-6">常用方法 [1] [2] [4] [6]</a></li>
+</ul>
+</li>
+<li><a href="#%E6%BC%8F%E6%96%97%E6%A8%A1%E5%9E%8B%E5%88%86%E6%9E%90">漏斗模型分析</a><ul>
+<li><a href="#%E9%9C%80%E6%B1%82%E5%9C%BA%E6%99%AF-9">需求场景 [9]</a></li>
+<li><a href="#%E6%BC%8F%E6%96%97%E7%B1%BB%E5%9E%8B">漏斗类型</a></li>
+<li><a href="#%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B">整体流程</a></li>
+<li><a href="#aarrr%E6%BC%8F%E6%96%97%E6%A8%A1%E5%9E%8B-1-3">AARRR漏斗模型 [1] [3]</a></li>
+</ul>
+</li>
+<li><a href="#%E8%B7%AF%E5%BE%84%E5%88%86%E6%9E%90">路径分析</a><ul>
+<li><a href="#%E8%BD%AC%E5%8C%96%E7%8E%87%E8%AE%A1%E7%AE%97">转化率计算</a></li>
+</ul>
+</li>
+<li><a href="#%E9%87%87%E9%9B%86%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%95%B0%E6%8D%AE-2">采集用户行为数据 [2]</a><ul>
+<li><a href="#%E5%B9%B3%E5%8F%B0%E8%AE%BE%E7%BD%AE%E5%9F%8B%E7%82%B9-6-10">平台设置埋点 [6] [10]</a></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E6%96%B9%E7%BB%9F%E8%AE%A1%E5%B7%A5%E5%85%B7">第三方统计工具</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+
+
+<h1><span id="架构-5">架构 [5]</span><a href="#架构-5" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/09/15/userBehaviorAnalysis/arch.jpg" class>
+
+<p>图中底层蓝色的部分是数据处理计算部分，依托于存储与计算分离的特性以及预计算能力， 很好地满足在海量数据场景下的数据高效计算能力。同时提供了完善的企业级平台运维处理能力，支持多种架构满足各类客户的场景需求。</p>
+<p>往上，通过多维数据模型框架，对用户基础数据进行语义分类和转化，提供多种维度分类的数据主题模型。基于这些数据主题模型，就可以直接对接应用分析端进行常用的事件分析，漏斗分析，留存分析。</p>
+<h1><span id="完整链路-4">完整链路 [4]</span><a href="#完整链路-4" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/09/15/userBehaviorAnalysis/flow.jpg" class>
+
+<p>埋点 -&gt; 使用app -&gt; 数据上报 -&gt; 数据模型 -&gt; 行为分析 </p>
+<h1><span id="指标-2">指标 [2]</span><a href="#指标-2" class="header-anchor">#</a></h1><h3><span id="粘性指标">粘性指标</span><a href="#粘性指标" class="header-anchor">#</a></h3><ul>
+<li>关注用户周期内持续访问的情况<br>新用户数与比例、活跃用户数与比例、用户转化率、用户留存率、用户流失率、用户访问率</li>
+</ul>
+<h3><span id="活跃指标">活跃指标</span><a href="#活跃指标" class="header-anchor">#</a></h3><ul>
+<li>用户访问的参与度<br>活跃用户、新增用户、回访用户、流失用户、平均停留时长、使用频率</li>
+</ul>
+<h3><span id="产出指标">产出指标</span><a href="#产出指标" class="header-anchor">#</a></h3><ul>
+<li>用户创造的直接价值输出<br>页面浏览数PV、独立访客数UV、点击次数、消费频次、消费金额</li>
+</ul>
+<h1><span id="用户行为分析">用户行为分析</span><a href="#用户行为分析" class="header-anchor">#</a></h1><h3><span id="常用方法-1-2-4-6">常用方法 [1] [2] [4] [6]</span><a href="#常用方法-1-2-4-6" class="header-anchor">#</a></h3><ul>
+<li><p>动作分析</p>
+<ul>
+<li>行为事件分析</li>
+<li>页面点击分析</li>
+</ul>
+</li>
+<li><p>转化分析</p>
+<ul>
+<li><strong>漏斗模型分析</strong> [7] [9]</li>
+<li><strong>用户行为路径分析</strong> [7][11]</li>
+</ul>
+</li>
+<li><p>用户分析</p>
+<ul>
+<li><strong>用户留存分析</strong> [7] [8]</li>
+<li><strong>用户分群分析</strong><br>用户画像（基本属性、用户偏好、生活习惯、用户行为等）的标签信息将用户分群</li>
+</ul>
+</li>
+<li><p>福格模型分析</p>
+</li>
+</ul>
+<img src="/www6vHomeHexo/2022/09/15/userBehaviorAnalysis/application.jpg" class>
+
+
+<h1><span id="漏斗模型分析">漏斗模型分析</span><a href="#漏斗模型分析" class="header-anchor">#</a></h1><h3><span id="需求场景-9">需求场景 [9]</span><a href="#需求场景-9" class="header-anchor">#</a></h3><p>定位用户流失具体原因</p>
+<p>针对不同版本，转化率情况对比</p>
+<p>检测某个专题活动效果</p>
+<h3><span id="漏斗类型">漏斗类型</span><a href="#漏斗类型" class="header-anchor">#</a></h3><p>无序漏斗：在漏斗的周期内，不限定漏斗多个步骤之间事件发生的顺序。<br>有序漏斗：在漏斗的周期内，严格限定漏斗每个步骤之间的发生顺序。</p>
+<h3><span id="整体流程">整体流程</span><a href="#整体流程" class="header-anchor">#</a></h3><ul>
+<li>确定转化路径</li>
+<li>分析流失原因</li>
+<li>优化关键因子</li>
+</ul>
+<h3><span id="aarrr漏斗模型-1-3">AARRR漏斗模型 [1] [3]</span><a href="#aarrr漏斗模型-1-3" class="header-anchor">#</a></h3><ul>
+<li>实现用户增长的5个指标<ul>
+<li>Acquisition（获取）：指的是用户从各种渠道进入产品的过程。</li>
+<li>Activation（激活）：指的是用户开始使用产品，并完成核心操作的过程。</li>
+<li>Retention（留存）：指的是用户在完成激活后，继续使用产品，并形成一定程度的用户粘性。</li>
+<li>Revenue（收入）：指的是用户在使用产品后，产生的实际收益。</li>
+<li>Referral（自传播）：指的是用户在使用产品后，愿意将产品推荐给他人，形成口碑和自然增长。</li>
+</ul>
+</li>
+</ul>
+<h1><span id="路径分析">路径分析</span><a href="#路径分析" class="header-anchor">#</a></h1><h3><span id="转化率计算">转化率计算</span><a href="#转化率计算" class="header-anchor">#</a></h3><p>页面转化率<br>路径转化率</p>
+<h1><span id="采集用户行为数据-2">采集用户行为数据 [2]</span><a href="#采集用户行为数据-2" class="header-anchor">#</a></h1><h3><span id="平台设置埋点-6-10">平台设置埋点 [6] [10]</span><a href="#平台设置埋点-6-10" class="header-anchor">#</a></h3><h3><span id="第三方统计工具">第三方统计工具</span><a href="#第三方统计工具" class="header-anchor">#</a></h3><p>国内： 百度统计,  CNZZ统计,  GrowingIO,  诸葛IO,  神策IO,  友盟<br>国外：Google Analytics,   Thinking Analytics, Mixpanel, Heap </p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Sake360/article/details/120350080">用户行为分析</a></li>
+<li><a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1653670195355016641&wfr=spider&for=pc">用户研究：如何做用户行为分析？</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/WindyQCF/article/details/123911538">万字详解用户行为分析</a></li>
+<li><a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1663323869315685791&wfr=spider&for=pc">用户行为分析是什么？怎么做？</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/xZYe1DUopNA9CzLwau3O">数十亿用户数据，上千个用户标签维度，用户分析怎么做？</a> ***<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIyNTIyNTYwOA==&mid=2651010996&idx=1&sn=f7ba207a991d595036a11fc3b6797bac">活动回顾 | 数十亿用户数据，上千个用户标签维度，用户分析怎么做？</a>  kylin</li>
+<li><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/yGOh38XjpYdTKMJjzjoH">如何实现用户行为的动态采集与分析</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/ecmRgdfrjFl1U3hAd59b">如何基于 Apache Doris 构建简易高效的用户行为分析平台？</a><br><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/SoCIclCLD8f4vSzLB4dX">如何基于 Apache Doris 构建简易高效的用户行为分析平台？</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NjY4MTU5Nw==&mid=2247490504&idx=1&sn=9827b136fa5cfc81467cb1b795f7bc41">用户行为分析模型实践（一）—— 路径分析模型</a>  vivo</li>
+<li><a target="_blank" rel="noopener" href="https://xie.infoq.cn/article/f305ea8be1935540432aca0d0">用户行为分析模型实践（二）—— 漏斗分析模型</a>  vivo</li>
+<li><a target="_blank" rel="noopener" href="https://xie.infoq.cn/article/1163e5781f37b4e55a2c43c70">用户行为分析模型实践（三）——H5 通用分析模型</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247486360&idx=1&sn=85504543498dfc82e5e720b77faa602d">基于Spark的用户行为路径分析的产品化实践</a></li>
+</ol>
 
     </div>
 
@@ -279,7 +389,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www6v.github.io/www6vHomeHexo/2022/07/18/flinkRealtimeWarehouse/" title="Flink 实时数仓">https://www6v.github.io/www6vHomeHexo/2022/07/18/flinkRealtimeWarehouse/</a>
+    <a href="https://www6v.github.io/www6vHomeHexo/2022/09/15/userBehaviorAnalysis/" title="用户行为分析">https://www6v.github.io/www6vHomeHexo/2022/09/15/userBehaviorAnalysis/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -290,7 +400,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/www6vHomeHexo/tags/%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/" rel="tag"># 流式计算</a>
+              <a href="/www6vHomeHexo/tags/%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90/" rel="tag"># 用户行为分析</a>
           </div>
 
         
@@ -299,12 +409,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/www6vHomeHexo/2022/07/17/observabilityPrometheusBiz/" rel="prev" title="可观测性-Prometheus业务监控">
-      <i class="fa fa-chevron-left"></i> 可观测性-Prometheus业务监控
+    <a href="/www6vHomeHexo/2022/09/09/golangStudy/" rel="prev" title="Golang 学习资源">
+      <i class="fa fa-chevron-left"></i> Golang 学习资源
     </a></div>
       <div class="post-nav-item">
-    <a href="/www6vHomeHexo/2022/07/18/flinkSQL/" rel="next" title="Flink SQL">
-      Flink SQL <i class="fa fa-chevron-right"></i>
+    <a href="/www6vHomeHexo/2022/09/21/personProflie/" rel="next" title="用户画像">
+      用户画像 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -377,20 +487,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">468</span>
+          <span class="site-state-item-count">475</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/www6vHomeHexo/categories/">
           
-        <span class="site-state-item-count">272</span>
+        <span class="site-state-item-count">280</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/www6vHomeHexo/tags/">
           
-        <span class="site-state-item-count">136</span>
+        <span class="site-state-item-count">142</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
