@@ -119,6 +119,7 @@
 <li><a href="/www6vHomeHexo/2019/11/19/k8sOperator/" title="Kubernetes Operator-Etcd">Kubernetes Operator-Etcd</a> </li>
 <li><a href="/www6vHomeHexo/2019/08/29/k8sDeclarativeAPI/" title="Kubernetes声明式API">Kubernetes声明式API</a> </li>
 <li><a href="/www6vHomeHexo/2022/02/17/k8sOperator-redis/" title="Kubernetes Operator-Redis">Kubernetes Operator-Redis</a></li>
+<li><a href="/www6vHomeHexo/2023/10/16/k8sAdmissionWebhook/" title="K8s  AdmissionWebhook">K8s  AdmissionWebhook</a></li>
 </ul>
 <h2><span id="container-runtime">Container Runtime</span><a href="#container-runtime" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2019/11/19/k8sRuntime/" title="Kubernetes Runtime">Kubernetes Runtime</a> </li>
@@ -784,14 +785,21 @@
 <li><a href="/www6vHomeHexo/2019/09/15/bigDataStorage/" title="大数据存储">大数据存储</a></li>
 </ul>
 <h1><span id="平台">平台</span><a href="#平台" class="header-anchor">#</a></h1><ul>
-<li><a href="/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/" title="实时数仓">实时数仓</a></li>
-<li><a href="/www6vHomeHexo/2022/08/04/streamingBatchIntegration/" title="批流一体">批流一体</a></li>
-<li><a href="/www6vHomeHexo/2022/09/15/userBehaviorAnalysis/" title="用户行为分析">用户行为分析</a></li>
-<li><a href="/www6vHomeHexo/2021/06/15/olap/" title="OLAP 在线分析处理">OLAP 在线分析处理</a></li>
+<li><a href="/www6vHomeHexo/2022/10/16/dataMiddlePlatform/" title="数据中台">数据中台</a>
+</li>
+<li><a href="/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/" title="实时数仓">实时数仓</a>
+</li>
+<li><a href="/www6vHomeHexo/2022/08/04/streamingBatchIntegration/" title="批流一体">批流一体</a>
+</li>
+<li><a href="/www6vHomeHexo/2022/09/15/userBehaviorAnalysis/" title="用户行为分析">用户行为分析</a>
+</li>
+<li><a href="/www6vHomeHexo/2021/06/15/olap/" title="OLAP 在线分析处理">OLAP 在线分析处理</a>
+</li>
 <li><a href="/www6vHomeHexo/2022/09/21/personProflie/" title="用户画像">用户画像</a></li>
 </ul>
 <h1><span id="计算">计算</span><a href="#计算" class="header-anchor">#</a></h1><ul>
-<li><a href="/www6vHomeHexo/2022/06/17/bigDataComputing/" title="大数据 计算Computing">大数据 计算Computing</a></li>
+<li><a href="/www6vHomeHexo/2022/06/17/bigDataComputing/" title="大数据 计算Computing">大数据 计算Computing</a>
+</li>
 <li><a href="/www6vHomeHexo/2022/09/08/bigDataSchedule/" title="大数据 调度">大数据 调度</a></li>
 </ul>
 ]]></content>
@@ -1315,6 +1323,46 @@
       </categories>
       <tags>
         <tag>汇总</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>K8s  AdmissionWebhook</title>
+    <url>/www6vHomeHexo/2023/10/16/k8sAdmissionWebhook/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="mutatingadmissionwebhook-是如何工作的1chat">MutatingAdmissionWebhook 是如何工作的[1][chat]</span><a href="#mutatingadmissionwebhook-是如何工作的1chat" class="header-anchor">#</a></h2><p><code>MutatingAdmissionWebhook</code>拦截与<code>MutatingWebhookConfiguration</code>中定义的规则匹配的请求，然后将其发送到Webhook服务器进行处理，然后再持久化到[etcd]（<a href="https://github.com/coreos/etcd">https://github.com/coreos/etcd</a>) 中。 <code>MutatingAdmissionWebhook</code>通过向Webhook服务器发送admission请求来执行变更。Webhook服务器只是遵循[Kubernetes的API]（<a href="https://github.com/kubernetes/kubernetes/blob/v1.9.0/pkg/apis/admission/types.go">https://github.com/kubernetes/kubernetes/blob/v1.9.0/pkg/apis/admission/types.go</a>)  的普通HTTP服务器。</p>
+<p>以下图示了<code>MutatingAdmissionWebhook</code>的工作原理:</p>
+<p><img src="https://github.com/morvencao/kube-mutating-webhook-tutorial/blob/master/mutating-admission-webhook.jpg" alt="mutating-admission-webhook"></p>
+<p><code>MutatingAdmissionWebhook</code>需要三个对象才能正常工作:</p>
+<ol>
+<li><p><strong>MutatingWebhookConfiguration</strong></p>
+<p><code>MutatingAdmissionWebhook</code>需要在<code>apiserver</code>中注册，提供<code>MutatingWebhookConfiguration</code>。在注册过程中，MutatingAdmissionWebhook说明以下内容:</p>
+<ul>
+<li>如何连接到Webhook Admission服务器</li>
+<li>如何验证Webhook Admission服务器</li>
+<li>Webhook Admission服务器的URL路径</li>
+<li>定义了哪些资源和操作它处理的规则</li>
+<li>如何处理来自Webhook Admission服务器的无法识别的错误</li>
+</ul>
+</li>
+<li><p><strong>MutatingAdmissionWebhook本身</strong></p>
+<p><code>MutatingAdmissionWebhook</code>是一种插件式的Admission控制器，可以配置到<code>apiserver</code>中。<code>MutatingAdmissionWebhook</code>插件从<code>MutatingWebhookConfiguration</code>中获取感兴趣的Admission Webhooks列表。然后，<code>MutatingAdmissionWebhook</code>观察到对apiserver的请求，并拦截与admission webhook规则匹配的请求，并并行地调用它们。</p>
+</li>
+<li><p><strong>Webhook Admission服务器</strong></p>
+<p><code>Webhook Admission服务器</code>只是一个符合Kubernetes [API]（<a href="https://github.com/kubernetes/kubernetes/blob/v1.9.0/pkg/apis/admission/types.go%EF%BC%89%E7%9A%84%E6%99%AE%E9%80%9AHTTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%82%E5%AF%B9%E4%BA%8E%E6%AF%8F%E4%B8%AAAPI">https://github.com/kubernetes/kubernetes/blob/v1.9.0/pkg/apis/admission/types.go）的普通HTTP服务器。对于每个API</a> server的请求，<code>MutatingAdmissionWebhook</code>将admissionReview（用于参考的[API]（<a href="https://github.com/kubernetes/kubernetes/blob/v1.9.0/pkg/apis/admission/types.go%EF%BC%89%EF%BC%89%E5%8F%91%E9%80%81%E5%88%B0%E7%9B%B8%E5%85%B3%E7%9A%84webhook">https://github.com/kubernetes/kubernetes/blob/v1.9.0/pkg/apis/admission/types.go））发送到相关的webhook</a> admission服务器。webhook admission服务器会从admissionReview中收集信息，如<code>object</code>，<code>oldobject</code>和<code>userInfo</code>，然后返回一个admissionReview响应，其中包括填充了admission决策和可选的<code>Patch</code>以改变资源的AdmissionResponse。</p>
+</li>
+</ol>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://medium.com/ibm-cloud/diving-into-kubernetes-mutatingadmissionwebhook-6ef3c5695f74">Diving into Kubernetes MutatingAdmissionWebhook</a><br><a href="https://github.com/www6v/kube-sidecar-injector">kube-sidecar-injector</a>  git</li>
+</ol>
+]]></content>
+      <categories>
+        <category>云原生</category>
+        <category>Kubernetes</category>
+      </categories>
+      <tags>
+        <tag>Kubernetes</tag>
       </tags>
   </entry>
   <entry>
@@ -2560,6 +2608,37 @@
       </tags>
   </entry>
   <entry>
+    <title>数据中台</title>
+    <url>/www6vHomeHexo/2022/10/16/dataMiddlePlatform/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h1><span id="数据中台">数据中台</span><a href="#数据中台" class="header-anchor">#</a></h1><h3><span id="数据中台全景">数据中台全景</span><a href="#数据中台全景" class="header-anchor">#</a></h3><ul>
+<li><p>数据中台全景[6]</p>
+<img src="/www6vHomeHexo/2022/10/16/dataMiddlePlatform/middleStage-data.jpg" class>
+</li>
+<li><p>数据中台全景-阿里[7]</p>
+<img src="/www6vHomeHexo/2022/10/16/dataMiddlePlatform/middleStage-data-ali.jpg" class title="数据中台全景-阿里">
+
+</li>
+<li><p>zhyt</p>
+<img src="/www6vHomeHexo/2022/10/16/dataMiddlePlatform/zhyt.png" class title="中和应泰"></li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="6">
+<li><a href="https://www.esensoft.com/industry-news/dx-24039.html">一文读懂数据中台架构体系</a> *** </li>
+<li><a href="https://xie.infoq.cn/article/8147ffdb15528ce08008d8100">数据中台各种架构图</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>数据中台</category>
+      </categories>
+      <tags>
+        <tag>数据中台</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>AWS 学习资源</title>
     <url>/www6vHomeHexo/2022/10/01/awsStudyResource/</url>
     <content><![CDATA[<p></p>
@@ -3181,7 +3260,8 @@
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247499260&idx=2&sn=5c6f1fb40cd90edd63ea7974284af09b">日处理数据量超10亿：友信金服基于Flink构建实时用户画像系统的实践</a></li>
 <li><a href="https://mp.weixin.qq.com/s/jyiDWiK0zczEaZKY5Hy5xg">网易大数据用户画像实践 </a></li>
-<li><a href="https://mp.weixin.qq.com/s?__biz=MzU1NTMyOTI4Mw==&mid=2247500642&idx=1&sn=15b22586962cee5c58bb58d898c9a465">用户画像技术及方法论</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzU1NTMyOTI4Mw==&mid=2247500642&idx=1&sn=15b22586962cee5c58bb58d898c9a465">用户画像技术及方法论</a> ***</li>
+<li><a href="https://zhuanlan.zhihu.com/p/466822319">实战案例：手把手教你构建电商用户画像(附代码）</a> 未</li>
 </ol>
 ]]></content>
       <categories>
@@ -3313,6 +3393,8 @@
 <li><a href="https://xie.infoq.cn/article/f305ea8be1935540432aca0d0">用户行为分析模型实践（二）—— 漏斗分析模型</a>  vivo</li>
 <li><a href="https://xie.infoq.cn/article/1163e5781f37b4e55a2c43c70">用户行为分析模型实践（三）——H5 通用分析模型</a></li>
 <li><a href="https://mp.weixin.qq.com/s?__biz=MzU1NDA4NjU2MA==&mid=2247486360&idx=1&sn=85504543498dfc82e5e720b77faa602d">基于Spark的用户行为路径分析的产品化实践</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/146639831">【分析框架】用户行为分析</a> *** 未</li>
+<li><a href="https://zhuanlan.zhihu.com/p/133962465">淘宝用户行为分析（附Python源码）</a> *** 未</li>
 </ol>
 ]]></content>
       <categories>
@@ -3440,7 +3522,46 @@
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
+<!-- toc -->
+
+<ul>
+<li><a href="#%E7%89%B9%E6%80%A7">特性</a></li>
+<li><a href="#%E9%99%90%E5%88%B6">限制</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%95%E6%93%8E">数据库引擎</a></li>
+<li><a href="#%E8%A1%A8%E5%BC%95%E6%93%8E">表引擎</a><ul>
+<li><a href="#mergetree">MergeTree</a></li>
+<li><a href="#%E6%97%A5%E5%BF%97">日志</a></li>
+<li><a href="#%E9%9B%86%E6%88%90%E5%BC%95%E6%93%8E">集成引擎</a></li>
+<li><a href="#%E7%94%A8%E4%BA%8E%E5%85%B6%E4%BB%96%E7%89%B9%E5%AE%9A%E5%8A%9F%E8%83%BD%E7%9A%84%E5%BC%95%E6%93%8E">用于其他特定功能的引擎</a></li>
+</ul>
+</li>
+<li><a href="#%E7%B4%A2%E5%BC%95">索引</a><ul>
+<li><a href="#%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95-3">主键索引 [3]</a></li>
+<li><a href="#%E7%A8%80%E7%96%8F%E7%B4%A2%E5%BC%95-4">稀疏索引 [4]</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="特性">特性</span><a href="#特性" class="header-anchor">#</a></h1><ul>
+<li>列式数据库</li>
+<li>数据压缩</li>
+<li>支持SQL</li>
+<li>向量引擎</li>
+<li>实时的数据更新<br>使查询能够快速在主键中进行范围查找, 以增量的方式有序的存储在MergeTree中</li>
+<li>索引<br>按照主键对数据进行排序，对数据特定值或范围的查找。</li>
+<li>支持近似计算</li>
+<li>支持数据复制和数据完整性<br>副本， 故障后自动恢复</li>
+</ul>
+<h1><span id="限制">限制</span><a href="#限制" class="header-anchor">#</a></h1><ul>
+<li>没有完整的事务支持。</li>
+<li>稀疏索引使得ClickHouse不适合通过其键检索单行的点查询</li>
+</ul>
 <h1><span id="数据库引擎">数据库引擎</span><a href="#数据库引擎" class="header-anchor">#</a></h1><p>默认情况下，ClickHouse使用<strong>Atomic</strong>数据库引擎</p>
 <ul>
 <li><a href="https://clickhouse.com/docs/zh/engines/database-engines/mysql">MySQL</a></li>
@@ -3479,7 +3600,7 @@
 <li><p><a href="https://clickhouse.com/docs/zh/engines/table-engines/special/materializedview#materializedview">MaterializedView</a></p>
 </li>
 </ul>
-<h1><span id="主键索引-3">主键索引 [3]</span><a href="#主键索引-3" class="header-anchor">#</a></h1><h1><span id="稀疏索引-4">稀疏索引 [4]</span><a href="#稀疏索引-4" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<h1><span id="索引">索引</span><a href="#索引" class="header-anchor">#</a></h1><h2><span id="主键索引-3">主键索引 [3]</span><a href="#主键索引-3" class="header-anchor">#</a></h2><h2><span id="稀疏索引-4">稀疏索引 [4]</span><a href="#稀疏索引-4" class="header-anchor">#</a></h2><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><p><a href="https://clickhouse.com/docs/zh/engines/database-engines">数据库引擎</a></p>
 </li>
 <li><p><a href="https://clickhouse.com/docs/zh/engines/table-engines">表引擎</a></p>
@@ -5036,6 +5157,7 @@
 <li><a href="#ads-%E5%B1%82-%E4%BB%A5%E7%AA%97%E5%8F%A3%E4%B8%BA%E6%A0%B8%E5%BF%83%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-6">ADS 层 - 以窗口为核心的解决方案 [6]</a></li>
 </ul>
 </li>
+<li><a href="#zhyt">ZHYT</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
@@ -5155,6 +5277,14 @@
 <td>dynamic_cumulate。</td>
 </tr>
 </tbody></table>
+<h1><span id="zhyt">ZHYT</span><a href="#zhyt" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/zhyt.png" class>
+
+<img src="/www6vHomeHexo/2022/07/18/realtimeDataWarehouse/zhyt-hangqing.png" class>
+
+
+
+
+
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://tech.meituan.com/2021/08/26/data-warehouse-in-meituan-waimai.html">美团外卖实时数仓建设实践</a>  美团 </li>
 <li><a href="https://notomato.blog.csdn.net/article/details/110635856">一篇文章搞懂数据仓库：三种事实表（设计原则，设计方法、对比）</a></li>
@@ -27061,10 +27191,6 @@ nq： 不排队调度
 <li><a href="#%E6%8A%80%E6%9C%AF%E4%B8%AD%E5%8F%B0-123">技术中台 [1][2][3]</a></li>
 </ul>
 </li>
-<li><a href="#%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0">数据中台</a><ul>
-<li><a href="#%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0%E5%85%A8%E6%99%AF">数据中台全景</a></li>
-</ul>
-</li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
@@ -27101,21 +27227,14 @@ nq： 不排队调度
 </ul>
 <h3><span id="技术中台-123">技术中台 [1][2][3]</span><a href="#技术中台-123" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2019/05/02/middleStage/middleStage-it.jpg" class title="技术中台">
 
-<h1><span id="数据中台">数据中台</span><a href="#数据中台" class="header-anchor">#</a></h1><h3><span id="数据中台全景">数据中台全景</span><a href="#数据中台全景" class="header-anchor">#</a></h3><ul>
-<li><p>数据中台全景[6]</p>
-<img src="/www6vHomeHexo/2019/05/02/middleStage/middleStage-data.jpg" class>
-</li>
-<li><p>数据中台全景-阿里[7]</p>
-<img src="/www6vHomeHexo/2019/05/02/middleStage/middleStage-data-ali.jpg" class title="数据中台全景-阿里"></li>
-</ul>
+
+
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li>《企业IT架构转型之道-阿里巴巴中台战略思想与架构实战》 钟华</li>
 <li><a href="https://mp.weixin.qq.com/s/Cfg-7MzabvPOLWrrlTVXzA">全面异步化：淘宝反应式架构升级探索</a></li>
 <li><a href="https://mp.weixin.qq.com/s/RM3ffBCJqoQ2JMPKHgmv0Q">淘宝应用柔性架构的探索</a></li>
 <li>《微服务架构核心20讲-如何理解阿里巴巴提出的微服务中台战略？》 杨波</li>
 <li><a href="https://www.sohu.com/na/465557053_411876">中小型电商相当适配：京东商城系统架构设计原则精炼</a></li>
-<li><a href="https://www.esensoft.com/industry-news/dx-24039.html">一文读懂数据中台架构体系</a> *** </li>
-<li><a href="https://xie.infoq.cn/article/8147ffdb15528ce08008d8100">数据中台各种架构图</a></li>
 </ol>
 ]]></content>
       <categories>
@@ -27877,8 +27996,8 @@ nq： 不排队调度
         <category>总结</category>
       </categories>
       <tags>
-        <tag>基础</tag>
         <tag>性能</tag>
+        <tag>基础</tag>
         <tag>性能优化</tag>
       </tags>
   </entry>
