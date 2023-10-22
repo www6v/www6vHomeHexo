@@ -153,7 +153,8 @@
 <h2><span id="生产化">生产化</span><a href="#生产化" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/02/02/k8sAppMigrate/" title="K8S 应用迁移至K8S">K8S 应用迁移至K8S</a> </li>
 <li><a href="/www6vHomeHexo/2022/01/02/k8sHA/" title="K8S高可用-控制面">K8S高可用-控制面</a> </li>
-<li><a href="/www6vHomeHexo/2022/04/05/k8sAvailable/" title="K8S高可用-零停机">K8S高可用-零停机</a> </li>
+<li><a href="/www6vHomeHexo/2022/04/05/k8sAvailable/" title="K8S高可用-零停机[自主中断]">K8S高可用-零停机[自主中断]</a> </li>
+<li><a href="/www6vHomeHexo/2022/10/22/k8sAvailableHealth/" title="K8S高可用-零停机[探针]">K8S高可用-零停机[探针]</a> </li>
 <li><a href="/www6vHomeHexo/2020/08/16/linuxKernelParam/" title="虚拟机和容器中的内核参数 kernel">虚拟机和容器中的内核参数 kernel</a> </li>
 <li><a href="/www6vHomeHexo/2022/01/16/k8sUpgrade/" title="Kubernetes 升级upgrade">Kubernetes 升级upgrade</a></li>
 </ul>
@@ -1331,9 +1332,11 @@
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h2><span id="mutatingadmissionwebhook-是如何工作的1chat">MutatingAdmissionWebhook 是如何工作的[1][chat]</span><a href="#mutatingadmissionwebhook-是如何工作的1chat" class="header-anchor">#</a></h2><p><code>MutatingAdmissionWebhook</code>拦截与<code>MutatingWebhookConfiguration</code>中定义的规则匹配的请求，然后将其发送到Webhook服务器进行处理，然后再持久化到[etcd]（<a href="https://github.com/coreos/etcd">https://github.com/coreos/etcd</a>) 中。 <code>MutatingAdmissionWebhook</code>通过向Webhook服务器发送admission请求来执行变更。Webhook服务器只是遵循[Kubernetes的API]（<a href="https://github.com/kubernetes/kubernetes/blob/v1.9.0/pkg/apis/admission/types.go">https://github.com/kubernetes/kubernetes/blob/v1.9.0/pkg/apis/admission/types.go</a>)  的普通HTTP服务器。</p>
+<h2><span id="mutatingadmissionwebhook-是如何工作的1chat">MutatingAdmissionWebhook 是如何工作的[1][chat]</span><a href="#mutatingadmissionwebhook-是如何工作的1chat" class="header-anchor">#</a></h2><p><code>MutatingAdmissionWebhook</code>拦截与<code>MutatingWebhookConfiguration</code>中定义的规则匹配的请求，然后将其发送到Webhook服务器进行处理，然后再持久化到<a href="https://github.com/coreos/etcd">etcd</a> 中。 <code>MutatingAdmissionWebhook</code>通过向Webhook服务器发送admission请求来执行变更。Webhook服务器只是遵循<a href="https://github.com/kubernetes/kubernetes/blob/v1.9.0/pkg/apis/admission/types.go">Kubernetes的API</a>  的普通HTTP服务器。</p>
 <p>以下图示了<code>MutatingAdmissionWebhook</code>的工作原理:</p>
-<p><img src="https://github.com/morvencao/kube-mutating-webhook-tutorial/blob/master/mutating-admission-webhook.jpg" alt="mutating-admission-webhook"></p>
+<img src="/www6vHomeHexo/2023/10/16/k8sAdmissionWebhook/admissionWebhook.jpg" class>
+
+
 <p><code>MutatingAdmissionWebhook</code>需要三个对象才能正常工作:</p>
 <ol>
 <li><p><strong>MutatingWebhookConfiguration</strong></p>
@@ -1346,13 +1349,22 @@
 <li>如何处理来自Webhook Admission服务器的无法识别的错误</li>
 </ul>
 </li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apiVersion: admissionregistration.k8s.io/v1beta1</span><br><span class="line">kind: MutatingWebhookConfiguration</span><br><span class="line">metadata:</span><br><span class="line">  name: sidecar-injector-webhook-cfg</span><br><span class="line">  labels:</span><br><span class="line">    app: sidecar-injector</span><br><span class="line">webhooks:</span><br><span class="line">  - name: sidecar-injector.morven.me</span><br><span class="line">    clientConfig:</span><br><span class="line">      service:</span><br><span class="line">        name: sidecar-injector-webhook-svc   #2</span><br><span class="line">        namespace: default</span><br><span class="line">        path: &quot;/mutate&quot;</span><br><span class="line">      caBundle: $&#123;CA_BUNDLE&#125;</span><br><span class="line">    rules:</span><br><span class="line">      - operations: [ &quot;CREATE&quot; ]</span><br><span class="line">        apiGroups: [&quot;&quot;]</span><br><span class="line">        apiVersions: [&quot;v1&quot;]</span><br><span class="line">        resources: [&quot;pods&quot;]</span><br><span class="line">    namespaceSelector:</span><br><span class="line">      matchLabels:</span><br><span class="line">        sidecar-injector: enabled</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
 <li><p><strong>MutatingAdmissionWebhook本身</strong></p>
 <p><code>MutatingAdmissionWebhook</code>是一种插件式的Admission控制器，可以配置到<code>apiserver</code>中。<code>MutatingAdmissionWebhook</code>插件从<code>MutatingWebhookConfiguration</code>中获取感兴趣的Admission Webhooks列表。然后，<code>MutatingAdmissionWebhook</code>观察到对apiserver的请求，并拦截与admission webhook规则匹配的请求，并并行地调用它们。</p>
 </li>
-<li><p><strong>Webhook Admission服务器</strong></p>
-<p><code>Webhook Admission服务器</code>只是一个符合Kubernetes [API]（<a href="https://github.com/kubernetes/kubernetes/blob/v1.9.0/pkg/apis/admission/types.go%EF%BC%89%E7%9A%84%E6%99%AE%E9%80%9AHTTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%82%E5%AF%B9%E4%BA%8E%E6%AF%8F%E4%B8%AAAPI">https://github.com/kubernetes/kubernetes/blob/v1.9.0/pkg/apis/admission/types.go）的普通HTTP服务器。对于每个API</a> server的请求，<code>MutatingAdmissionWebhook</code>将admissionReview（用于参考的[API]（<a href="https://github.com/kubernetes/kubernetes/blob/v1.9.0/pkg/apis/admission/types.go%EF%BC%89%EF%BC%89%E5%8F%91%E9%80%81%E5%88%B0%E7%9B%B8%E5%85%B3%E7%9A%84webhook">https://github.com/kubernetes/kubernetes/blob/v1.9.0/pkg/apis/admission/types.go））发送到相关的webhook</a> admission服务器。webhook admission服务器会从admissionReview中收集信息，如<code>object</code>，<code>oldobject</code>和<code>userInfo</code>，然后返回一个admissionReview响应，其中包括填充了admission决策和可选的<code>Patch</code>以改变资源的AdmissionResponse。</p>
+<li><p><strong>Webhook Admission Server</strong></p>
+<p><code>Webhook Admission服务器</code>只是一个符合Kubernetes <a href="https://github.com/kubernetes/kubernetes/blob/v1.9.0/pkg/apis/admission/types.go">API</a>的普通HTTP服务器。对于每个API server的请求，<code>MutatingAdmissionWebhook</code>将admissionReview（用于参考的<a href="https://github.com/kubernetes/kubernetes/blob/v1.9.0/pkg/apis/admission/types.go">API</a>）发送到相关的webhook admission服务器。webhook admission服务器会从admissionReview中收集信息，如<code>object</code>，<code>oldobject</code>和<code>userInfo</code>，然后返回一个admissionReview响应，其中包括填充了admission决策和可选的<code>Patch</code>以改变资源的AdmissionResponse。</p>
 </li>
 </ol>
+<h3><span id="服务部署">服务部署</span><a href="#服务部署" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apiVersion: extensions/v1beta1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: sidecar-injector-webhook-deployment</span><br><span class="line">  labels:</span><br><span class="line">    app: sidecar-injector</span><br><span class="line">spec:</span><br><span class="line">  replicas: 1</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: sidecar-injector</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">        - name: sidecar-injector</span><br><span class="line">          image: morvencao/sidecar-injector:v1</span><br><span class="line">          imagePullPolicy: IfNotPresent</span><br><span class="line">          args:</span><br><span class="line">            - -sidecarCfgFile=/etc/webhook/config/sidecarconfig.yaml  #1</span><br><span class="line">            - -tlsCertFile=/etc/webhook/certs/cert.pem</span><br><span class="line">            - -tlsKeyFile=/etc/webhook/certs/key.pem</span><br><span class="line">            - -alsologtostderr</span><br><span class="line">            - -v=4</span><br><span class="line">            - 2&gt;&amp;1</span><br><span class="line">          volumeMounts:</span><br><span class="line">            - name: webhook-certs</span><br><span class="line">              mountPath: /etc/webhook/certs</span><br><span class="line">              readOnly: true</span><br><span class="line">            - name: webhook-config</span><br><span class="line">              mountPath: /etc/webhook/config</span><br><span class="line">      volumes:</span><br><span class="line">        - name: webhook-certs</span><br><span class="line">          secret:</span><br><span class="line">            secretName: sidecar-injector-webhook-certs</span><br><span class="line">        - name: webhook-config</span><br><span class="line">          configMap:</span><br><span class="line">            name: sidecar-injector-webhook-configmap</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: ConfigMap</span><br><span class="line">metadata:</span><br><span class="line">  name: sidecar-injector-webhook-configmap</span><br><span class="line">data:</span><br><span class="line">  sidecarconfig.yaml: |</span><br><span class="line">    containers:</span><br><span class="line">      - name: sidecar-nginx</span><br><span class="line">        image: nginx:1.12.2</span><br><span class="line">        imagePullPolicy: IfNotPresent</span><br><span class="line">        ports:</span><br><span class="line">          - containerPort: 80</span><br><span class="line">        volumeMounts:</span><br><span class="line">          - name: nginx-conf</span><br><span class="line">            mountPath: /etc/nginx</span><br><span class="line">    volumes:</span><br><span class="line">      - name: nginx-conf</span><br><span class="line">        configMap:</span><br><span class="line">          name: nginx-configmap</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">  name: sidecar-injector-webhook-svc  #2</span><br><span class="line">  labels:</span><br><span class="line">    app: sidecar-injector</span><br><span class="line">spec:</span><br><span class="line">  ports:</span><br><span class="line">  - port: 443</span><br><span class="line">    targetPort: 443</span><br><span class="line">  selector:</span><br><span class="line">    app: sidecar-injector</span><br></pre></td></tr></table></figure>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://medium.com/ibm-cloud/diving-into-kubernetes-mutatingadmissionwebhook-6ef3c5695f74">Diving into Kubernetes MutatingAdmissionWebhook</a><br><a href="https://github.com/www6v/kube-sidecar-injector">kube-sidecar-injector</a>  git</li>
 </ol>
@@ -2605,6 +2617,69 @@
       </categories>
       <tags>
         <tag>安全</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>K8S高可用-零停机[探针]</title>
+    <url>/www6vHomeHexo/2022/10/22/k8sAvailableHealth/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5">健康检查</a><ul>
+<li><a href="#liveness-probe-2">Liveness Probe [2]</a></li>
+<li><a href="#readiness-probe-2">Readiness Probe  [2]</a></li>
+<li><a href="#startupprobe-4">startupProbe [4]</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BC%98%E9%9B%85%E7%BB%88%E6%AD%A2-5">优雅终止 [5]</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81-6">代码 [6]</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+
+<h1><span id="健康检查">健康检查</span><a href="#健康检查" class="header-anchor">#</a></h1><h3><span id="liveness-probe-2">Liveness Probe [2]</span><a href="#liveness-probe-2" class="header-anchor">#</a></h3><p><strong>确定何时重启容器</strong>. 例如，当应用程序处于运行状态但无法做进一步操作，liveness探针将捕获到deadlock，重启处于该状态下的容器，使应用程序在存在bug的情况下依然能够继续运行下去。<br><strong>liveness的初始值为成功。</strong></p>
+<h3><span id="readiness-probe-2">Readiness Probe  [2]</span><a href="#readiness-probe-2" class="header-anchor">#</a></h3><p><strong>确定容器是否已经就绪可以接受流量.</strong> 该信号的作用是控制哪些Pod应该作为service的后端。如果Pod处于非就绪状态，那么它们将会被从service的load balancer中移除。<br><strong>readiness的初始值为失败。</strong></p>
+<h3><span id="startupprobe-4">startupProbe [4]</span><a href="#startupprobe-4" class="header-anchor">#</a></h3><p>启动检查, 使用启动探针检测容器应用程序是否已经启动<br>对于较新的（≥v1.16）Kubernetes 集群，如果是具有<strong>不可预测或可变启动时间</strong>的应用程序应使用 startup 探针。</p>
+<p><strong>只运行一次。</strong></p>
+<ul>
+<li>探针类型<br>httpGet: 指定端口和路径执行 HTTP GET 请求<br>tcpSocket: 对容器的 IP 地址上的指定端口执行 TCP 检查<br>命令,exec: 在容器内执行指定命令</li>
+</ul>
+<h1><span id="优雅终止-5">优雅终止 [5]</span><a href="#优雅终止-5" class="header-anchor">#</a></h1><p>  系统底层默认会向主进程发送 SIGTERM 信号，而对剩余子进程发送 SIGKILL 信号。系统这样做的大概原因是因为大家在设计主进程脚本的时候都不会进行信号的捕获和传递，这会导致容器关闭时，多个子进程无法被正常终止，所以系统使用 SIGKILL 这个不可屏蔽信号，而是为了能够在没有任何前提条件的情况下，能够把容器中所有的进程关掉。</p>
+<p>  也就是说如果主进程自身不是服务本身，可能会导致是被强制Kill的，解决的方法也很简单，也就是在主进程中对收到的信号做个转发，发送到容器中的其他子进程，这样容器中的所有进程在停止时，都会收到 SIGTERM，而不是 SIGKILL 信号了。</p>
+<h1><span id="代码-6">代码 [6]</span><a href="#代码-6" class="header-anchor">#</a></h1><ul>
+<li><p>Probe</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">default</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="comment"># 存活检测</span></span><br><span class="line">    <span class="attr">livenessProbe:</span></span><br><span class="line">      <span class="attr">failureThreshold:</span> <span class="number">3</span></span><br><span class="line">      <span class="attr">initialDelaySeconds:</span> <span class="number">30</span></span><br><span class="line">      <span class="attr">periodSeconds:</span> <span class="number">30</span></span><br><span class="line">      <span class="attr">successThreshold:</span> <span class="number">1</span></span><br><span class="line">      <span class="attr">tcpSocket:</span></span><br><span class="line">        <span class="attr">port:</span> <span class="number">5084</span></span><br><span class="line">      <span class="attr">timeoutSeconds:</span> <span class="number">1</span></span><br><span class="line">    <span class="comment"># 就绪检测</span></span><br><span class="line">    <span class="attr">readinessProbe:</span></span><br><span class="line">      <span class="attr">failureThreshold:</span> <span class="number">3</span></span><br><span class="line">      <span class="attr">initialDelaySeconds:</span> <span class="number">30</span></span><br><span class="line">      <span class="attr">periodSeconds:</span> <span class="number">30</span></span><br><span class="line">      <span class="attr">successThreshold:</span> <span class="number">1</span></span><br><span class="line">      <span class="attr">tcpSocket:</span></span><br><span class="line">        <span class="attr">port:</span> <span class="number">5084</span></span><br><span class="line">      <span class="attr">timeoutSeconds:</span> <span class="number">1</span></span><br><span class="line">    <span class="comment"># 优雅退出</span></span><br><span class="line">    <span class="attr">lifecycle:</span> </span><br><span class="line">      <span class="attr">preStop:</span> </span><br><span class="line">        <span class="attr">exec:</span> </span><br><span class="line">          <span class="attr">command:</span> </span><br><span class="line">          <span class="bullet">-</span> <span class="string">sleep</span></span><br><span class="line">          <span class="bullet">-</span> <span class="number">30</span></span><br><span class="line">  <span class="attr">terminationGracePeriodSeconds:</span> <span class="number">60</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Service<br>Cluster 模式（externalTrafficPolicy: Cluster）</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">default</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">externalTrafficPolicy:</span> <span class="string">Cluster</span>  <span class="comment">###</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">port:</span> <span class="number">80</span></span><br><span class="line">    <span class="attr">protocol:</span> <span class="string">TCP</span></span><br><span class="line">    <span class="attr">targetPort:</span> <span class="number">80</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">run:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">LoadBalancer</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>Local 模式（externalTrafficPolicy: Local）</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">default</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">externalTrafficPolicy:</span> <span class="string">Local</span>  <span class="comment">###</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">port:</span> <span class="number">80</span></span><br><span class="line">    <span class="attr">protocol:</span> <span class="string">TCP</span></span><br><span class="line">    <span class="attr">targetPort:</span> <span class="number">80</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">run:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">LoadBalancer</span></span><br></pre></td></tr></table></figure>
+
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>健康检查</p>
+<ol>
+<li><a href="https://blog.51cto.com/3842834/2317986">Liveness和Readiness两种Health Check手段在Kubernetes中的使用</a>  耕耘实录</li>
+<li><a href="https://github.com/rootsongjc/kubernetes-handbook/blob/master/guide/configure-liveness-readiness-probes.md">配置Pod的liveness和readiness探针</a>  宋净超</li>
+<li><a href="https://www.cnblogs.com/xuxinkun/p/11785521.html">liveness与readiness的探针工作方式源码解析</a>  xinkun的博客</li>
+<li><a href="https://mp.weixin.qq.com/s/wT_NQF9xYfKD3wVm6yUUMw">Kubernetes 探针详解！</a> </li>
+<li>04 | 理解进程(3):为什么我在容器中的进程被强制杀死了? -  李程远 </li>
+<li><a href="https://blog.csdn.net/alisystemsoftware/article/details/106520606">更新应用时，如何实现 K8s 零中断滚动更新</a> ***</li>
+</ol>
+]]></content>
+      <categories>
+        <category>云原生</category>
+        <category>Kubernetes</category>
+      </categories>
+      <tags>
+        <tag>Kubernetes</tag>
       </tags>
   </entry>
   <entry>
@@ -11852,37 +11927,34 @@ BGP 协议传输的消息
       </tags>
   </entry>
   <entry>
-    <title>K8S高可用-零停机</title>
+    <title>K8S高可用-零停机[自主中断]</title>
     <url>/www6vHomeHexo/2022/04/05/k8sAvailable/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h2><span id="自主中断和非自主中断4">自主中断和非自主中断[4]</span><a href="#自主中断和非自主中断4" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/04/05/k8sAvailable/interrupt.png" class title="自主中断和非自主中断">
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
-<h2><span id="poddisruptionbudged">PodDisruptionBudged</span><a href="#poddisruptionbudged" class="header-anchor">#</a></h2><ol>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E8%87%AA%E4%B8%BB%E4%B8%AD%E6%96%AD%E5%92%8C%E9%9D%9E%E8%87%AA%E4%B8%BB%E4%B8%AD%E6%96%AD4">自主中断和非自主中断[4]</a></li>
+<li><a href="#poddisruptionbudged-4">PodDisruptionBudged [4]</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="自主中断和非自主中断4">自主中断和非自主中断[4]</span><a href="#自主中断和非自主中断4" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/04/05/k8sAvailable/interrupt.png" class title="自主中断和非自主中断">
+
+<h1><span id="poddisruptionbudged-4">PodDisruptionBudged [4]</span><a href="#poddisruptionbudged-4" class="header-anchor">#</a></h1><ol>
 <li>无状态应用：<br>maxUnavailable &#x3D; 40%</li>
 <li>单实例有状态应用: </li>
 <li>多实例有状态应用：<br>etcd N, maxUnavailable&#x3D;1 或者 minAvailable&#x3D;N</li>
 </ol>
-<h2><span id="健康检查">健康检查</span><a href="#健康检查" class="header-anchor">#</a></h2><p><strong>Liveness Probe</strong>:  确定何时重启容器. 例如，当应用程序处于运行状态但无法做进一步操作，liveness探针将捕获到deadlock，重启处于该状态下的容器，使应用程序在存在bug的情况下依然能够继续运行下去。<br>liveness的初始值为成功。<br><strong>Readiness Probe</strong>:  确定容器是否已经就绪可以接受流量. 该信号的作用是控制哪些Pod应该作为service的后端。如果Pod处于非就绪状态，那么它们将会被从service的load balancer中移除。<br>readiness的初始值为失败。<br><strong>startupProbe</strong>: 启动检查, 使用启动探针检测容器应用程序是否已经启动</p>
-<ul>
-<li>探针类型<br>httpGet: 指定端口和路径执行 HTTP GET 请求<br>tcpSocket: 对容器的 IP 地址上的指定端口执行 TCP 检查<br>命令,exec: 在容器内执行指定命令</li>
-</ul>
-<h2><span id="优雅终止-3">优雅终止 [3]</span><a href="#优雅终止-3" class="header-anchor">#</a></h2><p>  系统底层默认会向主进程发送 SIGTERM 信号，而对剩余子进程发送 SIGKILL 信号。系统这样做的大概原因是因为大家在设计主进程脚本的时候都不会进行信号的捕获和传递，这会导致容器关闭时，多个子进程无法被正常终止，所以系统使用 SIGKILL 这个不可屏蔽信号，而是为了能够在没有任何前提条件的情况下，能够把容器中所有的进程关掉。</p>
-<p>  也就是说如果主进程自身不是服务本身，可能会导致是被强制Kill的，解决的方法也很简单，也就是在主进程中对收到的信号做个转发，发送到容器中的其他子进程，这样容器中的所有进程在停止时，都会收到 SIGTERM，而不是 SIGKILL 信号了。</p>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://blog.csdn.net/alisystemsoftware/article/details/106520606">更新应用时，如何实现 K8s 零中断滚动更新</a> 未</li>
-<li><a href="https://zhuanlan.zhihu.com/p/360521649">使用 PDB 避免 Kubernetes 集群中断</a> 未</li>
-<li>04 | 理解进程(3):为什么我在容器中的进程被强制杀死了? -  李程远 </li>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="4">
 <li>模块十一： 将应用迁移至Kubernetes平台</li>
-</ol>
-<hr>
-<p>健康检查</p>
-<ol>
-<li><a href="https://blog.51cto.com/3842834/2317986">Liveness和Readiness两种Health Check手段在Kubernetes中的使用</a>  耕耘实录</li>
-<li><a href="https://github.com/rootsongjc/kubernetes-handbook/blob/master/guide/configure-liveness-readiness-probes.md">配置Pod的liveness和readiness探针</a>  宋净超</li>
-<li><a href="https://www.cnblogs.com/xuxinkun/p/11785521.html">liveness与readiness的探针工作方式源码解析</a>  xinkun的博客</li>
-<li><a href="https://mp.weixin.qq.com/s/wT_NQF9xYfKD3wVm6yUUMw">Kubernetes 探针详解！</a> 未</li>
+<li><a href="https://zhuanlan.zhihu.com/p/360521649">使用 PDB 避免 Kubernetes 集群中断</a> 未</li>
 </ol>
 ]]></content>
       <categories>
@@ -21325,20 +21397,21 @@ BGP 协议传输的消息
 <ul>
 <li><p><a href="https://yq.aliyun.com/live/2831">Alibaba Cloud Native Day 杭州站 2020-05-30 2020年第二期</a> seen  网盘里有ppt</p>
 </li>
-<li><p><a href="https://www.bilibili.com/video/BV1qt4y1C74P">基于阿里云容器服务&amp;ECI的在线业务弹性伸缩最佳实践</a> video seen 钉钉2020.6.12有相同的视频<br>ECI, kata, vitual kubelet</p>
-</li>
-<li><p><a href="https://www.bilibili.com/video/BV1mK4y1t7WS/">如何为云原生应用带来稳定高效的部署能力？</a> video seen 钉钉2020.05.28有相同的视频<br><a href="https://yq.aliyun.com/articles/762949">如何为云原生应用带来稳定高效的部署能力？</a> text seen<br>CloneSet, Advanced StatefulSet, OpenKuise</p>
-</li>
-<li><p><a href="https://blog.csdn.net/zl1zl2zl3/article/details/106129314">云原生时代消息中间件的演进路线</a> text 未 钉钉2020.05.28有相同的视频</p>
-</li>
 <li><p><a href="https://edu.csdn.net/course/play/29034/407143?spm=1002.2009.3001.4024">阿里云核心技术竞争力第二期</a> 未</p>
 </li>
 <li><p><a href="https://jimmysong.io/guide-to-cloud-native-app/">云原生应用白皮书 - 定义云原生应用标准</a>  **</p>
 </li>
-<li><p>Serverless<br><a href="https://yq.aliyun.com/articles/744370">Serverless 工程化落地与实践</a>  video 未<br><a href="https://www.bilibili.com/video/av925967133">云原生之Serverless互联网实践专场</a> video 未  3个分享 钉钉2020.05.26有相同的视频</p>
+</ul>
+<h3><span id="serverless">Serverless</span><a href="#serverless" class="header-anchor">#</a></h3><p><a href="https://yq.aliyun.com/articles/744370">Serverless 工程化落地与实践</a>  video 未<br><a href="https://www.bilibili.com/video/av925967133">云原生之Serverless互联网实践专场</a> video 未  3个分享 钉钉2020.05.26有相同的视频<br><a href="https://developer.aliyun.com/learning/roadmap/serverless">Serverless 技术公开课</a>   *** 阿里</p>
+<h3><span id="devops">DevOps</span><a href="#devops" class="header-anchor">#</a></h3><p><a href="https://developer.aliyun.com/live/2730">2020阿里巴巴研发效能峰会——云原生应用与架构专场</a> video seen<br><a href="https://yq.aliyun.com/live/2499">阿里巴巴DevOps文化浅谈</a> video  未<br><a href="https://yq.aliyun.com/articles/744373">云原生时代 Devops 实操笔记</a> video  10期 未</p>
+<h3><span id="容器">容器</span><a href="#容器" class="header-anchor">#</a></h3><ul>
+<li><p><a href="https://www.bilibili.com/video/BV1qt4y1C74P">基于阿里云容器服务&amp;ECI的在线业务弹性伸缩最佳实践</a> video seen 钉钉2020.6.12有相同的视频<br>ECI, kata, vitual kubelet</p>
 </li>
-<li><p>DevOps<br><a href="https://developer.aliyun.com/live/2730">2020阿里巴巴研发效能峰会——云原生应用与架构专场</a> video seen<br><a href="https://yq.aliyun.com/live/2499">阿里巴巴DevOps文化浅谈</a> video  未<br><a href="https://yq.aliyun.com/articles/744373">云原生时代 Devops 实操笔记</a> video  10期 未</p>
+<li><p><a href="https://www.bilibili.com/video/BV1mK4y1t7WS/">如何为云原生应用带来稳定高效的部署能力？</a> video seen 钉钉2020.05.28有相同的视频<br><a href="https://yq.aliyun.com/articles/762949">如何为云原生应用带来稳定高效的部署能力？</a> text seen<br>CloneSet, Advanced StatefulSet, OpenKuise</p>
 </li>
+</ul>
+<h3><span id="中间件">中间件</span><a href="#中间件" class="header-anchor">#</a></h3><ul>
+<li><a href="https://blog.csdn.net/zl1zl2zl3/article/details/106129314">云原生时代消息中间件的演进路线</a> text 未 钉钉2020.05.28有相同的视频</li>
 </ul>
 ]]></content>
       <categories>
@@ -25999,8 +26072,8 @@ nq： 不排队调度
         <category>serviceMesh</category>
       </categories>
       <tags>
-        <tag>k8s</tag>
         <tag>istio</tag>
+        <tag>k8s</tag>
       </tags>
   </entry>
   <entry>
@@ -27996,8 +28069,8 @@ nq： 不排队调度
         <category>总结</category>
       </categories>
       <tags>
-        <tag>性能</tag>
         <tag>基础</tag>
+        <tag>性能</tag>
         <tag>性能优化</tag>
       </tags>
   </entry>
