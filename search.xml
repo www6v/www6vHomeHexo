@@ -2465,18 +2465,60 @@
 <li>Example Selectors [类比选择]</li>
 </ul>
 </li>
+<li>function call[2]</li>
 </ul>
 </li>
 <li><p>Retrieval</p>
 <ul>
+<li>Document Loaders</li>
+<li>Text Splitters</li>
+<li>Retrievers-VectoreStoreRetriever</li>
+<li>VectorStores</li>
 <li>index</li>
 </ul>
 </li>
+<li><p>Memory</p>
+</li>
+<li><p>Chains</p>
+<ul>
+<li>2大类<br>Chain interface[Legacy]<br>LangChain Expression Language (LCEL)</li>
+<li>Foundational<ul>
+<li>LLM</li>
+<li>Sequential- SequentialChain</li>
+<li>Router</li>
+<li>Transformation</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Agent</p>
+</li>
+</ul>
+<h1><span id="function-call">Function Call</span><a href="#function-call" class="header-anchor">#</a></h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> langchain.chains.openai_functions.base <span class="keyword">import</span> (</span><br><span class="line">    create_openai_fn_chain,</span><br><span class="line">    create_structured_output_chain,[<span class="number">2</span>]</span><br><span class="line">)</span><br><span class="line"><span class="keyword">from</span> langchain.chains.openai_functions.citation_fuzzy_match <span class="keyword">import</span> (</span><br><span class="line">    create_citation_fuzzy_match_chain,</span><br><span class="line">)</span><br><span class="line"><span class="keyword">from</span> langchain.chains.openai_functions.extraction <span class="keyword">import</span> (</span><br><span class="line">    create_extraction_chain,</span><br><span class="line">    create_extraction_chain_pydantic,</span><br><span class="line">)</span><br><span class="line"><span class="keyword">from</span> langchain.chains.openai_functions.qa_with_structure <span class="keyword">import</span> (</span><br><span class="line">    create_qa_with_sources_chain,</span><br><span class="line">    create_qa_with_structure_chain,</span><br><span class="line">)</span><br><span class="line"><span class="keyword">from</span> langchain.chains.openai_functions.tagging <span class="keyword">import</span> (</span><br><span class="line">    create_tagging_chain,</span><br><span class="line">    create_tagging_chain_pydantic,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+<h1><span id="应用4">应用[4]</span><a href="#应用4" class="header-anchor">#</a></h1><ul>
+<li>Question &amp; Answering Using Documents As Context[3]</li>
+<li>Extraction[Kor]</li>
+<li>Evaluation</li>
+<li>Querying Tabular Data[sqlite]</li>
+<li>Code Understanding</li>
+<li>Interacting with APIs</li>
+<li>Chatbots</li>
 </ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a href="https://github.com/kyrolabs/awesome-langchain">https://github.com/kyrolabs/awesome-langchain</a></li>
-<li><a href="https://github.com/gkamradt/langchain-tutorials">https://github.com/gkamradt/langchain-tutorials</a></li>
-<li><a href="https://github.com/Crossme0809/langchain-tutorials">https://github.com/Crossme0809/langchain-tutorials</a></li>
+<li><p><a href="https://github.com/gkamradt/langchain-tutorials">https://github.com/gkamradt/langchain-tutorials</a></p>
+</li>
+<li><p><a href="https://github.com/www6v/pyExamples/blob/master/langchain/langchain-functioncall.py">functioncall</a></p>
+</li>
+<li><p><a href="https://github.com/www6v/pyExamples/blob/master/langchain/langchain-qaOnDoc.py">qaOnDoc</a></p>
+</li>
+<li><p><a href="https://github.com/www6v/langchain-tutorials/blob/main/LangChain%20Cookbook%20Part%202%20-%20Use%20Cases.ipynb">LangChain Cookbook Part 2: Use Cases</a></p>
+</li>
+<li><p><a href="https://github.com/kyrolabs/awesome-langchain">https://github.com/kyrolabs/awesome-langchain</a></p>
+</li>
+<li><p><a href="https://github.com/Crossme0809/langchain-tutorials">https://github.com/Crossme0809/langchain-tutorials</a></p>
+</li>
 </ol>
 ]]></content>
       <categories>
