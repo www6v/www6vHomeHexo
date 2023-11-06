@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-02T02:45:06.000Z">
-<meta property="article:modified_time" content="2023-11-05T14:02:42.980Z">
+<meta property="article:modified_time" content="2023-11-06T20:33:22.320Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="GPT">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-05 22:02:42" itemprop="dateModified" datetime="2023-11-05T22:02:42+08:00">2023-11-05</time>
+                <time title="修改时间：2023-11-07 04:33:22" itemprop="dateModified" datetime="2023-11-07T04:33:22+08:00">2023-11-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,13 +255,21 @@
 <span id="more"></span>
 
 <h1><span id="basic">Basic</span><a href="#basic" class="header-anchor">#</a></h1><ul>
-<li><p>Model I&#x2F;O </p>
+<li><p>Model I&#x2F;O  </p>
 <ul>
-<li>Prompts <ul>
-<li>Prompt Template</li>
-<li>Example Selectors [类比选择]</li>
+<li>Language models  [10]        <ul>
+<li>LLM</li>
+<li>Chat Model</li>
+<li>Embedding [7]</li>
 </ul>
 </li>
+<li>Prompts <ul>
+<li>Prompt Template</li>
+<li>Few-shot example</li>
+<li>Example Selectors [类比选择]<br>关键字  相似度  长度</li>
+</ul>
+</li>
+<li>Output parsers</li>
 <li>function call[2]</li>
 </ul>
 </li>
@@ -274,7 +282,14 @@
 <li>index</li>
 </ul>
 </li>
-<li><p>Memory</p>
+<li><p>Memory [10]</p>
+<ul>
+<li>帮语言模型补充上下文</li>
+<li>ConversationBufferMemory</li>
+<li>ConversationBufferWindowMemory<br>窗口</li>
+<li>ConversationSummaryMemory</li>
+<li>VectorStoreRetrieverMemory</li>
+</ul>
 </li>
 <li><p>Chains</p>
 <ul>
@@ -289,6 +304,9 @@
 </ul>
 </li>
 <li><p>Agent</p>
+<ul>
+<li>Plan-and-execute agents</li>
+</ul>
 </li>
 </ul>
 <h1><span id="function-call">Function Call</span><a href="#function-call" class="header-anchor">#</a></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> langchain.chains.openai_functions.base <span class="keyword">import</span> (</span><br><span class="line">    create_openai_fn_chain,</span><br><span class="line">    create_structured_output_chain,[<span class="number">2</span>]</span><br><span class="line">)</span><br><span class="line"><span class="keyword">from</span> langchain.chains.openai_functions.citation_fuzzy_match <span class="keyword">import</span> (</span><br><span class="line">    create_citation_fuzzy_match_chain,</span><br><span class="line">)</span><br><span class="line"><span class="keyword">from</span> langchain.chains.openai_functions.extraction <span class="keyword">import</span> (</span><br><span class="line">    create_extraction_chain,</span><br><span class="line">    create_extraction_chain_pydantic,</span><br><span class="line">)</span><br><span class="line"><span class="keyword">from</span> langchain.chains.openai_functions.qa_with_structure <span class="keyword">import</span> (</span><br><span class="line">    create_qa_with_sources_chain,</span><br><span class="line">    create_qa_with_structure_chain,</span><br><span class="line">)</span><br><span class="line"><span class="keyword">from</span> langchain.chains.openai_functions.tagging <span class="keyword">import</span> (</span><br><span class="line">    create_tagging_chain,</span><br><span class="line">    create_tagging_chain_pydantic,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
@@ -304,18 +322,15 @@
 <li>Chatbots</li>
 </ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/gkamradt/langchain-tutorials">https://github.com/gkamradt/langchain-tutorials</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/www6v/pyExamples/blob/master/langchain/langchain-functioncall.py">functioncall</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/www6v/pyExamples/blob/master/langchain/langchain-qaOnDoc.py">qaOnDoc</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/www6v/langchain-tutorials/blob/main/LangChain%20Cookbook%20Part%202%20-%20Use%20Cases.ipynb">LangChain Cookbook Part 2: Use Cases</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/kyrolabs/awesome-langchain">https://github.com/kyrolabs/awesome-langchain</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/Crossme0809/langchain-tutorials">https://github.com/Crossme0809/langchain-tutorials</a></p>
-</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/gkamradt/langchain-tutorials">https://github.com/gkamradt/langchain-tutorials</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/www6v/pyExamples/blob/master/langchain/langchain-functioncall.py">functioncall</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/www6v/pyExamples/blob/master/langchain/langchain-qaOnDoc.py">qaOnDoc</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/www6v/langchain-tutorials/blob/main/LangChain%20Cookbook%20Part%202%20-%20Use%20Cases.ipynb">LangChain Cookbook Part 2: Use Cases</a><br>  10.公开课</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/kyrolabs/awesome-langchain">https://github.com/kyrolabs/awesome-langchain</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Crossme0809/langchain-tutorials">https://github.com/Crossme0809/langchain-tutorials</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2352088">微信向量检索分析一体化数仓探索：OLAP For Embedding</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2313918">一文入门最热的LLM应用开发框架LangChain</a> 未</li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2331337">大模型LangChain框架基础与使用示例</a> 未</li>
 </ol>
 
     </div>
