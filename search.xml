@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>AIGC 汇总</title>
+    <url>/www6vHomeHexo/2022/11/16/gptSummary/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<ul>
+<li><a href="/www6vHomeHexo/2022/10/30/gptBigModel/" title="大模型">大模型</a></li>
+<li><p>Prompt</p>
+<ul>
+<li><a href="/www6vHomeHexo/2022/11/10/gptPromptEngineering/" title="Prompt Engineering">Prompt Engineering</a></li>
+<li><a href="/www6vHomeHexo/2022/07/11/gptPromptResearch/" title="Prompt-学术研究">Prompt-学术研究</a></li>
+<li><a href="/www6vHomeHexo/2021/05/28/gptPromptCode/" title="Prompt-Code">Prompt-Code</a></li>
+<li><a href="/www6vHomeHexo/2021/05/26/gptPrompt/" title="Prompt 总结">Prompt 总结</a></li>
+</ul>
+</li>
+<li><a href="/www6vHomeHexo/2022/05/09/gpt/" title="GPT-工具和应用">GPT-工具和应用</a></li>
+<li><a href="/www6vHomeHexo/2022/11/02/gptAgent/" title="GPT-Agent">GPT-Agent</a></li>
+<li><a href="/www6vHomeHexo/2022/11/10/gptBigModelCOT/" title="COT">COT</a></li>
+<li><a href="/www6vHomeHexo/2022/11/02/gptLangchain/" title="GPT - Langchain">GPT - Langchain</a></li>
+<li><a href="/www6vHomeHexo/2022/11/02/gptRAG/" title="GPT-RAG">GPT-RAG</a></li>
+<li><a href="/www6vHomeHexo/2022/11/16/gptFunctionCall/" title="Function Call">Function Call</a> </li>
+<li><a href="/www6vHomeHexo/2022/11/18/gptFineTuning/" title="Fine-Tuning">Fine-Tuning</a> </li>
+<li><a href="/www6vHomeHexo/2022/08/01/gptStudy/" title="GPT  学习资源">GPT  学习资源</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>汇总</category>
+      </categories>
+      <tags>
+        <tag>AIGC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>云计算 汇总</title>
     <url>/www6vHomeHexo/2022/04/09/cloudComputing/</url>
     <content><![CDATA[<p></p>
@@ -2417,38 +2452,171 @@
       </tags>
   </entry>
   <entry>
+    <title>Fine-Tuning</title>
+    <url>/www6vHomeHexo/2022/11/18/gptFineTuning/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>Fine-Tuning</category>
+      </categories>
+      <tags>
+        <tag>AIGC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Function Call</title>
+    <url>/www6vHomeHexo/2022/11/16/gptFunctionCall/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h1><span id="function-call">Function Call</span><a href="#function-call" class="header-anchor">#</a></h1><h3><span id="调用顺序-12">调用顺序 [1][2]</span><a href="#调用顺序-12" class="header-anchor">#</a></h3><ul>
+<li>Function Calling 整个功能的调用顺序大致如下<ul>
+<li>声明函数：定义当前函数的名称，描述，以及对应的参数信息，并请求对应的接口；</li>
+<li>解析函数参数：接受对应的接口返回，并解析对应的函数参数信息；</li>
+<li>执行函数：根据对应的参数信息调用本地函数；</li>
+<li>上报结果：将本地函数执行的结果上报给 Chat 接口；</li>
+</ul>
+</li>
+</ul>
+<img src="/www6vHomeHexo/2022/11/16/gptFunctionCall/functioncall.png" class>
+
+<h3><span id="代码-2">代码 [2]</span><a href="#代码-2" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><p><a href="https://www.duidaima.com/Group/Topic/OtherTools/13709">如何使用Chat Completions接口的函数调用功能</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/Lvbaby_/article/details/131892482">OpenAI开发系列（十一）：Function calling功能的实际应用流程与案例解析</a>   代码  流程图<br><a href="https://github.com/www6v/AIGC/tree/master/Function%20calling%E5%8A%9F%E8%83%BD%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E6%B5%81%E7%A8%8B%E4%B8%8E%E6%A1%88%E4%BE%8B%E8%A7%A3%E6%9E%90">代码</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/Lvbaby_/article/details/131933871">OpenAI开发系列（十三）：利用Function calling功能开发基于大模型的实时天气查询助手</a> 未</p>
+</li>
+<li><p><a href="https://blog.csdn.net/Lvbaby_/article/details/131912170">OpenAI开发系列（十二）：Function calling功能的流程优化与多轮对话实现</a> 未</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>Function Call</category>
+      </categories>
+      <tags>
+        <tag>Function Call</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Prompt Engineering</title>
+    <url>/www6vHomeHexo/2022/11/10/gptPromptEngineering/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/">Prompt Engineering</a></p>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>prompt</category>
+      </categories>
+      <tags>
+        <tag>Prompt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>COT</title>
+    <url>/www6vHomeHexo/2022/11/10/gptBigModelCOT/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h1><span id="cot1">CoT[1]</span><a href="#cot1" class="header-anchor">#</a></h1><ul>
+<li><p>CoT(Chain of Thought)</p>
+<ul>
+<li>CoT-SC(Self Consistency)</li>
+</ul>
+</li>
+<li><p>ToT(Tree of Thoughts)<br>分为了Thought Decomposition，Thought Generator，State Evaluator，Search algorithms</p>
+</li>
+<li><p>GoT(Graph of Thoughts)</p>
+</li>
+<li><p>AoT(Algorithm of Thoughts)</p>
+</li>
+</ul>
+<ol>
+<li><a href="https://zhuanlan.zhihu.com/p/654034193">2023年能够解决复杂问题的思维链技术：Cot，ToT，GoT，AoT</a></li>
+<li><a href="https://mp.weixin.qq.com/s/nXoZJ4xfgihA2mnBQ8EdIQ">运维大模型探索之 Text2PromQL 问答机器人 </a>     架构图， 最后两个重点总结   未</li>
+</ol>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>COT</category>
+      </categories>
+      <tags>
+        <tag>COT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>GPT-Agent</title>
     <url>/www6vHomeHexo/2022/11/02/gptAgent/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
 
-<h1><span id="agent">Agent</span><a href="#agent" class="header-anchor">#</a></h1><ul>
-<li><p>基础<br>ReACT 范式</p>
-</li>
-<li><p>Agent &#x3D; LLM + plan[规划能力] + memory[记忆能力] +Tools[工具使用能力]</p>
-</li>
-<li><p>分类</p>
-<ul>
-<li>Action agents<br>Function Call， ReACT</li>
-<li>Simulation agents<br>生成式智能体， CAMEL</li>
-<li>Automomous Agent<br><strong>AutoGPT</strong>， BabyAGI</li>
+<h1><span id="agent">Agent</span><a href="#agent" class="header-anchor">#</a></h1><h3><span id="概念-12">概念 [1][2]</span><a href="#概念-12" class="header-anchor">#</a></h3><p>  Agent &#x3D; LLM + plan[规划能力] + memory[记忆能力] +Tools[工具使用能力]</p>
+<h3><span id="类型-3">类型  [3]</span><a href="#类型-3" class="header-anchor">#</a></h3><ul>
+<li>ReACT 范式<br>把<strong>融合了Reasoning和Acting</strong>的一种范式，推理过程是浅显易懂，仅仅<strong>包含thought-action-observation步骤</strong>，很容易判断推理的过程的正确性，使用ReAct做决策甚至超过了强化学习.<ul>
+<li>chain-of-thought推理-问题<br> 事实幻想（fact hallucination）和错误传递（error propagation）</li>
 </ul>
 </li>
+<li>Self-ask</li>
+<li>Plan-and-execute agents<br>本质上是先计划再执行，即先把用户的问题分解成一个个的子任务，然后再执行各个子任务，最后合并输出得到结果</li>
+</ul>
+<h3><span id="分类-123">分类 [1][2][3]</span><a href="#分类-123" class="header-anchor">#</a></h3><ul>
+<li>Action agents<br>  Function Call， ReACT</li>
+<li>Simulation agents<br>  生成式智能体， CAMEL</li>
+<li>Automomous Agent<br>  <strong>AutoGPT</strong>， BabyAGI</li>
+<li>跨模态Agents<br>HuggingGPT</li>
+</ul>
+<h1><span id="autogpt36">AutoGPT[3][6]</span><a href="#autogpt36" class="header-anchor">#</a></h1><p>AutoGPT 的核心逻辑是一个 Prompt Loop，步骤如下</p>
+<ol>
+<li>AutoGPT 会基于一定策略自动组装 Command Prompt，这些首次会包含用户输入的 Name, Role和Goals </li>
+<li>Command Prompt 的目标不是为了拿到最终结果，而是通过 GPT Chat API(Thinking 的过程)返回下一步的 Command (包含name和arguments, 如<code>browser_website(url = &quot;www.baidu.com&quot;)</code> )</li>
+<li>这些 Command 都是可扩展的，每一种命令代表一种外部能力(比如爬虫、Google搜索，也包括GPT的能力)，通过这些 Command 调用返回的 Result 又会成为到 Command Prompt 的组成元素，</li>
+<li>回到第 1 步往复循环，直到拿到最终结果结果（状态为“compelete”）</li>
+</ol>
+<p>[本质上是prompt enginering]</p>
+<h1><span id="问题和局限性-4">问题和局限性 [4]</span><a href="#问题和局限性-4" class="header-anchor">#</a></h1><ul>
+<li><p>记忆召回问题<br>只是做简单的 embedding 相似性召回，很容易发现召回的结果不是很好</p>
+</li>
+<li><p>错误累积问题</p>
+</li>
+<li><p>探索效率问题<br>中途引入人工的判断干预和反馈输入</p>
+</li>
+<li><p>任务终止与结果验证<br>模型 agent 的工作如何终止也是一个挑战</p>
+</li>
+</ul>
+<h3><span id="assistant-api功能介绍-7">Assistant API功能介绍 [7]</span><a href="#assistant-api功能介绍-7" class="header-anchor">#</a></h3><p>从功能实现层面来说，Assistant API是截至目前最完整、性能最强大的AI应用开发API，具体功能如下：</p>
+<ul>
+<li>首先，Assistant API前所未有的能够<strong>调用OpenAI各模型的各项能力</strong>，包括可以调用Chat系列模型（即GPT系列模型）完成文本对话、调用DALL·E 3进行绘图、调用GPT-4-vision进行图像识别、以及调用Text-to-Speech模型进行语音转文字等，并且支持在一轮对话中调用不同模型；</li>
+<li>其次，Assistant API还<strong>内置了代码解释器功能（Code interpreter）和海量文本信息提取功能（Knowledge retrieval）</strong>同时也一如既往支持借助<strong>Function calling</strong>进行模型功能层面拓展，此外，非常重要的是，Assistant API还支持在一轮对话中调用多个工具；</li>
+<li>其三，此外对于开发者非常友好的一点是，Assistant API最小运行单元为持久化的线程对象（persistent Threads），因此在实际运行Assistant API时，不仅能可以精确控制每一步的执行过程，同时persistent Threads也会保留每轮对话的核心信息，并且当超出模型接收信息最大上下文限制时能够自动删除早期信息，从而实现对模型短期记忆的合理管理；</li>
+<li>其四，Assistant API还能够直<strong>接连接OpenAI在线文档库</strong>，即如果用户将外部文档保存在OpenAI云空间内，则可以在调用Assistant API时实时访问文档库中的任意文件，甚至可以在不同线程中调用不同的文档。而在借助Assistant API的Knowledge retrieval功能，则可以让大模型实时获取这些文件信息，并且合理管理短期记忆；</li>
 </ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li>公开课</li>
 <li>公开课</li>
-<li><a href="https://github.com/Significant-Gravitas/AutoGPT">AutoGPT</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/622947810">AutoGPT与LLM Agent解析</a> *** 未</li>
+<li><a href="https://zhuanlan.zhihu.com/p/642357544">2023年新生代大模型Agents技术,ReAct,Self-Ask,Plan-and-execute,以及AutoGPT, HuggingGPT等应用</a> *** 论文</li>
+<li><a href="https://zhuanlan.zhihu.com/p/622947810">AutoGPT与LLM Agent解析</a> *** </li>
+<li><a href="https://github.com/Significant-Gravitas/AutoGPT">AutoGPT</a> git</li>
+<li><a href="https://link.zhihu.com/?target=https://godmode.space/">带界面的 AutoGPT 产品</a></li>
+<li><a href="https://github.com/www6v/AIGC/tree/master/%E4%B9%9D%E5%A4%A9Hector/Assistant%20API%E8%AF%A6%E8%A7%A3%E4%B8%8EAgent%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98-%E4%B9%9D%E5%A4%A9Hector">Assistant API详解与Agent开发实战-九天Hector</a></li>
 </ol>
 ]]></content>
       <categories>
-        <category>AI</category>
+        <category>AIGC</category>
         <category>Agent</category>
       </categories>
       <tags>
-        <tag>GPT</tag>
+        <tag>AIGC</tag>
       </tags>
   </entry>
   <entry>
@@ -2524,20 +2692,61 @@
 <li>Interacting with APIs</li>
 <li>Chatbots</li>
 </ul>
+<h1><span id="chains-1-89">Chains [1] [8][9]</span><a href="#chains-1-89" class="header-anchor">#</a></h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">chain = load_summarize_chain(llm, chain_type=<span class="string">&quot;stuff&quot;</span>, verbose=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">chain = load_summarize_chain(llm, chain_type=<span class="string">&quot;map_reduce&quot;</span>, verbose=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">chain = load_summarize_chain(llm, chain_type=<span class="string">&quot;refine&quot;</span>, verbose=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">chain = load_qa_chain(llm, chain_type=<span class="string">&quot;map_rerank&quot;</span>, verbose=<span class="literal">True</span>, return_intermediate_steps=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>链类型</th>
+<th>整合方法</th>
+<th>优缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>stuff</td>
+<td>将所有内容放入一个提示中，输入LLM</td>
+<td>简单、廉价、效果好&#x2F; 对输入文本有一定token限制</td>
+</tr>
+<tr>
+<td>Map_reduce</td>
+<td>每个问题和文本块单独给语言模型，并将答案汇总生成最终结果</td>
+<td>输入任意数量文本，且并行处理&#x2F; 速度慢，费token</td>
+</tr>
+<tr>
+<td>Refine</td>
+<td>迭代处理多个文本，基于前一个文档答案构建下一个答案</td>
+<td>用于组合信息，依次构建答案&#x2F; 速度慢，费token</td>
+</tr>
+<tr>
+<td>Map_rerank</td>
+<td>每个文档单独调用LLM,并要求返回一个得分，然后选择最高的得分</td>
+<td>需要告诉模型评分的规则&#x2F; 费token</td>
+</tr>
+</tbody></table>
+<img src="/www6vHomeHexo/2022/11/02/gptLangchain/chains-type.jpg" class>
+
+
+
+
+
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://github.com/gkamradt/langchain-tutorials">https://github.com/gkamradt/langchain-tutorials</a></li>
 <li><a href="https://github.com/www6v/pyExamples/blob/master/langchain/langchain-functioncall.py">functioncall</a></li>
 <li><a href="https://github.com/www6v/pyExamples/blob/master/langchain/langchain-qaOnDoc.py">qaOnDoc</a></li>
-<li><a href="https://github.com/www6v/langchain-tutorials/blob/main/LangChain%20Cookbook%20Part%202%20-%20Use%20Cases.ipynb">LangChain Cookbook Part 2: Use Cases</a><br>  10.公开课</li>
+<li><a href="https://github.com/www6v/langchain-tutorials/blob/main/LangChain%20Cookbook%20Part%202%20-%20Use%20Cases.ipynb">LangChain Cookbook Part 2: Use Cases</a><br> 10.公开课</li>
 <li><a href="https://github.com/kyrolabs/awesome-langchain">https://github.com/kyrolabs/awesome-langchain</a></li>
 <li><a href="https://github.com/Crossme0809/langchain-tutorials">https://github.com/Crossme0809/langchain-tutorials</a></li>
 <li><a href="https://cloud.tencent.com/developer/article/2352088">微信向量检索分析一体化数仓探索：OLAP For Embedding</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/666656208">吴恩达短课_LangChain</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/651216604">精华笔记：吴恩达 x LangChain 《使用LangChain构建与数据对话的聊天机器人》（下）</a></li>
 <li><a href="https://cloud.tencent.com/developer/article/2313918">一文入门最热的LLM应用开发框架LangChain</a> 未</li>
 <li><a href="https://cloud.tencent.com/developer/article/2331337">大模型LangChain框架基础与使用示例</a> 未</li>
 </ol>
 ]]></content>
       <categories>
-        <category>AI</category>
+        <category>AIGC</category>
         <category>Langchain</category>
       </categories>
       <tags>
@@ -2577,20 +2786,38 @@
 </li>
 <li><p>国外</p>
 <ul>
-<li>Pinecone</li>
-<li>FAISS</li>
+<li><p>Pinecone</p>
+</li>
+<li><p>FAISS</p>
+<p>[ANN]</p>
+</li>
 </ul>
 </li>
 </ul>
+<p>【向量的相对度算法</p>
+<ol>
+<li>欧式距离</li>
+<li>余弦</li>
+<li>ANN】</li>
+</ol>
 <h1><span id="langchain-chatchat">Langchain-Chatchat</span><a href="#langchain-chatchat" class="header-anchor">#</a></h1><ul>
-<li>部署<br>windows 10<br>Linux<br>Docker</li>
+<li>部署 <ul>
+<li>windows 10 [5]<br>部署本地， 没显存，卡</li>
+<li>Linux [2]<br>部署   32C125G ，没显存， 推理很慢 </li>
+<li>Docker</li>
+</ul>
+</li>
 </ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><p><a href="https://github.com/chatchat-space/Langchain-Chatchat">Langchain-Chatchat </a> master<br>Langchain 与 ChatGLM 等语言模型的本地知识库问答<br><a href="https://github.com/chatchat-space/Langchain-Chatchat/tree/v0.2.4">Langchain-Chatchat</a>  v0.2.4<br><a href="https://blog.csdn.net/weixin_43094965/article/details/133044128">win10 安装 Langchain-Chatchat 避坑指南（2023年9月18日v0.2.4版本，包含全部下载内容！）</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/649055955">langChain-ChatGLM 尝试，踩坑记录</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/651189680">Langchain-Chatchat + 阿里通义千问Qwen 保姆级教程 | 次世代知识管理解决方案</a></p>
-<p><a href="https://github.com/cwyalpha/Langchain-Chatchat-Colab">Colab for Langchain-Chatchat</a></p>
-<p><a href="https://gitee.com/deepeye/langchain-ChatGLM">langchain-ChatGLM</a></p>
+<li><p><a href="https://github.com/chatchat-space/Langchain-Chatchat">Langchain-Chatchat </a> master<br>Langchain 与 ChatGLM 等语言模型的本地知识库问答<br><a href="https://github.com/chatchat-space/Langchain-Chatchat/tree/v0.2.4">Langchain-Chatchat</a>  v0.2.4<br><a href="https://gitee.com/deepeye/langchain-ChatGLM">langchain-ChatGLM</a>  gitee </p>
+</li>
+<li><p><a href="https://github.com/www6v/Langchain-Chatchat-Colab">Colab for Langchain-Chatchat</a>   linux 可以部署  v0.2.6</p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/649055955">langChain-ChatGLM 尝试，踩坑记录</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/651189680">Langchain-Chatchat + 阿里通义千问Qwen 保姆级教程 | 次世代知识管理解决方案</a>    Langchain-Chatchat + 通义千问</p>
+</li>
+<li><p><a href="https://blog.csdn.net/weixin_43094965/article/details/133044128">win10 安装 Langchain-Chatchat 避坑指南（2023年9月18日v0.2.4版本，包含全部下载内容！）</a>  </p>
 </li>
 <li><p>langchain</p>
 <p>cookbook RAG</p>
@@ -2598,7 +2825,7 @@
 </ol>
 ]]></content>
       <categories>
-        <category>AI</category>
+        <category>AIGC</category>
         <category>RAG</category>
       </categories>
       <tags>
@@ -2626,6 +2853,12 @@
 </li>
 <li><a href="#llm%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%AD%E7%BB%83">LLM的分布式训练</a></li>
 <li><a href="#%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84">大模型架构</a></li>
+<li><a href="#%E5%88%86%E8%AF%8D">分词</a><ul>
+<li><a href="#%E5%8D%95%E8%AF%8D%E5%88%86%E8%AF%8D%E6%B3%95">单词分词法</a></li>
+<li><a href="#%E5%8D%95%E5%AD%97%E5%88%86%E8%AF%8D%E6%B3%95">单字分词法</a></li>
+<li><a href="#%E5%AD%90%E8%AF%8D%E5%88%86%E8%AF%8D%E6%B3%95">子词分词法</a></li>
+</ul>
+</li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
@@ -2640,7 +2873,6 @@
 </ul>
 <h1><span id="工具">工具</span><a href="#工具" class="header-anchor">#</a></h1><ul>
 <li>langchain</li>
-<li>deepspeed</li>
 </ul>
 <h1><span id="原理">原理</span><a href="#原理" class="header-anchor">#</a></h1><ul>
 <li><p>正向传播<br>损失函数  </p>
@@ -2673,17 +2905,30 @@
 <h3><span id="非开源">非开源</span><a href="#非开源" class="header-anchor">#</a></h3><p>  Chatgpt<br>  文心一言</p>
 <h3><span id="开源">开源</span><a href="#开源" class="header-anchor">#</a></h3><p>  LLaMA<br>  Baichuan2<br>  通义千问（Qwen-7B）<br>  ChatGLM</p>
 <h1><span id="llm的分布式训练">LLM的分布式训练</span><a href="#llm的分布式训练" class="header-anchor">#</a></h1><ul>
+<li><p>分布式训练框架</p>
+<ul>
+<li>DeepSpeed</li>
+<li>Magatron</li>
+</ul>
+</li>
+<li><p>预训练 3D并行</p>
+<ul>
 <li>数据并行</li>
 <li>模型并行</li>
 <li>张量并行</li>
 </ul>
-<h1><span id="大模型架构">大模型架构</span><a href="#大模型架构" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://zhuanlan.zhihu.com/p/648050614">LLM学习系列1：大模型架构要点总结</a></p>
+</li>
+<li><p>参数量和数据量之间的关系</p>
+</li>
+</ul>
+<h1><span id="大模型架构">大模型架构</span><a href="#大模型架构" class="header-anchor">#</a></h1><h1><span id="分词">分词</span><a href="#分词" class="header-anchor">#</a></h1><h3><span id="单词分词法">单词分词法</span><a href="#单词分词法" class="header-anchor">#</a></h3><h3><span id="单字分词法">单字分词法</span><a href="#单字分词法" class="header-anchor">#</a></h3><h3><span id="子词分词法">子词分词法</span><a href="#子词分词法" class="header-anchor">#</a></h3><p>BPE - GPT系列</p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://zhuanlan.zhihu.com/p/648050614">LLM学习系列1：大模型架构要点总结</a></p>
 <ol start="100">
 <li><a href="https://cloud.tencent.com/developer/article/2328541">主流大语言模型的技术原理细节</a> *** 腾讯 未</li>
 </ol>
 ]]></content>
       <categories>
-        <category>AI</category>
+        <category>AIGC</category>
         <category>大模型</category>
       </categories>
       <tags>
@@ -4573,12 +4818,23 @@
 <span id="more"></span>
 
 
-<h1><span id="学习资料">学习资料</span><a href="#学习资料" class="header-anchor">#</a></h1><h3><span id="chatgpt">Chatgpt</span><a href="#chatgpt" class="header-anchor">#</a></h3><p><a href="https://time.geekbang.org/opencourse/videointro/100541101">ChatGPT 从 0 到 1</a>  基础<br><a href="https://time.geekbang.org/opencourse/videointro/100541201">ChatGPT 和预训练模型实战课</a> </p>
-<h3><span id="大模型">大模型</span><a href="#大模型" class="header-anchor">#</a></h3><p><a href="https://shimo.im/docs/47kgM6NewnSO613V">尚硅谷×极客时间《AI 大模型实战训练营》大纲</a><br><a href="https://shimo.im/docs/XKq42v7061SxZ2AN/read">AI 大模型应用开发实战营1期大纲</a><br><a href="https://agiclass.feishu.cn/docx/DDzxdQZBooXw9Jx4DdWcLZjLnHd">《AI 大模型全栈工程师》课程表（第 02 期） </a></p>
-<h3><span id="code">Code</span><a href="#code" class="header-anchor">#</a></h3><p><a href="https://time.geekbang.org/opencourse/videointro/100540901">GitHub Copilot 实践课</a></p>
+<h1><span id="学习资料">学习资料</span><a href="#学习资料" class="header-anchor">#</a></h1><h3><span id="chatgpt">Chatgpt</span><a href="#chatgpt" class="header-anchor">#</a></h3><ul>
+<li><a href="https://time.geekbang.org/opencourse/videointro/100541101">ChatGPT 从 0 到 1</a>  基础</li>
+<li><a href="https://time.geekbang.org/opencourse/videointro/100541201">ChatGPT 和预训练模型实战课</a></li>
+</ul>
+<h3><span id="大模型">大模型</span><a href="#大模型" class="header-anchor">#</a></h3><ul>
+<li><a href="https://shimo.im/docs/47kgM6NewnSO613V">尚硅谷×极客时间《AI 大模型实战训练营》大纲</a></li>
+<li><a href="https://shimo.im/docs/XKq42v7061SxZ2AN/read">AI 大模型应用开发实战营1期大纲</a></li>
+<li><a href="https://agiclass.feishu.cn/docx/DDzxdQZBooXw9Jx4DdWcLZjLnHd">《AI 大模型全栈工程师》课程表（第 02 期） </a></li>
+<li><a href="https://www.zhihu.com/education/video-course/1545850719483392000">【清华 NLP X OpenBMB】大模型公开课｜带你从入门到实战</a>  V ***</li>
+<li><a href="https://w.1yb.co/KqBR58E">《AI 大模型微调训练营》大纲</a></li>
+</ul>
+<h3><span id="code">Code</span><a href="#code" class="header-anchor">#</a></h3><ul>
+<li><a href="https://time.geekbang.org/opencourse/videointro/100540901">GitHub Copilot 实践课</a></li>
+</ul>
 ]]></content>
       <categories>
-        <category>AI</category>
+        <category>AIGC</category>
         <category>gpt</category>
         <category>study</category>
       </categories>
@@ -6112,7 +6368,7 @@
       </tags>
   </entry>
   <entry>
-    <title>gpt  Prompt-学术研究</title>
+    <title>Prompt-学术研究</title>
     <url>/www6vHomeHexo/2022/07/11/gptPromptResearch/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -6134,7 +6390,7 @@
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://www.bilibili.com/video/BV18M4y1C7HY/">整合chatGPT的新必应（NewBing chat）简直就是科研神器！</a></p>
 ]]></content>
       <categories>
-        <category>AI</category>
+        <category>AIGC</category>
         <category>prompt</category>
       </categories>
       <tags>
@@ -10604,11 +10860,11 @@ MySQL MVCC 快照读 vs 当前读 </li>
 </ul>
 ]]></content>
       <categories>
-        <category>AI</category>
+        <category>AIGC</category>
         <category>gpt</category>
       </categories>
       <tags>
-        <tag>AI</tag>
+        <tag>AIGC</tag>
       </tags>
   </entry>
   <entry>
@@ -15712,7 +15968,6 @@ BGP 协议传输的消息
 <li>李宏毅 台湾</li>
 </ul>
 <h2><span id="nlp-amp-大模型">NLP &amp; 大模型</span><a href="#nlp-amp-大模型" class="header-anchor">#</a></h2><ul>
-<li><a href="https://www.zhihu.com/education/video-course/1545850719483392000">【清华 NLP X OpenBMB】大模型公开课｜带你从入门到实战</a>  V ***</li>
 <li><a href="https://www.zhihu.com/education/video-course/1546509363711614976">沈向洋带你读论文——CV &amp; NLP 专题</a> V ***</li>
 <li><a href="https://www.bilibili.com/video/BV1Cb411T7Cd">中科院 宗成庆 自然语言处理公开课（64集）</a> V</li>
 <li><a href="https://www.bilibili.com/video/BV1C14y147dp">2022年首发！B站讲的最好的【NLP自然语言处理】保姆级教程！</a>  V  有实践</li>
@@ -19209,7 +19464,7 @@ BGP 协议传输的消息
       </tags>
   </entry>
   <entry>
-    <title>gpt Prompt-Code</title>
+    <title>Prompt-Code</title>
     <url>/www6vHomeHexo/2021/05/28/gptPromptCode/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -19333,7 +19588,7 @@ BGP 协议传输的消息
 </code></pre>
 ]]></content>
       <categories>
-        <category>AI</category>
+        <category>AIGC</category>
         <category>prompt</category>
       </categories>
       <tags>
@@ -19341,7 +19596,7 @@ BGP 协议传输的消息
       </tags>
   </entry>
   <entry>
-    <title>gpt  Prompt</title>
+    <title>Prompt 总结</title>
     <url>/www6vHomeHexo/2021/05/26/gptPrompt/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -19424,7 +19679,7 @@ BGP 协议传输的消息
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://www.bilibili.com/video/BV1Lg4y1c7fk/">学完这个视频，简历加一条：熟练掌握ChatGPT解决复杂问题｜ChatGPT使用教程</a>  ***</p>
 ]]></content>
       <categories>
-        <category>AI</category>
+        <category>AIGC</category>
         <category>prompt</category>
       </categories>
       <tags>
@@ -25392,7 +25647,8 @@ nq： 不排队调度
 </ul>
 </li>
 <li><a href="#%E5%9F%9F%E5%90%8D%E8%BD%AC%E5%8F%91%E5%88%B0%E5%85%B6%E4%BB%96%E5%9F%9F%E5%90%8D2">域名转发到其他域名[2]</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考:</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD">文件下载</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
 
@@ -25430,7 +25686,10 @@ nq： 不排队调度
 <li>rewrite</li>
 <li>proxy_pass</li>
 </ul>
-<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<h2><span id="文件下载">文件下载</span><a href="#文件下载" class="header-anchor">#</a></h2><p>nginx.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">location /file &#123;</span><br><span class="line">    charset  gbk;</span><br><span class="line">    alias /home/hp/home/frontend/indicator/userlab.dat;</span><br><span class="line"></span><br><span class="line">    if ($request_filename ~* ^.*?\.(txt)$)&#123;</span><br><span class="line">        add_header Content-Disposition &#x27;attachment&#x27;;</span><br><span class="line">        add_header Content-Type: &#x27;APPLICATION/OCTET-STREAM&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    autoindex on;</span><br><span class="line">    autoindex_exact_size   off;</span><br><span class="line">    autoindex_localtime    on;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><p><a href="https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&mid=2651010416&idx=4&sn=dfa07f0e065d273b028e662e87e780ff&chksm=bdbecd238ac9443511c4e7eadf9e59cc9139fac25c52b44f7a93787b940826c5f61f06e10224&scene=27#wechat_redirect">深入Nginx 思维导图</a></p>
 </li>
 <li><p><a href="https://blog.csdn.net/yeguxin/article/details/94020476">nginx配置域名转发到其他域名的几种方法</a></p>

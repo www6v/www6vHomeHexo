@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-30T11:10:21.000Z">
-<meta property="article:modified_time" content="2023-11-06T20:02:27.469Z">
+<meta property="article:modified_time" content="2023-11-14T22:24:16.963Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="大模型">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-07 04:02:27" itemprop="dateModified" datetime="2023-11-07T04:02:27+08:00">2023-11-07</time>
+                <time title="修改时间：2023-11-15 06:24:16" itemprop="dateModified" datetime="2023-11-15T06:24:16+08:00">2023-11-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -232,11 +232,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/www6vHomeHexo/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+                  <a href="/www6vHomeHexo/categories/AIGC/" itemprop="url" rel="index"><span itemprop="name">AIGC</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/www6vHomeHexo/categories/AI/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" itemprop="url" rel="index"><span itemprop="name">大模型</span></a>
+                  <a href="/www6vHomeHexo/categories/AIGC/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" itemprop="url" rel="index"><span itemprop="name">大模型</span></a>
                 </span>
             </span>
 
@@ -269,6 +269,12 @@
 </li>
 <li><a href="#llm%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%AD%E7%BB%83">LLM的分布式训练</a></li>
 <li><a href="#%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84">大模型架构</a></li>
+<li><a href="#%E5%88%86%E8%AF%8D">分词</a><ul>
+<li><a href="#%E5%8D%95%E8%AF%8D%E5%88%86%E8%AF%8D%E6%B3%95">单词分词法</a></li>
+<li><a href="#%E5%8D%95%E5%AD%97%E5%88%86%E8%AF%8D%E6%B3%95">单字分词法</a></li>
+<li><a href="#%E5%AD%90%E8%AF%8D%E5%88%86%E8%AF%8D%E6%B3%95">子词分词法</a></li>
+</ul>
+</li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
@@ -283,7 +289,6 @@
 </ul>
 <h1><span id="工具">工具</span><a href="#工具" class="header-anchor">#</a></h1><ul>
 <li>langchain</li>
-<li>deepspeed</li>
 </ul>
 <h1><span id="原理">原理</span><a href="#原理" class="header-anchor">#</a></h1><ul>
 <li><p>正向传播<br>损失函数  </p>
@@ -316,11 +321,24 @@
 <h3><span id="非开源">非开源</span><a href="#非开源" class="header-anchor">#</a></h3><p>  Chatgpt<br>  文心一言</p>
 <h3><span id="开源">开源</span><a href="#开源" class="header-anchor">#</a></h3><p>  LLaMA<br>  Baichuan2<br>  通义千问（Qwen-7B）<br>  ChatGLM</p>
 <h1><span id="llm的分布式训练">LLM的分布式训练</span><a href="#llm的分布式训练" class="header-anchor">#</a></h1><ul>
+<li><p>分布式训练框架</p>
+<ul>
+<li>DeepSpeed</li>
+<li>Magatron</li>
+</ul>
+</li>
+<li><p>预训练 3D并行</p>
+<ul>
 <li>数据并行</li>
 <li>模型并行</li>
 <li>张量并行</li>
 </ul>
-<h1><span id="大模型架构">大模型架构</span><a href="#大模型架构" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/648050614">LLM学习系列1：大模型架构要点总结</a></p>
+</li>
+<li><p>参数量和数据量之间的关系</p>
+</li>
+</ul>
+<h1><span id="大模型架构">大模型架构</span><a href="#大模型架构" class="header-anchor">#</a></h1><h1><span id="分词">分词</span><a href="#分词" class="header-anchor">#</a></h1><h3><span id="单词分词法">单词分词法</span><a href="#单词分词法" class="header-anchor">#</a></h3><h3><span id="单字分词法">单字分词法</span><a href="#单字分词法" class="header-anchor">#</a></h3><h3><span id="子词分词法">子词分词法</span><a href="#子词分词法" class="header-anchor">#</a></h3><p>BPE - GPT系列</p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/648050614">LLM学习系列1：大模型架构要点总结</a></p>
 <ol start="100">
 <li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2328541">主流大语言模型的技术原理细节</a> *** 腾讯 未</li>
 </ol>
@@ -437,20 +455,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">482</span>
+          <span class="site-state-item-count">487</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/www6vHomeHexo/categories/">
           
-        <span class="site-state-item-count">287</span>
+        <span class="site-state-item-count">292</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/www6vHomeHexo/tags/">
           
-        <span class="site-state-item-count">147</span>
+        <span class="site-state-item-count">151</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
