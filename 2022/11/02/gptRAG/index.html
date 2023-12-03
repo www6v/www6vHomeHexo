@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/11/02/gptRAG/langchain+chatglm.jpg">
 <meta property="article:published_time" content="2022-11-02T01:57:59.000Z">
-<meta property="article:modified_time" content="2023-11-16T14:29:28.559Z">
+<meta property="article:modified_time" content="2023-11-27T20:58:39.310Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="RAG">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-16 22:29:28" itemprop="dateModified" datetime="2023-11-16T22:29:28+08:00">2023-11-16</time>
+                <time title="修改时间：2023-11-28 04:58:39" itemprop="dateModified" datetime="2023-11-28T04:58:39+08:00">2023-11-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -256,7 +256,42 @@
         <p></p>
 <span id="more"></span>
 
-<h1><span id="rag">RAG</span><a href="#rag" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/11/02/gptRAG/langchain+chatglm.jpg" class>
+
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#rag%E6%9E%B6%E6%9E%84">RAG架构</a></li>
+<li><a href="#rag-on-text-data">RAG on Text data</a><ul>
+<li><a href="#langchain-chatchat">Langchain-Chatchat</a></li>
+</ul>
+</li>
+<li><a href="#rag-on-semi-structured-data">RAG on Semi-structured data</a><ul>
+<li><a href="#%E5%88%86%E6%9E%90pdf%E4%B8%AD%E5%9B%BE%E7%89%87-6">分析PDF中图片 [6]</a></li>
+<li><a href="#%E5%88%86%E6%9E%90pdf%E4%B8%AD%E8%A1%A8%E6%A0%BC-7">分析pdf中表格 [7]</a></li>
+<li><a href="#%E7%BB%84%E4%BB%B6">组件</a></li>
+</ul>
+</li>
+<li><a href="#self-rag">Self-RAG</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
+<li><a href="#rag-on-text-data-1">RAG on Text data</a></li>
+<li><a href="#rag-on-semi-structured-data-1">RAG on Semi-structured data</a></li>
+<li><a href="#self-rag-1">Self-RAG</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+
+
+
+
+
+<h1><span id="rag架构">RAG架构</span><a href="#rag架构" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/11/02/gptRAG/langchain+chatglm.jpg" class>
 
 <ul>
 <li><p>架构</p>
@@ -270,34 +305,11 @@
 <li>本地知识库</li>
 <li>Embedding 模型</li>
 <li>向量数据库</li>
+<li>Prompt Template</li>
 </ul>
 </li>
 </ul>
-<h1><span id="向量数据库">向量数据库</span><a href="#向量数据库" class="header-anchor">#</a></h1><ul>
-<li><p>国产</p>
-<ul>
-<li>Milvus</li>
-<li>Tencent </li>
-<li>zilliz cloud</li>
-</ul>
-</li>
-<li><p>国外</p>
-<ul>
-<li><p>Pinecone</p>
-</li>
-<li><p>FAISS</p>
-<p>[ANN]</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>【向量的相对度算法</p>
-<ol>
-<li>欧式距离</li>
-<li>余弦</li>
-<li>ANN】</li>
-</ol>
-<h1><span id="langchain-chatchat">Langchain-Chatchat</span><a href="#langchain-chatchat" class="header-anchor">#</a></h1><ul>
+<h1><span id="rag-on-text-data">RAG on Text data</span><a href="#rag-on-text-data" class="header-anchor">#</a></h1><h3><span id="langchain-chatchat">Langchain-Chatchat</span><a href="#langchain-chatchat" class="header-anchor">#</a></h3><ul>
 <li>部署 <ul>
 <li>windows 10 [5]<br>部署本地， 没显存，卡</li>
 <li>Linux [2]<br>部署   32C125G ，没显存， 推理很慢 </li>
@@ -305,7 +317,29 @@
 </ul>
 </li>
 </ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<h1><span id="rag-on-semi-structured-data">RAG on Semi-structured data</span><a href="#rag-on-semi-structured-data" class="header-anchor">#</a></h1><h3><span id="分析pdf中图片-6">分析PDF中图片 [6]</span><a href="#分析pdf中图片-6" class="header-anchor">#</a></h3><p><strong>Option 1</strong> </p>
+<ul>
+<li>Use multimodal embeddings <strong>(such as <a target="_blank" rel="noopener" href="https://openai.com/research/clip">CLIP</a>)</strong> to embed images and text</li>
+<li>Retrieve both using similarity search</li>
+<li>Pass <strong>raw images and text chunks</strong> to a multimodal LLM for answer synthesis</li>
+</ul>
+<p><strong>Option 2</strong> </p>
+<ul>
+<li>Use a multimodal LLM (such as <a target="_blank" rel="noopener" href="https://openai.com/research/gpt-4v-system-card">GPT4-V</a>, <a target="_blank" rel="noopener" href="https://llava.hliu.cc/">LLaVA</a>, or <a target="_blank" rel="noopener" href="https://www.adept.ai/blog/fuyu-8b">FUYU-8b</a>) to produce <strong>text summaries from images</strong></li>
+<li>Embed and retrieve text </li>
+<li>Pass text chunks to an LLM for answer synthesis</li>
+</ul>
+<p><strong>Option 3</strong> </p>
+<ul>
+<li>Use a multimodal LLM (such as <a target="_blank" rel="noopener" href="https://openai.com/research/gpt-4v-system-card">GPT4-V</a>, <a target="_blank" rel="noopener" href="https://llava.hliu.cc/">LLaVA</a>, or <a target="_blank" rel="noopener" href="https://www.adept.ai/blog/fuyu-8b">FUYU-8b</a>) to produce text summaries from images</li>
+<li>Embed and retrieve image summaries with a reference to the raw image </li>
+<li>Pass <strong>raw images and text chunks</strong> to a multimodal LLM for answer synthesis</li>
+</ul>
+<h3><span id="分析pdf中表格-7">分析pdf中表格 [7]</span><a href="#分析pdf中表格-7" class="header-anchor">#</a></h3><h3><span id="组件">组件</span><a href="#组件" class="header-anchor">#</a></h3><ul>
+<li>pdf解析<br>unstructured</li>
+<li>store<br> MultiVector Retriever- 元数据+数据</li>
+</ul>
+<h1><span id="self-rag">Self-RAG</span><a href="#self-rag" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="rag-on-text-data">RAG on Text data</span><a href="#rag-on-text-data" class="header-anchor">#</a></h3><ol>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/chatchat-space/Langchain-Chatchat">Langchain-Chatchat </a> master<br>Langchain 与 ChatGLM 等语言模型的本地知识库问答<br><a target="_blank" rel="noopener" href="https://github.com/chatchat-space/Langchain-Chatchat/tree/v0.2.4">Langchain-Chatchat</a>  v0.2.4<br><a target="_blank" rel="noopener" href="https://gitee.com/deepeye/langchain-ChatGLM">langchain-ChatGLM</a>  gitee </p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/www6v/Langchain-Chatchat-Colab">Colab for Langchain-Chatchat</a>   linux 可以部署  v0.2.6</p>
@@ -314,11 +348,16 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/651189680">Langchain-Chatchat + 阿里通义千问Qwen 保姆级教程 | 次世代知识管理解决方案</a>    Langchain-Chatchat + 通义千问</p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43094965/article/details/133044128">win10 安装 Langchain-Chatchat 避坑指南（2023年9月18日v0.2.4版本，包含全部下载内容！）</a>  </p>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43094965/article/details/133044128">win10 安装 Langchain-Chatchat 避坑指南（2023年9月18日v0.2.4版本，包含全部下载内容！）</a></p>
 </li>
-<li><p>langchain</p>
-<p>cookbook RAG</p>
-</li>
+</ol>
+<h3><span id="rag-on-semi-structured-data">RAG on Semi-structured data</span><a href="#rag-on-semi-structured-data" class="header-anchor">#</a></h3><ol start="6">
+<li><a target="_blank" rel="noopener" href="https://github.com/www6v/AIGC/blob/master/langchain-cookbook/Semi_structured_multi_modal_RAG_LLaMA2.ipynb">langchain-cookbook RAG</a>   解析pdf中的图片  运行有问题</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/www6v/AIGC/blob/master/Advanced-RAG/01_semi_structured_data.ipynb">Advanced-RAG semi_structured_data</a>   解析pdf中的表格，  运行没问题，能问表格中的数据</li>
+</ol>
+<h3><span id="self-rag">Self-RAG</span><a href="#self-rag" class="header-anchor">#</a></h3><ol start="8">
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/661465330?utm_id=0">NLP（廿一）：从 RAG 到 Self-RAG —— LLM 的知识增强</a> *** </li>
+<li><a target="_blank" rel="noopener" href="https://github.com/www6v/self-rag">original implementation of SELF-RAG</a></li>
 </ol>
 
     </div>
@@ -433,20 +472,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">488</span>
+          <span class="site-state-item-count">491</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/www6vHomeHexo/categories/">
           
-        <span class="site-state-item-count">293</span>
+        <span class="site-state-item-count">296</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/www6vHomeHexo/tags/">
           
-        <span class="site-state-item-count">152</span>
+        <span class="site-state-item-count">155</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
