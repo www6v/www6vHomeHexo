@@ -25,13 +25,14 @@
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/11/19/gptBigModelTraining/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/11/19/gptBigModelTraining/pararllelTraining.jpg">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/11/19/gptBigModelTraining/bigModelTrainingPipeline.jpg">
 <meta property="article:published_time" content="2022-11-19T14:32:11.000Z">
-<meta property="article:modified_time" content="2023-12-04T20:39:16.510Z">
+<meta property="article:modified_time" content="2023-12-18T18:37:39.540Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="train">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2022/11/19/gptBigModelTraining/bigModelTrainingPipeline.jpg">
+<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2022/11/19/gptBigModelTraining/pararllelTraining.jpg">
 
 <link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/11/19/gptBigModelTraining/">
 
@@ -226,7 +227,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-05 04:39:16" itemprop="dateModified" datetime="2023-12-05T04:39:16+08:00">2023-12-05</time>
+                <time title="修改时间：2023-12-19 02:37:39" itemprop="dateModified" datetime="2023-12-19T02:37:39+08:00">2023-12-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -261,12 +262,16 @@
 <!-- toc -->
 
 <ul>
-<li><a href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%AD%E7%BB%83-1">分布式训练 [1]</a></li>
+<li><a href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%AD%E7%BB%83-1">分布式训练 [1]</a><ul>
+<li><a href="#%E9%A2%84%E8%AE%AD%E7%BB%83-3d%E5%B9%B6%E8%A1%8C">预训练 3D并行</a></li>
+</ul>
+</li>
 <li><a href="#%E9%A2%84%E8%AE%AD%E7%BB%83">预训练</a><ul>
 <li><a href="#%E9%A2%84%E8%AE%AD%E7%BB%83-4">预训练 [4]</a></li>
 <li><a href="#training-pipeline0">Training Pipeline[0]</a></li>
 <li><a href="#%E8%AE%BE%E7%BD%AE%E8%AE%AD%E7%BB%83%E5%8F%82%E6%95%B0">设置训练参数</a></li>
 <li><a href="#%E5%8F%82%E6%95%B0%E9%87%8F-vs-%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E9%87%8F">参数量 vs 训练数据量</a></li>
+<li><a href="#%E5%88%86%E8%AF%8D">分词</a></li>
 </ul>
 </li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
@@ -275,23 +280,16 @@
 
 </div>
 
-<h1><span id="分布式训练-1">分布式训练 [1]</span><a href="#分布式训练-1" class="header-anchor">#</a></h1><ul>
-<li><p>分布式训练框架</p>
-<ul>
-<li>DeepSpeed</li>
-<li>Magatron</li>
-</ul>
-</li>
-<li><p>预训练 3D并行</p>
-<ul>
+<h1><span id="分布式训练-1">分布式训练 [1]</span><a href="#分布式训练-1" class="header-anchor">#</a></h1><h3><span id="预训练-3d并行">预训练 3D并行</span><a href="#预训练-3d并行" class="header-anchor">#</a></h3><ul>
 <li>数据并行</li>
 <li>模型并行</li>
 <li>张量并行</li>
 </ul>
-</li>
-<li><p>参数量和数据量之间的关系</p>
-</li>
-</ul>
+   <img src="/www6vHomeHexo/2022/11/19/gptBigModelTraining/pararllelTraining.jpg" class>
+
+
+
+
 <h1><span id="预训练">预训练</span><a href="#预训练" class="header-anchor">#</a></h1><h3><span id="预训练-4">预训练 [4]</span><a href="#预训练-4" class="header-anchor">#</a></h3><ul>
 <li><p>⾃回归与⽣成式<br><strong>⾃回归模型</strong>是⼀种序列模型，它在预测下⼀个输出时，会将之前的所有输出作为输⼊，然后<strong>根据统计规律、结合已经输⼊的样本</strong>，预测下个位置各单词出现的概率，然后输出概率最⼤的单词，类似于完形填空；<br><strong>⽣成式模型</strong>的预测过程和⾃回归模型类似，都是根据统<br>计规律预测下个单词的概率，所不同的是，<strong>⽣成式模型可以根据之前的样本的<br>概率分布⽣成下⼀个词，⽣成式模型预测时会存在⼀定的随机性；</strong></p>
 </li>
@@ -322,8 +320,13 @@
 <li><strong>Learning rate设定较小</strong>，且随着网络规模的增大，Learning rate越来越小。</li>
 </ul>
 <h3><span id="参数量-vs-训练数据量">参数量 vs 训练数据量</span><a href="#参数量-vs-训练数据量" class="header-anchor">#</a></h3><p><strong>参数量并不是衡量模型能力的唯一标准，训练数据量也是一个非常重要的因素。</strong><br>LLaMA模型，尽管它的参数量只有650亿，但其性能与参数量为1750亿的GPT-3模型相比也非常优秀。主要原因在于，LLaMA模型的训练数据量达到了1.4万亿，而GPT-3只有3000亿。</p>
+<h3><span id="分词">分词</span><a href="#分词" class="header-anchor">#</a></h3><ul>
+<li>单词分词法</li>
+<li>单字分词法</li>
+<li>子词分词法<br>BPE - GPT系列, WordPiece</li>
+</ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="0">
-<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/648050614">LLM学习系列1：大模型架构要点总结</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/648050614">LLM学习系列1：大模型架构要点总结</a>  from ppt</p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://lilianweng.github.io/posts/2021-09-25-train-large/">How to Train Really Large Models on Many GPUs? </a></p>
 </li>
@@ -335,6 +338,10 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://techdiylife.github.io/big-model-training/deepspeed/deepspeed-chat.html">第1章：DeepSpeed-Chat 模型训练实战</a>  Bili 未</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/microsoft/DeepSpeedExamples/tree/master/applications/DeepSpeed-Chat">DeepSpeed-Chat</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://arthurchiao.art/blog/how-to-train-a-gpt-assistant-zh/">[译] 如何训练一个企业级 GPT 助手（OpenAI，2023）</a> 未</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://arthurchiao.art/blog/gpt-as-a-finite-state-markov-chain-zh/">[译] GPT 是如何工作的：200 行 Python 代码实现一个极简 GPT（2023）</a>  未</p>
 </li>
 </ol>
 
@@ -450,14 +457,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">492</span>
+          <span class="site-state-item-count">493</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/www6vHomeHexo/categories/">
           
-        <span class="site-state-item-count">296</span>
+        <span class="site-state-item-count">297</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

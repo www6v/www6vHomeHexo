@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-27T10:19:59.000Z">
-<meta property="article:modified_time" content="2023-12-01T20:47:44.677Z">
+<meta property="article:modified_time" content="2023-12-18T18:37:39.731Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="向量数据库">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-02 04:47:44" itemprop="dateModified" datetime="2023-12-02T04:47:44+08:00">2023-12-02</time>
+                <time title="修改时间：2023-12-19 02:37:39" itemprop="dateModified" datetime="2023-12-19T02:37:39+08:00">2023-12-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -256,6 +256,25 @@
 
 
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93">向量数据库</a></li>
+<li><a href="#%E5%90%91%E9%87%8F%E7%9A%84%E7%9B%B8%E5%AF%B9%E5%BA%A6%E7%AE%97%E6%B3%953">向量的相对度算法[3]</a><ul>
+<li><a href="#%E6%AF%94%E8%BE%834">比较[4]</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+
+
+
 <h1><span id="向量数据库">向量数据库</span><a href="#向量数据库" class="header-anchor">#</a></h1><ul>
 <li><p>国产</p>
 <ul>
@@ -268,17 +287,49 @@
 <ul>
 <li>Pinecone</li>
 <li>FAISS<br>[ANN]</li>
+<li>Chroma</li>
+<li>Weaviate</li>
 </ul>
 </li>
 </ul>
-<p>【向量的相对度算法</p>
-<ol>
-<li>欧式距离</li>
-<li>余弦</li>
-<li>ANN】</li>
+<h1><span id="向量的相对度算法3">向量的相对度算法[3]</span><a href="#向量的相对度算法3" class="header-anchor">#</a></h1><ul>
+<li>Cosine Similarity *<br>余弦</li>
+<li>Dot Product *</li>
+<li>Squared Euclidean (L2-Squared) *<br>欧式距离</li>
+<li>Manhattan (L1 Norm or Taxicab Distance) *</li>
+<li>Hamming *</li>
+<li>ANN</li>
+</ul>
+<h3><span id="比较4">比较[4]</span><a href="#比较4" class="header-anchor">#</a></h3><table>
+<thead>
+<tr>
+<th>Similarity Metric</th>
+<th>Vector properties considered</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Euclidean distance</td>
+<td>Magnitudes and direction</td>
+</tr>
+<tr>
+<td>Cosine similarity</td>
+<td>Only direction</td>
+</tr>
+<tr>
+<td>Dot product similarity</td>
+<td>Magnitudes and direction</td>
+</tr>
+</tbody></table>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/476025527">云原生向量数据库Milvus扫盲，看完这篇就够了</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/477231485">云原生向量数据库Milvus（二）-数据与索引的处理流程、索引类型及Schema</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://weaviate.io/blog/distance-metrics-in-vector-search?ref=blog.langchain.dev">Distance Metrics in Vector Search</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.pinecone.io/learn/vector-similarity/">Vector Similarity Explained</a></p>
+</li>
 </ol>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/476025527">云原生向量数据库Milvus扫盲，看完这篇就够了</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/477231485">云原生向量数据库Milvus（二）-数据与索引的处理流程、索引类型及Schema</a></p>
 
     </div>
 
@@ -392,14 +443,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">492</span>
+          <span class="site-state-item-count">493</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/www6vHomeHexo/categories/">
           
-        <span class="site-state-item-count">296</span>
+        <span class="site-state-item-count">297</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

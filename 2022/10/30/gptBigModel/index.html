@@ -25,14 +25,18 @@
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/10/30/gptBigModel/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/10/30/gptBigModel/npl4Paragiam.jpg">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/10/30/gptBigModel/scalingLaw.jpg">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/10/30/gptBigModel/paramVSdataSize.jpg">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/10/30/gptBigModel/computeVSDatasize.jpg">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/10/30/gptBigModel/bigModelArch.jpg">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/10/30/gptBigModel/bigModelArch1.jpg">
 <meta property="article:published_time" content="2022-10-30T11:10:21.000Z">
-<meta property="article:modified_time" content="2023-12-01T20:47:44.657Z">
+<meta property="article:modified_time" content="2023-12-18T18:37:39.395Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="大模型">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2022/10/30/gptBigModel/bigModelArch.jpg">
+<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2022/10/30/gptBigModel/npl4Paragiam.jpg">
 
 <link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/10/30/gptBigModel/">
 
@@ -227,7 +231,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-02 04:47:44" itemprop="dateModified" datetime="2023-12-02T04:47:44+08:00">2023-12-02</time>
+                <time title="修改时间：2023-12-19 02:37:39" itemprop="dateModified" datetime="2023-12-19T02:37:39+08:00">2023-12-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -262,27 +266,33 @@
 <!-- toc -->
 
 <ul>
+<li><a href="#npl%E8%8C%83%E5%BC%8F3">NPL范式[3]</a></li>
+<li><a href="#scaling-law5">Scaling Law[5]</a><ul>
+<li><a href="#scaling-law">Scaling Law</a></li>
+<li><a href="#%E5%8F%82%E6%95%B0%E9%87%8F-vs-%E6%95%B0%E6%8D%AE%E9%87%8F">参数量 vs 数据量</a></li>
+<li><a href="#%E5%8F%82%E6%95%B0%E9%87%8F-vs-%E6%95%B0%E6%8D%AE%E9%87%8F-1">参数量 vs 数据量</a></li>
+</ul>
+</li>
 <li><a href="#%E5%8E%9F%E7%90%86">原理</a></li>
 <li><a href="#%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84-12">大模型架构 [1][2]</a></li>
-<li><a href="#%E5%88%86%E8%AF%8D">分词</a><ul>
-<li><a href="#%E5%8D%95%E8%AF%8D%E5%88%86%E8%AF%8D%E6%B3%95">单词分词法</a></li>
-<li><a href="#%E5%8D%95%E5%AD%97%E5%88%86%E8%AF%8D%E6%B3%95">单字分词法</a></li>
-<li><a href="#%E5%AD%90%E8%AF%8D%E5%88%86%E8%AF%8D%E6%B3%95">子词分词法</a></li>
-</ul>
-</li>
 <li><a href="#%E5%A4%A7%E6%A8%A1%E5%9E%8B">大模型</a><ul>
 <li><a href="#%E6%8E%92%E8%A1%8C%E6%A6%9C-4">排行榜 [4]</a></li>
-<li><a href="#%E9%9D%9E%E5%BC%80%E6%BA%90">非开源</a></li>
-<li><a href="#%E5%BC%80%E6%BA%90">开源</a></li>
 </ul>
 </li>
-<li><a href="#shot3">Shot[3]</a></li>
+<li><a href="#gpu">GPU</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
 
 </div>
 
+<h1><span id="npl范式3">NPL范式[3]</span><a href="#npl范式3" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/10/30/gptBigModel/npl4Paragiam.jpg" class title="4种范式">
+
+
+<h1><span id="scaling-law5">Scaling Law[5]</span><a href="#scaling-law5" class="header-anchor">#</a></h1><h3><span id="scaling-law">Scaling Law</span><a href="#scaling-law" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/10/30/gptBigModel/scalingLaw.jpg" class>
+
+<h3><span id="参数量-vs-数据量">参数量 vs 数据量</span><a href="#参数量-vs-数据量" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/10/30/gptBigModel/paramVSdataSize.jpg" class>
+<h3><span id="参数量-vs-数据量">参数量 vs 数据量</span><a href="#参数量-vs-数据量" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/10/30/gptBigModel/computeVSDatasize.jpg" class>
 
 <h1><span id="原理">原理</span><a href="#原理" class="header-anchor">#</a></h1><ul>
 <li>正向传播<br>损失函数  </li>
@@ -294,22 +304,24 @@
 <img src="/www6vHomeHexo/2022/10/30/gptBigModel/bigModelArch1.jpg" class>
 
 
-<h1><span id="分词">分词</span><a href="#分词" class="header-anchor">#</a></h1><h3><span id="单词分词法">单词分词法</span><a href="#单词分词法" class="header-anchor">#</a></h3><h3><span id="单字分词法">单字分词法</span><a href="#单字分词法" class="header-anchor">#</a></h3><h3><span id="子词分词法">子词分词法</span><a href="#子词分词法" class="header-anchor">#</a></h3><p>BPE - GPT系列</p>
-<h1><span id="大模型">大模型</span><a href="#大模型" class="header-anchor">#</a></h1><h3><span id="排行榜-4">排行榜 [4]</span><a href="#排行榜-4" class="header-anchor">#</a></h3><h3><span id="非开源">非开源</span><a href="#非开源" class="header-anchor">#</a></h3><p>  Chatgpt<br>  文心一言</p>
-<h3><span id="开源">开源</span><a href="#开源" class="header-anchor">#</a></h3><p>  LLaMA<br>  Baichuan2<br>  通义千问（Qwen-7B）<br>  ChatGLM</p>
-<h1><span id="shot3">Shot[3]</span><a href="#shot3" class="header-anchor">#</a></h1><ul>
-<li>One-shot </li>
-<li>Few-Shot</li>
-<li>Zero-Shot</li>
+<h1><span id="大模型">大模型</span><a href="#大模型" class="header-anchor">#</a></h1><h3><span id="排行榜-4">排行榜 [4]</span><a href="#排行榜-4" class="header-anchor">#</a></h3><h1><span id="gpu">GPU</span><a href="#gpu" class="header-anchor">#</a></h1><ul>
+<li><p>显卡天梯榜<br> <a target="_blank" rel="noopener" href="https://topic.expreview.com/GPU">显卡天梯榜</a></p>
+</li>
+<li><p>显卡<br>显卡 &#x3D; GPU +  显存</p>
+</li>
 </ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/648050614">LLM学习系列1：大模型架构要点总结</a></p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2328541">主流大语言模型的技术原理细节</a> *** 腾讯     架构 + 训练 + 微调</p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/624793654">Few-Shot, Zero-Shot &amp; One-shot 的通俗理解</a> </p>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/396098543">[综述]鹏飞大神的Pre-train, Prompt, and Predict [1]</a></p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard">HuggingFaceH 大模型排行榜</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/667489780">解析大模型中的Scaling Law</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://arthurchiao.art/blog/llm-practical-guide-zh/">[译][论文] 大语言模型（LLM）综述与实用指南（Amazon，2023）</a> 未</p>
 </li>
 </ol>
 
@@ -351,8 +363,8 @@
       <i class="fa fa-chevron-left"></i> AWS Network-Direct Connect
     </a></div>
       <div class="post-nav-item">
-    <a href="/www6vHomeHexo/2022/11/02/gptRAG/" rel="next" title="GPT-RAG">
-      GPT-RAG <i class="fa fa-chevron-right"></i>
+    <a href="/www6vHomeHexo/2022/11/02/gptRAG/" rel="next" title="RAG">
+      RAG <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -425,14 +437,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">492</span>
+          <span class="site-state-item-count">493</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/www6vHomeHexo/categories/">
           
-        <span class="site-state-item-count">296</span>
+        <span class="site-state-item-count">297</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
