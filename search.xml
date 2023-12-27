@@ -2542,14 +2542,16 @@
 <span id="more"></span>
 
 
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="5">
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><p><a href="https://blog.langchain.dev/using-langsmith-to-support-fine-tuning-of-open-source-llms/">Using LangSmith to Support Fine-tuning</a><br>  <a href="https://colab.research.google.com/drive/1tpywvzwOS74YndNXhI8NUaEfPeqOc7ub?usp=sharing&ref=blog.langchain.dev">colab</a></p>
+</li>
+<li><p><a href="https://platform.openai.com/docs/guides/fine-tuning">Fine-tuning</a>  openai *** </p>
+</li>
 <li><p><a href="https://github.com/www6v/llm-action#llm%E5%BE%AE%E8%B0%83%E5%AE%9E%E6%88%98">LLM微调实战</a> 李国东  未<br>5.1 <a href="https://zhuanlan.zhihu.com/p/651744834">大模型参数高效微调技术实战（一）-PEFT概述</a><br>5.2 <a href="https://zhuanlan.zhihu.com/p/649315197">大模型参数高效微调技术实战（五）-LoRA</a></p>
 </li>
 <li><p><a href="https://github.com/www6v/transformers-code/tree/master/03-PEFT">PEFT</a>  未  bili</p>
 </li>
 <li><p><a href="https://github.com/huggingface/peft">https://github.com/huggingface/peft</a></p>
-</li>
-<li><p><a href="https://blog.langchain.dev/using-langsmith-to-support-fine-tuning-of-open-source-llms/">Using LangSmith to Support Fine-tuning</a><br><a href="https://colab.research.google.com/drive/1tpywvzwOS74YndNXhI8NUaEfPeqOc7ub?usp=sharing&ref=blog.langchain.dev">colab</a></p>
 </li>
 </ol>
 ]]></content>
@@ -3192,9 +3194,9 @@
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-
-
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ul>
+<h1><span id="six-strategies-for-getting-better-results1">Six strategies for getting better results[1]</span><a href="#six-strategies-for-getting-better-results1" class="header-anchor">#</a></h1><h3><span id="write-clear-instructions">Write clear instructions</span><a href="#write-clear-instructions" class="header-anchor">#</a></h3><h3><span id="provide-reference-text">Provide reference text</span><a href="#provide-reference-text" class="header-anchor">#</a></h3><h3><span id="split-complex-tasks-into-simpler-subtasks">Split complex tasks into simpler subtasks</span><a href="#split-complex-tasks-into-simpler-subtasks" class="header-anchor">#</a></h3><h3><span id="give-the-model-time-to-think">Give the model time to “think”</span><a href="#give-the-model-time-to-think" class="header-anchor">#</a></h3><h3><span id="use-external-tools">Use external tools</span><a href="#use-external-tools" class="header-anchor">#</a></h3><h3><span id="test-changes-systematically">Test changes systematically</span><a href="#test-changes-systematically" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><p><a href="https://platform.openai.com/docs/guides/prompt-engineering">Prompt engineering</a>  openai</p>
+</li>
 <li><p><a href="https://github.com/www6v/Prompt-Engineering-Guide">Prompt-Engineering-Guide </a> *** git</p>
 </li>
 <li><p><a href="https://blog.langchain.dev/the-prompt-landscape/">The Prompt Landscape</a>  langchain</p>
@@ -3203,7 +3205,7 @@
 </li>
 <li><p><a href="https://www.promptingguide.ai/techniques">Prompt Engineering Guide</a> guide</p>
 </li>
-</ul>
+</ol>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -9690,10 +9692,17 @@
 </ul>
 <img src="/www6vHomeHexo/2022/06/07/aiMachineLearning/scikit-learn.png" class title="scikit-learn overview">
 
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://zhuanlan.zhihu.com/p/479973669">【机器学习算法】10种常见机器学习算法+Python代码</a></li>
-<li><a href="https://www.jianshu.com/p/b8227eac1fa6">机器学习–有监督–支持向量机SVM</a></li>
-<li><a href="https://scikit-learn.org/stable/supervised_learning.html">Supervised learning</a></li>
+
+
+<h2><span id="按学习模型划分-4">按学习模型划分 [4]</span><a href="#按学习模型划分-4" class="header-anchor">#</a></h2><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
+<li><p><a href="https://zhuanlan.zhihu.com/p/479973669">【机器学习算法】10种常见机器学习算法+Python代码</a></p>
+</li>
+<li><p><a href="https://www.jianshu.com/p/b8227eac1fa6">机器学习–有监督–支持向量机SVM</a></p>
+</li>
+<li><p><a href="https://scikit-learn.org/stable/supervised_learning.html">Supervised learning</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/hustlei/article/details/121803226">人工智能导论(6)——机器学习(Machine Learning)</a> ***</p>
+</li>
 </ol>
 ]]></content>
       <categories>
