@@ -18,6 +18,7 @@
 <li><a href="/www6vHomeHexo/2022/12/11/gptFamily/" title="GPT 系列">GPT 系列</a>  </li>
 <li><a href="/www6vHomeHexo/2022/11/19/gptBigModelTraining/" title="大模型训练">大模型训练</a></li>
 <li><a href="/www6vHomeHexo/2022/11/18/gptFineTuning/" title="Fine-Tuning">Fine-Tuning</a> </li>
+<li><a href="/www6vHomeHexo/2022/12/28/gptFineTuningWhen/" title="Fine-Tuning 时机">Fine-Tuning 时机</a>  </li>
 <li><a href="/www6vHomeHexo/2022/12/20/gptFineTuningCode/" title="Fine-Tuning 实战">Fine-Tuning 实战</a>  </li>
 <li><a href="/www6vHomeHexo/2022/11/24/gptFinGPT/" title="FinGTP">FinGTP</a></li>
 </ul>
@@ -2468,6 +2469,55 @@
       </tags>
   </entry>
   <entry>
+    <title>Fine-Tuning 时机</title>
+    <url>/www6vHomeHexo/2022/12/28/gptFineTuningWhen/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+
+<h3><span id="何时进行微调1">何时进行微调[1]</span><a href="#何时进行微调1" class="header-anchor">#</a></h3><p>语言模型（LLM）可以通过至少两种方式学习新知识：权重更新（例如预训练或微调）或提示（例如检索增强生成，RAG）。模型的权重就像长期记忆，而提示就像短期记忆。这个OpenAI Cookbook给出了一个有用的比喻：当你对模型进行微调时，就像是在离考试还有一周的时候准备复习。当你通过提示（例如检索）向提示中插入知识时，就像是在有开放笔记的考试中。</p>
+<p>基于这一点，<strong>不建议使用微调来教授LLM新的知识或事实回忆</strong>；OpenAI的John Schulman在一次讲话中指出，微调可能会<strong>增加虚构</strong>。微调<strong>更适合教授专门的任务</strong>，但应与提示或RAG相对比。正如这里所讨论的，对于具有丰富示例和&#x2F;或缺乏上下文学习能力的LLM来说，微调对于定义明确的任务可能是有帮助的。这篇Anyscale博客很好地总结了这些观点：<strong>微调是为形式而非事实</strong>[3]。</p>
+<h3><span id="what-4">what [4]</span><a href="#what-4" class="header-anchor">#</a></h3><p>这是一个很好的问题。我大致将微调类比为人的专业知识：</p>
+<ul>
+<li><strong>用文字描述一个任务 ~&#x3D; 零样本提示</strong></li>
+<li><strong>给出解决任务的示例 ~&#x3D; 少样本提示</strong></li>
+<li><strong>允许人们练习任务 ~&#x3D; 微调</strong></li>
+</ul>
+<p>考虑到这个比喻，令人惊奇的是我们有了可以仅通过提示就能在许多任务上达到高水平准确性的模型，但我也预计达到顶级性能可能需要微调，特别是在具有明确定义的具体任务的应用中，在这些任务中我们可以收集大量数据并在其上进行“练习”。</p>
+<p>这可能是一个需要牢记的<strong>粗略图景</strong>。<strong>小型模型</strong>无法进行上下文学习，并且从提示工程中受益甚少，但根据任务的难度，<strong>仍然有可能将它们微调为表现良好的专家</strong>。</p>
+<p>需要注意的是，所有这些都还是非常新颖的。</p>
+
+
+<h3><span id="common-use-cases2">Common use cases[2]</span><a href="#common-use-cases2" class="header-anchor">#</a></h3><p>微调可以改善结果的一些常见<strong>用例</strong>包括：</p>
+<ul>
+<li><strong>设定风格、语气、格式或其他定性因素</strong></li>
+<li><strong>提高生成所需输出的可靠性</strong></li>
+<li><strong>纠正无法按照复杂提示要求执行的问题</strong></li>
+<li>以特定方式处理许多边缘情况</li>
+<li><strong>执行难以用提示清晰表达的新技能或任务</strong></li>
+</ul>
+<p>从较高层面来看，这些情况下微调更容易实现“<strong>展示而非告诉</strong>”的效果。在接下来的部分中，我们将探讨如何为微调设置数据以及各种示例，这些示例中微调改善了基线模型的性能。</p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><p><a href="https://blog.langchain.dev/using-langsmith-to-support-fine-tuning-of-open-source-llms/">Using LangSmith to Support Fine-tuning</a><br>  <a href="https://colab.research.google.com/drive/1tpywvzwOS74YndNXhI8NUaEfPeqOc7ub?usp=sharing&ref=blog.langchain.dev">colab</a>   LANGCHAIN_API_KEY</p>
+</li>
+<li><p><a href="https://platform.openai.com/docs/guides/fine-tuning">Fine-tuning</a>  openai *** </p>
+</li>
+<li><p><a href="https://www.anyscale.com/blog/fine-tuning-is-for-form-not-facts">Fine tuning is for form, not facts</a> ***</p>
+</li>
+<li><p><a href="https://twitter.com/karpathy/status/1655994367033884672">Andrej Karpathy twitter</a></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>Fine-Tuning</category>
+      </categories>
+      <tags>
+        <tag>AIGC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RAG 性能-OpenAI案例</title>
     <url>/www6vHomeHexo/2022/12/27/gptRAGPerformanceOpenAI/</url>
     <content><![CDATA[<p></p>
@@ -2542,11 +2592,10 @@
 <span id="more"></span>
 
 
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><p><a href="https://blog.langchain.dev/using-langsmith-to-support-fine-tuning-of-open-source-llms/">Using LangSmith to Support Fine-tuning</a><br>  <a href="https://colab.research.google.com/drive/1tpywvzwOS74YndNXhI8NUaEfPeqOc7ub?usp=sharing&ref=blog.langchain.dev">colab</a></p>
-</li>
-<li><p><a href="https://platform.openai.com/docs/guides/fine-tuning">Fine-tuning</a>  openai *** </p>
-</li>
+
+
+
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="5">
 <li><p><a href="https://github.com/www6v/llm-action#llm%E5%BE%AE%E8%B0%83%E5%AE%9E%E6%88%98">LLM微调实战</a> 李国东  未<br>5.1 <a href="https://zhuanlan.zhihu.com/p/651744834">大模型参数高效微调技术实战（一）-PEFT概述</a><br>5.2 <a href="https://zhuanlan.zhihu.com/p/649315197">大模型参数高效微调技术实战（五）-LoRA</a></p>
 </li>
 <li><p><a href="https://github.com/www6v/transformers-code/tree/master/03-PEFT">PEFT</a>  未  bili</p>
