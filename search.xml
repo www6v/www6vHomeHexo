@@ -2475,6 +2475,11 @@
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+
+<ol>
+<li><a href="https://drive.google.com/file/d/1LZXTrRdrloIqAJT6xaNTl4WQd6y95o7K/view">LLMOps: Deployment and Learning in Production</a><br><a href="https://fullstackdeeplearning.com/llm-bootcamp/spring-2023/llmops/">LLMOps: Deployment and Learning in Production</a><br><a href="https://zhuanlan.zhihu.com/p/629589593">[必读] LLM 应用开发全栈指南</a> LLMOps</li>
+<li><a href="https://zhuanlan.zhihu.com/p/632026876">了解一下新领域 LLMOps: 大模型运维</a><br><a href="https://wandb.ai/site/articles/understanding-llmops-large-language-model-operations">Understanding LLMOps: Large Language Model Operations</a></li>
+</ol>
 ]]></content>
       <categories>
         <category>AIGC</category>
