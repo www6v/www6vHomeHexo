@@ -2923,6 +2923,8 @@
 <li>机器翻译和生成模型</li>
 </ul>
 </li>
+<li><p>天梯榜<br><a href="https://huggingface.co/spaces/mteb/leaderboard">mteb&#x2F;leaderboard</a></p>
+</li>
 </ul>
 <h1><span id="向量数据库">向量数据库</span><a href="#向量数据库" class="header-anchor">#</a></h1><ul>
 <li><p>国产</p>
@@ -3804,7 +3806,10 @@
 </ul>
 </li>
 <li><a href="#%E6%98%BE%E5%8D%A1">显卡</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
+<li><a href="#%E7%BB%BC%E8%BF%B0">综述</a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 
@@ -3844,18 +3849,15 @@
 </li>
 </ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><p><a href="https://zhuanlan.zhihu.com/p/648050614">LLM学习系列1：大模型架构要点总结</a></p>
-</li>
-<li><p><a href="https://cloud.tencent.com/developer/article/2328541">主流大语言模型的技术原理细节</a> *** 腾讯     架构 + 训练 + 微调</p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/396098543">[综述]鹏飞大神的Pre-train, Prompt, and Predict [1]</a></p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/667489780">解析大模型中的Scaling Law</a></p>
-</li>
-<li><p><a href="http://arthurchiao.art/blog/llm-practical-guide-zh/">[译][论文] 大语言模型（LLM）综述与实用指南（Amazon，2023）</a> 未</p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/597586623">通向AGI之路：大型语言模型（LLM）技术精要</a> *** 未</p>
-</li>
+<li><a href="https://zhuanlan.zhihu.com/p/648050614">LLM学习系列1：大模型架构要点总结</a></li>
+<li><a href="https://cloud.tencent.com/developer/article/2328541">主流大语言模型的技术原理细节</a> *** 腾讯     架构 + 训练 + 微调</li>
+<li><a href="https://zhuanlan.zhihu.com/p/396098543">[综述]鹏飞大神的Pre-train, Prompt, and Predict [1]</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/667489780">解析大模型中的Scaling Law</a></li>
+</ol>
+<h3><span id="综述">综述</span><a href="#综述" class="header-anchor">#</a></h3><ol start="100">
+<li><a href="http://arthurchiao.art/blog/llm-practical-guide-zh/">[译][论文] 大语言模型（LLM）综述与实用指南（Amazon，2023）</a> 未</li>
+<li><a href="https://zhuanlan.zhihu.com/p/597586623">通向AGI之路：大型语言模型（LLM）技术精要</a> *** 未</li>
+<li><a href="http://aibox.ruc.edu.cn/docs/2023-08/cb9badcb213f4c8b89d00d579eed4a4c.pdf">大语言模型综述</a> 中文  v10<br><a href="https://github.com/RUCAIBox/LLMSurvey/blob/main/assets/LLM_Survey_Chinese.pdf">大语言模型综述</a> 中文<br><a href="https://arxiv.org/pdf/2303.18223.pdf">A Survey of Large Language Models</a> 英文<br><a href="https://github.com/www6v/LLMSurvey">LLMSurvey</a>  github<br><a href="https://zhuanlan.zhihu.com/p/630203554">[论文]大语言模型综述</a></li>
 </ol>
 ]]></content>
       <categories>
@@ -5795,7 +5797,8 @@
 <li><a href="https://time.geekbang.org/opencourse/videointro/100541201">ChatGPT 和预训练模型实战课</a></li>
 </ul>
 <h3><span id="知乎">知乎</span><a href="#知乎" class="header-anchor">#</a></h3><ul>
-<li><a href="https://agiclass.feishu.cn/docx/DDzxdQZBooXw9Jx4DdWcLZjLnHd">《AI 大模型全栈工程师》课程表（第 02 期） </a></li>
+<li><a href="https://agiclass.feishu.cn/docx/DDzxdQZBooXw9Jx4DdWcLZjLnHd">《AI 大模型全栈工程师》课程表（第 02 期） </a>  </li>
+<li><a href="https://www.zhihu.com/people/dou-hong-jian-44/posts">AI Box专栏</a>  中国人大  AI ***<br>大模型survey</li>
 </ul>
 <h3><span id="清华">清华</span><a href="#清华" class="header-anchor">#</a></h3><ul>
 <li><a href="https://www.zhihu.com/education/video-course/1545850719483392000">【清华 NLP X OpenBMB】大模型公开课｜带你从入门到实战</a>  V ***</li>
