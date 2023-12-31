@@ -17,10 +17,12 @@
 <li><a href="/www6vHomeHexo/2022/11/30/gptTransformer/" title="Transformer">Transformer</a> </li>
 <li><a href="/www6vHomeHexo/2022/12/11/gptFamily/" title="GPT 系列">GPT 系列</a>  </li>
 <li><a href="/www6vHomeHexo/2022/11/19/gptBigModelTraining/" title="大模型训练">大模型训练</a></li>
+<li><a href="/www6vHomeHexo/2022/11/24/gptFinGPT/" title="FinGTP">FinGTP</a></li>
+</ul>
+<h2><span id="finetuning">FineTuning</span><a href="#finetuning" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/11/18/gptFineTuning/" title="Fine-Tuning">Fine-Tuning</a> </li>
 <li><a href="/www6vHomeHexo/2022/12/28/gptFineTuningWhen/" title="Fine-Tuning 时机">Fine-Tuning 时机</a>  </li>
-<li><a href="/www6vHomeHexo/2022/12/20/gptFineTuningCode/" title="Fine-Tuning 实战">Fine-Tuning 实战</a>  </li>
-<li><a href="/www6vHomeHexo/2022/11/24/gptFinGPT/" title="FinGTP">FinGTP</a></li>
+<li><a href="/www6vHomeHexo/2022/12/20/gptFineTuningCode/" title="Fine-Tuning 实战">Fine-Tuning 实战</a></li>
 </ul>
 <h2><span id="prompt">Prompt</span><a href="#prompt" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/11/10/gptPromptEngineering/" title="Prompt Engineering">Prompt Engineering</a></li>
@@ -29,14 +31,22 @@
 <li><a href="/www6vHomeHexo/2021/05/26/gptPrompt/" title="Prompt-How to use">Prompt-How to use</a></li>
 <li><a href="/www6vHomeHexo/2022/11/10/gptBigModelCOT/" title="COT">COT</a></li>
 </ul>
+<h2><span id="rag">RAG</span><a href="#rag" class="header-anchor">#</a></h2><ul>
+<li><a href="/www6vHomeHexo/2022/11/02/gptRAG/" title="RAG 原理">RAG 原理</a></li>
+<li><a href="/www6vHomeHexo/2022/12/31/gptRAGPractice/" title="RAG 实践">RAG 实践</a> </li>
+<li><a href="/www6vHomeHexo/2022/12/07/gptRAGPerformance/" title="RAG 性能">RAG 性能</a></li>
+<li><a href="/www6vHomeHexo/2022/12/27/gptRAGPerformanceOpenAI/" title="RAG 性能-OpenAI案例">RAG 性能-OpenAI案例</a></li>
+</ul>
+<h2><span id="langchain">Langchain</span><a href="#langchain" class="header-anchor">#</a></h2><ul>
+<li><a href="/www6vHomeHexo/2022/11/02/gptLangchain/" title="Langchain">Langchain</a></li>
+<li><a href="/www6vHomeHexo/2022/12/31/gptRetrievers/" title="Retrievers">Retrievers</a></li>
+</ul>
+<h2><span id="agent">Agent</span><a href="#agent" class="header-anchor">#</a></h2><ul>
+<li><a href="/www6vHomeHexo/2022/11/02/gptAgent/" title="Agent">Agent</a></li>
+<li><a href="/www6vHomeHexo/2022/11/16/gptFunctionCall/" title="Function Call">Function Call</a></li>
+</ul>
 <h2><span id="application">Application</span><a href="#application" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/05/09/gpt/" title="GPT-工具和应用">GPT-工具和应用</a></li>
-<li><a href="/www6vHomeHexo/2022/11/02/gptAgent/" title="Agent">Agent</a></li>
-<li><a href="/www6vHomeHexo/2022/11/02/gptLangchain/" title="Langchain">Langchain</a></li>
-<li><a href="/www6vHomeHexo/2022/11/02/gptRAG/" title="RAG">RAG</a></li>
-<li><a href="/www6vHomeHexo/2022/12/07/gptRAGPerformance/" title="RAG 性能">RAG 性能</a></li>
-<li><a href="/www6vHomeHexo/2022/12/27/gptRAGPerformanceOpenAI/" title="RAG 性能-OpenAI案例">RAG 性能-OpenAI案例</a> </li>
-<li><a href="/www6vHomeHexo/2022/11/16/gptFunctionCall/" title="Function Call">Function Call</a> </li>
 <li><a href="/www6vHomeHexo/2022/12/28/gptLLMOps/" title="LLMOps">LLMOps</a> </li>
 <li><a href="/www6vHomeHexo/2022/11/27/gptVectorStore/" title="向量数据库">向量数据库</a></li>
 </ul>
@@ -2470,6 +2480,202 @@
       </tags>
   </entry>
   <entry>
+    <title>RAG 实践</title>
+    <url>/www6vHomeHexo/2022/12/31/gptRAGPractice/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#rag-on-text-data">RAG on Text data</a><ul>
+<li><a href="#langchain-chatchat-%E6%9E%B6%E6%9E%84">Langchain-Chatchat 架构</a></li>
+<li><a href="#langchain-chatchat">Langchain-Chatchat</a></li>
+</ul>
+</li>
+<li><a href="#rag-on-semi-structured-data">RAG on Semi-structured data</a><ul>
+<li><a href="#%E5%88%86%E6%9E%90pdf%E4%B8%AD%E5%9B%BE%E7%89%87-6">分析PDF中图片 [6]</a></li>
+<li><a href="#%E5%88%86%E6%9E%90pdf%E4%B8%AD%E8%A1%A8%E6%A0%BC-7">分析pdf中表格 [7]</a></li>
+<li><a href="#%E7%BB%84%E4%BB%B6">组件</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
+<li><a href="#rag-on-text-data-1">RAG on Text data</a></li>
+<li><a href="#rag-on-semi-structured-data-1">RAG on Semi-structured data</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="rag-on-text-data">RAG on Text data</span><a href="#rag-on-text-data" class="header-anchor">#</a></h1><h3><span id="langchain-chatchat-架构">Langchain-Chatchat 架构</span><a href="#langchain-chatchat-架构" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/12/31/gptRAGPractice/langchain+chatglm.jpg" class>
+
+<ul>
+<li>组件<ul>
+<li>本地知识库</li>
+<li>Embedding 模型</li>
+<li>向量数据库</li>
+<li>Prompt Template</li>
+</ul>
+</li>
+</ul>
+<h3><span id="langchain-chatchat">Langchain-Chatchat</span><a href="#langchain-chatchat" class="header-anchor">#</a></h3><ul>
+<li>部署 <ul>
+<li>windows 10 [5]<br>部署本地， 没显存，卡</li>
+<li>Linux [2]<br>部署   32C125G ，没显存， 推理很慢 </li>
+<li>Docker</li>
+</ul>
+</li>
+</ul>
+<h1><span id="rag-on-semi-structured-data">RAG on Semi-structured data</span><a href="#rag-on-semi-structured-data" class="header-anchor">#</a></h1><h3><span id="分析pdf中图片-6">分析PDF中图片 [6]</span><a href="#分析pdf中图片-6" class="header-anchor">#</a></h3><p><strong>Option 1</strong> </p>
+<ul>
+<li>Use multimodal embeddings <strong>(such as <a href="https://openai.com/research/clip">CLIP</a>)</strong> to embed images and text</li>
+<li>Retrieve both using similarity search</li>
+<li>Pass <strong>raw images and text chunks</strong> to a multimodal LLM for answer synthesis</li>
+</ul>
+<p><strong>Option 2</strong> </p>
+<ul>
+<li>Use a multimodal LLM (such as <a href="https://openai.com/research/gpt-4v-system-card">GPT4-V</a>, <a href="https://llava.hliu.cc/">LLaVA</a>, or <a href="https://www.adept.ai/blog/fuyu-8b">FUYU-8b</a>) to produce <strong>text summaries from images</strong></li>
+<li>Embed and retrieve text </li>
+<li>Pass text chunks to an LLM for answer synthesis</li>
+</ul>
+<p><strong>Option 3</strong> </p>
+<ul>
+<li>Use a multimodal LLM (such as <a href="https://openai.com/research/gpt-4v-system-card">GPT4-V</a>, <a href="https://llava.hliu.cc/">LLaVA</a>, or <a href="https://www.adept.ai/blog/fuyu-8b">FUYU-8b</a>) to produce text summaries from images</li>
+<li>Embed and retrieve image summaries with a reference to the raw image </li>
+<li>Pass <strong>raw images and text chunks</strong> to a multimodal LLM for answer synthesis</li>
+</ul>
+<h3><span id="分析pdf中表格-7">分析pdf中表格 [7]</span><a href="#分析pdf中表格-7" class="header-anchor">#</a></h3><h3><span id="组件">组件</span><a href="#组件" class="header-anchor">#</a></h3><ul>
+<li>pdf解析<br>unstructured</li>
+<li>store<br> MultiVector Retriever- 元数据+数据</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="rag-on-text-data">RAG on Text data</span><a href="#rag-on-text-data" class="header-anchor">#</a></h3><ol>
+<li><p><a href="https://github.com/chatchat-space/Langchain-Chatchat">Langchain-Chatchat </a> master<br>Langchain 与 ChatGLM 等语言模型的本地知识库问答<br><a href="https://github.com/chatchat-space/Langchain-Chatchat/tree/v0.2.4">Langchain-Chatchat</a>  v0.2.4<br><a href="https://gitee.com/deepeye/langchain-ChatGLM">langchain-ChatGLM</a>  gitee </p>
+</li>
+<li><p><a href="https://github.com/www6v/Langchain-Chatchat-Colab">Colab for Langchain-Chatchat</a>   linux 可以部署  v0.2.6</p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/649055955">langChain-ChatGLM 尝试，踩坑记录</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/651189680">Langchain-Chatchat + 阿里通义千问Qwen 保姆级教程 | 次世代知识管理解决方案</a>    Langchain-Chatchat + 通义千问</p>
+</li>
+<li><p><a href="https://blog.csdn.net/weixin_43094965/article/details/133044128">win10 安装 Langchain-Chatchat 避坑指南（2023年9月18日v0.2.4版本，包含全部下载内容！）</a></p>
+</li>
+</ol>
+<h3><span id="rag-on-semi-structured-data">RAG on Semi-structured data</span><a href="#rag-on-semi-structured-data" class="header-anchor">#</a></h3><ol start="6">
+<li><a href="https://github.com/www6v/AIGC/blob/master/langchain-cookbook/Semi_structured_multi_modal_RAG_LLaMA2.ipynb">langchain-cookbook RAG</a>   解析pdf中的图片  运行有问题</li>
+<li><a href="https://github.com/www6v/AIGC/blob/master/Advanced-RAG/01_semi_structured_data.ipynb">Advanced-RAG semi_structured_data</a>   解析pdf中的表格，  运行没问题，能问表格中的数据</li>
+</ol>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>RAG</category>
+      </categories>
+      <tags>
+        <tag>RAG</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Retrievers</title>
+    <url>/www6vHomeHexo/2022/12/31/gptRetrievers/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h1><span id="langchain-retrievers10">Langchain Retrievers[10]</span><a href="#langchain-retrievers10" class="header-anchor">#</a></h1><h3><span id="multiqueryretriever">MultiQueryRetriever</span><a href="#multiqueryretriever" class="header-anchor">#</a></h3><p>The MultiQueryRetriever automates the process of prompt tuning by using an LLM to <strong>generate multiple queries from different perspectives for a given user input query</strong>. </p>
+<h3><span id="contextual-compression">Contextual compression</span><a href="#contextual-compression" class="header-anchor">#</a></h3><h3><span id="ensemble-retriever">Ensemble Retriever</span><a href="#ensemble-retriever" class="header-anchor">#</a></h3><p>The EnsembleRetriever takes a list of retrievers as input and ensemble the results of their get_relevant_documents() methods and <strong>rerank the results based on the Reciprocal Rank Fusion algorithm</strong>.<br>The most common pattern is to <strong>combine a sparse retriever (like BM25) with a dense retriever (like embedding similarity)</strong>, because their strengths are complementary. It is also known as “hybrid search”.</p>
+<h3><span id="multivector-retriever">MultiVector Retriever</span><a href="#multivector-retriever" class="header-anchor">#</a></h3><p>The methods to create multiple vectors per document include:<br>    - Smaller chunks: split a document into smaller chunks, and embed those (this is ParentDocumentRetriever).<br>    - Summary: create a summary for each document, embed that along with (or instead of) the document.<br>    - Hypothetical questions: create hypothetical questions that each document would be appropriate to answer, embed those along with (or instead of) the document.</p>
+<h3><span id="parent-document-retriever">Parent Document Retriever</span><a href="#parent-document-retriever" class="header-anchor">#</a></h3><p>chunks of data</p>
+<h3><span id="self-querying">Self-querying</span><a href="#self-querying" class="header-anchor">#</a></h3><p>This allows the retriever to not only use the user-input query for <strong>semantic similarity comparison</strong> with the contents of stored documents but to also extract filters from the user query on <strong>the metadata</strong> of stored documents and to execute those filters.</p>
+<h1><span id="langchian-retriever10">Langchian Retriever[10]</span><a href="#langchian-retriever10" class="header-anchor">#</a></h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Index Type</th>
+<th>Uses an LLM</th>
+<th>When to Use</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://python.langchain.com/docs/modules/data_connection/retrievers/vectorstore">Vectorstore</a></td>
+<td>Vectorstore</td>
+<td>No</td>
+<td>If you are just getting started and looking for something quick and easy.</td>
+<td>This is the <strong>simplest method</strong> and the one that is easiest to get started with. It involves creating embeddings for each piece of text.</td>
+</tr>
+<tr>
+<td><a href="https://python.langchain.com/docs/modules/data_connection/retrievers/parent_document_retriever">ParentDocument</a></td>
+<td>Vectorstore + Document Store</td>
+<td>No</td>
+<td>If your pages have lots of smaller pieces of distinct information that are best indexed by themselves, but best retrieved all together.</td>
+<td>This involves indexing <strong>multiple chunks</strong> for each document. Then you find the  chunks that are most similar in embedding space, but you retrieve the  <strong>whole parent</strong> document and <strong>return</strong> that (rather than individual chunks).</td>
+</tr>
+<tr>
+<td><a href="https://python.langchain.com/docs/modules/data_connection/retrievers/multi_vector">Multi Vector</a></td>
+<td>Vectorstore + Document Store</td>
+<td>Sometimes during indexing</td>
+<td>If you are able to extract information from documents that you think is more relevant to index than the text itself.</td>
+<td>This involves creating multiple vectors for each document. Each vector could be created in a <strong>myriad of ways</strong> - examples include <strong>summaries of the text</strong> and <strong>hypothetical questions</strong>.</td>
+</tr>
+<tr>
+<td><a href="https://python.langchain.com/docs/modules/data_connection/retrievers/self_query">Self Query</a></td>
+<td>Vectorstore</td>
+<td>Yes</td>
+<td>If users are asking questions that are better answered by fetching  documents based on metadata rather than similarity with the text.</td>
+<td>This uses an LLM to transform user input into two things: (1) a string to  look up semantically, (2) a <strong>metadata filer</strong> to go along with it. This is  useful because oftentimes questions are about the METADATA of documents  (not the content itself).</td>
+</tr>
+<tr>
+<td><a href="https://python.langchain.com/docs/modules/data_connection/retrievers/contextual_compression">Contextual Compression</a></td>
+<td>Any</td>
+<td>Sometimes</td>
+<td>If you are finding that your retrieved documents contain too much irrelevant information and are distracting the LLM.</td>
+<td>This puts a <strong>post-processing step</strong> on top of another retriever and extracts  only the most relevant information from retrieved documents. This can be done with embeddings or an LLM.</td>
+</tr>
+<tr>
+<td><a href="https://python.langchain.com/docs/modules/data_connection/retrievers/time_weighted_vectorstore">Time-Weighted Vectorstore</a></td>
+<td>Vectorstore</td>
+<td>No</td>
+<td>If you have timestamps associated with your documents, and you want to retrieve the most recent ones</td>
+<td>This fetches documents based on a combination of semantic similarity (as in  normal vector retrieval) and recency (looking at timestamps of indexed  documents)</td>
+</tr>
+<tr>
+<td><a href="https://python.langchain.com/docs/modules/data_connection/retrievers/MultiQueryRetriever">Multi-Query Retriever</a></td>
+<td>Any</td>
+<td>Yes</td>
+<td>If users are asking questions that are complex and require multiple pieces of distinct information to respond</td>
+<td>This uses an LLM to <strong>generate multiple queries</strong> from the original one. This is useful when the original query needs pieces of information about  multiple topics to be properly answered. By generating multiple queries, we can then fetch documents for each of them.</td>
+</tr>
+<tr>
+<td><a href="https://python.langchain.com/docs/modules/data_connection/retrievers/ensemble">Ensemble</a></td>
+<td>Any</td>
+<td>No</td>
+<td>If you have multiple retrieval methods and want to try combining them.</td>
+<td>This fetches documents from <strong>multiple retrievers</strong> and then <strong>combines</strong> them.</td>
+</tr>
+<tr>
+<td><a href="https://python.langchain.com/docs/modules/data_connection/retrievers/long_context_reorder">Long-Context Reorder</a></td>
+<td>Any</td>
+<td>No</td>
+<td>If you are working with a long-context model and noticing that it’s not  paying attention to information in the middle of retrieved documents.</td>
+<td>This fetches documents from an underlying retriever, and then reorders them  so that the most similar are near the beginning and end. This is useful  because it’s been shown that for longer context models they sometimes  don’t pay attention to information in the middle of the context window.</td>
+</tr>
+</tbody></table>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="10">
+<li><a href="https://python.langchain.com/docs/modules/data_connection/retrievers">retrievers</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>Retrievers</category>
+      </categories>
+      <tags>
+        <tag>AIGC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>LLMOps</title>
     <url>/www6vHomeHexo/2022/12/28/gptLLMOps/</url>
     <content><![CDATA[<p></p>
@@ -2628,8 +2834,10 @@
 
 
 
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="5">
-<li><p><a href="https://github.com/www6v/llm-action#llm%E5%BE%AE%E8%B0%83%E5%AE%9E%E6%88%98">LLM微调实战</a> 李国东  未<br>5.1 <a href="https://zhuanlan.zhihu.com/p/651744834">大模型参数高效微调技术实战（一）-PEFT概述</a><br>5.2 <a href="https://zhuanlan.zhihu.com/p/649315197">大模型参数高效微调技术实战（五）-LoRA</a></p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><p><a href="https://github.com/www6v/llm-action#llm%E5%BE%AE%E8%B0%83%E5%AE%9E%E6%88%98">LLM微调实战</a> 李国东  未<br>1.1 <a href="https://zhuanlan.zhihu.com/p/651744834">大模型参数高效微调技术实战（一）-PEFT概述</a><br>1.2 <a href="https://zhuanlan.zhihu.com/p/649315197">大模型参数高效微调技术实战（五）-LoRA</a></p>
+</li>
+<li><p><a href="https://lightning.ai/pages/community/lora-insights/">Finetuning LLMs with LoRA and QLoRA: Insights from Hundreds of Experiments</a> ***</p>
 </li>
 <li><p><a href="https://github.com/www6v/transformers-code/tree/master/03-PEFT">PEFT</a>  未  bili</p>
 </li>
@@ -3507,15 +3715,6 @@
 </li>
 </ul>
 </li>
-<li><a href="#retrievers10">Retrievers[10]</a><ul>
-<li><a href="#multiqueryretriever">MultiQueryRetriever</a></li>
-<li><a href="#contextual-compression">Contextual compression</a></li>
-<li><a href="#ensemble-retriever">Ensemble Retriever</a></li>
-<li><a href="#multivector-retriever">MultiVector Retriever</a></li>
-<li><a href="#parent-document-retriever">Parent Document Retriever</a></li>
-<li><a href="#self-querying">Self-querying</a></li>
-</ul>
-</li>
 <li><a href="#function-call">Function Call</a></li>
 <li><a href="#%E5%BA%94%E7%94%A84">应用[4]</a></li>
 <li><a href="#chains-1-89">Chains [1] [8][9]</a></li>
@@ -3572,11 +3771,6 @@
 <li>ConversationSummaryMemory</li>
 <li>VectorStoreRetrieverMemory</li>
 </ul>
-<h1><span id="retrievers10">Retrievers[10]</span><a href="#retrievers10" class="header-anchor">#</a></h1><h3><span id="multiqueryretriever">MultiQueryRetriever</span><a href="#multiqueryretriever" class="header-anchor">#</a></h3><p>The MultiQueryRetriever automates the process of prompt tuning by using an LLM to <strong>generate multiple queries from different perspectives for a given user input query</strong>. </p>
-<h3><span id="contextual-compression">Contextual compression</span><a href="#contextual-compression" class="header-anchor">#</a></h3><h3><span id="ensemble-retriever">Ensemble Retriever</span><a href="#ensemble-retriever" class="header-anchor">#</a></h3><p>The EnsembleRetriever takes a list of retrievers as input and ensemble the results of their get_relevant_documents() methods and <strong>rerank the results based on the Reciprocal Rank Fusion algorithm</strong>.<br>The most common pattern is to <strong>combine a sparse retriever (like BM25) with a dense retriever (like embedding similarity)</strong>, because their strengths are complementary. It is also known as “hybrid search”.</p>
-<h3><span id="multivector-retriever">MultiVector Retriever</span><a href="#multivector-retriever" class="header-anchor">#</a></h3><p>The methods to create multiple vectors per document include:<br>    - Smaller chunks: split a document into smaller chunks, and embed those (this is ParentDocumentRetriever).<br>    - Summary: create a summary for each document, embed that along with (or instead of) the document.<br>    - Hypothetical questions: create hypothetical questions that each document would be appropriate to answer, embed those along with (or instead of) the document.</p>
-<h3><span id="parent-document-retriever">Parent Document Retriever</span><a href="#parent-document-retriever" class="header-anchor">#</a></h3><p>chunks of data</p>
-<h3><span id="self-querying">Self-querying</span><a href="#self-querying" class="header-anchor">#</a></h3><p>This allows the retriever to not only use the user-input query for <strong>semantic similarity comparison</strong> with the contents of stored documents but to also extract filters from the user query on <strong>the metadata</strong> of stored documents and to execute those filters.</p>
 <h1><span id="function-call">Function Call</span><a href="#function-call" class="header-anchor">#</a></h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> langchain.chains.openai_functions.base <span class="keyword">import</span> (</span><br><span class="line">    create_openai_fn_chain,</span><br><span class="line">    create_structured_output_chain,[<span class="number">2</span>]</span><br><span class="line">)</span><br><span class="line"><span class="keyword">from</span> langchain.chains.openai_functions.citation_fuzzy_match <span class="keyword">import</span> (</span><br><span class="line">    create_citation_fuzzy_match_chain,</span><br><span class="line">)</span><br><span class="line"><span class="keyword">from</span> langchain.chains.openai_functions.extraction <span class="keyword">import</span> (</span><br><span class="line">    create_extraction_chain,</span><br><span class="line">    create_extraction_chain_pydantic,</span><br><span class="line">)</span><br><span class="line"><span class="keyword">from</span> langchain.chains.openai_functions.qa_with_structure <span class="keyword">import</span> (</span><br><span class="line">    create_qa_with_sources_chain,</span><br><span class="line">    create_qa_with_structure_chain,</span><br><span class="line">)</span><br><span class="line"><span class="keyword">from</span> langchain.chains.openai_functions.tagging <span class="keyword">import</span> (</span><br><span class="line">    create_tagging_chain,</span><br><span class="line">    create_tagging_chain_pydantic,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
 
@@ -3647,8 +3841,6 @@
 </li>
 <li><p><a href="https://zhuanlan.zhihu.com/p/651216604">精华笔记：吴恩达 x LangChain 《使用LangChain构建与数据对话的聊天机器人》（下）</a></p>
 </li>
-<li><p><a href="https://python.langchain.com/docs/modules/data_connection/retrievers">retrievers</a></p>
-</li>
 <li><p><a href="https://cloud.tencent.com/developer/article/2313918">一文入门最热的LLM应用开发框架LangChain</a> 未</p>
 </li>
 <li><p><a href="https://cloud.tencent.com/developer/article/2331337">大模型LangChain框架基础与使用示例</a> 未</p>
@@ -3664,33 +3856,23 @@
       </tags>
   </entry>
   <entry>
-    <title>RAG</title>
+    <title>RAG 原理</title>
     <url>/www6vHomeHexo/2022/11/02/gptRAG/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
-
-
 
 <h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
 <!-- toc -->
 
 <ul>
-<li><a href="#rag%E6%9E%B6%E6%9E%84">RAG架构</a></li>
-<li><a href="#rag-on-text-data">RAG on Text data</a><ul>
-<li><a href="#langchain-chatchat">Langchain-Chatchat</a></li>
-</ul>
-</li>
-<li><a href="#rag-on-semi-structured-data">RAG on Semi-structured data</a><ul>
-<li><a href="#%E5%88%86%E6%9E%90pdf%E4%B8%AD%E5%9B%BE%E7%89%87-6">分析PDF中图片 [6]</a></li>
-<li><a href="#%E5%88%86%E6%9E%90pdf%E4%B8%AD%E8%A1%A8%E6%A0%BC-7">分析pdf中表格 [7]</a></li>
-<li><a href="#%E7%BB%84%E4%BB%B6">组件</a></li>
-</ul>
-</li>
+<li><a href="#rag-overview2">RAG Overview[2]</a></li>
+<li><a href="#advanced-rag">Advanced RAG</a></li>
+<li><a href="#rag-vs-ft-2">RAG vs FT [2]</a></li>
 <li><a href="#self-rag">Self-RAG</a></li>
+<li><a href="#rag-fusion">RAG Fusion</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
-<li><a href="#rag-on-text-data-1">RAG on Text data</a></li>
-<li><a href="#rag-on-semi-structured-data-1">RAG on Semi-structured data</a></li>
+<li><a href="#%E7%BB%BC%E8%BF%B0">综述</a></li>
 <li><a href="#self-rag-1">Self-RAG</a></li>
 </ul>
 </li>
@@ -3699,76 +3881,26 @@
 
 </div>
 
+<h1><span id="rag-overview2">RAG Overview[2]</span><a href="#rag-overview2" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/11/02/gptRAG/rag-overview.jpg" class>
 
-
-
-
-
-<h1><span id="rag架构">RAG架构</span><a href="#rag架构" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/11/02/gptRAG/langchain+chatglm.jpg" class>
-
-<ul>
-<li><p>架构</p>
-<ul>
-<li>离线 index<br>LLamaIndex 构建和查询本地文档索引  </li>
+<h1><span id="advanced-rag">Advanced RAG</span><a href="#advanced-rag" class="header-anchor">#</a></h1><ul>
+<li>架构 [1]<ul>
+<li>离线 index</li>
 <li>在线 查询</li>
 </ul>
 </li>
-<li><p>组件</p>
-<ul>
-<li>本地知识库</li>
-<li>Embedding 模型</li>
-<li>向量数据库</li>
-<li>Prompt Template</li>
 </ul>
-</li>
-</ul>
-<h1><span id="rag-on-text-data">RAG on Text data</span><a href="#rag-on-text-data" class="header-anchor">#</a></h1><h3><span id="langchain-chatchat">Langchain-Chatchat</span><a href="#langchain-chatchat" class="header-anchor">#</a></h3><ul>
-<li>部署 <ul>
-<li>windows 10 [5]<br>部署本地， 没显存，卡</li>
-<li>Linux [2]<br>部署   32C125G ，没显存， 推理很慢 </li>
-<li>Docker</li>
-</ul>
-</li>
-</ul>
-<h1><span id="rag-on-semi-structured-data">RAG on Semi-structured data</span><a href="#rag-on-semi-structured-data" class="header-anchor">#</a></h1><h3><span id="分析pdf中图片-6">分析PDF中图片 [6]</span><a href="#分析pdf中图片-6" class="header-anchor">#</a></h3><p><strong>Option 1</strong> </p>
-<ul>
-<li>Use multimodal embeddings <strong>(such as <a href="https://openai.com/research/clip">CLIP</a>)</strong> to embed images and text</li>
-<li>Retrieve both using similarity search</li>
-<li>Pass <strong>raw images and text chunks</strong> to a multimodal LLM for answer synthesis</li>
-</ul>
-<p><strong>Option 2</strong> </p>
-<ul>
-<li>Use a multimodal LLM (such as <a href="https://openai.com/research/gpt-4v-system-card">GPT4-V</a>, <a href="https://llava.hliu.cc/">LLaVA</a>, or <a href="https://www.adept.ai/blog/fuyu-8b">FUYU-8b</a>) to produce <strong>text summaries from images</strong></li>
-<li>Embed and retrieve text </li>
-<li>Pass text chunks to an LLM for answer synthesis</li>
-</ul>
-<p><strong>Option 3</strong> </p>
-<ul>
-<li>Use a multimodal LLM (such as <a href="https://openai.com/research/gpt-4v-system-card">GPT4-V</a>, <a href="https://llava.hliu.cc/">LLaVA</a>, or <a href="https://www.adept.ai/blog/fuyu-8b">FUYU-8b</a>) to produce text summaries from images</li>
-<li>Embed and retrieve image summaries with a reference to the raw image </li>
-<li>Pass <strong>raw images and text chunks</strong> to a multimodal LLM for answer synthesis</li>
-</ul>
-<h3><span id="分析pdf中表格-7">分析pdf中表格 [7]</span><a href="#分析pdf中表格-7" class="header-anchor">#</a></h3><h3><span id="组件">组件</span><a href="#组件" class="header-anchor">#</a></h3><ul>
-<li>pdf解析<br>unstructured</li>
-<li>store<br> MultiVector Retriever- 元数据+数据</li>
-</ul>
-<h1><span id="self-rag">Self-RAG</span><a href="#self-rag" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="rag-on-text-data">RAG on Text data</span><a href="#rag-on-text-data" class="header-anchor">#</a></h3><ol>
-<li><p><a href="https://github.com/chatchat-space/Langchain-Chatchat">Langchain-Chatchat </a> master<br>Langchain 与 ChatGLM 等语言模型的本地知识库问答<br><a href="https://github.com/chatchat-space/Langchain-Chatchat/tree/v0.2.4">Langchain-Chatchat</a>  v0.2.4<br><a href="https://gitee.com/deepeye/langchain-ChatGLM">langchain-ChatGLM</a>  gitee </p>
-</li>
-<li><p><a href="https://github.com/www6v/Langchain-Chatchat-Colab">Colab for Langchain-Chatchat</a>   linux 可以部署  v0.2.6</p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/649055955">langChain-ChatGLM 尝试，踩坑记录</a></p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/651189680">Langchain-Chatchat + 阿里通义千问Qwen 保姆级教程 | 次世代知识管理解决方案</a>    Langchain-Chatchat + 通义千问</p>
-</li>
-<li><p><a href="https://blog.csdn.net/weixin_43094965/article/details/133044128">win10 安装 Langchain-Chatchat 避坑指南（2023年9月18日v0.2.4版本，包含全部下载内容！）</a></p>
-</li>
+<img src="/www6vHomeHexo/2022/11/02/gptRAG/rag.jpg" class>
+
+<h1><span id="rag-vs-ft-2">RAG vs FT [2]</span><a href="#rag-vs-ft-2" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/11/02/gptRAG/rag-vs-ft.jpg" class>
+
+<h1><span id="self-rag">Self-RAG</span><a href="#self-rag" class="header-anchor">#</a></h1><h1><span id="rag-fusion">RAG Fusion</span><a href="#rag-fusion" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://blog.langchain.dev/deconstructing-rag/">Deconstructing RAG</a> ***</li>
 </ol>
-<h3><span id="rag-on-semi-structured-data">RAG on Semi-structured data</span><a href="#rag-on-semi-structured-data" class="header-anchor">#</a></h3><ol start="6">
-<li><a href="https://github.com/www6v/AIGC/blob/master/langchain-cookbook/Semi_structured_multi_modal_RAG_LLaMA2.ipynb">langchain-cookbook RAG</a>   解析pdf中的图片  运行有问题</li>
-<li><a href="https://github.com/www6v/AIGC/blob/master/Advanced-RAG/01_semi_structured_data.ipynb">Advanced-RAG semi_structured_data</a>   解析pdf中的表格，  运行没问题，能问表格中的数据</li>
+<h3><span id="综述">综述</span><a href="#综述" class="header-anchor">#</a></h3><ol start="2">
+<li><a href="https://zhuanlan.zhihu.com/p/673910600">https://zhuanlan.zhihu.com/p/673910600</a></li>
 </ol>
-<h3><span id="self-rag">Self-RAG</span><a href="#self-rag" class="header-anchor">#</a></h3><ol start="8">
+<h3><span id="self-rag">Self-RAG</span><a href="#self-rag" class="header-anchor">#</a></h3><ol start="3">
 <li><a href="https://zhuanlan.zhihu.com/p/661465330?utm_id=0">NLP（廿一）：从 RAG 到 Self-RAG —— LLM 的知识增强</a> *** </li>
 <li><a href="https://github.com/www6v/self-rag">original implementation of SELF-RAG</a></li>
 </ol>

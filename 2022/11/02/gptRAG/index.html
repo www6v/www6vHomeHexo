@@ -21,17 +21,19 @@
   </script>
 
   <meta property="og:type" content="article">
-<meta property="og:title" content="RAG">
+<meta property="og:title" content="RAG 原理">
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/11/02/gptRAG/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/11/02/gptRAG/langchain+chatglm.jpg">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/11/02/gptRAG/rag-overview.jpg">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/11/02/gptRAG/rag.jpg">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/11/02/gptRAG/rag-vs-ft.jpg">
 <meta property="article:published_time" content="2022-11-02T01:57:59.000Z">
-<meta property="article:modified_time" content="2023-12-11T16:30:04.922Z">
+<meta property="article:modified_time" content="2023-12-31T00:01:15.792Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="RAG">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2022/11/02/gptRAG/langchain+chatglm.jpg">
+<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2022/11/02/gptRAG/rag-overview.jpg">
 
 <link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/11/02/gptRAG/">
 
@@ -46,7 +48,7 @@
   };
 </script>
 
-  <title>RAG | www6v的博客</title>
+  <title>RAG 原理 | www6v的博客</title>
   
 
 
@@ -203,7 +205,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          RAG
+          RAG 原理
         </h1>
 
         <div class="post-meta">
@@ -226,7 +228,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-12 00:30:04" itemprop="dateModified" datetime="2023-12-12T00:30:04+08:00">2023-12-12</time>
+                <time title="修改时间：2023-12-31 08:01:15" itemprop="dateModified" datetime="2023-12-31T08:01:15+08:00">2023-12-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -256,28 +258,18 @@
         <p></p>
 <span id="more"></span>
 
-
-
 <h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
 <!-- toc -->
 
 <ul>
-<li><a href="#rag%E6%9E%B6%E6%9E%84">RAG架构</a></li>
-<li><a href="#rag-on-text-data">RAG on Text data</a><ul>
-<li><a href="#langchain-chatchat">Langchain-Chatchat</a></li>
-</ul>
-</li>
-<li><a href="#rag-on-semi-structured-data">RAG on Semi-structured data</a><ul>
-<li><a href="#%E5%88%86%E6%9E%90pdf%E4%B8%AD%E5%9B%BE%E7%89%87-6">分析PDF中图片 [6]</a></li>
-<li><a href="#%E5%88%86%E6%9E%90pdf%E4%B8%AD%E8%A1%A8%E6%A0%BC-7">分析pdf中表格 [7]</a></li>
-<li><a href="#%E7%BB%84%E4%BB%B6">组件</a></li>
-</ul>
-</li>
+<li><a href="#rag-overview2">RAG Overview[2]</a></li>
+<li><a href="#advanced-rag">Advanced RAG</a></li>
+<li><a href="#rag-vs-ft-2">RAG vs FT [2]</a></li>
 <li><a href="#self-rag">Self-RAG</a></li>
+<li><a href="#rag-fusion">RAG Fusion</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
-<li><a href="#rag-on-text-data-1">RAG on Text data</a></li>
-<li><a href="#rag-on-semi-structured-data-1">RAG on Semi-structured data</a></li>
+<li><a href="#%E7%BB%BC%E8%BF%B0">综述</a></li>
 <li><a href="#self-rag-1">Self-RAG</a></li>
 </ul>
 </li>
@@ -286,76 +278,26 @@
 
 </div>
 
+<h1><span id="rag-overview2">RAG Overview[2]</span><a href="#rag-overview2" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/11/02/gptRAG/rag-overview.jpg" class>
 
-
-
-
-
-<h1><span id="rag架构">RAG架构</span><a href="#rag架构" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/11/02/gptRAG/langchain+chatglm.jpg" class>
-
-<ul>
-<li><p>架构</p>
-<ul>
-<li>离线 index<br>LLamaIndex 构建和查询本地文档索引  </li>
+<h1><span id="advanced-rag">Advanced RAG</span><a href="#advanced-rag" class="header-anchor">#</a></h1><ul>
+<li>架构 [1]<ul>
+<li>离线 index</li>
 <li>在线 查询</li>
 </ul>
 </li>
-<li><p>组件</p>
-<ul>
-<li>本地知识库</li>
-<li>Embedding 模型</li>
-<li>向量数据库</li>
-<li>Prompt Template</li>
 </ul>
-</li>
-</ul>
-<h1><span id="rag-on-text-data">RAG on Text data</span><a href="#rag-on-text-data" class="header-anchor">#</a></h1><h3><span id="langchain-chatchat">Langchain-Chatchat</span><a href="#langchain-chatchat" class="header-anchor">#</a></h3><ul>
-<li>部署 <ul>
-<li>windows 10 [5]<br>部署本地， 没显存，卡</li>
-<li>Linux [2]<br>部署   32C125G ，没显存， 推理很慢 </li>
-<li>Docker</li>
-</ul>
-</li>
-</ul>
-<h1><span id="rag-on-semi-structured-data">RAG on Semi-structured data</span><a href="#rag-on-semi-structured-data" class="header-anchor">#</a></h1><h3><span id="分析pdf中图片-6">分析PDF中图片 [6]</span><a href="#分析pdf中图片-6" class="header-anchor">#</a></h3><p><strong>Option 1</strong> </p>
-<ul>
-<li>Use multimodal embeddings <strong>(such as <a target="_blank" rel="noopener" href="https://openai.com/research/clip">CLIP</a>)</strong> to embed images and text</li>
-<li>Retrieve both using similarity search</li>
-<li>Pass <strong>raw images and text chunks</strong> to a multimodal LLM for answer synthesis</li>
-</ul>
-<p><strong>Option 2</strong> </p>
-<ul>
-<li>Use a multimodal LLM (such as <a target="_blank" rel="noopener" href="https://openai.com/research/gpt-4v-system-card">GPT4-V</a>, <a target="_blank" rel="noopener" href="https://llava.hliu.cc/">LLaVA</a>, or <a target="_blank" rel="noopener" href="https://www.adept.ai/blog/fuyu-8b">FUYU-8b</a>) to produce <strong>text summaries from images</strong></li>
-<li>Embed and retrieve text </li>
-<li>Pass text chunks to an LLM for answer synthesis</li>
-</ul>
-<p><strong>Option 3</strong> </p>
-<ul>
-<li>Use a multimodal LLM (such as <a target="_blank" rel="noopener" href="https://openai.com/research/gpt-4v-system-card">GPT4-V</a>, <a target="_blank" rel="noopener" href="https://llava.hliu.cc/">LLaVA</a>, or <a target="_blank" rel="noopener" href="https://www.adept.ai/blog/fuyu-8b">FUYU-8b</a>) to produce text summaries from images</li>
-<li>Embed and retrieve image summaries with a reference to the raw image </li>
-<li>Pass <strong>raw images and text chunks</strong> to a multimodal LLM for answer synthesis</li>
-</ul>
-<h3><span id="分析pdf中表格-7">分析pdf中表格 [7]</span><a href="#分析pdf中表格-7" class="header-anchor">#</a></h3><h3><span id="组件">组件</span><a href="#组件" class="header-anchor">#</a></h3><ul>
-<li>pdf解析<br>unstructured</li>
-<li>store<br> MultiVector Retriever- 元数据+数据</li>
-</ul>
-<h1><span id="self-rag">Self-RAG</span><a href="#self-rag" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="rag-on-text-data">RAG on Text data</span><a href="#rag-on-text-data" class="header-anchor">#</a></h3><ol>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/chatchat-space/Langchain-Chatchat">Langchain-Chatchat </a> master<br>Langchain 与 ChatGLM 等语言模型的本地知识库问答<br><a target="_blank" rel="noopener" href="https://github.com/chatchat-space/Langchain-Chatchat/tree/v0.2.4">Langchain-Chatchat</a>  v0.2.4<br><a target="_blank" rel="noopener" href="https://gitee.com/deepeye/langchain-ChatGLM">langchain-ChatGLM</a>  gitee </p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/www6v/Langchain-Chatchat-Colab">Colab for Langchain-Chatchat</a>   linux 可以部署  v0.2.6</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/649055955">langChain-ChatGLM 尝试，踩坑记录</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/651189680">Langchain-Chatchat + 阿里通义千问Qwen 保姆级教程 | 次世代知识管理解决方案</a>    Langchain-Chatchat + 通义千问</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43094965/article/details/133044128">win10 安装 Langchain-Chatchat 避坑指南（2023年9月18日v0.2.4版本，包含全部下载内容！）</a></p>
-</li>
+<img src="/www6vHomeHexo/2022/11/02/gptRAG/rag.jpg" class>
+
+<h1><span id="rag-vs-ft-2">RAG vs FT [2]</span><a href="#rag-vs-ft-2" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/11/02/gptRAG/rag-vs-ft.jpg" class>
+
+<h1><span id="self-rag">Self-RAG</span><a href="#self-rag" class="header-anchor">#</a></h1><h1><span id="rag-fusion">RAG Fusion</span><a href="#rag-fusion" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a target="_blank" rel="noopener" href="https://blog.langchain.dev/deconstructing-rag/">Deconstructing RAG</a> ***</li>
 </ol>
-<h3><span id="rag-on-semi-structured-data">RAG on Semi-structured data</span><a href="#rag-on-semi-structured-data" class="header-anchor">#</a></h3><ol start="6">
-<li><a target="_blank" rel="noopener" href="https://github.com/www6v/AIGC/blob/master/langchain-cookbook/Semi_structured_multi_modal_RAG_LLaMA2.ipynb">langchain-cookbook RAG</a>   解析pdf中的图片  运行有问题</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/www6v/AIGC/blob/master/Advanced-RAG/01_semi_structured_data.ipynb">Advanced-RAG semi_structured_data</a>   解析pdf中的表格，  运行没问题，能问表格中的数据</li>
+<h3><span id="综述">综述</span><a href="#综述" class="header-anchor">#</a></h3><ol start="2">
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/673910600">https://zhuanlan.zhihu.com/p/673910600</a></li>
 </ol>
-<h3><span id="self-rag">Self-RAG</span><a href="#self-rag" class="header-anchor">#</a></h3><ol start="8">
+<h3><span id="self-rag">Self-RAG</span><a href="#self-rag" class="header-anchor">#</a></h3><ol start="3">
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/661465330?utm_id=0">NLP（廿一）：从 RAG 到 Self-RAG —— LLM 的知识增强</a> *** </li>
 <li><a target="_blank" rel="noopener" href="https://github.com/www6v/self-rag">original implementation of SELF-RAG</a></li>
 </ol>
@@ -374,7 +316,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www6v.github.io/www6vHomeHexo/2022/11/02/gptRAG/" title="RAG">https://www6v.github.io/www6vHomeHexo/2022/11/02/gptRAG/</a>
+    <a href="https://www6v.github.io/www6vHomeHexo/2022/11/02/gptRAG/" title="RAG 原理">https://www6v.github.io/www6vHomeHexo/2022/11/02/gptRAG/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -472,14 +414,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">497</span>
+          <span class="site-state-item-count">499</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/www6vHomeHexo/categories/">
           
-        <span class="site-state-item-count">298</span>
+        <span class="site-state-item-count">299</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
