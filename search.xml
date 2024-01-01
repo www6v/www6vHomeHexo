@@ -10820,6 +10820,7 @@ table th:first-of-type {
 </ul>
 </li>
 <li><a href="#%E6%98%BE%E5%8D%A1">显卡</a></li>
+<li><a href="#%E5%9E%82%E7%B1%BB%E6%A8%A1%E5%BC%8F">垂类模式</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
 <li><a href="#%E7%BB%BC%E8%BF%B0">综述</a></li>
 </ul>
@@ -10861,6 +10862,11 @@ table th:first-of-type {
 </li>
 <li><p>显卡<br>显卡 &#x3D; GPU +  显存</p>
 </li>
+</ul>
+<h1><span id="垂类模式">垂类模式</span><a href="#垂类模式" class="header-anchor">#</a></h1><ul>
+<li>金融<br>FinGPT</li>
+<li>医疗<br>MedicalGPT   华驼</li>
+<li>法律</li>
 </ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://zhuanlan.zhihu.com/p/648050614">LLM学习系列1：大模型架构要点总结</a></li>
@@ -12162,8 +12168,12 @@ table th:first-of-type {
 <li><a href="/www6vHomeHexo/2022/10/30/gptBigModel/" title="大模型">大模型</a></li>
 <li><a href="/www6vHomeHexo/2022/11/30/gptTransformer/" title="Transformer">Transformer</a> </li>
 <li><a href="/www6vHomeHexo/2022/12/11/gptFamily/" title="GPT 系列">GPT 系列</a>  </li>
-<li><a href="/www6vHomeHexo/2022/11/19/gptBigModelTraining/" title="大模型训练">大模型训练</a></li>
+<li><a href="/www6vHomeHexo/2023/01/01/gptLlama/" title="Llama">Llama</a>   </li>
 <li><a href="/www6vHomeHexo/2022/11/24/gptFinGPT/" title="FinGTP">FinGTP</a></li>
+</ul>
+<h2><span id="training-amp-inference">Training &amp; Inference</span><a href="#training-amp-inference" class="header-anchor">#</a></h2><ul>
+<li><a href="/www6vHomeHexo/2022/11/19/gptBigModelTraining/" title="大模型训练">大模型训练</a></li>
+<li><a href="/www6vHomeHexo/2023/01/01/gptInference/" title="推理">推理</a></li>
 </ul>
 <h2><span id="finetuning">FineTuning</span><a href="#finetuning" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/11/18/gptFineTuning/" title="Fine-Tuning">Fine-Tuning</a> </li>
@@ -39332,6 +39342,43 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>AIGC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>推理</title>
+    <url>/www6vHomeHexo/2023/01/01/gptInference/</url>
+    <content><![CDATA[<h1><span id="推理-框架1">推理 框架[1]</span><a href="#推理-框架1" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2023/01/01/gptInference/inference.jpg" class>
+
+<h1><span id="推理-优化">推理 优化</span><a href="#推理-优化" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="框架">框架</span><a href="#框架" class="header-anchor">#</a></h3><ol>
+<li><p><a href="https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&__biz=MzA5MTIxNTY4MQ==&scene=1&album_id=2959126655292211206">探秘LLM应用开发</a>   8-19</p>
+</li>
+<li><p><a href="https://github.com/www6v/llm-action/tree/main/inference">https://github.com/www6v/llm-action/tree/main/inference</a></p>
+</li>
+<li><p><a href="https://www.zhihu.com/question/625415776/answer/3243562246">https://www.zhihu.com/question/625415776/answer/3243562246</a></p>
+</li>
+</ol>
+<h3><span id="优化">优化</span><a href="#优化" class="header-anchor">#</a></h3><ol start="101">
+<li><a href="https://lilianweng.github.io/posts/2023-01-10-inference-optimization/">https://lilianweng.github.io/posts/2023-01-10-inference-optimization/</a></li>
+<li><a href="https://mp.weixin.qq.com/s/glPPSqHjsnDjC0DZSuuPzA">一文探秘LLM应用开发(13)-模型部署与推理(优化理论) </a></li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>Llama</title>
+    <url>/www6vHomeHexo/2023/01/01/gptLlama/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://www.bilibili.com/video/BV1nN41157a9/">第十五课：LLaMA</a> V<br><a href="http://arthurchiao.art/blog/llama-paper-zh/">[译][论文] LLaMA：开放和高效的基础语言模型集</a><br><a href="http://arthurchiao.art/blog/llama2-paper-zh/">[译][论文] LLaMA 2：开放基础和微调聊天模型</a><br><a href="https://github.com/www6v/Llama2-Chinese">https://github.com/www6v/Llama2-Chinese</a><br><a href="https://llama.family/">Llama中文社区</a></p>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>Llama</category>
+      </categories>
+      <tags>
+        <tag>Llama</tag>
       </tags>
   </entry>
 </search>
