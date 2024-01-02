@@ -2680,7 +2680,7 @@
 </li>
 </ol>
 <h3><span id="rag-on-semi-structured-data">RAG on Semi-structured data</span><a href="#rag-on-semi-structured-data" class="header-anchor">#</a></h3><ol start="6">
-<li><a href="https://github.com/www6v/AIGC/blob/master/langchain-cookbook/Semi_structured_multi_modal_RAG_LLaMA2.ipynb">langchain-cookbook RAG</a>   解析pdf中的图片  运行有问题</li>
+<li><a href="https://github.com/www6v/AIGC/blob/master/langchain-cookbook/Semi_structured_multi_modal_RAG_LLaMA2.ipynb">langchain-cookbook RAG</a>   解析pdf中的图片  运行有问题<br><a href="https://blog.langchain.dev/semi-structured-multi-modal-rag/">Multi-Vector Retriever for RAG on tables, text, and images</a></li>
 <li><a href="https://github.com/www6v/AIGC/blob/master/Advanced-RAG/01_semi_structured_data.ipynb">Advanced-RAG semi_structured_data</a>   解析pdf中的表格，  运行没问题，能问表格中的数据</li>
 </ol>
 ]]></content>
