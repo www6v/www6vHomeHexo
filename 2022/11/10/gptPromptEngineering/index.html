@@ -25,11 +25,13 @@
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/11/10/gptPromptEngineering/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/11/10/gptPromptEngineering/TOT.jpg">
 <meta property="article:published_time" content="2022-11-10T07:48:39.000Z">
-<meta property="article:modified_time" content="2023-12-27T09:14:35.258Z">
+<meta property="article:modified_time" content="2024-01-03T04:15:52.734Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Prompt">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2022/11/10/gptPromptEngineering/TOT.jpg">
 
 <link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/11/10/gptPromptEngineering/">
 
@@ -224,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-27 17:14:35" itemprop="dateModified" datetime="2023-12-27T17:14:35+08:00">2023-12-27</time>
+                <time title="修改时间：2024-01-03 12:15:52" itemprop="dateModified" datetime="2024-01-03T12:15:52+08:00">2024-01-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -254,17 +256,83 @@
         <p></p>
 <span id="more"></span>
 
-<h1><span id="six-strategies-for-getting-better-results1">Six strategies for getting better results[1]</span><a href="#six-strategies-for-getting-better-results1" class="header-anchor">#</a></h1><h3><span id="write-clear-instructions">Write clear instructions</span><a href="#write-clear-instructions" class="header-anchor">#</a></h3><h3><span id="provide-reference-text">Provide reference text</span><a href="#provide-reference-text" class="header-anchor">#</a></h3><h3><span id="split-complex-tasks-into-simpler-subtasks">Split complex tasks into simpler subtasks</span><a href="#split-complex-tasks-into-simpler-subtasks" class="header-anchor">#</a></h3><h3><span id="give-the-model-time-to-think">Give the model time to “think”</span><a href="#give-the-model-time-to-think" class="header-anchor">#</a></h3><h3><span id="use-external-tools">Use external tools</span><a href="#use-external-tools" class="header-anchor">#</a></h3><h3><span id="test-changes-systematically">Test changes systematically</span><a href="#test-changes-systematically" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><p><a target="_blank" rel="noopener" href="https://platform.openai.com/docs/guides/prompt-engineering">Prompt engineering</a>  openai</p>
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#basic-prompting-2">Basic Prompting [2]</a><ul>
+<li><a href="#zero-shot-prompting-3">Zero-Shot Prompting [3]</a></li>
+<li><a href="#few-shot-prompting-3">Few-Shot Prompting [3]</a></li>
+</ul>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/www6v/Prompt-Engineering-Guide">Prompt-Engineering-Guide </a> *** git</p>
+<li><a href="#cot-2">CoT [2]</a><ul>
+<li><a href="#chain-of-thought-promptingcot-3">Chain-of-Thought Prompting(CoT) [3]</a></li>
+<li><a href="#self-consistencycot-sc-3">Self-Consistency(CoT-SC) [3]</a></li>
+<li><a href="#tree-of-thoughts-tot">Tree of Thoughts (ToT)</a></li>
+<li><a href="#cot-vs-cot-sc-vs-tot-3">CoT vs. CoT-SC vs. ToT  [3]</a></li>
+<li><a href="#tips-and-extensions-2">Tips and Extensions   [2]</a></li>
+</ul>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://blog.langchain.dev/the-prompt-landscape/">The Prompt Landscape</a>  langchain</p>
+<li><a href="#automatic-prompt-design-2">Automatic Prompt Design [2]</a></li>
+<li><a href="#cot4">CoT[4]</a></li>
+<li><a href="#six-strategies-for-getting-better-results1">Six strategies for getting better results[1]</a><ul>
+<li><a href="#write-clear-instructions">Write clear instructions</a></li>
+<li><a href="#provide-reference-text">Provide reference text</a></li>
+<li><a href="#split-complex-tasks-into-simpler-subtasks">Split complex tasks into simpler subtasks</a></li>
+<li><a href="#give-the-model-time-to-think">Give the model time to “think”</a></li>
+<li><a href="#use-external-tools">Use external tools</a></li>
+<li><a href="#test-changes-systematically">Test changes systematically</a></li>
+</ul>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/">Prompt Engineering </a> paper</p>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
+<li><a href="#%E6%A1%88%E4%BE%8B">案例</a></li>
+</ul>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://www.promptingguide.ai/techniques">Prompt Engineering Guide</a> guide</p>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="basic-prompting-2">Basic Prompting [2]</span><a href="#basic-prompting-2" class="header-anchor">#</a></h1><h3><span id="zero-shot-prompting-3">Zero-Shot Prompting [3]</span><a href="#zero-shot-prompting-3" class="header-anchor">#</a></h3><h3><span id="few-shot-prompting-3">Few-Shot Prompting [3]</span><a href="#few-shot-prompting-3" class="header-anchor">#</a></h3><h1><span id="cot-2">CoT [2]</span><a href="#cot-2" class="header-anchor">#</a></h1><h3><span id="chain-of-thought-promptingcot-3">Chain-of-Thought Prompting(CoT) [3]</span><a href="#chain-of-thought-promptingcot-3" class="header-anchor">#</a></h3><ul>
+<li>Few-shot CoT</li>
+<li>Zero-shot COT<br><strong>“Let’s think step by step”</strong></li>
+</ul>
+<h3><span id="self-consistencycot-sc-3">Self-Consistency(CoT-SC) [3]</span><a href="#self-consistencycot-sc-3" class="header-anchor">#</a></h3><p>The idea is to sample multiple, diverse reasoning paths through few-shot CoT, and use the generations to <strong>select</strong> the most consistent answer.  </p>
+<h3><span id="tree-of-thoughts-tot">Tree of Thoughts (ToT)</span><a href="#tree-of-thoughts-tot" class="header-anchor">#</a></h3><h3><span id="cot-vs-cot-sc-vs-tot-3">CoT vs. CoT-SC vs. ToT  [3]</span><a href="#cot-vs-cot-sc-vs-tot-3" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/11/10/gptPromptEngineering/TOT.jpg" class>
+
+<h3><span id="tips-and-extensions-2">Tips and Extensions   [2]</span><a href="#tips-and-extensions-2" class="header-anchor">#</a></h3><p>Self-Ask </p>
+<h1><span id="automatic-prompt-design-2">Automatic Prompt Design [2]</span><a href="#automatic-prompt-design-2" class="header-anchor">#</a></h1><ul>
+<li>Automatic Chain-of-Thought (Auto-CoT) [3]</li>
+</ul>
+<h1><span id="cot4">CoT[4]</span><a href="#cot4" class="header-anchor">#</a></h1><ul>
+<li><p>CoT(Chain of Thought)</p>
+<ul>
+<li>CoT-SC(Self Consistency)</li>
+</ul>
 </li>
+<li><p>ToT(Tree of Thoughts)<br>分为了Thought Decomposition，Thought Generator，State Evaluator，Search algorithms</p>
+</li>
+<li><p>GoT(Graph of Thoughts)</p>
+</li>
+<li><p>AoT(Algorithm of Thoughts)</p>
+</li>
+</ul>
+<h1><span id="six-strategies-for-getting-better-results1">Six strategies for getting better results[1]</span><a href="#six-strategies-for-getting-better-results1" class="header-anchor">#</a></h1><h3><span id="write-clear-instructions">Write clear instructions</span><a href="#write-clear-instructions" class="header-anchor">#</a></h3><p>   清晰的指令</p>
+<h3><span id="provide-reference-text">Provide reference text</span><a href="#provide-reference-text" class="header-anchor">#</a></h3><h3><span id="split-complex-tasks-into-simpler-subtasks">Split complex tasks into simpler subtasks</span><a href="#split-complex-tasks-into-simpler-subtasks" class="header-anchor">#</a></h3><pre><code>复杂任务简单化
+</code></pre>
+<h3><span id="give-the-model-time-to-think">Give the model time to “think”</span><a href="#give-the-model-time-to-think" class="header-anchor">#</a></h3><p>   给模型时间去思考</p>
+<h3><span id="use-external-tools">Use external tools</span><a href="#use-external-tools" class="header-anchor">#</a></h3><p>   使用外部工具</p>
+<h3><span id="test-changes-systematically">Test changes systematically</span><a href="#test-changes-systematically" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a target="_blank" rel="noopener" href="https://platform.openai.com/docs/guides/prompt-engineering">Prompt engineering</a>  openai</li>
+<li><a target="_blank" rel="noopener" href="https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/">Prompt Engineering </a> paper</li>
+<li><a target="_blank" rel="noopener" href="https://www.promptingguide.ai/techniques">Prompt Engineering Guide</a> guide<br><a target="_blank" rel="noopener" href="https://github.com/www6v/Prompt-Engineering-Guide">Prompt-Engineering-Guide </a> *** git</li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/654034193">2023年能够解决复杂问题的思维链技术：Cot，ToT，GoT，AoT</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.langchain.dev/the-prompt-landscape/">The Prompt Landscape</a>  langchain</li>
+<li><a target="_blank" rel="noopener" href="https://colab.research.google.com/github/comet-ml/comet-llm/blob/main/examples/CometLLM_Prompts.ipynb">CometLLM - suite of LLMOps tools - track and visualize LLM prompts and chains</a></li>
+</ol>
+<h3><span id="案例">案例</span><a href="#案例" class="header-anchor">#</a></h3><ol start="200">
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/nXoZJ4xfgihA2mnBQ8EdIQ">运维大模型探索之 Text2PromQL 问答机器人 </a>     架构图， 最后两个重点总结   未</li>
 </ol>
 
     </div>
@@ -301,8 +369,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/www6vHomeHexo/2022/11/10/gptBigModelCOT/" rel="prev" title="COT">
-      <i class="fa fa-chevron-left"></i> COT
+    <a href="/www6vHomeHexo/2022/11/02/gptAgent/" rel="prev" title="Agent">
+      <i class="fa fa-chevron-left"></i> Agent
     </a></div>
       <div class="post-nav-item">
     <a href="/www6vHomeHexo/2022/11/16/gptSummary/" rel="next" title="AIGC 汇总">

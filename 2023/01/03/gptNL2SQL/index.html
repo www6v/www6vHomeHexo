@@ -21,20 +21,17 @@
   </script>
 
   <meta property="og:type" content="article">
-<meta property="og:title" content="大模型训练">
-<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/11/19/gptBigModelTraining/index.html">
+<meta property="og:title" content="NL2SQL">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2023/01/03/gptNL2SQL/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/11/19/gptBigModelTraining/pararllelTraining.jpg">
-<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/11/19/gptBigModelTraining/bigModelTrainingPipeline.jpg">
-<meta property="article:published_time" content="2022-11-19T14:32:11.000Z">
-<meta property="article:modified_time" content="2023-12-20T19:40:08.405Z">
+<meta property="article:published_time" content="2023-01-03T02:13:45.000Z">
+<meta property="article:modified_time" content="2024-01-03T02:33:21.993Z">
 <meta property="article:author" content="Wang Wei">
-<meta property="article:tag" content="train">
+<meta property="article:tag" content="NL2SQL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www6v.github.io/www6vHomeHexo/2022/11/19/gptBigModelTraining/pararllelTraining.jpg">
 
-<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/11/19/gptBigModelTraining/">
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2023/01/03/gptNL2SQL/">
 
 
 <script id="page-configurations">
@@ -47,7 +44,7 @@
   };
 </script>
 
-  <title>大模型训练 | www6v的博客</title>
+  <title>NL2SQL | www6v的博客</title>
   
 
 
@@ -191,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2022/11/19/gptBigModelTraining/">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2023/01/03/gptNL2SQL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
@@ -204,7 +201,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          大模型训练
+          NL2SQL
         </h1>
 
         <div class="post-meta">
@@ -220,14 +217,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-11-19 22:32:11" itemprop="dateCreated datePublished" datetime="2022-11-19T22:32:11+08:00">2022-11-19</time>
+              <time title="创建时间：2023-01-03 10:13:45" itemprop="dateCreated datePublished" datetime="2023-01-03T10:13:45+08:00">2023-01-03</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-21 03:40:08" itemprop="dateModified" datetime="2023-12-21T03:40:08+08:00">2023-12-21</time>
+                <time title="修改时间：2024-01-03 10:33:21" itemprop="dateModified" datetime="2024-01-03T10:33:21+08:00">2024-01-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -239,7 +236,7 @@
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/www6vHomeHexo/categories/AIGC/train/" itemprop="url" rel="index"><span itemprop="name">train</span></a>
+                  <a href="/www6vHomeHexo/categories/AIGC/NL2SQL/" itemprop="url" rel="index"><span itemprop="name">NL2SQL</span></a>
                 </span>
             </span>
 
@@ -257,93 +254,8 @@
         <p></p>
 <span id="more"></span>
 
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
-<!-- toc -->
-
-<ul>
-<li><a href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%AD%E7%BB%83-1">分布式训练 [1]</a><ul>
-<li><a href="#%E9%A2%84%E8%AE%AD%E7%BB%83-3d%E5%B9%B6%E8%A1%8C">预训练 3D并行</a></li>
-</ul>
-</li>
-<li><a href="#%E9%A2%84%E8%AE%AD%E7%BB%83">预训练</a><ul>
-<li><a href="#%E9%A2%84%E8%AE%AD%E7%BB%83-4">预训练 [4]</a></li>
-<li><a href="#training-pipeline0">Training Pipeline[0]</a></li>
-<li><a href="#%E8%AE%BE%E7%BD%AE%E8%AE%AD%E7%BB%83%E5%8F%82%E6%95%B0">设置训练参数</a></li>
-<li><a href="#%E5%8F%82%E6%95%B0%E9%87%8F-vs-%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E9%87%8F">参数量 vs 训练数据量</a></li>
-<li><a href="#tokenizer-%E5%88%86%E8%AF%8D">tokenizer 分词</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="分布式训练-1">分布式训练 [1]</span><a href="#分布式训练-1" class="header-anchor">#</a></h1><h3><span id="预训练-3d并行">预训练 3D并行</span><a href="#预训练-3d并行" class="header-anchor">#</a></h3><ul>
-<li>数据并行</li>
-<li>模型并行</li>
-<li>张量并行</li>
-</ul>
-   <img src="/www6vHomeHexo/2022/11/19/gptBigModelTraining/pararllelTraining.jpg" class>
-
-
-
-
-<h1><span id="预训练">预训练</span><a href="#预训练" class="header-anchor">#</a></h1><h3><span id="预训练-4">预训练 [4]</span><a href="#预训练-4" class="header-anchor">#</a></h3><ul>
-<li><p>⾃回归与⽣成式<br><strong>⾃回归模型</strong>是⼀种序列模型，它在预测下⼀个输出时，会将之前的所有输出作为输⼊，然后<strong>根据统计规律、结合已经输⼊的样本</strong>，预测下个位置各单词出现的概率，然后输出概率最⼤的单词，类似于完形填空；<br><strong>⽣成式模型</strong>的预测过程和⾃回归模型类似，都是根据统<br>计规律预测下个单词的概率，所不同的是，<strong>⽣成式模型可以根据之前的样本的<br>概率分布⽣成下⼀个词，⽣成式模型预测时会存在⼀定的随机性；</strong></p>
-</li>
-<li><p>GPT来说，就是⼀个⾃回归⽣成式模型 [4]<br>⼀个⾃回归⽣成式模型在进⾏预测的时候，<strong>会⾸先根据⾃回归模型，在参考到⽬前为⽌<br>已经⽣成的词的情况下确定下⼀个词的概率分布，然后再根据⽣成式的⽅式来根据这个<br>分布⽣成下⼀个词</strong></p>
-</li>
-</ul>
-<h3><span id="training-pipeline0">Training Pipeline[0]</span><a href="#training-pipeline0" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/11/19/gptBigModelTraining/bigModelTrainingPipeline.jpg" class>
-
-<p><strong>模型训练分为四个阶段</strong></p>
-<ul>
-<li>预训练（Pretraining） –&gt;Base model  <ul>
-<li>预训练技术<br>预训练本质上是⼀个⽆监督学习过程</li>
-</ul>
-</li>
-<li>监督微调（Supervised Finetuning） –&gt; SFT model<br>核⼼原因还是在于需要“赋予”⼤模型更加定制化的功能</li>
-<li>奖励建模（Reward Modeling）</li>
-<li>强化学习（Reinforcement Learning）</li>
-</ul>
-<p><strong>三个角度解析</strong></p>
-<ul>
-<li>数据量：<strong>预训练</strong>阶段所需的<strong>数据量很大</strong>，但<strong>质量要求不高</strong>；而<strong>后面的三个阶段</strong>恰恰相反，需要的<strong>数据质量较高</strong>。</li>
-<li>训练方法：<strong>预训练和监督微调</strong>的训练方法相同，都是<strong>预测下一个单词</strong>。奖励模型和强化学习的训练方法则不同。<strong>奖励模型</strong>是<strong>二元分类学习</strong>，而<strong>强化学习</strong>则鼓励模型生成奖励模型评分较高的回答。</li>
-<li>训练所需资源：预训练阶段的资源消耗巨大，使用数千颗GPU，花费<strong>数月</strong>时间，占总训练时间的99%。后面的三个阶段只需使用数十颗GPU，训练时间约<strong>数天</strong>。</li>
-</ul>
-<h3><span id="设置训练参数">设置训练参数</span><a href="#设置训练参数" class="header-anchor">#</a></h3><p>设置训练参数，如batch-size、learning rate等</p>
-<ul>
-<li>预训练阶段的<strong>Batch Size非常大</strong>，范围在0.5M到4M之间。</li>
-<li><strong>Learning rate设定较小</strong>，且随着网络规模的增大，Learning rate越来越小。</li>
-</ul>
-<h3><span id="参数量-vs-训练数据量">参数量 vs 训练数据量</span><a href="#参数量-vs-训练数据量" class="header-anchor">#</a></h3><p><strong>参数量并不是衡量模型能力的唯一标准，训练数据量也是一个非常重要的因素。</strong><br>LLaMA模型，尽管它的参数量只有650亿，但其性能与参数量为1750亿的GPT-3模型相比也非常优秀。主要原因在于，LLaMA模型的训练数据量达到了1.4万亿，而GPT-3只有3000亿。</p>
-<h3><span id="tokenizer-分词">tokenizer 分词</span><a href="#tokenizer-分词" class="header-anchor">#</a></h3><ul>
-<li>单词分词法</li>
-<li>单字分词法</li>
-<li>子词分词法<br>BPE [GPT系列], WordPiece</li>
-</ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="0">
-<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/648050614">LLM学习系列1：大模型架构要点总结</a>  from ppt</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://lilianweng.github.io/posts/2021-09-25-train-large/">How to Train Really Large Models on Many GPUs? </a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://techdiylife.github.io/big-model-training/deepspeed/LLM-state-of-GPT.html">大模型训练入门实战</a>  ***<br><a target="_blank" rel="noopener" href="https://karpathy.ai/stateofgpt.pdf">State of GPT</a><br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/zmEGzm1cdXupNoqZ65h7yg">State of GPT：大神Andrej揭秘OpenAI大模型原理和训练过程 </a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2328541">主流大语言模型的技术原理细节</a> *** 腾讯     架构 + 训练 + 微调</p>
-</li>
-<li><p>大模型入门必看教程  九天Hector</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://techdiylife.github.io/big-model-training/deepspeed/deepspeed-chat.html">第1章：DeepSpeed-Chat 模型训练实战</a>  Bili 未</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/microsoft/DeepSpeedExamples/tree/master/applications/DeepSpeed-Chat">DeepSpeed-Chat</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="http://arthurchiao.art/blog/how-to-train-a-gpt-assistant-zh/">[译] 如何训练一个企业级 GPT 助手（OpenAI，2023）</a> 未</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="http://arthurchiao.art/blog/gpt-as-a-finite-state-markov-chain-zh/">[译] GPT 是如何工作的：200 行 Python 代码实现一个极简 GPT（2023）</a>  未</p>
-</li>
-</ol>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a target="_blank" rel="noopener" href="https://github.com/www6v/NL2SQL">https://github.com/www6v/NL2SQL</a><br><a target="_blank" rel="noopener" href="https://github.com/www6v/nl2sql-">https://github.com/www6v/nl2sql-</a><br><a target="_blank" rel="noopener" href="https://blog.langchain.dev/llms-and-sql/">LLMs and SQL</a></p>
 
     </div>
 
@@ -359,7 +271,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www6v.github.io/www6vHomeHexo/2022/11/19/gptBigModelTraining/" title="大模型训练">https://www6v.github.io/www6vHomeHexo/2022/11/19/gptBigModelTraining/</a>
+    <a href="https://www6v.github.io/www6vHomeHexo/2023/01/03/gptNL2SQL/" title="NL2SQL">https://www6v.github.io/www6vHomeHexo/2023/01/03/gptNL2SQL/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -370,7 +282,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/www6vHomeHexo/tags/train/" rel="tag"># train</a>
+              <a href="/www6vHomeHexo/tags/NL2SQL/" rel="tag"># NL2SQL</a>
           </div>
 
         
@@ -379,12 +291,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/www6vHomeHexo/2022/11/18/gptFineTuning/" rel="prev" title="Fine-Tuning">
-      <i class="fa fa-chevron-left"></i> Fine-Tuning
+    <a href="/www6vHomeHexo/2023/01/01/gptInference/" rel="prev" title="推理">
+      <i class="fa fa-chevron-left"></i> 推理
     </a></div>
       <div class="post-nav-item">
-    <a href="/www6vHomeHexo/2022/11/24/gptFinGPT/" rel="next" title="FinGTP">
-      FinGTP <i class="fa fa-chevron-right"></i>
+    <a href="/www6vHomeHexo/2023/01/28/observabilityLog/" rel="next" title="可观测性-Log">
+      可观测性-Log <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
