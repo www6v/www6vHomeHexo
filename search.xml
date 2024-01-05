@@ -11520,10 +11520,6 @@ table th:first-of-type {
 <!-- toc -->
 
 <ul>
-<li><a href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%AD%E7%BB%83-1">分布式训练 [1]</a><ul>
-<li><a href="#%E9%A2%84%E8%AE%AD%E7%BB%83-3d%E5%B9%B6%E8%A1%8C">预训练 3D并行</a></li>
-</ul>
-</li>
 <li><a href="#%E9%A2%84%E8%AE%AD%E7%BB%83">预训练</a><ul>
 <li><a href="#%E9%A2%84%E8%AE%AD%E7%BB%83-4">预训练 [4]</a></li>
 <li><a href="#training-pipeline0">Training Pipeline[0]</a></li>
@@ -11537,15 +11533,6 @@ table th:first-of-type {
 <!-- tocstop -->
 
 </div>
-
-<h1><span id="分布式训练-1">分布式训练 [1]</span><a href="#分布式训练-1" class="header-anchor">#</a></h1><h3><span id="预训练-3d并行">预训练 3D并行</span><a href="#预训练-3d并行" class="header-anchor">#</a></h3><ul>
-<li>数据并行</li>
-<li>模型并行</li>
-<li>张量并行</li>
-</ul>
-   <img src="/www6vHomeHexo/2022/11/19/gptLargeModelTraining/pararllelTraining.jpg" class>
-
-
 
 
 <h1><span id="预训练">预训练</span><a href="#预训练" class="header-anchor">#</a></h1><h3><span id="预训练-4">预训练 [4]</span><a href="#预训练-4" class="header-anchor">#</a></h3><ul>
@@ -11586,7 +11573,7 @@ table th:first-of-type {
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="0">
 <li><p><a href="https://zhuanlan.zhihu.com/p/648050614">LLM学习系列1：大模型架构要点总结</a>  from ppt</p>
 </li>
-<li><p><a href="https://lilianweng.github.io/posts/2021-09-25-train-large/">How to Train Really Large Models on Many GPUs? </a></p>
+<li><p>xxx</p>
 </li>
 <li><p><a href="https://techdiylife.github.io/big-model-training/deepspeed/LLM-state-of-GPT.html">大模型训练入门实战</a>  ***<br><a href="https://karpathy.ai/stateofgpt.pdf">State of GPT</a><br><a href="https://mp.weixin.qq.com/s/zmEGzm1cdXupNoqZ65h7yg">State of GPT：大神Andrej揭秘OpenAI大模型原理和训练过程 </a></p>
 </li>
@@ -11594,12 +11581,13 @@ table th:first-of-type {
 </li>
 <li><p>大模型入门必看教程  九天Hector</p>
 </li>
-<li><p><a href="https://techdiylife.github.io/big-model-training/deepspeed/deepspeed-chat.html">第1章：DeepSpeed-Chat 模型训练实战</a>  Bili 未</p>
-<p><a href="https://github.com/microsoft/DeepSpeedExamples/tree/master/applications/DeepSpeed-Chat">DeepSpeed-Chat</a></p>
-</li>
 <li><p><a href="http://arthurchiao.art/blog/how-to-train-a-gpt-assistant-zh/">[译] 如何训练一个企业级 GPT 助手（OpenAI，2023）</a> 未</p>
 </li>
 <li><p><a href="http://arthurchiao.art/blog/gpt-as-a-finite-state-markov-chain-zh/">[译] GPT 是如何工作的：200 行 Python 代码实现一个极简 GPT（2023）</a>  未</p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/636270877">【LLM】从零开始训练大模型</a> ***  未</p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/637996787">【Falcon Paper】我们是靠洗数据洗败 LLaMA 的！</a> 未</p>
 </li>
 </ol>
 ]]></content>
@@ -12469,6 +12457,7 @@ table th:first-of-type {
 </ul>
 <h2><span id="training-amp-inference">Training &amp; Inference</span><a href="#training-amp-inference" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/11/19/gptLargeModelTraining/" title="训练">训练</a></li>
+<li><a href="/www6vHomeHexo/2024/01/06/gptTrainParallelism/" title="训练-并行">训练-并行</a> </li>
 <li><a href="/www6vHomeHexo/2023/01/01/gptInference/" title="推理">推理</a></li>
 </ul>
 <h2><span id="finetuning">FineTuning</span><a href="#finetuning" class="header-anchor">#</a></h2><ul>
@@ -12574,6 +12563,10 @@ table th:first-of-type {
 <li><a href="https://cloud.tencent.com/developer/article/2328541">主流大语言模型的技术原理细节</a></li>
 <li><a href="http://arthurchiao.art/blog/transformers-from-scratch-zh/">Transformers from scratch</a> V, github 未</li>
 <li><a href="https://bbycroft.net/llm">LLM Visualization</a> ***  未</li>
+<li><a href="https://blog.csdn.net/v_JULY_v/article/details/127411638">Transformer通俗笔记：从Word2Vec、Seq2Seq逐步理解到GPT、BERT</a> ***</li>
+<li><a href="https://blog.csdn.net/v_JULY_v/article/details/130090649">从零实现Transformer的简易版与强大版：从300多行到3000多行</a></li>
+<li><a href="https://blog.csdn.net/v_JULY_v/article/details/134228287">一文通透各种注意力：从多头注意力MHA到分组查询注意力GQA、多查询注意力MQA</a></li>
+<li><a href="https://blog.csdn.net/v_JULY_v/article/details/134085503">一文通透位置编码：从标准位置编码、旋转位置编码RoPE到ALiBi、LLaMA 2 Long</a></li>
 </ol>
 ]]></content>
       <categories>
@@ -39586,6 +39579,53 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>AIGC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>训练-并行</title>
+    <url>/www6vHomeHexo/2024/01/06/gptTrainParallelism/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%AD%E7%BB%83-1">分布式训练 [1]</a><ul>
+<li><a href="#%E9%A2%84%E8%AE%AD%E7%BB%83-3d%E5%B9%B6%E8%A1%8C">预训练 3D并行</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+
+<h1><span id="分布式训练-1">分布式训练 [1]</span><a href="#分布式训练-1" class="header-anchor">#</a></h1><h3><span id="预训练-3d并行">预训练 3D并行</span><a href="#预训练-3d并行" class="header-anchor">#</a></h3><ul>
+<li>数据并行</li>
+<li>模型并行</li>
+<li>张量并行</li>
+</ul>
+   
+
+
+
+<ol>
+<li><p><a href="https://lilianweng.github.io/posts/2021-09-25-train-large/">How to Train Really Large Models on Many GPUs? </a></p>
+</li>
+<li><p><a href="https://techdiylife.github.io/big-model-training/deepspeed/deepspeed-chat.html">第1章：DeepSpeed-Chat 模型训练实战</a>  Bili 未<br>   <a href="https://github.com/microsoft/DeepSpeedExamples/tree/master/applications/DeepSpeed-Chat">DeepSpeed-Chat</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/v_JULY_v/article/details/132462452">大模型并行训练指南：通俗理解Megatron-DeepSpeed之模型并行与数据并行</a> 未</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>train</category>
+      </categories>
+      <tags>
+        <tag>train</tag>
       </tags>
   </entry>
 </search>
