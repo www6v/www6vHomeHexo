@@ -27,8 +27,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2024/01/06/gptInstructTuning/ICL.webp">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2024/01/06/gptInstructTuning/ICL-tech.webp">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2024/01/06/gptInstructTuning/instructTuning.webp">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2024/01/06/gptInstructTuning/limitation.JPG">
 <meta property="article:published_time" content="2024-01-06T11:09:20.000Z">
-<meta property="article:modified_time" content="2024-01-07T04:55:16.340Z">
+<meta property="article:modified_time" content="2024-01-07T07:40:19.353Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Instruct-Tuning">
 <meta name="twitter:card" content="summary">
@@ -227,7 +229,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-07 12:55:16" itemprop="dateModified" datetime="2024-01-07T12:55:16+08:00">2024-01-07</time>
+                <time title="修改时间：2024-01-07 15:40:19" itemprop="dateModified" datetime="2024-01-07T15:40:19+08:00">2024-01-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -257,6 +259,26 @@
         <p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#in-context-learning-icl-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AD%A6%E4%B9%A0">In Context Learning ( ICL ) 上下文学习</a></li>
+<li><a href="#instruction-learning-1">Instruction Learning [1]</a><ul>
+<li><a href="#instruct-tuning-">Instruct Tuning-</a></li>
+<li><a href="#instructgpt">instructGPT</a></li>
+<li><a href="#chatgpt">chatGPT</a></li>
+</ul>
+</li>
+<li><a href="#instruction-tuning">Instruction Tuning</a></li>
+<li><a href="#limitation-of-instruction-finetuning-2">Limitation of instruction finetuning [2]</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
 <h1><span id="in-context-learning-icl-上下文学习">In Context Learning ( ICL ) 上下文学习</span><a href="#in-context-learning-icl-上下文学习" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2024/01/06/gptInstructTuning/ICL.webp" class>
 
 <ul>
@@ -268,7 +290,44 @@
 <ul>
 <li><strong>FLAN</strong>，<strong>既属于 in context learning，也属于 instruction learning</strong></li>
 </ul>
-<h1><span id="instruction-learning">Instruction Learning</span><a href="#instruction-learning" class="header-anchor">#</a></h1><h3><span id="instruct-tuning-flan">Instruct Tuning-FLAN</span><a href="#instruct-tuning-flan" class="header-anchor">#</a></h3><h3><span id="instructgpt">instructGPT</span><a href="#instructgpt" class="header-anchor">#</a></h3><h3><span id="chatgpt">chatGPT</span><a href="#chatgpt" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1cm4y1e7Cc/">第九课：Instruct Tuning</a> *** V<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/646136859">FLANv2：大模型指令微调必看论文</a><br><a target="_blank" rel="noopener" href="https://yaofu.notion.site/June-2023-A-Stage-Review-of-Instruction-Tuning-f59dbfc36e2d4e12a33443bd6b2012c2">June 2023, A Stage Review of Instruction Tuning</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/619406727">各种tuning的简单逻辑解释</a></p>
+<h1><span id="instruction-learning-1">Instruction Learning [1]</span><a href="#instruction-learning-1" class="header-anchor">#</a></h1><h3><span id="instruct-tuning-">Instruct Tuning-</span><a href="#instruct-tuning-" class="header-anchor">#</a></h3><pre><code>FLANv1, FLANv2
+</code></pre>
+<h3><span id="instructgpt">instructGPT</span><a href="#instructgpt" class="header-anchor">#</a></h3><h3><span id="chatgpt">chatGPT</span><a href="#chatgpt" class="header-anchor">#</a></h3><h1><span id="instruction-tuning">Instruction Tuning</span><a href="#instruction-tuning" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2024/01/06/gptInstructTuning/instructTuning.webp" class>
+
+<ul>
+<li><p>对于已有的预训练模型，继续在多项任务（B、C、D等）上做训练，在其他任务（A）上做预测。<strong>虽然依然没见过任务A，但是根据对B、C、D等的训练，对A的效果有所提升；</strong> [1]</p>
+</li>
+<li><p><strong>Instruct Tuning 本质上也是Prompt Tuning</strong> [2]</p>
+</li>
+<li><p>研究了缩放对指令微调的影响 [3]<br>  与微调指令的任务数量有关，<strong>任务数量越多效果越好</strong><br>  与模型的大小有关，<strong>模型越大效果越好</strong></p>
+</li>
+<li><p>Prompt vs. Instruction Tuning  [4]<br>  Prompt是去激发语言模型的<strong>补全能力</strong>，比如给出上半句生成下半句、或者做完形填空，都还是像在做language model任务.<br>  而Instruction Tuning则是激发语言模型的<strong>理解能力</strong>，通过给出更明显的指令&#x2F;指示，让模型去理解并做出正确的action<br>  <strong>Prompt tuning</strong>都是针对<strong>一个任务</strong>的，比如做个情感分析任务的prompt tuning，精调完的模型只能用于情感分析任务，而经过<strong>Instruction Tuning多任务</strong>精调后，可以用于其他任务的zero-shot</p>
+</li>
+<li><p>Instruction Tuning 指令微调  [4]</p>
+<ul>
+<li>Self Instruction<ul>
+<li>Alpaca &#x3D; LLaMA + Intruction Tuning [2]</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1><span id="limitation-of-instruction-finetuning-2">Limitation of instruction finetuning [2]</span><a href="#limitation-of-instruction-finetuning-2" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2024/01/06/gptInstructTuning/limitation.JPG" class>
+<p>问题1.  开放性问题<br>问题2.  看图</p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/619406727">各种tuning的简单逻辑解释</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1cm4y1e7Cc/">第九课：Instruct Tuning</a> *** V</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/646136859">FLANv2：大模型指令微调必看论文</a> </p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/408166011">Instruction Tuning｜谷歌Quoc V.Le团队提出又一精调范式</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://yaofu.notion.site/June-2023-A-Stage-Review-of-Instruction-Tuning-f59dbfc36e2d4e12a33443bd6b2012c2">June 2023, A Stage Review of Instruction Tuning</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/629461665">【LLM系列之FLAN-T5&#x2F;PaLM】Scaling Instruction-Finetuned Language Models</a></p>
+</li>
+</ol>
 
     </div>
 
