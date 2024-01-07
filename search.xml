@@ -2563,7 +2563,7 @@
 
 
 
-<p><a href="https://www.bilibili.com/video/BV1ju411T74Y/">第十一课：ChatGLM</a></p>
+<p><a href="https://www.bilibili.com/video/BV1ju411T74Y/">第十一课：ChatGLM</a> V<br><a href="https://blog.csdn.net/v_JULY_v/article/details/129880836">ChatGLM两代的部署&#x2F;微调&#x2F;实现：从基座GLM、ChatGLM的LoRA&#x2F;P-Tuning微调、6B源码解读到ChatGLM2的微调与实现</a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -4291,8 +4291,12 @@
 <li><a href="https://zhuanlan.zhihu.com/p/673910600">https://zhuanlan.zhihu.com/p/673910600</a></li>
 </ol>
 <h3><span id="self-rag">Self-RAG</span><a href="#self-rag" class="header-anchor">#</a></h3><ol start="3">
-<li><a href="https://zhuanlan.zhihu.com/p/661465330?utm_id=0">NLP（廿一）：从 RAG 到 Self-RAG —— LLM 的知识增强</a> *** </li>
-<li><a href="https://github.com/www6v/self-rag">original implementation of SELF-RAG</a></li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/661465330?utm_id=0">NLP（廿一）：从 RAG 到 Self-RAG —— LLM 的知识增强</a> *** </p>
+</li>
+<li><p><a href="https://github.com/www6v/self-rag">original implementation of SELF-RAG</a></p>
+</li>
+<li><p><a href="https://llamahub.ai/">LlamaHub</a> 未<br>Mix and match our Data Loaders and Agent Tools to build custom RAG apps or use our LlamaPacks as a starting point for your retrieval use cases.</p>
+</li>
 </ol>
 ]]></content>
       <categories>
