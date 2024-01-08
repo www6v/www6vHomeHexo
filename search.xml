@@ -2671,6 +2671,14 @@
 </li>
 <li><p><a href="https://blog.csdn.net/v_JULY_v/article/details/132462452">大模型并行训练指南：通俗理解Megatron-DeepSpeed之模型并行与数据并行</a> 未</p>
 </li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/441591808">全网最全-混合精度训练原理</a> 未</p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/450854172">全网最全-超大模型+分布式训练架构和经典论文</a> 未</p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/465967735">分布式训练硬核技术——通信原语</a> 未</p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/613196255">图解大模型训练之：流水线并行（Pipeline Parallelism），以Gpipe为例</a>  系列文章 未</p>
+</li>
 </ol>
 ]]></content>
       <categories>
@@ -3676,6 +3684,8 @@
 </li>
 <li><p><a href="https://cloud.tencent.com/developer/article/2352088">微信向量检索分析一体化数仓探索：OLAP For Embedding</a> *** 未</p>
 </li>
+<li><p><a href="https://blog.csdn.net/v_JULY_v/article/details/135311471">一文通透Text Embedding模型：从text2vec、openai-ada-002到m3e、bge</a> 未</p>
+</li>
 </ol>
 ]]></content>
       <categories>
@@ -3809,6 +3819,24 @@
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%88%86%E7%B1%BB">分类</a></li>
+<li><a href="#peft-%E5%88%86%E7%B1%BB">PEFT 分类</a></li>
+<li><a href="#chatgpt-%E8%AE%AD%E7%BB%83-1">ChatGPT 训练  [1]</a></li>
+<li><a href="#%E5%BE%AE%E8%B0%83%E6%8C%87%E4%BB%A4%E7%9A%84%E7%94%9F%E6%88%90-56">微调指令的生成 [5][6]</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
+<li><a href="#%E5%8E%9F%E7%90%86">原理</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
 <h1><span id="分类">分类</span><a href="#分类" class="header-anchor">#</a></h1><ul>
 <li><p>全量微调</p>
 </li>
@@ -3860,7 +3888,7 @@
 </ul>
 <img src="/www6vHomeHexo/2022/11/18/gptFineTuning/overview.jpg" class>
 
-<h2><span id="chatgpt-训练-1">ChatGPT 训练  [1]</span><a href="#chatgpt-训练-1" class="header-anchor">#</a></h2><ul>
+<h1><span id="chatgpt-训练-1">ChatGPT 训练  [1]</span><a href="#chatgpt-训练-1" class="header-anchor">#</a></h1><ul>
 <li>基于人类反馈的强化学习微调技术 RLHF<ul>
 <li>使用有监督微调 Supervised Fine-tuning（SFT）预训练语言模型<ul>
 <li>Supervised fine-tuning (SFT)<br>&#x3D; Instruction Tuning</li>
@@ -3874,12 +3902,7 @@
 </ul>
 </li>
 </ul>
-<h2><span id="工具-1">工具 [1]</span><a href="#工具-1" class="header-anchor">#</a></h2><ul>
-<li>Hugging Face Transformers</li>
-<li>Hugging Face PEFT</li>
-<li>DeepSpeed</li>
-</ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="原理">原理</span><a href="#原理" class="header-anchor">#</a></h3><ol>
+<h1><span id="微调指令的生成-56">微调指令的生成 [5][6]</span><a href="#微调指令的生成-56" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="原理">原理</span><a href="#原理" class="header-anchor">#</a></h3><ol>
 <li><p><a href="https://shimo.im/docs/KlkKv4XQDouwWRqd/read">AI 大模型微调训练营大纲</a> </p>
 </li>
 <li><p>xxx</p>
@@ -3889,7 +3912,9 @@
 <li><p><a href="https://github.com/www6v/llm-action#llm%E5%BE%AE%E8%B0%83%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86">llm微调技术原理</a>  李国东<br>4.1 <a href="https://zhuanlan.zhihu.com/p/635152813">大模型参数高效微调技术原理综述（一）-背景、参数高效微调简介</a></p>
 <p>4.2  <a href="https://zhuanlan.zhihu.com/p/649755252">大模型参数高效微调技术原理综述（七）-最佳实践、总结</a></p>
 </li>
-<li><p>xxx</p>
+<li><p><a href="https://zhuanlan.zhihu.com/p/650596719">大模型SFT微调指令数据的生成</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/618334308">让ChatGPT生成训练ChatGPT的训练数据</a></p>
 </li>
 <li><p><a href="https://blog.csdn.net/v_JULY_v/article/details/132116949">LLM高效参数微调方法：从Prefix Tuning、Prompt Tuning、P-Tuning V1&#x2F;V2到LoRA、QLoRA(含对模型量化的解释)</a> *** 未</p>
 </li>
