@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/11/02/gptRAG/rag.jpg">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/11/02/gptRAG/rag-vs-ft.jpg">
 <meta property="article:published_time" content="2022-11-02T01:57:59.000Z">
-<meta property="article:modified_time" content="2024-01-07T02:45:32.996Z">
+<meta property="article:modified_time" content="2024-01-08T09:16:33.383Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="RAG">
 <meta name="twitter:card" content="summary">
@@ -228,7 +228,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-07 10:45:32" itemprop="dateModified" datetime="2024-01-07T10:45:32+08:00">2024-01-07</time>
+                <time title="修改时间：2024-01-08 17:16:33" itemprop="dateModified" datetime="2024-01-08T17:16:33+08:00">2024-01-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -264,10 +264,13 @@
 
 <ul>
 <li><a href="#rag-overview2">RAG Overview[2]</a></li>
-<li><a href="#advanced-rag">Advanced RAG</a></li>
+<li><a href="#advanced-rag">Advanced RAG</a><ul>
+<li><a href="#%E6%9E%B6%E6%9E%84-1">架构 [1]</a></li>
+<li><a href="#rag-fusion">RAG Fusion</a></li>
+</ul>
+</li>
 <li><a href="#rag-vs-ft-2">RAG vs FT [2]</a></li>
 <li><a href="#self-rag">Self-RAG</a></li>
-<li><a href="#rag-fusion">RAG Fusion</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
 <li><a href="#%E7%BB%BC%E8%BF%B0">综述</a></li>
 <li><a href="#self-rag-1">Self-RAG</a></li>
@@ -280,18 +283,15 @@
 
 <h1><span id="rag-overview2">RAG Overview[2]</span><a href="#rag-overview2" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/11/02/gptRAG/rag-overview.jpg" class>
 
-<h1><span id="advanced-rag">Advanced RAG</span><a href="#advanced-rag" class="header-anchor">#</a></h1><ul>
-<li>架构 [1]<ul>
+<h1><span id="advanced-rag">Advanced RAG</span><a href="#advanced-rag" class="header-anchor">#</a></h1><h3><span id="架构-1">架构 [1]</span><a href="#架构-1" class="header-anchor">#</a></h3><ul>
 <li>离线 index</li>
 <li>在线 查询</li>
 </ul>
-</li>
-</ul>
 <img src="/www6vHomeHexo/2022/11/02/gptRAG/rag.jpg" class>
 
-<h1><span id="rag-vs-ft-2">RAG vs FT [2]</span><a href="#rag-vs-ft-2" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/11/02/gptRAG/rag-vs-ft.jpg" class>
+<h3><span id="rag-fusion">RAG Fusion</span><a href="#rag-fusion" class="header-anchor">#</a></h3><h1><span id="rag-vs-ft-2">RAG vs FT [2]</span><a href="#rag-vs-ft-2" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/11/02/gptRAG/rag-vs-ft.jpg" class>
 
-<h1><span id="self-rag">Self-RAG</span><a href="#self-rag" class="header-anchor">#</a></h1><h1><span id="rag-fusion">RAG Fusion</span><a href="#rag-fusion" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<h1><span id="self-rag">Self-RAG</span><a href="#self-rag" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a target="_blank" rel="noopener" href="https://blog.langchain.dev/deconstructing-rag/">Deconstructing RAG</a> ***</li>
 </ol>
 <h3><span id="综述">综述</span><a href="#综述" class="header-anchor">#</a></h3><ol start="2">
@@ -302,7 +302,9 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/www6v/self-rag">original implementation of SELF-RAG</a></p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://llamahub.ai/">LlamaHub</a> 未<br>Mix and match our Data Loaders and Agent Tools to build custom RAG apps or use our LlamaPacks as a starting point for your retrieval use cases.</p>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/673922981">高级检索增强生成技术(RAG)全面指南：原理、分块、编码、索引、微调、Agent、展望</a> 未</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/665078079">万字综述：2023年多模态检索增强生成技术(mRAG)最新进展与趋势-图片、代码、图谱、视频、声音、文本</a> 未</p>
 </li>
 </ol>
 
@@ -418,20 +420,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">509</span>
+          <span class="site-state-item-count">510</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/www6vHomeHexo/categories/">
           
-        <span class="site-state-item-count">305</span>
+        <span class="site-state-item-count">306</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/www6vHomeHexo/tags/">
           
-        <span class="site-state-item-count">164</span>
+        <span class="site-state-item-count">165</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
