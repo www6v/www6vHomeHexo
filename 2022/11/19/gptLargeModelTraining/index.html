@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/11/19/gptLargeModelTraining/bigModelTrainingPipeline.jpg">
 <meta property="article:published_time" content="2022-11-19T14:32:11.000Z">
-<meta property="article:modified_time" content="2024-01-05T22:20:30.071Z">
+<meta property="article:modified_time" content="2024-01-09T01:08:59.244Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="train">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-06 06:20:30" itemprop="dateModified" datetime="2024-01-06T06:20:30+08:00">2024-01-06</time>
+                <time title="修改时间：2024-01-09 09:08:59" itemprop="dateModified" datetime="2024-01-09T09:08:59+08:00">2024-01-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -261,9 +261,9 @@
 <!-- toc -->
 
 <ul>
-<li><a href="#%E9%A2%84%E8%AE%AD%E7%BB%83">预训练</a><ul>
-<li><a href="#%E9%A2%84%E8%AE%AD%E7%BB%83-4">预训练 [4]</a></li>
 <li><a href="#training-pipeline0">Training Pipeline[0]</a></li>
+<li><a href="#pre-training">Pre-training</a><ul>
+<li><a href="#pre-training-4">Pre-training [4]</a></li>
 <li><a href="#%E8%AE%BE%E7%BD%AE%E8%AE%AD%E7%BB%83%E5%8F%82%E6%95%B0">设置训练参数</a></li>
 <li><a href="#%E5%8F%82%E6%95%B0%E9%87%8F-vs-%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E9%87%8F">参数量 vs 训练数据量</a></li>
 <li><a href="#tokenizer-%E5%88%86%E8%AF%8D">tokenizer 分词</a></li>
@@ -275,14 +275,7 @@
 
 </div>
 
-
-<h1><span id="预训练">预训练</span><a href="#预训练" class="header-anchor">#</a></h1><h3><span id="预训练-4">预训练 [4]</span><a href="#预训练-4" class="header-anchor">#</a></h3><ul>
-<li><p>⾃回归与⽣成式<br><strong>⾃回归模型</strong>是⼀种序列模型，它在预测下⼀个输出时，会将之前的所有输出作为输⼊，然后<strong>根据统计规律、结合已经输⼊的样本</strong>，预测下个位置各单词出现的概率，然后输出概率最⼤的单词，类似于完形填空；<br><strong>⽣成式模型</strong>的预测过程和⾃回归模型类似，都是根据统<br>计规律预测下个单词的概率，所不同的是，<strong>⽣成式模型可以根据之前的样本的<br>概率分布⽣成下⼀个词，⽣成式模型预测时会存在⼀定的随机性；</strong></p>
-</li>
-<li><p>GPT来说，就是⼀个⾃回归⽣成式模型 [4]<br>⼀个⾃回归⽣成式模型在进⾏预测的时候，<strong>会⾸先根据⾃回归模型，在参考到⽬前为⽌<br>已经⽣成的词的情况下确定下⼀个词的概率分布，然后再根据⽣成式的⽅式来根据这个<br>分布⽣成下⼀个词</strong></p>
-</li>
-</ul>
-<h3><span id="training-pipeline0">Training Pipeline[0]</span><a href="#training-pipeline0" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/11/19/gptLargeModelTraining/bigModelTrainingPipeline.jpg" class>
+<h1><span id="training-pipeline0">Training Pipeline[0]</span><a href="#training-pipeline0" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/11/19/gptLargeModelTraining/bigModelTrainingPipeline.jpg" class>
 
 <p><strong>模型训练分为四个阶段</strong></p>
 <ul>
@@ -299,6 +292,12 @@
 <li>数据量：<strong>预训练</strong>阶段所需的<strong>数据量很大</strong>，但<strong>质量要求不高</strong>；而<strong>后面的三个阶段</strong>恰恰相反，需要的<strong>数据质量较高</strong>。</li>
 <li>训练方法：<strong>预训练和监督微调</strong>的训练方法相同，都是<strong>预测下一个单词</strong>。奖励模型和强化学习的训练方法则不同。<strong>奖励模型</strong>是<strong>二元分类学习</strong>，而<strong>强化学习</strong>则鼓励模型生成奖励模型评分较高的回答。</li>
 <li>训练所需资源：预训练阶段的资源消耗巨大，使用数千颗GPU，花费<strong>数月</strong>时间，占总训练时间的99%。后面的三个阶段只需使用数十颗GPU，训练时间约<strong>数天</strong>。</li>
+</ul>
+<h1><span id="pre-training">Pre-training</span><a href="#pre-training" class="header-anchor">#</a></h1><h3><span id="pre-training-4">Pre-training [4]</span><a href="#pre-training-4" class="header-anchor">#</a></h3><ul>
+<li><p>⾃回归与⽣成式<br><strong>⾃回归模型</strong>是⼀种序列模型，它在预测下⼀个输出时，会将之前的所有输出作为输⼊，然后<strong>根据统计规律、结合已经输⼊的样本</strong>，预测下个位置各单词出现的概率，然后输出概率最⼤的单词，类似于完形填空；<br><strong>⽣成式模型</strong>的预测过程和⾃回归模型类似，都是根据统<br>计规律预测下个单词的概率，所不同的是，<strong>⽣成式模型可以根据之前的样本的<br>概率分布⽣成下⼀个词，⽣成式模型预测时会存在⼀定的随机性；</strong></p>
+</li>
+<li><p>GPT来说，就是⼀个⾃回归⽣成式模型 [4]<br>⼀个⾃回归⽣成式模型在进⾏预测的时候，<strong>会⾸先根据⾃回归模型，在参考到⽬前为⽌<br>已经⽣成的词的情况下确定下⼀个词的概率分布，然后再根据⽣成式的⽅式来根据这个<br>分布⽣成下⼀个词</strong></p>
+</li>
 </ul>
 <h3><span id="设置训练参数">设置训练参数</span><a href="#设置训练参数" class="header-anchor">#</a></h3><p>设置训练参数，如batch-size、learning rate等</p>
 <ul>
