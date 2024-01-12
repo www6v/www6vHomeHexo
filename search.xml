@@ -1409,6 +1409,29 @@
     <url>/www6vHomeHexo/2024/01/12/gptPEFTQLora/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
+
+<h1><span id="技术原理-1">技术原理 [1]</span><a href="#技术原理-1" class="header-anchor">#</a></h1><p>使用一种新颖的高精度技术将预训练模型量化为 4 bit，然后添加一小组可学习的低秩适配器权重，这些权重通过量化权重的反向传播梯度进行微调。<br>QLoRA提出了两种技术实现高保真 4 bit微调——4 bit NormalFloat(NF4) 量化和双量化。</p>
+<ul>
+<li><p>4bit NormalFloat（NF4）：对于正态分布权重而言，一种信息理论上最优的新数据类型，该数据类型对正态分布数据产生比 4 bit整数和 4bit 浮点数更好的实证结果。</p>
+</li>
+<li><p>双量化：对第一次量化后的那些常量再进行一次量化，减少存储空间。</p>
+</li>
+<li><p>分页优化器:  使用此功能为优化器状态（Optimizer）分配分页内存，然后在 GPU 内存不足时将其自动卸载到 CPU 内存，并在优化器更新步骤需要时将其加载回 GPU 内存。</p>
+</li>
+</ul>
+<img src="/www6vHomeHexo/2024/01/12/gptPEFTQLora/qlora.png" class>
+
+<p>实验证明，无论是使用16bit、8bit还是4bit的适配器方法，都能够复制16bit全参数微调的基准性能。这说明，尽管量化过程中会存在性能损失，但通过适配器微调，完全可以恢复这些性能。</p>
+<h1><span id="实战-2">实战 [2]</span><a href="#实战-2" class="header-anchor">#</a></h1><h1><span id="参数">参数</span><a href="#参数" class="header-anchor">#</a></h1><ol>
+<li><p><a href="https://zhuanlan.zhihu.com/p/636215898">大模型参数高效微调技术原理综述（五）-LoRA、AdaLoRA、QLoRA</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/636644164">高效微调技术QLoRA实战，基于LLaMA-65B微调仅需48G显存，真香</a><br><a href="https://github.com/www6v/llm-action/tree/main/train/qlora">qlora</a> git</p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/671089942">[大模型微调技术] LoRA、QLoRA、QA-LoRA 原理笔记</a></p>
+</li>
+<li><p><a href="https://cloud.tencent.com/developer/article/2375230">大模型实操 | LoRA、QLoRA微调大模型实战技巧分享，含常见QA解答！</a></p>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -2967,6 +2990,7 @@
 
 
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://blog.csdn.net/v_JULY_v/article/details/129709105">LLaMA的解读与其微调：Alpaca-LoRA&#x2F;Vicuna&#x2F;BELLE&#x2F;中文LLaMA&#x2F;姜子牙&#x2F;LLaMA 2</a><br><a href="https://www.bilibili.com/video/BV1nN41157a9/">第十五课：LLaMA</a>  *** 华为  V<br><a href="https://www.bilibili.com/video/BV1Me411z7ZV/">第十六课：LLaMA2</a> *** 华为  V<br><a href="http://arthurchiao.art/blog/llama-paper-zh/">[译][论文] LLaMA：开放和高效的基础语言模型集</a><br><a href="http://arthurchiao.art/blog/llama2-paper-zh/">[译][论文] LLaMA 2：开放基础和微调聊天模型</a><br><a href="https://github.com/www6v/Llama2-Chinese">https://github.com/www6v/Llama2-Chinese</a><br><a href="https://llama.family/">Llama中文社区</a><br>《千帆增强版 Llama 2-提升大模型对话指令遵循能力》</p>
+<p><a href="https://zhuanlan.zhihu.com/p/618321077">从0到1复现斯坦福羊驼（Stanford Alpaca 7B）</a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -30344,8 +30368,8 @@ nq： 不排队调度
         <category>总结</category>
       </categories>
       <tags>
-        <tag>性能</tag>
         <tag>基础</tag>
+        <tag>性能</tag>
         <tag>性能优化</tag>
       </tags>
   </entry>
