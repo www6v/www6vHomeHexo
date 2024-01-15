@@ -22,6 +22,7 @@
 </ul>
 <h2><span id="training-amp-inference">Training &amp; Inference</span><a href="#training-amp-inference" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/11/19/gptLargeModelTraining/" title="训练">训练</a></li>
+<li><a href="/www6vHomeHexo/2023/01/15/gptLargeModelTrainingPractice/" title="训练-实战">训练-实战</a> </li>
 <li><a href="/www6vHomeHexo/2023/01/06/gptTrainParallelism/" title="训练-并行">训练-并行</a> </li>
 <li><a href="/www6vHomeHexo/2023/01/01/gptInference/" title="推理">推理</a></li>
 <li><a href="/www6vHomeHexo/2023/01/08/gptDataSet/" title="数据集">数据集</a></li>
@@ -2568,6 +2569,31 @@
       </tags>
   </entry>
   <entry>
+    <title>训练-实战</title>
+    <url>/www6vHomeHexo/2023/01/15/gptLargeModelTrainingPractice/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="102">
+<li><a href="https://zhuanlan.zhihu.com/p/636270877">【LLM】从零开始训练大模型</a> ***  未<br><a href="https://www.bilibili.com/video/BV1a14y1o7fr/">从零开始训练大模型</a> V</li>
+<li><a href="https://zhuanlan.zhihu.com/p/637996787">【Falcon Paper】我们是靠洗数据洗败 LLaMA 的！</a> 未</li>
+<li><a href="http://arthurchiao.art/blog/how-to-train-a-gpt-assistant-zh/">[译] 如何训练一个企业级 GPT 助手（OpenAI，2023）</a> 未</li>
+</ol>
+<h3><span id="小模型训练-poc">小模型训练 PoC</span><a href="#小模型训练-poc" class="header-anchor">#</a></h3><ol start="100">
+<li><a href="https://zhuanlan.zhihu.com/p/660759033">LLM从0开始预训练系列：1、大模型训练踩坑</a></li>
+<li><a href="http://arthurchiao.art/blog/gpt-as-a-finite-state-markov-chain-zh/">[译] GPT 是如何工作的：200 行 Python 代码实现一个极简 GPT（2023）</a>  未</li>
+</ol>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>train</category>
+      </categories>
+      <tags>
+        <tag>train</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Langchain  App</title>
     <url>/www6vHomeHexo/2023/01/11/gptLangchainApp/</url>
     <content><![CDATA[<p></p>
@@ -3983,14 +4009,6 @@
 <li><p><a href="https://cloud.tencent.com/developer/article/2328541">主流大语言模型的技术原理细节</a> *** 腾讯     架构 + 训练 + 微调</p>
 </li>
 <li><p>大模型入门必看教程  九天Hector</p>
-</li>
-<li><p><a href="http://arthurchiao.art/blog/how-to-train-a-gpt-assistant-zh/">[译] 如何训练一个企业级 GPT 助手（OpenAI，2023）</a> 未</p>
-</li>
-<li><p><a href="http://arthurchiao.art/blog/gpt-as-a-finite-state-markov-chain-zh/">[译] GPT 是如何工作的：200 行 Python 代码实现一个极简 GPT（2023）</a>  未</p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/636270877">【LLM】从零开始训练大模型</a> ***  未</p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/637996787">【Falcon Paper】我们是靠洗数据洗败 LLaMA 的！</a> 未</p>
 </li>
 </ol>
 ]]></content>
