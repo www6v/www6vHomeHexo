@@ -3029,6 +3029,14 @@
 
 <h1><span id="推理-框架11">推理 框架[1.1]</span><a href="#推理-框架11" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2023/01/01/gptInference/inference.jpg" class>
 
+<ul>
+<li><p>server 云端<br>vLLM，TensorRT， deepspeed</p>
+</li>
+<li><p>pc&#x2F;edge 移动端<br> llama.cpp<br> mlc-llm<br> ollama</p>
+</li>
+<li><p>服务 Server<br>Triton Server</p>
+</li>
+</ul>
 <h1><span id="推理-优化">推理 优化</span><a href="#推理-优化" class="header-anchor">#</a></h1><h3><span id="模型压缩-21">模型压缩 [2.1]</span><a href="#模型压缩-21" class="header-anchor">#</a></h3><p>剪枝（Pruning）<br>知识蒸馏（Knowledge Distillation，KD）<br>量化（Quantization）<br>低秩分解（Low-Rank Factorization）</p>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="框架">框架</span><a href="#框架" class="header-anchor">#</a></h3><p>1.1. <a href="https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&__biz=MzA5MTIxNTY4MQ==&scene=1&album_id=2959126655292211206">探秘LLM应用开发</a>   8-19</p>
 <ol start="100">
