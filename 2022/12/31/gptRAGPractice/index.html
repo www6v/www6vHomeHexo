@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/12/31/gptRAGPractice/langchain+chatglm.jpg">
 <meta property="article:published_time" content="2022-12-30T23:42:52.000Z">
-<meta property="article:modified_time" content="2024-01-16T11:33:12.466Z">
+<meta property="article:modified_time" content="2024-01-17T02:54:01.273Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="RAG">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-16 19:33:12" itemprop="dateModified" datetime="2024-01-16T19:33:12+08:00">2024-01-16</time>
+                <time title="修改时间：2024-01-17 10:54:01" itemprop="dateModified" datetime="2024-01-17T10:54:01+08:00">2024-01-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -261,25 +261,22 @@
 <!-- toc -->
 
 <ul>
-<li><a href="#rag-on-text-data">RAG on Text data</a><ul>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E6%96%87%E6%9C%AC%E7%9A%84rag">基于文本的RAG</a><ul>
 <li><a href="#langchain-chatchat-%E6%9E%B6%E6%9E%84">Langchain-Chatchat 架构</a></li>
 <li><a href="#langchain-chatchat">Langchain-Chatchat</a></li>
 </ul>
 </li>
-<li><a href="#%E5%A4%9A%E6%A8%A1%E6%80%81rag-%E5%A4%9A%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2%E5%99%A8-8">多模态RAG-多向量检索器 [8]</a><ul>
-<li><a href="#semi-structured-tables-text-rag">semi-structured (tables + text) RAG</a></li>
-<li><a href="#multi-modal-text-tables-images-rag">multi-modal (text + tables + images) RAG</a><ul>
-<li><a href="#%E5%88%86%E6%9E%90pdf%E4%B8%AD%E5%9B%BE%E7%89%87-6">分析PDF中图片 [6]</a></li>
-<li><a href="#%E5%88%86%E6%9E%90pdf%E4%B8%AD%E8%A1%A8%E6%A0%BC-7">分析pdf中表格 [7]</a></li>
+<li><a href="#%E5%A4%9A%E6%A8%A1%E6%80%81rag-%E5%A4%9A%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2%E5%99%A8-1011">多模态RAG-多向量检索器 [10][11]</a><ul>
+<li><a href="#semi-structured-tables-text-rag-12">semi-structured (tables + text) RAG [12]</a></li>
+<li><a href="#multi-modal-text-tables-images-rag-13">multi-modal (text + tables + images) RAG [13]</a></li>
+<li><a href="#private-multi-modal-text-tables-images-rag-14">private multi-modal (text + tables + images)  RAG [14]</a></li>
 <li><a href="#%E7%BB%84%E4%BB%B6">组件</a></li>
 </ul>
 </li>
-<li><a href="#private-multi-modal-text-tables-images-rag">private multi-modal (text + tables + images)  RAG</a></li>
-</ul>
-</li>
+<li><a href="#vectorkg-rag1516">Vector+KG RAG[15][16]</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
-<li><a href="#rag-on-text-data-1">RAG on Text data</a></li>
-<li><a href="#rag-on-semi-structured-data">RAG on Semi-structured data</a></li>
+<li><a href="#%E6%96%87%E6%9C%AC">文本</a></li>
+<li><a href="#%E5%A4%9A%E6%A8%A1%E6%80%81">多模态</a></li>
 </ul>
 </li>
 </ul>
@@ -287,7 +284,7 @@
 
 </div>
 
-<h1><span id="rag-on-text-data">RAG on Text data</span><a href="#rag-on-text-data" class="header-anchor">#</a></h1><h3><span id="langchain-chatchat-架构">Langchain-Chatchat 架构</span><a href="#langchain-chatchat-架构" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/12/31/gptRAGPractice/langchain+chatglm.jpg" class>
+<h1><span id="基于文本的rag">基于文本的RAG</span><a href="#基于文本的rag" class="header-anchor">#</a></h1><h3><span id="langchain-chatchat-架构">Langchain-Chatchat 架构</span><a href="#langchain-chatchat-架构" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/12/31/gptRAGPractice/langchain+chatglm.jpg" class>
 
 <ul>
 <li>组件<ul>
@@ -306,7 +303,8 @@
 </ul>
 </li>
 </ul>
-<h1><span id="多模态rag-多向量检索器-8">多模态RAG-多向量检索器 [8]</span><a href="#多模态rag-多向量检索器-8" class="header-anchor">#</a></h1><h3><span id="semi-structured-tables-text-rag">semi-structured (tables + text) RAG</span><a href="#semi-structured-tables-text-rag" class="header-anchor">#</a></h3><h3><span id="multi-modal-text-tables-images-rag">multi-modal (text + tables + images) RAG</span><a href="#multi-modal-text-tables-images-rag" class="header-anchor">#</a></h3><h5><span id="分析pdf中图片-6">分析PDF中图片 [6]</span><a href="#分析pdf中图片-6" class="header-anchor">#</a></h5><p><strong>Option 1</strong> </p>
+<h1><span id="多模态rag-多向量检索器-1011">多模态RAG-多向量检索器 [10][11]</span><a href="#多模态rag-多向量检索器-1011" class="header-anchor">#</a></h1><h3><span id="semi-structured-tables-text-rag-12">semi-structured (tables + text) RAG [12]</span><a href="#semi-structured-tables-text-rag-12" class="header-anchor">#</a></h3><p> 分析pdf中表格 </p>
+<h3><span id="multi-modal-text-tables-images-rag-13">multi-modal (text + tables + images) RAG [13]</span><a href="#multi-modal-text-tables-images-rag-13" class="header-anchor">#</a></h3><h3><span id="private-multi-modal-text-tables-images-rag-14">private multi-modal (text + tables + images)  RAG [14]</span><a href="#private-multi-modal-text-tables-images-rag-14" class="header-anchor">#</a></h3><p>分析PDF中图片<br><strong>Option 1</strong> </p>
 <ul>
 <li>Use multimodal embeddings <strong>(such as <a target="_blank" rel="noopener" href="https://openai.com/research/clip">CLIP</a>)</strong> to embed images and text</li>
 <li>Retrieve both using similarity search</li>
@@ -324,11 +322,11 @@
 <li>Embed and retrieve image summaries with a reference to the raw image </li>
 <li>Pass <strong>raw images and text chunks</strong> to a multimodal LLM for answer synthesis</li>
 </ul>
-<h5><span id="分析pdf中表格-7">分析pdf中表格 [7]</span><a href="#分析pdf中表格-7" class="header-anchor">#</a></h5><h5><span id="组件">组件</span><a href="#组件" class="header-anchor">#</a></h5><ul>
+<h3><span id="组件">组件</span><a href="#组件" class="header-anchor">#</a></h3><ul>
 <li>pdf解析<br>unstructured</li>
-<li>store<br> MultiVector Retriever- 元数据+数据</li>
+<li>store<br>MultiVectorRetriever - 元数据+数据</li>
 </ul>
-<h3><span id="private-multi-modal-text-tables-images-rag">private multi-modal (text + tables + images)  RAG</span><a href="#private-multi-modal-text-tables-images-rag" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="rag-on-text-data">RAG on Text data</span><a href="#rag-on-text-data" class="header-anchor">#</a></h3><ol>
+<h1><span id="vectorkg-rag1516">Vector+KG RAG[15][16]</span><a href="#vectorkg-rag1516" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="文本">文本</span><a href="#文本" class="header-anchor">#</a></h3><ol>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/chatchat-space/Langchain-Chatchat">Langchain-Chatchat </a> master<br>Langchain 与 ChatGLM 等语言模型的本地知识库问答<br><a target="_blank" rel="noopener" href="https://github.com/chatchat-space/Langchain-Chatchat/tree/v0.2.4">Langchain-Chatchat</a>  v0.2.4<br><a target="_blank" rel="noopener" href="https://gitee.com/deepeye/langchain-ChatGLM">langchain-ChatGLM</a>  gitee </p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/www6v/Langchain-Chatchat-Colab">Colab for Langchain-Chatchat</a>   linux 可以部署  v0.2.6</p>
@@ -340,12 +338,20 @@
 <li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43094965/article/details/133044128">win10 安装 Langchain-Chatchat 避坑指南（2023年9月18日v0.2.4版本，包含全部下载内容！）</a></p>
 </li>
 </ol>
-<h3><span id="rag-on-semi-structured-data">RAG on Semi-structured data</span><a href="#rag-on-semi-structured-data" class="header-anchor">#</a></h3><ol start="6">
-<li><p><a target="_blank" rel="noopener" href="https://github.com/www6v/AIGC/blob/master/langchain-cookbook/Semi_structured_multi_modal_RAG_LLaMA2.ipynb">langchain-cookbook RAG</a>   解析pdf中的图片  运行有问题<br><a target="_blank" rel="noopener" href="https://blog.langchain.dev/semi-structured-multi-modal-rag/">Multi-Vector Retriever for RAG on tables, text, and images</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/www6v/AIGC/blob/master/Advanced-RAG/01_semi_structured_data.ipynb">Advanced-RAG semi_structured_data</a>   解析pdf中的表格，  运行没问题，能问表格中的数据</p>
-</li>
+<h3><span id="多模态">多模态</span><a href="#多模态" class="header-anchor">#</a></h3><ol start="10">
 <li><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/628651389/answer/3321989558">检索增强生成（RAG）有什么好的优化方案？</a> </p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.langchain.dev/semi-structured-multi-modal-rag/">Multi-Vector Retriever for RAG on tables, text, and images</a> *** </p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/langchain-ai/langchain/blob/master/cookbook/Semi_Structured_RAG.ipynb">Semi_Structured_RAG</a><br><a target="_blank" rel="noopener" href="https://github.com/www6v/AIGC/blob/master/Advanced-RAG/01_semi_structured_data.ipynb">Advanced-RAG semi_structured_data</a>   code 半结构化-解析pdf中的表格，  运行没问题，能问表格中的数据</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/langchain-ai/langchain/blob/master/cookbook/Semi_structured_and_multi_modal_RAG.ipynb">Semi_structured_and_multi_modal_RAG</a>  </p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/www6v/AIGC/blob/master/langchain-cookbook/Semi_structured_multi_modal_RAG_LLaMA2.ipynb">Private Semi-structured and Multi-modal RAG w&#x2F; LLaMA2 and LLaVA</a>  code 多模态- 解析pdf中的图片  运行有问题<br><a target="_blank" rel="noopener" href="https://github.com/langchain-ai/langchain/blob/master/cookbook/Semi_structured_multi_modal_RAG_LLaMA2.ipynb">Private Semi-structured and Multi-modal RAG w&#x2F; LLaMA2 and LLaVA</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://neo4j.com/developer-blog/unstructured-knowledge-graph-neo4j-langchain/">Enhanced QA Integrating Unstructured Knowledge Graph Using Neo4j and LangChain</a>  </p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.langchain.dev/using-a-knowledge-graph-to-implement-a-devops-rag-application/">Using a Knowledge Graph to implement a DevOps RAG application</a></p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://llamahub.ai/">LlamaHub</a> 未<br> Mix and match our Data Loaders and Agent Tools to build custom RAG apps or use our LlamaPacks as a starting point for your retrieval use cases.</p>
 </li>
