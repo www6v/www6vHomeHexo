@@ -3037,6 +3037,7 @@
 <ul>
 <li><a href="#%E6%8E%A8%E7%90%86-%E6%A1%86%E6%9E%B611">推理 框架[1.1]</a></li>
 <li><a href="#%E6%8E%A8%E7%90%86-%E4%BC%98%E5%8C%96">推理 优化</a><ul>
+<li><a href="#overview22">overview[2.2]</a></li>
 <li><a href="#%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9-21">模型压缩 [2.1]</a></li>
 </ul>
 </li>
@@ -3055,18 +3056,26 @@
 <ul>
 <li><p>server 云端<br>vLLM，TensorRT， deepspeed</p>
 </li>
-<li><p>pc&#x2F;edge 移动端<br> llama.cpp<br> mlc-llm<br> ollama</p>
+<li><p>pc&#x2F;edge 移动端<br> llama.cpp<br>mlc-llm<br>ollama</p>
 </li>
 <li><p>服务 Server<br>Triton Server</p>
 </li>
 </ul>
-<h1><span id="推理-优化">推理 优化</span><a href="#推理-优化" class="header-anchor">#</a></h1><h3><span id="模型压缩-21">模型压缩 [2.1]</span><a href="#模型压缩-21" class="header-anchor">#</a></h3><p>剪枝（Pruning）<br>知识蒸馏（Knowledge Distillation，KD）<br>量化（Quantization）<br>低秩分解（Low-Rank Factorization）</p>
+<h1><span id="推理-优化">推理 优化</span><a href="#推理-优化" class="header-anchor">#</a></h1><h3><span id="overview22">overview[2.2]</span><a href="#overview22" class="header-anchor">#</a></h3><p>有几种方法可以在内存中<strong>降低推理成本</strong>或&#x2F;和<strong>加快推理速度</strong>。</p>
+<ul>
+<li>应用各种<strong>并行处理方式</strong>，以在大量GPU上扩展模型。智能并行处理模型组件和数据使得运行拥有数万亿参数的模型成为可能。</li>
+<li><strong>内存卸载</strong>，将临时未使用的数据卸载到CPU，并在以后需要时再读回。这有助于减少内存使用，但会导致更高的延迟。</li>
+<li><strong>智能批处理策略</strong>；例如，EffectiveTransformer将连续的序列打包在一起，以消除批处理内的填充。</li>
+<li><strong>网络压缩技术</strong>，如<strong>修剪、量化、蒸馏</strong>。较小的模型，无论是参数数量还是位宽，应该需要更少的内存并且运行更快。</li>
+<li>针对目标模型架构的特定改进。许多<strong>架构变化</strong>，特别是针对注意力层的变化，有助于提高Transformer解码速度。</li>
+</ul>
+<h3><span id="模型压缩-21">模型压缩 [2.1]</span><a href="#模型压缩-21" class="header-anchor">#</a></h3><p>剪枝（Pruning）<br>知识蒸馏（Knowledge Distillation，KD）<br>量化（Quantization）<br>低秩分解（Low-Rank Factorization）</p>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="框架">框架</span><a href="#框架" class="header-anchor">#</a></h3><p>1.1. <a href="https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&__biz=MzA5MTIxNTY4MQ==&scene=1&album_id=2959126655292211206">探秘LLM应用开发</a>   8-19</p>
 <ol start="100">
 <li><a href="https://github.com/www6v/llm-action/tree/main/inference">https://github.com/www6v/llm-action/tree/main/inference</a></li>
 <li><a href="https://www.zhihu.com/question/625415776/answer/3243562246">https://www.zhihu.com/question/625415776/answer/3243562246</a></li>
 </ol>
-<h3><span id="优化">优化</span><a href="#优化" class="header-anchor">#</a></h3><p>2.1. <a href="https://mp.weixin.qq.com/s/glPPSqHjsnDjC0DZSuuPzA">一文探秘LLM应用开发(13)-模型部署与推理(优化理论) </a><br>102. <a href="https://lilianweng.github.io/posts/2023-01-10-inference-optimization/">https://lilianweng.github.io/posts/2023-01-10-inference-optimization/</a></p>
+<h3><span id="优化">优化</span><a href="#优化" class="header-anchor">#</a></h3><p>2.1. <a href="https://mp.weixin.qq.com/s/glPPSqHjsnDjC0DZSuuPzA">一文探秘LLM应用开发(13)-模型部署与推理(优化理论) </a><br>2.2 <a href="https://lilianweng.github.io/posts/2023-01-10-inference-optimization/">https://lilianweng.github.io/posts/2023-01-10-inference-optimization/</a><br>103. <a href="https://zhuanlan.zhihu.com/p/656485997">大语言模型推理性能优化综述</a><br>104. <a href="https://www.bilibili.com/video/BV1iW4y1A77P/">(5)LMDeploy 大模型量化部署实践</a> V</p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -3084,8 +3093,20 @@
 
 
 
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://blog.csdn.net/v_JULY_v/article/details/129709105">LLaMA的解读与其微调：Alpaca-LoRA&#x2F;Vicuna&#x2F;BELLE&#x2F;中文LLaMA&#x2F;姜子牙&#x2F;LLaMA 2</a><br><a href="https://www.bilibili.com/video/BV1nN41157a9/">第十五课：LLaMA</a>  *** 华为  V<br><a href="https://www.bilibili.com/video/BV1Me411z7ZV/">第十六课：LLaMA2</a> *** 华为  V<br><a href="http://arthurchiao.art/blog/llama-paper-zh/">[译][论文] LLaMA：开放和高效的基础语言模型集</a><br><a href="http://arthurchiao.art/blog/llama2-paper-zh/">[译][论文] LLaMA 2：开放基础和微调聊天模型</a><br><a href="https://github.com/www6v/Llama2-Chinese">https://github.com/www6v/Llama2-Chinese</a><br><a href="https://llama.family/">Llama中文社区</a><br>《千帆增强版 Llama 2-提升大模型对话指令遵循能力》</p>
-<p><a href="https://zhuanlan.zhihu.com/p/618321077">从0到1复现斯坦福羊驼（Stanford Alpaca 7B）</a></p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://blog.csdn.net/v_JULY_v/article/details/129709105">LLaMA的解读与其微调：Alpaca-LoRA&#x2F;Vicuna&#x2F;BELLE&#x2F;中文LLaMA&#x2F;姜子牙&#x2F;LLaMA 2</a> ***</li>
+<li><a href="https://www.bilibili.com/video/BV1nN41157a9/">第十五课：LLaMA</a>  *** 华为  V</li>
+<li><a href="https://www.bilibili.com/video/BV1Me411z7ZV/">第十六课：LLaMA2</a> *** 华为  V</li>
+<li>&lt;&lt;千帆增强版 Llama 2-提升大模型对话指令遵循能力&gt;&gt;</li>
+<li><a href="https://zhuanlan.zhihu.com/p/618321077">从0到1复现斯坦福羊驼（Stanford Alpaca 7B）</a><br>GPUs: 8 卡 A800 80GB GPUs</li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzUyOTA5OTcwMg==&mid=2247485019&idx=1&sn=e3417472c0c1f98aede498fbe905e1a0&">我想学大模型，应该从哪个模型开始？LLaMA生态家谱整理和分析 </a></li>
+<li><a href="https://github.com/www6v/Llama2-Chinese">https://github.com/www6v/Llama2-Chinese</a></li>
+<li><a href="https://llama.family/">Llama中文社区</a></li>
+</ol>
+<ul>
+<li><a href="http://arthurchiao.art/blog/llama-paper-zh/">[译][论文] LLaMA：开放和高效的基础语言模型集</a></li>
+<li><a href="http://arthurchiao.art/blog/llama2-paper-zh/">[译][论文] LLaMA 2：开放基础和微调聊天模型</a></li>
+</ul>
 ]]></content>
       <categories>
         <category>AIGC</category>
