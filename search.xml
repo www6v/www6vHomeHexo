@@ -69,6 +69,7 @@
 </ul>
 <h2><span id="study">Study</span><a href="#study" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/08/01/gptStudy/" title="GPT  学习资源">GPT  学习资源</a></li>
+<li><a href="/www6vHomeHexo/2023/01/20/gptStudyPaper/" title="GPT 论文">GPT 论文</a></li>
 <li><a href="/www6vHomeHexo/2022/01/22/aiStudyResouce/" title="人工智能-学习资源">人工智能-学习资源</a></li>
 </ul>
 ]]></content>
@@ -2567,6 +2568,59 @@
       </categories>
       <tags>
         <tag>可观测性</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>GPT 论文</title>
+    <url>/www6vHomeHexo/2023/01/20/gptStudyPaper/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#paper">Paper</a></li>
+<li><a href="#gpt%E7%A0%94%E7%A9%B6%E6%96%B9%E5%90%911">GPT研究方向[1]</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="paper">Paper</span><a href="#paper" class="header-anchor">#</a></h1><ul>
+<li><a href="https://github.com/www6v/paper-reading">paper-reading</a> 李牧大神<ul>
+<li>GPT-4</li>
+<li>Instruct GPT *** </li>
+<li>多模态</li>
+<li>Chain of Thought  *** </li>
+<li>CLIP</li>
+<li>ViLT </li>
+<li>GPT, GPT-2, GPT-3 精读  ***</li>
+<li>Transformer  ***</li>
+</ul>
+</li>
+<li><a href="https://shimo.im/docs/XKq42v7061SxZ2AN/read">AI 大模型应用开发实战营1期大纲</a><br>基础篇 - 论文 *** </li>
+<li><a href="https://blog.csdn.net/v_JULY_v/article/details/129508065">LLM&#x2F;ChatGPT与多模态必读论文150篇(已更至第101篇)</a></li>
+</ul>
+<h1><span id="gpt研究方向1">GPT研究方向[1]</span><a href="#gpt研究方向1" class="header-anchor">#</a></h1><ul>
+<li>Efficient (PEFT)</li>
+<li>Existing stuff(pretrained model)  -应用<br>New directions</li>
+<li>Plug-and-play<br> 通用模块组件，能用在各个领域， baseline</li>
+<li>Dataset,  evaluation and survey</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://www.bilibili.com/video/BV1oX4y1d7X6">大模型时代下做科研的四个思路【论文精读·52】</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>gpt</category>
+        <category>study</category>
+      </categories>
+      <tags>
+        <tag>gpt</tag>
       </tags>
   </entry>
   <entry>
@@ -6697,7 +6751,6 @@
 <!-- toc -->
 
 <ul>
-<li><a href="#paper">Paper</a></li>
 <li><a href="#%E5%B7%A5%E7%A8%8B">工程</a></li>
 <li><a href="#%E8%AF%BE%E7%A8%8B">课程</a><ul>
 <li><a href="#%E6%9E%81%E5%AE%A2%E6%97%B6%E9%97%B4">极客时间</a></li>
@@ -6713,21 +6766,6 @@
 
 </div>
 
-<h1><span id="paper">Paper</span><a href="#paper" class="header-anchor">#</a></h1><ul>
-<li><a href="https://github.com/www6v/paper-reading">paper-reading</a> 李牧大神<ul>
-<li>GPT-4</li>
-<li>Instruct GPT *** </li>
-<li>多模态</li>
-<li>Chain of Thought  *** </li>
-<li>CLIP</li>
-<li>ViLT </li>
-<li>GPT, GPT-2, GPT-3 精读  ***</li>
-<li>Transformer  ***</li>
-</ul>
-</li>
-<li><a href="https://shimo.im/docs/XKq42v7061SxZ2AN/read">AI 大模型应用开发实战营1期大纲</a><br>基础篇 - 论文 *** </li>
-<li><a href="https://blog.csdn.net/v_JULY_v/article/details/129508065">LLM&#x2F;ChatGPT与多模态必读论文150篇(已更至第101篇)</a></li>
-</ul>
 <h1><span id="工程">工程</span><a href="#工程" class="header-anchor">#</a></h1><ul>
 <li><a href="https://github.com/www6v/openai-cookbook">openai-cookbook</a><br><a href="https://cookbook.openai.com/">cookbook.openai</a></li>
 </ul>
