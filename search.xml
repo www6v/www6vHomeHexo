@@ -3128,7 +3128,7 @@
 
 <ul>
 <li><a href="#assistant-api%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D-7">Assistant API功能介绍 [7]</a></li>
-<li><a href="#agent-function-call1">Agent-function call[1]</a></li>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E5%BE%AE%E8%B0%83%E7%9A%84agent-function-call12">基于微调的Agent-function call[1][2]</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
@@ -3142,7 +3142,9 @@
 <li>其三，此外对于开发者非常友好的一点是，Assistant API最小运行单元为持久化的线程对象（persistent Threads），因此在实际运行Assistant API时，不仅能可以精确控制每一步的执行过程，同时persistent Threads也会保留每轮对话的核心信息，并且当超出模型接收信息最大上下文限制时能够自动删除早期信息，从而实现对模型短期记忆的合理管理；</li>
 <li>其四，Assistant API还能够直<strong>接连接OpenAI在线文档库</strong>，即如果用户将外部文档保存在OpenAI云空间内，则可以在调用Assistant API时实时访问文档库中的任意文件，甚至可以在不同线程中调用不同的文档。而在借助Assistant API的Knowledge retrieval功能，则可以让大模型实时获取这些文件信息，并且合理管理短期记忆；</li>
 </ul>
-<h1><span id="agent-function-call1">Agent-function call[1]</span><a href="#agent-function-call1" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2023/01/01/gptAgentPractice/xtuner-agent.png" class>
+<h1><span id="基于微调的agent-function-call12">基于微调的Agent-function call[1][2]</span><a href="#基于微调的agent-function-call12" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2023/01/01/gptAgentPractice/dirs.JPG" class>
+
+<img src="/www6vHomeHexo/2023/01/01/gptAgentPractice/xtuner-agent.png" class>
 
 
 
