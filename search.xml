@@ -3069,6 +3069,7 @@
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://github.com/www6v/NL2SQL">https://github.com/www6v/NL2SQL</a><br><a href="https://github.com/www6v/nl2sql-">https://github.com/www6v/nl2sql-</a><br><a href="https://blog.langchain.dev/llms-and-sql/">LLMs and SQL</a><br><a href="https://zhuanlan.zhihu.com/p/640580808">大模型与数据科学：从Text-to-SQL 开始（一）</a> 多款产品</p>
 <p><a href="https://zhuanlan.zhihu.com/p/668557045">C3: Zero-shot Text-to-SQL with ChatGPT笔记</a><br><a href="https://github.com/bigbigwatermalon/C3SQL">C3SQL  </a> git</p>
 <p>百度千帆-ppt<br>QCon-ppt</p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzUxNzk5MTU3OQ==&mid=2247487028&idx=1&sn=7b6767878b7f6b891fc69e408f248ef1">语义解析 (Text-to-SQL) 技术研究及应用 上篇 </a><br><a href="https://mp.weixin.qq.com/s/5lTLW5OOuRMo2zjbzMxr_Q">语义解析 (Text-to-SQL) 技术研究及应用 下篇 </a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -4065,6 +4066,8 @@
 <li><p><a href="https://cloud.tencent.com/developer/article/2352088">微信向量检索分析一体化数仓探索：OLAP For Embedding</a> *** 未</p>
 </li>
 <li><p><a href="https://blog.csdn.net/v_JULY_v/article/details/135311471">一文通透Text Embedding模型：从text2vec、openai-ada-002到m3e、bge</a> 未</p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/646832642">Meta向量数据库Faiss介绍</a> 未</p>
 </li>
 </ol>
 ]]></content>
