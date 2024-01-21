@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2023/01/01/gptInference/infer-api.png">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2023/01/01/gptInference/infer-api-client.png">
 <meta property="article:published_time" content="2023-01-01T14:58:43.000Z">
-<meta property="article:modified_time" content="2024-01-21T02:29:41.499Z">
+<meta property="article:modified_time" content="2024-01-21T22:27:36.539Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Inference">
 <meta name="twitter:card" content="summary">
@@ -230,7 +230,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-21 10:29:41" itemprop="dateModified" datetime="2024-01-21T10:29:41+08:00">2024-01-21</time>
+                <time title="修改时间：2024-01-22 06:27:36" itemprop="dateModified" datetime="2024-01-22T06:27:36+08:00">2024-01-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,6 +269,7 @@
 <li><a href="#%E6%8E%A8%E7%90%86-%E4%BC%98%E5%8C%96">推理 优化</a><ul>
 <li><a href="#overview22">overview[2.2]</a></li>
 <li><a href="#%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9-21">模型压缩 [2.1]</a></li>
+<li><a href="#kv-cache2324">KV Cache[2.3][2.4]</a></li>
 </ul>
 </li>
 <li><a href="#%E6%8E%A8%E7%90%86%E5%AE%9E%E6%88%98-3">推理实战 [3]</a><ul>
@@ -307,7 +308,7 @@
 <li>针对目标模型架构的特定改进。许多<strong>架构变化</strong>，特别是针对注意力层的变化，有助于提高Transformer解码速度。</li>
 </ul>
 <h3><span id="模型压缩-21">模型压缩 [2.1]</span><a href="#模型压缩-21" class="header-anchor">#</a></h3><p>剪枝（Pruning）<br>知识蒸馏（Knowledge Distillation，KD）<br>量化（Quantization）<br>低秩分解（Low-Rank Factorization）</p>
-<h1><span id="推理实战-3">推理实战 [3]</span><a href="#推理实战-3" class="header-anchor">#</a></h1><h3><span id="模型转换">模型转换</span><a href="#模型转换" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2023/01/01/gptInference/convert.png" class>
+<h3><span id="kv-cache2324">KV Cache[2.3][2.4]</span><a href="#kv-cache2324" class="header-anchor">#</a></h3><h1><span id="推理实战-3">推理实战 [3]</span><a href="#推理实战-3" class="header-anchor">#</a></h1><h3><span id="模型转换">模型转换</span><a href="#模型转换" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2023/01/01/gptInference/convert.png" class>
 <h3><span id="turbomind-推理命令行本地对话">TurboMind 推理+命令行本地对话</span><a href="#turbomind-推理命令行本地对话" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2023/01/01/gptInference/infer.png" class>
 <h3><span id="turbomind推理api服务">TurboMind推理+API服务</span><a href="#turbomind推理api服务" class="header-anchor">#</a></h3><ul>
 <li>启动服务<img src="/www6vHomeHexo/2023/01/01/gptInference/infer-api.png" class></li>
@@ -318,7 +319,11 @@
 <li><a target="_blank" rel="noopener" href="https://github.com/www6v/llm-action/tree/main/inference">https://github.com/www6v/llm-action/tree/main/inference</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/625415776/answer/3243562246">https://www.zhihu.com/question/625415776/answer/3243562246</a></li>
 </ol>
-<h3><span id="优化">优化</span><a href="#优化" class="header-anchor">#</a></h3><p>2.1. <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/glPPSqHjsnDjC0DZSuuPzA">一文探秘LLM应用开发(13)-模型部署与推理(优化理论) </a><br>2.2 <a target="_blank" rel="noopener" href="https://lilianweng.github.io/posts/2023-01-10-inference-optimization/">https://lilianweng.github.io/posts/2023-01-10-inference-optimization/</a><br>103. <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/656485997">大语言模型推理性能优化综述</a><br>104. <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/642412124">NLP（十八）：LLM 的推理优化技术纵览</a> ***<br>105. <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/659770503">NLP（二十）：漫谈 KV Cache 优化方法，深度理解 StreamingLLM</a></p>
+<h3><span id="优化">优化</span><a href="#优化" class="header-anchor">#</a></h3><p>2.1. <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/glPPSqHjsnDjC0DZSuuPzA">一文探秘LLM应用开发(13)-模型部署与推理(优化理论) </a><br>2.2 <a target="_blank" rel="noopener" href="https://lilianweng.github.io/posts/2023-01-10-inference-optimization/">https://lilianweng.github.io/posts/2023-01-10-inference-optimization/</a><br>2.3. <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/659770503">NLP（二十）：漫谈 KV Cache 优化方法，深度理解 StreamingLLM</a> ***<br>2.4. <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/662498827">大模型推理加速：看图学KV Cache</a> ***</p>
+<ol start="103">
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/656485997">大语言模型推理性能优化综述</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/642412124">NLP（十八）：LLM 的推理优化技术纵览</a> ***</li>
+</ol>
 <h3><span id="实战">实战</span><a href="#实战" class="header-anchor">#</a></h3><ol start="3">
 <li><a target="_blank" rel="noopener" href="https://github.com/InternLM/tutorial/blob/main/lmdeploy/lmdeploy.md">lmdeploy 量化部署</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1iW4y1A77P/">(5)LMDeploy 大模型量化部署实践</a> V</li>
 </ol>
