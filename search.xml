@@ -10754,8 +10754,6 @@ table th:first-of-type {
 <li><a href="https://github.com/Significant-Gravitas/AutoGPT">AutoGPT</a> git<br><a href="https://link.zhihu.com/?target=https://godmode.space/">带界面的 AutoGPT 产品</a></li>
 <li><a href="https://lilianweng.github.io/posts/2023-06-23-agent/">LLM Powered Autonomous Agents </a> paper </li>
 <li><a href="https://react-lm.github.io/">ReAct: Synergizing Reasoning and Acting in Language Models</a> paper</li>
-<li><a href="https://github.com/WooooDyy/LLM-Agent-Paper-List">The Rise and Potential of Large Language Model Based Agents: A Survey</a> *** 未</li>
-<li><a href="https://zhuanlan.zhihu.com/p/656676717">《综述：全新大语言模型驱动的Agent》</a>  *** 未</li>
 </ol>
 ]]></content>
       <categories>
@@ -13040,7 +13038,8 @@ table th:first-of-type {
 <h2><span id="agent">Agent</span><a href="#agent" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/11/02/gptAgent/" title="Agent 原理">Agent 原理</a></li>
 <li><a href="/www6vHomeHexo/2023/01/01/gptAgentPractice/" title="Agent 实践">Agent 实践</a> </li>
-<li><a href="/www6vHomeHexo/2022/11/16/gptFunctionCall/" title="Function Call">Function Call</a></li>
+<li><a href="/www6vHomeHexo/2022/11/16/gptFunctionCall/" title="Function Call">Function Call</a> </li>
+<li><a href="/www6vHomeHexo/2023/01/21/gptMultiAgents/" title="Multi-Agents">Multi-Agents</a></li>
 </ul>
 <h2><span id="application">Application</span><a href="#application" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/05/09/gpt/" title="GPT-工具和应用">GPT-工具和应用</a></li>
@@ -40194,6 +40193,27 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>GPT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Multi-Agents</title>
+    <url>/www6vHomeHexo/2023/01/21/gptMultiAgents/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h1><span id="协作型的-multi-agent-系统">协作型的 multi-agent 系统</span><a href="#协作型的-multi-agent-系统" class="header-anchor">#</a></h1><h1><span id="竞争型的-multi-agent-系统">竞争型的 multi-agent 系统</span><a href="#竞争型的-multi-agent-系统" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://zhuanlan.zhihu.com/p/665644399">NLP（廿二）：LLM 时代的 multi-agent 系统</a></li>
+<li><a href="https://github.com/WooooDyy/LLM-Agent-Paper-List">The Rise and Potential of Large Language Model Based Agents: A Survey</a> *** 未</li>
+<li><a href="https://zhuanlan.zhihu.com/p/656676717">《综述：全新大语言模型驱动的Agent》</a>  *** 未</li>
+</ol>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>Agents</category>
+      </categories>
+      <tags>
+        <tag>Agents</tag>
       </tags>
   </entry>
 </search>
