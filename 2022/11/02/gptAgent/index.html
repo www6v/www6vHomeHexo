@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/11/02/gptAgent/agent-overview.jpg">
 <meta property="article:published_time" content="2022-11-02T02:55:27.000Z">
-<meta property="article:modified_time" content="2024-01-22T03:30:45.899Z">
+<meta property="article:modified_time" content="2024-01-27T09:28:32.205Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="AIGC">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-22 11:30:45" itemprop="dateModified" datetime="2024-01-22T11:30:45+08:00">2024-01-22</time>
+                <time title="修改时间：2024-01-27 17:28:32" itemprop="dateModified" datetime="2024-01-27T17:28:32+08:00">2024-01-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -262,10 +262,11 @@
 <!-- toc -->
 
 <ul>
-<li><a href="#%E6%9E%B6%E6%9E%84%E5%9B%BE-6-12">架构图 [6] [1][2]</a><ul>
-<li><a href="#planning">Planning</a></li>
-<li><a href="#memory">Memory</a></li>
-<li><a href="#tool-use">Tool Use</a></li>
+<li><a href="#%E6%9E%B6%E6%9E%84%E5%9B%BE">架构图</a><ul>
+<li><a href="#%E7%BB%84%E4%BB%B6-12">组件 [1][2]</a></li>
+<li><a href="#planning-6">Planning [6]</a></li>
+<li><a href="#memory-6">Memory [6]</a></li>
+<li><a href="#tool-use-6">Tool Use [6]</a></li>
 </ul>
 </li>
 <li><a href="#%E7%B1%BB%E5%9E%8B-3">类型 [3]</a></li>
@@ -277,6 +278,16 @@
 </ul>
 </li>
 <li><a href="#%E9%97%AE%E9%A2%98%E5%92%8C%E5%B1%80%E9%99%90%E6%80%A7-4">问题和局限性 [4]</a></li>
+<li><a href="#%E6%8C%91%E6%88%98-8">挑战 [8]</a><ul>
+<li><a href="#%E5%A6%82%E4%BD%95%E8%AE%A9-agent-%E9%80%89%E6%8B%A9%E5%90%88%E9%80%82%E7%9A%84%E5%B7%A5%E5%85%B7">如何让 agent 选择合适的工具</a></li>
+<li><a href="#%E4%B8%8D%E5%BF%85%E8%A6%81%E7%9A%84%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8">不必要的工具使用</a></li>
+<li><a href="#agent-%E8%BF%94%E5%9B%9E%E7%9A%84%E6%A0%BC%E5%BC%8F%E4%B8%8D%E7%A8%B3%E5%AE%9A">Agent 返回的格式不稳定</a></li>
+<li><a href="#%E8%AE%B0%E4%BD%8F%E4%B9%8B%E5%89%8D%E7%9A%84%E6%93%8D%E4%BD%9C%E9%81%BF%E5%85%8D%E9%87%8D%E5%A4%8D">记住之前的操作，避免重复</a></li>
+<li><a href="#%E5%A4%84%E7%90%86%E8%B6%85%E9%95%BF%E7%9A%84-observation">处理超长的 observation</a></li>
+<li><a href="#%E4%B8%93%E6%B3%A8%E4%BA%8E%E7%9B%AE%E6%A0%87">专注于目标</a></li>
+<li><a href="#%E7%BB%93%E6%9E%9C%E8%AF%84%E4%BC%B0">结果评估</a></li>
+</ul>
+</li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
@@ -284,10 +295,10 @@
 </div>
 
 
-<h1><span id="架构图-6-12">架构图 [6] [1][2]</span><a href="#架构图-6-12" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/11/02/gptAgent/agent-overview.jpg" class>
+<h1><span id="架构图">架构图</span><a href="#架构图" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/11/02/gptAgent/agent-overview.jpg" class>
 
-<p>Agent &#x3D; LLM + plan[规划能力] + memory[记忆能力] +Tools[工具使用能力]</p>
-<h3><span id="planning">Planning</span><a href="#planning" class="header-anchor">#</a></h3><ul>
+<h3><span id="组件-12">组件   [1][2]</span><a href="#组件-12" class="header-anchor">#</a></h3><p>Agent &#x3D; LLM + plan[规划能力] + memory[记忆能力] +Tools[工具使用能力] </p>
+<h3><span id="planning-6">Planning [6]</span><a href="#planning-6" class="header-anchor">#</a></h3><ul>
 <li><p>Task Decomposition</p>
 <ul>
 <li>CoT </li>
@@ -302,7 +313,7 @@
 </ul>
 </li>
 </ul>
-<h3><span id="memory">Memory</span><a href="#memory" class="header-anchor">#</a></h3><ul>
+<h3><span id="memory-6">Memory [6]</span><a href="#memory-6" class="header-anchor">#</a></h3><ul>
 <li>Types of Memory<ul>
 <li><strong>Sensory memory</strong> as learning <strong>embedding representations for raw inputs, including text, image or other modalities</strong>;</li>
 <li><strong>Short-term memory</strong> as <strong>in-context learning</strong>. It is short and finite, as it is restricted by the finite context window length of Transformer.</li>
@@ -310,17 +321,24 @@
 </ul>
 </li>
 </ul>
-<h3><span id="tool-use">Tool Use</span><a href="#tool-use" class="header-anchor">#</a></h3><ul>
+<h3><span id="tool-use-6">Tool Use [6]</span><a href="#tool-use-6" class="header-anchor">#</a></h3><ul>
 <li><p>让 agent 选择合适的工具 [8]</p>
 <ul>
 <li>可以 retrieve 相关示例来做 <strong>few-shot prompt</strong>。</li>
 <li>也可以进一步 <strong>fine tune 特定模型</strong>，例如之前的 Toolformer。</li>
 </ul>
 </li>
-<li><p>Framework</p>
+<li><p>Research</p>
 <ul>
-<li><strong>Toolformer</strong> </li>
-<li>Gorilla [8]</li>
+<li><strong>TALM</strong> (Tool Augmented Language Models; Parisi et al. 2022) [6]</li>
+<li><strong>Toolformer</strong> (Schick et al. 2023)   [6]</li>
+<li><strong>Gorilla</strong> [8]</li>
+</ul>
+</li>
+<li><p>Production  [6]</p>
+<ul>
+<li>ChatGPT <strong>Plugins</strong> </li>
+<li>OpenAI API <strong>function calling</strong></li>
 </ul>
 </li>
 </ul>
@@ -370,6 +388,24 @@
 <li><p>探索效率问题<br>中途引入人工的判断干预和反馈输入</p>
 </li>
 <li><p>任务终止与结果验证<br>模型 agent 的工作如何终止也是一个挑战</p>
+</li>
+</ul>
+<h1><span id="挑战-8">挑战 [8]</span><a href="#挑战-8" class="header-anchor">#</a></h1><h3><span id="如何让-agent-选择合适的工具">如何让 agent 选择合适的工具</span><a href="#如何让-agent-选择合适的工具" class="header-anchor">#</a></h3><ul>
+<li>Toolformer - fine tune</li>
+<li>Gorilla - retrieval，fine tune</li>
+</ul>
+<h3><span id="不必要的工具使用">不必要的工具使用</span><a href="#不必要的工具使用" class="header-anchor">#</a></h3><p>“Human Input”也写成一种工具，让模型来主动发起对人类的提问<br><a target="_blank" rel="noopener" href="https://python.langchain.com/docs/integrations/tools/human_tools">Human as a tool</a></p>
+<h3><span id="agent-返回的格式不稳定">Agent 返回的格式不稳定</span><a href="#agent-返回的格式不稳定" class="header-anchor">#</a></h3><p>这里常见的做法是让 LLM <strong>按照 json 这类常见的 schema 来返回</strong>，一般稳定性会高一些（相比“Action:”这种）。<br>此外自动修复重试也很实用，可以利用 LangChain 里的 <strong>output parsers</strong> 来帮助完成。</p>
+<h3><span id="记住之前的操作避免重复">记住之前的操作，避免重复</span><a href="#记住之前的操作避免重复" class="header-anchor">#</a></h3><p>AutoGPT - retrieval 结合近期操作记录</p>
+<h3><span id="处理超长的-observation">处理超长的 observation</span><a href="#处理超长的-observation" class="header-anchor">#</a></h3><p>需要用一些工具从中<strong>提取有用信息</strong>，或者<strong>放到外部存储中再借助 retrieval 来使用</strong>。</p>
+<h3><span id="专注于目标">专注于目标</span><a href="#专注于目标" class="header-anchor">#</a></h3><p>简单的做法是<strong>在 prompt 结尾处再把目标加上</strong>，引起 agent 的注意。<br>另外像 BabyAGI，HuggingGPT 这种把 <strong>planning 和 execution 分开</strong>的做法也是很有用。<strong>拆分的比较细</strong>的任务往往步骤比较短，也不容易丢失目标。</p>
+<h3><span id="结果评估">结果评估</span><a href="#结果评估" class="header-anchor">#</a></h3><ul>
+<li><strong>评估最终结果</strong>是否正确</li>
+<li><strong>过程的细化评估</strong><ul>
+<li>选择的中间步骤是否正确。</li>
+<li>生成 action 的 input 是否正确。</li>
+<li>生成的步骤序列是否合理高效。</li>
+</ul>
 </li>
 </ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
@@ -495,20 +531,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">519</span>
+          <span class="site-state-item-count">520</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/www6vHomeHexo/categories/">
           
-        <span class="site-state-item-count">310</span>
+        <span class="site-state-item-count">311</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/www6vHomeHexo/tags/">
           
-        <span class="site-state-item-count">169</span>
+        <span class="site-state-item-count">170</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
