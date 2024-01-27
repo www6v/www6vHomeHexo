@@ -62,10 +62,13 @@
 </ul>
 <h2><span id="agent">Agent</span><a href="#agent" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/11/02/gptAgent/" title="Agent 原理">Agent 原理</a></li>
-<li><a href="/www6vHomeHexo/2023/01/01/gptAgentPractice/" title="Agent 实践">Agent 实践</a> </li>
-<li><a href="/www6vHomeHexo/2022/11/16/gptFunctionCall/" title="Function Call">Function Call</a> </li>
 <li><a href="/www6vHomeHexo/2023/01/21/gptMultiAgents/" title="Multi-Agents">Multi-Agents</a>  </li>
-<li><a href="/www6vHomeHexo/2023/01/27/gptToolformer/" title="Toolformer">Toolformer</a></li>
+<li><a href="/www6vHomeHexo/2023/01/01/gptAgentPractice/" title="Agent 实践">Agent 实践</a> </li>
+<li>Tools<ul>
+<li><a href="/www6vHomeHexo/2022/11/16/gptFunctionCall/" title="Function Call">Function Call</a> </li>
+<li><a href="/www6vHomeHexo/2023/01/27/gptAgentTool/" title="Agent-Tools">Agent-Tools</a></li>
+</ul>
+</li>
 </ul>
 <h2><span id="application">Application</span><a href="#application" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/05/09/gpt/" title="GPT-工具和应用">GPT-工具和应用</a></li>
@@ -2598,13 +2601,13 @@
       </tags>
   </entry>
   <entry>
-    <title>Toolformer</title>
-    <url>/www6vHomeHexo/2023/01/27/gptToolformer/</url>
+    <title>Agent-Tools</title>
+    <url>/www6vHomeHexo/2023/01/27/gptAgentTool/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-
-<p><a href="https://finisky.github.io/toolformer-summary/">使LLM善假于物: Toolformer </a><br><a href="https://www.bilibili.com/video/BV18s4y1u7nJ/">清华博士带你搞懂大模型自学工具使用（Toolformer)【OpenBMB论文速读】第 7 期</a> V</p>
+<h1><span id="gorilla">Gorilla</span><a href="#gorilla" class="header-anchor">#</a></h1><p><a href="https://apposcmf8kb5033.pc.xiaoe-tech.com/live_pc/l_64a7d5afe4b09d7237a04b5b">Gorilla：链接海量API的大型语言模型</a> V<br><a href="https://github.com/ShishirPatil/gorilla">gorilla</a> git<br><a href="https://ar5iv.labs.arxiv.org/html/2305.15334">Gorilla: Large Language Model Connected with Massive APIs</a> paper<br><a href="https://gorilla.cs.berkeley.edu/">Gorilla: Large Language Model Connected with Massive APIs</a><br><a href="https://gorilla.cs.berkeley.edu/blog.html">Gorilla blog</a><br><a href="https://zhuanlan.zhihu.com/p/632583909">大猩猩（Gorilla）🦍，连接大量 API 的大型语言模型，能成为未来AI应用的核心么？</a><br><a href="https://zhuanlan.zhihu.com/p/640697382">Gorilla：与大规模API相连的大型语言模型</a></p>
+<h1><span id="toolformer">Toolformer</span><a href="#toolformer" class="header-anchor">#</a></h1><p><a href="https://finisky.github.io/toolformer-summary/">使LLM善假于物: Toolformer </a><br><a href="https://www.bilibili.com/video/BV18s4y1u7nJ/">清华博士带你搞懂大模型自学工具使用（Toolformer)【OpenBMB论文速读】第 7 期</a> V 有思维导图<br><a href="https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/#external-apis">Prompt Engineering </a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -4814,13 +4817,12 @@
 </li>
 </ul>
 <h1><span id="类型-3">类型  [3]</span><a href="#类型-3" class="header-anchor">#</a></h1><ul>
-<li><p>ReACT 范式 [7]<br>把<strong>融合了Reasoning和Acting</strong>的一种范式，推理过程是浅显易懂，仅仅<strong>包含thought-action-observation步骤</strong>，很容易判断推理的过程的正确性，使用ReAct做决策甚至超过了强化学习.</p>
+<li><p>ReACT 范式 [7]<br>把<strong>融合了Reasoning和Acting</strong>的一种范式，推理过程是浅显易懂，仅仅<strong>包含thought-action-observation步骤</strong>，很容易判断推理的过程的正确性，使用ReAct做决策甚至超过了强化学习.  </p>
 <ul>
 <li>chain-of-thought推理-问题<br> 事实幻想（fact hallucination）和错误传递（error propagation）</li>
 </ul>
 </li>
-<li><p>Self-ask</p>
-<p>Self-ask是一种follow-up的使用范式，仅仅包含follow-up, immediate answer步骤，至于follow-up多少个step，完全由它自己决定，估计这就是Self-ask的名字的由来。</p>
+<li><p>Self-ask<br>Self-ask是一种follow-up的使用范式，仅仅包含follow-up, immediate answer步骤，至于follow-up多少个step，完全由它自己决定，估计这就是Self-ask的名字的由来。</p>
 </li>
 <li><p>Plan-and-execute agents<br>本质上是先计划再执行，即先把用户的问题分解成一个个的子任务，然后再执行各个子任务，最后合并输出得到结果</p>
 </li>
