@@ -3257,9 +3257,9 @@
 </li>
 <li><p><a href="https://www.bilibili.com/video/BV13w411y7fq/">【手把手带你实战HuggingFace Transformers-高效微调篇】LoRA 原理与实战</a> V<br> <a href="https://github.com/www6v/transformers-code/blob/master/03-PEFT/21-lora/chatbot_lora.ipynb">bloom Lora-origin</a>  <a href="https://colab.research.google.com/github/www6v/transformers-code/blob/master/03-PEFT/21-lora/chatbot_lora.ipynb">bloom Lora-origin</a> git   origin运行有问题<br> <a href="https://github.com/www6v/transformers-code/blob/master/03-PEFT/21-lora/chatbot_lora%5Bworkable%5D.ipynb">bloom Lora-modify</a>  <a href="https://colab.research.google.com/drive/1SNy35_CJOobe4AxAecMZJo4LX1TjXvTm">bloom Lora-modify</a> 修改过可以在colab运行的代码</p>
 </li>
-<li><p><a href="https://lightning.ai/pages/community/lora-insights/">Finetuning LLMs with LoRA and QLoRA: Insights from Hundreds of Experiments</a> ***<br><a href="https://www.bilibili.com/video/BV16u4y1a7MH/">几百次大模型LoRA和QLoRA 微调实践的经验分享</a> V</p>
-</li>
 </ol>
+<p>1xx. <a href="https://lightning.ai/pages/community/lora-insights/">Finetuning LLMs with LoRA and QLoRA: Insights from Hundreds of Experiments</a> ***<br>     <a href="https://www.bilibili.com/video/BV16u4y1a7MH/">几百次大模型LoRA和QLoRA 微调实践的经验分享</a> V</p>
+<p>1xx. <a href="https://github.com/www6v/fine-tuning-lab/blob/agiclass-v1/chatglm/train_lora.sh">train_lora.sh</a>  基于法律文本的chatglm的lora<br><a href="https://github.com/www6v/fine-tuning-lab/blob/agiclass-v1/chatglm2/train_lora.sh">train_lora.sh</a>  基于法律文本的chatglm-2的lora<br><a href="https://github.com/www6v/fullStackLLM/blob/master/08-fine-tuning/peft/index.ipynb">十一、小参数量微调</a><br>bili有相关的总结的视频</p>
 ]]></content>
       <categories>
         <category>AIGC</category>
