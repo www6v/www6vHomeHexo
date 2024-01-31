@@ -2701,7 +2701,17 @@
 </ul>
 </li>
 <li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+<li><a href="#scaling-law10">Scaling Law[10]</a><ul>
+<li><a href="#scaling-law">Scaling Law</a></li>
+<li><a href="#%E5%8F%82%E6%95%B0%E9%87%8F-vs-%E6%95%B0%E6%8D%AE%E9%87%8F">参数量 vs 数据量</a></li>
+<li><a href="#%E5%8F%82%E6%95%B0%E9%87%8F-vs-%E6%95%B0%E6%8D%AE%E9%87%8F-1">参数量 vs 数据量</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
+<li><a href="#%E4%B8%8D%E5%8F%AF%E8%83%BD%E4%B8%89%E8%A7%92-1">不可能三角</a></li>
+<li><a href="#scaling-law-1">Scaling Law</a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 
@@ -2747,11 +2757,21 @@
 <h1><span id="范式">范式</span><a href="#范式" class="header-anchor">#</a></h1><h3><span id="pretrain-finetune-范式3">pretrain, finetune 范式[3]</span><a href="#pretrain-finetune-范式3" class="header-anchor">#</a></h3><p>第三阶段范式</p>
 <h3><span id="pretrain-prompt-predict-范式3">pretrain, prompt, predict 范式[3]</span><a href="#pretrain-prompt-predict-范式3" class="header-anchor">#</a></h3><p>第四阶段范式</p>
 <h1><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h1><p>根据不可能三角形， pretrain, finetune 范式[3] 向pretrain, prompt, predict 范式[3]的迁移是受大模型大小的影响</p>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<h1><span id="scaling-law10">Scaling Law[10]</span><a href="#scaling-law10" class="header-anchor">#</a></h1><h3><span id="scaling-law">Scaling Law</span><a href="#scaling-law" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2023/01/25/gptImpossibleTriangle/scalingLaw.jpg" class>
+
+<h3><span id="参数量-vs-数据量">参数量 vs 数据量</span><a href="#参数量-vs-数据量" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2023/01/25/gptImpossibleTriangle/paramVSdataSize.jpg" class>
+
+<h3><span id="参数量-vs-数据量">参数量 vs 数据量</span><a href="#参数量-vs-数据量" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2023/01/25/gptImpossibleTriangle/computeVSDatasize.jpg" class>
+
+
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="不可能三角">不可能三角</span><a href="#不可能三角" class="header-anchor">#</a></h3><ol>
 <li><a href="https://zhuanlan.zhihu.com/p/501381510">预训练模型的下一步？突破Impossible Triangle</a></li>
 <li><a href="https://arxiv.org/pdf/2204.06130.pdf">Impossible Triangle: What’s Next for Pre-trained Language Models?</a></li>
 <li><a href="https://blog.csdn.net/zandaoguang/article/details/124395479">微软朱晨光：预训练模型下一步怎么走？突破PLM的「不可能三角」</a></li>
 <li><a href="/www6vHomeHexo/2023/01/06/gptPromptTuning/" title="Prompt Tuning">Prompt Tuning</a> self</li>
+</ol>
+<h3><span id="scaling-law">Scaling Law</span><a href="#scaling-law" class="header-anchor">#</a></h3><ol start="10">
+<li><a href="https://zhuanlan.zhihu.com/p/667489780">解析大模型中的Scaling Law</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/663296750">论文阅读，大模型的缩放定律，Scaling Laws for Neural Language Models</a><br>2xx. <a href="https://finisky.github.io/training-compute-optimal-large-language-models-summary/">Training Compute-Optimal Large Language Models 简读 </a></li>
 </ol>
 ]]></content>
       <categories>
@@ -2935,6 +2955,7 @@
 <p><a href="https://apposcmf8kb5033.pc.xiaoe-tech.com/live_pc/l_64a7d4fde4b0d1e42e7fc7e6">基于视觉指令调整的多模态聊天机器人 LLaVA</a>  V</p>
 <p><a href="https://baoyu.io/translations/ai-paper/2401.13919-webvoyager-building-an-end-to-end-web-agent-with-large-multimodal-models">WebVoyager：借助强大多模态模型，开创全新的网络智能体 [译]</a></p>
 <p><a href="https://baoyu.io/translations/lmm/multimodality-and-large-multimodal-models">多模态和多模态大模型 (LMM)[译]</a></p>
+<p><a href="https://github.com/Coobiw/MiniGPT4Qwen">MiniGPT4Qwen</a> git<br><a href="https://zhuanlan.zhihu.com/p/664612306">多模态大模型实战-MiniGPT4Qwen系列1：3090+2小时+通义千问&#x3D;个人版双语多模态大模型</a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -3020,6 +3041,7 @@
 <p><a href="https://zhuanlan.zhihu.com/p/639207933">大模型时代下数据的重要性</a></p>
 <p><a href="https://hub.baai.ac.cn/view/28740">大模型研发核心：数据工程、自动化评估及与知识图谱的结合</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/420295576">哈工大｜15种NLP数据增强方法总结与对比</a></p>
+<p><a href="https://finisky.github.io/textbooks-are-all-you-need-summary/">数据为王: Textbooks Are All You Need </a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -3207,6 +3229,7 @@
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/622212228">图解大模型训练之：张量模型并行(TP)，Megatron-LM</a> ***</p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/441591808">全网最全-混合精度训练原理</a>  *** </p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/450854172">全网最全-超大模型+分布式训练架构和经典论文</a> 未</p>
+<p>1xx. <a href="https://zhuanlan.zhihu.com/p/664604792">[Transformer 101系列] LLM分布式训练面面观</a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -3565,7 +3588,7 @@
 <li><a href="https://blog.csdn.net/v_JULY_v/article/details/129709105">LLaMA的解读与其微调：Alpaca-LoRA&#x2F;Vicuna&#x2F;BELLE&#x2F;中文LLaMA&#x2F;姜子牙&#x2F;LLaMA 2</a> ***<br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzUyOTA5OTcwMg==&mid=2247485019&idx=1&sn=e3417472c0c1f98aede498fbe905e1a0&">我想学大模型，应该从哪个模型开始？LLaMA生态家谱整理和分析 </a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/618695885">NLP（九）：LLaMA, Alpaca, ColossalChat 系列模型研究</a><br>1xx. <a href="https://github.com/www6v/Llama2-Chinese">https://github.com/www6v/Llama2-Chinese</a><br>1xx. &lt;&lt;千帆增强版 Llama 2-提升大模型对话指令遵循能力&gt;&gt;</li>
 </ol>
 <h3><span id="基座">基座</span><a href="#基座" class="header-anchor">#</a></h3><p>1xx. <a href="https://www.bilibili.com/video/BV1nN41157a9/">第十五课：LLaMA</a>  *** 华为  V<br>1xx. <a href="https://www.bilibili.com/video/BV1Me411z7ZV/">第十六课：LLaMA2</a> *** 华为  V<br>1xx. <a href="http://arthurchiao.art/blog/llama-paper-zh/">[译][论文] LLaMA：开放和高效的基础语言模型集</a><br>1xx. <a href="http://arthurchiao.art/blog/llama2-paper-zh/">[译][论文] LLaMA 2：开放基础和微调聊天模型</a><br>1xx.  <a href="https://zhuanlan.zhihu.com/p/618321077">从0到1复现斯坦福羊驼（Stanford Alpaca 7B）</a><br>    GPUs: 8 卡 A800 80GB GPUs</p>
-<p>1xx. <a href="https://llama.family/">Llama中文社区</a></p>
+<p>1xx. <a href="https://llama.family/">Llama中文社区</a><br>2xx. <a href="https://github.com/ymcui/Chinese-LLaMA-Alpaca"> Chinese-LLaMA-Alpaca</a> git</p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -4817,11 +4840,7 @@
 <li><a href="https://platform.openai.com/docs/guides/prompt-engineering">Prompt engineering</a>  openai</li>
 <li><a href="https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/">Prompt Engineering </a> paper</li>
 <li><a href="https://www.promptingguide.ai/techniques">Prompt Engineering Guide</a> guide<br><a href="https://github.com/www6v/Prompt-Engineering-Guide">Prompt-Engineering-Guide </a> *** git</li>
-<li><a href="https://zhuanlan.zhihu.com/p/654034193">2023年能够解决复杂问题的思维链技术：Cot，ToT，GoT，AoT</a></li>
-<li><a href="https://blog.langchain.dev/the-prompt-landscape/">The Prompt Landscape</a>  langchain</li>
-<li><a href="https://colab.research.google.com/github/comet-ml/comet-llm/blob/main/examples/CometLLM_Prompts.ipynb">CometLLM - suite of LLMOps tools - track and visualize LLM prompts and chains</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/671915693">大模型 PUA 指南：来自 Google Meta Microsoft 等大厂</a> </li>
-<li><a href="https://zhuanlan.zhihu.com/p/632369186">NLP（十三）：Prompt Engineering 面面观</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/654034193">2023年能够解决复杂问题的思维链技术：Cot，ToT，GoT，AoT</a><br>1xx. <a href="https://blog.langchain.dev/the-prompt-landscape/">The Prompt Landscape</a>  langchain<br>1xx. <a href="https://colab.research.google.com/github/comet-ml/comet-llm/blob/main/examples/CometLLM_Prompts.ipynb">CometLLM - suite of LLMOps tools - track and visualize LLM prompts and chains</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/671915693">大模型 PUA 指南：来自 Google Meta Microsoft 等大厂</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/632369186">NLP（十三）：Prompt Engineering 面面观</a><br>1xx. <a href="https://github.com/brexhq/prompt-engineering?tab=readme-ov-file"> prompt-engineering</a> git<br>1xx. <a href="https://finisky.github.io/chain-of-thought-prompting-summary/">Chain-of-Thought Prompting 简读 </a></li>
 </ol>
 <h3><span id="案例">案例</span><a href="#案例" class="header-anchor">#</a></h3><ol start="200">
 <li><a href="https://mp.weixin.qq.com/s/nXoZJ4xfgihA2mnBQ8EdIQ">运维大模型探索之 Text2PromQL 问答机器人 </a>     架构图， 最后两个重点总结   未</li>
@@ -5257,12 +5276,6 @@
 <!-- toc -->
 
 <ul>
-<li><a href="#scaling-law3">Scaling Law[3]</a><ul>
-<li><a href="#scaling-law">Scaling Law</a></li>
-<li><a href="#%E5%8F%82%E6%95%B0%E9%87%8F-vs-%E6%95%B0%E6%8D%AE%E9%87%8F">参数量 vs 数据量</a></li>
-<li><a href="#%E5%8F%82%E6%95%B0%E9%87%8F-vs-%E6%95%B0%E6%8D%AE%E9%87%8F-1">参数量 vs 数据量</a></li>
-</ul>
-</li>
 <li><a href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C">神经网络</a></li>
 <li><a href="#%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84-12">大模型架构 [1][2]</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
@@ -5274,12 +5287,6 @@
 
 </div>
 
-
-<h1><span id="scaling-law3">Scaling Law[3]</span><a href="#scaling-law3" class="header-anchor">#</a></h1><h3><span id="scaling-law">Scaling Law</span><a href="#scaling-law" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/10/30/gptLargeModel/scalingLaw.jpg" class>
-
-<h3><span id="参数量-vs-数据量">参数量 vs 数据量</span><a href="#参数量-vs-数据量" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/10/30/gptLargeModel/paramVSdataSize.jpg" class>
-
-<h3><span id="参数量-vs-数据量">参数量 vs 数据量</span><a href="#参数量-vs-数据量" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/10/30/gptLargeModel/computeVSDatasize.jpg" class>
 
 <h1><span id="神经网络">神经网络</span><a href="#神经网络" class="header-anchor">#</a></h1><ul>
 <li><p>正向传播<br>损失函数  </p>
@@ -5301,8 +5308,6 @@
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://zhuanlan.zhihu.com/p/648050614">LLM学习系列1：大模型架构要点总结</a></li>
 <li><a href="https://cloud.tencent.com/developer/article/2328541">主流大语言模型的技术原理细节</a> *** 腾讯     架构 + 训练 + 微调</li>
-<li><a href="https://zhuanlan.zhihu.com/p/667489780">解析大模型中的Scaling Law</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/663296750">论文阅读，大模型的缩放定律，Scaling Laws for Neural Language Models</a></li>
 </ol>
 <h3><span id="综述">综述</span><a href="#综述" class="header-anchor">#</a></h3><ol start="100">
 <li><a href="http://arthurchiao.art/blog/llm-practical-guide-zh/">[译][论文] 大语言模型（LLM）综述与实用指南（Amazon，2023）</a> 未</li>
