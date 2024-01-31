@@ -3262,22 +3262,38 @@
 </div>
 
 <h1><span id="基于llama的sft">基于LLaMA的SFT</span><a href="#基于llama的sft" class="header-anchor">#</a></h1><ul>
-<li>版本<ul>
+<li><p>版本</p>
+<ul>
 <li>deepspeed的版本  [3.1]</li>
 <li>AutoGPTQ的版本  0.6.0 -&gt; git下载到本地安装</li>
 </ul>
 </li>
-<li>代码错误<ul>
+<li><p>代码错误</p>
+<ul>
 <li>use_flash_attention_2 相关的错误 [3.2]</li>
 </ul>
 </li>
-<li>脚本 [3.3]<ul>
+<li><p>脚本 [3.3]</p>
+<ul>
 <li>modescope 下载 shakechen&#x2F;Llama-2-7b-chat-hf</li>
 <li>单卡训练<br>1个epoch 差不多7小时</li>
 </ul>
 </li>
+<li><p>checkpoint 生成文件</p>
+</li>
 </ul>
 <img src="/www6vHomeHexo/2023/01/05/gptPEFTLora/llama-lora.png" class>
+
+<img src="/www6vHomeHexo/2023/01/05/gptPEFTLora/llama-lora1.png" class>
+
+<ul>
+<li>模型生成文件</li>
+</ul>
+<img src="/www6vHomeHexo/2023/01/05/gptPEFTLora/model1.png" class>
+
+<img src="/www6vHomeHexo/2023/01/05/gptPEFTLora/model2.png" class>
+
+
 
 <h1><span id="基于bloom的微调">基于bloom的微调</span><a href="#基于bloom的微调" class="header-anchor">#</a></h1><ul>
 <li><p>简单基础  [2]</p>
