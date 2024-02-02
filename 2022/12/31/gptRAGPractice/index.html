@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2022/12/31/gptRAGPractice/langchain+chatglm.jpg">
 <meta property="article:published_time" content="2022-12-30T23:42:52.000Z">
-<meta property="article:modified_time" content="2024-01-17T02:54:01.273Z">
+<meta property="article:modified_time" content="2024-02-01T13:50:56.767Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="RAG">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-17 10:54:01" itemprop="dateModified" datetime="2024-01-17T10:54:01+08:00">2024-01-17</time>
+                <time title="修改时间：2024-02-01 21:50:56" itemprop="dateModified" datetime="2024-02-01T21:50:56+08:00">2024-02-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -274,6 +274,7 @@
 </ul>
 </li>
 <li><a href="#vectorkg-rag1516">Vector+KG RAG[15][16]</a></li>
+<li><a href="#data-processing17">Data processing[17]</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
 <li><a href="#%E6%96%87%E6%9C%AC">文本</a></li>
 <li><a href="#%E5%A4%9A%E6%A8%A1%E6%80%81">多模态</a></li>
@@ -326,7 +327,13 @@
 <li>pdf解析<br>unstructured</li>
 <li>store<br>MultiVectorRetriever - 元数据+数据</li>
 </ul>
-<h1><span id="vectorkg-rag1516">Vector+KG RAG[15][16]</span><a href="#vectorkg-rag1516" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="文本">文本</span><a href="#文本" class="header-anchor">#</a></h3><ol>
+<h1><span id="vectorkg-rag1516">Vector+KG RAG[15][16]</span><a href="#vectorkg-rag1516" class="header-anchor">#</a></h1><h1><span id="data-processing17">Data processing[17]</span><a href="#data-processing17" class="header-anchor">#</a></h1><p>长文本   变成   QA pair</p>
+<ul>
+<li>规则匹配</li>
+<li>利用LLM抽取</li>
+<li>人工处理</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="文本">文本</span><a href="#文本" class="header-anchor">#</a></h3><ol>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/chatchat-space/Langchain-Chatchat">Langchain-Chatchat </a> master<br>Langchain 与 ChatGLM 等语言模型的本地知识库问答<br><a target="_blank" rel="noopener" href="https://github.com/chatchat-space/Langchain-Chatchat/tree/v0.2.4">Langchain-Chatchat</a>  v0.2.4<br><a target="_blank" rel="noopener" href="https://gitee.com/deepeye/langchain-ChatGLM">langchain-ChatGLM</a>  gitee </p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/www6v/Langchain-Chatchat-Colab">Colab for Langchain-Chatchat</a>   linux 可以部署  v0.2.6</p>
@@ -352,6 +359,8 @@
 <li><p><a target="_blank" rel="noopener" href="https://neo4j.com/developer-blog/unstructured-knowledge-graph-neo4j-langchain/">Enhanced QA Integrating Unstructured Knowledge Graph Using Neo4j and LangChain</a>  </p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://blog.langchain.dev/using-a-knowledge-graph-to-implement-a-devops-rag-application/">Using a Knowledge Graph to implement a DevOps RAG application</a></p>
+</li>
+<li><p>&lt;&lt;大模型结合 RAG 构建客服场景自动问答系统&gt;&gt;  NVIDIA大模型日系列活动  </p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://llamahub.ai/">LlamaHub</a> 未<br> Mix and match our Data Loaders and Agent Tools to build custom RAG apps or use our LlamaPacks as a starting point for your retrieval use cases.</p>
 </li>
@@ -469,20 +478,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">521</span>
+          <span class="site-state-item-count">522</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/www6vHomeHexo/categories/">
           
-        <span class="site-state-item-count">311</span>
+        <span class="site-state-item-count">312</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/www6vHomeHexo/tags/">
           
-        <span class="site-state-item-count">170</span>
+        <span class="site-state-item-count">171</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

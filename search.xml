@@ -27,6 +27,7 @@
 <li><a href="/www6vHomeHexo/2023/01/15/gptLargeModelTrainingPractice/" title="训练-实战">训练-实战</a> </li>
 <li><a href="/www6vHomeHexo/2023/01/06/gptTrainParallelism/" title="训练-并行">训练-并行</a> </li>
 <li><a href="/www6vHomeHexo/2023/01/01/gptInference/" title="推理">推理</a></li>
+<li><a href="/www6vHomeHexo/2024/02/01/gptPrecision/" title="混合精度">混合精度</a></li>
 <li><a href="/www6vHomeHexo/2023/01/08/gptDataSet/" title="数据集">数据集</a></li>
 </ul>
 <h2><span id="finetuning">FineTuning</span><a href="#finetuning" class="header-anchor">#</a></h2><ul>
@@ -1420,6 +1421,26 @@
       </tags>
   </entry>
   <entry>
+    <title>混合精度</title>
+    <url>/www6vHomeHexo/2024/02/01/gptPrecision/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h1><span id="混合精度1">混合精度[1]</span><a href="#混合精度1" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2024/02/01/gptPrecision/solution.png" class>
+
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://www.bilibili.com/video/BV1R94y1g78L?p=6">混合精度</a>  *** V<br>1xx. <a href="https://zhuanlan.zhihu.com/p/441591808">全网最全-混合精度训练原理</a>  ***<br>1xx. <a href="https://www.bilibili.com/video/BV1CB4y1R78v/">半精度训练与LLaMA2训练实战</a> 有代码<br>1xx. <a href="https://www.bilibili.com/video/BV1y34y1M7t1/">低精度训练与大模型下载</a> 有代码</li>
+</ol>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>Precision</category>
+      </categories>
+      <tags>
+        <tag>Precision</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PEFT P-Tuning</title>
     <url>/www6vHomeHexo/2024/01/28/gptPEFTPtuning/</url>
     <content><![CDATA[<p></p>
@@ -2649,6 +2670,7 @@
 <h1><span id="overview">Overview</span><a href="#overview" class="header-anchor">#</a></h1><p><a href="https://github.com/thunlp/ToolLearningPapers">ToolLearningPapers</a> git<br><a href="https://arxiv.org/pdf/2304.08354.pdf">Tool Learning with Foundation Models</a> paper</p>
 <h1><span id="gorilla">Gorilla</span><a href="#gorilla" class="header-anchor">#</a></h1><p><a href="https://apposcmf8kb5033.pc.xiaoe-tech.com/live_pc/l_64a7d5afe4b09d7237a04b5b">Gorilla：链接海量API的大型语言模型</a> V<br><a href="https://github.com/ShishirPatil/gorilla">gorilla</a> git<br><a href="https://ar5iv.labs.arxiv.org/html/2305.15334">Gorilla: Large Language Model Connected with Massive APIs</a> paper<br><a href="https://gorilla.cs.berkeley.edu/">Gorilla: Large Language Model Connected with Massive APIs</a><br><a href="https://gorilla.cs.berkeley.edu/blog.html">Gorilla blog</a><br><a href="https://zhuanlan.zhihu.com/p/632583909">大猩猩（Gorilla）🦍，连接大量 API 的大型语言模型，能成为未来AI应用的核心么？</a><br><a href="https://zhuanlan.zhihu.com/p/640697382">Gorilla：与大规模API相连的大型语言模型</a></p>
 <h1><span id="toolformer">Toolformer</span><a href="#toolformer" class="header-anchor">#</a></h1><p><a href="https://finisky.github.io/toolformer-summary/">使LLM善假于物: Toolformer </a><br><a href="https://www.bilibili.com/video/BV18s4y1u7nJ/">清华博士带你搞懂大模型自学工具使用（Toolformer)【OpenBMB论文速读】第 7 期</a> V 有思维导图<br><a href="https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/#external-apis">Prompt Engineering </a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/633654195">LLM能够自己制作工具了：详解Large Language Models as Tool Makers</a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -2773,6 +2795,7 @@
 <h3><span id="scaling-law">Scaling Law</span><a href="#scaling-law" class="header-anchor">#</a></h3><ol start="10">
 <li><a href="https://zhuanlan.zhihu.com/p/667489780">解析大模型中的Scaling Law</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/663296750">论文阅读，大模型的缩放定律，Scaling Laws for Neural Language Models</a><br>2xx. <a href="https://finisky.github.io/training-compute-optimal-large-language-models-summary/">Training Compute-Optimal Large Language Models 简读 </a></li>
 </ol>
+<p>2xx. <a href="https://zhuanlan.zhihu.com/p/536053110">【预训练模型】推翻OpenAI结论, DeepMind重新定义预训练的训练参数和训练规模的关系！</a><br>《Scaling Laws for Neural Language Models》<br>《Training Compute-Optimal Large Language Models》</p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -3229,9 +3252,9 @@
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/465967735">分布式训练硬核技术——通信原语</a> </p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/613196255">图解大模型训练之：流水线并行（Pipeline Parallelism），以Gpipe为例</a>  系列文章 </p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/622212228">图解大模型训练之：张量模型并行(TP)，Megatron-LM</a> ***</p>
-<p>1xx. <a href="https://zhuanlan.zhihu.com/p/441591808">全网最全-混合精度训练原理</a>  *** </p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/450854172">全网最全-超大模型+分布式训练架构和经典论文</a> 未</p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/664604792">[Transformer 101系列] LLM分布式训练面面观</a></p>
+<p>1xx. <a href="https://zhuanlan.zhihu.com/p/636488690">大模型流水线并行（Pipeline）实战</a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -3695,6 +3718,7 @@
 </ul>
 </li>
 <li><a href="#vectorkg-rag1516">Vector+KG RAG[15][16]</a></li>
+<li><a href="#data-processing17">Data processing[17]</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
 <li><a href="#%E6%96%87%E6%9C%AC">文本</a></li>
 <li><a href="#%E5%A4%9A%E6%A8%A1%E6%80%81">多模态</a></li>
@@ -3747,7 +3771,13 @@
 <li>pdf解析<br>unstructured</li>
 <li>store<br>MultiVectorRetriever - 元数据+数据</li>
 </ul>
-<h1><span id="vectorkg-rag1516">Vector+KG RAG[15][16]</span><a href="#vectorkg-rag1516" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="文本">文本</span><a href="#文本" class="header-anchor">#</a></h3><ol>
+<h1><span id="vectorkg-rag1516">Vector+KG RAG[15][16]</span><a href="#vectorkg-rag1516" class="header-anchor">#</a></h1><h1><span id="data-processing17">Data processing[17]</span><a href="#data-processing17" class="header-anchor">#</a></h1><p>长文本   变成   QA pair</p>
+<ul>
+<li>规则匹配</li>
+<li>利用LLM抽取</li>
+<li>人工处理</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="文本">文本</span><a href="#文本" class="header-anchor">#</a></h3><ol>
 <li><p><a href="https://github.com/chatchat-space/Langchain-Chatchat">Langchain-Chatchat </a> master<br>Langchain 与 ChatGLM 等语言模型的本地知识库问答<br><a href="https://github.com/chatchat-space/Langchain-Chatchat/tree/v0.2.4">Langchain-Chatchat</a>  v0.2.4<br><a href="https://gitee.com/deepeye/langchain-ChatGLM">langchain-ChatGLM</a>  gitee </p>
 </li>
 <li><p><a href="https://github.com/www6v/Langchain-Chatchat-Colab">Colab for Langchain-Chatchat</a>   linux 可以部署  v0.2.6</p>
@@ -3773,6 +3803,8 @@
 <li><p><a href="https://neo4j.com/developer-blog/unstructured-knowledge-graph-neo4j-langchain/">Enhanced QA Integrating Unstructured Knowledge Graph Using Neo4j and LangChain</a>  </p>
 </li>
 <li><p><a href="https://blog.langchain.dev/using-a-knowledge-graph-to-implement-a-devops-rag-application/">Using a Knowledge Graph to implement a DevOps RAG application</a></p>
+</li>
+<li><p>&lt;&lt;大模型结合 RAG 构建客服场景自动问答系统&gt;&gt;  NVIDIA大模型日系列活动  </p>
 </li>
 <li><p><a href="https://llamahub.ai/">LlamaHub</a> 未<br> Mix and match our Data Loaders and Agent Tools to build custom RAG apps or use our LlamaPacks as a starting point for your retrieval use cases.</p>
 </li>
@@ -4883,18 +4915,20 @@
 
 <ul>
 <li><a href="#%E6%9E%B6%E6%9E%84%E5%9B%BE">架构图</a><ul>
-<li><a href="#%E7%BB%84%E4%BB%B6-12">组件 [1][2]</a></li>
+<li><a href="#%E7%BB%84%E4%BB%B6-6">组件 [6]</a></li>
 <li><a href="#planning-6">Planning [6]</a></li>
 <li><a href="#memory-6">Memory [6]</a></li>
 <li><a href="#tool-use-6">Tool Use [6]</a></li>
 </ul>
 </li>
-<li><a href="#%E7%B1%BB%E5%9E%8B-3">类型 [3]</a></li>
-<li><a href="#%E5%88%86%E7%B1%BB-123">分类 [1][2][3]</a></li>
+<li><a href="#patterns-3">Patterns [3]</a></li>
+<li><a href="#agent%E5%88%86%E7%B1%BB-123">Agent分类 [1][2][3]</a><ul>
 <li><a href="#example">Example</a><ul>
 <li><a href="#hugginggpt">HuggingGPT</a></li>
 <li><a href="#babyagi-aigc">BabyAGI [AIGC]</a></li>
 <li><a href="#autogpt35">AutoGPT[3][5]</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#%E9%97%AE%E9%A2%98%E5%92%8C%E5%B1%80%E9%99%90%E6%80%A7-4">问题和局限性 [4]</a></li>
@@ -4908,7 +4942,10 @@
 <li><a href="#%E7%BB%93%E6%9E%9C%E8%AF%84%E4%BC%B0">结果评估</a></li>
 </ul>
 </li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
+<li><a href="#planning">Planning</a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 
@@ -4917,7 +4954,7 @@
 
 <h1><span id="架构图">架构图</span><a href="#架构图" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/11/02/gptAgent/agent-overview.jpg" class>
 
-<h3><span id="组件-12">组件   [1][2]</span><a href="#组件-12" class="header-anchor">#</a></h3><p>Agent &#x3D; LLM + plan[规划能力] + memory[记忆能力] +Tools[工具使用能力] </p>
+<h3><span id="组件-6">组件  [6]</span><a href="#组件-6" class="header-anchor">#</a></h3><p>Agent &#x3D; LLM + plan[规划能力] + memory[记忆能力] +Tools[工具使用能力] </p>
 <h3><span id="planning-6">Planning [6]</span><a href="#planning-6" class="header-anchor">#</a></h3><ul>
 <li><p>Task Decomposition</p>
 <ul>
@@ -4927,8 +4964,8 @@
 </li>
 <li><p>Self-Reflection</p>
 <ul>
-<li>ReAct </li>
-<li>Reflexion </li>
+<li>ReAct [20]</li>
+<li>Reflexion [21][22]</li>
 <li>Chain of Hindsight</li>
 </ul>
 </li>
@@ -4962,8 +4999,8 @@
 </ul>
 </li>
 </ul>
-<h1><span id="类型-3">类型  [3]</span><a href="#类型-3" class="header-anchor">#</a></h1><ul>
-<li><p>ReACT 范式 [7]<br>把<strong>融合了Reasoning和Acting</strong>的一种范式，推理过程是浅显易懂，仅仅<strong>包含thought-action-observation步骤</strong>，很容易判断推理的过程的正确性，使用ReAct做决策甚至超过了强化学习.  </p>
+<h1><span id="patterns-3">Patterns  [3]</span><a href="#patterns-3" class="header-anchor">#</a></h1><ul>
+<li><p>ReACT 范式 [20]<br>把<strong>融合了Reasoning和Acting</strong>的一种范式，推理过程是浅显易懂，仅仅<strong>包含thought-action-observation步骤</strong>，很容易判断推理的过程的正确性，使用ReAct做决策甚至超过了强化学习.  </p>
 <ul>
 <li>chain-of-thought推理-问题<br> 事实幻想（fact hallucination）和错误传递（error propagation）</li>
 </ul>
@@ -4973,7 +5010,7 @@
 <li><p>Plan-and-execute agents<br>本质上是先计划再执行，即先把用户的问题分解成一个个的子任务，然后再执行各个子任务，最后合并输出得到结果</p>
 </li>
 </ul>
-<h1><span id="分类-123">分类 [1][2][3]</span><a href="#分类-123" class="header-anchor">#</a></h1><ul>
+<h1><span id="agent分类-123">Agent分类 [1][2][3]</span><a href="#agent分类-123" class="header-anchor">#</a></h1><ul>
 <li><p>Action agents  </p>
 <ul>
 <li>Function Call</li>
@@ -4982,16 +5019,14 @@
 </li>
 <li><p>Simulation agents<br>  生成式智能体， CAMEL，  Generative Agents</p>
 </li>
-<li><p>Automomous Agent<br>  <strong>AutoGPT</strong>， <strong>BabyAGI</strong>,  <strong>AutoGen[Microsoft]</strong><br>  MetaGPT，</p>
+<li><p>Automomous Agent<br>  <strong>AutoGPT</strong>， <strong>BabyAGI</strong>,  <strong>AutoGen</strong><br>  <strong>MetaGPT</strong></p>
 </li>
 <li><p>跨模态Agents<br>  HuggingGPT</p>
 </li>
 <li><p>ChatDev， AutoGen</p>
 </li>
 </ul>
-<h1><span id="example">Example</span><a href="#example" class="header-anchor">#</a></h1><h3><span id="hugginggpt">HuggingGPT</span><a href="#hugginggpt" class="header-anchor">#</a></h3><h3><span id="babyagi-aigc">BabyAGI  [AIGC]</span><a href="#babyagi-aigc" class="header-anchor">#</a></h3><p>Plan-and-execute agents </p>
-<p>The <strong>planning</strong> is almost always done <strong>by an LLM</strong>.</p>
-<p>The <strong>execution</strong> is usually done by a <strong>separate agent (equipped with tools)</strong>.</p>
+<h2><span id="example">Example</span><a href="#example" class="header-anchor">#</a></h2><h3><span id="hugginggpt">HuggingGPT</span><a href="#hugginggpt" class="header-anchor">#</a></h3><h3><span id="babyagi-aigc">BabyAGI  [AIGC]</span><a href="#babyagi-aigc" class="header-anchor">#</a></h3><p>Plan-and-execute agents<br>The <strong>planning</strong> is almost always done <strong>by an LLM</strong>.<br>The <strong>execution</strong> is usually done by a <strong>separate agent (equipped with tools)</strong>.</p>
 <h3><span id="autogpt35">AutoGPT[3][5]</span><a href="#autogpt35" class="header-anchor">#</a></h3><p>AutoGPT 的核心逻辑是一个 Prompt Loop，步骤如下</p>
 <ol>
 <li>AutoGPT 会基于一定策略自动组装 Command Prompt，这些首次会包含用户输入的 Name, Role和Goals </li>
@@ -5034,9 +5069,15 @@
 <li><a href="https://zhuanlan.zhihu.com/p/622947810">AutoGPT与LLM Agent解析</a> *** </li>
 <li><a href="https://github.com/Significant-Gravitas/AutoGPT">AutoGPT</a> git<br><a href="https://link.zhihu.com/?target=https://godmode.space/">带界面的 AutoGPT 产品</a></li>
 <li><a href="https://lilianweng.github.io/posts/2023-06-23-agent/">LLM Powered Autonomous Agents </a> paper </li>
-<li><a href="https://react-lm.github.io/">ReAct: Synergizing Reasoning and Acting in Language Models</a> paper</li>
+<li>xxx</li>
 <li><a href="https://zhuanlan.zhihu.com/p/633033220">LLM 全栈开发指南补遗</a>  Agents  ***<br><a href="https://fullstackdeeplearning.com/llm-bootcamp/spring-2023/chase-agents/">Harrison Chase: Agents</a>  ***</li>
 </ol>
+<h3><span id="planning">Planning</span><a href="#planning" class="header-anchor">#</a></h3><ol start="20">
+<li><a href="https://react-lm.github.io/">ReAct: Synergizing Reasoning and Acting in Language Models</a> paper</li>
+<li><a href="https://zhuanlan.zhihu.com/p/639254455">【论文阅读】Reflexion: 大模型如何从错误经验中学习？</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/671508578">Reflexion: 带言语强化学习的语言智体</a><br>2xx. <a href="https://zhuanlan.zhihu.com/p/671491031">ReWOO: 高效增强语言模型中解偶观测和推理</a></li>
+</ol>
+<p>3xx. <a href="https://zhuanlan.zhihu.com/p/678203245">智体AI在多模态交互领域的综述（上）</a><br>3xx. <a href="https://zhuanlan.zhihu.com/p/678222381">智体AI在多模态交互领域的综述（下）</a><br>3xx. <a href="https://zhuanlan.zhihu.com/p/678238642">个人LLM智体的综述</a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
