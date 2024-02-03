@@ -2759,7 +2759,7 @@
 <h1><span id="overview">Overview</span><a href="#overview" class="header-anchor">#</a></h1><p><a href="https://github.com/thunlp/ToolLearningPapers">ToolLearningPapers</a> git<br><a href="https://arxiv.org/pdf/2304.08354.pdf">Tool Learning with Foundation Models</a> paper</p>
 <h1><span id="gorilla">Gorilla</span><a href="#gorilla" class="header-anchor">#</a></h1><p><a href="https://apposcmf8kb5033.pc.xiaoe-tech.com/live_pc/l_64a7d5afe4b09d7237a04b5b">Gorilla：链接海量API的大型语言模型</a> V<br><a href="https://github.com/ShishirPatil/gorilla">gorilla</a> git<br><a href="https://ar5iv.labs.arxiv.org/html/2305.15334">Gorilla: Large Language Model Connected with Massive APIs</a> paper<br><a href="https://gorilla.cs.berkeley.edu/">Gorilla: Large Language Model Connected with Massive APIs</a><br><a href="https://gorilla.cs.berkeley.edu/blog.html">Gorilla blog</a><br><a href="https://zhuanlan.zhihu.com/p/632583909">大猩猩（Gorilla）🦍，连接大量 API 的大型语言模型，能成为未来AI应用的核心么？</a><br><a href="https://zhuanlan.zhihu.com/p/640697382">Gorilla：与大规模API相连的大型语言模型</a></p>
 <h1><span id="toolformer">Toolformer</span><a href="#toolformer" class="header-anchor">#</a></h1><p><a href="https://finisky.github.io/toolformer-summary/">使LLM善假于物: Toolformer </a><br><a href="https://www.bilibili.com/video/BV18s4y1u7nJ/">清华博士带你搞懂大模型自学工具使用（Toolformer)【论文速读】</a> V 有思维导图<br><a href="https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/#external-apis">Prompt Engineering </a></p>
-<h1><span id="others">Others</span><a href="#others" class="header-anchor">#</a></h1><p><a href="https://zhuanlan.zhihu.com/p/633654195">LLM能够自己制作工具了：详解Large Language Models as Tool Makers</a><br><a href="https://www.bilibili.com/video/BV1EN4y1q7Zn/">https://www.bilibili.com/video/BV1EN4y1q7Zn/</a> V 有思维导图</p>
+<h1><span id="others">Others</span><a href="#others" class="header-anchor">#</a></h1><p><a href="https://zhuanlan.zhihu.com/p/633654195">LLM能够自己制作工具了：详解Large Language Models as Tool Makers</a><br><a href="https://www.bilibili.com/video/BV1EN4y1q7Zn/">THUNLP成员领读EMNLP大模型工具创造新框架“CREATOR”</a> V 有思维导图</p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -4411,8 +4411,9 @@
 <!-- toc -->
 
 <ul>
+<li><a href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C">神经网络</a></li>
 <li><a href="#attention-3">Attention [3]</a><ul>
-<li><a href="#attention-%E4%BC%98%E5%8C%964">Attention 优化[4]</a></li>
+<li><a href="#%E4%BC%98%E5%8C%964">优化[4]</a></li>
 </ul>
 </li>
 <li><a href="#transformer-2">Transformer [2]</a><ul>
@@ -4420,12 +4421,13 @@
 <li><a href="#self-attention">Self-attention</a></li>
 <li><a href="#multi-head-attentionmha">Multi-Head Attention(MHA)</a></li>
 <li><a href="#positional-encoding">Positional Encoding</a></li>
+<li><a href="#layer-normalization">Layer Normalization</a></li>
 </ul>
 </li>
-<li><a href="#transformer-%E4%BC%98%E5%8C%96%E7%82%B9">Transformer 优化点</a></li>
-<li><a href="#%E5%85%B3%E6%B3%A8%E7%82%B95">关注点[5]</a><ul>
-<li><a href="#mask-attention-%E7%9A%84%E7%AD%96%E7%95%A5%E4%B8%8D%E5%90%8C">Mask attention 的策略不同</a></li>
-<li><a href="#%E8%AE%AD%E7%BB%83%E4%BB%BB%E5%8A%A1%E7%9B%AE%E6%A0%87%E4%B8%8D%E5%90%8C">训练任务目标不同</a></li>
+<li><a href="#%E5%A4%A7%E6%A8%A1%E5%9E%8B">大模型</a><ul>
+<li><a href="#%E6%9E%B6%E6%9E%84-67">架构 [6][7]</a></li>
+<li><a href="#%E4%BC%98%E5%8C%96%E7%82%B9">优化点</a></li>
+<li><a href="#%E5%85%B3%E6%B3%A8%E7%82%B95">关注点[5]</a></li>
 </ul>
 </li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
@@ -4439,26 +4441,47 @@
 
 </div>
 
+<h1><span id="神经网络">神经网络</span><a href="#神经网络" class="header-anchor">#</a></h1><ul>
+<li><p>正向传播<br>损失函数  </p>
+</li>
+<li><p>反相传播<br>梯度</p>
+</li>
+</ul>
 <h1><span id="attention-3">Attention [3]</span><a href="#attention-3" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/11/30/gptTransformer/self-attention.jpg" class>
 
-<h3><span id="attention-优化4">Attention 优化[4]</span><a href="#attention-优化4" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/11/30/gptTransformer/attentions.jpg" class>
+<h3><span id="优化4">优化[4]</span><a href="#优化4" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/11/30/gptTransformer/attentions.jpg" class>
 
 <h1><span id="transformer-2">Transformer [2]</span><a href="#transformer-2" class="header-anchor">#</a></h1><h3><span id="encoder-decoder架构-1">Encoder-Decoder架构 [1]</span><a href="#encoder-decoder架构-1" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/11/30/gptTransformer/Transformer_decoder.jpg" class>
 <img src="/www6vHomeHexo/2022/11/30/gptTransformer/transformer_resideual_layer_norm_3.jpg" class>
 
 <p>transfomer 架构在GPU上的并行</p>
 <h3><span id="self-attention">Self-attention</span><a href="#self-attention" class="header-anchor">#</a></h3><p>Q&#x3D;K&#x3D;V<br>aligment</p>
-<h3><span id="multi-head-attentionmha">Multi-Head Attention(MHA)</span><a href="#multi-head-attentionmha" class="header-anchor">#</a></h3><h3><span id="positional-encoding">Positional Encoding</span><a href="#positional-encoding" class="header-anchor">#</a></h3><h1><span id="transformer-优化点">Transformer 优化点</span><a href="#transformer-优化点" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/11/30/gptTransformer/transformers.jpg" class>
+<h3><span id="multi-head-attentionmha">Multi-Head Attention(MHA)</span><a href="#multi-head-attentionmha" class="header-anchor">#</a></h3><h3><span id="positional-encoding">Positional Encoding</span><a href="#positional-encoding" class="header-anchor">#</a></h3><h3><span id="layer-normalization">Layer Normalization</span><a href="#layer-normalization" class="header-anchor">#</a></h3><ul>
+<li>Post-LN</li>
+<li>Pre-LN</li>
+<li>Sandwich-LN<br>layerNorm是针对序列数据提出的一种归一化方法，主要在layer维度进行归一化，即对整个序列进行归一化。</li>
+</ul>
+<h1><span id="大模型">大模型</span><a href="#大模型" class="header-anchor">#</a></h1><h3><span id="架构-67">架构 [6][7]</span><a href="#架构-67" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/11/30/gptTransformer/bigModelArch.jpg" class>
 
-<h1><span id="关注点5">关注点[5]</span><a href="#关注点5" class="header-anchor">#</a></h1><h3><span id="mask-attention-的策略不同">Mask attention 的策略不同</span><a href="#mask-attention-的策略不同" class="header-anchor">#</a></h3><ul>
+<img src="/www6vHomeHexo/2022/11/30/gptTransformer/bigModelArch1.jpg" class>
+
+<h3><span id="优化点">优化点</span><a href="#优化点" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/11/30/gptTransformer/transformers.jpg" class>
+
+<h3><span id="关注点5">关注点[5]</span><a href="#关注点5" class="header-anchor">#</a></h3><ul>
+<li><p><strong>Mask attention 的策略不同</strong></p>
+<ul>
 <li>bert  [双向都能看到]</li>
 <li>chatgpt  [只能看到单项的]</li>
 <li>chatglm  [左边像bert, 右边像gpt]</li>
 </ul>
-<h3><span id="训练任务目标不同">训练任务目标不同</span><a href="#训练任务目标不同" class="header-anchor">#</a></h3><ul>
+</li>
+<li><p><strong>训练任务目标不同</strong></p>
+<ul>
 <li>bert [mask掉一个次, 在原位置把它预测出来]</li>
 <li>gpt [预测下一个词]</li>
 <li>chatglm [用gpt的方式来做bert的任务]</li>
+</ul>
+</li>
 </ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><p><a href="http://jalammar.github.io/illustrated-transformer/">illustrated-transformer</a> ***<br><a href="https://baoyu.io/translations/llm/illustrated-transformer">图解 Transformer [译]</a></p>
@@ -4471,13 +4494,12 @@
 </li>
 <li><p><a href="https://www.bilibili.com/video/BV1gY4y1d7nk/">基于ChatGLM对话系统实战</a></p>
 </li>
-<li><p><a href="https://www.bilibili.com/video/BV16h4y1W7us/">第一课：Transformer</a> ***  华为 </p>
+<li><p><a href="https://zhuanlan.zhihu.com/p/648050614">LLM学习系列1：大模型架构要点总结</a></p>
 </li>
-<li><p><a href="https://bbycroft.net/llm">LLM Visualization</a> ***  可视化 未</p>
-</li>
-<li><p><a href="https://blog.csdn.net/v_JULY_v/article/details/127411638">Transformer通俗笔记：从Word2Vec、Seq2Seq逐步理解到GPT、BERT</a> *** 未</p>
+<li><p><a href="https://cloud.tencent.com/developer/article/2328541">主流大语言模型的技术原理细节</a> *** 腾讯     架构 + 训练 + 微调</p>
 </li>
 </ol>
+<p>2xx. <a href="https://www.bilibili.com/video/BV16h4y1W7us/">第一课：Transformer</a> ***  华为<br>2xx. <a href="https://bbycroft.net/llm">LLM Visualization</a> ***  可视化<br>2xx. <a href="https://blog.csdn.net/v_JULY_v/article/details/127411638">Transformer通俗笔记：从Word2Vec、Seq2Seq逐步理解到GPT、BERT</a> *** </p>
 <h3><span id="attention">Attention</span><a href="#attention" class="header-anchor">#</a></h3><p>1xx. <a href="https://blog.csdn.net/kkm09/article/details/120855658">李宏毅《深度学习》- Self-attention 自注意力机制</a><br>1xx. <a href="https://blog.csdn.net/v_JULY_v/article/details/134228287">一文通透各种注意力：从多头注意力MHA到分组查询注意力GQA、多查询注意力MQA</a></p>
 <h3><span id="transformer-实现">Transformer 实现</span><a href="#transformer-实现" class="header-anchor">#</a></h3><p>1xx. <a href="http://arthurchiao.art/blog/transformers-from-scratch-zh/">Transformers from scratch</a> V, github 未<br>1xx. <a href="https://blog.csdn.net/v_JULY_v/article/details/130090649">从零实现Transformer的简易版与强大版：从300多行到3000多行</a></p>
 <h3><span id="位置编码">位置编码</span><a href="#位置编码" class="header-anchor">#</a></h3><p>1xx. <a href="https://blog.csdn.net/v_JULY_v/article/details/134085503">一文通透位置编码：从标准位置编码、旋转位置编码RoPE到ALiBi、LLaMA 2 Long</a></p>
@@ -5414,8 +5436,6 @@
 <!-- toc -->
 
 <ul>
-<li><a href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C">神经网络</a></li>
-<li><a href="#%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84-12">大模型架构 [1][2]</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
 <li><a href="#%E7%BB%BC%E8%BF%B0">综述</a></li>
 </ul>
@@ -5426,29 +5446,9 @@
 </div>
 
 
-<h1><span id="神经网络">神经网络</span><a href="#神经网络" class="header-anchor">#</a></h1><ul>
-<li><p>正向传播<br>损失函数  </p>
-</li>
-<li><p>反相传播<br>梯度</p>
-</li>
-<li><p>Layer Normalization</p>
-<ul>
-<li>Post-LN</li>
-<li>Pre-LN</li>
-<li>Sandwich-LN<br>layerNorm是针对序列数据提出的一种归一化方法，主要在layer维度进行归一化，即对整个序列进行归一化。</li>
-</ul>
-</li>
-</ul>
-<h1><span id="大模型架构-12">大模型架构 [1][2]</span><a href="#大模型架构-12" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/10/30/gptLargeModel/bigModelArch.jpg" class>
-
-<img src="/www6vHomeHexo/2022/10/30/gptLargeModel/bigModelArch1.jpg" class>
-
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a href="https://zhuanlan.zhihu.com/p/648050614">LLM学习系列1：大模型架构要点总结</a></li>
-<li><a href="https://cloud.tencent.com/developer/article/2328541">主流大语言模型的技术原理细节</a> *** 腾讯     架构 + 训练 + 微调</li>
-</ol>
-<h3><span id="综述">综述</span><a href="#综述" class="header-anchor">#</a></h3><p>1xx. <a href="http://arthurchiao.art/blog/llm-practical-guide-zh/">[译][论文] 大语言模型（LLM）综述与实用指南（Amazon，2023）</a> 未<br>1xx. <a href="https://zhuanlan.zhihu.com/p/597586623">通向AGI之路：大型语言模型（LLM）技术精要</a> *** 未<br>1xx. <a href="http://aibox.ruc.edu.cn/docs/2023-08/cb9badcb213f4c8b89d00d579eed4a4c.pdf">大语言模型综述</a> 中文  v10<br>     <a href="https://github.com/RUCAIBox/LLMSurvey/blob/main/assets/LLM_Survey_Chinese.pdf">大语言模型综述</a> 中文<br>     <a href="https://arxiv.org/pdf/2303.18223.pdf">A Survey of Large Language Models</a> 英文<br>     <a href="https://github.com/www6v/LLMSurvey">LLMSurvey</a>  github<br>     <a href="https://zhuanlan.zhihu.com/p/630203554">[论文]大语言模型综述</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/640784855">[Transformer 101系列] 初探LLM基座模型</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/664046612">LLM从0开始预训练系列：2、大模型技术报告总结（GPT&#x2F;PaLM&#x2F;GLM&#x2F;LLaMA&#x2F;Skywork）</a> </p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="综述">综述</span><a href="#综述" class="header-anchor">#</a></h3><p>1xx. <a href="http://arthurchiao.art/blog/llm-practical-guide-zh/">[译][论文] 大语言模型（LLM）综述与实用指南（Amazon，2023）</a>   实战  未<br>1xx. <a href="https://zhuanlan.zhihu.com/p/597586623">通向AGI之路：大型语言模型（LLM）技术精要</a> *** 未<br>1xx. <a href="http://aibox.ruc.edu.cn/docs/2023-08/cb9badcb213f4c8b89d00d579eed4a4c.pdf">大语言模型综述</a> 中文  v10<br>     <a href="https://github.com/RUCAIBox/LLMSurvey/blob/main/assets/LLM_Survey_Chinese.pdf">大语言模型综述</a> 中文<br>     <a href="https://arxiv.org/pdf/2303.18223.pdf">A Survey of Large Language Models</a> 英文<br>     <a href="https://github.com/www6v/LLMSurvey">LLMSurvey</a>  github<br>     <a href="https://zhuanlan.zhihu.com/p/630203554">[论文]大语言模型综述</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/640784855">[Transformer 101系列] 初探LLM基座模型</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/664046612">LLM从0开始预训练系列：2、大模型技术报告总结（GPT&#x2F;PaLM&#x2F;GLM&#x2F;LLaMA&#x2F;Skywork）</a> </p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/671710012">高效大语言模型：综述</a>  *** 大模型各个维度的优化</p>
+<p>1xx. <a href="https://www.bilibili.com/video/BV1qX4y1i78J/">清华博士带你思考大语言模型LLM的涌现现象（Emergent）</a>  有脑图<br>    Emergent Abilities of Large Language Models （<a href="https://arxiv.org/abs/2206.07682%EF%BC%89">https://arxiv.org/abs/2206.07682）</a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
