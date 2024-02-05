@@ -11,6 +11,7 @@
 <li><a href="/www6vHomeHexo/2022/06/07/aiMachineLearning/" title="Machine Learning">Machine Learning</a></li>
 <li><a href="/www6vHomeHexo/2021/08/11/ai/" title="AI 应用场景">AI 应用场景</a> </li>
 <li><a href="/www6vHomeHexo/2022/01/22/aiOverview/" title="人工智能 知识点">人工智能 知识点</a></li>
+<li><a href="/www6vHomeHexo/2023/02/05/gptNLPTask/" title="NLP 任务">NLP 任务</a></li>
 </ul>
 <h2><span id="model">Model</span><a href="#model" class="header-anchor">#</a></h2><ul>
 <li>基础<ul>
@@ -2563,6 +2564,34 @@
       </tags>
   </entry>
   <entry>
+    <title>NLP 任务</title>
+    <url>/www6vHomeHexo/2023/02/05/gptNLPTask/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h1><span id="nlp任务">NLP任务</span><a href="#nlp任务" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2023/02/05/gptNLPTask/NLP_tasks.jpg" class>
+
+
+<ul>
+<li><strong>文本摘要</strong> text summarization</li>
+<li>信息提取 information extraction</li>
+<li><strong>问答</strong> question answering</li>
+<li><strong>文本分类</strong> text classification</li>
+<li>对话 conversation</li>
+<li>代码生成 code generation</li>
+<li><strong>推理</strong> reasoning</li>
+</ul>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>NLP</category>
+      </categories>
+      <tags>
+        <tag>NLP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Toolformer</title>
     <url>/www6vHomeHexo/2023/02/03/gptToolformer/</url>
     <content><![CDATA[<p></p>
@@ -4457,15 +4486,6 @@
 </blockquote>
 <h3><span id="3-序列分类任务sequence-classification">3. 序列分类任务（Sequence Classification）</span><a href="#3-序列分类任务sequence-classification" class="header-anchor">#</a></h3><p>  序列分类（Sequence Classification），对整个句子进行分类。如: 获取评论的情绪，检测电子邮件是否为垃圾邮件，确定句子在语法上是否正确或两个句子在逻辑上是否相关等</p>
 <h3><span id="4-token-分类任务token-classification">4. Token 分类任务（Token Classification）</span><a href="#4-token-分类任务token-classification" class="header-anchor">#</a></h3><p>  Token 分类任务（Token Classification），对句子中的每个词进行分类。如: 识别句子的语法成分（名词、动词、形容词）或命名实体（人、地点、组织）。</p>
-<h1><span id="nlp任务">NLP任务</span><a href="#nlp任务" class="header-anchor">#</a></h1><ul>
-<li>文本摘要 text summarization</li>
-<li>信息提取 information extraction</li>
-<li>问答 question answering</li>
-<li>文本分类 text classification</li>
-<li>对话 conversation</li>
-<li>代码生成 code generation</li>
-<li>推理 reasoning</li>
-</ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://zhuanlan.zhihu.com/p/651744834">大模型参数高效微调技术实战（一）-PEFT概述</a></li>
 <li><a href="https://github.com/www6v/llm-action#llm%E5%BE%AE%E8%B0%83%E5%AE%9E%E6%88%98">LLM微调实战</a> 李国东</li>
