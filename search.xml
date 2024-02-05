@@ -3433,7 +3433,14 @@
 </li>
 </ul>
 <h3><span id="sft数据集">SFT数据集</span><a href="#sft数据集" class="header-anchor">#</a></h3><p><a href="https://github.com/chaoswork/sft_datasets">开源SFT数据集整理</a></p>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://zhuanlan.zhihu.com/p/641013454">数据为王：大模型预训练中的数据处理及思考—The RefinedWeb Dataset for Falcon LLM论文解读</a></p>
+<h1><span id="数据处理">数据处理</span><a href="#数据处理" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2023/01/08/gptDataSet/data_process.png" class>
+
+<h3><span id="质量过滤">质量过滤</span><a href="#质量过滤" class="header-anchor">#</a></h3><ul>
+<li>基于分类器的方法</li>
+<li>基于启发 式的方法</li>
+</ul>
+<h3><span id="冗余去除">冗余去除</span><a href="#冗余去除" class="header-anchor">#</a></h3><p>可以在<strong>句子级</strong>、<strong>文档级</strong>和<strong>数据集级</strong>等不同粒度上去重<br>在实践中应该 共同使用这三个级别的去重</p>
+<h3><span id="隐私消除">隐私消除</span><a href="#隐私消除" class="header-anchor">#</a></h3><h3><span id="词元切分">词元切分</span><a href="#词元切分" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://zhuanlan.zhihu.com/p/641013454">数据为王：大模型预训练中的数据处理及思考—The RefinedWeb Dataset for Falcon LLM论文解读</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/639207933">大模型时代下数据的重要性</a></p>
 <p><a href="https://hub.baai.ac.cn/view/28740">大模型研发核心：数据工程、自动化评估及与知识图谱的结合</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/420295576">哈工大｜15种NLP数据增强方法总结与对比</a></p>
