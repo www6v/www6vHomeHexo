@@ -2575,7 +2575,7 @@
 <!-- toc -->
 
 <ul>
-<li><a href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86">数据处理</a><ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86-1">数据处理 [1]</a><ul>
 <li><a href="#%E8%B4%A8%E9%87%8F%E8%BF%87%E6%BB%A4">质量过滤</a></li>
 <li><a href="#%E5%86%97%E4%BD%99%E5%8E%BB%E9%99%A4">冗余去除</a></li>
 <li><a href="#%E9%9A%90%E7%A7%81%E6%B6%88%E9%99%A4">隐私消除</a></li>
@@ -2592,7 +2592,7 @@
 
 </div>
 
-<h1><span id="数据处理">数据处理</span><a href="#数据处理" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2023/02/05/gptDataProcess/data_process.png" class>
+<h1><span id="数据处理-1">数据处理 [1]</span><a href="#数据处理-1" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2023/02/05/gptDataProcess/data_process.png" class>
 
 <h3><span id="质量过滤">质量过滤</span><a href="#质量过滤" class="header-anchor">#</a></h3><ul>
 <li>基于分类器的方法</li>
@@ -2604,7 +2604,10 @@
 <li>WordPiece</li>
 <li>Unigram 词元分析</li>
 </ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>1xx. <a href="https://zhuanlan.zhihu.com/p/639207933">大模型时代下数据的重要性</a> 综述</p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li>《大规模语言模型》</li>
+</ol>
+<p>1xx. <a href="https://zhuanlan.zhihu.com/p/639207933">大模型时代下数据的重要性</a> 综述</p>
 <p>1xx. <a href="https://finisky.github.io/textbooks-are-all-you-need-summary/">数据为王: Textbooks Are All You Need </a></p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/641013454">数据为王：大模型预训练中的数据处理及思考—The RefinedWeb Dataset for Falcon LLM论文解读</a></p>
 <p>1xx. <a href="https://mp.weixin.qq.com/s/c50HrOfKOqgqGPVRHf6EpA">大模型微调究竟需要多少数据：从三个现有代表工作看几组结论及一点思考 </a><br>   &lt;&lt;LIMa：Less Is More for Alignment&gt;&gt;</p>
