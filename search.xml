@@ -109,8 +109,11 @@
 <li><a href="/www6vHomeHexo/2022/12/28/gptLLMOps/" title="LLMOps">LLMOps</a> </li>
 <li><a href="/www6vHomeHexo/2022/11/27/gptVectorStore/" title="向量数据库">向量数据库</a></li>
 <li><a href="/www6vHomeHexo/2023/01/03/gptNL2SQL/" title="NL2SQL">NL2SQL</a> </li>
+<li>垂类模型<ul>
 <li><a href="/www6vHomeHexo/2023/01/04/gptLargeModelDomain/" title="垂类大模型">垂类大模型</a> </li>
-<li><a href="/www6vHomeHexo/2022/11/24/gptFinGPT/" title="FinGTP">FinGTP</a></li>
+<li><a href="/www6vHomeHexo/2022/11/24/gptFinance/" title="FinGTP">FinGTP</a></li>
+</ul>
+</li>
 </ul>
 <h2><span id="study">Study</span><a href="#study" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/08/01/gptStudy/" title="GPT  学习资源">GPT  学习资源</a></li>
@@ -2627,6 +2630,8 @@
 </ol>
 <p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648403998&idx=1&sn=400cc902434bc04df508a55e192d2455">再看大模型幻觉问题如何缓解 ：Chain-of-Verification-一种基于链式验证思想的自我修正工作解读 </a></p>
 <p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648405983&idx=2&sn=95dc9c7a12bed99b63c775d4b90519d8">也看缓解大模型幻觉的多阶段RAG框架：加入混合检索、过程理由生成与验证的方案 </a></p>
+<p>1xx. <a href="https://arxiv.org/abs/2309.01219">大模型幻觉综述</a><br>   <a href="https://arxiv.org/abs/2309.05922">大模型幻觉综述</a></p>
+<p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648405791&idx=2&sn=d7dada69e6d5ab5fba1333d234b947ef">网络安全领域微调模型SecGPT：兼看大模型幻觉的度量方式、评估benchmark及RAG增强不同方式 </a> 大模型幻觉综述</p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -3174,7 +3179,8 @@
 <h3><span id="tool-learning-with-foundation-models">Tool Learning with Foundation Models</span><a href="#tool-learning-with-foundation-models" class="header-anchor">#</a></h3><p>1xx. <a href="https://github.com/thunlp/ToolLearningPapers">ToolLearningPapers</a> git<br>1xx. <a href="https://arxiv.org/pdf/2304.08354.pdf">Tool Learning with Foundation Models</a> paper<br>1xx. <a href="https://blog.csdn.net/xixiaoyaoww/article/details/130278978">清华发布工具学习框架，让ChatGPT操控地图、股票查询，贾维斯已来？</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/624459759">大模型工具学习权威综述，BMTools 背后的论文！</a></p>
 <h3><span id="augmented-language-models">Augmented Language Models</span><a href="#augmented-language-models" class="header-anchor">#</a></h3><p>1xx. <a href="https://blog.csdn.net/qq_39388410/article/details/130798125">Augmented Language Models（增强语言模型）</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/611492200">增强语言模型（ALM）之综述篇</a></p>
 <h3><span id="gorilla">Gorilla</span><a href="#gorilla" class="header-anchor">#</a></h3><p>1xx. <a href="https://ar5iv.labs.arxiv.org/html/2305.15334">Gorilla: Large Language Model Connected with Massive APIs</a> paper<br>1xx. <a href="https://apposcmf8kb5033.pc.xiaoe-tech.com/live_pc/l_64a7d5afe4b09d7237a04b5b">Gorilla：链接海量API的大型语言模型</a> V<br>1xx. <a href="https://github.com/ShishirPatil/gorilla">gorilla</a> git<br>1xx. <a href="https://gorilla.cs.berkeley.edu/">Gorilla: Large Language Model Connected with Massive APIs</a><br>1xx. <a href="https://gorilla.cs.berkeley.edu/blog.html">Gorilla blog</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/632583909">大猩猩（Gorilla）🦍，连接大量 API 的大型语言模型，能成为未来AI应用的核心么？</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/640697382">Gorilla：与大规模API相连的大型语言模型</a></p>
-<h3><span id="others">Others</span><a href="#others" class="header-anchor">#</a></h3><p>1xx. <a href="https://zhuanlan.zhihu.com/p/633654195">LLM能够自己制作工具了：详解Large Language Models as Tool Makers</a><br>1xx. <a href="https://www.bilibili.com/video/BV1EN4y1q7Zn/">THUNLP成员领读EMNLP大模型工具创造新框架“CREATOR”</a> V 有思维导图</p>
+<h3><span id="others">Others</span><a href="#others" class="header-anchor">#</a></h3><p>1xx. <a href="https://zhuanlan.zhihu.com/p/633654195">LLM能够自己制作工具了：详解Large Language Models as Tool Makers</a>  ToolMaker<br>1xx. <a href="https://www.bilibili.com/video/BV1EN4y1q7Zn/">THUNLP成员领读EMNLP大模型工具创造新框架“CREATOR”</a> V 有思维导图 </p>
+<p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648404626&idx=1&sn=da5ac106548dd30f14a57a5ce4d90f08">基于llama7B的文本嵌入模型ANGLE：兼看Agent微调数据的生成方案</a>  AgentTuning</p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -3483,6 +3489,7 @@
 <p><a href="https://baoyu.io/translations/ai-paper/2401.13919-webvoyager-building-an-end-to-end-web-agent-with-large-multimodal-models">WebVoyager：借助强大多模态模型，开创全新的网络智能体 [译]</a></p>
 <p><a href="https://baoyu.io/translations/lmm/multimodality-and-large-multimodal-models">多模态和多模态大模型 (LMM)[译]</a></p>
 <p><a href="https://github.com/Coobiw/MiniGPT4Qwen">MiniGPT4Qwen</a> git<br><a href="https://zhuanlan.zhihu.com/p/664612306">多模态大模型实战-MiniGPT4Qwen系列1：3090+2小时+通义千问&#x3D;个人版双语多模态大模型</a></p>
+<p><a href="https://arxiv.org/abs/2306.13549">多模大语言模型综述</a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -3563,9 +3570,10 @@
 </li>
 <li><p>个人收集</p>
 <ul>
-<li><a href="https://zhuanlan.zhihu.com/p/641187337">LLM大模型数据集之谜</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/641187337">LLM大模型数据集之谜</a> Pretrain数据集</li>
 <li><a href="https://github.com/brightmart/nlp_chinese_corpus">大规模中文自然语言处理语料</a></li>
-<li><a href="https://github.com/Glanvery/LLM-Travel/blob/main/LLM_Pretrain_Datasets.md">开源的可用于LLM Pretrain数据集</a></li>
+<li><a href="https://github.com/Glanvery/LLM-Travel/blob/main/LLM_Pretrain_Datasets.md">开源的可用于LLM Pretrain数据集</a> Pretrain数据集</li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648405040&idx=1&sn=ad45944e78b5742337158cff80dbd9b3">再看领域微调大模型的主流基座和评测数据集：项目地址及论文指引</a> 评测数据集</li>
 </ul>
 </li>
 </ul>
@@ -3668,13 +3676,11 @@
 </li>
 <li><p><a href="https://zhuanlan.zhihu.com/p/408166011">Instruction Tuning｜谷歌Quoc V.Le团队提出又一精调范式</a></p>
 </li>
-<li><p><a href="https://yaofu.notion.site/June-2023-A-Stage-Review-of-Instruction-Tuning-f59dbfc36e2d4e12a33443bd6b2012c2">June 2023, A Stage Review of Instruction Tuning</a></p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/629461665">【LLM系列之FLAN-T5&#x2F;PaLM】Scaling Instruction-Finetuned Language Models</a></p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/597036814">如何优化大模型的In-Context Learning效果？</a></p>
-</li>
 </ol>
+<p>1xx. <a href="https://yaofu.notion.site/June-2023-A-Stage-Review-of-Instruction-Tuning-f59dbfc36e2d4e12a33443bd6b2012c2">June 2023, A Stage Review of Instruction Tuning</a></p>
+<p>1xx. <a href="https://zhuanlan.zhihu.com/p/629461665">【LLM系列之FLAN-T5&#x2F;PaLM】Scaling Instruction-Finetuned Language Models</a></p>
+<p>1xx. <a href="https://zhuanlan.zhihu.com/p/597036814">如何优化大模型的In-Context Learning效果？</a></p>
+<p>1xx. <a href="https://arxiv.org/abs/2308.10792">大语言模型指令微调综述</a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -5068,22 +5074,18 @@
   </entry>
   <entry>
     <title>FinGTP</title>
-    <url>/www6vHomeHexo/2022/11/24/gptFinGPT/</url>
+    <url>/www6vHomeHexo/2022/11/24/gptFinance/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<ul>
-<li><p>Model:<br><a href="https://huggingface.co/FinGPT">https://huggingface.co/FinGPT</a></p>
-</li>
-<li><p>FinGPT-Forecaster:<br><a href="https://huggingface.co/spaces/FinGPT/FinGPT-Forecaster">https://huggingface.co/spaces/FinGPT/FinGPT-Forecaster</a></p>
-</li>
-<li><p>Github Repo:<br><a href="https://github.com/www6v/FinGPT">https://github.com/www6v/FinGPT</a></p>
-</li>
-<li><p>medium<br><a href="https://byfintech.medium.com/beginners-guide-to-fingpt-training-with-lora-chatglm2-6b-9eb5ace7fe99">https://byfintech.medium.com/beginners-guide-to-fingpt-training-with-lora-chatglm2-6b-9eb5ace7fe99</a></p>
-</li>
-<li><p>Paper<br>五篇paper</p>
-</li>
+<h1><span id="fingpt">FinGPT</span><a href="#fingpt" class="header-anchor">#</a></h1><ul>
+<li>Model:<br><a href="https://huggingface.co/FinGPT">https://huggingface.co/FinGPT</a></li>
+<li>FinGPT-Forecaster:<br><a href="https://huggingface.co/spaces/FinGPT/FinGPT-Forecaster">https://huggingface.co/spaces/FinGPT/FinGPT-Forecaster</a></li>
+<li>Github Repo:<br><a href="https://github.com/www6v/FinGPT">https://github.com/www6v/FinGPT</a></li>
+<li>medium<br><a href="https://byfintech.medium.com/beginners-guide-to-fingpt-training-with-lora-chatglm2-6b-9eb5ace7fe99">https://byfintech.medium.com/beginners-guide-to-fingpt-training-with-lora-chatglm2-6b-9eb5ace7fe99</a></li>
+<li>Paper<br>五篇paper</li>
 </ul>
+<h1><span id="disc-finllm">DISC-FinLLM</span><a href="#disc-finllm" class="header-anchor">#</a></h1><p><a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648404800&idx=2&sn=9c1ad9d8aa8b0725dd6289bc15e177c9">本周大模型代表进展解析:ChatGLM3的特性认识及LoRA专家模组形式的金融领域微调模型实现策略</a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -5850,7 +5852,7 @@
 <h3><span id="多模态">多模态</span><a href="#多模态" class="header-anchor">#</a></h3><ol start="5">
 <li><a href="https://zhuanlan.zhihu.com/p/665078079">万字综述：2023年多模态检索增强生成技术(mRAG)最新进展与趋势-图片、代码、图谱、视频、声音、文本</a></li>
 </ol>
-<p>1xx. <a href="https://zhuanlan.zhihu.com/p/673922981">高级检索增强生成技术(RAG)全面指南：原理、分块、编码、索引、微调、Agent、展望</a> 未<br>1xx. <a href="https://baoyu.io/translations/ai-paper/2005.11401-retrieval-augmented-generation-for-knowledge-intensive-nlp-tasks">知识密集型自然语言处理任务的检索增强生成技术研究 [译]</a><br>1xx. <a href="https://baoyu.io/translations/rag/mastering-rag-how-to-architect-an-enterprise-rag-system">构建企业级 RAG 系统的高级指南 [译]</a><br>1xx. <a href="https://baoyu.io/translations/ai-paper/2312.10997-retrieval-augmented-generation-for-large-language-models-a-survey">面向大语言模型的检索增强生成技术：综述 [译]</a><br>1xx. <a href="https://baoyu.io/translations/ai-paper/2401.05856v1-seven-failure-points-when-engineering-a-retrieval-augmented-generation-system">在构建检索增强型生成系统时的七大挑战 [译]</a></p>
+<p>1xx. <a href="https://zhuanlan.zhihu.com/p/673922981">高级检索增强生成技术(RAG)全面指南：原理、分块、编码、索引、微调、Agent、展望</a> 未<br>1xx. <a href="https://baoyu.io/translations/ai-paper/2005.11401-retrieval-augmented-generation-for-knowledge-intensive-nlp-tasks">知识密集型自然语言处理任务的检索增强生成技术研究 [译]</a><br>1xx. <a href="https://baoyu.io/translations/rag/mastering-rag-how-to-architect-an-enterprise-rag-system">构建企业级 RAG 系统的高级指南 [译]</a><br>1xx. <a href="https://baoyu.io/translations/ai-paper/2312.10997-retrieval-augmented-generation-for-large-language-models-a-survey">面向大语言模型的检索增强生成技术：综述 [译]</a><br>1xx. <a href="https://baoyu.io/translations/ai-paper/2401.05856v1-seven-failure-points-when-engineering-a-retrieval-augmented-generation-system">在构建检索增强型生成系统时的七大挑战 [译]</a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648407638&idx=1&sn=5c167b4a11bc483f5790ef1e0340d670">大模型RAG问答行业最佳案例及微调、推理双阶段实现模式：基于模块化(Modular)RAG自定义RAG Flow </a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -5882,7 +5884,7 @@
 
 
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="综述">综述</span><a href="#综述" class="header-anchor">#</a></h3><p>1xx. <a href="http://arthurchiao.art/blog/llm-practical-guide-zh/">[译][论文] 大语言模型（LLM）综述与实用指南（Amazon，2023）</a>   实战  未<br>1xx. <a href="https://zhuanlan.zhihu.com/p/597586623">通向AGI之路：大型语言模型（LLM）技术精要</a> *** 未<br>1xx. <a href="http://aibox.ruc.edu.cn/docs/2023-08/cb9badcb213f4c8b89d00d579eed4a4c.pdf">大语言模型综述</a> 中文  v10<br>     <a href="https://github.com/RUCAIBox/LLMSurvey/blob/main/assets/LLM_Survey_Chinese.pdf">大语言模型综述</a> 中文<br>     <a href="https://arxiv.org/pdf/2303.18223.pdf">A Survey of Large Language Models</a> 英文<br>     <a href="https://github.com/www6v/LLMSurvey">LLMSurvey</a>  github<br>     <a href="https://zhuanlan.zhihu.com/p/630203554">[论文]大语言模型综述</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/640784855">[Transformer 101系列] 初探LLM基座模型</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/664046612">LLM从0开始预训练系列：2、大模型技术报告总结（GPT&#x2F;PaLM&#x2F;GLM&#x2F;LLaMA&#x2F;Skywork）</a> </p>
-<p>1xx. <a href="https://zhuanlan.zhihu.com/p/671710012">高效大语言模型：综述</a>  *** 大模型各个维度的优化</p>
+<p>1xx. <a href="https://zhuanlan.zhihu.com/p/671710012">高效大语言模型：综述</a>  *** 大模型各个维度的优化<br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648403847&idx=1&sn=9af731e9f8418a2d869f5464530c8bd6">必看的十二个大模型前沿综述：兼论HALO大模型幻觉检测与缓解方案及Google小模型预测大模型训练不稳定的探索 </a> 12个综述</p>
 ]]></content>
       <categories>
         <category>AIGC</category>
