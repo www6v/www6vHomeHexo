@@ -45,8 +45,11 @@
 <li><a href="/www6vHomeHexo/2023/01/01/gptInference/" title="推理-优化">推理-优化</a></li>
 </ul>
 </li>
+<li>Data<ul>
 <li><a href="/www6vHomeHexo/2023/01/08/gptDataSet/" title="数据集">数据集</a> </li>
 <li><a href="/www6vHomeHexo/2023/02/05/gptDataProcess/" title="数据处理">数据处理</a></li>
+</ul>
+</li>
 </ul>
 <h2><span id="finetuning">FineTuning</span><a href="#finetuning" class="header-anchor">#</a></h2><ul>
 <li>基础<ul>
@@ -66,6 +69,10 @@
 </ul>
 </li>
 <li><a href="/www6vHomeHexo/2024/01/26/gptFineTuningBert/" title="Fine Tuning-Bert">Fine Tuning-Bert</a></li>
+</ul>
+</li>
+<li>Data<ul>
+<li><a href="/www6vHomeHexo/2023/02/06/gptSTFData/" title="STF 数据">STF 数据</a></li>
 </ul>
 </li>
 </ul>
@@ -2566,12 +2573,58 @@
       </tags>
   </entry>
   <entry>
+    <title>STF 数据</title>
+    <url>/www6vHomeHexo/2023/02/06/gptSTFData/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#stf-%E6%95%B0%E6%8D%AE%E7%BB%84%E5%90%881">STF 数据组合[1]</a><ul>
+<li><a href="#%E9%97%AE%E9%A2%98">问题</a></li>
+<li><a href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C">实验结果</a></li>
+</ul>
+</li>
+<li><a href="#sft%E6%95%B0%E6%8D%AE%E9%9B%86">SFT数据集</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="stf-数据组合1">STF 数据组合[1]</span><a href="#stf-数据组合1" class="header-anchor">#</a></h1><p>《HOW ABILITIES IN LARGE LANGUAGE MODELS ARE AFFECTED BY SUPERVISED FINE-TUNING DATA COM- POSITION》</p>
+<h3><span id="问题">问题</span><a href="#问题" class="header-anchor">#</a></h3><p>1、推理、编码和通用能力如何随SFT数据量而变化？<br>2、在SFT中结合三种能力时是否存在性能冲突？<br>3、导致性能冲突的关键因素是什么？<br>4、不同的SFT策略对组合数据有什么影响？</p>
+<h3><span id="实验结果">实验结果</span><a href="#实验结果" class="header-anchor">#</a></h3><p>1、不同的能力表现出不同的扩展模式，在数据量相同的情况下，较大的模型通常表现出更优越的性能。<br>2、随着数据量的持续增加，数学推理和代码生成能力也在不断提高，一般能力则是在样本数达到一千左右时才得到提升，且提升速度较慢。<br>3、在数据量较低的情况下，数据组合会带来各种能力的提高，而在数据量较高的情况下，能力则会发生冲突。<br>4、组成数据量会影响性能，而组成比例的影响则微乎其微。</p>
+<h1><span id="sft数据集">SFT数据集</span><a href="#sft数据集" class="header-anchor">#</a></h1><p><a href="https://github.com/chaoswork/sft_datasets">开源SFT数据集整理</a></p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648404728&idx=2&sn=1cb2203648271720d421c963ebcc03b3">SFT微调的数据组合及训练策略如何影响大模型性能：4个经典问题及实验结论分享 </a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>STF</category>
+      </categories>
+      <tags>
+        <tag>STF</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>幻觉问题</title>
     <url>/www6vHomeHexo/2023/02/06/gptHallucination/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-
+<h1><span id="幻觉-vs-事实性1">幻觉 vs 事实性[1]</span><a href="#幻觉-vs-事实性1" class="header-anchor">#</a></h1><p><strong>幻觉</strong>主要是指LLM生成毫无根据或毫无根据的内容，幻觉可以理解为模型倾向于”生成与某些来源相关的无意义或不真实的内容”。这与<strong>事实性问题</strong>不同，后者强调模型学习、获取和利用事实性知识的能力。</p>
+<p>举例说明两者的<strong>区别</strong>：</p>
+<p>如果一个LLM在被要求创作”一个关于兔子和狼交朋友的童话故事”时，创作出了一个关于”兔子和狗交朋友”的故事，那么它就表现出了幻觉。不过，这并不一定是事实性错误。<br>如果生成的内容包含准确的信息，但与提示的具体内容有出入，那就是<strong>幻觉</strong>，而<strong>不是事实性问题</strong>。<br>例如，如果LLM的输出包含了比提示指定更多的细节或不同的元素，但事实仍然正确，这就是<strong>幻觉</strong>。</p>
+<p>相反，如果LLM避免给出直接答案，而是说”我不知道”，或者给出了一个准确的答案，但遗漏了一些正确的细节，那么这就是<strong>事实性问题</strong>，而<strong>不是幻觉</strong>。</p>
+<p>此外，值得注意的是，<strong>幻觉有时会产生一些内容，虽然与原始输入内容有偏差，但在事实方面仍然是准确的</strong>。</p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648404394&idx=1&sn=d7cfcf2cd9aa6756d3cbff938f5f4cf2">再看大模型事实性的界定、错误的起因、评估及前沿缓解方案：Survey on Factuality in LLMS</a></li>
+</ol>
 <p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648403998&idx=1&sn=400cc902434bc04df508a55e192d2455">再看大模型幻觉问题如何缓解 ：Chain-of-Verification-一种基于链式验证思想的自我修正工作解读 </a></p>
 <p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648405983&idx=2&sn=95dc9c7a12bed99b63c775d4b90519d8">也看缓解大模型幻觉的多阶段RAG框架：加入混合检索、过程理由生成与验证的方案 </a></p>
 ]]></content>
@@ -2634,6 +2687,7 @@
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/671183709">大模型微调技巧 | 高质量指令数据筛选方法-MoDS</a></p>
 <h3><span id="其他">其他</span><a href="#其他" class="header-anchor">#</a></h3><p>1xx. <a href="https://zhuanlan.zhihu.com/p/420295576">哈工大｜15种NLP数据增强方法总结与对比</a></p>
 <p>1xx. <a href="https://hub.baai.ac.cn/view/28740">大模型研发核心：数据工程、自动化评估及与知识图谱的结合</a><br>   <a href="https://mp.weixin.qq.com/s/SvDnQD886E3DBtw8k9asgg">大模型研发核心：数据工程、自动化评估及与知识图谱的结合 </a></p>
+<p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648403976&idx=1&sn=694db5e2b3085b1610e8d19daa93a474">再看大模型预训数据质量如何评估：困惑度、错误L2范数和记忆化三种度量方法的效果对比分析研究</a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -3500,16 +3554,21 @@
 <span id="more"></span>
 
 
-<h1><span id="dataset">DataSet</span><a href="#dataset" class="header-anchor">#</a></h1><h3><span id="pretrain数据集">Pretrain数据集</span><a href="#pretrain数据集" class="header-anchor">#</a></h3><ul>
-<li><p>大而全<br><a href="http://opendatalab.com/">OpenDataLab 是引领AI大模型时代的开放数据平台</a>  </p>
-<p><a href="https://www.luge.ai/#/">千言数据集</a> </p>
+<h1><span id="dataset">DataSet</span><a href="#dataset" class="header-anchor">#</a></h1><ul>
+<li><p>大而全 </p>
+<ul>
+<li><a href="http://opendatalab.com/">OpenDataLab 是引领AI大模型时代的开放数据平台</a><br>上海人工智能实验室  </li>
+<li><a href="https://www.luge.ai/#/">千言数据集</a><br>百度</li>
+</ul>
 </li>
-<li><p>个人收集<br><a href="https://zhuanlan.zhihu.com/p/641187337">LLM大模型数据集之谜</a></p>
-<p><a href="https://github.com/brightmart/nlp_chinese_corpus">大规模中文自然语言处理语料</a></p>
-<p><a href="https://github.com/Glanvery/LLM-Travel/blob/main/LLM_Pretrain_Datasets.md">开源的可用于LLM Pretrain数据集</a></p>
+<li><p>个人收集</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/641187337">LLM大模型数据集之谜</a></li>
+<li><a href="https://github.com/brightmart/nlp_chinese_corpus">大规模中文自然语言处理语料</a></li>
+<li><a href="https://github.com/Glanvery/LLM-Travel/blob/main/LLM_Pretrain_Datasets.md">开源的可用于LLM Pretrain数据集</a></li>
+</ul>
 </li>
 </ul>
-<h3><span id="sft数据集">SFT数据集</span><a href="#sft数据集" class="header-anchor">#</a></h3><p><a href="https://github.com/chaoswork/sft_datasets">开源SFT数据集整理</a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
