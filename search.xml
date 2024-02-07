@@ -29,7 +29,8 @@
 <li><a href="/www6vHomeHexo/2023/01/18/gptMultimodal/" title="多模态">多模态</a>  </li>
 <li><a href="/www6vHomeHexo/2023/01/25/gptImpossibleTriangle/" title="不可能三角">不可能三角</a> </li>
 <li><a href="/www6vHomeHexo/2023/02/03/gptEmergent/" title="涌现现象（Emergent）">涌现现象（Emergent）</a>   </li>
-<li><a href="/www6vHomeHexo/2023/02/06/gptHallucination/" title="幻觉问题">幻觉问题</a></li>
+<li><a href="/www6vHomeHexo/2023/02/06/gptHallucination/" title="幻觉问题">幻觉问题</a>    </li>
+<li><a href="/www6vHomeHexo/2023/02/07/gptEval/" title="测评">测评</a></li>
 </ul>
 <h2><span id="training-amp-inference">Training &amp; Inference</span><a href="#training-amp-inference" class="header-anchor">#</a></h2><ul>
 <li>训练<ul>
@@ -2576,6 +2577,23 @@
       </tags>
   </entry>
   <entry>
+    <title>测评</title>
+    <url>/www6vHomeHexo/2023/02/07/gptEval/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402223&idx=1&sn=f2ec30cd04600129bb90bc9c81413d95">一些讨论：三张关于大模型微调方案的脑图及几点llama2等行业落地的问题思考 </a><br><a href="https://github.com/CLUEbenchmark/SuperCLUE-Llama2-Chinese">https://github.com/CLUEbenchmark/SuperCLUE-Llama2-Chinese</a><br><a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402549&idx=1&sn=07a8af1db44df6125939c5c9e90f6267">如何让自己的大模型榜单评分更高：也谈榜单评测评分的一些常见方案和典型案例 </a></p>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>eval</category>
+      </categories>
+      <tags>
+        <tag>eval</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>STF 数据</title>
     <url>/www6vHomeHexo/2023/02/06/gptSTFData/</url>
     <content><![CDATA[<p></p>
@@ -2633,6 +2651,7 @@
 <p>1xx. <a href="https://arxiv.org/abs/2309.01219">大模型幻觉综述</a><br>   <a href="https://arxiv.org/abs/2309.05922">大模型幻觉综述</a></p>
 <p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648405791&idx=2&sn=d7dada69e6d5ab5fba1333d234b947ef">网络安全领域微调模型SecGPT：兼看大模型幻觉的度量方式、评估benchmark及RAG增强不同方式 </a> 大模型幻觉综述</p>
 <p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648403602&idx=1&sn=f2365b05630094f8d0de7ff784abe233">大模型前沿热点最新综述：大模型微调遗忘、Agent智能体、幻觉及RAG检索增强模型推介</a> 大模型微调遗忘</p>
+<p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648403341&idx=1&sn=86cdaaf2c3a73439d2591a2f3dd0b9e0">值得一读的大模型生成幻觉研究综述：大模型幻觉的起因、评估以及减轻策略总结 </a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -3977,7 +3996,7 @@
 <li>ChatLaw </li>
 <li>LawGPT_zh</li>
 </ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>1xx. <a href="https://zhuanlan.zhihu.com/p/642611747">垂直领域大模型的一些思考及开源模型汇总</a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648403459&idx=2&sn=0219fc098c208e36cd32940e71089fd2">层出不穷的垂域微调大模型非最全汇总：12大领域、57个领域微调模型概述及对垂直行业问答的一些讨论 </a><br>    <a href="https://github.com/www6v/Awesome-Domain-LLM">Awesome-Domain-LLM</a><br>1xx. <a href="https://blog.csdn.net/v_JULY_v/article/details/131550529?spm=1001.2014.3001.5502">医疗金融法律大模型：从ChatDoctor到BloombergGPT&#x2F;FinGPT&#x2F;FinBERT、ChatLaw&#x2F;LawGPT_zh</a><br>1xx. <a href="https://finisky.github.io/lawyer-llama-summary/">训练中文垂类大模型：Lawyer LLaMA </a><br>1xx. <a href="/www6vHomeHexo/2023/01/04/gptLeaderBoard/" title="排行榜">排行榜</a> self</p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>1xx. <a href="https://zhuanlan.zhihu.com/p/642611747">垂直领域大模型的一些思考及开源模型汇总</a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648403459&idx=2&sn=0219fc098c208e36cd32940e71089fd2">层出不穷的垂域微调大模型非最全汇总：12大领域、57个领域微调模型概述及对垂直行业问答的一些讨论 </a><br>    <a href="https://github.com/www6v/Awesome-Domain-LLM">Awesome-Domain-LLM</a><br>1xx. <a href="https://blog.csdn.net/v_JULY_v/article/details/131550529?spm=1001.2014.3001.5502">医疗金融法律大模型：从ChatDoctor到BloombergGPT&#x2F;FinGPT&#x2F;FinBERT、ChatLaw&#x2F;LawGPT_zh</a><br>1xx. <a href="https://finisky.github.io/lawyer-llama-summary/">训练中文垂类大模型：Lawyer LLaMA </a><br>1xx. <a href="/www6vHomeHexo/2023/01/04/gptLeaderBoard/" title="排行榜">排行榜</a> self<br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402872&idx=1&sn=0649e8f7490e057680cff1be16157209">再看法律领域微调模型及外挂知识库问答优化方案：从引入关键词、领域嵌入到知识库细化、意图识别及知识增强项目案例 </a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402886&idx=1&sn=0552d60744645a84d13bb0cef57f321c">再看23个医疗领域微调大模型集合：兼看CareLlama医疗模型的一些实践经验与开放医疗数据 </a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402589&idx=1&sn=3ba9d50fad433adeb8dd6c623b06c42d">大模型遇上心理健康咨询：MeChat、QiaoBan、SoulChat、MindChat四大心理健康领域微调模型总结 </a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402638&idx=1&sn=b9329498806e2b93b2d6817a17941bff">大模型常见错误、反馈的来源及自我修正方法：兼论两个有趣的同名中医微调垂域模型 </a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -3994,11 +4013,14 @@
 <span id="more"></span>
 
 
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://github.com/www6v/NL2SQL">https://github.com/www6v/NL2SQL</a><br><a href="https://github.com/www6v/nl2sql-">https://github.com/www6v/nl2sql-</a><br><a href="https://blog.langchain.dev/llms-and-sql/">LLMs and SQL</a><br><a href="https://zhuanlan.zhihu.com/p/640580808">大模型与数据科学：从Text-to-SQL 开始（一）</a> 多款产品</p>
-<p><a href="https://zhuanlan.zhihu.com/p/668557045">C3: Zero-shot Text-to-SQL with ChatGPT笔记</a><br><a href="https://github.com/bigbigwatermalon/C3SQL">C3SQL  </a> git</p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>1xx. <a href="https://github.com/www6v/NL2SQL">https://github.com/www6v/NL2SQL</a><br>1xx. <a href="https://github.com/www6v/nl2sql-">https://github.com/www6v/nl2sql-</a><br>1xx. <a href="https://blog.langchain.dev/llms-and-sql/">LLMs and SQL</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/640580808">大模型与数据科学：从Text-to-SQL 开始（一）</a> 多款产品</p>
 <p>百度千帆-ppt<br>QCon-ppt</p>
-<p><a href="https://mp.weixin.qq.com/s?__biz=MzUxNzk5MTU3OQ==&mid=2247487028&idx=1&sn=7b6767878b7f6b891fc69e408f248ef1">语义解析 (Text-to-SQL) 技术研究及应用 上篇 </a><br><a href="https://mp.weixin.qq.com/s/5lTLW5OOuRMo2zjbzMxr_Q">语义解析 (Text-to-SQL) 技术研究及应用 下篇 </a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/670509396">LLM在中文Text2SQL的实践</a><br><a href="https://zhuanlan.zhihu.com/p/673474672">LLM在中文Text2SQL任务上的优化V2.0</a><br><a href="https://zhuanlan.zhihu.com/p/670913902">LLM在中文Text2SQL任务上的优化V1.0</a></p>
+<p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzUxNzk5MTU3OQ==&mid=2247487028&idx=1&sn=7b6767878b7f6b891fc69e408f248ef1">语义解析 (Text-to-SQL) 技术研究及应用 上篇 </a><br>1xx. <a href="https://mp.weixin.qq.com/s/5lTLW5OOuRMo2zjbzMxr_Q">语义解析 (Text-to-SQL) 技术研究及应用 下篇 </a></p>
+<p>1xx. <a href="https://zhuanlan.zhihu.com/p/670509396">LLM在中文Text2SQL的实践</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/673474672">LLM在中文Text2SQL任务上的优化V2.0</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/670913902">LLM在中文Text2SQL任务上的优化V1.0</a></p>
+<p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402400&idx=1&sn=fe122657b35f27090aaca9c144d1d23b">也看大模型与数据库查询分析的落地结合：C3 Text2SQL方案及Data-Copilot数据自动化编排机制的实现思想阅读 </a> </p>
+<hr>
+<p>1xx. <a href="https://zhuanlan.zhihu.com/p/668557045">C3: Zero-shot Text-to-SQL with ChatGPT笔记</a><br>1xx. <a href="https://github.com/bigbigwatermalon/C3SQL">C3SQL  </a> git</p>
+<p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402424&idx=1&sn=e2d26821b6e9a5a2871e0ddbca565c30">大模型再总结及ChatSQL实践案例分享：大模型训练数据及工具的5张脑图总结及ChatSQL开源项目实现解析 </a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
