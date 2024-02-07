@@ -2632,6 +2632,7 @@
 <p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648405983&idx=2&sn=95dc9c7a12bed99b63c775d4b90519d8">也看缓解大模型幻觉的多阶段RAG框架：加入混合检索、过程理由生成与验证的方案 </a></p>
 <p>1xx. <a href="https://arxiv.org/abs/2309.01219">大模型幻觉综述</a><br>   <a href="https://arxiv.org/abs/2309.05922">大模型幻觉综述</a></p>
 <p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648405791&idx=2&sn=d7dada69e6d5ab5fba1333d234b947ef">网络安全领域微调模型SecGPT：兼看大模型幻觉的度量方式、评估benchmark及RAG增强不同方式 </a> 大模型幻觉综述</p>
+<p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648403602&idx=1&sn=f2365b05630094f8d0de7ff784abe233">大模型前沿热点最新综述：大模型微调遗忘、Agent智能体、幻觉及RAG检索增强模型推介</a> 大模型微调遗忘</p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -3976,7 +3977,7 @@
 <li>ChatLaw </li>
 <li>LawGPT_zh</li>
 </ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>1xx. <a href="https://blog.csdn.net/v_JULY_v/article/details/131550529?spm=1001.2014.3001.5502">医疗金融法律大模型：从ChatDoctor到BloombergGPT&#x2F;FinGPT&#x2F;FinBERT、ChatLaw&#x2F;LawGPT_zh</a><br>1xx. <a href="/www6vHomeHexo/2023/01/04/gptLeaderBoard/" title="排行榜">排行榜</a> self<br>1xx. <a href="https://finisky.github.io/lawyer-llama-summary/">训练中文垂类大模型：Lawyer LLaMA </a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/642611747">垂直领域大模型的一些思考及开源模型汇总</a></p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>1xx. <a href="https://zhuanlan.zhihu.com/p/642611747">垂直领域大模型的一些思考及开源模型汇总</a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648403459&idx=2&sn=0219fc098c208e36cd32940e71089fd2">层出不穷的垂域微调大模型非最全汇总：12大领域、57个领域微调模型概述及对垂直行业问答的一些讨论 </a><br>    <a href="https://github.com/www6v/Awesome-Domain-LLM">Awesome-Domain-LLM</a><br>1xx. <a href="https://blog.csdn.net/v_JULY_v/article/details/131550529?spm=1001.2014.3001.5502">医疗金融法律大模型：从ChatDoctor到BloombergGPT&#x2F;FinGPT&#x2F;FinBERT、ChatLaw&#x2F;LawGPT_zh</a><br>1xx. <a href="https://finisky.github.io/lawyer-llama-summary/">训练中文垂类大模型：Lawyer LLaMA </a><br>1xx. <a href="/www6vHomeHexo/2023/01/04/gptLeaderBoard/" title="排行榜">排行榜</a> self</p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -4210,9 +4211,12 @@
 </li>
 <li><a href="#vectorkg-rag1516">Vector+KG RAG[15][16]</a></li>
 <li><a href="#data-processing17">Data processing[17]</a></li>
+<li><a href="#%E6%A1%86%E6%9E%B6-18">框架 [18]</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
 <li><a href="#%E6%96%87%E6%9C%AC">文本</a></li>
 <li><a href="#%E5%A4%9A%E6%A8%A1%E6%80%81">多模态</a></li>
+<li><a href="#%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1">知识图谱</a></li>
+<li><a href="#xxx">xxx</a></li>
 </ul>
 </li>
 </ul>
@@ -4268,6 +4272,7 @@
 <li>利用LLM抽取</li>
 <li>人工处理</li>
 </ul>
+<h1><span id="框架-18">框架 [18]</span><a href="#框架-18" class="header-anchor">#</a></h1><p>1）<strong>LangChain</strong>： <a href="https://github.com/langchain-ai/langchain/">https://github.com/langchain-ai/langchain/</a><br>2）QAnything： <a href="https://github.com/netease-youdao/QAnything/tree/master">https://github.com/netease-youdao/QAnything/tree/master</a><br>3）<strong>LlamaIndex</strong>： <a href="https://github.com/run-llama/llama_index/">https://github.com/run-llama/llama_index/</a><br>4）<strong>langchainchat</strong>： <a href="https://github.com/chatchat-space/Langchain-Chatchat/releases/tag/v0.2.8">https://github.com/chatchat-space/Langchain-Chatchat/releases/tag/v0.2.8</a><br>5) <strong>FastGPT</strong> ：<a href="https://github.com/labring/FastGPT">https://github.com/labring/FastGPT</a><br>6）langchain4j ：<a href="https://github.com/langchain4j/langchain4j">https://github.com/langchain4j/langchain4j</a><br>7）<strong>Unstructured</strong> ：<a href="https://github.com/Unstructured-IO/unstructured">https://github.com/Unstructured-IO/unstructured</a><br>8）GPT-RAG ：<a href="https://github.com/Azure/GPT-RAG">https://github.com/Azure/GPT-RAG</a><br>9）Quivr ：<a href="https://github.com/StanGirard/quivr">https://github.com/StanGirard/quivr</a><br>10）<strong>Dify</strong> ：<a href="https://github.com/langgenius/dify">https://github.com/langgenius/dify</a><br>11）Verba ：<a href="https://github.com/weaviate/Verba">https://github.com/weaviate/Verba</a><br>12）danswer：<a href="https://github.com/danswer-ai/danswer">https://github.com/danswer-ai/danswer</a></p>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="文本">文本</span><a href="#文本" class="header-anchor">#</a></h3><ol>
 <li><p><a href="https://github.com/chatchat-space/Langchain-Chatchat">Langchain-Chatchat </a> master<br>Langchain 与 ChatGLM 等语言模型的本地知识库问答<br><a href="https://github.com/chatchat-space/Langchain-Chatchat/tree/v0.2.4">Langchain-Chatchat</a>  v0.2.4<br><a href="https://gitee.com/deepeye/langchain-ChatGLM">langchain-ChatGLM</a>  gitee </p>
 </li>
@@ -4291,15 +4296,22 @@
 </li>
 <li><p><a href="https://github.com/www6v/AIGC/blob/master/langchain-cookbook/Semi_structured_multi_modal_RAG_LLaMA2.ipynb">Private Semi-structured and Multi-modal RAG w&#x2F; LLaMA2 and LLaVA</a>  code 多模态- 解析pdf中的图片  运行有问题<br><a href="https://github.com/langchain-ai/langchain/blob/master/cookbook/Semi_structured_multi_modal_RAG_LLaMA2.ipynb">Private Semi-structured and Multi-modal RAG w&#x2F; LLaMA2 and LLaVA</a></p>
 </li>
+</ol>
+<h3><span id="知识图谱">知识图谱</span><a href="#知识图谱" class="header-anchor">#</a></h3><ol start="15">
 <li><p><a href="https://neo4j.com/developer-blog/unstructured-knowledge-graph-neo4j-langchain/">Enhanced QA Integrating Unstructured Knowledge Graph Using Neo4j and LangChain</a>  </p>
 </li>
 <li><p><a href="https://blog.langchain.dev/using-a-knowledge-graph-to-implement-a-devops-rag-application/">Using a Knowledge Graph to implement a DevOps RAG application</a></p>
 </li>
+</ol>
+<h3><span id="xxx">xxx</span><a href="#xxx" class="header-anchor">#</a></h3><ol start="17">
 <li><p>&lt;&lt;大模型结合 RAG 构建客服场景自动问答系统&gt;&gt;  NVIDIA大模型日系列活动  </p>
 </li>
-<li><p><a href="https://llamahub.ai/">LlamaHub</a> 未<br> Mix and match our Data Loaders and Agent Tools to build custom RAG apps or use our LlamaPacks as a starting point for your retrieval use cases.</p>
+<li><p><a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648407281&idx=2&sn=f39b46cad1787123b485d76dff33bc93">大模型RAG问答研发真实图鉴：一周出Demo，半年用不好，缝补之路漫漫 </a></p>
 </li>
 </ol>
+<p>1xx. <a href="https://llamahub.ai/">LlamaHub</a><br>      Mix and match our Data Loaders and Agent Tools to build custom RAG apps or use our LlamaPacks as a starting point for your retrieval use cases.</p>
+<p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648404338&idx=1&sn=3c8f8c44ac7a1d925216b40833525b25">再看业界大模型行业问答的困难及若干业界实践：兼看智能客服常用路线及多场景prompt </a></p>
+<p>1xx. <a href="https://zhuanlan.zhihu.com/p/664921095">RAG探索之路的血泪史及曙光</a>  腾讯</p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -5814,6 +5826,7 @@
 <li><a href="#%E7%BB%BC%E8%BF%B0">综述</a></li>
 <li><a href="#self-rag">Self-RAG</a></li>
 <li><a href="#%E5%A4%9A%E6%A8%A1%E6%80%81">多模态</a></li>
+<li><a href="#%E8%AF%84%E4%BC%B0">评估</a></li>
 </ul>
 </li>
 </ul>
@@ -5844,7 +5857,7 @@
 </ol>
 <h3><span id="综述">综述</span><a href="#综述" class="header-anchor">#</a></h3><ol start="2">
 <li><a href="https://zhuanlan.zhihu.com/p/673910600">LLM之RAG理论（二）| RAG综述论文详解</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/661465330?utm_id=0">NLP（廿一）：从 RAG 到 Self-RAG —— LLM 的知识增强</a> ***</li>
+<li><a href="https://zhuanlan.zhihu.com/p/661465330?utm_id=0">NLP（廿一）：从 RAG 到 Self-RAG —— LLM 的知识增强</a> ***<br>1xx. <a href="https://baoyu.io/translations/ai-paper/2312.10997-retrieval-augmented-generation-for-large-language-models-a-survey">面向大语言模型的检索增强生成技术：综述 [译]</a></li>
 </ol>
 <h3><span id="self-rag">Self-RAG</span><a href="#self-rag" class="header-anchor">#</a></h3><ol start="4">
 <li><a href="https://github.com/www6v/self-rag">original implementation of SELF-RAG</a></li>
@@ -5852,7 +5865,9 @@
 <h3><span id="多模态">多模态</span><a href="#多模态" class="header-anchor">#</a></h3><ol start="5">
 <li><a href="https://zhuanlan.zhihu.com/p/665078079">万字综述：2023年多模态检索增强生成技术(mRAG)最新进展与趋势-图片、代码、图谱、视频、声音、文本</a></li>
 </ol>
-<p>1xx. <a href="https://zhuanlan.zhihu.com/p/673922981">高级检索增强生成技术(RAG)全面指南：原理、分块、编码、索引、微调、Agent、展望</a> 未<br>1xx. <a href="https://baoyu.io/translations/ai-paper/2005.11401-retrieval-augmented-generation-for-knowledge-intensive-nlp-tasks">知识密集型自然语言处理任务的检索增强生成技术研究 [译]</a><br>1xx. <a href="https://baoyu.io/translations/rag/mastering-rag-how-to-architect-an-enterprise-rag-system">构建企业级 RAG 系统的高级指南 [译]</a><br>1xx. <a href="https://baoyu.io/translations/ai-paper/2312.10997-retrieval-augmented-generation-for-large-language-models-a-survey">面向大语言模型的检索增强生成技术：综述 [译]</a><br>1xx. <a href="https://baoyu.io/translations/ai-paper/2401.05856v1-seven-failure-points-when-engineering-a-retrieval-augmented-generation-system">在构建检索增强型生成系统时的七大挑战 [译]</a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648407638&idx=1&sn=5c167b4a11bc483f5790ef1e0340d670">大模型RAG问答行业最佳案例及微调、推理双阶段实现模式：基于模块化(Modular)RAG自定义RAG Flow </a></p>
+<h3><span id="评估">评估</span><a href="#评估" class="header-anchor">#</a></h3><p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648404511&idx=2&sn=fefb78c1d920cb5b437f2e3da9935637">再看大模型RAG检索增强如何评估：RAGAS开源自动化评估框架</a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648404476&idx=2&sn=d07b27dc9162ab0aaec3108004e4cfbe">大模型RAG检索增强问答如何评估：噪声、拒答、反事实、信息整合四大能力评测任务探索 </a></p>
+<p>1xx. <a href="https://zhuanlan.zhihu.com/p/673922981">高级检索增强生成技术(RAG)全面指南：原理、分块、编码、索引、微调、Agent、展望</a><br>1xx. <a href="https://baoyu.io/translations/ai-paper/2005.11401-retrieval-augmented-generation-for-knowledge-intensive-nlp-tasks">知识密集型自然语言处理任务的检索增强生成技术研究 [译]</a><br>1xx. <a href="https://baoyu.io/translations/rag/mastering-rag-how-to-architect-an-enterprise-rag-system">构建企业级 RAG 系统的高级指南 [译]</a><br>1xx. <a href="https://baoyu.io/translations/ai-paper/2401.05856v1-seven-failure-points-when-engineering-a-retrieval-augmented-generation-system">在构建检索增强型生成系统时的七大挑战 [译]</a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648407638&idx=1&sn=5c167b4a11bc483f5790ef1e0340d670">大模型RAG问答行业最佳案例及微调、推理双阶段实现模式：基于模块化(Modular)RAG自定义RAG Flow </a></p>
+<p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648406156&idx=1&sn=d91a4df105c4fc4c9523f7141bc1c24d">知识图谱用于细粒度大模型幻觉评估：兼论Langchain-RAG问答中的问题改写范式 </a><br>  RAG:  rewrite , Step back prompting, fusion</p>
 ]]></content>
       <categories>
         <category>AIGC</category>
