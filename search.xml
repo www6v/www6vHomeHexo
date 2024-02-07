@@ -111,8 +111,10 @@
 <li><a href="/www6vHomeHexo/2022/11/27/gptVectorStore/" title="向量数据库">向量数据库</a></li>
 <li><a href="/www6vHomeHexo/2023/01/03/gptNL2SQL/" title="NL2SQL">NL2SQL</a> </li>
 <li>垂类模型<ul>
-<li><a href="/www6vHomeHexo/2023/01/04/gptLargeModelDomain/" title="垂类大模型">垂类大模型</a> </li>
-<li><a href="/www6vHomeHexo/2022/11/24/gptFinance/" title="FinGTP">FinGTP</a></li>
+<li><a href="/www6vHomeHexo/2023/01/04/gptDomain/" title="垂类大模型">垂类大模型</a> </li>
+<li><a href="/www6vHomeHexo/2022/11/24/gptDomainFinance/" title="金融大模型">金融大模型</a>   </li>
+<li><a href="/www6vHomeHexo/2023/02/07/gptDomainMed/" title="医疗大模型">医疗大模型</a>   </li>
+<li><a href="/www6vHomeHexo/2024/02/07/gptDomainLaw/" title="法律大模型">法律大模型</a></li>
 </ul>
 </li>
 </ul>
@@ -1457,6 +1459,29 @@
       </tags>
   </entry>
   <entry>
+    <title>法律大模型</title>
+    <url>/www6vHomeHexo/2024/02/07/gptDomainLaw/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+
+<h3><span id="法律大模型">法律大模型</span><a href="#法律大模型" class="header-anchor">#</a></h3><ul>
+<li>ChatLaw </li>
+<li>LawGPT_zh</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402872&idx=1&sn=0649e8f7490e057680cff1be16157209">再看法律领域微调模型及外挂知识库问答优化方案：从引入关键词、领域嵌入到知识库细化、意图识别及知识增强项目案例 </a></p>
+<p>1xx. <a href="https://finisky.github.io/lawyer-llama-summary/">训练中文垂类大模型：Lawyer LLaMA </a></p>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>垂类大模型</category>
+      </categories>
+      <tags>
+        <tag>垂类大模型</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>混合精度</title>
     <url>/www6vHomeHexo/2024/02/01/gptPrecision/</url>
     <content><![CDATA[<p></p>
@@ -2574,6 +2599,36 @@
       </categories>
       <tags>
         <tag>消息系统</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>医疗大模型</title>
+    <url>/www6vHomeHexo/2023/02/07/gptDomainMed/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h3><span id="医疗大模型">医疗大模型</span><a href="#医疗大模型" class="header-anchor">#</a></h3><ul>
+<li>LLaMA<ul>
+<li>ChatDoctor  </li>
+<li>华驼&#x2F;本草  哈工大</li>
+<li>PMC-LLaMA 上海交大</li>
+</ul>
+</li>
+<li>ChatGLM-6B<ul>
+<li>ChatGLM-Med  哈工大</li>
+<li>DoctorGLM</li>
+<li>明医 (MING)  MedicalGPT-zh  上海交通大学</li>
+</ul>
+</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402886&idx=1&sn=0552d60744645a84d13bb0cef57f321c">再看23个医疗领域微调大模型集合：兼看CareLlama医疗模型的一些实践经验与开放医疗数据 </a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402589&idx=1&sn=3ba9d50fad433adeb8dd6c623b06c42d">大模型遇上心理健康咨询：MeChat、QiaoBan、SoulChat、MindChat四大心理健康领域微调模型总结 </a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402638&idx=1&sn=b9329498806e2b93b2d6817a17941bff">大模型常见错误、反馈的来源及自我修正方法：兼论两个有趣的同名中医微调垂域模型 </a></p>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>垂类大模型</category>
+      </categories>
+      <tags>
+        <tag>垂类大模型</tag>
       </tags>
   </entry>
   <entry>
@@ -3969,34 +4024,12 @@
   </entry>
   <entry>
     <title>垂类大模型</title>
-    <url>/www6vHomeHexo/2023/01/04/gptLargeModelDomain/</url>
+    <url>/www6vHomeHexo/2023/01/04/gptDomain/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h1><span id="垂类大模型">垂类大模型</span><a href="#垂类大模型" class="header-anchor">#</a></h1><h3><span id="金融">金融</span><a href="#金融" class="header-anchor">#</a></h3><ul>
-<li>BloombergGPT(未开源)</li>
-<li>FinGPT  哥大  </li>
-<li>FinBERT</li>
-</ul>
-<h3><span id="医疗">医疗</span><a href="#医疗" class="header-anchor">#</a></h3><ul>
-<li>LLaMA<ul>
-<li>ChatDoctor  </li>
-<li>华驼&#x2F;本草  哈工大</li>
-<li>PMC-LLaMA 上海交大</li>
-</ul>
-</li>
-<li>ChatGLM-6B<ul>
-<li>ChatGLM-Med  哈工大</li>
-<li>DoctorGLM</li>
-<li>明医 (MING)  MedicalGPT-zh  上海交通大学</li>
-</ul>
-</li>
-</ul>
-<h3><span id="法律">法律</span><a href="#法律" class="header-anchor">#</a></h3><ul>
-<li>ChatLaw </li>
-<li>LawGPT_zh</li>
-</ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>1xx. <a href="https://zhuanlan.zhihu.com/p/642611747">垂直领域大模型的一些思考及开源模型汇总</a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648403459&idx=2&sn=0219fc098c208e36cd32940e71089fd2">层出不穷的垂域微调大模型非最全汇总：12大领域、57个领域微调模型概述及对垂直行业问答的一些讨论 </a><br>    <a href="https://github.com/www6v/Awesome-Domain-LLM">Awesome-Domain-LLM</a><br>1xx. <a href="https://blog.csdn.net/v_JULY_v/article/details/131550529?spm=1001.2014.3001.5502">医疗金融法律大模型：从ChatDoctor到BloombergGPT&#x2F;FinGPT&#x2F;FinBERT、ChatLaw&#x2F;LawGPT_zh</a><br>1xx. <a href="https://finisky.github.io/lawyer-llama-summary/">训练中文垂类大模型：Lawyer LLaMA </a><br>1xx. <a href="/www6vHomeHexo/2023/01/04/gptLeaderBoard/" title="排行榜">排行榜</a> self<br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402872&idx=1&sn=0649e8f7490e057680cff1be16157209">再看法律领域微调模型及外挂知识库问答优化方案：从引入关键词、领域嵌入到知识库细化、意图识别及知识增强项目案例 </a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402886&idx=1&sn=0552d60744645a84d13bb0cef57f321c">再看23个医疗领域微调大模型集合：兼看CareLlama医疗模型的一些实践经验与开放医疗数据 </a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402589&idx=1&sn=3ba9d50fad433adeb8dd6c623b06c42d">大模型遇上心理健康咨询：MeChat、QiaoBan、SoulChat、MindChat四大心理健康领域微调模型总结 </a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402638&idx=1&sn=b9329498806e2b93b2d6817a17941bff">大模型常见错误、反馈的来源及自我修正方法：兼论两个有趣的同名中医微调垂域模型 </a></p>
+<h1><span id="垂类大模型">垂类大模型</span><a href="#垂类大模型" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>1xx. <a href="https://zhuanlan.zhihu.com/p/642611747">垂直领域大模型的一些思考及开源模型汇总</a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648403459&idx=2&sn=0219fc098c208e36cd32940e71089fd2">层出不穷的垂域微调大模型非最全汇总：12大领域、57个领域微调模型概述及对垂直行业问答的一些讨论 </a><br>    <a href="https://github.com/www6v/Awesome-Domain-LLM">Awesome-Domain-LLM</a><br>1xx. <a href="https://blog.csdn.net/v_JULY_v/article/details/131550529?spm=1001.2014.3001.5502">医疗金融法律大模型：从ChatDoctor到BloombergGPT&#x2F;FinGPT&#x2F;FinBERT、ChatLaw&#x2F;LawGPT_zh</a></p>
+<p>1xx. <a href="/www6vHomeHexo/2023/01/04/gptLeaderBoard/" title="排行榜">排行榜</a> self</p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -5107,11 +5140,18 @@
       </tags>
   </entry>
   <entry>
-    <title>FinGTP</title>
-    <url>/www6vHomeHexo/2022/11/24/gptFinance/</url>
+    <title>金融大模型</title>
+    <url>/www6vHomeHexo/2022/11/24/gptDomainFinance/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
+
+
+<h1><span id="金融大模型">金融大模型</span><a href="#金融大模型" class="header-anchor">#</a></h1><ul>
+<li>BloombergGPT(未开源)</li>
+<li>FinGPT  哥大  </li>
+<li>FinBERT</li>
+</ul>
 <h1><span id="fingpt">FinGPT</span><a href="#fingpt" class="header-anchor">#</a></h1><ul>
 <li>Model:<br><a href="https://huggingface.co/FinGPT">https://huggingface.co/FinGPT</a></li>
 <li>FinGPT-Forecaster:<br><a href="https://huggingface.co/spaces/FinGPT/FinGPT-Forecaster">https://huggingface.co/spaces/FinGPT/FinGPT-Forecaster</a></li>
@@ -5123,10 +5163,10 @@
 ]]></content>
       <categories>
         <category>AIGC</category>
-        <category>FinGTP</category>
+        <category>金融大模型</category>
       </categories>
       <tags>
-        <tag>FinGTP</tag>
+        <tag>金融大模型</tag>
       </tags>
   </entry>
   <entry>
