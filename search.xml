@@ -79,6 +79,7 @@
 </ul>
 <h2><span id="prompt">Prompt</span><a href="#prompt" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/11/10/gptPromptEngineering/" title="Prompt Engineering">Prompt Engineering</a></li>
+<li><a href="/www6vHomeHexo/2023/02/08/gptCOT/" title="COT">COT</a> </li>
 <li><a href="/www6vHomeHexo/2022/07/11/gptPromptResearch/" title="Prompt-学术研究">Prompt-学术研究</a></li>
 <li><a href="/www6vHomeHexo/2021/05/28/gptPromptCode/" title="Prompt-Code">Prompt-Code</a></li>
 <li><a href="/www6vHomeHexo/2021/05/26/gptPrompt/" title="Prompt-How to use">Prompt-How to use</a></li>
@@ -2602,6 +2603,38 @@
       </tags>
   </entry>
   <entry>
+    <title>COT</title>
+    <url>/www6vHomeHexo/2023/02/08/gptCOT/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h1><span id="cot4">CoT[4]</span><a href="#cot4" class="header-anchor">#</a></h1><ul>
+<li><p>CoT(Chain of Thought)</p>
+<ul>
+<li>CoT-SC(Self Consistency)</li>
+</ul>
+</li>
+<li><p>ToT(Tree of Thoughts)<br>分为了Thought Decomposition，Thought Generator，State Evaluator，Search algorithms</p>
+</li>
+<li><p>GoT(Graph of Thoughts)</p>
+</li>
+<li><p>AoT(Algorithm of Thoughts)</p>
+</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="4">
+<li><a href="https://zhuanlan.zhihu.com/p/654034193">2023年能够解决复杂问题的思维链技术：Cot，ToT，GoT，AoT</a></li>
+</ol>
+<p>1xx. <a href="https://github.com/zchuz/CoT-Reasoning-Survey">CoT-Reasoning-Survey </a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648404176&idx=1&sn=2eafdf5426bfe1347869b9af268d4238">大模型COT思维链推理的几个关键问题：从评测基准、结构变体到增强方案的系统综述 </a></p>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>COT</category>
+      </categories>
+      <tags>
+        <tag>COT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>医疗大模型</title>
     <url>/www6vHomeHexo/2023/02/07/gptDomainMed/</url>
     <content><![CDATA[<p></p>
@@ -2638,7 +2671,9 @@
 <span id="more"></span>
 
 
-<p><a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402223&idx=1&sn=f2ec30cd04600129bb90bc9c81413d95">一些讨论：三张关于大模型微调方案的脑图及几点llama2等行业落地的问题思考 </a><br><a href="https://github.com/CLUEbenchmark/SuperCLUE-Llama2-Chinese">https://github.com/CLUEbenchmark/SuperCLUE-Llama2-Chinese</a><br><a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402549&idx=1&sn=07a8af1db44df6125939c5c9e90f6267">如何让自己的大模型榜单评分更高：也谈榜单评测评分的一些常见方案和典型案例 </a></p>
+<p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402223&idx=1&sn=f2ec30cd04600129bb90bc9c81413d95">一些讨论：三张关于大模型微调方案的脑图及几点llama2等行业落地的问题思考 </a><br>1xx. <a href="https://github.com/CLUEbenchmark/SuperCLUE-Llama2-Chinese">https://github.com/CLUEbenchmark/SuperCLUE-Llama2-Chinese</a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402549&idx=1&sn=07a8af1db44df6125939c5c9e90f6267">如何让自己的大模型榜单评分更高：也谈榜单评测评分的一些常见方案和典型案例 </a></p>
+<p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648403046&idx=1&sn=0a9b612e9790c0bf49d5cede8fda365c">大模型落地的一些前沿观点：兼看知识图谱增强大模型问答的几个方案及CEVAL榜单评测启发 </a> 二、CEVAL榜单评测中能够得到一些启示<br><a href="https://github.com/hkust-nlp/ceval/blob/main/resources/tutorial.md">1. C-Eval 数据集评测简明教程</a></p>
+<p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648403295&idx=1&sn=126c949d0a00eb85b4a3a6b0106f55a6&poc_token=HApExGWjou7N5NVcTKmJpWt9LZ8ul6wynjV5VHnQ">大模型B端落地“牛刀杀鸡”的奇怪感觉：兼看CEVAl通用评测到金融、医疗两大垂域评测的转变 </a>   CEVAl</p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -4367,6 +4402,7 @@
 <p>1xx. <a href="https://llamahub.ai/">LlamaHub</a><br>      Mix and match our Data Loaders and Agent Tools to build custom RAG apps or use our LlamaPacks as a starting point for your retrieval use cases.</p>
 <p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648404338&idx=1&sn=3c8f8c44ac7a1d925216b40833525b25">再看业界大模型行业问答的困难及若干业界实践：兼看智能客服常用路线及多场景prompt </a></p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/664921095">RAG探索之路的血泪史及曙光</a>  腾讯</p>
+<p>1xx. <a href="https://mp.weixin.qq.com/s/d2Nns1qashMbcXPMG-4McQ">阿里面向企业数字化的文档智能技术与应用</a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -4886,6 +4922,7 @@
 <p>1xx. <a href="https://pub.towardsai.net/advanced-rag-techniques-an-illustrated-overview-04d193d8fec6">Advanced RAG Techniques: an Illustrated Overview</a><br>     <a href="https://mp.weixin.qq.com/s/CO7hMv4RW7OE6zwUmVfp5A">最全的RAG技术概览 </a></p>
 <p>1xx. <a href="https://baoyu.io/translations/rag/5-levels-of-text-splitting">文本分割的五个层次 [译]</a></p>
 <p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648406795&idx=1&sn=00ea4aab819eed3d622287fa1d32816f">大模型RAG问答技术架构及核心模块回顾：从Embedding、prompt-embedding到Reranker </a> ***</p>
+<p>1xx. CON<br>   <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648406194&idx=1&sn=aafe667fa5a73bd89a00272c5598c98e">引入COT缓解大模型RAG问答的上下文区分问题：兼看Langchain的表格检索思路及GPTBIAS评估框架 </a> CON<br>   <a href="https://cobusgreyling.medium.com/chain-of-note-con-retrieval-for-llms-763ead1ae5c5">Chain-Of-Note (CoN) Retrieval For LLMs</a><br>   <a href="https://praveengovindaraj.com/cutting-through-the-noise-chain-of-notes-con-robust-approach-to-super-power-your-rag-pipelines-0df5f1ce7952">Cutting Through the Noise: Chain-of-Note’s (CoN) Robust Approach to super power your RAG pipelines</a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -5440,7 +5477,6 @@
 </ul>
 </li>
 <li><a href="#automatic-prompt-design-2">Automatic Prompt Design [2]</a></li>
-<li><a href="#cot4">CoT[4]</a></li>
 <li><a href="#six-strategies-for-getting-better-results1">Six strategies for getting better results[1]</a><ul>
 <li><a href="#write-clear-instructions">Write clear instructions</a></li>
 <li><a href="#provide-reference-text">Provide reference text</a></li>
@@ -5475,19 +5511,6 @@
 <h1><span id="automatic-prompt-design-2">Automatic Prompt Design [2]</span><a href="#automatic-prompt-design-2" class="header-anchor">#</a></h1><ul>
 <li>Automatic Chain-of-Thought (Auto-CoT) [3]</li>
 </ul>
-<h1><span id="cot4">CoT[4]</span><a href="#cot4" class="header-anchor">#</a></h1><ul>
-<li><p>CoT(Chain of Thought)</p>
-<ul>
-<li>CoT-SC(Self Consistency)</li>
-</ul>
-</li>
-<li><p>ToT(Tree of Thoughts)<br>分为了Thought Decomposition，Thought Generator，State Evaluator，Search algorithms</p>
-</li>
-<li><p>GoT(Graph of Thoughts)</p>
-</li>
-<li><p>AoT(Algorithm of Thoughts)</p>
-</li>
-</ul>
 <h1><span id="six-strategies-for-getting-better-results1">Six strategies for getting better results[1]</span><a href="#six-strategies-for-getting-better-results1" class="header-anchor">#</a></h1><h3><span id="write-clear-instructions">Write clear instructions</span><a href="#write-clear-instructions" class="header-anchor">#</a></h3><p>   清晰的指令</p>
 <h3><span id="provide-reference-text">Provide reference text</span><a href="#provide-reference-text" class="header-anchor">#</a></h3><h3><span id="split-complex-tasks-into-simpler-subtasks">Split complex tasks into simpler subtasks</span><a href="#split-complex-tasks-into-simpler-subtasks" class="header-anchor">#</a></h3><pre><code>复杂任务简单化
 </code></pre>
@@ -5502,8 +5525,8 @@
 <li><a href="https://platform.openai.com/docs/guides/prompt-engineering">Prompt engineering</a>  openai</li>
 <li><a href="https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/">Prompt Engineering </a> paper</li>
 <li><a href="https://www.promptingguide.ai/techniques">Prompt Engineering Guide</a> guide<br><a href="https://github.com/www6v/Prompt-Engineering-Guide">Prompt-Engineering-Guide </a> *** git</li>
-<li><a href="https://zhuanlan.zhihu.com/p/654034193">2023年能够解决复杂问题的思维链技术：Cot，ToT，GoT，AoT</a><br>1xx. <a href="https://blog.langchain.dev/the-prompt-landscape/">The Prompt Landscape</a>  langchain<br>1xx. <a href="https://colab.research.google.com/github/comet-ml/comet-llm/blob/main/examples/CometLLM_Prompts.ipynb">CometLLM - suite of LLMOps tools - track and visualize LLM prompts and chains</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/671915693">大模型 PUA 指南：来自 Google Meta Microsoft 等大厂</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/632369186">NLP（十三）：Prompt Engineering 面面观</a><br>1xx. <a href="https://github.com/brexhq/prompt-engineering?tab=readme-ov-file"> prompt-engineering</a> git<br>1xx. <a href="https://finisky.github.io/chain-of-thought-prompting-summary/">Chain-of-Thought Prompting 简读 </a></li>
 </ol>
+<p>1xx. <a href="https://blog.langchain.dev/the-prompt-landscape/">The Prompt Landscape</a>  langchain<br>1xx. <a href="https://colab.research.google.com/github/comet-ml/comet-llm/blob/main/examples/CometLLM_Prompts.ipynb">CometLLM - suite of LLMOps tools - track and visualize LLM prompts and chains</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/671915693">大模型 PUA 指南：来自 Google Meta Microsoft 等大厂</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/632369186">NLP（十三）：Prompt Engineering 面面观</a><br>1xx. <a href="https://github.com/brexhq/prompt-engineering?tab=readme-ov-file"> prompt-engineering</a> git<br>1xx. <a href="https://finisky.github.io/chain-of-thought-prompting-summary/">Chain-of-Thought Prompting 简读 </a></p>
 <h3><span id="案例">案例</span><a href="#案例" class="header-anchor">#</a></h3><ol start="200">
 <li><a href="https://mp.weixin.qq.com/s/nXoZJ4xfgihA2mnBQ8EdIQ">运维大模型探索之 Text2PromQL 问答机器人 </a>     架构图， 最后两个重点总结   未</li>
 </ol>
