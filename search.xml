@@ -10942,6 +10942,7 @@ table th:first-of-type {
 <p><a href="https://www.bilibili.com/video/BV1ju411T74Y/">第十一课：ChatGLM</a> V<br><a href="https://blog.csdn.net/v_JULY_v/article/details/129880836">ChatGLM两代的部署&#x2F;微调&#x2F;实现：从基座GLM、ChatGLM的LoRA&#x2F;P-Tuning微调、6B源码解读到ChatGLM2的微调与实现</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/625468667">【Instruction Tuning】ChatGLM 微调实战（附源码）</a></p>
 <p><a href="https://github.com/www6v/transformers_tasks/blob/main/LLM/chatglm_finetune/readme.md">Finetune ChatGLM-6B</a></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648401516&idx=1&sn=80b3cfecc9f4338b87fcd9bc91ef2465">也看支持32K上下文的ChatGLM2-6B模型：优化点简读及现有开源模型主流训练优化点概述 </a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -11028,6 +11029,7 @@ table th:first-of-type {
 <p>1xx. <a href="https://hub.baai.ac.cn/view/28740">大模型研发核心：数据工程、自动化评估及与知识图谱的结合</a><br>   <a href="https://mp.weixin.qq.com/s/SvDnQD886E3DBtw8k9asgg">大模型研发核心：数据工程、自动化评估及与知识图谱的结合 </a></p>
 <p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648403976&idx=1&sn=694db5e2b3085b1610e8d19daa93a474">再看大模型预训数据质量如何评估：困惑度、错误L2范数和记忆化三种度量方法的效果对比分析研究</a></p>
 <p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402104&idx=1&sn=7d4924b2a5a840e4ff3de43299248b1d">再谈大模型的预训数据清洗与微调数据生成：RedPajama数据处理框架与entity-centric指令生成方法解读 </a><br>    llama数据的复现项目SlimPajama</p>
+<p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648401484&idx=1&sn=c49b5ca5fc962ca757d3a082b74f037a">“超越LLama 65B”的Falcon40B语言模型为什么好：再看精细化的数据清洗的重要性 </a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -11525,7 +11527,7 @@ table th:first-of-type {
 <li><p><a href="https://zhuanlan.zhihu.com/p/618334308">让ChatGPT生成训练ChatGPT的训练数据</a></p>
 </li>
 </ol>
-<p>1xx. <a href="https://blog.csdn.net/v_JULY_v/article/details/132116949">LLM高效参数微调方法：从Prefix Tuning、Prompt Tuning、P-Tuning V1&#x2F;V2到LoRA、QLoRA(含对模型量化的解释)</a> *** 未<br>1xx. <a href="https://aicarrier.feishu.cn/file/H1YvbRyacopEs6xzgZ8c9DDcnIh">大模型参数高效微调技术原理及实践</a> pdf<br>   <a href="https://www.bilibili.com/video/BV1qw411c7Hd/">如何高效微调大模型？技术原理与最佳实践揭秘！</a> V</p>
+<p>1xx. <a href="https://blog.csdn.net/v_JULY_v/article/details/132116949">LLM高效参数微调方法：从Prefix Tuning、Prompt Tuning、P-Tuning V1&#x2F;V2到LoRA、QLoRA(含对模型量化的解释)</a> *** 未<br>1xx. <a href="https://aicarrier.feishu.cn/file/H1YvbRyacopEs6xzgZ8c9DDcnIh">大模型参数高效微调技术原理及实践</a> pdf<br>   <a href="https://www.bilibili.com/video/BV1qw411c7Hd/">如何高效微调大模型？技术原理与最佳实践揭秘！</a> V<br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402136&idx=1&sn=554331e397015c4da95fb0d0929f5aa1">7月末关于大模型微调数据工程与评估的技术综述：从数据构造方案到模型评估范式的论文梳理指引 </a> 对齐-论文集<br>   <a href="https://github.com/GaryYufei/AlignLLMHumanSurvey">AlignLLMHumanSurvey</a> git</p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -12486,7 +12488,7 @@ table th:first-of-type {
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="分支">分支</span><a href="#分支" class="header-anchor">#</a></h3><ol>
 <li><a href="https://blog.csdn.net/v_JULY_v/article/details/129709105">LLaMA的解读与其微调：Alpaca-LoRA&#x2F;Vicuna&#x2F;BELLE&#x2F;中文LLaMA&#x2F;姜子牙&#x2F;LLaMA 2</a> ***<br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzUyOTA5OTcwMg==&mid=2247485019&idx=1&sn=e3417472c0c1f98aede498fbe905e1a0&">我想学大模型，应该从哪个模型开始？LLaMA生态家谱整理和分析 </a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/618695885">NLP（九）：LLaMA, Alpaca, ColossalChat 系列模型研究</a><br>1xx. <a href="https://github.com/www6v/Llama2-Chinese">https://github.com/www6v/Llama2-Chinese</a><br>1xx. &lt;&lt;千帆增强版 Llama 2-提升大模型对话指令遵循能力&gt;&gt;</li>
 </ol>
-<h3><span id="基座">基座</span><a href="#基座" class="header-anchor">#</a></h3><p>1xx. <a href="https://zhuanlan.zhihu.com/p/649756898">Llama 2详解</a>  ***<br>    <a href="https://www.bilibili.com/video/BV12h4y1N7C8/">Llama 2 模型结构解析</a> *** V<br>1xx. <a href="https://www.bilibili.com/video/BV1nN41157a9/">第十五课：LLaMA</a>  *** 华为  V<br>1xx. <a href="https://www.bilibili.com/video/BV1Me411z7ZV/">第十六课：LLaMA2</a> *** 华为  V<br>1xx. <a href="http://arthurchiao.art/blog/llama-paper-zh/">[译][论文] LLaMA：开放和高效的基础语言模型集</a><br>1xx. <a href="http://arthurchiao.art/blog/llama2-paper-zh/">[译][论文] LLaMA 2：开放基础和微调聊天模型</a><br>1xx.  <a href="https://zhuanlan.zhihu.com/p/618321077">从0到1复现斯坦福羊驼（Stanford Alpaca 7B）</a><br>    GPUs: 8 卡 A800 80GB GPUs<br>1xx. <a href="https://zhuanlan.zhihu.com/p/644671690">Llama2技术细节&amp;开源影响</a></p>
+<h3><span id="基座">基座</span><a href="#基座" class="header-anchor">#</a></h3><p>1xx. <a href="https://zhuanlan.zhihu.com/p/649756898">Llama 2详解</a>  ***<br>    <a href="https://www.bilibili.com/video/BV12h4y1N7C8/">Llama 2 模型结构解析</a> *** V<br>1xx. <a href="https://www.bilibili.com/video/BV1nN41157a9/">第十五课：LLaMA</a>  *** 华为  V<br>1xx. <a href="https://www.bilibili.com/video/BV1Me411z7ZV/">第十六课：LLaMA2</a> *** 华为  V<br>1xx. <a href="http://arthurchiao.art/blog/llama-paper-zh/">[译][论文] LLaMA：开放和高效的基础语言模型集</a><br>1xx. <a href="http://arthurchiao.art/blog/llama2-paper-zh/">[译][论文] LLaMA 2：开放基础和微调聊天模型</a><br>1xx.  <a href="https://zhuanlan.zhihu.com/p/618321077">从0到1复现斯坦福羊驼（Stanford Alpaca 7B）</a><br>    GPUs: 8 卡 A800 80GB GPUs<br>1xx. <a href="https://zhuanlan.zhihu.com/p/644671690">Llama2技术细节&amp;开源影响</a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648401927&idx=1&sn=3dddcb5c1d8b3c246a8b7529502fdcf0">也谈凌晨刷屏的Llama2开源可商用模型：从其数据构造、模型架构和评估方式等方面的一些总结与发现 </a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648401959&idx=1&sn=582fa45cd00035bac621336f47cce252">再看Llama2的实际体验与民间评测：从现有公开在线测试地址到几个测试例子看初步效果分析 </a></p>
 <p>1xx. <a href="https://llama.family/">Llama中文社区</a><br>2xx. <a href="https://github.com/ymcui/Chinese-LLaMA-Alpaca"> Chinese-LLaMA-Alpaca</a> git</p>
 ]]></content>
       <categories>
@@ -13674,6 +13676,7 @@ table th:first-of-type {
 <p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648404338&idx=1&sn=3c8f8c44ac7a1d925216b40833525b25">再看业界大模型行业问答的困难及若干业界实践：兼看智能客服常用路线及多场景prompt </a></p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/664921095">RAG探索之路的血泪史及曙光</a>  腾讯</p>
 <p>1xx. <a href="https://mp.weixin.qq.com/s/d2Nns1qashMbcXPMG-4McQ">阿里面向企业数字化的文档智能技术与应用</a></p>
+<p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648404651&idx=2&sn=335db95e104a5b09e33ac2245bae4fd2">再看RAG在真实金融文档问答场景的实践方案：SMP2023 金融大模型挑战赛的两种代表实现思路</a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
