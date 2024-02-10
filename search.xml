@@ -11061,6 +11061,8 @@ table th:first-of-type {
 <li><a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648405040&idx=1&sn=ad45944e78b5742337158cff80dbd9b3">再看领域微调大模型的主流基座和评测数据集：项目地址及论文指引</a> 评测数据集</li>
 </ul>
 </li>
+<li><p>其他<br><a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648399359&idx=1&sn=502c65376e14b20a7dc1ceb35c62141d">大规模语言模型训练必备数据集-The Pile：涵盖22类、800GB的多样性文本数据集概述 </a></p>
+</li>
 </ul>
 ]]></content>
       <categories>
@@ -11077,7 +11079,17 @@ table th:first-of-type {
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h1><span id="垂类大模型">垂类大模型</span><a href="#垂类大模型" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>1xx. <a href="https://zhuanlan.zhihu.com/p/642611747">垂直领域大模型的一些思考及开源模型汇总</a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648403459&idx=2&sn=0219fc098c208e36cd32940e71089fd2">层出不穷的垂域微调大模型非最全汇总：12大领域、57个领域微调模型概述及对垂直行业问答的一些讨论 </a><br>    <a href="https://github.com/www6v/Awesome-Domain-LLM">Awesome-Domain-LLM</a><br>1xx. <a href="https://blog.csdn.net/v_JULY_v/article/details/131550529?spm=1001.2014.3001.5502">医疗金融法律大模型：从ChatDoctor到BloombergGPT&#x2F;FinGPT&#x2F;FinBERT、ChatLaw&#x2F;LawGPT_zh</a></p>
+<h1><span id="垂类大模型">垂类大模型</span><a href="#垂类大模型" class="header-anchor">#</a></h1><h3><span id="领域微调模型-1">领域微调模型 [1]</span><a href="#领域微调模型-1" class="header-anchor">#</a></h3><ul>
+<li>注入领域知识，分成三种：<ul>
+<li>继续预训练注入</li>
+<li>微调注入以及</li>
+<li>外挂注入</li>
+</ul>
+</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648401405&idx=1&sn=59baf4a22d9a9abeb42599ac91e11a79">领域微调大模型入局的自我和解：领域微调大模型若一定要做，则务必想的若干个前提条件 </a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/642611747">垂直领域大模型的一些思考及开源模型汇总</a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648403459&idx=2&sn=0219fc098c208e36cd32940e71089fd2">层出不穷的垂域微调大模型非最全汇总：12大领域、57个领域微调模型概述及对垂直行业问答的一些讨论 </a><br> <a href="https://github.com/www6v/Awesome-Domain-LLM">Awesome-Domain-LLM</a><br>1xx. <a href="https://blog.csdn.net/v_JULY_v/article/details/131550529?spm=1001.2014.3001.5502">医疗金融法律大模型：从ChatDoctor到BloombergGPT&#x2F;FinGPT&#x2F;FinBERT、ChatLaw&#x2F;LawGPT_zh</a></li>
+</ol>
 <p>1xx. <a href="/www6vHomeHexo/2023/01/04/gptLeaderBoard/" title="排行榜">排行榜</a> self</p>
 ]]></content>
       <categories>
@@ -11286,7 +11298,10 @@ table th:first-of-type {
 </li>
 </ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a href="https://www.bilibili.com/video/BV1qX4y1i78J/">清华博士带你思考大语言模型LLM的涌现现象（Emergent）</a>  有脑图<br> Emergent Abilities of Large Language Models （<a href="https://arxiv.org/abs/2206.07682%EF%BC%89">https://arxiv.org/abs/2206.07682）</a></li>
+<li><p><a href="https://www.bilibili.com/video/BV1qX4y1i78J/">清华博士带你思考大语言模型LLM的涌现现象（Emergent）</a>  有脑图<br> Emergent Abilities of Large Language Models （<a href="https://arxiv.org/abs/2206.07682%EF%BC%89">https://arxiv.org/abs/2206.07682）</a></p>
+</li>
+<li><p><a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648399147&idx=1&sn=6e6d416db50d9708c900ee3b5416bba3">再谈ChatGPT等大模型的涌现能力：关于涌现能力的定义、测试方法及分析工作总结 </a></p>
+</li>
 </ol>
 ]]></content>
       <categories>
@@ -11840,14 +11855,16 @@ table th:first-of-type {
 </ul>
 </li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
-<li><a href="#%E4%BC%98%E5%8C%96">优化</a></li>
+<li><a href="#%E7%BB%BC%E8%BF%B0">综述</a></li>
+<li><a href="#kv-cache">kv cache</a></li>
+<li><a href="#%E9%87%8F%E5%8C%96">量化</a></li>
 </ul>
 </li>
 </ul>
 <!-- tocstop -->
 
 </div>
-  
+
 <h1><span id="推理-优化">推理 优化</span><a href="#推理-优化" class="header-anchor">#</a></h1><h3><span id="overview22">overview[2.2]</span><a href="#overview22" class="header-anchor">#</a></h3><p>有几种方法可以在内存中<strong>降低推理成本</strong>或&#x2F;和<strong>加快推理速度</strong>。</p>
 <ul>
 <li>应用各种<strong>并行处理方式</strong>，以在大量GPU上扩展模型。智能并行处理模型组件和数据使得运行拥有数万亿参数的模型成为可能。</li>
@@ -11857,11 +11874,9 @@ table th:first-of-type {
 <li>针对目标模型架构的特定改进。许多<strong>架构变化</strong>，特别是针对注意力层的变化，有助于提高Transformer解码速度。</li>
 </ul>
 <h3><span id="模型压缩-21">模型压缩 [2.1]</span><a href="#模型压缩-21" class="header-anchor">#</a></h3><p>剪枝（Pruning）<br>知识蒸馏（Knowledge Distillation，KD）<br>量化（Quantization）<br>低秩分解（Low-Rank Factorization）</p>
-<h3><span id="kv-cache2324">KV Cache[2.3][2.4]</span><a href="#kv-cache2324" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="优化">优化</span><a href="#优化" class="header-anchor">#</a></h3><p>2.1. <a href="https://mp.weixin.qq.com/s/glPPSqHjsnDjC0DZSuuPzA">一文探秘LLM应用开发(13)-模型部署与推理(优化理论) </a><br>2.2 <a href="https://lilianweng.github.io/posts/2023-01-10-inference-optimization/">https://lilianweng.github.io/posts/2023-01-10-inference-optimization/</a><br>2.3. <a href="https://zhuanlan.zhihu.com/p/659770503">NLP（二十）：漫谈 KV Cache 优化方法，深度理解 StreamingLLM</a> ***<br>2.4. <a href="https://zhuanlan.zhihu.com/p/662498827">大模型推理加速：看图学KV Cache</a> ***</p>
-<ol start="103">
-<li><a href="https://zhuanlan.zhihu.com/p/656485997">大语言模型推理性能优化综述</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/642412124">NLP（十八）：LLM 的推理优化技术纵览</a> ***</li>
-</ol>
+<h3><span id="kv-cache2324">KV Cache[2.3][2.4]</span><a href="#kv-cache2324" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="综述">综述</span><a href="#综述" class="header-anchor">#</a></h3><p>2.1. <a href="https://mp.weixin.qq.com/s/glPPSqHjsnDjC0DZSuuPzA">一文探秘LLM应用开发(13)-模型部署与推理(优化理论) </a><br>2.2 <a href="https://lilianweng.github.io/posts/2023-01-10-inference-optimization/">https://lilianweng.github.io/posts/2023-01-10-inference-optimization/</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/656485997">大语言模型推理性能优化综述</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/642412124">NLP（十八）：LLM 的推理优化技术纵览</a> *** </p>
+<h3><span id="kv-cache">kv cache</span><a href="#kv-cache" class="header-anchor">#</a></h3><p>2.3. <a href="https://zhuanlan.zhihu.com/p/659770503">NLP（二十）：漫谈 KV Cache 优化方法，深度理解 StreamingLLM</a> ***<br>2.4. <a href="https://zhuanlan.zhihu.com/p/662498827">大模型推理加速：看图学KV Cache</a> ***</p>
+<h3><span id="量化">量化</span><a href="#量化" class="header-anchor">#</a></h3><p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648399136&idx=1&sn=bd0a7237940c2ac800e06ae6d247349e">NLP大模型压缩关键技术解读：用于大型Transformer的8-bit矩阵乘法原理及其简单实现</a><br>   <a href="https://huggingface.co/blog/zh/hf-bitsandbytes-integration">大规模 Transformer 模型 8 比特矩阵乘简介 - 基于 Hugging Face Transformers、Accelerate 以及 bitsandbytes </a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
