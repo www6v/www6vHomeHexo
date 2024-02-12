@@ -2866,6 +2866,12 @@
 <li><a href="#%E8%AF%8D%E5%85%83%E5%88%87%E5%88%86">词元切分</a></li>
 </ul>
 </li>
+<li><a href="#%E5%8D%83%E5%B8%86llama-2%E4%B8%AD%E6%96%87%E5%A2%9E%E5%BC%BA%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D-sft2">千帆Llama 2中文增强技术介绍-SFT[2]</a><ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA">数据增强</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%B2%BE%E7%AE%80">数据精简</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E9%85%8D%E6%AF%94">数据配比</a></li>
+</ul>
+</li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
 <li><a href="#%E6%8C%87%E4%BB%A4%E6%95%B0%E6%8D%AE">指令数据</a></li>
 <li><a href="#%E5%85%B6%E4%BB%96">其他</a></li>
@@ -2888,14 +2894,30 @@
 <li>WordPiece</li>
 <li>Unigram 词元分析</li>
 </ul>
+<h1><span id="千帆llama-2中文增强技术介绍-sft2">千帆Llama 2中文增强技术介绍-SFT[2]</span><a href="#千帆llama-2中文增强技术介绍-sft2" class="header-anchor">#</a></h1><h3><span id="数据增强">数据增强</span><a href="#数据增强" class="header-anchor">#</a></h3><ul>
+<li>Self-instruct</li>
+<li>wizard [3]</li>
+</ul>
+<h3><span id="数据精简">数据精简</span><a href="#数据精简" class="header-anchor">#</a></h3><ul>
+<li>低质量过滤</li>
+<li>相似数据过滤</li>
+</ul>
+<h3><span id="数据配比">数据配比</span><a href="#数据配比" class="header-anchor">#</a></h3><ul>
+<li>领域数据</li>
+<li>多语言数据</li>
+</ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li>《大规模语言模型》</li>
+<li>《大规模语言模型》 </li>
+<li>《千帆增强版 Llama 2》 百度</li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648401462&idx=1&sn=764f0302918174cea29ae22ac5760033">如何构造复杂多样的微调指令数据：WizardLM复杂指令构造思想与实验分析工作总结 </a></li>
 </ol>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/639207933">大模型时代下数据的重要性</a> 综述</p>
 <p>1xx. <a href="https://finisky.github.io/textbooks-are-all-you-need-summary/">数据为王: Textbooks Are All You Need </a></p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/641013454">数据为王：大模型预训练中的数据处理及思考—The RefinedWeb Dataset for Falcon LLM论文解读</a></p>
 <p>1xx. <a href="https://mp.weixin.qq.com/s/c50HrOfKOqgqGPVRHf6EpA">大模型微调究竟需要多少数据：从三个现有代表工作看几组结论及一点思考 </a><br>   &lt;&lt;LIMa：Less Is More for Alignment&gt;&gt;</p>
-<h3><span id="指令数据">指令数据</span><a href="#指令数据" class="header-anchor">#</a></h3><p>1xx. <a href="https://zhuanlan.zhihu.com/p/658128530">如何从数据集中自动识别高质量的指令数据-IFD指标的使用</a></p>
+<h3><span id="指令数据">指令数据</span><a href="#指令数据" class="header-anchor">#</a></h3><ol start="20">
+<li><a href="https://zhuanlan.zhihu.com/p/658128530">如何从数据集中自动识别高质量的指令数据-IFD指标的使用</a></li>
+</ol>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/671183709">大模型微调技巧 | 高质量指令数据筛选方法-MoDS</a></p>
 <h3><span id="其他">其他</span><a href="#其他" class="header-anchor">#</a></h3><p>1xx. <a href="https://zhuanlan.zhihu.com/p/420295576">哈工大｜15种NLP数据增强方法总结与对比</a></p>
 <p>1xx. <a href="https://hub.baai.ac.cn/view/28740">大模型研发核心：数据工程、自动化评估及与知识图谱的结合</a><br>   <a href="https://mp.weixin.qq.com/s/SvDnQD886E3DBtw8k9asgg">大模型研发核心：数据工程、自动化评估及与知识图谱的结合 </a></p>
@@ -3183,14 +3205,35 @@
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h1><span id="继续-预训练-continual-pre-training">继续-预训练 continual pre-training</span><a href="#继续-预训练-continual-pre-training" class="header-anchor">#</a></h1><ul>
+<h1><span id="继续-预训练-continual-pre-training-1">继续-预训练 continual pre-training [1]</span><a href="#继续-预训练-continual-pre-training-1" class="header-anchor">#</a></h1><ul>
 <li><p>继续预训练的目的<br>为了得到<strong>适应不同行业&#x2F;任务领域</strong>的预训练模型，<strong>提升下游任务的效果</strong></p>
 </li>
 <li><p>什么时候需要继续预训练？<br><strong>预训练(pre-train)的语料与下游任务(finetune)语料的【数据分布&#x2F;领域差异】大时</strong></p>
 </li>
 </ul>
+<h1><span id="千帆llama-2中文增强技术介绍-postpretrain2">千帆Llama 2中文增强技术介绍-Postpretrain[2]</span><a href="#千帆llama-2中文增强技术介绍-postpretrain2" class="header-anchor">#</a></h1><ul>
+<li><p>中文词表构建 +Tokenizer<br>中文词表扩增 29k -&gt; 59k</p>
+</li>
+<li><p>Embedding<br>在原有Embedding矩阵后追加中文embedding映射</p>
+</li>
+<li><p>数据配比<br> 中文：英文约1:1</p>
+</li>
+<li><p>pipeline</p>
+<ul>
+<li>原始数据集</li>
+<li><strong>异常清洗</strong></li>
+<li><strong>数据过滤</strong></li>
+<li><strong>去重</strong></li>
+<li>隐私匿名化</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>开源大模型预训练语料预处理流程总结： 基于基础规则处理为主 + 基于模型的质量过滤逐步成为趋势</p>
+</blockquote>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a href="https://zhuanlan.zhihu.com/p/545092184">浅谈一下「继续预训练」</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/654463331">如何更好地继续预训练（Continue PreTraining）</a><br>warmup  +  学习率<br>1xx. <a href="https://blog.csdn.net/Kaiyuan_sjtu/article/details/120695507">Don’t stop pretraining，继续预训练！</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/545092184">浅谈一下「继续预训练」</a></li>
+<li>&lt;&lt;千帆增强版 Llama 2-提升大模型对话指令遵循能力&gt;&gt;<br>1xx. <a href="https://zhuanlan.zhihu.com/p/654463331">如何更好地继续预训练（Continue PreTraining）</a><br>warmup  +  学习率<br>1xx. <a href="https://blog.csdn.net/Kaiyuan_sjtu/article/details/120695507">Don’t stop pretraining，继续预训练！</a></li>
 </ol>
 ]]></content>
       <categories>
