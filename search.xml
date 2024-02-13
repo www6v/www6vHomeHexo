@@ -2899,17 +2899,26 @@
 <!-- toc -->
 
 <ul>
-<li><a href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86-1">数据处理 [1]</a><ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E9%80%9A%E7%94%A8-1">数据处理[通用] [1]</a><ul>
 <li><a href="#%E8%B4%A8%E9%87%8F%E8%BF%87%E6%BB%A4">质量过滤</a></li>
 <li><a href="#%E5%86%97%E4%BD%99%E5%8E%BB%E9%99%A4">冗余去除</a></li>
 <li><a href="#%E9%9A%90%E7%A7%81%E6%B6%88%E9%99%A4">隐私消除</a></li>
 <li><a href="#%E8%AF%8D%E5%85%83%E5%88%87%E5%88%86">词元切分</a></li>
 </ul>
 </li>
+<li><a href="#%E6%A1%88%E4%BE%8B">案例</a><ul>
 <li><a href="#%E5%8D%83%E5%B8%86llama-2%E4%B8%AD%E6%96%87%E5%A2%9E%E5%BC%BA%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D-sft2">千帆Llama 2中文增强技术介绍-SFT[2]</a><ul>
 <li><a href="#%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA">数据增强</a></li>
 <li><a href="#%E6%95%B0%E6%8D%AE%E7%B2%BE%E7%AE%80">数据精简</a></li>
 <li><a href="#%E6%95%B0%E6%8D%AE%E9%85%8D%E6%AF%94">数据配比</a></li>
+</ul>
+</li>
+<li><a href="#%E5%BA%A6%E5%B0%8F%E6%BB%A1%E8%BD%A9%E8%BE%95%E9%87%91%E8%9E%8D%E5%A4%A7%E6%A8%A1%E5%9E%8B4">度小满轩辕金融大模型[4]</a><ul>
+<li><a href="#%E9%80%9A%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E6%B5%81%E6%B0%B4%E7%BA%BF">通用的数据清洗流水线</a></li>
+<li><a href="#%E5%A2%9E%E9%87%8F%E9%A2%84%E8%AE%AD%E7%BB%83-%E6%9C%80%E4%BD%B3%E6%95%B0%E6%8D%AE%E9%85%8D%E6%AF%94">增量预训练 最佳数据配比</a></li>
+<li><a href="#%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8%E5%92%8C%E9%87%91%E8%9E%8D%E6%8C%87%E4%BB%A4%E6%95%B0%E6%8D%AE">构造通用和金融指令数据</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
@@ -2922,7 +2931,7 @@
 
 </div>
 
-<h1><span id="数据处理-1">数据处理 [1]</span><a href="#数据处理-1" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2023/02/05/gptDataProcess/data_process.png" class>
+<h1><span id="数据处理通用-1">数据处理[通用] [1]</span><a href="#数据处理通用-1" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2023/02/05/gptDataProcess/data_process.png" class>
 
 <h3><span id="质量过滤">质量过滤</span><a href="#质量过滤" class="header-anchor">#</a></h3><ul>
 <li>基于分类器的方法</li>
@@ -2934,7 +2943,7 @@
 <li>WordPiece</li>
 <li>Unigram 词元分析</li>
 </ul>
-<h1><span id="千帆llama-2中文增强技术介绍-sft2">千帆Llama 2中文增强技术介绍-SFT[2]</span><a href="#千帆llama-2中文增强技术介绍-sft2" class="header-anchor">#</a></h1><h3><span id="数据增强">数据增强</span><a href="#数据增强" class="header-anchor">#</a></h3><ul>
+<h1><span id="案例">案例</span><a href="#案例" class="header-anchor">#</a></h1><h2><span id="千帆llama-2中文增强技术介绍-sft2">千帆Llama 2中文增强技术介绍-SFT[2]</span><a href="#千帆llama-2中文增强技术介绍-sft2" class="header-anchor">#</a></h2><h3><span id="数据增强">数据增强</span><a href="#数据增强" class="header-anchor">#</a></h3><ul>
 <li>Self-instruct</li>
 <li>wizard [3]</li>
 </ul>
@@ -2946,10 +2955,40 @@
 <li>领域数据</li>
 <li>多语言数据</li>
 </ul>
+<h2><span id="度小满轩辕金融大模型4">度小满轩辕金融大模型[4]</span><a href="#度小满轩辕金融大模型4" class="header-anchor">#</a></h2><h3><span id="通用的数据清洗流水线">通用的数据清洗流水线</span><a href="#通用的数据清洗流水线" class="header-anchor">#</a></h3><ul>
+<li>文本抽取<ul>
+<li>多来源数据收集</li>
+<li>正文提取</li>
+</ul>
+</li>
+<li>数据清洗<ul>
+<li>规则过滤</li>
+<li>模型过滤</li>
+</ul>
+</li>
+<li>去重与校验<ul>
+<li>MinHashLSH</li>
+<li>质量校验</li>
+</ul>
+</li>
+</ul>
+<h3><span id="增量预训练-最佳数据配比">增量预训练 最佳数据配比</span><a href="#增量预训练-最佳数据配比" class="header-anchor">#</a></h3><ul>
+<li><p><strong>英文数据  vs 中文数据</strong><br><strong>1  :  3</strong></p>
+</li>
+<li><p>中文数据中的  <strong>通用数据 vs 金融数据</strong><br>从 9:1 变成  <strong>4:1</strong></p>
+<ul>
+<li>通用领域指令数据<br> 8大类 50小类</li>
+<li>金融领域指令数据<br> 4大类 20小类</li>
+</ul>
+</li>
+</ul>
+<h3><span id="构造通用和金融指令数据">构造通用和金融指令数据</span><a href="#构造通用和金融指令数据" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2023/02/05/gptDataProcess/data.jpeg" class>
+
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li>《大规模语言模型》 </li>
-<li>《千帆增强版 Llama 2》 百度</li>
-<li><a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648401462&idx=1&sn=764f0302918174cea29ae22ac5760033">如何构造复杂多样的微调指令数据：WizardLM复杂指令构造思想与实验分析工作总结 </a></li>
+<li>《千帆增强版 Llama 2》 百度 有ppt</li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648401462&idx=1&sn=764f0302918174cea29ae22ac5760033">如何构造复杂多样的微调指令数据：WizardLM复杂指令构造思想与实验分析工作总结 </a> </li>
+<li>《金融行业实战：度小满轩辕金融大模型应用探索与开发实践》 百度  有ppt</li>
 </ol>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/639207933">大模型时代下数据的重要性</a> 综述</p>
 <p>1xx. <a href="https://finisky.github.io/textbooks-are-all-you-need-summary/">数据为王: Textbooks Are All You Need </a></p>
