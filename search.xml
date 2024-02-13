@@ -1585,10 +1585,50 @@
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h1><span id="混合精度1">混合精度[1]</span><a href="#混合精度1" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2024/02/01/gptPrecision/solution.png" class>
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a href="https://www.bilibili.com/video/BV1R94y1g78L?p=6">混合精度</a>  *** V<br>1xx. <a href="https://zhuanlan.zhihu.com/p/441591808">全网最全-混合精度训练原理</a>  ***<br>1xx. <a href="https://www.bilibili.com/video/BV1CB4y1R78v/">半精度训练与LLaMA2训练实战</a> 有代码<br>1xx. <a href="https://www.bilibili.com/video/BV1y34y1M7t1/">低精度训练与大模型下载</a> 有代码</li>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E4%BD%BF%E7%94%A8%E7%9A%84%E6%B7%B7%E5%90%88%E7%B2%BE%E5%BA%A6%E5%8E%9F%E5%9B%A0">使用的混合精度原因</a></li>
+<li><a href="#%E6%B7%B7%E5%90%88%E7%B2%BE%E5%BA%A6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">混合精度解决方案</a><ul>
+<li><a href="#fp32-%E6%9D%83%E9%87%8D%E5%A4%87%E4%BB%BD-12">FP32 权重备份 [1][2]</a></li>
+<li><a href="#loss-scale12">Loss Scale[1][2]</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E6%88%98">实战</a><ul>
+<li><a href="#llama%E5%8D%8A%E7%B2%BE%E5%BA%A6%E8%AE%AD%E7%BB%8320">llama半精度训练[20]</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
+<li><a href="#%E5%8E%9F%E7%90%86">原理</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81">代码</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="使用的混合精度原因">使用的混合精度原因</span><a href="#使用的混合精度原因" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2024/02/01/gptPrecision/solution.png" class>
+
+<h1><span id="混合精度解决方案">混合精度解决方案</span><a href="#混合精度解决方案" class="header-anchor">#</a></h1><h3><span id="fp32-权重备份-12">FP32 权重备份 [1][2]</span><a href="#fp32-权重备份-12" class="header-anchor">#</a></h3><p>这种方法主要是用于<strong>解决舍入误差</strong>的问题。</p>
+<img src="/www6vHomeHexo/2024/02/01/gptPrecision/weight-backup.jpg" class> 
+
+<h3><span id="loss-scale12">Loss Scale[1][2]</span><a href="#loss-scale12" class="header-anchor">#</a></h3><p>Loss Scale 主要是为了<strong>解决 fp16 underflow</strong>的问题。</p>
+<img src="/www6vHomeHexo/2024/02/01/gptPrecision/loss-scale.jpg" class> 
+
+
+<h1><span id="实战">实战</span><a href="#实战" class="header-anchor">#</a></h1><h3><span id="llama半精度训练20">llama半精度训练[20]</span><a href="#llama半精度训练20" class="header-anchor">#</a></h3><ul>
+<li>现象<br>loss先变大，再为0<br>loss爆炸，loss消失</li>
+<li>解决方案<br>padding&#x3D;left<br>改为padding&#x3D;right</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="原理">原理</span><a href="#原理" class="header-anchor">#</a></h3><ol>
+<li><a href="https://www.bilibili.com/video/BV1R94y1g78L?p=6">混合精度</a>  *** V</li>
+<li><a href="https://zhuanlan.zhihu.com/p/103685761">浅谈混合精度训练</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/441591808">全网最全-混合精度训练原理</a>  ***</li>
+</ol>
+<h3><span id="代码">代码</span><a href="#代码" class="header-anchor">#</a></h3><ol start="20">
+<li><a href="https://www.bilibili.com/video/BV1CB4y1R78v/">半精度训练与LLaMA2训练实战</a> 有代码<br>1xx. <a href="https://www.bilibili.com/video/BV1y34y1M7t1/">低精度训练与大模型下载</a> 有代码<br>1xx. <a href="https://zhuanlan.zhihu.com/p/165152789">PyTorch的自动混合精度（AMP）</a><br>1xx. <a href="https://tensorflow.google.cn/guide/mixed_precision?hl=zh-cn">混合精度</a></li>
 </ol>
 ]]></content>
       <categories>
@@ -35395,15 +35435,94 @@ table th:first-of-type {
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<img src="/www6vHomeHexo/2014/04/09/cancelAndShutdown/cancelAndShutdown.jpg" class title="Java多线程中的取消和关闭">
+<ul>
+<li>取消和关闭<ul>
+<li>基础<ul>
+<li>中断状态</li>
+<li>中断请求</li>
+<li>取消点</li>
+</ul>
+</li>
+<li>任务取消<ul>
+<li>取消策略（how&#x2F;when&#x2F;what）<ul>
+<li>how&#x2F;when<ul>
+<li>volatile的取消状态+非阻塞方法(正确)</li>
+<li>volatile的取消状态+阻塞方法(错误)</li>
+<li>中断的状态显示的检查（正确）.Thread.currentThread().isInterrupted()</li>
+</ul>
+</li>
+<li>what, 中断策略（如何响应中断请求）<ul>
+<li>InterruptedException传递给调用者，捕获后恢复中断的状态，Thread.currentThread().interrupted().</li>
+<li>封装成shutdown方法</li>
+<li>通过Future.cancel来取消任务<ul>
+<li>中断当前线程</li>
+</ul>
+</li>
+<li>阻塞函数<ul>
+<li>抛出InterruptedException</li>
+<li>Thread.isInterrupted()返回false</li>
+<li>eg. Object的wait(),Thread的join(),sleep()</li>
+</ul>
+</li>
+<li>IO上的阻塞<ul>
+<li>BIO<ul>
+<li>Socket读写网络</li>
+<li>JDBC驱动MySQL-connector-java</li>
+</ul>
+</li>
+<li>nio<ul>
+<li>InterruptibleChannel<ul>
+<li>InterruptibleChannel将被关闭</li>
+<li>抛出ClosedByInterruptException</li>
+<li>Thread.isInterrupted()返回true</li>
+</ul>
+</li>
+<li>Selector<ul>
+<li>Selector#select()方法将立即返回</li>
+<li>不会抛出异常</li>
+<li>Thread.isInterrupted()返回true</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>服务取消<ul>
+<li>生命周期方法<ul>
+<li>start()</li>
+<li>stop()</li>
+</ul>
+</li>
+<li>ExceuteService.shutDown()&#x2F;shutDownNow()</li>
+<li>致命药丸(akka的Poison Pill)</li>
+</ul>
+</li>
+<li>锁中断<ul>
+<li>不可中断 <ul>
+<li>内部锁synchronized, ReentrantLock.lock()</li>
+</ul>
+</li>
+<li>可中断<ul>
+<li>显示锁ReentrantLock.tryLock()，.lockInterruptibly()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>Java基础</category>
         <category>多线程</category>
       </categories>
       <tags>
-        <tag>Java基础</tag>
-        <tag>并发</tag>
         <tag>多线程</tag>
       </tags>
   </entry>
