@@ -22,16 +22,16 @@
 
   <meta property="og:type" content="article">
 <meta property="og:title" content="大模型 综述">
-<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/10/30/gptLargeModel/index.html">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2022/10/30/gptLargeModelSurvey/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-30T11:10:21.000Z">
-<meta property="article:modified_time" content="2024-02-17T04:52:46.307Z">
+<meta property="article:modified_time" content="2024-02-17T09:49:15.683Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="大模型">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/10/30/gptLargeModel/">
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2022/10/30/gptLargeModelSurvey/">
 
 
 <script id="page-configurations">
@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2022/10/30/gptLargeModel/">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2022/10/30/gptLargeModelSurvey/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-02-17 12:52:46" itemprop="dateModified" datetime="2024-02-17T12:52:46+08:00">2024-02-17</time>
+                <time title="修改时间：2024-02-17 17:49:15" itemprop="dateModified" datetime="2024-02-17T17:49:15+08:00">2024-02-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,15 +272,17 @@
 </ul>
 </li>
 <li><a href="#adaptation-tuning-of-llms1">Adaptation Tuning of LLMs[1]</a><ul>
-<li><a href="#%E6%8C%87%E4%BB%A4%E8%B0%83%E4%BC%98">指令调优 ***</a></li>
+<li><a href="#%E6%8C%87%E4%BB%A4%E8%B0%83%E4%BC%98">指令调优 ***</a><ul>
+<li><a href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AE%9E%E4%BE%8B%E7%9A%84%E6%9E%84%E5%BB%BA">格式化实例的构建</a></li>
+<li><a href="#%E6%8C%87%E4%BB%A4%E5%BE%AE%E8%B0%83%E7%AD%96%E7%95%A5">指令微调策略</a></li>
+<li><a href="#%E6%8C%87%E4%BB%A4%E5%BE%AE%E8%B0%83%E7%9A%84%E6%95%88%E6%9E%9C">指令微调的效果</a></li>
+</ul>
+</li>
 <li><a href="#%E5%AF%B9%E9%BD%90%E8%B0%83%E4%BC%98">对齐调优</a></li>
 <li><a href="#%E9%AB%98%E6%95%88%E8%B0%83%E4%BC%98">高效调优</a></li>
 </ul>
 </li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
-<li><a href="#%E7%BB%BC%E8%BF%B0">综述</a></li>
-</ul>
-</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
 
@@ -321,11 +323,35 @@
 </ul>
 </li>
 </ul>
-<h1><span id="adaptation-tuning-of-llms1">Adaptation Tuning of LLMs[1]</span><a href="#adaptation-tuning-of-llms1" class="header-anchor">#</a></h1><h3><span id="指令调优">指令调优 ***</span><a href="#指令调优" class="header-anchor">#</a></h3><h3><span id="对齐调优">对齐调优</span><a href="#对齐调优" class="header-anchor">#</a></h3><h3><span id="高效调优">高效调优</span><a href="#高效调优" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="综述">综述</span><a href="#综述" class="header-anchor">#</a></h3><ol>
+<h1><span id="adaptation-tuning-of-llms1">Adaptation Tuning of LLMs[1]</span><a href="#adaptation-tuning-of-llms1" class="header-anchor">#</a></h1><h3><span id="指令调优">指令调优 ***</span><a href="#指令调优" class="header-anchor">#</a></h3><p>本质上，指令微调是在<strong>自然语言格式的实例（instance）集合上</strong>微调预训练后的 LLM 的方法 [62]。</p>
+<p>指令微调后，LLM 可以展现出<strong>泛化到未见过任务</strong>的卓越能力 [28, 62, 64]，即使在多语言场景下也能有不错表现 [98]。</p>
+<h5><span id="格式化实例的构建">格式化实例的构建</span><a href="#格式化实例的构建" class="header-anchor">#</a></h5><ul>
+<li>格式化已有数据集</li>
+<li>格式化人类需求</li>
+<li>构建实例的关键因素<ul>
+<li><strong>增加指令</strong></li>
+<li><strong>设计格式</strong></li>
+</ul>
+</li>
+</ul>
+<p>总的来说，指令<strong>多样性似乎比实例数量更重要</strong></p>
+<h5><span id="指令微调策略">指令微调策略</span><a href="#指令微调策略" class="header-anchor">#</a></h5><ul>
+<li><p><strong>平衡数据分布</strong><br>一种广泛使用的方法是实例比例混合策略 [87]，即将所有数据集合并，然后从混合数据集中按比例采样每种实例。<br>此外，根据最近的研究发现 [64, 99]，<strong>提高高质量数据集（例如 FLAN [62] 和 P3 [209]）的采样比例</strong>通常可以带来<strong>性能提升</strong>。</p>
+</li>
+<li><p>结合指令微调和预训练<br>为了使微调过程更加有效和稳定，OPT-IML [99] 在<strong>指令微调期间加入了预训练数据</strong>，这可以看作是对模型的正则化（regularization）。</p>
+</li>
+</ul>
+<p>具体而言，GLM-130B [97] 和 Galactica [34] 将<strong>指令格式数据集作为预训练语料库的一小部分来预训练 LLM</strong>，这有可能同时获得预训练和指令微调的优势。</p>
+<h5><span id="指令微调的效果">指令微调的效果</span><a href="#指令微调的效果" class="header-anchor">#</a></h5><ul>
+<li>性能改进<br>最近的研究在多个规模上（从 7700 百万到 5400 亿不等）对 LM 进行了实验，**表明不同规模的模型都可以从指令微调中受益 [64, 216]，随着参数规模的增加，性能也得到了提升 [98]**。 【普适性】</li>
+</ul>
+<p>此外，**经过指令微调的较小模型甚至可以比未经微调的较大模型表现更好 [28, 64]**。</p>
+<ul>
+<li>任务泛化性<br>todo</li>
+</ul>
+<h3><span id="对齐调优">对齐调优</span><a href="#对齐调优" class="header-anchor">#</a></h3><h3><span id="高效调优">高效调优</span><a href="#高效调优" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a target="_blank" rel="noopener" href="http://aibox.ruc.edu.cn/docs/2023-08/cb9badcb213f4c8b89d00d579eed4a4c.pdf">大语言模型综述</a> 中文  v10<br>  <a target="_blank" rel="noopener" href="https://github.com/RUCAIBox/LLMSurvey/blob/main/assets/LLM_Survey_Chinese.pdf">大语言模型综述</a> 中文<br>  <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2303.18223.pdf">A Survey of Large Language Models</a> 英文<br>  <a target="_blank" rel="noopener" href="https://github.com/www6v/LLMSurvey">LLMSurvey</a>  github<br>  <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/630203554">[论文]大语言模型综述</a></li>
 </ol>
-<p>1xx. <a target="_blank" rel="noopener" href="http://arthurchiao.art/blog/llm-practical-guide-zh/">[译][论文] 大语言模型（LLM）综述与实用指南（Amazon，2023）</a>   实战  未<br>1xx. <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/597586623">通向AGI之路：大型语言模型（LLM）技术精要</a> ***<br>1xx. <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/640784855">[Transformer 101系列] 初探LLM基座模型</a><br>1xx. <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/664046612">LLM从0开始预训练系列：2、大模型技术报告总结（GPT&#x2F;PaLM&#x2F;GLM&#x2F;LLaMA&#x2F;Skywork）</a> </p>
-<p>1xx. <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/671710012">高效大语言模型：综述</a>  *** 大模型各个维度的优化<br>1xx. <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648403847&idx=1&sn=9af731e9f8418a2d869f5464530c8bd6">必看的十二个大模型前沿综述：兼论HALO大模型幻觉检测与缓解方案及Google小模型预测大模型训练不稳定的探索 </a> 12个综述</p>
 
     </div>
 
@@ -341,7 +367,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www6v.github.io/www6vHomeHexo/2022/10/30/gptLargeModel/" title="大模型 综述">https://www6v.github.io/www6vHomeHexo/2022/10/30/gptLargeModel/</a>
+    <a href="https://www6v.github.io/www6vHomeHexo/2022/10/30/gptLargeModelSurvey/" title="大模型 综述">https://www6v.github.io/www6vHomeHexo/2022/10/30/gptLargeModelSurvey/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -439,7 +465,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">535</span>
+          <span class="site-state-item-count">536</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
