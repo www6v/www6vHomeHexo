@@ -107,6 +107,7 @@
 <li><a href="/www6vHomeHexo/2022/11/02/gptAgent/" title="Agent 原理">Agent 原理</a></li>
 <li><a href="/www6vHomeHexo/2023/01/21/gptMultiAgents/" title="Multi-Agents">Multi-Agents</a>  </li>
 <li><a href="/www6vHomeHexo/2023/01/01/gptAgentPractice/" title="Agent 实践">Agent 实践</a> </li>
+<li><a href="/www6vHomeHexo/2023/02/21/gptAgentMultimodal/" title="Agent 多模态">Agent 多模态</a>  </li>
 <li>Tools<ul>
 <li><a href="/www6vHomeHexo/2022/11/16/gptFunctionCall/" title="Function Call">Function Call</a> </li>
 <li><a href="/www6vHomeHexo/2023/01/27/gptAgentTool/" title="Agent-Tools">Agent-Tools</a>  </li>
@@ -1722,7 +1723,6 @@
 <ul>
 <li><a href="#%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86-1">技术原理 [1]</a></li>
 <li><a href="#%E5%AE%9E%E6%88%981-2">实战1 [2]</a></li>
-<li><a href="#%E5%AE%9E%E6%88%982-34">实战2 [3][4]</a></li>
 <li><a href="#%E5%8F%82%E6%95%B0">参数</a></li>
 </ul>
 <!-- tocstop -->
@@ -1741,38 +1741,15 @@
 <img src="/www6vHomeHexo/2024/01/12/gptPEFTQLora/qlora.png" class>
 
 <p>实验证明，无论是使用16bit、8bit还是4bit的适配器方法，都能够复制16bit全参数微调的基准性能。这说明，尽管量化过程中会存在性能损失，但通过适配器微调，完全可以恢复这些性能。</p>
-<h1><span id="实战1-2">实战1 [2]</span><a href="#实战1-2" class="header-anchor">#</a></h1><h1><span id="实战2-34">实战2 [3][4]</span><a href="#实战2-34" class="header-anchor">#</a></h1><ul>
-<li><p>Training的模型</p>
-<img src="/www6vHomeHexo/2024/01/12/gptPEFTQLora/dirs.png" class>
-</li>
-<li><p>合并后的模型</p>
-<img src="/www6vHomeHexo/2024/01/12/gptPEFTQLora/dir.png" class>
-</li>
-<li><p>4bit量化推理</p>
-<img src="/www6vHomeHexo/2024/01/12/gptPEFTQLora/xtuner-chat.png" class></li>
-</ul>
-<blockquote>
-<p>Training的时候要用tmux</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">tmux new -s finetune</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">tmux attach -t finetune</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">ctcl +b , D</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>16bit量化推理慢,  要用4bit量化推理</p>
-</blockquote>
-<h1><span id="参数">参数</span><a href="#参数" class="header-anchor">#</a></h1><ol>
+<h1><span id="实战1-2">实战1 [2]</span><a href="#实战1-2" class="header-anchor">#</a></h1><h1><span id="参数">参数</span><a href="#参数" class="header-anchor">#</a></h1><ol>
 <li><p><a href="https://zhuanlan.zhihu.com/p/636215898">大模型参数高效微调技术原理综述（五）-LoRA、AdaLoRA、QLoRA</a></p>
 </li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/636644164">高效微调技术QLoRA实战，基于LLaMA-65B微调仅需48G显存，真香</a><br><a href="https://github.com/www6v/llm-action/tree/main/train/qlora">qlora</a> git</p>
+<li><p><a href="https://zhuanlan.zhihu.com/p/636644164">高效微调技术QLoRA实战，基于LLaMA-65B微调仅需48G显存，真香</a>  先是训练llama-7b, 再是训练llama-65b<br><a href="https://github.com/www6v/llm-action/tree/main/train/qlora">qlora</a> git</p>
 </li>
-<li><p><a href="https://github.com/www6v/tutorial/tree/main/xtuner">internLM fine-tuning on xtuner</a>   </p>
-</li>
-<li><p><a href="https://www.bilibili.com/video/BV1yK4y1B75J/">(4)XTuner 大模型单卡低成本微调实战</a> V</p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/671089942">[大模型微调技术] LoRA、QLoRA、QA-LoRA 原理笔记</a> 未</p>
-</li>
-<li><p><a href="https://cloud.tencent.com/developer/article/2375230">大模型实操 | LoRA、QLoRA微调大模型实战技巧分享，含常见QA解答！</a> 未</p>
+<li><p><a href="https://github.com/zyds/transformers-code/tree/master/04-Kbit%20Training/27-4bits_training">4bits_training</a><br><a href="https://www.bilibili.com/video/BV1DQ4y1t7e8/">【手把手带你实战HuggingFace Transformers-低精度训练篇】4bit量化与QLoRA模型训练</a> V</p>
 </li>
 </ol>
+<p>1xx. <a href="https://zhuanlan.zhihu.com/p/671089942">[大模型微调技术] LoRA、QLoRA、QA-LoRA 原理笔记</a><br>1xx. <a href="https://cloud.tencent.com/developer/article/2375230">大模型实操 | LoRA、QLoRA微调大模型实战技巧分享，含常见QA解答！</a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -2752,6 +2729,24 @@
       </tags>
   </entry>
   <entry>
+    <title>Agent 多模态</title>
+    <url>/www6vHomeHexo/2023/02/21/gptAgentMultimodal/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<p>1xx. <a href="https://zhuanlan.zhihu.com/p/677071947">AppAgent源码分析&amp;思考</a><br><a href="https://github.com/mnotgod96/AppAgent">https://github.com/mnotgod96/AppAgent</a><br><a href="https://icoz69.github.io/">https://icoz69.github.io/</a></p>
+<p>1xx. <a href="https://zhuanlan.zhihu.com/p/681424409">【LLM-agent】MOBILE-AGENT: 具有视觉感知能力的自治多模移动设备agent</a><br>   <a href="https://github.com/X-PLUG/MobileAgent">https://github.com/X-PLUG/MobileAgent</a></p>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>Agent</category>
+      </categories>
+      <tags>
+        <tag>AIGC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>量化</title>
     <url>/www6vHomeHexo/2023/02/19/gptQuantization/</url>
     <content><![CDATA[<p></p>
@@ -2778,6 +2773,7 @@
 <li><a href="#%E9%87%8F%E5%8C%96%E4%B8%8E8bit%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83">量化与8bit模型训练</a></li>
 </ul>
 </li>
+<li><a href="#%E5%AE%9E%E6%88%982-%E9%87%8F%E5%8C%96%E6%8E%A8%E7%90%86-%E9%87%8F%E5%8C%96%E6%8E%A8%E7%90%86-8">实战2-量化推理 量化推理 [8]</a></li>
 <li><a href="#%E4%BD%8E%E7%B2%BE%E5%BA%A6%E8%AE%AD%E7%BB%83%E6%96%B9%E6%B3%95chat">低精度训练方法[chat]</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
@@ -2794,7 +2790,7 @@
 <li><p>量化分类 [3][5]</p>
 <ul>
 <li>Quantization-Aware Training (QAT)<br><strong>Need more data and time, More accurate</strong></li>
-<li>Quantization-Aware Fine-tuning，QAF   </li>
+<li>Quantization-Aware Fine-tuning(QAF)   [9]</li>
 <li>Post-Training Quantization (PTQ)<br><strong>Need fewer data and time, Less accurate</strong></li>
 </ul>
 </li>
@@ -2808,19 +2804,47 @@
 </ul>
 <h1><span id="ptq">PTQ</span><a href="#ptq" class="header-anchor">#</a></h1><h3><span id="llmint8-6">LLM.int8() [6]</span><a href="#llmint8-6" class="header-anchor">#</a></h3><h3><span id="gptq-6">GPTQ [6]</span><a href="#gptq-6" class="header-anchor">#</a></h3><h3><span id="awq-7">AWQ [7]</span><a href="#awq-7" class="header-anchor">#</a></h3><h1><span id="实战-ptq1">实战-PTQ[1]</span><a href="#实战-ptq1" class="header-anchor">#</a></h1><h3><span id="量化与8bit模型训练">量化与8bit模型训练</span><a href="#量化与8bit模型训练" class="header-anchor">#</a></h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">model = AutoModelForCausalLM.from_pretrained(<span class="string">&quot;D:/Pretrained_models/modelscope/Llama-2-7b-ms&quot;</span>, low_cpu_mem_usage=<span class="literal">True</span>, </span><br><span class="line">                                             torch_dtype=torch.half, device_map=<span class="string">&quot;auto&quot;</span>, load_in_8bit=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 
+<h1><span id="实战2-量化推理-量化推理-8">实战2-量化推理 量化推理 [8]</span><a href="#实战2-量化推理-量化推理-8" class="header-anchor">#</a></h1><ul>
+<li><p>Training的模型</p>
+<img src="/www6vHomeHexo/2023/02/19/gptQuantization/dirs.png" class>
+</li>
+<li><p>合并后的模型</p>
+<img src="/www6vHomeHexo/2023/02/19/gptQuantization/dir.png" class>
+</li>
+<li><p>4bit量化推理</p>
+<img src="/www6vHomeHexo/2023/02/19/gptQuantization/xtuner-chat.png" class></li>
+</ul>
+<blockquote>
+<p>Training的时候要用tmux</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">tmux new -s finetune</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">tmux attach -t finetune</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">ctcl +b , D</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>16bit量化推理慢,  要用4bit量化推理</p>
+</blockquote>
 <h1><span id="低精度训练方法chat">低精度训练方法[chat]</span><a href="#低精度训练方法chat" class="header-anchor">#</a></h1><ul>
 <li>半精度浮点数（FP16）训练</li>
 <li>混合精度训练（Mixed Precision Training）</li>
 <li>量化训练（Quantization Training）</li>
 </ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a href="https://www.bilibili.com/video/BV1EN411g7Yn/"> 量化与8bit模型训练</a> V<br><a href="https://www.bilibili.com/video/BV1EN411g7Yn/">【手把手带你实战HuggingFace Transformers-低精度训练篇】量化与8bit模型训练</a><br>   <a href="https://github.com/www6v/transformers-code/blob/master/04-Kbit%20Training/26-8bits_training/llama2_lora_8bit.ipynb">llama2_lora_8bit.ipynb</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/649460612">大模型训练｜概念篇</a></li>
-<li>&lt;&lt; An Introduction to Quantization of Large Language Model &gt;&gt; </li>
-<li>4.1<a href="https://pytorch.org/docs/stable/quantization.html">pytorch Quantization</a><br>4.2 <a href="https://pytorch.org/blog/introduction-to-quantization-on-pytorch/">Introduction to Quantization on PyTorch</a> </li>
-<li><a href="https://www.zhihu.com/question/627484732/answer/3261671478">目前针对大模型进行量化的方法有哪些？</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/680212402">大模型量化技术原理-LLM.int8()、GPTQ</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/681578090">大模型量化技术原理-AWQ、AutoAWQ</a></li>
+<li><p><a href="https://www.bilibili.com/video/BV1EN411g7Yn/"> 量化与8bit模型训练</a> V<br><a href="https://www.bilibili.com/video/BV1EN411g7Yn/">【手把手带你实战HuggingFace Transformers-低精度训练篇】量化与8bit模型训练</a><br>   <a href="https://github.com/www6v/transformers-code/blob/master/04-Kbit%20Training/26-8bits_training/llama2_lora_8bit.ipynb">llama2_lora_8bit.ipynb</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/649460612">大模型训练｜概念篇</a></p>
+</li>
+<li><p>&lt;&lt; An Introduction to Quantization of Large Language Model &gt;&gt; </p>
+</li>
+<li><p>4.1<a href="https://pytorch.org/docs/stable/quantization.html">pytorch Quantization</a><br>4.2 <a href="https://pytorch.org/blog/introduction-to-quantization-on-pytorch/">Introduction to Quantization on PyTorch</a> </p>
+</li>
+<li><p><a href="https://www.zhihu.com/question/627484732/answer/3261671478">目前针对大模型进行量化的方法有哪些？</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/680212402">大模型量化技术原理-LLM.int8()、GPTQ</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/681578090">大模型量化技术原理-AWQ、AutoAWQ</a></p>
+</li>
+<li><p><a href="https://github.com/www6v/tutorial/tree/main/xtuner">internLM fine-tuning on xtuner</a><br><a href="https://www.bilibili.com/video/BV1yK4y1B75J/">(4)XTuner 大模型单卡低成本微调实战</a> V</p>
+</li>
+<li><a href="/www6vHomeHexo/2024/01/12/gptPEFTQLora/" title="PEFT QLoRA 实战">PEFT QLoRA 实战</a>   self</li>
 </ol>
 <p>1xx. <a href="https://www.zhihu.com/question/510246227">神经网络低比特量化中训练和推理是如何实现的？</a></p>
 <p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648399136&idx=1&sn=bd0a7237940c2ac800e06ae6d247349e">NLP大模型压缩关键技术解读：用于大型Transformer的8-bit矩阵乘法原理及其简单实现</a><br>   <a href="https://huggingface.co/blog/zh/hf-bitsandbytes-integration">大规模 Transformer 模型 8 比特矩阵乘简介 - 基于 Hugging Face Transformers、Accelerate 以及 bitsandbytes </a></p>
