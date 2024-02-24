@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2023/01/01/gptLlama/llama2.png">
 <meta property="article:published_time" content="2023-01-01T11:35:09.000Z">
-<meta property="article:modified_time" content="2024-02-18T14:26:03.482Z">
+<meta property="article:modified_time" content="2024-02-24T14:23:52.720Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="LLaMA">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-02-18 22:26:03" itemprop="dateModified" datetime="2024-02-18T22:26:03+08:00">2024-02-18</time>
+                <time title="修改时间：2024-02-24 22:23:52" itemprop="dateModified" datetime="2024-02-24T22:23:52+08:00">2024-02-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,9 +273,7 @@
 <li><a href="#%E4%B8%8Ellama%E4%B8%BB%E8%A6%81%E5%8C%BA%E5%88%AB31">与LLaMA主要区别：[31]</a></li>
 </ul>
 </li>
-<li><a href="#llama-%E5%88%86%E6%94%AF1">LLaMA 分支[1]</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
-<li><a href="#%E5%88%86%E6%94%AF">分支</a></li>
 <li><a href="#llama">LLaMA</a></li>
 <li><a href="#llama2">LLaMA2</a></li>
 </ul>
@@ -300,61 +298,8 @@
 <li>GQA技术</li>
 <li>完整的RLHF链条</li>
 </ul>
-<hr>
-<h1><span id="llama-分支1">LLaMA 分支[1]</span><a href="#llama-分支1" class="header-anchor">#</a></h1><table>
-<thead>
-<tr>
-<th>项目</th>
-<th>描述</th>
-<th>数据集</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>LLaMa</td>
-<td>基座模型</td>
-<td>公开可用的数据集(1T token)</td>
-</tr>
-<tr>
-<td>Stanford Alpaca</td>
-<td>结合英文语料通过Self Instruct方式微调LLaMA 7B</td>
-<td>Self Instruct from davinci-003 API(52K)</td>
-</tr>
-<tr>
-<td>Vicuna-13B</td>
-<td>通过ShareGPT.com的7万条对话数据微调LLaMA(Alpaca基础之上, 多轮对话和长序列, full fine-tune)</td>
-<td>用户共享对话(70K sample)</td>
-</tr>
-<tr>
-<td>BELLE</td>
-<td>结合中文语料通过Self Instruct方式微调BLOOMZ-7B或LLaMA</td>
-<td></td>
-</tr>
-<tr>
-<td>Chinese-LLaMA&#x2F;Chinese-Alpaca</td>
-<td>通过中文数据预训练&#x2F;指令微调LLaMA</td>
-<td></td>
-</tr>
-<tr>
-<td>姜子牙系列模型Ziya-LLaMA-13B-v1</td>
-<td>基于LLaMA-13B的中英文模型</td>
-<td></td>
-</tr>
-<tr>
-<td>ChatLLaMA(英文版)</td>
-<td>LLaMA的RLHF版</td>
-<td></td>
-</tr>
-<tr>
-<td>ColossalChat</td>
-<td>通过self-instruct技术指令微调LLaMA且加上RLHF</td>
-<td></td>
-</tr>
-</tbody></table>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="分支">分支</span><a href="#分支" class="header-anchor">#</a></h3><ol>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/v_JULY_v/article/details/129709105">LLaMA的解读与其微调：Alpaca-LoRA&#x2F;Vicuna&#x2F;BELLE&#x2F;中文LLaMA&#x2F;姜子牙&#x2F;LLaMA 2</a> ***<br>1xx. <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzUyOTA5OTcwMg==&mid=2247485019&idx=1&sn=e3417472c0c1f98aede498fbe905e1a0&">我想学大模型，应该从哪个模型开始？LLaMA生态家谱整理和分析 </a><br>1xx. <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/618695885">NLP（九）：LLaMA, Alpaca, ColossalChat 系列模型研究</a><br>1xx. <a target="_blank" rel="noopener" href="https://github.com/www6v/Llama2-Chinese">https://github.com/www6v/Llama2-Chinese</a><br>1xx.  <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/618321077">从0到1复现斯坦福羊驼（Stanford Alpaca 7B）</a><br> GPUs: 8 卡 A800 80GB GPUs<br>1xx. &lt;&lt;千帆增强版 Llama 2-提升大模型对话指令遵循能力&gt;&gt;</li>
-</ol>
-<h3><span id="llama">LLaMA</span><a href="#llama" class="header-anchor">#</a></h3><ol start="20">
-<li><a target="_blank" rel="noopener" href="http://arthurchiao.art/blog/llama-paper-zh/">[译][论文] LLaMA：开放和高效的基础语言模型集</a><br>1xx. <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1nN41157a9/">第十五课：LLaMA</a>  *** 华为  V</li>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="llama">LLaMA</span><a href="#llama" class="header-anchor">#</a></h3><ol start="20">
+<li><a target="_blank" rel="noopener" href="http://arthurchiao.art/blog/llama-paper-zh/">[译][论文] LLaMA：开放和高效的基础语言模型集</a><br>1xx. <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1nN41157a9/">第十五课：LLaMA</a>  *** 华为  V<br>1xx. <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648399298&idx=1&sn=dd83c4f42c68a89f8199f990e7570586">Meta最新语言模型LLaMA论文研读：小参数+大数据的开放、高效基础语言模型阅读笔记 </a></li>
 </ol>
 <h3><span id="llama2">LLaMA2</span><a href="#llama2" class="header-anchor">#</a></h3><ol start="30">
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648401927&idx=1&sn=3dddcb5c1d8b3c246a8b7529502fdcf0">也谈凌晨刷屏的Llama2开源可商用模型：从其数据构造、模型架构和评估方式等方面的一些总结与发现 </a></li>
@@ -474,7 +419,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">541</span>
+          <span class="site-state-item-count">542</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
