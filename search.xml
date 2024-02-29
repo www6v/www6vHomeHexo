@@ -32,7 +32,6 @@
 <li><a href="/www6vHomeHexo/2023/01/04/gptLeaderBoard/" title="排行榜">排行榜</a></li>
 </ul>
 </li>
-<li><a href="/www6vHomeHexo/2023/01/18/gptMultimodal/" title="多模态">多模态</a>  </li>
 <li><a href="/www6vHomeHexo/2023/01/25/gptImpossibleTriangle/" title="不可能三角">不可能三角</a> </li>
 <li><a href="/www6vHomeHexo/2023/02/03/gptEmergent/" title="涌现现象（Emergent）">涌现现象（Emergent）</a>   </li>
 <li><a href="/www6vHomeHexo/2023/02/06/gptHallucination/" title="幻觉问题">幻觉问题</a>    </li>
@@ -98,6 +97,12 @@
 <li><a href="/www6vHomeHexo/2023/02/08/gptCOT/" title="COT">COT</a> </li>
 <li><a href="/www6vHomeHexo/2021/05/28/gptPromptCode/" title="Prompt-Code">Prompt-Code</a></li>
 <li><a href="/www6vHomeHexo/2021/05/26/gptPrompt/" title="Prompt-How to use">Prompt-How to use</a></li>
+</ul>
+<h2><span id="multimodal">Multimodal</span><a href="#multimodal" class="header-anchor">#</a></h2><ul>
+<li><a href="/www6vHomeHexo/2023/01/18/gptMultimodal/" title="多模态">多模态</a> </li>
+<li><a href="/www6vHomeHexo/2023/03/01/gptMultimodalCLIP/" title="CLIP">CLIP</a>  </li>
+<li><a href="/www6vHomeHexo/2023/03/01/gptMultimodalSAM/" title="SAM">SAM</a>   </li>
+<li><a href="/www6vHomeHexo/2023/03/01/gptMultimodalVit/" title="ViT">ViT</a></li>
 </ul>
 <h2><span id="rag">RAG</span><a href="#rag" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/11/02/gptRAG/" title="RAG 原理">RAG 原理</a></li>
@@ -2706,6 +2711,54 @@
       </categories>
       <tags>
         <tag>设计原则</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ViT</title>
+    <url>/www6vHomeHexo/2023/03/01/gptMultimodalVit/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>ViT</category>
+      </categories>
+      <tags>
+        <tag>ViT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SAM</title>
+    <url>/www6vHomeHexo/2023/03/01/gptMultimodalSAM/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<p><a href="https://blog.csdn.net/weixin_44386956/article/details/130262260">【模型解读】【代码复现】Segment Anything Model(SAM)</a><br><a href="https://zhuanlan.zhihu.com/p/620355474">【论文解读】MetaAi SAM(Segment Anything) 分割一切</a><br><a href="https://zhuanlan.zhihu.com/p/630529550">Segment Anything(sam)项目整理汇总</a></p>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>SAM</category>
+      </categories>
+      <tags>
+        <tag>SAM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CLIP</title>
+    <url>/www6vHomeHexo/2023/03/01/gptMultimodalCLIP/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<p>1xx. <a href="https://zhuanlan.zhihu.com/p/493489688">神器CLIP：连接文本和图像，打造可迁移的视觉模型</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/486857682">【CLIP系列Paper解读】CLIP: Learning Transferable Visual Models From Natural Language Supervision</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/660476765">关于多模态经典之作CLIP，还有哪些细节是你不知道的</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/646790176">CLIP 模型解读</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/521151393">详解CLIP (一) | 打通文本-图像预训练实现ImageNet的zero-shot分类，比肩全监督训练的ResNet50&#x2F;101</a><br>1xx. <a href="https://blog.csdn.net/lsb2002/article/details/132275132">openai多模态大模型：clip详解及实战</a></p>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>multimodal</category>
+      </categories>
+      <tags>
+        <tag>multimodal</tag>
       </tags>
   </entry>
   <entry>
