@@ -3395,6 +3395,7 @@
 
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/677071947">AppAgent源码分析&amp;思考</a><br><a href="https://github.com/mnotgod96/AppAgent">https://github.com/mnotgod96/AppAgent</a><br><a href="https://icoz69.github.io/">https://icoz69.github.io/</a></p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/681424409">【LLM-agent】MOBILE-AGENT: 具有视觉感知能力的自治多模移动设备agent</a><br>   <a href="https://github.com/X-PLUG/MobileAgent">https://github.com/X-PLUG/MobileAgent</a></p>
+<p>1xx. <a href="https://zhuanlan.zhihu.com/p/678203245">智体AI在多模态交互领域的综述（上）</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/678222381">智体AI在多模态交互领域的综述（下）</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/678238642">个人LLM智体的综述</a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -7071,14 +7072,13 @@
 <li><a href="https://github.com/Significant-Gravitas/AutoGPT">AutoGPT</a> git<br><a href="https://link.zhihu.com/?target=https://godmode.space/">带界面的 AutoGPT 产品</a></li>
 <li><a href="https://lilianweng.github.io/posts/2023-06-23-agent/">LLM Powered Autonomous Agents </a> paper </li>
 <li>xxx</li>
-<li><a href="https://zhuanlan.zhihu.com/p/633033220">LLM 全栈开发指南补遗</a>  Agents  ***<br><a href="https://fullstackdeeplearning.com/llm-bootcamp/spring-2023/chase-agents/">Harrison Chase: Agents</a>  ***</li>
+<li><a href="https://zhuanlan.zhihu.com/p/633033220">LLM 全栈开发指南补遗</a>  Agents  ***<br><a href="https://fullstackdeeplearning.com/llm-bootcamp/spring-2023/chase-agents/">Harrison Chase: Agents</a>  ***<br>1xx. <a href="https://blog.csdn.net/v_JULY_v/article/details/135868163?spm=1001.2014.3001.5502">智能体AI Agent的极速入门：从ReAct、AutoGPT到AutoGen、QwenAgent、XAgent、MetaGPT</a></li>
 </ol>
 <h3><span id="planning">Planning</span><a href="#planning" class="header-anchor">#</a></h3><ol start="20">
 <li><a href="https://react-lm.github.io/">ReAct: Synergizing Reasoning and Acting in Language Models</a> paper</li>
 <li><a href="https://zhuanlan.zhihu.com/p/639254455">【论文阅读】Reflexion: 大模型如何从错误经验中学习？</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/671508578">Reflexion: 带言语强化学习的语言智体</a><br>2xx. <a href="https://zhuanlan.zhihu.com/p/671491031">ReWOO: 高效增强语言模型中解偶观测和推理</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/671508578">Reflexion: 带言语强化学习的语言智体</a><br>2xx. <a href="https://baoyu.io/translations/ai-paper/2311.11797-igniting-language-intelligence-the-hitchhikers-guide-from-chain-of-thought-reasoning-to-language-agents">引领语言智能：从思维链推理到语言智能体的探索指南 [译]</a> paper<br>2xx. <a href="https://zhuanlan.zhihu.com/p/671491031">ReWOO: 高效增强语言模型中解偶观测和推理</a></li>
 </ol>
-<p>3xx. <a href="https://zhuanlan.zhihu.com/p/678203245">智体AI在多模态交互领域的综述（上）</a><br>3xx. <a href="https://zhuanlan.zhihu.com/p/678222381">智体AI在多模态交互领域的综述（下）</a><br>3xx. <a href="https://zhuanlan.zhihu.com/p/678238642">个人LLM智体的综述</a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
