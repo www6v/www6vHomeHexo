@@ -150,7 +150,8 @@
 <h2><span id="research">Research</span><a href="#research" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2024/02/11/gptPaperTools/" title="科研-工具">科研-工具</a> </li>
 <li><a href="/www6vHomeHexo/2023/01/20/gptStudyPaper/" title="GPT 论文">GPT 论文</a></li>
-<li><a href="/www6vHomeHexo/2023/02/25/gptSurveyList/" title="Survey List">Survey List</a></li>
+<li><a href="/www6vHomeHexo/2023/02/25/gptSurveyList/" title="Survey List">Survey List</a> </li>
+<li><a href="/www6vHomeHexo/2023/03/04/gptAgentPaper/" title="Paper-Agent">Paper-Agent</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -2717,6 +2718,24 @@
       </tags>
   </entry>
   <entry>
+    <title>Paper-Agent</title>
+    <url>/www6vHomeHexo/2023/03/04/gptAgentPaper/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<p>1xx. <a href="https://github.com/zjunlp/LLMAgentPapers">LLM Agents Papers</a> ***</p>
+<p>1xx. <a href="https://zhuanlan.zhihu.com/p/662506575">28 篇最新论文解读 LLMs-based Agents</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/661741663">ICLR’24 Agent论文合集：RL-based、LLM-based 前沿研究汇总</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/665282216">ICLR’24 大语言模型智能体最新研究进展丨智能体应用篇</a><br>1xx. <a href="https://mp.weixin.qq.com/s/GGRWQJ-eBvHerB9H9JPCjg">ICLR’24 大语言模型智能体最新研究进展丨智能体能力篇 </a><br>   <a href="https://mp.weixin.qq.com/s/eYnZY1GFWMKdU_Z57iSEJg">ICLR’24 大语言模型智能体最新研究进展 </a><br>1xx. <a href="https://github.com/www6v/LLM-Agents-Papers"> LLM-Agents-Papers</a></p>
+<p>1xx. <a href="https://www.bilibili.com/read/cv27126779/">AGI新突破！52篇论文尽览大模型Agent最新研究进展！</a></p>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>Agent</category>
+      </categories>
+      <tags>
+        <tag>Agent</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>多模态 预训练</title>
     <url>/www6vHomeHexo/2023/03/04/gptMultimodalPretrain/</url>
     <content><![CDATA[<p></p>
@@ -3600,9 +3619,9 @@
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-
-<p>1xx. <a href="https://zhuanlan.zhihu.com/p/677071947">AppAgent源码分析&amp;思考</a><br><a href="https://github.com/mnotgod96/AppAgent">https://github.com/mnotgod96/AppAgent</a><br><a href="https://icoz69.github.io/">https://icoz69.github.io/</a></p>
+<h3><span id="app-agent">App Agent</span><a href="#app-agent" class="header-anchor">#</a></h3><p>1xx. <a href="https://zhuanlan.zhihu.com/p/677071947">AppAgent源码分析&amp;思考</a><br><a href="https://github.com/mnotgod96/AppAgent">https://github.com/mnotgod96/AppAgent</a><br><a href="https://icoz69.github.io/">https://icoz69.github.io/</a></p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/681424409">【LLM-agent】MOBILE-AGENT: 具有视觉感知能力的自治多模移动设备agent</a><br>   <a href="https://github.com/X-PLUG/MobileAgent">https://github.com/X-PLUG/MobileAgent</a></p>
+<h3><span id="web-agent">web agent</span><a href="#web-agent" class="header-anchor">#</a></h3><p><a href="https://sites.google.com/view/mm-webnav/">Multimodal Web Navigation with Instruction-Finetuned Foundation Models</a></p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/678203245">智体AI在多模态交互领域的综述（上）</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/678222381">智体AI在多模态交互领域的综述（下）</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/678238642">个人LLM智体的综述</a></p>
 ]]></content>
       <categories>
