@@ -122,7 +122,11 @@
 <li><a href="/www6vHomeHexo/2023/01/21/gptMultiAgents/" title="Multi-Agents">Multi-Agents</a>  </li>
 <li><a href="/www6vHomeHexo/2023/01/01/gptAgentPractice/" title="Agent 实践">Agent 实践</a> </li>
 <li><a href="/www6vHomeHexo/2023/03/02/gptAgentPlanAndExecute/" title="Plan-And-Execute Agent">Plan-And-Execute Agent</a>  </li>
+<li>Multimodal Agent<ul>
 <li><a href="/www6vHomeHexo/2023/02/21/gptAgentMultimodal/" title="Agent 多模态">Agent 多模态</a>  </li>
+<li><a href="/www6vHomeHexo/2023/03/05/gptAgentWeb/" title="Web Agent">Web Agent</a></li>
+</ul>
+</li>
 <li>Tools<ul>
 <li><a href="/www6vHomeHexo/2022/11/16/gptFunctionCall/" title="Function Call">Function Call</a> </li>
 <li><a href="/www6vHomeHexo/2023/01/27/gptAgentTool/" title="Agent-Tools">Agent-Tools</a>  </li>
@@ -2718,6 +2722,22 @@
       </tags>
   </entry>
   <entry>
+    <title>Web Agent</title>
+    <url>/www6vHomeHexo/2023/03/05/gptAgentWeb/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>1xx. <a href="https://sites.google.com/view/mm-webnav/">Multimodal Web Navigation with Instruction-Finetuned Foundation Models</a><br>1xx. <a href="https://hub.baai.ac.cn/view/28104">Google DeepMind｜具备规划长程上下文理解和程序合成能力的真实世界WebAgent</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/662146234">LLMs-Agent 论文: WebAgent, 2023, Izzeddin Gur et al., Google DeepMind.</a><br>1xx. <a href="https://github.com/www6v/OpenAgents">OpenAgents</a></p>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>agent</category>
+      </categories>
+      <tags>
+        <tag>agent</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Paper-Agent</title>
     <url>/www6vHomeHexo/2023/03/04/gptAgentPaper/</url>
     <content><![CDATA[<p></p>
@@ -3621,7 +3641,6 @@
 
 <h3><span id="app-agent">App Agent</span><a href="#app-agent" class="header-anchor">#</a></h3><p>1xx. <a href="https://zhuanlan.zhihu.com/p/677071947">AppAgent源码分析&amp;思考</a><br><a href="https://github.com/mnotgod96/AppAgent">https://github.com/mnotgod96/AppAgent</a><br><a href="https://icoz69.github.io/">https://icoz69.github.io/</a></p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/681424409">【LLM-agent】MOBILE-AGENT: 具有视觉感知能力的自治多模移动设备agent</a><br>   <a href="https://github.com/X-PLUG/MobileAgent">https://github.com/X-PLUG/MobileAgent</a></p>
-<h3><span id="web-agent">web agent</span><a href="#web-agent" class="header-anchor">#</a></h3><p>1xx. <a href="https://sites.google.com/view/mm-webnav/">Multimodal Web Navigation with Instruction-Finetuned Foundation Models</a><br>1xx. <a href="https://hub.baai.ac.cn/view/28104">Google DeepMind｜具备规划长程上下文理解和程序合成能力的真实世界WebAgent</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/662146234">LLMs-Agent 论文: WebAgent, 2023, Izzeddin Gur et al., Google DeepMind.</a></p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/678203245">智体AI在多模态交互领域的综述（上）</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/678222381">智体AI在多模态交互领域的综述（下）</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/678238642">个人LLM智体的综述</a></p>
 ]]></content>
       <categories>
