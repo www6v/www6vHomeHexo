@@ -2738,19 +2738,19 @@
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>AutoGen</strong> <a href="https://www.bilibili.com/video/BV1DH4y1Z7Ep">video</a> paper</td>
+<td><strong>AutoGen</strong> <a href="https://www.bilibili.com/video/BV1DH4y1Z7Ep">video</a> paper ***</td>
 <td>Multi Agent</td>
 <td>customizable, <strong>conversable</strong>,  <strong>seamlessly allow human participation</strong> [微软]</td>
 <td><a href="https://github.com/microsoft/autogen">code</a><img src="https://img.shields.io/github/stars/microsoft/autogen.svg?style=flat-square" alt="GitHub Badge"></td>
 </tr>
 <tr>
-<td><strong>MetaGPT</strong> paper</td>
+<td><strong>MetaGPT</strong> paper***</td>
 <td>Multi Agent-role base</td>
 <td>覆盖软件公司全生命流程</td>
 <td><a href="https://github.com/geekan/MetaGPT">code</a><img src="https://img.shields.io/github/stars/geekan/MetaGPT.svg?style=flat-square" alt="GitHub Badge"></td>
 </tr>
 <tr>
-<td><strong>CrewAI</strong></td>
+<td><strong>CrewAI</strong><a href="https://www.bilibili.com/video/BV12C4y1Y7xm">video</a></td>
 <td>Multi Agent</td>
 <td>流程定义更灵活</td>
 <td><a href="https://github.com/joaomdmoura/CrewAI">code</a><img src="https://img.shields.io/github/stars/joaomdmoura/CrewAI.svg?style=flat-square" alt="GitHub Badge"></td>
@@ -2768,7 +2768,7 @@
 <td><a href="https://github.com/Torantulino/Auto-GPT">code</a><img src="https://img.shields.io/github/stars/Torantulino/Auto-GPT.svg?style=flat-square" alt="GitHub Badge"></td>
 </tr>
 <tr>
-<td><strong>LangGraph</strong> <a href="https://www.bilibili.com/video/BV1VN4y1n7bt/">video</a></td>
+<td><strong>LangGraph</strong> <a href="https://www.bilibili.com/video/BV1VN4y1n7bt/">video</a> ***</td>
 <td>flow engineering</td>
 <td></td>
 <td></td>
@@ -2778,12 +2778,6 @@
 <td><strong>双循环，人可参与</strong></td>
 <td>autogpt，babyagi - 没法收敛，有时候会不可控<br>metagpt，chatdev sop优化- 有一定的局限性，通用性不够好[面壁智能]</td>
 <td><a href="https://github.com/OpenBMB/XAgent">code</a><img src="https://img.shields.io/github/stars/OpenBMB/XAgent.svg?style=flat-square" alt="GitHub Badge"></td>
-</tr>
-<tr>
-<td><strong>crewAI</strong> <a href="https://www.bilibili.com/video/BV12C4y1Y7xm">video</a></td>
-<td>multi-agent</td>
-<td></td>
-<td></td>
 </tr>
 <tr>
 <td>Agents <a href="https://www.bilibili.com/video/BV1C8411k7UL">video</a> paper</td>
@@ -2820,7 +2814,7 @@
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>ResearchGPT</strong></td>
+<td><strong>ResearchGPT</strong> ***</td>
 <td>plan and execute</td>
 <td>融合论文拆解+网络爬虫</td>
 <td><a href="https://github.com/assafelovic/gpt-researcher">code</a><img src="https://img.shields.io/github/stars/assafelovic/gpt-researcher.svg?style=flat-square" alt="GitHub Badge"></td>
@@ -2884,13 +2878,13 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>Hyperwriteai <a href="https://www.bilibili.com/video/BV1BZ421B7ar/">video</a></td>
-<td>web agent</td>
+<td>Hyperwriteai <a href="https://www.bilibili.com/video/BV1BZ421B7ar/">video</a><a href="https://www.hyperwriteai.com/personal-assistant">website</a>***</td>
+<td>web agent, os agent</td>
 <td></td>
-<td></td>
+<td><a href="https://github.com/OthersideAI/self-operating-computer">code</a></td>
 </tr>
 <tr>
-<td><strong>MultiON</strong> <a href="https://www.bilibili.com/video/BV1mt421W7sw/">video</a></td>
+<td><strong>MultiON</strong> <a href="https://www.bilibili.com/video/BV1mt421W7sw/">video</a>***</td>
 <td>web agent</td>
 <td></td>
 <td></td>
@@ -2908,7 +2902,7 @@
 <td><a href="https://github.com/Farama-Foundation/miniwob-plusplus">code</a></td>
 </tr>
 <tr>
-<td><strong>OpenAgents</strong> <a href="https://www.bilibili.com/video/BV1wM41197N7/">video</a> paper</td>
+<td><strong>OpenAgents</strong> <a href="https://www.bilibili.com/video/BV1wM41197N7/">video</a> paper***</td>
 <td>web agent</td>
 <td>[港大]</td>
 <td><a href="https://github.com/xlang-ai/OpenAgents">code</a></td>
@@ -2990,7 +2984,7 @@
 <td></td>
 </tr>
 <tr>
-<td><strong>AutoGen Studio</strong> <a href="https://www.bilibili.com/video/BV1fi4y1i7g7/">video</a></td>
+<td><strong>AutoGen Studio</strong> <a href="https://www.bilibili.com/video/BV1fi4y1i7g7/">video</a> ***</td>
 <td>LLMOps</td>
 <td></td>
 <td></td>
