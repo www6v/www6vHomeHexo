@@ -99,11 +99,14 @@
 <li><a href="/www6vHomeHexo/2021/05/26/gptPrompt/" title="Prompt-How to use">Prompt-How to use</a></li>
 </ul>
 <h2><span id="multimodal">Multimodal</span><a href="#multimodal" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2023/01/18/gptMultimodal/" title="多模态">多模态</a> </li>
+<li><a href="/www6vHomeHexo/2023/01/18/gptMultimodal/" title="多模态 综述">多模态 综述</a> </li>
 <li><a href="/www6vHomeHexo/2023/03/04/gptMultimodalPretrain/" title="多模态 预训练">多模态 预训练</a>  </li>
+<li>基础模型  <ul>
 <li><a href="/www6vHomeHexo/2023/03/01/gptMultimodalCLIP/" title="CLIP">CLIP</a>  </li>
 <li><a href="/www6vHomeHexo/2023/03/01/gptMultimodalSAM/" title="SAM">SAM</a>   </li>
 <li><a href="/www6vHomeHexo/2023/03/01/gptMultimodalVit/" title="ViT">ViT</a></li>
+</ul>
+</li>
 </ul>
 <h2><span id="rag">RAG</span><a href="#rag" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/11/02/gptRAG/" title="RAG 原理">RAG 原理</a></li>
@@ -3356,7 +3359,8 @@
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<p>1xx. <a href="https://zhuanlan.zhihu.com/p/493489688">神器CLIP：连接文本和图像，打造可迁移的视觉模型</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/486857682">【CLIP系列Paper解读】CLIP: Learning Transferable Visual Models From Natural Language Supervision</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/660476765">关于多模态经典之作CLIP，还有哪些细节是你不知道的</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/646790176">CLIP 模型解读</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/521151393">详解CLIP (一) | 打通文本-图像预训练实现ImageNet的zero-shot分类，比肩全监督训练的ResNet50&#x2F;101</a><br>1xx. <a href="https://blog.csdn.net/lsb2002/article/details/132275132">openai多模态大模型：clip详解及实战</a></p>
+<h1><span id="clip">CLIP</span><a href="#clip" class="header-anchor">#</a></h1><p>英文全称是<strong>Contrastive Language-Image Pre-training</strong></p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>1xx. <a href="https://zhuanlan.zhihu.com/p/493489688">神器CLIP：连接文本和图像，打造可迁移的视觉模型</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/486857682">【CLIP系列Paper解读】CLIP: Learning Transferable Visual Models From Natural Language Supervision</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/660476765">关于多模态经典之作CLIP，还有哪些细节是你不知道的</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/646790176">CLIP 模型解读</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/521151393">详解CLIP (一) | 打通文本-图像预训练实现ImageNet的zero-shot分类，比肩全监督训练的ResNet50&#x2F;101</a><br>1xx. <a href="https://blog.csdn.net/lsb2002/article/details/132275132">openai多模态大模型：clip详解及实战</a></p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/555314976">CLIP：多模态领域革命者</a></p>
 ]]></content>
       <categories>
@@ -3695,7 +3699,11 @@
 </ul>
 <hr>
 <h2><span id="mulitmodal-of-llm">Mulitmodal of LLM</span><a href="#mulitmodal-of-llm" class="header-anchor">#</a></h2><h3><span id="visual-llm">Visual LLM</span><a href="#visual-llm" class="header-anchor">#</a></h3><ul>
-<li><p>MM-LLMs: Recent Advances in MultiModal Large Language Models, 2024.02 ***</p>
+<li><p>Multimodal Foundation Models: From Specialists to General-Purpose Assistants *** microsoft</p>
+</li>
+<li><p>Foundational Models Defining a New Era in Vision: A Survey and Outlook ***  大学</p>
+</li>
+<li><p>MM-LLMs: Recent Advances in MultiModal Large Language Models, 2024.02 *** 腾讯</p>
 </li>
 <li><p>Vision-Language Instruction Tuning: A Review and Analysis, 2023,11 <a href="https://arxiv.org/abs/2311.08172">[paper]</a><a href="https://github.com/palchenli/VL-Instruction-Tuning">[project]</a> ***</p>
 </li>
@@ -5340,7 +5348,7 @@
       </tags>
   </entry>
   <entry>
-    <title>多模态</title>
+    <title>多模态 综述</title>
     <url>/www6vHomeHexo/2023/01/18/gptMultimodal/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -5357,10 +5365,10 @@
 </ul>
 </li>
 <li><a href="#%E6%9E%B6%E6%9E%84-1">架构 [1]</a></li>
-<li><a href="#clip">CLIP</a></li>
 <li><a href="#%E5%85%B6%E4%BB%96">其他</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
-<li><a href="#overview">overview</a></li>
+<li><a href="#survey">survey</a></li>
+<li><a href="#overview">Overview</a></li>
 <li><a href="#chat">chat</a></li>
 <li><a href="#other">other</a></li>
 <li><a href="#agent">agent</a></li>
@@ -5387,7 +5395,7 @@
 </ul>
 <h3><span id="heterogeneous-models">heterogeneous  models</span><a href="#heterogeneous-models" class="header-anchor">#</a></h3><h1><span id="架构-1">架构 [1]</span><a href="#架构-1" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2023/01/18/gptMultimodal/arch.webp" class>
 
-<h1><span id="clip">CLIP</span><a href="#clip" class="header-anchor">#</a></h1><p>英文全称是<strong>Contrastive Language-Image Pre-training</strong></p>
+
 <h1><span id="其他">其他</span><a href="#其他" class="header-anchor">#</a></h1><ul>
 <li><p>对比</p>
 <ul>
@@ -5405,19 +5413,21 @@
 </ul>
 </li>
 </ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="overview">overview</span><a href="#overview" class="header-anchor">#</a></h3><ol>
-<li>《Foundational Models Defining a New Era in Vision: A Survey and Outlook》<br> <a href="https://blog.csdn.net/qq_45368632/article/details/132180645">视觉大模型的全面解析</a><br> <a href="https://zhuanlan.zhihu.com/p/655135848">基础模型定义视觉的新时代：综述和展望</a></li>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="survey">survey</span><a href="#survey" class="header-anchor">#</a></h3><ol>
+<li>《Foundational Models Defining a New Era in Vision: A Survey and Outlook》大学<br> <a href="https://blog.csdn.net/qq_45368632/article/details/132180645">视觉大模型的全面解析</a><br> <a href="https://zhuanlan.zhihu.com/p/655135848">基础模型定义视觉的新时代：综述和展望</a><br> <a href="https://zhuanlan.zhihu.com/p/648578542">万字长文带你全面解读视觉大模型</a></li>
 </ol>
+<p>1xx. 《Multimodal Foundation Models:From Specialists to General-Purpose Assistants》  microsoft<br>   <a href="https://blog.csdn.net/qq_41200212/article/details/134663233">Multimodal Foundation Models: From Specialists to General-Purpose Assistants</a><br>   <a href="https://blog.csdn.net/qq_41185868/article/details/133594461">AGI之MFM：《Multimodal Foundation Models: From Specialists to General-Purpose Assistants多模态基础模型：从专家到通用助</a></p>
 <p>1xx. <a href="https://blog.csdn.net/qq_41185868/article/details/135877268">AI之MLM：《MM-LLMs: Recent Advances in MultiModal Large Language Models多模态大语言模型的最新进展》翻译与解读</a><br>   <a href="https://zhuanlan.zhihu.com/p/680487634">腾讯发布的多模态大模型（MM-LLM）的最新综述、从26个最新的多模态大模型中归纳最佳实践</a><br>   <a href="https://zhuanlan.zhihu.com/p/680955430">多模态大模型最新完整综述 MM-LLMs</a><br><a href="https://mm-llms.github.io/archives/">mm-llms</a> 腾讯</p>
+<h3><span id="overview">Overview</span><a href="#overview" class="header-anchor">#</a></h3><p>1xx. <a href="https://cloud.tencent.com/developer/article/2322835">MLLM首篇综述 | 一文全览多模态大模型的前世、今生和未来</a><br>   <a href="https://arxiv.org/abs/2306.13549">A Survey on Multimodal Large Language Models</a></p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/643969218">[Transformer 101系列] 多模态的大一统之路</a></p>
 <p>1xx. <a href="https://huyenchip.com/2023/10/10/multimodal.html">Multimodality and Large Multimodal Models (LMMs)</a><br>   <a href="https://baoyu.io/translations/lmm/multimodality-and-large-multimodal-models">多模态和多模态大模型 (LMM)[译]</a></p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/667942680">写在多模态征服一切之前（未来数据和模型应该是什么样的？）</a></p>
-<p>1xx. <a href="https://arxiv.org/abs/2306.13549">多模大语言模型综述</a></p>
 <h3><span id="chat">chat</span><a href="#chat" class="header-anchor">#</a></h3><p>1xx. <a href="https://zhuanlan.zhihu.com/p/670821058">[论文阅读] 双子座：一个功能强大的多模态模型系列，Gemini: A Family of Highly Capable Multimodal Models</a></p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/663655741">166页超长论文阅读，大多模态模型的黎明：GPT-4V的初步探索，The Dawn of LMMs: Preliminary Explorations with GPT-4V(ision) [上]</a></p>
 <p>1xx. <a href="https://apposcmf8kb5033.pc.xiaoe-tech.com/live_pc/l_64a7d282e4b007b201a34052">使用大型语言模型为MiniGPT-4构建视觉语言理解能力</a> V</p>
 <p>1xx. <a href="https://apposcmf8kb5033.pc.xiaoe-tech.com/live_pc/l_64a7d4fde4b0d1e42e7fc7e6">基于视觉指令调整的多模态聊天机器人 LLaVA</a>  V</p>
 <h3><span id="other">other</span><a href="#other" class="header-anchor">#</a></h3><p>1xx. <a href="https://zhuanlan.zhihu.com/p/511517344">DeepMind出手！多模态小样本打败精调</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/669757416">大模型系列04 -文本图像生成</a></p>
+<p>1xx. <a href="https://blog.csdn.net/qq_39388410/article/details/130757157">基于LLMs的多模态大模型（Flamingo, BLIP-2，KOSMOS-1，ScienceQA）</a></p>
 <h3><span id="agent">agent</span><a href="#agent" class="header-anchor">#</a></h3><p>1xx. <a href="https://baoyu.io/translations/ai-paper/2401.13919-webvoyager-building-an-end-to-end-web-agent-with-large-multimodal-models">WebVoyager：借助强大多模态模型，开创全新的网络智能体 [译]</a></p>
 ]]></content>
       <categories>
