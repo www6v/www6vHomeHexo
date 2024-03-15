@@ -102,6 +102,7 @@
 <h2><span id="multimodal">Multimodal</span><a href="#multimodal" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2023/01/18/gptMultimodal/" title="多模态 综述">多模态 综述</a> </li>
 <li><a href="/www6vHomeHexo/2023/03/04/gptMultimodalPretrain/" title="多模态 预训练">多模态 预训练</a>  </li>
+<li><a href="/www6vHomeHexo/2023/03/15/gptMultimodalInstructTuning/" title="多模态-InstructTuning">多模态-InstructTuning</a>  </li>
 <li>backbone <ul>
 <li><a href="/www6vHomeHexo/2023/03/01/gptMultimodalCLIP/" title="CLIP">CLIP</a>  </li>
 <li><a href="/www6vHomeHexo/2023/03/01/gptMultimodalSAM/" title="SAM">SAM</a>   </li>
@@ -109,7 +110,8 @@
 </ul>
 </li>
 <li>chat<ul>
-<li><a href="/www6vHomeHexo/2023/03/14/gptMultimodalLlava/" title="多模态  LLaVa">多模态  LLaVa</a></li>
+<li><a href="/www6vHomeHexo/2023/03/14/gptMultimodalLlava/" title="多模态  LLaVa">多模态  LLaVa</a>  </li>
+<li><a href="/www6vHomeHexo/2023/03/15/gptMultimodalMinigpt4/" title="MiniGPT4">MiniGPT4</a></li>
 </ul>
 </li>
 </ul>
@@ -2732,6 +2734,106 @@
       </tags>
   </entry>
   <entry>
+    <title>多模态-InstructTuning</title>
+    <url>/www6vHomeHexo/2023/03/15/gptMultimodalInstructTuning/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>1xx. <a href="https://datac.blog.csdn.net/article/details/135434897">【LMM 015】LAMM：多模态指令微调数据集，框架和基准</a></p>
+<p>1xx. <a href="https://www.bilibili.com/video/BV12p4y1M7RV/">Talk | ACL’23 杰出论文，MultiIntruct：通过多模态指令集微调提升VLM的零样本学习</a></p>
+<p>1xx. <a href="https://blog.csdn.net/qq_45978862/article/details/132008907">【ACL2023】MultiInstruct: Improving Multi-Modal Zero-Shot Learning via Instruction Tuning</a></p>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>multimodal</category>
+      </categories>
+      <tags>
+        <tag>multimodal</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MiniGPT4</title>
+    <url>/www6vHomeHexo/2023/03/15/gptMultimodalMinigpt4/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#introduction1">INTRODUCTION[1]</a></li>
+<li><a href="#method1">METHOD[1]</a><ul>
+<li><a href="#first-pretraining-stage">FIRST <strong>PRETRAINING</strong> STAGE</a></li>
+<li><a href="#curating-a-high-quality-alignment-dataset-for-vision-language-domain">CURATING A <strong>HIGH-QUALITY ALIGNMENT DATASET</strong> FOR VISION-LANGUAGE DOMAIN.</a></li>
+<li><a href="#second-stage-finetuning">SECOND-STAGE <strong>FINETUNING</strong></a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
+<li><a href="#%E5%8E%9F%E7%90%86">原理</a></li>
+<li><a href="#%E5%AE%9E%E6%88%98">实战</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="introduction1">INTRODUCTION[1]</span><a href="#introduction1" class="header-anchor">#</a></h1><p>MiniGPT-4 增加了一个<strong>投影层</strong>，将<strong>编码的视觉特征与 Vicuna 语言模型对齐</strong>，并<strong>冻结了所有其他视觉和语言组件</strong></p>
+<h1><span id="method1">METHOD[1]</span><a href="#method1" class="header-anchor">#</a></h1><ul>
+<li><p>图 1</p>
+</li>
+<li><p>MiniGPT-4 的目标是将来自预训练视觉编码器的视觉信息与先进的大型语言模型（LLM）对齐（Alignment）。具体来说，</p>
+<ul>
+<li>使用 <strong>Vicuna作为语言解码器</strong>，该解码器基于 LLaMA构建，可以执行各种复杂的语言任务。</li>
+<li>视觉感知方：采用与 <strong>BLIP-2</strong> 相同的<strong>视觉编码器</strong>，<strong>ViT Backbone</strong>及其预先训练好的 <strong>Q-Former</strong>。<br>语言和视觉模型都是开源的。我们的目标是利用线性投影层弥合视觉编码器与 LLM 之间的差距，图 1 显示了模型概览。</li>
+</ul>
+</li>
+</ul>
+<h3><span id="first-pretraining-stage">FIRST <strong>PRETRAINING</strong> STAGE</span><a href="#first-pretraining-stage" class="header-anchor">#</a></h3><ul>
+<li><p>第一阶段：在大量对齐的图像-文本对上对模型进行预训练，以获取视觉语言知识。</p>
+</li>
+<li><p>Traditional alignment method [2]</p>
+<ul>
+<li>Input: Image</li>
+<li>Output: Caption</li>
+<li>Training Objective: Maximize the likelihood of GT captions</li>
+<li>Training Dataset 组合数据集 [postprocessed by BLIP] <ul>
+<li>Conceptual Caption</li>
+<li>SBU </li>
+<li>LAION</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3><span id="curating-a-high-quality-alignment-dataset-for-vision-language-domain">CURATING A <strong>HIGH-QUALITY ALIGNMENT DATASET</strong> FOR VISION-LANGUAGE DOMAIN.</span><a href="#curating-a-high-quality-alignment-dataset-for-vision-language-domain" class="header-anchor">#</a></h3><ul>
+<li>Create a dataset with detailed, human-perfered descriptions[2]<ul>
+<li>model  generates descriptions</li>
+<li>polishing and filtering by chatgpt</li>
+<li>further polishing and filtering by rules &amp; human</li>
+</ul>
+</li>
+</ul>
+<h3><span id="second-stage-finetuning">SECOND-STAGE <strong>FINETUNING</strong></span><a href="#second-stage-finetuning" class="header-anchor">#</a></h3><ul>
+<li>第二阶段：使用一个较小但高质量的图像-文本数据集对预训练模型进行微调，并设计了对话模板，以提高生成的可靠性和可用性。</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="原理">原理</span><a href="#原理" class="header-anchor">#</a></h3><ol>
+<li><a href="https://datac.blog.csdn.net/article/details/135399033">【LMM 009】MiniGPT-4：使用 Vicuna 增强视觉语言理解能力的多模态大模型</a> *** </li>
+<li><a href="https://www.bilibili.com/video/BV1n24y1F7kv/">MiniGPT-4、表格推理、代码生成、生成式推理-来自斯坦福、北大、阿卜杜拉、达摩院的四位论文一作思辨大模型</a> V<br>1xx. <a href="https://www.bilibili.com/video/BV12Q4y1b7nY/">miniGPT4：多模态图文理解训练</a> V</li>
+</ol>
+<h3><span id="实战">实战</span><a href="#实战" class="header-anchor">#</a></h3><p>1xx. <a href="https://zhuanlan.zhihu.com/p/627671257">大杀器，多模态大模型MiniGPT-4入坑指南</a></p>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>multimodal</category>
+      </categories>
+      <tags>
+        <tag>multimodal</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>多模态  LLaVa</title>
     <url>/www6vHomeHexo/2023/03/14/gptMultimodalLlava/</url>
     <content><![CDATA[<p></p>
@@ -4695,7 +4797,7 @@
 <p>1xx. <a href="https://hub.baai.ac.cn/view/28740">大模型研发核心：数据工程、自动化评估及与知识图谱的结合</a><br>   <a href="https://mp.weixin.qq.com/s/SvDnQD886E3DBtw8k9asgg">大模型研发核心：数据工程、自动化评估及与知识图谱的结合 </a></p>
 <p>1xx. <a href="https://blog.csdn.net/qq_16949707/article/details/133875958">符尧：别卷大模型训练了，来卷数据吧！【干货十足】</a> 看最后的5个结论   </p>
 <ol start="50">
-<li><a href="/www6vHomeHexo/2023/01/06/gptInstructTuning/" title="Instruct Tuning">Instruct Tuning</a> self</li>
+<li><a href="/www6vHomeHexo/2023/01/06/gptInstructTuning/" title="Instruct Tuning 原理">Instruct Tuning 原理</a> self</li>
 </ol>
 <h3><span id="案例">案例</span><a href="#案例" class="header-anchor">#</a></h3><ol start="30">
 <li>《千帆增强版 Llama 2》 百度 有ppt</li>
