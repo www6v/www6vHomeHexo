@@ -8392,13 +8392,12 @@
 <li><a href="https://blog.langchain.dev/deconstructing-rag/">Deconstructing RAG</a> ***</li>
 </ol>
 <h3><span id="综述">综述</span><a href="#综述" class="header-anchor">#</a></h3><ol start="2">
-<li><p><a href="https://zhuanlan.zhihu.com/p/673910600">LLM之RAG理论（二）| RAG综述论文详解</a><br><a href="https://cloud.tencent.com/developer/article/2373340">同济大学发布最新检索增强(RAG)的LLM生成技术综述</a><br><a href="https://www.promptingguide.ai/zh/research/rag">大语言模型的检索增强生成 (RAG) 方法</a></p>
+<li><p>《Retrieval-Augmented Generation for Large Language Models: A Survey》<br><a href="https://baoyu.io/translations/ai-paper/2312.10997-retrieval-augmented-generation-for-large-language-models-a-survey">面向大语言模型的检索增强生成技术：综述 [译]</a>  翻译<br><a href="https://zhuanlan.zhihu.com/p/673910600">LLM之RAG理论（二）| RAG综述论文详解</a><br><a href="https://cloud.tencent.com/developer/article/2373340">同济大学发布最新检索增强(RAG)的LLM生成技术综述</a><br><a href="https://mp.weixin.qq.com/s/JjcN6OoxNK7tddmIOpvr2g">面向大模型的检索增强生成（RAG）综述 </a><br><a href="https://www.promptingguide.ai/zh/research/rag">大语言模型的检索增强生成 (RAG) 方法</a></p>
 </li>
 <li><p><a href="https://zhuanlan.zhihu.com/p/661465330?utm_id=0">NLP（廿一）：从 RAG 到 Self-RAG —— LLM 的知识增强</a> ***</p>
 </li>
 </ol>
 <p>1xx. <a href="https://mp.weixin.qq.com/s/FKv9glaGZD0qbLmB2zg6bg">北大最新综述精读：RAG在AIGC中的前世今生，覆盖300篇论文！</a><br>   <a href="https://mp.weixin.qq.com/s?__biz=MzkzODMxNTkzNg==&mid=2247484337&idx=1&sn=484db46f6a974cb26b7659096b31cdd8">最新RAG综述来了！北京大学发布AIGC的检索增强技术综述</a></p>
-<p>1xx. <a href="https://baoyu.io/translations/ai-paper/2312.10997-retrieval-augmented-generation-for-large-language-models-a-survey">面向大语言模型的检索增强生成技术：综述 [译]</a></p>
 <h3><span id="评估">评估</span><a href="#评估" class="header-anchor">#</a></h3><p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648404511&idx=2&sn=fefb78c1d920cb5b437f2e3da9935637">再看大模型RAG检索增强如何评估：RAGAS开源自动化评估框架</a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648404476&idx=2&sn=d07b27dc9162ab0aaec3108004e4cfbe">大模型RAG检索增强问答如何评估：噪声、拒答、反事实、信息整合四大能力评测任务探索 </a></p>
 <p>XXX</p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/673922981">高级检索增强生成技术(RAG)全面指南：原理、分块、编码、索引、微调、Agent、展望</a><br>1xx. <a href="https://baoyu.io/translations/ai-paper/2005.11401-retrieval-augmented-generation-for-knowledge-intensive-nlp-tasks">知识密集型自然语言处理任务的检索增强生成技术研究 [译]</a><br>1xx. <a href="https://baoyu.io/translations/rag/mastering-rag-how-to-architect-an-enterprise-rag-system">构建企业级 RAG 系统的高级指南 [译]</a><br>1xx. <a href="https://baoyu.io/translations/ai-paper/2401.05856v1-seven-failure-points-when-engineering-a-retrieval-augmented-generation-system">在构建检索增强型生成系统时的七大挑战 [译]</a><br>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648407638&idx=1&sn=5c167b4a11bc483f5790ef1e0340d670">大模型RAG问答行业最佳案例及微调、推理双阶段实现模式：基于模块化(Modular)RAG自定义RAG Flow </a></p>
