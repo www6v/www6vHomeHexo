@@ -65,9 +65,9 @@
 </li>
 <li>DataProcess<ul>
 <li><a href="/www6vHomeHexo/2023/02/05/gptDataProcess/" title="数据处理">数据处理</a>  </li>
-<li><a href="/www6vHomeHexo/2023/02/21/gptSelfInstruct/" title="SELF-INSTRUCT">SELF-INSTRUCT</a>   </li>
-<li><a href="/www6vHomeHexo/2023/03/18/gptDataWizard/" title="Wizard[多样性 复杂度]">Wizard[多样性 复杂度]</a> </li>
-<li><a href="/www6vHomeHexo/2024/02/27/gptDataRefinedWeb/" title="RefinedWeb">RefinedWeb</a>  </li>
+<li><a href="/www6vHomeHexo/2023/02/21/gptSelfInstruct/" title="(多样性)SELF-INSTRUCT">(多样性)SELF-INSTRUCT</a>   </li>
+<li><a href="/www6vHomeHexo/2023/03/18/gptDataWizard/" title="(多样性 复杂度)Wizard">(多样性 复杂度)Wizard</a> </li>
+<li><a href="/www6vHomeHexo/2024/02/27/gptDataRefinedWeb/" title="(质量过滤)RefinedWeb">(质量过滤)RefinedWeb</a>  </li>
 <li><a href="/www6vHomeHexo/2023/02/26/gptTrainTokenizer/" title="Tokenizer">Tokenizer</a></li>
 </ul>
 </li>
@@ -1508,7 +1508,7 @@
       </tags>
   </entry>
   <entry>
-    <title>RefinedWeb</title>
+    <title>(质量过滤)RefinedWeb, Textbooks</title>
     <url>/www6vHomeHexo/2024/02/27/gptDataRefinedWeb/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -1525,11 +1525,12 @@
 <h1><span id="结论1">结论[1]</span><a href="#结论1" class="header-anchor">#</a></h1><ul>
 <li>作者证明了仅用<strong>web数据</strong>如果经过恰当的<strong>清洗和过滤</strong>，可以获得超过使用了专有数据模型的效果。</li>
 </ul>
-<h1><span id="文本处理pipeline1">文本处理Pipeline[1]</span><a href="#文本处理pipeline1" class="header-anchor">#</a></h1><h3><span id="目标语言识别">目标语言识别</span><a href="#目标语言识别" class="header-anchor">#</a></h3><h3><span id="规则过滤">规则过滤</span><a href="#规则过滤" class="header-anchor">#</a></h3><h3><span id="通过机器学习方法过滤出高质量语料库">通过机器学习方法过滤出高质量语料库</span><a href="#通过机器学习方法过滤出高质量语料库" class="header-anchor">#</a></h3><h3><span id="去重deduplication">去重（Deduplication）</span><a href="#去重deduplication" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<h1><span id="文本处理pipeline1">文本处理Pipeline[1]</span><a href="#文本处理pipeline1" class="header-anchor">#</a></h1><h3><span id="目标语言识别">目标语言识别</span><a href="#目标语言识别" class="header-anchor">#</a></h3><h3><span id="规则过滤">规则过滤</span><a href="#规则过滤" class="header-anchor">#</a></h3><h3><span id="通过机器学习方法过滤出高质量语料库">通过机器学习方法过滤出高质量语料库</span><a href="#通过机器学习方法过滤出高质量语料库" class="header-anchor">#</a></h3><h3><span id="去重deduplication">去重（Deduplication）</span><a href="#去重deduplication" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="refinedweb">RefinedWeb</span><a href="#refinedweb" class="header-anchor">#</a></h3><ol>
 <li><a href="https://zhuanlan.zhihu.com/p/641013454">数据为王：大模型预训练中的数据处理及思考—The RefinedWeb Dataset for Falcon LLM论文解读</a></li>
 </ol>
 <p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648401484&idx=1&sn=c49b5ca5fc962ca757d3a082b74f037a">“超越LLama 65B”的Falcon40B语言模型为什么好：再看精细化的数据清洗的重要性 </a><br>   RefinedWeb Dataset for Falcon,   Falcon采用bloom架构</p>
 <p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402104&idx=1&sn=7d4924b2a5a840e4ff3de43299248b1d">再谈大模型的预训数据清洗与微调数据生成：RedPajama数据处理框架与entity-centric指令生成方法解读 </a><br>    llama数据的复现项目SlimPajama</p>
+<h3><span id="textbooks-数量-gtscaling-law">Textbooks   数量-&gt;scaling law</span><a href="#textbooks-数量-gtscaling-law" class="header-anchor">#</a></h3><p>1xx. <a href="https://finisky.github.io/textbooks-are-all-you-need-summary/">数据为王: Textbooks Are All You Need </a>   以小博大  打破传统语言模型缩放定律<br>1xx. <a href="https://zhuanlan.zhihu.com/p/673021932">Textbooks Are All You Need II: phi-1.5 technical report 精读与翻译</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/672066480">小模型的惊人能力: Phi-2</a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -2749,7 +2750,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Wizard[多样性 复杂度]</title>
+    <title>(多样性 复杂度)Wizard</title>
     <url>/www6vHomeHexo/2023/03/18/gptDataWizard/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -2769,7 +2770,7 @@
 <p>2）响应生成</p>
 <p>3）消除进化<br>   即过滤未能进化的指令</p>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="质量-gt-多样性-复杂度">质量-&gt; 多样性, 复杂度</span><a href="#质量-gt-多样性-复杂度" class="header-anchor">#</a></h3><ol>
-<li><a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648401462&idx=1&sn=764f0302918174cea29ae22ac5760033">如何构造复杂多样的微调指令数据：WizardLM复杂指令构造思想与实验分析工作总结 </a><br>  <a href="https://github.com/nlpxucan/WizardLM">WizardLM</a> git</li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648401462&idx=1&sn=764f0302918174cea29ae22ac5760033">如何构造复杂多样的微调指令数据：WizardLM复杂指令构造思想与实验分析工作总结 </a><br> <a href="https://github.com/nlpxucan/WizardLM">WizardLM</a> git</li>
 </ol>
 <p>1xx. <a href="https://mp.weixin.qq.com/s/c50HrOfKOqgqGPVRHf6EpA">大模型微调究竟需要多少数据：从三个现有代表工作看几组结论及一点思考 </a><br>     <strong>指令格式的多样性</strong><br>     《LIMA: Less Is More for Alignment》<br>     《MAYBE ONLY 0.5% DATA IS NEEDED》</p>
 ]]></content>
@@ -4490,7 +4491,7 @@
       </tags>
   </entry>
   <entry>
-    <title>SELF-INSTRUCT</title>
+    <title>(多样性)SELF-INSTRUCT</title>
     <url>/www6vHomeHexo/2023/02/21/gptSelfInstruct/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -4927,7 +4928,6 @@
 <li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
 <li><a href="#%E6%A1%88%E4%BE%8B-1">案例</a></li>
 <li><a href="#%E8%B4%A8%E9%87%8F-%E5%A4%9A%E6%A0%B7%E6%80%A7-%E5%A4%8D%E6%9D%82%E5%BA%A6">质量-&gt;多样性, 复杂度</a></li>
-<li><a href="#%E6%95%B0%E9%87%8F-scaling-law">数量-&gt;scaling law</a></li>
 <li><a href="#%E6%8C%87%E4%BB%A4%E6%95%B0%E6%8D%AE">指令数据</a></li>
 <li><a href="#%E6%95%B0%E6%8D%AE%E6%A0%87%E7%AD%BE">数据标签</a></li>
 <li><a href="#%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA-2">数据增强</a></li>
@@ -5061,9 +5061,8 @@
 </ol>
 <p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648399885&idx=1&sn=4f49c5148715c38aa4eaee3080435f17">也看大模型训练语料如何清洗：Common Crawl概述、代表性清洗方案及代码实现          </a> 代码<br>   <a href="https://zhuanlan.zhihu.com/p/610659484?utm_id=0">GPT-3 训练语料 Common Crawl 处理流程</a></p>
 <h3><span id="质量-gt多样性-复杂度">质量-&gt;多样性, 复杂度</span><a href="#质量-gt多样性-复杂度" class="header-anchor">#</a></h3><ol start="20">
-<li><a href="/www6vHomeHexo/2023/03/18/gptDataWizard/" title="Wizard[多样性 复杂度]">Wizard[多样性 复杂度]</a>   self</li>
+<li><a href="/www6vHomeHexo/2023/03/18/gptDataWizard/" title="(多样性 复杂度)Wizard">(多样性 复杂度)Wizard</a>   self</li>
 </ol>
-<h3><span id="数量-gtscaling-law">数量-&gt;scaling law</span><a href="#数量-gtscaling-law" class="header-anchor">#</a></h3><p>1xx. <a href="https://finisky.github.io/textbooks-are-all-you-need-summary/">数据为王: Textbooks Are All You Need </a>   以小博大  打破传统语言模型缩放定律<br>1xx. <a href="https://zhuanlan.zhihu.com/p/673021932">Textbooks Are All You Need II: phi-1.5 technical report 精读与翻译</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/672066480">小模型的惊人能力: Phi-2</a></p>
 <h3><span id="指令数据">指令数据</span><a href="#指令数据" class="header-anchor">#</a></h3><p>1xx. <a href="https://zhuanlan.zhihu.com/p/658128530">如何从数据集中自动识别高质量的指令数据-IFD指标的使用</a></p>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/671183709">大模型微调技巧 | 高质量指令数据筛选方法-MoDS</a></p>
 <h3><span id="数据标签">数据标签</span><a href="#数据标签" class="header-anchor">#</a></h3><p>1xx. <a href="https://developer.aliyun.com/article/1311807">InsTag：大语言模型监督微调数据标签标注工具</a><br>   <a href="https://www.modelscope.cn/studios/lukeminglkm/instagger_demo/summary">InsTag指令打标工具</a> demo</p>
