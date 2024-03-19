@@ -67,27 +67,27 @@
 <li><a href="/www6vHomeHexo/2023/02/05/gptDataProcess/" title="数据处理">数据处理</a>  </li>
 <li><a href="/www6vHomeHexo/2023/02/21/gptSelfInstruct/" title="(多样性)SELF-INSTRUCT">(多样性)SELF-INSTRUCT</a>   </li>
 <li><a href="/www6vHomeHexo/2023/03/18/gptDataWizard/" title="(多样性 复杂度)Wizard">(多样性 复杂度)Wizard</a> </li>
-<li><a href="/www6vHomeHexo/2024/02/27/gptDataRefinedWeb/" title="(质量过滤)RefinedWeb">(质量过滤)RefinedWeb</a>  </li>
+<li><a href="/www6vHomeHexo/2024/02/27/gptDataRefinedWeb/" title="(质量过滤)RefinedWeb, Textbooks">(质量过滤)RefinedWeb, Textbooks</a>  </li>
 <li><a href="/www6vHomeHexo/2023/02/26/gptTrainTokenizer/" title="Tokenizer">Tokenizer</a></li>
 </ul>
 </li>
 </ul>
 <h2><span id="finetuning">FineTuning</span><a href="#finetuning" class="header-anchor">#</a></h2><ul>
 <li>基础<ul>
-<li><a href="/www6vHomeHexo/2022/11/18/gptFineTuning/" title="SFT-PEFT">SFT-PEFT</a> </li>
-<li><a href="/www6vHomeHexo/2022/12/28/gptFineTuningWhen/" title="Fine-Tuning 时机">Fine-Tuning 时机</a>  </li>
+<li><a href="/www6vHomeHexo/2022/11/18/gptFineTuning/" title="(原理)PEFT">(原理)PEFT</a> </li>
+<li><a href="/www6vHomeHexo/2022/12/28/gptFineTuningWhen/" title="(原理)Fine-Tuning 时机">(原理)Fine-Tuning 时机</a>  </li>
 <li><a href="/www6vHomeHexo/2023/01/06/gptPromptTuning/" title="Prompt Tuning">Prompt Tuning</a> </li>
-<li><a href="/www6vHomeHexo/2023/01/06/gptInstructTuning/" title="Instruct Tuning 原理">Instruct Tuning 原理</a> </li>
-<li><a href="/www6vHomeHexo/2023/03/12/gptInstructTuningSurvey/" title="Instruct-Tuning Survey">Instruct-Tuning Survey</a></li>
+<li><a href="/www6vHomeHexo/2023/01/06/gptInstructTuning/" title="(原理)Instruct Tuning">(原理)Instruct Tuning</a> </li>
+<li><a href="/www6vHomeHexo/2023/03/12/gptInstructTuningSurvey/" title="(Survey)Instruct Tuning">(Survey)Instruct Tuning</a></li>
 </ul>
 </li>
 <li>实战<ul>
-<li><a href="/www6vHomeHexo/2022/12/20/gptFineTuningPEFT/" title="PEFT 实战">PEFT 实战</a>  
+<li><a href="/www6vHomeHexo/2022/12/20/gptFineTuningPEFT/" title="(实战)PEFT 概述">(实战)PEFT 概述</a>  
 <ul>
-<li><a href="/www6vHomeHexo/2023/01/05/gptPEFTLora/" title="PEFT Lora 实战">PEFT Lora 实战</a> </li>
-<li><a href="/www6vHomeHexo/2024/01/12/gptPEFTQLora/" title="PEFT QLoRA 实战">PEFT QLoRA 实战</a> </li>
-<li><a href="/www6vHomeHexo/2023/01/25/gptPromptTuningPractice/" title="PromptTuning 实战">PromptTuning 实战</a>    </li>
-<li><a href="/www6vHomeHexo/2024/01/28/gptPEFTPtuning/" title="PEFT P-Tuning">PEFT P-Tuning</a></li>
+<li><a href="/www6vHomeHexo/2023/01/05/gptPEFTLora/" title="(实战)PEFT Lora">(实战)PEFT Lora</a> </li>
+<li><a href="/www6vHomeHexo/2024/01/12/gptPEFTQLora/" title="(实战)PEFT QLoRA">(实战)PEFT QLoRA</a> </li>
+<li><a href="/www6vHomeHexo/2023/01/25/gptPromptTuningPractice/" title="(实战)PromptTuning">(实战)PromptTuning</a>    </li>
+<li><a href="/www6vHomeHexo/2024/01/28/gptPEFTPtuning/" title="(实战)PEFT P-Tuning">(实战)PEFT P-Tuning</a></li>
 </ul>
 </li>
 <li><a href="/www6vHomeHexo/2024/01/26/gptFineTuningBert/" title="Fine Tuning-Bert">Fine Tuning-Bert</a></li>
@@ -101,10 +101,10 @@
 <li><a href="/www6vHomeHexo/2021/05/26/gptPrompt/" title="Prompt-How to use">Prompt-How to use</a></li>
 </ul>
 <h2><span id="multimodal">Multimodal</span><a href="#multimodal" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2023/01/18/gptMultimodal/" title="多模态 综述">多模态 综述</a> </li>
-<li><a href="/www6vHomeHexo/2023/03/16/gptMultimodalSurvey/" title="多模态  Survey">多模态  Survey</a> </li>
-<li><a href="/www6vHomeHexo/2023/03/04/gptMultimodalPretrain/" title="多模态 预训练">多模态 预训练</a>  </li>
-<li><a href="/www6vHomeHexo/2023/03/15/gptMultimodalInstructTuning/" title="多模态-InstructTuning">多模态-InstructTuning</a>  </li>
+<li><a href="/www6vHomeHexo/2023/01/18/gptMultimodal/" title="(综述)多模态">(综述)多模态</a> </li>
+<li><a href="/www6vHomeHexo/2023/03/16/gptMultimodalSurvey/" title="(Survey)多模态">(Survey)多模态</a> </li>
+<li><a href="/www6vHomeHexo/2023/03/04/gptMultimodalPretrain/" title="(原理)多模态 预训练">(原理)多模态 预训练</a>  </li>
+<li><a href="/www6vHomeHexo/2023/03/15/gptMultimodalInstructTuning/" title="(综述)多模态-InstructTuning">(综述)多模态-InstructTuning</a>  </li>
 <li>backbone <ul>
 <li><a href="/www6vHomeHexo/2023/03/01/gptMultimodalCLIP/" title="CLIP">CLIP</a>  </li>
 <li><a href="/www6vHomeHexo/2023/03/01/gptMultimodalSAM/" title="SAM">SAM</a>   </li>
@@ -119,12 +119,12 @@
 </li>
 </ul>
 <h2><span id="rag">RAG</span><a href="#rag" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2022/11/02/gptRAG/" title="RAG 原理">RAG 原理</a></li>
-<li><a href="/www6vHomeHexo/2022/12/31/gptRAGPractice/" title="RAG 实践">RAG 实践</a> </li>
+<li><a href="/www6vHomeHexo/2022/11/02/gptRAG/" title="(综述)RAG">(综述)RAG</a></li>
+<li><a href="/www6vHomeHexo/2022/12/31/gptRAGPractice/" title="(实战)RAG">(实战)RAG</a> </li>
 <li><a href="/www6vHomeHexo/2022/12/07/gptRAGPerformance/" title="RAG 性能">RAG 性能</a></li>
 <li><a href="/www6vHomeHexo/2022/12/27/gptRAGPerformanceOpenAI/" title="RAG 性能-OpenAI案例">RAG 性能-OpenAI案例</a> </li>
-<li><a href="/www6vHomeHexo/2023/03/02/gptRAGSelfReflective/" title="Self-Reflective RAG">Self-Reflective RAG</a> </li>
-<li><a href="/www6vHomeHexo/2023/03/14/gptRAGMultimodal/" title="多模态 RAG-原理 实战">多模态 RAG-原理 实战</a></li>
+<li><a href="/www6vHomeHexo/2023/03/02/gptRAGSelfReflective/" title="(原理|实战)Self-Reflective RAG">(原理|实战)Self-Reflective RAG</a> </li>
+<li><a href="/www6vHomeHexo/2023/03/14/gptRAGMultimodal/" title="(原理|实战)多模态 RAG">(原理|实战)多模态 RAG</a></li>
 </ul>
 <h2><span id="langchain">Langchain</span><a href="#langchain" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/11/02/gptLangchain/" title="Langchain">Langchain</a></li>
@@ -132,20 +132,20 @@
 <li><a href="/www6vHomeHexo/2023/01/11/gptLangchainAgent/" title="Langchain  Agent">Langchain  Agent</a></li>
 </ul>
 <h2><span id="agent">Agent</span><a href="#agent" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2022/11/02/gptAgent/" title="Agent 原理">Agent 原理</a></li>
-<li><a href="/www6vHomeHexo/2023/01/21/gptMultiAgents/" title="Multi-Agents">Multi-Agents</a>  </li>
-<li><a href="/www6vHomeHexo/2023/01/01/gptAgentPractice/" title="Agent 实践">Agent 实践</a> </li>
-<li><a href="/www6vHomeHexo/2023/03/02/gptAgentPlanAndExecute/" title="Plan-And-Execute Agent">Plan-And-Execute Agent</a></li>
-<li><a href="/www6vHomeHexo/2023/03/05/gptAgentList/" title="Agent List">Agent List</a> </li>
+<li><a href="/www6vHomeHexo/2022/11/02/gptAgent/" title="(原理)Agent">(原理)Agent</a></li>
+<li><a href="/www6vHomeHexo/2023/01/21/gptMultiAgents/" title="(原理)Multi-Agents">(原理)Multi-Agents</a>  </li>
+<li><a href="/www6vHomeHexo/2023/01/01/gptAgentPractice/" title="(实战)Agent">(实战)Agent</a> </li>
+<li><a href="/www6vHomeHexo/2023/03/02/gptAgentPlanAndExecute/" title="(原理|实战)Plan-And-Execute Agent">(原理|实战)Plan-And-Execute Agent</a></li>
+<li><a href="/www6vHomeHexo/2023/03/05/gptAgentList/" title="(Survey)Agent List">(Survey)Agent List</a> </li>
 <li>Multimodal Agent<ul>
 <li><a href="/www6vHomeHexo/2023/02/21/gptAgentMultimodal/" title="Agent 多模态">Agent 多模态</a>  </li>
-<li><a href="/www6vHomeHexo/2023/03/05/gptAgentWeb/" title="Web Agent">Web Agent</a></li>
+<li><a href="/www6vHomeHexo/2023/03/05/gptAgentWeb/" title="(原理)Web Agent">(原理)Web Agent</a></li>
 </ul>
 </li>
 <li>Tools<ul>
-<li><a href="/www6vHomeHexo/2022/11/16/gptFunctionCall/" title="Function Call">Function Call</a> </li>
+<li><a href="/www6vHomeHexo/2022/11/16/gptFunctionCall/" title="(原理|实战)Function Call">(原理|实战)Function Call</a> </li>
 <li><a href="/www6vHomeHexo/2023/01/27/gptAgentTool/" title="Agent-Tools">Agent-Tools</a>  </li>
-<li><a href="/www6vHomeHexo/2023/02/03/gptToolformer/" title="Toolformer">Toolformer</a></li>
+<li><a href="/www6vHomeHexo/2023/02/03/gptToolformer/" title="(原理)Toolformer">(原理)Toolformer</a></li>
 </ul>
 </li>
 </ul>
@@ -1722,7 +1722,7 @@
       </tags>
   </entry>
   <entry>
-    <title>PEFT P-Tuning</title>
+    <title>(实战)PEFT P-Tuning</title>
     <url>/www6vHomeHexo/2024/01/28/gptPEFTPtuning/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -1780,7 +1780,7 @@
       </tags>
   </entry>
   <entry>
-    <title>PEFT QLoRA 实战</title>
+    <title>(实战)PEFT QLoRA</title>
     <url>/www6vHomeHexo/2024/01/12/gptPEFTQLora/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -2783,7 +2783,7 @@
       </tags>
   </entry>
   <entry>
-    <title>多模态  Survey</title>
+    <title>(Survey)多模态</title>
     <url>/www6vHomeHexo/2023/03/16/gptMultimodalSurvey/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -2844,7 +2844,7 @@
       </tags>
   </entry>
   <entry>
-    <title>多模态-InstructTuning</title>
+    <title>(综述)多模态-InstructTuning</title>
     <url>/www6vHomeHexo/2023/03/15/gptMultimodalInstructTuning/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -3125,7 +3125,7 @@
       </tags>
   </entry>
   <entry>
-    <title>多模态 RAG-原理 实战</title>
+    <title>(原理|实战)多模态 RAG</title>
     <url>/www6vHomeHexo/2023/03/14/gptRAGMultimodal/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -3174,7 +3174,7 @@
 <ul>
 <li>Use a multimodal LLM (such as <a href="https://openai.com/research/gpt-4v-system-card">GPT4-V</a>, <a href="https://llava.hliu.cc/">LLaVA</a>, or <a href="https://www.adept.ai/blog/fuyu-8b">FUYU-8b</a>) to produce text summaries from images</li>
 <li>Embed and retrieve image summaries with a reference to the raw image </li>
-<li>Pass <strong>raw images and text chunks</strong> to a multimodal LLM for answer synthesis<br> 【实际模型输入使用的是图片】<br> 【图片概要依然是用于检索（GPT-4V，LLaVA，FUYU-8b）】[15]<br>  {选项3：前置阶段同选项2相同。对话时，根据query召回原始文本&#x2F;表格&#x2F;图片。构造完整Prompt，访问多模态大模型生成应答结果。}[10]</li>
+<li>Pass <strong>raw images and text chunks</strong> to a multimodal LLM for answer synthesis<br> 【实际模型输入使用的是图片】<br>   【图片概要依然是用于检索（GPT-4V，LLaVA，FUYU-8b）】[15]<br>  {选项3：前置阶段同选项2相同。对话时，根据query召回原始文本&#x2F;表格&#x2F;图片。构造完整Prompt，访问多模态大模型生成应答结果。}[10]</li>
 </ul>
 </li>
 </ul>
@@ -3212,7 +3212,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Instruct-Tuning Survey</title>
+    <title>(Survey)Instruct Tuning</title>
     <url>/www6vHomeHexo/2023/03/12/gptInstructTuningSurvey/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -3242,7 +3242,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Agent List</title>
+    <title>(Survey)Agent List</title>
     <url>/www6vHomeHexo/2023/03/05/gptAgentList/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -3579,7 +3579,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Web Agent</title>
+    <title>(原理)Web Agent</title>
     <url>/www6vHomeHexo/2023/03/05/gptAgentWeb/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -3635,7 +3635,7 @@
       </tags>
   </entry>
   <entry>
-    <title>多模态 预训练</title>
+    <title>(原理)多模态 预训练</title>
     <url>/www6vHomeHexo/2023/03/04/gptMultimodalPretrain/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -3728,7 +3728,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Self-Reflective RAG</title>
+    <title>(原理|实战)Self-Reflective RAG</title>
     <url>/www6vHomeHexo/2023/03/02/gptRAGSelfReflective/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -3766,7 +3766,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Plan-And-Execute Agent</title>
+    <title>(原理|实战)Plan-And-Execute Agent</title>
     <url>/www6vHomeHexo/2023/03/02/gptAgentPlanAndExecute/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -4650,7 +4650,7 @@
 </li>
 <li><p><a href="https://github.com/www6v/tutorial/tree/main/xtuner">internLM fine-tuning on xtuner</a><br><a href="https://www.bilibili.com/video/BV1yK4y1B75J/">(4)XTuner 大模型单卡低成本微调实战</a> V</p>
 </li>
-<li><a href="/www6vHomeHexo/2024/01/12/gptPEFTQLora/" title="PEFT QLoRA 实战">PEFT QLoRA 实战</a>   self</li>
+<li><a href="/www6vHomeHexo/2024/01/12/gptPEFTQLora/" title="(实战)PEFT QLoRA">(实战)PEFT QLoRA</a>   self</li>
 </ol>
 <p>1xx. <a href="https://www.zhihu.com/question/510246227">神经网络低比特量化中训练和推理是如何实现的？</a></p>
 <p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648399136&idx=1&sn=bd0a7237940c2ac800e06ae6d247349e">NLP大模型压缩关键技术解读：用于大型Transformer的8-bit矩阵乘法原理及其简单实现</a><br>   <a href="https://huggingface.co/blog/zh/hf-bitsandbytes-integration">大规模 Transformer 模型 8 比特矩阵乘简介 - 基于 Hugging Face Transformers、Accelerate 以及 bitsandbytes </a></p>
@@ -5046,14 +5046,14 @@
 </ul>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li>《大规模语言模型》 </li>
-<li>《Data-centric Artificial Intelligence: A Survey》<br><a href="https://zhuanlan.zhihu.com/p/620890799">Data-centric Artificial Intelligence: A Survey</a><br> <a href="https://cloud.tencent.com/developer/article/2359824">机器学习数据工程的概述</a></li>
-<li>《Data Management For Large Language Models: A Survey》<br> <a href="https://blog.csdn.net/weixin_60760661/article/details/136058893">大模型的数据管理——论文精读</a><br> <a href="https://github.com/www6v/data_management_LLM">Data Management for LLM</a></li>
+<li>《Data-centric Artificial Intelligence: A Survey》 大学<br><a href="https://zhuanlan.zhihu.com/p/620890799">Data-centric Artificial Intelligence: A Survey</a><br> <a href="https://cloud.tencent.com/developer/article/2359824">机器学习数据工程的概述</a></li>
+<li>《Data Management For Large Language Models: A Survey》huawei<br> <a href="https://blog.csdn.net/weixin_60760661/article/details/136058893">大模型的数据管理——论文精读</a><br> <a href="https://github.com/www6v/data_management_LLM">Data Management for LLM</a></li>
 </ol>
 <p>1xx. <a href="https://zhuanlan.zhihu.com/p/639207933">大模型时代下数据的重要性</a> 综述</p>
 <p>1xx. <a href="https://hub.baai.ac.cn/view/28740">大模型研发核心：数据工程、自动化评估及与知识图谱的结合</a><br>   <a href="https://mp.weixin.qq.com/s/SvDnQD886E3DBtw8k9asgg">大模型研发核心：数据工程、自动化评估及与知识图谱的结合 </a></p>
 <p>1xx. <a href="https://blog.csdn.net/qq_16949707/article/details/133875958">符尧：别卷大模型训练了，来卷数据吧！【干货十足】</a> 看最后的5个结论   </p>
 <ol start="50">
-<li><a href="/www6vHomeHexo/2023/01/06/gptInstructTuning/" title="Instruct Tuning 原理">Instruct Tuning 原理</a> self</li>
+<li><a href="/www6vHomeHexo/2023/01/06/gptInstructTuning/" title="(原理)Instruct Tuning">(原理)Instruct Tuning</a> self</li>
 </ol>
 <h3><span id="案例">案例</span><a href="#案例" class="header-anchor">#</a></h3><ol start="30">
 <li>《千帆增强版 Llama 2》 百度 有ppt</li>
@@ -5106,7 +5106,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Toolformer</title>
+    <title>(原理)Toolformer</title>
     <url>/www6vHomeHexo/2023/02/03/gptToolformer/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -5594,7 +5594,7 @@
       </tags>
   </entry>
   <entry>
-    <title>PromptTuning 实战</title>
+    <title>(实战)PromptTuning</title>
     <url>/www6vHomeHexo/2023/01/25/gptPromptTuningPractice/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -5719,7 +5719,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Multi-Agents</title>
+    <title>(原理)Multi-Agents</title>
     <url>/www6vHomeHexo/2023/01/21/gptMultiAgents/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -5877,7 +5877,7 @@
       </tags>
   </entry>
   <entry>
-    <title>多模态 综述</title>
+    <title>(综述)多模态</title>
     <url>/www6vHomeHexo/2023/01/18/gptMultimodal/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -6088,7 +6088,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Instruct Tuning 原理</title>
+    <title>(原理)Instruct Tuning</title>
     <url>/www6vHomeHexo/2023/01/06/gptInstructTuning/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -6306,7 +6306,7 @@
       </tags>
   </entry>
   <entry>
-    <title>PEFT Lora 实战</title>
+    <title>(实战)PEFT Lora</title>
     <url>/www6vHomeHexo/2023/01/05/gptPEFTLora/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -6742,7 +6742,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Agent 实践</title>
+    <title>(实战)Agent</title>
     <url>/www6vHomeHexo/2023/01/01/gptAgentPractice/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -6799,7 +6799,7 @@
       </tags>
   </entry>
   <entry>
-    <title>RAG 实践</title>
+    <title>(实战)RAG</title>
     <url>/www6vHomeHexo/2022/12/31/gptRAGPractice/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -7061,7 +7061,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Fine-Tuning 时机</title>
+    <title>(原理)Fine-Tuning 时机</title>
     <url>/www6vHomeHexo/2022/12/28/gptFineTuningWhen/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -7191,7 +7191,7 @@
       </tags>
   </entry>
   <entry>
-    <title>PEFT 实战</title>
+    <title>(实战)PEFT 概述</title>
     <url>/www6vHomeHexo/2022/12/20/gptFineTuningPEFT/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -7822,7 +7822,7 @@
       </tags>
   </entry>
   <entry>
-    <title>SFT-PEFT</title>
+    <title>(原理)PEFT</title>
     <url>/www6vHomeHexo/2022/11/18/gptFineTuning/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -7921,7 +7921,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Function Call</title>
+    <title>(原理|实战)Function Call</title>
     <url>/www6vHomeHexo/2022/11/16/gptFunctionCall/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -8047,7 +8047,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Agent 原理</title>
+    <title>(原理)Agent</title>
     <url>/www6vHomeHexo/2022/11/02/gptAgent/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -8394,7 +8394,7 @@
       </tags>
   </entry>
   <entry>
-    <title>RAG 原理</title>
+    <title>(综述)RAG</title>
     <url>/www6vHomeHexo/2022/11/02/gptRAG/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
