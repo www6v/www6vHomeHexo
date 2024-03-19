@@ -1530,6 +1530,7 @@
 </ol>
 <p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648401484&idx=1&sn=c49b5ca5fc962ca757d3a082b74f037a">“超越LLama 65B”的Falcon40B语言模型为什么好：再看精细化的数据清洗的重要性 </a><br>   RefinedWeb Dataset for Falcon,   Falcon采用bloom架构</p>
 <p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648402104&idx=1&sn=7d4924b2a5a840e4ff3de43299248b1d">再谈大模型的预训数据清洗与微调数据生成：RedPajama数据处理框架与entity-centric指令生成方法解读 </a><br>    llama数据的复现项目SlimPajama</p>
+<p>1xx. <a href="https://zhuanlan.zhihu.com/p/637996787">【Falcon Paper】我们是靠洗数据洗败 LLaMA 的！</a> 未</p>
 <h3><span id="textbooks-数量-gtscaling-law">Textbooks   数量-&gt;scaling law</span><a href="#textbooks-数量-gtscaling-law" class="header-anchor">#</a></h3><p>1xx. <a href="https://finisky.github.io/textbooks-are-all-you-need-summary/">数据为王: Textbooks Are All You Need </a>   以小博大  打破传统语言模型缩放定律<br>1xx. <a href="https://zhuanlan.zhihu.com/p/673021932">Textbooks Are All You Need II: phi-1.5 technical report 精读与翻译</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/672066480">小模型的惊人能力: Phi-2</a></p>
 ]]></content>
       <categories>
@@ -1661,7 +1662,7 @@
       </tags>
   </entry>
   <entry>
-    <title>混合精度</title>
+    <title>(原理|实战)混合精度</title>
     <url>/www6vHomeHexo/2024/02/01/gptPrecision/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -1705,6 +1706,8 @@
 <li>解决方案<br>padding&#x3D;left<br>改为padding&#x3D;right</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">model = AutoModelForCausalLM.from_pretrained(<span class="string">&quot;D:/Pretrained_models/modelscope/Llama-2-7b-ms&quot;</span>, low_cpu_mem_usage=<span class="literal">True</span>, torch_dtype=torch.half, device_map=<span class="string">&quot;auto&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="原理">原理</span><a href="#原理" class="header-anchor">#</a></h3><ol>
 <li><a href="https://www.bilibili.com/video/BV1R94y1g78L?p=6">混合精度</a>  *** V</li>
 <li><a href="https://zhuanlan.zhihu.com/p/103685761">浅谈混合精度训练</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/441591808">全网最全-混合精度训练原理</a>  ***<br>1xx. <a href="https://zhuanlan.zhihu.com/p/608634079">【深度学习】混合精度训练与显存分析</a></li>
@@ -4397,7 +4400,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Chinese LLaMA 实战</title>
+    <title>(实战)Chinese-LLaMA PT+SFT</title>
     <url>/www6vHomeHexo/2023/02/21/gptChineseLlama/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -4553,7 +4556,7 @@
       </tags>
   </entry>
   <entry>
-    <title>量化</title>
+    <title>(原理|实战)量化</title>
     <url>/www6vHomeHexo/2023/02/19/gptQuantization/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -4710,7 +4713,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Transformer-实现</title>
+    <title>(实战)Transformer</title>
     <url>/www6vHomeHexo/2023/02/16/gptTransformerCode/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -4851,7 +4854,7 @@
       </tags>
   </entry>
   <entry>
-    <title>幻觉问题</title>
+    <title>(原理)幻觉问题</title>
     <url>/www6vHomeHexo/2023/02/06/gptHallucination/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -5215,7 +5218,7 @@
       </tags>
   </entry>
   <entry>
-    <title>涌现现象（Emergent）</title>
+    <title>(原理)涌现现象</title>
     <url>/www6vHomeHexo/2023/02/03/gptEmergent/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -5344,7 +5347,7 @@
       </tags>
   </entry>
   <entry>
-    <title>继续-预训练</title>
+    <title>(原理|实战)继续Pre-Training</title>
     <url>/www6vHomeHexo/2023/02/03/gptContinualPretraining/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -5389,7 +5392,7 @@
       </tags>
   </entry>
   <entry>
-    <title>推理-框架</title>
+    <title>(实战)推理-框架</title>
     <url>/www6vHomeHexo/2023/02/02/gptInferenceFramework/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -5437,7 +5440,7 @@
 <h1><span id="实战-vllm推理部署11">实战-vllm推理部署[11]</span><a href="#实战-vllm推理部署11" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="框架">框架</span><a href="#框架" class="header-anchor">#</a></h3><p>1.1. <a href="https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&__biz=MzA5MTIxNTY4MQ==&scene=1&album_id=2959126655292211206">探秘LLM应用开发</a>   8-19</p>
 <p>1xx. <a href="https://github.com/www6v/llm-action/tree/main/inference">https://github.com/www6v/llm-action/tree/main/inference</a><br>1xx. <a href="https://www.zhihu.com/question/625415776/answer/3243562246">https://www.zhihu.com/question/625415776/answer/3243562246</a></p>
 <h3><span id="实战">实战</span><a href="#实战" class="header-anchor">#</a></h3><ol start="10">
-<li><p><a href="https://github.com/InternLM/tutorial/blob/main/lmdeploy/lmdeploy.md">lmdeploy 量化部署</a><br>   <a href="https://www.bilibili.com/video/BV1iW4y1A77P/">(5)LMDeploy 大模型量化部署实践</a> V</p>
+<li><p><a href="https://github.com/InternLM/tutorial/blob/main/lmdeploy/lmdeploy.md">lmdeploy 量化部署</a><br>  <a href="https://www.bilibili.com/video/BV1iW4y1A77P/">(5)LMDeploy 大模型量化部署实践</a> V</p>
 </li>
 <li><p><a href="https://github.com/LlamaFamily/Llama2-Chinese/blob/main/inference-speed/GPU/vllm_example/README.md">Atom-7B-Chat vllm推理部署</a></p>
 </li>
@@ -5610,7 +5613,7 @@
       </tags>
   </entry>
   <entry>
-    <title>不可能三角</title>
+    <title>(原理)不可能三角</title>
     <url>/www6vHomeHexo/2023/01/25/gptImpossibleTriangle/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -5978,13 +5981,13 @@
       </tags>
   </entry>
   <entry>
-    <title>训练Train-实战</title>
+    <title>(实战)Training</title>
     <url>/www6vHomeHexo/2023/01/15/gptLargeModelTrainingPractice/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
 
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>1xx. <a href="https://zhuanlan.zhihu.com/p/636270877">【LLM】从零开始训练大模型</a> ***  未<br>     <a href="https://www.bilibili.com/video/BV1a14y1o7fr/">从零开始训练大模型</a> V<br>1xx. <a href="https://zhuanlan.zhihu.com/p/637996787">【Falcon Paper】我们是靠洗数据洗败 LLaMA 的！</a> 未<br>1xx. <a href="http://arthurchiao.art/blog/how-to-train-a-gpt-assistant-zh/">[译] 如何训练一个企业级 GPT 助手（OpenAI，2023）</a> 未<br>1xx. <a href="https://github.com/www6v/fullStackLLM/blob/master/08-fine-tuning/huggingface/index.ipynb">chatgpt2 训练</a>  10.5   10.6</p>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>1xx. <a href="https://zhuanlan.zhihu.com/p/636270877">【LLM】从零开始训练大模型</a> ***  未<br>     <a href="https://www.bilibili.com/video/BV1a14y1o7fr/">从零开始训练大模型</a> V<br>1xx. <a href="http://arthurchiao.art/blog/how-to-train-a-gpt-assistant-zh/">[译] 如何训练一个企业级 GPT 助手（OpenAI，2023）</a> 未<br>1xx. <a href="https://github.com/www6v/fullStackLLM/blob/master/08-fine-tuning/huggingface/index.ipynb">chatgpt2 训练</a>  10.5   10.6</p>
 <h3><span id="小模型训练-poc">小模型训练 PoC</span><a href="#小模型训练-poc" class="header-anchor">#</a></h3><p>1xx. <a href="https://zhuanlan.zhihu.com/p/660759033">LLM从0开始预训练系列：1、大模型训练踩坑</a><br>1xx. <a href="http://arthurchiao.art/blog/gpt-as-a-finite-state-markov-chain-zh/">[译] GPT 是如何工作的：200 行 Python 代码实现一个极简 GPT（2023）</a>  未</p>
 ]]></content>
       <categories>
@@ -6195,7 +6198,7 @@
       </tags>
   </entry>
   <entry>
-    <title>训练-并行</title>
+    <title>(原理)分布式并行Training</title>
     <url>/www6vHomeHexo/2023/01/06/gptTrainParallelism/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -6243,6 +6246,7 @@
 </ul>
 <h3><span id="模型并行">模型并行</span><a href="#模型并行" class="header-anchor">#</a></h3><p><strong>张量并行</strong>与<strong>流水线并行</strong>都属于<strong>模型并行</strong>，<br>区别在于对模型参数的切分“方向”不同：<br><strong>张量并行</strong>把模型的<strong>每层进行切分 (intra-layer)<strong>，而</strong>流水线并行</strong>则<strong>按层进行切分 (inter-layer) 并在不同设备处理</strong>。[2]</p>
 <h5><span id="张量并行-3">张量并行 [3]</span><a href="#张量并行-3" class="header-anchor">#</a></h5> <img src="/www6vHomeHexo/2023/01/06/gptTrainParallelism/tensor.png" class>
+
 <ul>
 <li>Megatron-LM（1D）</li>
 <li>Colossal-AI（2D、2.5D、3D）</li>
@@ -6623,7 +6627,7 @@
       </tags>
   </entry>
   <entry>
-    <title>推理-优化</title>
+    <title>(综述)推理优化</title>
     <url>/www6vHomeHexo/2023/01/01/gptInference/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -7122,7 +7126,7 @@
       </tags>
   </entry>
   <entry>
-    <title>RAG 性能-OpenAI案例</title>
+    <title>(原理)RAG 性能[OpenAI案例]</title>
     <url>/www6vHomeHexo/2022/12/27/gptRAGPerformanceOpenAI/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -7338,7 +7342,7 @@
       </tags>
   </entry>
   <entry>
-    <title>RAG 性能</title>
+    <title>(原理)RAG 性能</title>
     <url>/www6vHomeHexo/2022/12/07/gptRAGPerformance/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -7412,9 +7416,7 @@
 <li><p><a href="https://www.pinecone.io/learn/series/rag/rerankers/">Rerankers and Two-Stage Retrieval</a><br>文中的第二阶段就是指Reranker</p>
 </li>
 </ol>
-<p>1xx. <a href="https://www.youtube.com/watch?v=ahnGLM-RC1Y">A Survey of Techniques for Maximizing LLM Performance</a>  *** V</p>
-<pre><code>[A Survey of Techniques for Maximizing LLM Performance梳理](https://zhuanlan.zhihu.com/p/670880685) 
-</code></pre>
+<p>1xx. <a href="https://www.youtube.com/watch?v=ahnGLM-RC1Y">A Survey of Techniques for Maximizing LLM Performance</a>  *** V<br>    <a href="https://zhuanlan.zhihu.com/p/670880685">A Survey of Techniques for Maximizing LLM Performance梳理</a> </p>
 <p>1xx. <a href="https://blog.llamaindex.ai/a-cheat-sheet-and-some-recipes-for-building-advanced-rag-803a9d94c41b">A Cheat Sheet and Some Recipes For Building Advanced RAG</a><br>     <a href="https://mp.weixin.qq.com/s/KM8c3PUww1SOK1dbLjn1Tw">LlamaIndex官方年度巨献：高清大图纵览高级 RAG技术，强烈推荐收藏 </a> *** 看图<br>     <a href="https://baoyu.io/translations/rag/a-cheat-sheet-and-some-recipes-for-building-advanced-rag">构建高级 RAG 的指南和技巧 [译]</a></p>
 <p>1xx. <a href="https://pub.towardsai.net/advanced-rag-techniques-an-illustrated-overview-04d193d8fec6">Advanced RAG Techniques: an Illustrated Overview</a><br>     <a href="https://mp.weixin.qq.com/s/CO7hMv4RW7OE6zwUmVfp5A">最全的RAG技术概览 </a></p>
 <p>1xx. <a href="https://baoyu.io/translations/rag/5-levels-of-text-splitting">文本分割的五个层次 [译]</a></p>
@@ -7430,7 +7432,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Transformer</title>
+    <title>(原理)Transformer</title>
     <url>/www6vHomeHexo/2022/11/30/gptTransformer/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -7740,7 +7742,7 @@
       </tags>
   </entry>
   <entry>
-    <title>训练</title>
+    <title>(原理)Training</title>
     <url>/www6vHomeHexo/2022/11/19/gptLargeModelTraining/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -8455,7 +8457,7 @@
       </tags>
   </entry>
   <entry>
-    <title>大模型 综述</title>
+    <title>(综述)大模型</title>
     <url>/www6vHomeHexo/2022/10/30/gptLargeModelSurvey/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
