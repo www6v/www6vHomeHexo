@@ -21,12 +21,12 @@
   </script>
 
   <meta property="og:type" content="article">
-<meta property="og:title" content="Blip,BLIP-2">
+<meta property="og:title" content="(图生文)BLIP-2, Flamingo">
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2023/03/15/gptMultimodalBlip/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-15T15:00:59.000Z">
-<meta property="article:modified_time" content="2024-03-15T15:17:01.634Z">
+<meta property="article:modified_time" content="2024-03-20T02:37:30.559Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="multimodal">
 <meta name="twitter:card" content="summary">
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>Blip,BLIP-2 | www6v的博客</title>
+  <title>(图生文)BLIP-2, Flamingo | www6v的博客</title>
   
 
 
@@ -201,7 +201,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Blip,BLIP-2
+          (图生文)BLIP-2, Flamingo
         </h1>
 
         <div class="post-meta">
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-15 23:17:01" itemprop="dateModified" datetime="2024-03-15T23:17:01+08:00">2024-03-15</time>
+                <time title="修改时间：2024-03-20 10:37:30" itemprop="dateModified" datetime="2024-03-20T10:37:30+08:00">2024-03-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -254,9 +254,30 @@
         <p></p>
 <span id="more"></span>
 
-<h1><span id="blip">BLIP</span><a href="#blip" class="header-anchor">#</a></h1><h1><span id="blip-2">BLIP-2</span><a href="#blip-2" class="header-anchor">#</a></h1><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>1xx.  <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ek4y1G74J">强推！科大讯飞和中科院终于把多模态大模型讲明白了，CLIP、blip、blip2三种模型原理一口气学完</a> V<br>1xx.  <a target="_blank" rel="noopener" href="https://nakaizura.blog.csdn.net/article/details/130757157?spm=1001.2014.3001.5502">基于LLMs的多模态大模型（Flamingo, BLIP-2，KOSMOS-1，ScienceQA）</a><br>1xx.  <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV18u4y137ZV/">AI论文精读之多模态大模型BLIP-2</a> V</p>
-<p>1xx. <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648400402&idx=1&sn=efd84698e6a207b2035995ec2e255417">MiniGPT-4实现原理及其核心BLIP2模型实践：从代表性图文对数据集、BLIP2模型结构到调用实践</a></p>
-
+<h1><span id="blip-2">BLIP-2</span><a href="#blip-2" class="header-anchor">#</a></h1><h3><span id="overview-1">Overview [1]</span><a href="#overview-1" class="header-anchor">#</a></h3><p>用一个Qformer来提取图像特征（等同与Flamingo的perceiver resampler），然后用cross- attention进行多模态交互，此时视觉编码器和LLM都会被冻结，<strong>只训练Qformer</strong>，而在下游任务微调时，可以再解锁视觉编码器，让它跟Qformer一起训练</p>
+<h3><span id="两阶段的训练策略-1">两阶段的训练策略 [1]</span><a href="#两阶段的训练策略-1" class="header-anchor">#</a></h3><p>BLIP-2设计了两阶段的训练策略，以使视觉编码器能学会提取更关键的信息。</p>
+<ul>
+<li>第一阶段：使用多种预训练任务，如Image-Text Contrastive Learning(<strong>ITC</strong>)，Image-grounded Text Generation(<strong>ITG</strong>)，Image-Text Matching(<strong>ITM</strong>)让Qformer学会如何从<strong>视觉编码器中抽取文本相关的特征</strong>。</li>
+<li>第二阶段，将Qformer插入到LLMs中，用language modeling进行训练。</li>
+</ul>
+<h3><span id="架构3">架构[3]</span><a href="#架构3" class="header-anchor">#</a></h3><ul>
+<li><strong>两个阶段训练</strong><ul>
+<li>阶段一<br>获得高质量的 <strong>图文对齐向量表征</strong><br>通过<strong>ITC ITM  ITG 三个损失函数</strong>获得了很好的图片文本 <strong>对齐向量表征能力</strong>，仅训练<strong>Qformer</strong>中很少的参数<br>【ITM:  image-text 是否是匹配的 |    image 和text 都能相互看到】<br>【ITG: image生成text |    image 能全看到, text只能逐个的看】<br>【ITC: image和text的对比学习, 对比学习分类分错了的  送入ITM 负样本 |  image和 text  之间是不能看到的】</li>
+<li>阶段二<br>通过向量表征进行<strong>文字生成</strong></li>
+</ul>
+</li>
+</ul>
+<h3><span id="code-2">code [2]</span><a href="#code-2" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="blip2">blip2</span><a href="#blip2" class="header-anchor">#</a></h3><ol>
+<li><p><a target="_blank" rel="noopener" href="https://nakaizura.blog.csdn.net/article/details/130757157?spm=1001.2014.3001.5502">基于LLMs的多模态大模型（Flamingo, BLIP-2，KOSMOS-1，ScienceQA）</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/www6v/LAVIS/tree/main/projects/blip2">blip2</a> git<br><a target="_blank" rel="noopener" href="https://colab.research.google.com/github/salesforce/LAVIS/blob/main/examples/blip2_instructed_generation.ipynb">blip2_instructed_generation</a> git 运行过</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ek4y1G74J">强推！科大讯飞和中科院终于把多模态大模型讲明白了，CLIP、blip、blip2三种模型原理一口气学完</a> V ***</p>
+</li>
+</ol>
+<p>1xx.  <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV18u4y137ZV/">AI论文精读之多模态大模型BLIP-2</a> V</p>
+<p>1xx. <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648400402&idx=1&sn=efd84698e6a207b2035995ec2e255417">MiniGPT-4实现原理及其核心BLIP2模型实践：从代表性图文对数据集、BLIP2模型结构到调用实践</a> *</p>
+<h3><span id="flamingo">Flamingo</span><a href="#flamingo" class="header-anchor">#</a></h3>
     </div>
 
     
@@ -271,7 +292,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www6v.github.io/www6vHomeHexo/2023/03/15/gptMultimodalBlip/" title="Blip,BLIP-2">https://www6v.github.io/www6vHomeHexo/2023/03/15/gptMultimodalBlip/</a>
+    <a href="https://www6v.github.io/www6vHomeHexo/2023/03/15/gptMultimodalBlip/" title="(图生文)BLIP-2, Flamingo">https://www6v.github.io/www6vHomeHexo/2023/03/15/gptMultimodalBlip/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
