@@ -21,17 +21,14 @@
   </script>
 
   <meta property="og:type" content="article">
-<meta property="og:title" content="(原理|实战)量化">
+<meta property="og:title" content="(原理)量化">
 <meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2023/02/19/gptQuantization/index.html">
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2023/02/19/gptQuantization/quantization.jpeg">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2023/02/19/gptQuantization/twoProcedures.jpeg">
-<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2023/02/19/gptQuantization/dirs.png">
-<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2023/02/19/gptQuantization/dir.png">
-<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2023/02/19/gptQuantization/xtuner-chat.png">
 <meta property="article:published_time" content="2023-02-19T09:00:25.000Z">
-<meta property="article:modified_time" content="2024-03-19T05:56:30.398Z">
+<meta property="article:modified_time" content="2024-03-22T02:35:04.087Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="量化">
 <meta name="twitter:card" content="summary">
@@ -50,7 +47,7 @@
   };
 </script>
 
-  <title>(原理|实战)量化 | www6v的博客</title>
+  <title>(原理)量化 | www6v的博客</title>
   
 
 
@@ -207,7 +204,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          (原理|实战)量化
+          (原理)量化
         </h1>
 
         <div class="post-meta">
@@ -230,7 +227,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-19 13:56:30" itemprop="dateModified" datetime="2024-03-19T13:56:30+08:00">2024-03-19</time>
+                <time title="修改时间：2024-03-22 10:35:04" itemprop="dateModified" datetime="2024-03-22T10:35:04+08:00">2024-03-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,6 +266,7 @@
 <li><a href="#%E9%87%8F%E5%8C%96%E7%9A%84%E5%AE%9A%E4%B9%89-3">量化的定义 [3]</a></li>
 <li><a href="#%E9%87%8F%E5%8C%96%E7%9A%84%E4%B8%A4%E4%B8%AA%E9%98%B6%E6%AE%B5-3">量化的两个阶段 [3]</a></li>
 <li><a href="#%E9%87%8F%E5%8C%96%E5%88%86%E7%B1%BB">量化分类</a></li>
+<li><a href="#quantization">Quantization</a></li>
 </ul>
 </li>
 <li><a href="#ptq">PTQ</a><ul>
@@ -277,12 +275,10 @@
 <li><a href="#awq-7">AWQ [7]</a></li>
 </ul>
 </li>
-<li><a href="#%E5%AE%9E%E6%88%98-ptq1">实战-PTQ[1]</a><ul>
-<li><a href="#%E9%87%8F%E5%8C%96%E4%B8%8E8bit%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83">量化与8bit模型训练</a></li>
+<li><a href="#%E4%BD%8E%E7%B2%BE%E5%BA%A6%E8%AE%AD%E7%BB%83%E6%96%B9%E6%B3%95chat">低精度训练方法[chat]</a><ul>
+<li><a href="#quantization1">Quantization[1]</a></li>
 </ul>
 </li>
-<li><a href="#%E5%AE%9E%E6%88%982-%E9%87%8F%E5%8C%96%E6%8E%A8%E7%90%86-%E9%87%8F%E5%8C%96%E6%8E%A8%E7%90%86-8">实战2-量化推理 量化推理 [8]</a></li>
-<li><a href="#%E4%BD%8E%E7%B2%BE%E5%BA%A6%E8%AE%AD%E7%BB%83%E6%96%B9%E6%B3%95chat">低精度训练方法[chat]</a></li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 <!-- tocstop -->
@@ -310,33 +306,51 @@
 </ul>
 </li>
 </ul>
-<h1><span id="ptq">PTQ</span><a href="#ptq" class="header-anchor">#</a></h1><h3><span id="llmint8-6">LLM.int8() [6]</span><a href="#llmint8-6" class="header-anchor">#</a></h3><h3><span id="gptq-6">GPTQ [6]</span><a href="#gptq-6" class="header-anchor">#</a></h3><h3><span id="awq-7">AWQ [7]</span><a href="#awq-7" class="header-anchor">#</a></h3><h1><span id="实战-ptq1">实战-PTQ[1]</span><a href="#实战-ptq1" class="header-anchor">#</a></h1><h3><span id="量化与8bit模型训练">量化与8bit模型训练</span><a href="#量化与8bit模型训练" class="header-anchor">#</a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">model = AutoModelForCausalLM.from_pretrained(<span class="string">&quot;D:/Pretrained_models/modelscope/Llama-2-7b-ms&quot;</span>, low_cpu_mem_usage=<span class="literal">True</span>, </span><br><span class="line">                                             torch_dtype=torch.half, device_map=<span class="string">&quot;auto&quot;</span>, load_in_8bit=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
-<h1><span id="实战2-量化推理-量化推理-8">实战2-量化推理 量化推理 [8]</span><a href="#实战2-量化推理-量化推理-8" class="header-anchor">#</a></h1><ul>
-<li><p>Training的模型</p>
-<img src="/www6vHomeHexo/2023/02/19/gptQuantization/dirs.png" class>
-</li>
-<li><p>合并后的模型</p>
-<img src="/www6vHomeHexo/2023/02/19/gptQuantization/dir.png" class>
-</li>
-<li><p>4bit量化推理</p>
-<img src="/www6vHomeHexo/2023/02/19/gptQuantization/xtuner-chat.png" class></li>
+<h3><span id="quantization">Quantization</span><a href="#quantization" class="header-anchor">#</a></h3><ul>
+<li>QAT -&gt; Expensive</li>
+<li>PTQ -&gt; More feasible than QAT</li>
 </ul>
-<blockquote>
-<p>Training的时候要用tmux</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">tmux new -s finetune</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">tmux attach -t finetune</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">ctcl +b , D</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>16bit量化推理慢,  要用4bit量化推理</p>
-</blockquote>
-<h1><span id="低精度训练方法chat">低精度训练方法[chat]</span><a href="#低精度训练方法chat" class="header-anchor">#</a></h1><ul>
+<h1><span id="ptq">PTQ</span><a href="#ptq" class="header-anchor">#</a></h1><h3><span id="llmint8-6">LLM.int8() [6]</span><a href="#llmint8-6" class="header-anchor">#</a></h3><h3><span id="gptq-6">GPTQ [6]</span><a href="#gptq-6" class="header-anchor">#</a></h3><h3><span id="awq-7">AWQ [7]</span><a href="#awq-7" class="header-anchor">#</a></h3><h1><span id="低精度训练方法chat">低精度训练方法[chat]</span><a href="#低精度训练方法chat" class="header-anchor">#</a></h1><ul>
 <li>半精度浮点数（FP16）训练</li>
 <li>混合精度训练（Mixed Precision Training）</li>
 <li>量化训练（Quantization Training）</li>
 </ul>
+<h3><span id="quantization1">Quantization[1]</span><a href="#quantization1" class="header-anchor">#</a></h3><table>
+<thead>
+<tr>
+<th></th>
+<th>Weight only quant</th>
+<th>smoothquant(PTQ )</th>
+<th>fp8(PTQ )</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Latency Reduction</td>
+<td>**</td>
+<td>***(best)</td>
+<td>***(best)</td>
+</tr>
+<tr>
+<td>Modal Acc</td>
+<td>**</td>
+<td>*</td>
+<td>***(best)</td>
+</tr>
+<tr>
+<td>Memory Saving</td>
+<td>**</td>
+<td>***(best)</td>
+<td>***(best)</td>
+</tr>
+<tr>
+<td>Ease of use</td>
+<td>***(best)</td>
+<td>**</td>
+<td>*</td>
+</tr>
+</tbody></table>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1EN411g7Yn/"> 量化与8bit模型训练</a> V<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1EN411g7Yn/">【手把手带你实战HuggingFace Transformers-低精度训练篇】量化与8bit模型训练</a><br>   <a target="_blank" rel="noopener" href="https://github.com/www6v/transformers-code/blob/master/04-Kbit%20Training/26-8bits_training/llama2_lora_8bit.ipynb">llama2_lora_8bit.ipynb</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1h44y1c72B">大语言模型推理：低精度最佳实践</a> V</p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/649460612">大模型训练｜概念篇</a></p>
 </li>
@@ -350,7 +364,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/681578090">大模型量化技术原理-AWQ、AutoAWQ</a></p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/www6v/tutorial/tree/main/xtuner">internLM fine-tuning on xtuner</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yK4y1B75J/">(4)XTuner 大模型单卡低成本微调实战</a> V</p>
+<li><p>xxx</p>
 </li>
 <li><a href="/www6vHomeHexo/2024/01/12/gptPEFTQLora/" title="(实战)PEFT QLoRA">(实战)PEFT QLoRA</a>   self</li>
 </ol>
@@ -371,7 +385,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www6v.github.io/www6vHomeHexo/2023/02/19/gptQuantization/" title="(原理|实战)量化">https://www6v.github.io/www6vHomeHexo/2023/02/19/gptQuantization/</a>
+    <a href="https://www6v.github.io/www6vHomeHexo/2023/02/19/gptQuantization/" title="(原理)量化">https://www6v.github.io/www6vHomeHexo/2023/02/19/gptQuantization/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -469,7 +483,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">565</span>
+          <span class="site-state-item-count">566</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

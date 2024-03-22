@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2023/03/21/gptInferFramework/inference.jpg">
 <meta property="article:published_time" content="2023-03-21T14:18:17.000Z">
-<meta property="article:modified_time" content="2024-03-21T15:08:19.871Z">
+<meta property="article:modified_time" content="2024-03-22T02:31:39.494Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Inference">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-21 23:08:19" itemprop="dateModified" datetime="2024-03-21T23:08:19+08:00">2024-03-21</time>
+                <time title="修改时间：2024-03-22 10:31:39" itemprop="dateModified" datetime="2024-03-22T10:31:39+08:00">2024-03-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -262,14 +262,12 @@
 
 <ul>
 <li><a href="#%E6%8E%A8%E7%90%86-%E6%A1%86%E6%9E%B611">推理 框架[1.1]</a></li>
-<li><a href="#vllm2">vLLM[2]</a><ul>
-<li><a href="#page-attention">page attention</a></li>
+<li><a href="#vllm">vLLM</a><ul>
+<li><a href="#key-features-5">key features [5]</a></li>
 </ul>
 </li>
 <li><a href="#tensorrt-llm">TensorRT-LLM</a><ul>
-<li><a href="#key-features">key features</a></li>
-<li><a href="#quantization">Quantization</a></li>
-<li><a href="#quantization3">Quantization[3]</a></li>
+<li><a href="#key-features-4">key features [4]</a></li>
 </ul>
 </li>
 <li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
@@ -288,58 +286,42 @@
 <li><p>服务 Server<br>Triton Server</p>
 </li>
 </ul>
-<h1><span id="vllm2">vLLM[2]</span><a href="#vllm2" class="header-anchor">#</a></h1><h3><span id="page-attention">page attention</span><a href="#page-attention" class="header-anchor">#</a></h3><p>   memory sharing</p>
-<h1><span id="tensorrt-llm">TensorRT-LLM</span><a href="#tensorrt-llm" class="header-anchor">#</a></h1><h3><span id="key-features">key features</span><a href="#key-features" class="header-anchor">#</a></h3><ul>
+<h1><span id="vllm">vLLM</span><a href="#vllm" class="header-anchor">#</a></h1><h3><span id="key-features-5">key features [5]</span><a href="#key-features-5" class="header-anchor">#</a></h3><ul>
+<li><strong>page attention</strong>[2]<br> memory sharing</li>
+<li>Continuous <strong>batching</strong> of incoming requests</li>
+<li>Quantization: <ul>
+<li><strong>GPTQ</strong></li>
+<li><strong>AWQ</strong></li>
+<li>SqueezeLLM</li>
+<li><strong>FP8 KV Cache</strong></li>
+</ul>
+</li>
+</ul>
+<h1><span id="tensorrt-llm">TensorRT-LLM</span><a href="#tensorrt-llm" class="header-anchor">#</a></h1><h3><span id="key-features-4">key features [4]</span><a href="#key-features-4" class="header-anchor">#</a></h3><ul>
 <li>Flash Attention</li>
-<li>MMHA</li>
-<li>Quantization</li>
+<li>MHA&#x2F;MQA&#x2F;GQA</li>
+<li><strong>Quantization</strong><ul>
+<li>Weight-Only</li>
+<li>SmoothQuant</li>
+<li><strong>GPTQ</strong></li>
+<li><strong>AWQ</strong></li>
+<li>FP8</li>
+</ul>
+</li>
+<li>Paged <strong>KV Cache</strong> for the Attention</li>
 <li>Multi-GPU Multi-Node</li>
-<li>TP&#x2F;PP</li>
-<li>In-flight Batching</li>
+<li><strong>TP(Tensor Parallelism)&#x2F;PP(Pipeline Parallelism)</strong></li>
+<li>In-flight <strong>Batching</strong></li>
 </ul>
-<h3><span id="quantization">Quantization</span><a href="#quantization" class="header-anchor">#</a></h3><ul>
-<li>QAT Expensive</li>
-<li>PTQ More feasible than QAT</li>
-</ul>
-<h3><span id="quantization3">Quantization[3]</span><a href="#quantization3" class="header-anchor">#</a></h3><table>
-<thead>
-<tr>
-<th></th>
-<th>Weight only quant</th>
-<th>smoothquant(PTQ )</th>
-<th>fp8(PTQ )</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Latency Reduction</td>
-<td>**</td>
-<td>***(best)</td>
-<td>***(best)</td>
-</tr>
-<tr>
-<td>Modal Acc</td>
-<td>**</td>
-<td>*</td>
-<td>***(best)</td>
-</tr>
-<tr>
-<td>Memory Saving</td>
-<td>**</td>
-<td>***(best)</td>
-<td>***(best)</td>
-</tr>
-<tr>
-<td>Ease of use</td>
-<td>***(best)</td>
-<td>**</td>
-<td>*</td>
-</tr>
-</tbody></table>
 <h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>1.1. <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&__biz=MzA5MTIxNTY4MQ==&scene=1&album_id=2959126655292211206">探秘LLM应用开发</a>   8-19</p>
 <ol start="2">
 <li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1cP41187wY/">VLLM ——高效GPU训练框架</a> V</p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1h44y1c72B">大语言模型推理：低精度最佳实践</a> V</p>
+<li><p>xx</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/NVIDIA/TensorRT-LLM/">TensorRT-LLM</a> git</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/vllm-project/vllm">vllm</a> git</p>
 </li>
 </ol>
 <p>1xx. <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzA5MTIxNTY4MQ==&mid=2461142079&idx=1&sn=07d9033203c0064408fe0af33d1f9414">一文探秘LLM应用开发(18)-模型部署与推理(框架工具-Triton Server、RayLLM、OpenLLM)</a></p>
@@ -458,7 +440,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/www6vHomeHexo/archives/">
         
-          <span class="site-state-item-count">565</span>
+          <span class="site-state-item-count">566</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
