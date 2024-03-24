@@ -26,8 +26,9 @@
 <meta property="og:site_name" content="www6v的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2023/01/06/gptPromptTuning/npl4Paragiam.jpg">
+<meta property="og:image" content="https://www6v.github.io/www6vHomeHexo/2023/01/06/gptPromptTuning/promptTuning.JPG">
 <meta property="article:published_time" content="2023-01-06T11:06:15.000Z">
-<meta property="article:modified_time" content="2024-01-27T08:48:51.505Z">
+<meta property="article:modified_time" content="2024-03-24T10:59:00.800Z">
 <meta property="article:author" content="Wang Wei">
 <meta property="article:tag" content="Prompt-Tuning">
 <meta name="twitter:card" content="summary">
@@ -226,7 +227,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-27 16:48:51" itemprop="dateModified" datetime="2024-01-27T16:48:51+08:00">2024-01-27</time>
+                <time title="修改时间：2024-03-24 18:59:00" itemprop="dateModified" datetime="2024-03-24T18:59:00+08:00">2024-03-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -256,15 +257,124 @@
         <p></p>
 <span id="more"></span>
 
-<h1><span id="npl范式3">NPL范式[3]</span><a href="#npl范式3" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2023/01/06/gptPromptTuning/npl4Paragiam.jpg" class title="4种范式">
+<h1><span id="npl范式-1">NPL范式 [1]</span><a href="#npl范式-1" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2023/01/06/gptPromptTuning/npl4Paragiam.jpg" class title="4种范式">
 
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="3">
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/396098543">[综述]鹏飞大神的Pre-train, Prompt, and Predict [1]</a></li>
+
+<h1><span id="prompt-tuning-2">Prompt Tuning [2]</span><a href="#prompt-tuning-2" class="header-anchor">#</a></h1><ul>
+<li>🔔 Prompt Tuning<ul>
+<li>🔗 文章：The Power of Scale for Parameter-Efficient Prompt Tuning (EMNLP 2021) <a target="_blank" rel="noopener" href="https://aclanthology.org/2021.emnlp-main.243/">https://aclanthology.org/2021.emnlp-main.243/</a></li>
+<li>🔑关键词和摘要<ul>
+<li>Keywords: Large-scale PLMs, Parameter-efficient Tuning, Prompt Tuning</li>
+<li>摘要<ul>
+<li>Prompt变成可学习的向量，固定PLM，微调Prompt来适配下游任务</li>
+<li>PLM参数规模越大，Prompt Tuning的性能和全参数微调越接近</li>
+<li>这种基于<strong>Soft Prompt</strong>的Prompt Tuning方法可以看作是<strong>Prefix Tuning的简化版本</strong>（只加在输入上）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>⚙️研究设计和结论<ul>
+<li>方法   <ul>
+<li>模型示意图：xxx</li>
+<li>模型基本思路：<ul>
+<li>经典分类：P(Y | X; θ)<ul>
+<li>Hard Prompt: P(Y | [P;X] ; θ)<ul>
+<li>Soft Prompt: P(Y | [P;X] ; θ; Δ)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Pre-Training<ul>
+<li>Fine-Tuning<ul>
+<li>Prompt Tuning</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>实现细节：<ul>
+<li>模型参数量<ul>
+<li>参数量：T5 ~ T5-XXL(10B)</li>
+<li>预训练：LM Adaptation</li>
+</ul>
+</li>
+<li>Prompt长度：xxx<ul>
+<li>1、5、20、100、150</li>
+</ul>
+</li>
+<li>初始化方法：xxx<ul>
+<li>随机初始化</li>
+<li>使用预设文本的词向量初始化，类似于设计hard prompt，然后将hard prompt转化为soft prompt</li>
+<li>使用类别词向量初始化，类似于提供选项</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>实验<ul>
+<li>数据集：SuperGLUE</li>
+<li>xxx<ul>
+<li>Prompt的规模越大，性能相对而言会越好</li>
+</ul>
+</li>
+<li>xxx<ul>
+<li>基于语义信息的初始化比随机初始化要好</li>
+</ul>
+</li>
+<li>xxx<ul>
+<li>LM Adaptation 对性能提升显著</li>
+<li>Prompt Tuning还是需要大模型有较好的文本生成能力</li>
+</ul>
+</li>
+<li>xxx<ul>
+<li>模型参数规模越大，Prompt Tuning效果越好</li>
+<li>10B参数时与全参数微调性能接近</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>📚论文贡献<ul>
+<li>优点（计算友好）<ul>
+<li>大模型的<strong>微调新范式</strong></li>
+<li><strong>一个中心模型服务多个下游任务</strong>，<strong>节省参数存储量</strong></li>
+<li><strong>无需优化模型参数</strong>，节省优化器的计算量和存储量</li>
+<li><strong>只在输入层进行操作</strong>，适合多任务场景下的计算合并</li>
+</ul>
+</li>
+<li>缺点（性能和收敛性存在问题）<ul>
+<li>Prompt Tuning的<strong>收敛速度很慢</strong></li>
+<li>Prompt Tuning的模型<strong>性能不稳定</strong></li>
+<li>Few-shot场景上表现不佳</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1><span id="prompt-tuning3">Prompt Tuning[3]</span><a href="#prompt-tuning3" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2023/01/06/gptPromptTuning/promptTuning.JPG" class>
+
+<ul>
+<li>Allow an <strong>additional k tunable tokens</strong> per downstream task to <strong>be prepended to the input text</strong></li>
+<li>No intermediate-layer prefixes or task-specific output layers</li>
+<li><strong>Freeze the entire pre-trained model</strong> and <strong>only optimize the embedding layer</strong></li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/396098543">[综述]鹏飞大神的Pre-train, Prompt, and Predict [1]</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV18P411E7VK/">清华博后带你轻松吃透Prompt Tuning顶会大模型论文</a> V</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Wg4y1K77R/">第七课：Prompt Tuning</a> ***  V  有ppt</p>
+</li>
 </ol>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/395115779">近代自然语言处理技术发展的“第四范式”</a>  Prompt Learning</p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/396971490">Prompt范式的缘起｜Pattern-Exploiting Training</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/400790006">Prompt范式第二阶段｜Prefix-tuning、P-tuning、Prompt-tuning</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/423306405">清华P-tuning v2、谷歌SPoT｜Prompt可以超过精调了吗？</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Wg4y1K77R/">第七课：Prompt Tuning</a> ***  V  有ppt<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV18P411E7VK/">清华博后带你轻松吃透Prompt Tuning顶会大模型论文</a> V</p>
+<p>1xx. <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/395115779">近代自然语言处理技术发展的“第四范式”</a>  Prompt Learning</p>
+<p>1xx. <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/396971490">Prompt范式的缘起｜Pattern-Exploiting Training</a></p>
+<p>1xx. <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/400790006">Prompt范式第二阶段｜Prefix-tuning、P-tuning、Prompt-tuning</a></p>
+<h3><span id="p-tuning-v2">P-tuning v2</span><a href="#p-tuning-v2" class="header-anchor">#</a></h3><p>1xx. <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/423306405">清华P-tuning v2、谷歌SPoT｜Prompt可以超过精调了吗？</a></p>
 
     </div>
 
