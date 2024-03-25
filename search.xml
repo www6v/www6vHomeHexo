@@ -16508,6 +16508,7 @@ table th:first-of-type {
 <li><a href="/www6vHomeHexo/2023/02/21/gptChineseLlama/" title="(实战)Chinese-LLaMA PT+SFT">(实战)Chinese-LLaMA PT+SFT</a>   </li>
 <li><a href="/www6vHomeHexo/2023/01/06/gptTrainParallelism/" title="(原理)分布式并行Training">(原理)分布式并行Training</a>    </li>
 <li><a href="/www6vHomeHexo/2023/03/23/gptTrainZeroDeepspeed/" title="(原理)Zero Deepspeed">(原理)Zero Deepspeed</a>    </li>
+<li><a href="/www6vHomeHexo/2023/03/25/gptTrainDeepspeedPractice/" title="(实战)Deepspeed">(实战)Deepspeed</a>     </li>
 <li><a href="/www6vHomeHexo/2024/02/01/gptPrecision/" title="(原理|实战)混合精度">(原理|实战)混合精度</a></li>
 </ul>
 </li>
@@ -44352,6 +44353,32 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>PEFT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(实战)Deepspeed</title>
+    <url>/www6vHomeHexo/2023/03/25/gptTrainDeepspeedPractice/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+
+
+
+
+<h1><span id="deepspeed-配置0">DeepSpeed 配置[0]</span><a href="#deepspeed-配置0" class="header-anchor">#</a></h1><h3><span id="zero-2-配置-12">ZeRO-2 配置 [1][2]</span><a href="#zero-2-配置-12" class="header-anchor">#</a></h3><h3><span id="zero-3-配置34">ZeRO-3 配置[3][4]</span><a href="#zero-3-配置34" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="0">
+<li>《大模型分布式训练框架 Microsoft DeepSpeed》 Ai大模型微调</li>
+<li><a href="https://github.com/www6v/LLM-quickstart/blob/main/deepspeed/config/ds_config_zero2.json">ds_config_zero2.json</a></li>
+<li><a href="https://github.com/LlamaFamily/Llama-Chinese/blob/main/train/pretrain/ds_config_zero2.json">ds_config_zero2.json</a></li>
+<li><a href="https://github.com/www6v/LLM-quickstart/blob/main/deepspeed/config/ds_config_zero3.json">ds_config_zero3.json</a></li>
+<li><a href="https://github.com/LlamaFamily/Llama-Chinese/blob/main/train/pretrain/ds_config_zero3.json">ds_config_zero3.json</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>AIGC</category>
+        <category>Deepspeed</category>
+      </categories>
+      <tags>
+        <tag>Deepspeed</tag>
       </tags>
   </entry>
 </search>
