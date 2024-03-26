@@ -57,7 +57,7 @@
 </li>
 <li>模型压缩<ul>
 <li><a href="/www6vHomeHexo/2023/02/19/gptQuantization/" title="(原理)模型压缩-量化概述">(原理)模型压缩-量化概述</a> </li>
-<li><a href="/www6vHomeHexo/2023/03/26/gptQuantizationWeight/" title="(原理)Weight only quant(GPTQ, AWQ)">(原理)Weight only quant(GPTQ, AWQ)</a> </li>
+<li><a href="/www6vHomeHexo/2023/03/26/gptQuantizationWeight/" title="(原理)Weight Only(LLM.int8(), GPTQ, AWQ)">(原理)Weight Only(LLM.int8(), GPTQ, AWQ)</a> </li>
 <li><a href="/www6vHomeHexo/2024/03/22/gptQuantizationPractice/" title="(实战)模型压缩-量化">(实战)模型压缩-量化</a></li>
 </ul>
 </li>
@@ -2827,20 +2827,37 @@
       </tags>
   </entry>
   <entry>
-    <title>(原理)Weight only quant(GPTQ, AWQ)</title>
+    <title>(原理)Weight Only(LLM.int8(), GPTQ, AWQ)</title>
     <url>/www6vHomeHexo/2023/03/26/gptQuantizationWeight/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-
-<h1><span id="gptq6">GPTQ[6]</span><a href="#gptq6" class="header-anchor">#</a></h1><h3><span id="原理">原理</span><a href="#原理" class="header-anchor">#</a></h3><p>GPTQ 采用 int4&#x2F;fp16 (W4A16) 的混合量化方案，其中<strong>模型权重</strong>被量化为 <strong>int4</strong> 数值类型，而<strong>激活值</strong>则保留在 ** float16<strong>，是一种</strong>仅权重量化<strong>方法。在推理阶段，模型权重被动态地反量化回 float16 并在该数值类型下进行实际的运算；同 OBQ  一样，GPTQ还是从</strong>单层量化<strong>的角度考虑，</strong>希望找到一个量化过的权重，使的新的权重和老的权重之间输出的结果差别最小**。</p>
+<h1><span id="llmint8-2">LLM.int8() [2]</span><a href="#llmint8-2" class="header-anchor">#</a></h1><h3><span id="原理">原理</span><a href="#原理" class="header-anchor">#</a></h3><p>LLM.int8()是一种采用<strong>混合精度分解</strong>的量化方法。该方案先做了一个矩阵分解，对绝大部分权重和激活用8bit量化（vector-wise）。对<strong>离群特征</strong>的几个维度保留16bit，对其做高精度的矩阵乘法。</p>
+<h3><span id="算法">算法</span><a href="#算法" class="header-anchor">#</a></h3><p>LLM.int8() 通过三个步骤完成矩阵乘法计算:</p>
+<ul>
+<li>从输入的隐含状态中，按列提取**异常值 (离群特征，即大于某个阈值的值)**。</li>
+<li>对离群特征进行 FP16 矩阵运算，对非离群特征进行量化，做 INT8 矩阵运算；</li>
+<li>反量化非离群值的矩阵乘结果，并与离群值矩阵乘结果相加，获得最终的 FP16 结果。</li>
+</ul>
+<h1><span id="gptq2">GPTQ[2]</span><a href="#gptq2" class="header-anchor">#</a></h1><h3><span id="原理">原理</span><a href="#原理" class="header-anchor">#</a></h3><p>GPTQ 采用** int4&#x2F;fp16 (W4A16) 的混合量化<strong>方案，其中</strong>模型权重<strong>被量化为 <strong>int4</strong> 数值类型，而</strong>激活值<strong>则保留在 ** float16</strong>，是一种<strong>仅权重量化</strong>方法。在推理阶段，模型权重被动态地反量化回 float16 并在该数值类型下进行实际的运算；同 OBQ  一样，GPTQ还是从<strong>单层量化</strong>的角度考虑，<strong>希望找到一个量化过的权重，使的新的权重和老的权重之间输出的结果差别最小</strong>。</p>
+<p>GPTQ 将权重分组（如：128列为一组）为多个子矩阵（block）。对某个 block 内的所有参数逐个量化，每个参数量化后，需要适当调整这个 block 内其他未量化的参数，以弥补量化造成的精度损失。因此，GPTQ 量化需要准备校准数据集。</p>
 <h3><span id="实现">实现</span><a href="#实现" class="header-anchor">#</a></h3><p>AutoGPTQ 代码库集成到了 Transformers 中，让用户使用 GPTQ 算法在 <strong>8 bit、4 bit、3 bit</strong>，甚至是 <strong>2 bit</strong> 精度下量化和运行模型成为可能。当使用 <strong>int4 量化</strong>时，精度的下降可以忽略不计，同时在小批量推理上保持着与 fp16 基线相当的速度。需要注意的是，GPTQ 方法与 bitsandbytes 提出的训练后量化方法有所不同，GPTQ 需要<strong>在量化阶段</strong>提供一个<strong>校准数据集</strong>。</p>
-<h1><span id="awq-7">AWQ [7]</span><a href="#awq-7" class="header-anchor">#</a></h1><h3><span id="技术原理">技术原理</span><a href="#技术原理" class="header-anchor">#</a></h3><p>AWQ是一种对大模型<strong>仅权重量化</strong>方法。通过<strong>保护更“重要”的权重不进行量化</strong>，从而在不进行训练的情况下提高准确率。</p>
+<h1><span id="awq-3">AWQ [3]</span><a href="#awq-3" class="header-anchor">#</a></h1><h3><span id="技术原理">技术原理</span><a href="#技术原理" class="header-anchor">#</a></h3><p>AWQ是一种对大模型<strong>仅权重量化</strong>方法。通过<strong>保护更“重要”的权重不进行量化</strong>，从而在不进行训练的情况下提高准确率。</p>
 <h3><span id="实现">实现</span><a href="#实现" class="header-anchor">#</a></h3><p>目前，除了官方提供了对于AWQ的支持（llm-awq）之外，社区有相当多的工具（如：<strong>AutoAWQ</strong>、<strong>vLLM</strong>、 HuggingFace TGI、LMDeploy、 <strong>TensorRT-LLM</strong>、FastChat 等）提供了对AWQ的支持。</p>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="6">
-<li><a href="https://zhuanlan.zhihu.com/p/680212402">大模型量化技术原理-LLM.int8()、GPTQ</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/681578090">大模型量化技术原理-AWQ、AutoAWQ</a><br>1xx. 《8-实战Transformers模型量化》 Ai大模型微调</li>
+<h1><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h1><ul>
+<li><p>LLM.int8()<br> 属于 round-to-nearest (RTN) 量化：舍入到最近的定点数。<br> 【keyword: 混合精度分解    离群值】</p>
+</li>
+<li><p>GPT-Q<br> 把量化问题视作<strong>优化问题</strong>，逐层寻找最优的量化权重。<br>【keyword: 混合量化  优化问题】</p>
+</li>
+</ul>
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648399136&idx=1&sn=bd0a7237940c2ac800e06ae6d247349e">NLP大模型压缩关键技术解读：用于大型Transformer的8-bit矩阵乘法原理及其简单实现</a><br>   <a href="https://huggingface.co/blog/zh/hf-bitsandbytes-integration">大规模 Transformer 模型 8 比特矩阵乘简介 - 基于 Hugging Face Transformers、Accelerate 以及 bitsandbytes </a>  LLM.int8()</p>
+<ol start="2">
+<li><p><a href="https://zhuanlan.zhihu.com/p/680212402">大模型量化技术原理-LLM.int8()、GPTQ</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/681578090">大模型量化技术原理-AWQ、AutoAWQ</a></p>
+</li>
 </ol>
+<p>1xx. 《8-实战Transformers模型量化》 Ai大模型微调</p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -5061,7 +5078,7 @@
 </ul>
 </li>
 <li><a href="#ptq-%E5%88%86%E7%B1%BB">PTQ 分类</a><ul>
-<li><a href="#weight-quantization-10">Weight Quantization  [10]</a></li>
+<li><a href="#weight-quantization-106">Weight Quantization  [10][6]</a></li>
 <li><a href="#weight-and-activation-quantization-10">Weight and Activation Quantization [10]</a></li>
 <li><a href="#%E6%AF%94%E8%BE%831">比较[1]</a></li>
 </ul>
@@ -5098,10 +5115,10 @@
 <li>QAT -&gt; Expensive</li>
 <li>PTQ -&gt; More feasible than QAT</li>
 </ul>
-<h1><span id="ptq-分类">PTQ 分类</span><a href="#ptq-分类" class="header-anchor">#</a></h1><h3><span id="weight-quantization-10">Weight Quantization  [10]</span><a href="#weight-quantization-10" class="header-anchor">#</a></h3><ul>
-<li>LLM.int8() [6]</li>
-<li>GPTQ [6]</li>
-<li>AWQ [6]</li>
+<h1><span id="ptq-分类">PTQ 分类</span><a href="#ptq-分类" class="header-anchor">#</a></h1><h3><span id="weight-quantization-106">Weight Quantization  [10][6]</span><a href="#weight-quantization-106" class="header-anchor">#</a></h3><ul>
+<li>LLM.int8() </li>
+<li>GPTQ </li>
+<li>AWQ</li>
 </ul>
 <h3><span id="weight-and-activation-quantization-10">Weight and Activation Quantization [10]</span><a href="#weight-and-activation-quantization-10" class="header-anchor">#</a></h3><ul>
 <li>SmoothQuant[8]</li>
@@ -5150,15 +5167,14 @@
 <li><a href="https://zhuanlan.zhihu.com/p/649460612">大模型训练｜概念篇</a></li>
 <li>&lt;&lt; An Introduction to Quantization of Large Language Model &gt;&gt; </li>
 <li>4.1<a href="https://pytorch.org/docs/stable/quantization.html">pytorch Quantization</a><br>4.2 <a href="https://pytorch.org/blog/introduction-to-quantization-on-pytorch/">Introduction to Quantization on PyTorch</a> </li>
-<li><a href="https://zhuanlan.zhihu.com/p/662881352">大模型量化概述</a></li>
-<li><a href="/www6vHomeHexo/2023/03/26/gptQuantizationWeight/" title="(原理)Weight only quant(GPTQ, AWQ)">(原理)Weight only quant(GPTQ, AWQ)</a> self</li>
+<li><a href="https://zhuanlan.zhihu.com/p/662881352">大模型量化概述</a>  ***</li>
+<li><a href="/www6vHomeHexo/2023/03/26/gptQuantizationWeight/" title="(原理)Weight Only(LLM.int8(), GPTQ, AWQ)">(原理)Weight Only(LLM.int8(), GPTQ, AWQ)</a> self</li>
 <li>xxx</li>
 <li><a href="https://juejin.cn/post/7330079146515611687">大模型量化技术原理-SmoothQuant </a></li>
 <li><a href="/www6vHomeHexo/2024/01/12/gptPEFTQLora/" title="(实战)PEFT QLoRA">(实战)PEFT QLoRA</a>   self</li>
 <li>《A Survey on Model Compression for Large Language Models》</li>
 </ol>
 <p>1xx. <a href="https://www.zhihu.com/question/510246227">神经网络低比特量化中训练和推理是如何实现的？</a></p>
-<p>1xx. <a href="https://mp.weixin.qq.com/s?__biz=MzAxMjc3MjkyMg==&mid=2648399136&idx=1&sn=bd0a7237940c2ac800e06ae6d247349e">NLP大模型压缩关键技术解读：用于大型Transformer的8-bit矩阵乘法原理及其简单实现</a><br>   <a href="https://huggingface.co/blog/zh/hf-bitsandbytes-integration">大规模 Transformer 模型 8 比特矩阵乘简介 - 基于 Hugging Face Transformers、Accelerate 以及 bitsandbytes </a></p>
 ]]></content>
       <categories>
         <category>AIGC</category>
@@ -6131,7 +6147,7 @@
 <li><a href="https://zhuanlan.zhihu.com/p/501381510">预训练模型的下一步？突破Impossible Triangle</a></li>
 <li><a href="https://arxiv.org/pdf/2204.06130.pdf">Impossible Triangle: What’s Next for Pre-trained Language Models?</a></li>
 <li><a href="https://blog.csdn.net/zandaoguang/article/details/124395479">微软朱晨光：预训练模型下一步怎么走？突破PLM的「不可能三角」</a></li>
-<li><a href="/www6vHomeHexo/2023/01/06/gptPromptTuning/" title="Prompt Tuning">Prompt Tuning</a> self</li>
+<li><a href="/www6vHomeHexo/2023/01/06/gptPromptTuning/" title="(原理)Prompt Tuning">(原理)Prompt Tuning</a> self</li>
 </ol>
 <h3><span id="scaling-law">Scaling Law</span><a href="#scaling-law" class="header-anchor">#</a></h3><ol start="10">
 <li><a href="https://zhuanlan.zhihu.com/p/667489780">解析大模型中的Scaling Law</a><br>1xx. <a href="https://zhuanlan.zhihu.com/p/663296750">论文阅读，大模型的缩放定律，Scaling Laws for Neural Language Models</a><br>2xx. <a href="https://finisky.github.io/training-compute-optimal-large-language-models-summary/">Training Compute-Optimal Large Language Models 简读 </a></li>
