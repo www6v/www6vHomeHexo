@@ -1108,9 +1108,11 @@
 </ul>
 </li>
 </ul>
-<h3><span id="故障模型">故障模型</span><a href="#故障模型" class="header-anchor">#</a></h3> <a href="/www6vHomeHexo/2018/10/27/faultModel1/" title="故障模型-应用层">故障模型-应用层</a> 
- <a href="/www6vHomeHexo/2018/05/03/faultModel2/" title="故障模型-中间件层">故障模型-中间件层</a> 
- <a href="/www6vHomeHexo/2018/05/03/faultModel3/" title="故障模型-基础设施层">故障模型-基础设施层</a> 
+<h3><span id="故障模型">故障模型</span><a href="#故障模型" class="header-anchor">#</a></h3><ul>
+<li><a href="/www6vHomeHexo/2018/10/27/faultModel1/" title="故障模型-应用层">故障模型-应用层</a> </li>
+<li><a href="/www6vHomeHexo/2018/05/03/faultModel2/" title="故障模型-中间件层">故障模型-中间件层</a> </li>
+<li><a href="/www6vHomeHexo/2018/05/03/faultModel3/" title="故障模型-基础设施层">故障模型-基础设施层</a></li>
+</ul>
 <h3><span id="容量保障">容量保障</span><a href="#容量保障" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2022/03/13/capacityGuarantee/" title="容量保障与全链路压测">容量保障与全链路压测</a></li>
 </ul>
