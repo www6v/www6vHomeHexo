@@ -211,8 +211,6 @@
 
 <ul>
 <li><a href="#%E7%BC%96%E6%8E%92%E5%8E%9F%E7%90%86">编排原理</a></li>
-<li><a href="#%E6%9C%8D%E5%8A%A1%E5%92%8Cdns">服务和DNS</a></li>
-<li><a href="#%E5%AD%98%E5%82%A8">存储</a></li>
 <li><a href="#%E8%B0%83%E5%BA%A6">调度</a></li>
 <li><a href="#%E7%9B%91%E6%8E%A7%E5%92%8Cautoscale">监控和AutoScale</a></li>
 <li><a href="#%E7%94%9F%E4%BA%A7%E5%8C%96">生产化</a></li>
@@ -232,21 +230,12 @@
 <h2><span id="编排原理">编排原理</span><a href="#编排原理" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2019/04/25/k8s/" title="Kubernetes 架构">Kubernetes 架构</a></li>
 </ul>
-<h2><span id="服务和dns">服务和DNS</span><a href="#服务和dns" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2019/11/04/k8sService/" title="Kubernetes服务">Kubernetes服务</a> </li>
-<li><a href="/www6vHomeHexo/2022/01/12/k8sDNS/" title="Kubernetes CoreDNS">Kubernetes CoreDNS</a> </li>
-<li><a href="/www6vHomeHexo/2022/02/10/k8sIngressNginx/" title="Kubernetes Nginx Ingress">Kubernetes Nginx Ingress</a></li>
-</ul>
-<h2><span id="存储">存储</span><a href="#存储" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2019/09/01/k8sStorage/" title="Kubernetes存储">Kubernetes存储</a> </li>
-<li><a href="/www6vHomeHexo/2022/01/12/k8sRook/" title="Kubernetes Rook">Kubernetes Rook</a> </li>
-<li><a href="/www6vHomeHexo/2022/01/08/ceph/" title="Ceph 总结">Ceph 总结</a> </li>
-<li><a href="/www6vHomeHexo/2022/04/06/etcd/" title="etcd 总结">etcd 总结</a></li>
-</ul>
+<hr>
 <h2><span id="调度">调度</span><a href="#调度" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2019/06/09/k8sScheduler/" title="Kubernetes调度器">Kubernetes调度器</a> </li>
 <li><a href="/www6vHomeHexo/2022/05/27/k8sAdvancedScheduling/" title="Kubernetes 高级调度">Kubernetes 高级调度</a></li>
 </ul>
+<hr>
 <h2><span id="监控和autoscale">监控和AutoScale</span><a href="#监控和autoscale" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2019/11/16/k8sAutoScale/" title="Kubernetes自动伸缩和HPA">Kubernetes自动伸缩和HPA</a> </li>
 <li><a href="/www6vHomeHexo/2022/04/10/observabilityPrometheus/" title="可观测性-Prometheus">可观测性-Prometheus</a> </li>
@@ -696,7 +685,7 @@
 </ul>
 <h3><span id="灰度发布">灰度发布</span><a href="#灰度发布" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2022/03/23/apiGatewayGray/" title="API 网关-灰度发布">API 网关-灰度发布</a></li>
-<li><a href="/www6vHomeHexo/2022/02/10/k8sIngressNginx/" title="Kubernetes Nginx Ingress">Kubernetes Nginx Ingress</a> </li>
+<li><a href="k8sIngressNginx.md">Go to Page</a></li>
 <li><a href="/www6vHomeHexo/2023/04/15/istioGray/" title="istio 灰度发布">istio 灰度发布</a></li>
 </ul>
 <h3><span id="安全">安全</span><a href="#安全" class="header-anchor">#</a></h3><ul>
@@ -11489,56 +11478,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
       </tags>
   </entry>
   <entry>
-    <title>etcd 总结</title>
-    <url>/www6vHomeHexo/2022/04/06/etcd/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-
-<h2><span id="读流程-3">读流程 [3]</span><a href="#读流程-3" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/04/06/etcd/read1.png" class title="读流程">
-
-<p>一个读请求从 client 通过 Round-robin 负载均衡算法，选择一个-etcd server 节点，发出 gRPC 请求，经过 etcd server 的 KVServer 模块、线性读模块、MVCC 的 treeIndex 和 boltdb 模块紧密协作，完成了一个读请求。</p>
-<p>etcd 提供的两种读机制 (串行读和线性读) </p>
-<h2><span id="写流程4">写流程[4]</span><a href="#写流程4" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/04/06/etcd/write.png" class title="写流程">
-
-<p> etcd 的写请求流程，重点介绍了 Quota、WAL、Apply 和 MVCC 模块。Quota 模块会防止 db 大小超限，WAL 模块保证了集群的一致性和可恢复性，Apply 模块实现了幂等性，MVCC 模块维护索引版本号和内存索引结构。etcd 通过异步、批量提交事务机制提升写 QPS 和吞吐量。这些模块相互协作，实现了在节点遭遇 crash 等异常情况下，不丢任何已提交的数据、不重复执行任何提案。[N AI]</p>
-<h2><span id="客户端lease-5">客户端Lease [5]</span><a href="#客户端lease-5" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/04/06/etcd/lease.png" class title="客户端Lease">
-
-<p>etcd 的 Lessor 模块在启动时会创建两个常驻 goroutine，分别用于检查过期 Lease 并撤销，以及定时更新 Lease 的剩余到期时间。该模块提供了 Grant、Revoke、LeaseTimeToLive 和 LeaseKeepAlive API，用于创建、撤销、获取有效期和续期 Lease。[N AI]</p>
-<h2><span id="mvcc-和-revision2">MVCC 和 revision[2]</span><a href="#mvcc-和-revision2" class="header-anchor">#</a></h2><ul>
-<li>etcd revision<ul>
-<li>定义 <ul>
-<li>计数器</li>
-<li>键值空间发生变化， revision相应增加</li>
-</ul>
-</li>
-<li>用途<ul>
-<li>逻辑时钟</li>
-<li><strong>MVCC</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://edu.aliyun.com/lesson_1651_18365#_18365">第16 章 ： 深入理解 etcd - 基本原理解析</a> 未</li>
-<li>《云原生分布式存储基石-etcd深入解析》</li>
-<li>《02 | 基础架构：etcd一个读请求是如何执行的？》</li>
-<li>《03丨基础架构：etcd一个写请求是如何执行的？》</li>
-<li>《06 | 租约：如何检测你的客户端存活？》</li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>etcd</category>
-      </categories>
-      <tags>
-        <tag>etcd</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>RocksDB- LSM-Tree</title>
     <url>/www6vHomeHexo/2022/04/05/rocksdbLsm/</url>
     <content><![CDATA[<p></p>
@@ -12374,7 +12313,7 @@ MySQL MVCC 快照读 vs 当前读 </li>
 
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><a href="https://www.cnblogs.com/linyb-geek/p/12774014.html">基于springcloud gateway + nacos实现灰度发布（reactive版）</a><br><a href="https://github.com/lyb-geek/gateway">相关的代码</a></li>
-<li><a href="/www6vHomeHexo/2022/02/10/k8sIngressNginx/" title="Kubernetes Nginx Ingress">Kubernetes Nginx Ingress</a>   灰度发布  self</li>
+<li><a href="k8sIngressNginx.md">Go to Page</a>   灰度发布  self</li>
 </ol>
 ]]></content>
       <categories>
@@ -13937,114 +13876,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
       </tags>
   </entry>
   <entry>
-    <title>Kubernetes Nginx Ingress</title>
-    <url>/www6vHomeHexo/2022/02/10/k8sIngressNginx/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#kubernetes-nginx-ingress-0">Kubernetes Nginx Ingress [0]</a><ul>
-<li><a href="#%E7%89%88%E6%9C%AC1-k8s%E5%AE%98%E6%96%B9%E7%BB%B4%E6%8A%A4-12">版本1-K8s官方维护 [1][2]</a></li>
-<li><a href="#%E7%89%88%E6%9C%AC2-nginx%E5%AE%98%E6%96%B9%E7%BB%B4%E6%8A%A4-34">版本2-Nginx官方维护 [3][4]</a></li>
-<li><a href="#%E7%89%88%E6%9C%AC1-vs-%E7%89%88%E6%9C%AC2-5">版本1 vs.  版本2 [5]</a></li>
-</ul>
-</li>
-<li><a href="#%E5%AE%9E%E8%B7%B5-0">实践 [0]</a><ul>
-<li><a href="#%E5%9F%9F%E5%90%8D%E9%87%8D%E5%AE%9A%E5%90%91">域名重定向 ***</a></li>
-<li><a href="#%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB">前后端分离 ***</a></li>
-<li><a href="#ssl%E9%85%8D%E7%BD%AE-p">SSL配置 [p]</a></li>
-<li><a href="#%E5%8C%B9%E9%85%8D%E8%AF%B7%E6%B1%82%E5%A4%B4">匹配请求头</a></li>
-<li><a href="#%E5%AE%9E%E7%8E%B0%E7%81%B0%E5%BA%A6%E9%87%91%E4%B8%9D%E9%9B%80%E5%8F%91%E5%B8%8367">实现灰度金丝雀发布[6][7]</a></li>
-<li><a href="#%E9%80%9F%E7%8E%87%E9%99%90%E5%88%B6">速率限制</a></li>
-<li><a href="#%E9%BB%91%E7%99%BD%E5%90%8D%E5%8D%95">黑白名单</a></li>
-<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E9%94%99%E8%AF%AF%E9%A1%B5%E9%9D%A2">自定义错误页面</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="kubernetes-nginx-ingress-0">Kubernetes Nginx Ingress [0]</span><a href="#kubernetes-nginx-ingress-0" class="header-anchor">#</a></h1><h3><span id="版本1-k8s官方维护-12">版本1-K8s官方维护 [1][2]</span><a href="#版本1-k8s官方维护-12" class="header-anchor">#</a></h3><ul>
-<li>There are three ways to customize NGINX:<ul>
-<li><strong>ConfigMap</strong>: using a Configmap to set global configurations in NGINX.<br>[滚动更新后生效， 针对全局的配置]</li>
-<li><strong>Annotations</strong>: use this if you want a specific configuration for a particular Ingress rule. [立即生效，针对某个域名location进行配置]</li>
-<li><strong>Custom template</strong>: when more specific settings are required, like open_file_cache, adjust listen options as rcvbuf or when is not possible to change the configuration through the ConfigMap.</li>
-</ul>
-</li>
-</ul>
-<h3><span id="版本2-nginx官方维护-34">版本2-Nginx官方维护 [3][4]</span><a href="#版本2-nginx官方维护-34" class="header-anchor">#</a></h3><h3><span id="版本1-vs-版本2-5">版本1 vs.  版本2 [5]</span><a href="#版本1-vs-版本2-5" class="header-anchor">#</a></h3><h1><span id="实践-0">实践 [0]</span><a href="#实践-0" class="header-anchor">#</a></h1><h3><span id="域名重定向">域名重定向 ***</span><a href="#域名重定向" class="header-anchor">#</a></h3><p>  <code>redirect</code> ，  http 重定向到https， 新旧域名替换</p>
-<h3><span id="前后端分离">前后端分离 ***</span><a href="#前后端分离" class="header-anchor">#</a></h3><p><code>rewrite</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ www.a.com /    --&gt; 前端服务</span><br><span class="line">+ www.a.com /api --&gt; 后端服务 /api  </span><br><span class="line">  www.a.com/api rewrite到  www.a.com </span><br></pre></td></tr></table></figure>
-<h3><span id="ssl配置-p">SSL配置  [p]</span><a href="#ssl配置-p" class="header-anchor">#</a></h3><p>  验证  自签名证书</p>
-<h3><span id="匹配请求头">匹配请求头</span><a href="#匹配请求头" class="header-anchor">#</a></h3><p>  Mobile 和 PC 的请求头不同，路由到不同的后端服务</p>
-<h3><span id="实现灰度金丝雀发布67">实现灰度金丝雀发布[6][7]</span><a href="#实现灰度金丝雀发布67" class="header-anchor">#</a></h3><p>不同灰度方式的优先级由高到低为：<br>canary-by-header<code>&gt;</code>canary-by-cookie<code>&gt;</code>canary-weight</p>
-<table>
-<thead>
-<tr>
-<th>Annotation</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>nginx.ingress.kubernetes.io&#x2F;canary</td>
-<td>必须设置该Annotation值为<code>true</code>，否则其它规则将不会生效。</td>
-</tr>
-<tr>
-<td>nginx.ingress.kubernetes.io&#x2F;canary-by-header</td>
-<td>表示基于请求头的名称进行灰度发布。</td>
-</tr>
-<tr>
-<td>nginx.ingress.kubernetes.io&#x2F;canary-by-header-value</td>
-<td>表示基于请求头的值进行灰度发布。</td>
-</tr>
-<tr>
-<td>nginx.ingress.kubernetes.io&#x2F;canary-by-header-pattern</td>
-<td>表示基于请求头的值进行灰度发布，并对请求头的值进行正则匹配。</td>
-</tr>
-<tr>
-<td>nginx.ingress.kubernetes.io&#x2F;canary-by-cookie</td>
-<td>表示基于Cookie进行灰度发布。</td>
-</tr>
-<tr>
-<td>nginx.ingress.kubernetes.io&#x2F;canary-weight</td>
-<td>表示基于权重进行灰度发布。</td>
-</tr>
-<tr>
-<td>nginx.ingress.kubernetes.io&#x2F;canary-weight-total</td>
-<td>表示设定的权重总值。</td>
-</tr>
-</tbody></table>
-<details><summary>灰度发布 示例</summary><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ 基于Header灰度（自定义header值）：当请求Header为ack: alibaba时将访问灰度服务；其它Header将根据灰度权重将流量分配给灰度服务。</span><br><span class="line">+ 基于Cookie灰度：当Header不匹配时，请求的Cookie为hangzhou_region=always时将访问灰度服务。 </span><br><span class="line"></span><br><span class="line">apiVersion: networking.k8s.io/v1</span><br><span class="line">kind: Ingress</span><br><span class="line">metadata:</span><br><span class="line">  annotations:</span><br><span class="line">    kubernetes.io/ingress.class: nginx</span><br><span class="line">    nginx.ingress.kubernetes.io/canary: &quot;true&quot;</span><br><span class="line">    nginx.ingress.kubernetes.io/canary-weight: &quot;20&quot;</span><br><span class="line">    nginx.ingress.kubernetes.io/canary-by-header: &quot;ack&quot;</span><br><span class="line">    nginx.ingress.kubernetes.io/canary-by-header-value: &quot;alibaba&quot;</span><br><span class="line">    nginx.ingress.kubernetes.io/canary-by-cookie: &quot;hangzhou_region&quot;</span><br></pre></td></tr></table></figure></details>
-
-
-
-<h3><span id="速率限制">速率限制</span><a href="#速率限制" class="header-anchor">#</a></h3><h3><span id="黑白名单">黑白名单</span><a href="#黑白名单" class="header-anchor">#</a></h3><p>  allow deny</p>
-<h3><span id="自定义错误页面">自定义错误页面</span><a href="#自定义错误页面" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="0">
-<li><a href="https://www.bilibili.com/video/BV16t4y1w7r6?p=162">kubernetes架构师课程</a>  162 V ***</li>
-<li><a href="https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/">Ingress-Nginx Doc</a></li>
-<li><a href="https://github.com/kubernetes/ingress-nginx">Ingress-Nginx Github</a></li>
-<li><a href="https://docs.nginx.com/nginx-ingress-controller/configuration/ingress-resources/advanced-configuration-with-annotations/">Nginx-ingress Doc</a></li>
-<li><a href="https://github.com/nginxinc/kubernetes-ingress">Nginx-ingress GitHub</a></li>
-<li><a href="https://github.com/nginxinc/kubernetes-ingress/blob/main/docs/content/intro/nginx-ingress-controllers.md">nginx-ingress-controllers.md</a>    表格 </li>
-<li><a href="https://help.aliyun.com/document_detail/86533.html#section-gjm-dw6-hkn">Nginx Ingress高级用法</a></li>
-<li><a href="https://www.bilibili.com/video/BV15o4y1Y7Bq/">【IT老齐294】大厂如何基于K8S实现金丝雀发布</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>云原生</category>
-        <category>Kubernetes</category>
-      </categories>
-      <tags>
-        <tag>Kubernetes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>分布式 数据库 总结</title>
     <url>/www6vHomeHexo/2022/02/09/distributedDatabase/</url>
     <content><![CDATA[<p></p>
@@ -15294,7 +15125,7 @@ MySQL MVCC 快照读 vs 当前读 </li>
 <li><a href="https://juejin.cn/post/6844903806208049159">微服务架构：BFF和网关是如何演化出来的？</a></li>
 <li>《27 | API网关：系统的门面要如何做呢？》</li>
 <li><a href="https://tech.meituan.com/2021/05/20/shepherd-api-gateway.html">百亿规模API网关服务Shepherd的设计与实现</a> 点评 未</li>
-<li><a href="/www6vHomeHexo/2022/02/10/k8sIngressNginx/" title="Kubernetes Nginx Ingress">Kubernetes Nginx Ingress</a> self</li>
+<li><a href="k8sIngressNginx.md">Go to Page</a> self</li>
 </ol>
 ]]></content>
       <categories>
@@ -16491,108 +16322,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
       </tags>
   </entry>
   <entry>
-    <title>Kubernetes Rook</title>
-    <url>/www6vHomeHexo/2022/01/12/k8sRook/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#rook-for-ceph">Rook for ceph</a><br>- <a href="#rook%E5%BB%BA%E7%AB%8Bceph%E9%9B%86%E7%BE%A4%E6%B5%81%E7%A8%8B1">Rook建立Ceph集群流程[1]</a><br>- <a href="#rook-cluster-installation-23-i">Rook cluster installation [2][3] [I]</a><br>- <a href="#ceph%E5%AD%98%E5%82%A8%E7%B1%BB%E5%9E%8B">Ceph存储类型</a><br>- <a href="#block-storage-45-ii">Block Storage [4][5] [II]</a><br>- <a href="#filesystem67-iii">FileSystem[6][7] [III]</a><br>- <a href="#pvc%E5%9C%A8%E7%BA%BF%E6%89%A9%E5%AE%B9pvc%E5%BF%AB%E7%85%A7%E5%92%8C%E5%9B%9E%E6%BB%9A">PVC在线扩容，PVC快照和回滚</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h2><span id="rook-for-ceph">Rook for ceph</span><a href="#rook-for-ceph" class="header-anchor">#</a></h2><h5><span id="rook建立ceph集群流程1">Rook建立Ceph集群流程[1]</span><a href="#rook建立ceph集群流程1" class="header-anchor">#</a></h5><blockquote>
-<p>rook的crd建立好之后，<br>Rook的operator会把rook的控制面建立出来<br>然后把storageclass和csi driver都注册好。<br>用户只要建立pvc，pvc里指定用哪个storageclass，然后csi driver会去工作。</p>
-</blockquote>
-<h5><span id="rook-cluster-installation-23-i">Rook cluster installation [2][3] [I]</span><a href="#rook-cluster-installation-23-i" class="header-anchor">#</a></h5><h5><span id="ceph存储类型">Ceph存储类型</span><a href="#ceph存储类型" class="header-anchor">#</a></h5><ul>
-<li>Block </li>
-<li>FileSystem</li>
-<li>Object</li>
-</ul>
-<h5><span id="block-storage-45-ii">Block Storage [4][5] [II]</span><a href="#block-storage-45-ii" class="header-anchor">#</a></h5><ul>
-<li><p>install</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">ceph.rook.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">CephBlockPool</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">replicapool</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">rook-ceph</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">failureDomain:</span> <span class="string">host</span></span><br><span class="line">  <span class="attr">replicated:</span></span><br><span class="line">    <span class="attr">size:</span> <span class="number">3</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">storage.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">StorageClass</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">   <span class="attr">name:</span> <span class="string">rook-ceph-block</span></span><br><span class="line"><span class="comment"># Change &quot;rook-ceph&quot; provisioner prefix to match the operator namespace if needed</span></span><br><span class="line"><span class="attr">provisioner:</span> <span class="string">rook-ceph.rbd.csi.ceph.com</span></span><br><span class="line"><span class="attr">parameters:</span></span><br><span class="line">    <span class="comment"># clusterID is the namespace where the rook cluster is running</span></span><br><span class="line">    <span class="attr">clusterID:</span> <span class="string">rook-ceph</span></span><br><span class="line">    <span class="comment"># Ceph pool into which the RBD image shall be created</span></span><br><span class="line">    <span class="attr">pool:</span> <span class="string">replicapool</span></span><br><span class="line"></span><br><span class="line">    <span class="string">...</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># Delete the rbd volume when a PVC is deleted</span></span><br><span class="line"><span class="attr">reclaimPolicy:</span> <span class="string">Delete</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Consume Block[II]<br>eg 1.     <a href="k8sStatefulSet.md">StatefulSet</a>  通过StorageClass动态申请pv  </p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">volumeClaimTemplates:</span></span><br><span class="line"><span class="string">-metadata:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">  <span class="attr">spec:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">    <span class="attr">storageClassName:</span> <span class="string">rook-ceph-block</span></span><br><span class="line">    <span class="attr">volumeMode:</span> <span class="string">Filesystem</span></span><br></pre></td></tr></table></figure>
-<p>eg 2. pvc动态申请pv， deployment申请pvc</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">volumes:</span> <span class="string">...</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">pvc-test</span></span><br><span class="line">    <span class="attr">persistentVolumeClaim:</span></span><br><span class="line">      <span class="attr">claimName:</span> <span class="string">rook-ceph-test-pvc</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h5><span id="filesystem67-iii">FileSystem[6][7] [III]</span><a href="#filesystem67-iii" class="header-anchor">#</a></h5><h5><span id="pvc在线扩容pvc快照和回滚">PVC在线扩容，PVC快照和回滚</span><a href="#pvc在线扩容pvc快照和回滚" class="header-anchor">#</a></h5><h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><p>云原生训练营 第0期-模块七</p>
-</li>
-<li><p><a href="https://rook.io/docs/rook/v1.2/ceph-cluster-crd.html">Ceph Cluster CRD</a> ***</p>
-</li>
-<li><p><a href="https://rook.io/docs/rook/v1.2/ceph-quickstart.html">Ceph Storage Quickstart</a></p>
-</li>
-<li><p><a href="https://rook.github.io/docs/rook/v1.2/ceph-block.html">Block Storage</a></p>
-</li>
-<li><p><a href="https://rook.github.io/docs/rook/v1.2/ceph-pool-crd.html#spec">Ceph Block Pool CRD</a></p>
-</li>
-<li><p><a href="https://rook.github.io/docs/rook/v1.2/ceph-filesystem.html">Shared Filesystem</a></p>
-</li>
-<li><p><a href="https://rook.github.io/docs/rook/v1.2/ceph-filesystem-crd.html">Ceph Shared Filesystem CRD</a></p>
-</li>
-<li><p><a href="https://www.bilibili.com/video/BV16t4y1w7r6?p=111">kubernetes架构师课程</a> 杜宽 ***<br>[I]P112-P114 installation, [II]P115-P117 block, [III]  P118 FileSystem</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>云原生</category>
-        <category>Kubernetes</category>
-      </categories>
-      <tags>
-        <tag>Kubernetes</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Kubernetes CoreDNS</title>
-    <url>/www6vHomeHexo/2022/01/12/k8sDNS/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="coredns插件架构">CoreDNS插件架构</span><a href="#coredns插件架构" class="header-anchor">#</a></h2><p>github中</p>
-<h2><span id="kubernetes-dns">Kubernetes DNS</span><a href="#kubernetes-dns" class="header-anchor">#</a></h2><ul>
-<li>Kubernetes服务发现 <img src="/www6vHomeHexo/2022/01/12/k8sDNS/k8sDNS.png" class title="k8s DNS"></li>
-</ul>
-<h2><span id="自定义域名解析">自定义域名解析</span><a href="#自定义域名解析" class="header-anchor">#</a></h2><ul>
-<li>hosts: 存量代码域名调用</li>
-<li>rewrite: 集群外服务调用</li>
-<li>forward： 配置存根域</li>
-</ul>
-<img src="/www6vHomeHexo/2022/01/12/k8sDNS/customizeDNS.png" class title="自定义域名解析">
-
-<h2><span id="coredns-部署架构">CoreDNS 部署架构</span><a href="#coredns-部署架构" class="header-anchor">#</a></h2><ul>
-<li>kubesphere.local</li>
-<li>prod.kubesphere.local</li>
-<li>dev.kubesphere.local</li>
-<li>qa.kubesphere.local</li>
-<li>test.kubesphere.local</li>
-</ul>
-<img src="/www6vHomeHexo/2022/01/12/k8sDNS/coreDNS-arch.png" class title="CoreDNS部署架构">
-
-
-<h2><span id="reference">reference:</span><a href="#reference" class="header-anchor">#</a></h2><ol>
-<li><a href="https://www.bilibili.com/video/BV1HY4y1n7PV">【Meetup 分享】使用 KubeSphere &amp; CoreDNS 搭建云原生 DNS</a></li>
-<li><a href="https://draveness.me/dns-coredns/">详解 DNS 与 CoreDNS 的实现原理</a> 未</li>
-</ol>
-]]></content>
-      <categories>
-        <category>云原生</category>
-        <category>Kubernetes</category>
-      </categories>
-      <tags>
-        <tag>Kubernetes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Kubernetes PaaS平台</title>
     <url>/www6vHomeHexo/2022/01/12/k8sPaaS/</url>
     <content><![CDATA[<p></p>
@@ -16962,127 +16691,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
       </categories>
       <tags>
         <tag>Elasticsearch</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Ceph 总结</title>
-    <url>/www6vHomeHexo/2022/01/08/ceph/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#ceph%E6%9E%B6%E6%9E%84%E5%9B%BE">Ceph架构图</a><br>- <a href="#%E6%9E%B6%E6%9E%842">架构[2]</a><br>- <a href="#ceph%E4%B8%BB%E8%A6%81%E6%9C%89%E4%B8%89%E4%B8%AA%E5%9F%BA%E6%9C%AC%E8%BF%9B%E7%A8%8B25">Ceph主要有三个基本进程[2][5]</a></li>
-<li><a href="#ceph%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6%E5%8F%8A%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D26">Ceph核心组件及概念介绍[2][6]</a></li>
-<li><a href="#ceph%E6%94%AF%E6%8C%81%E7%9A%84%E5%AD%98%E5%82%A8%E6%8E%A5%E5%8F%A37">ceph支持的存储接口[7]</a></li>
-<li><a href="#%E9%83%A8%E7%BD%B2-%E5%B7%A5%E5%85%B7">部署 &amp; 工具</a></li>
-<li><a href="#%E5%9C%BA%E6%99%AF7">场景[7]</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h2><span id="ceph架构图">Ceph架构图</span><a href="#ceph架构图" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/01/08/ceph/ceph-arch.png" class title="ceph架构图">
-
-<img src="/www6vHomeHexo/2022/01/08/ceph/ceph-arch1.png" class title="ceph架构图">
-<h5><span id="架构2">架构[2]</span><a href="#架构2" class="header-anchor">#</a></h5><p>基础存储系统</p>
-<ul>
-<li>rados:基础存现系统RADOS(Reliable,Autonomic,Distribuuted object store，既可靠的、自动化的、分布式的对象存储).所有存储在Ceph系统中的用户数据事实上最终都是由这一层来存储的。Ceph的高可靠、高可扩展、高性能、高自动化等等特性本质上也是由这一层所提供的。</li>
-<li>RADOS -<br>  RADOS全称Reliable Autonomic Distrubuted object Store,是Ceph集群的精华，用户实现数据分配，Failover等集群操作</li>
-</ul>
-<p>基础库librados:</p>
-<ul>
-<li>librodos:这一层的功能是对RADOS进行抽象和封装，并向上层提供API，以便直接基于RADOS进行应用开发。特别要注意的是，RADOS是一个对象存储系统，因此，librodos实现的API也只是针对对象存储功能的。</li>
-<li>Libradio -<br>  Librados是RODOS提供库，因为RADOS是协议很难直接访问，因此上层的RBD、RGW和CephFS都是通过librados访问的，目前提供PHP、Ruby、Java、Python、C和C++支持。</li>
-</ul>
-<p>高层应用接口</p>
-<ul>
-<li>radosgw:对象网关接口</li>
-<li>rbd:块存储</li>
-<li>cephfs：文件系统存储，其作用是在librodos库的基础上提供抽象层次更高、更便于应用或客户端使用的上层接口。</li>
-<li>RBD -<br>  RBD全称RADOS Block Device，是ceph对外提供服务的块设备服务。</li>
-<li>RGW -<br>  RGW全称RADOS gateway,是ceph对外提供的对象存储服务，接口与S3和Swift兼容</li>
-<li>CephFS -<br>  CephFS全称Ceph File System，是ceph对外提供的文件系统服务。</li>
-</ul>
-<h5><span id="ceph主要有三个基本进程25">Ceph主要有三个基本进程[2][5]</span><a href="#ceph主要有三个基本进程25" class="header-anchor">#</a></h5><ul>
-<li><p>osd:<br>  用于集群中所有数据与对象的存储。处理集群数据的复制、恢复、回填、再负载。并向其他osd守护进程发送心跳，然后向Mon提供一些监控信息。<br>  当Ceph存储集群设定数据有两个副本时，则至少需要两个OSD守护进程即OSD节点，集群才能达到active+clean状态。</p>
-</li>
-<li><p>MDS(可选)<br>  为Ceph文件系统提供元数据计算、缓存与同步(也就是说，ceph块设备和ceph对象存储不使用MDS)。在ceph中，元数据也是存储在osd节点中的，mds类似于元数据的代理缓存服务器。MDS进程并不是必须的进程，只有需要使用CEPHFS时，才需要配置MDS节点。</p>
-</li>
-<li><p>Monitor<br>  监控整个集群的状态，维护集群的cluster MA二进制表，保证集群数据的一致性。ClusterMAP描述了对象存储的物理位置，以及一个将设备聚合到物理位置的桶列表。</p>
-</li>
-<li><p>Manager(ceph-mgr)<br>  用于收集ceph集群状态，运行指标，比如存储利用率、当前性能指标和系统负载。对外提供ceph dashboard(ceph-ui)和resetful api,manger组件开启高可用时，至少2个</p>
-</li>
-<li><p>MDS -<br>  MDS全称Ceph Metadata Server，是CephFS服务依赖的元数据服务    </p>
-</li>
-<li><p>Monitor -<br>  监控整个集群的状态，维护集群的cluster MA二进制表，保证集群数据的一致性</p>
-</li>
-<li><p>OSD -<br>  OSD全程Object storage Device,也就是负责响应客户端请求返回具体数据的进程。一个Ceph集群一般都有很多个OSD</p>
-</li>
-</ul>
-<hr>
-<ul>
-<li>rbd: 不需要部署独立的守护进程</li>
-<li>Cephfs  需要部署独立的守护进程 MDS</li>
-<li>对象存储 需要部署独立的守护进程  radosgw</li>
-</ul>
-<hr>
-<p>生产环境</p>
-<ul>
-<li>Monitor 需要至少3个</li>
-<li>Manager 需要至少2个</li>
-</ul>
-<h2><span id="ceph核心组件及概念介绍26">Ceph核心组件及概念介绍[2][6]</span><a href="#ceph核心组件及概念介绍26" class="header-anchor">#</a></h2><ul>
-<li>Object<br>  Ceph最底层的存储单元是Object对象，每个object包含数据和原始数据。<br>  [自带元数据]<br>  [id + binary data + metadate(key+value)]</li>
-<li>PG<br>  PG全称Placement Grouops,是一个逻辑的概念，一个PG包含多个OSD。引入PG这一层其实是为了更好的分配数据和定位数据。</li>
-<li>CRUSH<br>  CRUSH是Ceph使用的数据分布算法，类似一致性哈希，让数据分配到预期的地方。</li>
-<li>Ceph纠删码<br> [数据保护, 数据恢复]</li>
-<li>客户端的数据条带化<br> 存储内容进行顺序分片, 分布式存储每个分片</li>
-</ul>
-<h2><span id="ceph支持的存储接口7">ceph支持的存储接口[7]</span><a href="#ceph支持的存储接口7" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/01/08/ceph/ceph-interface.png" class title="ceph支持的存储接口">
-
-
-<h2><span id="部署-amp-工具">部署 &amp; 工具</span><a href="#部署-amp-工具" class="header-anchor">#</a></h2><ul>
-<li>ceph ansible<br>主流</li>
-<li>rook operator<ul>
-<li><strong>超融合模式</strong><br>混合部署 资源预留</li>
-<li><strong>存算分离模式</strong><br>ceph独立部署, 打label</li>
-</ul>
-</li>
-<li>工具<br>RedHat OCS sizing tool</li>
-</ul>
-<h2><span id="场景7">场景[7]</span><a href="#场景7" class="header-anchor">#</a></h2><ul>
-<li>openstack<br>静态化</li>
-<li>云原生 rook<ul>
-<li><strong>动态化</strong><br>动态扩缩容</li>
-<li><strong>支持混合云，多云场景</strong><br>通过CSI接口，提供混合云环境下的一致性</li>
-<li>拓扑感知<br>副本分到到3个rack中<br>跨AZ的多副本</li>
-<li>multus管理网络， 提升性能[pic]<br>管理网 - ovs<br>ceph private network - vlan10<br>ceph public network - vlan20</li>
-</ul>
-</li>
-<li>占比<br>Ceph RBD - 48%<br>LVM - 15%<br>NFS - 8%</li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://github.com/0voice/kernel_awsome_feature/blob/main/%E3%80%8C%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%E3%80%8DCEPH%20%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D.md">「基础理论」CEPH 基础介绍</a> good</li>
-<li><a href="https://github.com/0voice/kernel_awsome_feature/blob/main/%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8Ceph.md">分布式存储Ceph</a></li>
-<li><a href="https://github.com/0voice/kernel_awsome_feature/blob/main/%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9Fceph%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86.md">分布式文件系统ceph知识整理</a></li>
-<li><a href="https://github.com/0voice/kernel_awsome_feature/blob/main/%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%20Ceph%20%E7%9A%84%E6%BC%94%E8%BF%9B%E7%BB%8F%E9%AA%8C%20%C2%B7%20SOSP%20'19.md">分布式存储 Ceph 的演进经验 · SOSP ‘19</a></li>
-<li><a href="https://www.bilibili.com/video/BV17p4y1a7Em?p=4&vd_source=f6e8c1128f9f264c5ab8d9411a644036">马哥教育2021-Ceph分布式存储系统快速入门</a></li>
-<li>《Ceph企业级分布式存储》</li>
-<li><a href="https://www.bilibili.com/video/BV1D3411873Z?spm_id_from=333.880.my_history.page.click&vd_source=f6e8c1128f9f264c5ab8d9411a644036">【直播回放】ROOK 云原生分布式存储开源项目的介绍及其在企业中的应用未来</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>云计算</category>
-        <category>存储</category>
-        <category>ceph</category>
-      </categories>
-      <tags>
-        <tag>存储</tag>
       </tags>
   </entry>
   <entry>
@@ -21392,7 +21000,7 @@ MySQL MVCC 快照读 vs 当前读 </li>
 </tbody></table>
 <p>参考:</p>
 <ul>
-<li><a href="/www6vHomeHexo/2019/11/04/k8sService/" title="Kubernetes服务">Kubernetes服务</a> self</li>
+<li><a href="k8sService.md">Go to Page</a> self</li>
 </ul>
 <h2><span id="结构模式">结构模式</span><a href="#结构模式" class="header-anchor">#</a></h2><h5><span id="init-container">Init Container</span><a href="#init-container" class="header-anchor">#</a></h5><h5><span id="sidecar">Sidecar</span><a href="#sidecar" class="header-anchor">#</a></h5><p>场景:</p>
 <ul>
@@ -21430,132 +21038,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
 </li>
 <li><p><a href="https://github.com/k8spatterns">Kubernetes Patterns</a></p>
 </li>
-</ol>
-]]></content>
-      <categories>
-        <category>云原生</category>
-        <category>Kubernetes</category>
-      </categories>
-      <tags>
-        <tag>Kubernetes</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Kubernetes服务</title>
-    <url>/www6vHomeHexo/2019/11/04/k8sService/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="一-kubenetes服务">一. Kubenetes服务</span><a href="#一-kubenetes服务" class="header-anchor">#</a></h2><div style="text-align: center;">
-
-<p><img src="https://user-images.githubusercontent.com/5608425/68105556-d4257280-ff19-11e9-9d19-f18f5c454f34.jpg" alt="Kubernetes服务发现架构"><br>Kubernetes服务发现架构</p>
-</div>
-
-<img src="/www6vHomeHexo/2019/11/04/k8sService/k8sService.jpg" class title="Kubernetes服务"> 
-
-<ul>
-<li>ClusterIP 模式的 Service: <strong>稳定的 IP 地址</strong>，即 VIP.  ClusterIP是VIP, 虚拟IP.    </li>
-<li>Headless Service: <strong>稳定的 DNS 名字</strong>, 名字是通过 Pod 名字和 Service 名字拼接出来.</li>
-</ul>
-<h3><span id="11-服务对外暴露方式">1.1  服务对外暴露方式</span><a href="#11-服务对外暴露方式" class="header-anchor">#</a></h3><ol>
-<li>NodePort  四层<div style="text-align: center; width:60%; height: 60%"></div></li>
-</ol>
-<p><img src="https://user-images.githubusercontent.com/5608425/68234082-7d17be80-003b-11ea-891f-90a9e174bbc8.png" alt="node-port"></p>
-
-
-<ul>
-<li>一定要对流出的包做 SNAT操作[2][6]</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">          client</span><br><span class="line">            \ ^</span><br><span class="line">             \ \</span><br><span class="line">              v \</span><br><span class="line">  node 1 &lt;--- node 2</span><br><span class="line">  | ^    SNAT</span><br><span class="line">  | |    ---&gt;</span><br><span class="line">  v |</span><br><span class="line">endpoint</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>获取真实客户端IP, 设置Service 的 spec.externalTrafficPolicy 字段设置为 local，[2][6]</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    client</span><br><span class="line">    ^ / \</span><br><span class="line">   / /   \</span><br><span class="line">  / v     X</span><br><span class="line">node 1   node 2</span><br><span class="line">  ^ |</span><br><span class="line">  | |</span><br><span class="line">  | v</span><br><span class="line">endpoint</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>Service LoadBalancer  四层<div style="text-align: center; width:60%; height: 60%"></div></li>
-</ol>
-<p><img src="https://user-images.githubusercontent.com/5608425/68290997-e216f700-00c3-11ea-82d3-b5e3f4c565a1.jpg" alt="loadbalancer"></p>
-
-
-<p><strong>LoadBalancer</strong>类型的Service被提交后，Kubernetes就会调用<strong>CloudProvider</strong>[5]在公有云上为你创建一个负载均衡服务，并且把被代理的 Pod 的 IP地址配置给负载均衡服务做后端.</p>
-<ol start="3">
-<li><p>ExternalName<br>ExternalName 类型的 Service，其实是在 kubedns里为你添加了一条 CNAME 记录.<br>1.7 之后支持的一个新特性.</p>
-</li>
-<li><p>Ingress Controller  七层</p>
-<div style="text-align: center; width:60%; height: 60%"></div></li>
-</ol>
-<p><img src="https://user-images.githubusercontent.com/5608425/68234079-7c7f2800-003b-11ea-8ada-2c034db8b25a.png" alt="ingress-1"><br><img src="https://user-images.githubusercontent.com/5608425/68234081-7c7f2800-003b-11ea-804c-1c5d87164d06.png" alt="ingress-2">   </p>
-
-
-<ul>
-<li>Ingress 服务: 全局的、为了代理不同后端 Service 而设置的负载均衡服务.</li>
-<li>Ingress 对象，其实就是 Kubernetes 项目对“反向代理”的一种抽象。</li>
-<li>Ingress Controller: Nginx、HAProxy、Envoy、Traefik</li>
-</ul>
-<p><strong>Ingress controller</strong></p>
-<p>为了使 Ingress 正常工作，集群中必须运行 Ingress controller。 这与其他类型的控制器不同，其他类型的控制器通常作为 kube-controller-manager 二进制文件的一部分运行，在集群启动时自动启动。 你需要选择最适合自己集群的 Ingress controller 或者自己实现一个。</p>
-<ul>
-<li>Kubernetes 当前支持并维护 GCE 和 nginx 两种 controller</li>
-<li>F5（公司）支持并维护 F5 BIG-IP Controller for Kubernetes</li>
-<li>Kong 同时支持并维护 社区版 与 企业版 的 Kong Ingress Controller for Kubernetes</li>
-<li>Traefik 是功能齐全的 ingress controller（Let’s Encrypt, secrets, http2, websocket…）, Containous 也对其提供商业支持。</li>
-<li>Istio 使用 CRD Gateway 来 控制 Ingress 流量。</li>
-</ul>
-<h3><span id="12-通过dns发现服务">1.2 通过DNS发现服务</span><a href="#12-通过dns发现服务" class="header-anchor">#</a></h3><blockquote>
-<p>每个Service对象相关的DNS记录有两个：<br>{SVCNAME}.{NAMESPACE}.{CLUSTER_DOMAIN}<br>{SVCNAME}.{NAMESPACE}.svc.{CLUSTER_DOMAIN}</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">root@kubia-9nvx7:/# cat /etc/resolv.conf</span><br><span class="line">nameserver 172.17.0.2</span><br><span class="line">search default.svc.cluster.local svc.cluster.local cluster.local</span><br><span class="line">options ndots:5</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">（1）拥有ClusterIP的Service资源，要具有以下类型的资源记录</span><br><span class="line">A记录：&lt;service&gt;.&lt;ns&gt;.svc.&lt;zone&gt;. &lt;ttl&gt;  IN  A  &lt;cluster-ip&gt;</span><br><span class="line"></span><br><span class="line">（2）Headless类型的Service资源，要具有以下类型的资源记录</span><br><span class="line">A记录：&lt;service&gt;.&lt;ns&gt;.svc.&lt;zone&gt;. &lt;ttl&gt; IN A &lt;endpoint-ip&gt;</span><br><span class="line"></span><br><span class="line">（3）ExternalName类型的Service资源，要具有CNAME类型的资源记录</span><br><span class="line">CNAME记录：&lt;service&gt;.&lt;ns&gt;.svc.&lt;zone&gt;. &lt;ttl&gt; IN CNAME &lt;extname&gt;.</span><br></pre></td></tr></table></figure>
-
-<h3><span id="13-clusterip模式的yaml配置">1.3 ClusterIP模式的yaml配置</span><a href="#13-clusterip模式的yaml配置" class="header-anchor">#</a></h3><p>Service（接口声明） + Deployment（ endpoint 接口实现）</p>
-<h2><span id="二-kubenetes服务工作原理">二. Kubenetes服务工作原理</span><a href="#二-kubenetes服务工作原理" class="header-anchor">#</a></h2><ul>
-<li>Service是由<strong>kube-proxy</strong>组件，加上<strong>iptables</strong>来共同实现的。</li>
-<li>kube-proxy的作用: 网络配置</li>
-</ul>
-<h5><span id="21-kube-proxy">2.1 kube-proxy</span><a href="#21-kube-proxy" class="header-anchor">#</a></h5><h5><span id="userspace-代理模式">userspace 代理模式</span><a href="#userspace-代理模式" class="header-anchor">#</a></h5><div style="text-align: center;">
-<img width="450" alt="user-space-proxy" src="https://user-images.githubusercontent.com/5608425/68077955-2b3b2280-fe08-11e9-8672-3210219a7372.png">
-userspace 代理模式
-</div>
-
-<h5><span id="iptables-proxy-mode">iptables Proxy Mode</span><a href="#iptables-proxy-mode" class="header-anchor">#</a></h5><div style="text-align: center;">
-<img width="450" alt="iptables-proxy" src="https://user-images.githubusercontent.com/5608425/68077954-2b3b2280-fe08-11e9-8231-cb9bc177ba21.png">
- Iptables Proxy Mode
-</div>
-
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-A OUTPUT -m comment --comment &quot;kubernetes service portals&quot; -j KUBE-SERVICES</span><br><span class="line"></span><br><span class="line"># 访问10.107.54.95后跳转到KUBE-SVC-4N57TFCL4MD7ZTDA链</span><br><span class="line">-A KUBE-SERVICES -d 10.107.54.95/32 -p tcp -m comment --comment &quot;default/nginx: cluster IP&quot; -m tcp --dport 80 -j KUBE-SVC-4N57TFCL4MD7ZTDA</span><br><span class="line"></span><br><span class="line"># 随机转发的目的地，分别是 KUBE-SEP-UZXILYFQQ2IZUWN5 和 KUBE-SEP-43IWXJI557JKCKCF</span><br><span class="line">-N KUBE-SVC-4N57TFCL4MD7ZTDA</span><br><span class="line">-A KUBE-SVC-4N57TFCL4MD7ZTDA -m statistic --mode random --probability 0.50000000000 -j KUBE-SEP-UZXILYFQQ2IZUWN5</span><br><span class="line">-A KUBE-SVC-4N57TFCL4MD7ZTDA -j KUBE-SEP-43IWXJI557JKCKCF</span><br><span class="line"></span><br><span class="line">## DNAT到pod的ip和端口</span><br><span class="line">-A KUBE-SEP-UZXILYFQQ2IZUWN5 -p tcp -m tcp -j DNAT --to-destination 172.17.0.4:80</span><br><span class="line">-A KUBE-SEP-43IWXJI557JKCKCF -p tcp -m tcp -j DNAT --to-destination 172.17.0.5:80</span><br></pre></td></tr></table></figure>
-
-<h5><span id="ipvs-proxy-mode">IPVS proxy mode</span><a href="#ipvs-proxy-mode" class="header-anchor">#</a></h5><blockquote>
-<p>IPVS是LVS一个组件，提供高性能、高可靠性的四层负载均衡器。IPVS 是IP Virtual Server的简写。IPVS构建在netfilter上，作为Linux 内核的一部分，从传输层实现了负载均衡。</p>
-</blockquote>
-<p>与iptables类似，ipvs基于netfilter 的 hook 功能，但使用哈希表作为底层数据结构并在内核空间中工作。这意味着ipvs可以更快地重定向流量，并且在同步代理规则时具有更好的性能。此外，ipvs为负载均衡算法提供了更多选项，例如：</p>
-<pre><code>rr：轮询调度
-lc：最小连接数
-dh：目标哈希
-sh：源哈希
-sed：最短期望延迟
-nq： 不排队调度
-</code></pre>
-<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://www.kubernetes.org.cn/5992.html">深入理解 Kubernetes之：Service</a> good</li>
-<li><a href="https://edu.aliyun.com/lesson_1651_17064#_17064">第14 章 ： Kubernetes Services</a>  阿里</li>
-<li><a href="http://product.dangdang.com/26439199.html?ref=book-65152-9168_1-529800-3">《Kubenetes in Action》</a>  七牛容器云团队</li>
-<li><a href="https://mp.weixin.qq.com/s/3THiWFt52tZckFGxg3Cx-g">Kubernetes中的服务发现机制与方式</a> 马永亮 </li>
-<li><a href="https://mp.weixin.qq.com/s/a_540yJ1EGVroJ9TpvYtPw">从 K8S 的 Cloud Provider 到 CCM 的演进之路</a>  毛宏斌 百度</li>
-<li><a href="https://docs.ucloud.cn/compute/uk8s/service/getresourceip">获取真实客户端IP</a></li>
-<li><a href="https://mp.weixin.qq.com/s?__biz=MzU1OTAzNzc5MQ==&mid=2247485610&idx=1&sn=e092e55c848af62368835d530c57da15&chksm=fc1c249acb6bad8c940c587e59e0dc63ba4863c7063f0a0e322dcbd6ad5f610cd2ad1b4ba87d&scene=21#wechat_redirect">华为云在 K8S 大规模场景下的 Service 性能优化实践</a> 未</li>
-<li><a href="https://jimmysong.io/kubernetes-handbook/concepts/service.html">Service</a>  jimmysong</li>
-<li><a href="https://jimmysong.io/kubernetes-handbook/concepts/ingress.html">Ingress</a> jimmysong</li>
-</ol>
-<hr>
-<p>《深入剖析Kubernetes》  张磊</p>
-<ol>
-<li><a href>《37  找到容器不容易：Service、DNS与服务发现》</a> </li>
-<li><a href>《38  从外界连通Service与Service调试“三板斧”》</a></li>
-<li><a href>《39  谈谈Service与Ingress》</a></li>
 </ol>
 ]]></content>
       <categories>
@@ -23403,59 +22885,6 @@ nq： 不排队调度
       </categories>
       <tags>
         <tag>微服务</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Kubernetes存储</title>
-    <url>/www6vHomeHexo/2019/09/01/k8sStorage/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<img src="/www6vHomeHexo/2019/09/01/k8sStorage/k8sStorage.jpg" class title="Kubernetes存储">
-
-<h2><span id="一-kubernetes-存储的绑定流程">一. Kubernetes 存储的绑定流程</span><a href="#一-kubernetes-存储的绑定流程" class="header-anchor">#</a></h2><h3><span id="11">1.1</span><a href="#11" class="header-anchor">#</a></h3><p><img src="https://user-images.githubusercontent.com/5608425/68108028-9593b600-ff21-11e9-8623-5c719772317e.jpg" alt="Kubernetes存储的绑定流程"></p>
-<p><strong>三个阶段：</strong><br>第一个<strong>create</strong>阶段，主要是创建存储；<br>第二个<strong>attach</strong>阶段，就是将那块存储挂载到 node 上面(通常为将存储load到node的&#x2F;dev下面)；<br>第三个<strong>mount</strong>阶段，将对应的存储进一步挂载到 pod 可以使用的路径。</p>
-<h2><span id="二-static-provisioning-ampamp-dynamic-provisioning">二. Static Provisioning &amp;&amp; Dynamic Provisioning</span><a href="#二-static-provisioning-ampamp-dynamic-provisioning" class="header-anchor">#</a></h2><h3><span id="21-static-provisioning">2.1 Static Provisioning</span><a href="#21-static-provisioning" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2019/09/01/k8sStorage/static-provision.PNG" class title="Static Provisioning">
-
-<h3><span id="22-dynamic-provisioning">2.2 Dynamic Provisioning</span><a href="#22-dynamic-provisioning" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2019/09/01/k8sStorage/dynamic-provision.PNG" class title="Dynamic Provisioning">
-
-<div style="text-align: center;">
-
-<p><img src="https://user-images.githubusercontent.com/5608425/64247540-aafc5c00-cf41-11e9-83af-64199e79ded7.JPG" alt="relationship"><br><strong>Kubernetes pvc 动态绑定流程</strong></p>
-</div>
-
-<blockquote>
-<p>只有同属于一个 StorageClass 的PV 和 PVC，才可以绑定在一起</p>
-</blockquote>
-<ul>
-<li>CSI driver动态创建pv ， CSI Driver 可以动态创建PV [5]<br>创建pvc之后，provisioner 会创建pv ，并做pvc和pv的绑定关系</li>
-</ul>
-<h2><span id="本地存储5">本地存储[5]</span><a href="#本地存储5" class="header-anchor">#</a></h2><ul>
-<li>emptyDir<br>不是overlayFS ，和写主机的性能是一样的<br>和容器的生命周期一致，如果容器销毁， emptyDir也被销毁。</li>
-<li>hostPath<br>需要的注意点，不建议用</li>
-</ul>
-<h2><span id="最佳实践5">最佳实践[5]</span><a href="#最佳实践5" class="header-anchor">#</a></h2><ul>
-<li>用户去查询集群中有哪些storageclass<br>可能有本地的hostpath，或者远程的nfs， ceph 等等<ul>
-<li>在storageClass中, provisioner很重要</li>
-</ul>
-</li>
-<li>pod中声明一个pvc<br>csi  plugin把pv attach到对应的node，mount到对应的pod</li>
-<li>pvc和pv是一一对应的关系</li>
-</ul>
-<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="http://product.dangdang.com/26439199.html?ref=book-65152-9168_1-529800-3">《Kubenetes in Action》七牛容器云团队</a></li>
-<li>&lt;&lt;深入剖析Kubernetes - 28  PV、PVC、StorageClass，这些到底在说啥？&gt;&gt; 张磊</li>
-<li>&lt;&lt;深入剖析Kubernetes - 29  PV、PVC体系是不是多此一举？从本地持久化卷谈起&gt;&gt; 张磊</li>
-<li><a href="https://edu.aliyun.com/lesson_1651_13085#_13085">第9 章 ： 应用存储和持久化数据卷：核心知识</a> </li>
-<li>云原生训练营 第0期-模块七</li>
-</ol>
-]]></content>
-      <categories>
-        <category>云原生</category>
-        <category>Kubernetes</category>
-      </categories>
-      <tags>
-        <tag>Kubernetes</tag>
       </tags>
   </entry>
   <entry>
@@ -28924,7 +28353,7 @@ nq： 不排队调度
 <td align="center">强一致性</td>
 <td align="center"><a href="/www6vHomeHexo/2019/06/21/raft/" title="Raft协议">Raft协议</a> self</td>
 <td align="center">相对Paxos简单。主从，三个阶段</td>
-<td align="center"><a href="/www6vHomeHexo/2022/04/06/etcd/" title="etcd 总结">etcd 总结</a> self</td>
+<td align="center"><a href="etcd.md">Go to Page</a> self</td>
 </tr>
 </tbody></table>
 <ul>
