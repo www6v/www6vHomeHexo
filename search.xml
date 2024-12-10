@@ -211,7 +211,6 @@
 
 <ul>
 <li><a href="#%E7%BC%96%E6%8E%92%E5%8E%9F%E7%90%86">编排原理</a></li>
-<li><a href="#%E7%BD%91%E7%BB%9C">网络</a></li>
 <li><a href="#%E6%9C%8D%E5%8A%A1%E5%92%8Cdns">服务和DNS</a></li>
 <li><a href="#%E5%AD%98%E5%82%A8">存储</a></li>
 <li><a href="#%E8%B0%83%E5%BA%A6">调度</a></li>
@@ -232,10 +231,6 @@
 
 <h2><span id="编排原理">编排原理</span><a href="#编排原理" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2019/04/25/k8s/" title="Kubernetes 架构">Kubernetes 架构</a></li>
-</ul>
-<h2><span id="网络">网络</span><a href="#网络" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2019/08/23/k8sNetwork/" title="Kubernetes网络">Kubernetes网络</a> </li>
-<li><a href="/www6vHomeHexo/2022/05/03/k8sCalico/" title="Calico">Calico</a></li>
 </ul>
 <h2><span id="服务和dns">服务和DNS</span><a href="#服务和dns" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2019/11/04/k8sService/" title="Kubernetes服务">Kubernetes服务</a> </li>
@@ -4079,80 +4074,6 @@
       </categories>
       <tags>
         <tag>db</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Calico</title>
-    <url>/www6vHomeHexo/2022/08/12/k8sCalico1/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<h2><span id="best-practice">Best Practice</span><a href="#best-practice" class="header-anchor">#</a></h2><h5><span id="at-a-high-level-the-key-recommendations-are">At a high-level, the key recommendations are:</span><a href="#at-a-high-level-the-key-recommendations-are" class="header-anchor">#</a></h5><ul>
-<li>Use the Kubernetes datastore.<br>使用K8S datastore</li>
-<li>Install Typha to ensure datastore scalability.<br>安装Typha</li>
-<li>Use no encapsulation for single subnet clusters.<br>在单一子网的集群中，不要封装   </li>
-<li>Use IP-in-IP in CrossSubnet mode for multi-subnet clusters.<br>在多子网集群中，使用IP-in-IP的跨子网模式</li>
-<li>Configure Calico MTU based on the network MTU and the chosen routing mode.<br>MTU</li>
-<li>Add global route reflectors for clusters capable of growing above 50 nodes.<br>50个nodes以上使用RR(route reflectors)</li>
-<li>Use GlobalNetworkPolicy for cluster-wide ingress and egress rules. Modify the policy by adding namespace-scoped NetworkPolicy.</li>
-</ul>
-<h2><span id="calico-component-overview">Calico Component Overview</span><a href="#calico-component-overview" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/08/12/k8sCalico1/calico-components.png" class title="Calico Component Overview">
-
-<h5><span id="calico-node">calico-node</span><a href="#calico-node" class="header-anchor">#</a></h5><ul>
-<li>Route programming: Based on known routes to pods in the Kubernetes cluster, configure the Linux host to facilitate routing accordingly.   [路由配置  Flex]</li>
-<li>Route sharing: Based on pods running on this host, provide a mechanism to share known routes with other hosts. Typically accomplished with (BGP) Border Gateway Protocol.  [路由共享  BIRD]</li>
-</ul>
-<h5><span id="calico-kube-controller">calico-kube-controller</span><a href="#calico-kube-controller" class="header-anchor">#</a></h5><ul>
-<li>The calico-kube-controller is responsible for recognizing changes in Kubernetes objects that impact routing.<br>识别影响路由变化。且包含多个控制器</li>
-<li>multiple controllers<ul>
-<li>policy-controller</li>
-<li>ns-controller</li>
-<li>sa-controller</li>
-<li>pod-controller</li>
-<li>node-controller</li>
-</ul>
-</li>
-</ul>
-<h5><span id="typha">Typha</span><a href="#typha" class="header-anchor">#</a></h5><h2><span id="calico-datastore">Calico Datastore</span><a href="#calico-datastore" class="header-anchor">#</a></h2><ul>
-<li>Calico supports 2 datastore modes, Kubernetes and etcd.<ul>
-<li>Kubernetes Datastore Mode (Recommended)</li>
-<li>etcd Datastore Mode</li>
-</ul>
-</li>
-</ul>
-<h2><span id="routing-configuration">Routing Configuration</span><a href="#routing-configuration" class="header-anchor">#</a></h2><h5><span id="routing-methods">Routing Methods</span><a href="#routing-methods" class="header-anchor">#</a></h5><ul>
-<li><p>3 routing modes </p>
-<ul>
-<li>Native: Packets routed as-is, no encapsulation.</li>
-<li>IP-in-IP: Minimal encapsulation; outer header includes host source&#x2F;destination IPs and inner header includes pod source&#x2F;destination.<br>[tunl]</li>
-<li>VXLAN: Robust encapsulation using UDP over IP; outer header includes host source&#x2F;destination IP addresses and inner header includes pod source&#x2F;destination IP addresses as well as Ethernet headers.<br>[on udp, ]</li>
-</ul>
-</li>
-<li><p>1.注意VxLAN模式不需要BGP协议参与！！！但是IPIP模式是需要的。<br>Calico supports two types of encapsulation: VXLAN and IP in IP. VXLAN is supported in some environments where IP in IP is not (for example, Azure). VXLAN has a slightly higher per-packet overhead because the header is larger, but unless you are running very network intensive workloads the difference is not something you would typically notice. The other small difference between the two types of encapsulation is that Calico’s VXLAN implementation does not use BGP, whereas Calico’s IP in IP implementation uses BGP between Calico nodes.   # From Calico Docs</p>
-</li>
-</ul>
-<h5><span id="single-subnet-configuration">Single Subnet Configuration</span><a href="#single-subnet-configuration" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2022/08/12/k8sCalico1/calico-single-subnet.png" class title="calico-single-subnet">
-
-<h5><span id="multi-subnet-configuration">Multi-Subnet Configuration</span><a href="#multi-subnet-configuration" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2022/08/12/k8sCalico1/calico-multi-subnet.png" class title="calico-multi-subnet">
-
-
-<h2><span id="route-distribution">Route Distribution</span><a href="#route-distribution" class="header-anchor">#</a></h2><ul>
-<li>BGP Full Mesh<br>node-to-node mesh</li>
-<li>Global Route Reflection(RR)</li>
-<li>Node-Specific Route Reflection<br>Peering can be configured for <strong>BGP-capable hardware</strong> in a datacenter’s network. Most commonly setup with <strong>top of rack (ToR)</strong> switches.</li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://tanzu.vmware.com/developer/guides/container-networking-calico-refarch/">Calico Reference Architecture</a></li>
-<li><a href="https://www.yuque.com/wei.luo/cni/agyl5i">20210808-Calico IPIP Mode</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>云原生</category>
-        <category>Kubernetes</category>
-      </categories>
-      <tags>
-        <tag>Kubernetes</tag>
       </tags>
   </entry>
   <entry>
@@ -10689,106 +10610,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
       </categories>
       <tags>
         <tag>云计算</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Calico</title>
-    <url>/www6vHomeHexo/2022/05/03/k8sCalico/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<h2><span id="一-介绍和原理">一. 介绍和原理</span><a href="#一-介绍和原理" class="header-anchor">#</a></h2><ul>
-<li><p>calico 是容器网络的又一种解决方案，和其他虚拟网络最大的不同是，它没有采用 overlay 网络做报文的转发，提供了纯 3 层的网络模型。三层通信模型表示每个容器都通过 IP 直接通信，中间通过路由转发找到对方。在这个过程中，容器所在的节点类似于传统的路由器，提供了路由查找的功能。</p>
-</li>
-<li><p>要想路由工作能够正常，每个虚拟路由器（容器所在的主机节点）必须有某种方法知道整个集群的路由信息，calico 采用的是 BGP 路由协议，全称是 Border Gateway Protocol。</p>
-</li>
-<li><p>BGP(Border Gateway Protocol 边界网关协议): 就是在大规模网络中实现节点路由信息共享的一种协议</p>
-</li>
-</ul>
-<code>
-BGP 协议传输的消息
-
-<p>1 [BGP 消息]<br>2 我是宿主机 192.168.1.3<br>3 10.233.2.0&#x2F;24 网段的容器都在我这里<br>4 这些容器的下一跳地址是我<br></p></code><p></p>
-<h2><span id="二-组件">二. 组件</span><a href="#二-组件" class="header-anchor">#</a></h2><ul>
-<li><p>Calico 的 CNI 插件</p>
-</li>
-<li><p>Felix<br>它是一个 DaemonSet，负责在宿主机上插入路由规则(即:写入 Linux 内核的 FIB 转发信息库)，以及维护 Calico 所需的网络设备等工作。</p>
-</li>
-</ul>
-<ol>
-<li><p>路由规则(核心)  </p>
-<code>  
-<目的容器 ip 地址段> via <网关的 ip 地址> dev eth0
-</网关的></目的容器></code>
-
-</li>
-<li><p>iptables的配置组件Felix;<br>基于iptable&#x2F;linux kernel包转发;<br>根据iptables规则进行路由转发;</p>
-</li>
-</ol>
-<ul>
-<li>BIRD， 路由广播组件BGP Speaker<br>BIRD是 BGP 的客户端，专门负责在集群里分发路由规则信息。</li>
-</ul>
-<h2><span id="三-架构">三. 架构</span><a href="#三-架构" class="header-anchor">#</a></h2><h5><span id="1-node-to-node-mesh模式小规模">1. Node-to-Node Mesh模式（小规模）</span><a href="#1-node-to-node-mesh模式小规模" class="header-anchor">#</a></h5><ul>
-<li>默认配置下，是一个被称为“Node-to-Node Mesh”的模式，一般推荐用在少于 100 个节点的集群里<br>Node 称为 BGP Peer</li>
-</ul>
-  <img src="/www6vHomeHexo/2022/05/03/k8sCalico/bgp-peer.png" class title="BGP Peer"> 
-  <img src="/www6vHomeHexo/2022/05/03/k8sCalico/ippool.png" class title="ippool-CIDR 网段分配">       
-
-  <img src="/www6vHomeHexo/2022/05/03/k8sCalico/mesh-mode1.png" class title="Node-to-Node Mesh模式（图中Route为路由规则）">
-
-
-<ul>
-<li>非overlay, Calico 没有使用 CNI 的网桥模式;</li>
-</ul>
-<code> 
-宿主机 Node 2 上的 Container 4 对应的路由规则，如下所示: 
-
-<p>10.233.2.3 dev cali5863f3 scope link<br>即:发往 10.233.2.3 的 IP 包，应该进入 cali5863f3 设备。<br></p></code> <p></p>
-  <img src="/www6vHomeHexo/2022/05/03/k8sCalico/mesh-mode.png" class title="Node-to-Node Mesh模式(有iptable规则)">
-
-
-  <img src="/www6vHomeHexo/2022/05/03/k8sCalico/link.png" class title="网路互通">
-
-
-<h5><span id="2-route-reflector模式-ipip模式大规模">2. Route Reflector模式 + IPIP模式（大规模）</span><a href="#2-route-reflector模式-ipip模式大规模" class="header-anchor">#</a></h5>  <img src="/www6vHomeHexo/2022/05/03/k8sCalico/route-reflector+ipip.png" class title="Route Reflector模式+IPIP模式">
-
-<p>  默认情况下，每个 calico 节点会和集群中其他所有节点建立 BGP peer 连接，也就是说这是一个 O(n^2) 的增长趋势。在集群规模比较小的情况下，这种模式是可以接受的，但是当集群规模扩展到百个节点、甚至更多的时候，这样的连接数无疑会带来很大的负担。为了解决集群规模较大情况下 BGP client 连接数膨胀的问题，calico 引入了 RR（Router Reflector） 的功能。</p>
-<p>  RR 的基本思想是选择一部分节点（一个或者多个）作为 Global BGP Peer，它们和所有的其他节点互联来交换路由信息，其他的节点只需要和 Global BGP Peer 相连就行，不需要之间再两两连接。更多的组网模式也是支持的，不管怎么组网，最核心的思想就是所有的节点能获取到整个集群的路由信息。</p>
-  <img src="/www6vHomeHexo/2022/05/03/k8sCalico/route-reflector.png" class title="Route Reflector模式+IPIP模式">
-
-
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ul>
-<li><p>《31容器网络之Calico：为高效说出善意的谎言》  趣谈网络协议  刘超</p>
-</li>
-<li><p>《35  解读Kubernetes三层网络方案》  深入剖析Kubernetes  张磊</p>
-</li>
-<li><p><a href="https://blog.csdn.net/ccy19910925/article/details/82423452">kubernetes网络之—Calico原理解读</a>  看图</p>
-</li>
-<li><p><a href="https://developer.aliyun.com/article/68558">容器网络Calico进阶实践 | 褚向阳</a>  “看看 Calico 是如何实现跨主机互通”</p>
-</li>
-<li><p><a href="https://www.cnblogs.com/netonline/p/9720279.html">Calico网络方案</a> 安装</p>
-</li>
-<li><p><a href="https://cizixs.com/2017/10/19/docker-calico-network/">docker 容器网络方案：calico 网络模型</a> 安装+原理 - 阿里人 - ”报文流程“</p>
-</li>
-<li><p>&lt;&lt;kubernetes网络权威指南&gt;&gt;  5.4节</p>
-</li>
-<li><p><a href="https://www.yuque.com/wei.luo/cni/uf5hyp">20210806-Calico基础架构</a> 未</p>
-</li>
-<li><p><a href="https://projectcalico.docs.tigera.io/archive/v3.20/networking/bgp">Configure BGP peering</a> 未<br>Full-mesh , Route reflectors</p>
-</li>
-<li><p><a href="https://projectcalico.docs.tigera.io/archive/v3.20/networking/vxlan-ipip">Overlay networking</a>  未<br>公有云环境中（aws）<br>ipipMode field (IP in IP encapsulation)， ipipMode 必须with BGP<br>vxlanMode field (VXLAN encapsulation)， vxlanMode 可以without BGP<br>两种模式不能一起运行，只能运行其中的一种</p>
-</li>
-<li><p><a href="https://kubesphere.com.cn/blogs/calico-guide/">Calico 路由反射模式权威指南</a> 未</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>云原生</category>
-        <category>Kubernetes</category>
-      </categories>
-      <tags>
-        <tag>Kubernetes</tag>
       </tags>
   </entry>
   <entry>
@@ -24039,134 +23860,6 @@ nq： 不排队调度
       </categories>
       <tags>
         <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Kubernetes网络</title>
-    <url>/www6vHomeHexo/2019/08/23/k8sNetwork/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<img src="/www6vHomeHexo/2019/08/23/k8sNetwork/k8sNetwork.jpg" class title="图1.Kubenetes网络">
-
-<h1><span id="一-容器和容器之间的网络">一. 容器和容器之间的网络</span><a href="#一-容器和容器之间的网络" class="header-anchor">#</a></h1><ul>
-<li>使用Docker的一种网络模型：–net&#x3D;container</li>
-<li>每个Pod容器有有一个pause容器<br> <a href="https://jimmysong.io/kubernetes-handbook/concepts/pause-container.html">Pause容器</a> 例子<br> <a href="https://o-my-chenjian.com/2017/10/17/The-Pause-Container-Of-Kubernetes/">Kubernetes之Pause容器</a><br> <a href="https://mp.weixin.qq.com/s?__biz=Mzg5Mjc3MjIyMA==&mid=2247542987&idx=1&sn=dad6c7723576cf1fb86486f2855b0efd&source=41#wechat_redirect">Kubernetes之“暂停”容器</a></li>
-</ul>
-<h1><span id="二-pod与pod之间的网络">二.  Pod与Pod之间的网络</span><a href="#二-pod与pod之间的网络" class="header-anchor">#</a></h1><h3><span id="20-overview">2.0   Overview</span><a href="#20-overview" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2019/08/23/k8sNetwork/k8sNetworkAll.png" class title="K8S 网络"> 
-
-<h3><span id="21-同节点pod通信">2.1  同节点pod通信</span><a href="#21-同节点pod通信" class="header-anchor">#</a></h3><p>基础: 网桥 bridge<br>通过<strong>网桥</strong>通信</p>
-<div style="text-align: center; width:60%; height: 60%">
-
-<p><img src="https://user-images.githubusercontent.com/5608425/68114098-31c4b980-ff30-11e9-9dbd-163452ec51bc.jpg" alt="pod-to-pod-in-node"><br>图2. 同节点pod通信</p>
-</div>
-
-<h3><span id="22-不同节点中的pod通信跨主机网络通讯">2.2  不同节点中的Pod通信（跨主机网络通讯）</span><a href="#22-不同节点中的pod通信跨主机网络通讯" class="header-anchor">#</a></h3><h5><span id="221-overlay-flannel方案">2.2.1  Overlay (Flannel方案)</span><a href="#221-overlay-flannel方案" class="header-anchor">#</a></h5><ol>
-<li><strong>flannel-UDP模式(三层overlay)</strong></li>
-</ol>
-<ul>
-<li>原理：<br>  fannelId进程封装&#x2F;解开虚拟网卡docker0,fannel0的数据;<br>  三层的overlay网络;</li>
-<li>组件： TUN设备是<strong>3层</strong>的虚拟网络设备 ; fannel0</li>
-<li>劣势:  三次用户态和内核态切换 ; 性能差， 已弃用 <div style="text-align: center;"></div></li>
-</ul>
-<p><img src="https://user-images.githubusercontent.com/5608425/65022322-50acc380-d963-11e9-8476-5e5ab22c8b4c.JPG" alt="flannel-udp">  图3. flannel-UDP模式</p>
-<p><img src="https://user-images.githubusercontent.com/5608425/68364150-16dc8a00-0168-11ea-8281-272b274fdfae.jpg" alt="flannel-udp">  图4. flannel-UDP模式</p>
-
-
-<ol start="2">
-<li><strong>flannel-vxlan模式(两层虚拟网络)</strong></li>
-</ol>
-<ul>
-<li>VXLAN 的覆盖网络的设计思想是：在现有的三层网络之上，“覆盖”一层虚拟的、由内核 VXLAN<br>模块负责维护的二层网络，使得连接在这个 VXLAN 二层网络上的“主机”（虚拟机或者容器都可<br>以）之间，可以像在同一个局域网（LAN）里那样自由通信</li>
-<li>组件：<br>  VTEP（VXLAN Tunnel End Point）设备; fannel.1;<br>  组成一个虚拟的<strong>两层</strong>网络</li>
-<li>优势：<br>  进行封装和解封装的对象，是二层数据帧（Ethernet frame）;<br>  而且这个工作的执行流程，全部是在内核里完成的（因为VXLAN本身就是内核中的一个模块）;<br>  主流的网络容器方案。<div style="text-align: center;"></div></li>
-</ul>
-<p><img src="https://user-images.githubusercontent.com/5608425/65022323-51455a00-d963-11e9-9442-d4f1b84ecce5.JPG" alt="flannel-vxlan">   图5. flannel-vxlan模式</p>
-<p><img src="https://user-images.githubusercontent.com/5608425/68364151-16dc8a00-0168-11ea-8935-445ad9c6b456.jpg" alt="flannel-vxlan"> 图6. flannel-vxlan模式</p>
-
-
-<h5><span id="222-纯3层网络方案">2.2.2 纯3层网络方案</span><a href="#222-纯3层网络方案" class="header-anchor">#</a></h5><ol>
-<li><strong>Flannel host-gw模式</strong></li>
-</ol>
-<p><img src="https://user-images.githubusercontent.com/5608425/68364149-1643f380-0168-11ea-80ef-c0b218278dec.jpg" alt="flannel-host-gw"></p>
-<ul>
-<li><p>host-gw 模式工作原理：<br>其实就是将每个 Flannel 子网（Flannel Subnet，比如：10.244.1.0&#x2F;24）的“下一跳”，设置成了该子网对应的宿主机的 IP 地址。<br>也就是说，这台“主机”（Host）会充当这条容器通信路径里的“网关”（Gateway）。这也正是“host-gw”的含义。</p>
-</li>
-<li><p>核心<br>路由规则：<br>&lt;目的容器 IP 地址段&gt; via &lt;网关的 IP 地址&gt; dev eth0</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ ip route</span><br><span class="line">...</span><br><span class="line">10.244.1.0/24 via 10.168.0.3 dev eth0</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>优势：<br>根据实际的测试，host-gw 的性能损失大约在 10% 左右，而其他所有基于 VXLAN“隧道”机制的网络方案，性能损失都在 20%~30% 左右。</p>
-</li>
-</ul>
-<ol start="2">
-<li><strong>Calico</strong></li>
-</ol>
-<ul>
-<li><p>原理:<br>基于iptable&#x2F;linux kernel包转发;<br>根据iptables规则进行路由转发;<br>非overlay, Calico 没有使用 CNI 的网桥模式;</p>
-</li>
-<li><p>核心<br>路由规则：<br>&lt;目的容器 IP 地址段&gt; via &lt;网关的 IP 地址&gt; dev eth0</p>
-</li>
-<li><p>组件:<br>路由规则; iptables的配置组件Felix;<br>路由广播组件BGP Speaker;</p>
-</li>
-</ul>
-<ol start="3">
-<li><strong>Host Network模式</strong><br>容器的网络和宿主机的网络打平，在同一层;<br>underlay方案;</li>
-</ol>
-<h5><span id="223-总结">2.2.3 总结:</span><a href="#223-总结" class="header-anchor">#</a></h5><ul>
-<li>flannel-UDP模式和flannel-vxlan模式都可以称作”隧道”机制；都是是overlay的。</li>
-<li>普适性最强 flannel-VxLan (OpenShift使用)</li>
-<li>二层可直连可选用Calico &#x2F; Flannel host-gw</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="center">&#x2F;</th>
-<th align="center">overlay（隧道）</th>
-<th align="center">underlay（路由）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">L2</td>
-<td align="center">Vxlan(大二层 通讯双方在同一逻辑网段内)</td>
-<td align="center">IPvlan L2模式<br> Macvlan <a href="https://larioy.gst.monster/2021/09/06/k8s-ji-chong-cni-fang-an-jie-xi/macvlan-yu-ipvlan/macvlan-he-ipvlan-jie-shao/">9</a></td>
-</tr>
-<tr>
-<td align="center">L3</td>
-<td align="center">flannel-UDP（类似L2 overlay， 在节点上增加一个网关）</td>
-<td align="center">IPvlan L3模式<br> flannel host-gw（不能跨两层网络） <br> Calico BGP组网方式（大三层）</td>
-</tr>
-</tbody></table>
-<h1><span id="三-pod与service之间的网络">三. Pod与Service之间的网络</span><a href="#三-pod与service之间的网络" class="header-anchor">#</a></h1><p><a href="../../../../2019/11/04/k8sService/">Kubernetes服务</a></p>
-<h1><span id="四-internet与service之间的网络">四. Internet与Service之间的网络</span><a href="#四-internet与service之间的网络" class="header-anchor">#</a></h1><h3><span id="41-service到internet">4.1 Service到Internet</span><a href="#41-service到internet" class="header-anchor">#</a></h3><p>iptables执行源NAT( SNAT )</p>
-<h3><span id="42-internet到service">4.2 Internet到Service</span><a href="#42-internet到service" class="header-anchor">#</a></h3><p><a href="../../../../2019/11/04/k8sService/">Kubernetes服务</a></p>
-<h1><span id="五-网络隔离-多租户">五. 网络隔离 多租户</span><a href="#五-网络隔离-多租户" class="header-anchor">#</a></h1><p>NetworkPolicy</p>
-<h1><span id="六-访问公网99">六. 访问公网[99]</span><a href="#六-访问公网99" class="header-anchor">#</a></h1><h3><span id="通过nat访问公网">通过NAT访问公网</span><a href="#通过nat访问公网" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2019/08/23/k8sNetwork/internet-access.jpg" class title="通过NAT访问公网">
-
-<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ul>
-<li><p>1.<a href="https://edu.aliyun.com/lesson_1651_13087#_13087">第13 章 ： Kubernetes网络概念及策略控制</a>  CNCF × Alibaba 云原生技术公开课</p>
-</li>
-<li><p>2.<a href="https://blog.csdn.net/hxpjava1/article/details/79566192">calico网络原理及与flannel对比</a></p>
-</li>
-<li><p>3.<a href="https://mp.weixin.qq.com/s/GQc8XPV4MaCWiTcN2wVzbw">Kubernetes CNI网络最强对比：Flannel、Calico、Canal和Weave</a></p>
-</li>
-<li><p>8.<a href="https://mp.weixin.qq.com/s/spw8fHkIjiyf4kg5RQIL_w">K8s网络模型</a>  阿里 加多  ***</p>
-</li>
-<li><p>9.<a href="https://larioy.gst.monster/2021/09/06/k8s-ji-chong-cni-fang-an-jie-xi/macvlan-yu-ipvlan/macvlan-he-ipvlan-jie-shao/">macvlan和ipvlan介绍及在k8s中的使用</a></p>
-</li>
-<li><p>趣谈网络协议  刘超<br>+《30容器网络之Flannel：每人一亩三分地》<br>+《31容器网络之Calico：为高效说出善意的谎言》</p>
-</li>
-<li><p>深入剖析Kubernetes  张磊<br>+《32  浅谈容器网络》<br>+《33  深入解析容器跨主机网络》<br>+《34  Kubernetes网络模型与CNI网络插件》<br>+《35  解读Kubernetes三层网络方案》</p>
-</li>
-<li><p>99.<a href="https://www.aliyundrive.com/s/dXxngxjTkZE">K8S在UCloud内部的应用-高鹏</a></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>云原生</category>
-        <category>Kubernetes</category>
-      </categories>
-      <tags>
-        <tag>Kubernetes</tag>
       </tags>
   </entry>
   <entry>
