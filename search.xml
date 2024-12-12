@@ -211,7 +211,6 @@
 
 <ul>
 <li><a href="#%E7%BC%96%E6%8E%92%E5%8E%9F%E7%90%86">编排原理</a></li>
-<li><a href="#paas">PaaS</a></li>
 <li><a href="#%E5%AE%89%E5%85%A8">安全</a></li>
 <li><a href="#%E4%BB%A3%E7%A0%81%E8%B5%B0%E8%AF%BB">代码走读</a></li>
 <li><a href="#%E9%97%AE%E9%A2%98%E5%92%8C%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">问题和最佳实践</a></li>
@@ -228,20 +227,12 @@
 <li><a href="/www6vHomeHexo/2019/04/25/k8s/" title="Kubernetes 架构">Kubernetes 架构</a></li>
 </ul>
 <hr>
-<h2><span id="paas">PaaS</span><a href="#paas" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2022/01/12/k8sPaaS/" title="Kubernetes PaaS平台">Kubernetes PaaS平台</a> </li>
-<li><a href="/www6vHomeHexo/2022/01/05/k8sOpenShift/" title="Kubernetes OpenShift">Kubernetes OpenShift</a> </li>
-<li><a href="/www6vHomeHexo/2021/10/18/k8sMultiTenancy/" title="Kubernetes 多租户">Kubernetes 多租户</a> </li>
-<li><a href="/www6vHomeHexo/2019/11/14/k8sRBAC/" title="Kubenetes RBAC">Kubenetes RBAC</a> </li>
-<li><a href="/www6vHomeHexo/2022/05/08/k8sMultiCluster/" title="Kubernetes 多集群管理">Kubernetes 多集群管理</a> </li>
-<li><a href="/www6vHomeHexo/2022/06/03/k8sVM/" title="Kubernetes和VM">Kubernetes和VM</a></li>
-</ul>
-<hr>
 <h2><span id="安全">安全</span><a href="#安全" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/05/22/k8sSecurity/" title="Kubernetes安全-Security">Kubernetes安全-Security</a> </li>
 <li><a href="/www6vHomeHexo/2022/01/15/k8sCKS/" title="Kubernetes CKS">Kubernetes CKS</a> </li>
 <li><a href="/www6vHomeHexo/2022/01/16/k8sSecurityPractice/" title="Kubernetes 安全实践">Kubernetes 安全实践</a></li>
 </ul>
+<hr>
 <h2><span id="代码走读">代码走读</span><a href="#代码走读" class="header-anchor">#</a></h2><ul>
 <li><a href="/www6vHomeHexo/2022/01/15/k8sCodeOfApiServer/" title="Kubernetes ApiServer 代码走读">Kubernetes ApiServer 代码走读</a> </li>
 <li><a href="/www6vHomeHexo/2022/01/15/k8sCodeOfInformerFramework/" title="Kubernetes Informer Framework 代码走读">Kubernetes Informer Framework 代码走读</a> </li>
@@ -8285,24 +8276,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
-    <title>Kubernetes和VM</title>
-    <url>/www6vHomeHexo/2022/06/03/k8sVM/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-
-<p><a href="https://blog.csdn.net/qihoo_tech/article/details/113153640">kubevirt在360的探索之路（k8s接管虚拟化）</a><br><a href="https://www.jianshu.com/p/b2a35f31b88c">后Kubernetes时代的虚拟机管理技术之kubevirt篇</a></p>
-]]></content>
-      <categories>
-        <category>云原生</category>
-        <category>Kubernetes</category>
-      </categories>
-      <tags>
-        <tag>Kubernetes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Redis LazyFree</title>
     <url>/www6vHomeHexo/2022/06/01/redisLazyFree/</url>
     <content><![CDATA[<p></p>
@@ -9872,50 +9845,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
       </categories>
       <tags>
         <tag>devops</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Kubernetes 多集群管理</title>
-    <url>/www6vHomeHexo/2022/05/08/k8sMultiCluster/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目标">目标：</span><a href="#目标" class="header-anchor">#</a></h2><p>让用户像使用单集群一样来使用多集群。</p>
-<h2><span id="多集群部署需要解决哪些问题">多集群部署需要解决哪些问题</span><a href="#多集群部署需要解决哪些问题" class="header-anchor">#</a></h2><ul>
-<li>而多集群管理需要解决以下问题：<br>多集群服务的分发部署（deployment、daemonset等）<br>跨集群自动迁移与调度（当某个集群异常，服务可以在其他集群自动部署）<br>多集群服务发现，网络通信及负载均衡（service，ingress等）</li>
-</ul>
-<h2><span id="开源和解决方案">开源和解决方案</span><a href="#开源和解决方案" class="header-anchor">#</a></h2><ul>
-<li><p>KubeFed 或 Federation v2<br><a href="https://github.com/kubernetes-sigs/kubefed">https://github.com/kubernetes-sigs/kubefed</a><br><a href="https://jimmysong.io/kubernetes-handbook/practice/federation.html">集群联邦（Cluster Federation）</a>   jimmysong</p>
-</li>
-<li><p>virtual-kubelet Virtual Kubelet<br><a href="https://www.modb.pro/db/166209">阿里云virtual-kubelet-autoscaler实现ECI作为弹性补充</a><br><a href="https://www.alibabacloud.com/help/zh/elastic-container-instance/latest/schedule-pods-to-a-virtual-node-through-the-virtual-kubelet-autoscaler-add-on">通过 virtual-kubelet-autoscaler 将Pod自动调度到虚拟节点</a><br><a href="https://help.aliyun.com/document_detail/97527.html">自建Kubernetes集群部署Virtual Kubelet（ECI）</a> 未<br><a href="https://v.qq.com/x/page/d0816t4u183.html">简介：Virtual Kubelet</a> video 2018 kubecon   未<br><a href="https://v.qq.com/x/page/q0827olfrlx.html">深入了解：Virtual Kubelet</a> video   2018 kubecon  未  </p>
-</li>
-<li><p>Karmada（Kubernetes Armada）[5]</p>
-</li>
-<li><p>clusternet - 腾讯云</p>
-</li>
-<li><p>OCM(Open Cluster Management) - RedHat </p>
-</li>
-<li><p>Gardener [3]</p>
-</li>
-<li><p>Crossplane [3]</p>
-</li>
-<li><p>cluster-api [4]</p>
-</li>
-</ul>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://www.huweihuang.com/kubernetes-notes/multi-cluster/k8s-multi-cluster-thinking.html">k8s多集群的思考</a></li>
-<li><a href="https://kubesphere.com.cn/blogs/kubernetes-multicluster-kubesphere/">混合云下的 Kubernetes 多集群管理与应用部署</a> 未</li>
-<li><a href="https://www.bilibili.com/video/BV14f4y1T7LY/">【PingCAP Infra Meetup】No.141 Kubernetes 开发设计模式在 TiDB Cloud 中的应用</a></li>
-<li><a href="https://www.bilibili.com/video/BV12e4y1M7KM?spm_id_from=333.880.my_history.page.click">基于 ClusterAPI 的集群管理</a></li>
-<li><a href="https://www.bilibili.com/video/BV1rX4y1c72s?spm_id_from=333.999.0.0">Karmada: 开源的云原生多云容器编排引擎</a> 华为</li>
-</ol>
-]]></content>
-      <categories>
-        <category>云原生</category>
-        <category>Kubernetes</category>
-      </categories>
-      <tags>
-        <tag>Kubernetes</tag>
       </tags>
   </entry>
   <entry>
@@ -15720,77 +15649,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
       </tags>
   </entry>
   <entry>
-    <title>Kubernetes PaaS平台</title>
-    <url>/www6vHomeHexo/2022/01/12/k8sPaaS/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<table>
-<thead>
-<tr>
-<th align="center">&#x2F;</th>
-<th align="center">OpenShift</th>
-<th align="center">KubeSphere</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">网络</td>
-<td align="center">ovs(openshift SDN), flannel, calico</td>
-<td align="center">calico, flannel, QinCloud CNI, Porter</td>
-</tr>
-<tr>
-<td align="center">存储</td>
-<td align="center">Ceph,NFS</td>
-<td align="center">NeonSAN， QingCloud-csi，Ceph-csi</td>
-</tr>
-<tr>
-<td align="center">CI&#x2F;CD</td>
-<td align="center">OCP Pipeline&#x2F;Tekton<br>s2i</td>
-<td align="center">Pipeline, Jenkins, sonarqube<br>s2i</td>
-</tr>
-<tr>
-<td align="center">微服务</td>
-<td align="center">istio</td>
-<td align="center">istio</td>
-</tr>
-<tr>
-<td align="center">ingress</td>
-<td align="center">HA Proxy</td>
-<td align="center">openELB</td>
-</tr>
-<tr>
-<td align="center">infa(多云)</td>
-<td align="center">kvm,openstack,aws,GCP,azure<br> marketplace</td>
-<td align="center">OpenPitrix(aws, aliyun, openstack)</td>
-</tr>
-<tr>
-<td align="center">Service Catelog</td>
-<td align="center">operatorhub</td>
-<td align="center">无</td>
-</tr>
-<tr>
-<td align="center">serverless</td>
-<td align="center">knative</td>
-<td align="center">openfunction(基于knative)</td>
-</tr>
-<tr>
-<td align="center">多集群</td>
-<td align="center"></td>
-<td align="center">solo、 kubefed(二开)</td>
-</tr>
-</tbody></table>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>青云官网</p>
-]]></content>
-      <categories>
-        <category>云原生</category>
-        <category>Kubernetes</category>
-      </categories>
-      <tags>
-        <tag>Kubernetes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>HAProxy抓包</title>
     <url>/www6vHomeHexo/2022/01/11/haproxyTcpdump/</url>
     <content><![CDATA[<p hidden></p>
@@ -16181,69 +16039,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
       </tags>
   </entry>
   <entry>
-    <title>Kubernetes OpenShift</title>
-    <url>/www6vHomeHexo/2022/01/05/k8sOpenShift/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<img src="/www6vHomeHexo/2022/01/05/k8sOpenShift/openshift.png" class>
-
-
-<h2><span id="interface">Interface</span><a href="#interface" class="header-anchor">#</a></h2><ul>
-<li>CNI<br>OpenFlow(OVS)(使用的， 更通用，场景适合的更多)<br>Calico</li>
-<li>CRI<ul>
-<li>OpenShift3.0 用的<br>  Docker（有守护进程，守护进程宕掉后，运行时会有问题）<br>  Red Hat Enterprise Linux - 4G大小</li>
-<li>OpenShift4.0 用的<br>  CRI-O（没有守护进程）<br>  Ret Hat CoreOS - 不到800M大小</li>
-</ul>
-</li>
-<li>CSI<br>CEPH(ROOK)<br>NFS</li>
-<li>入口 ingress<ul>
-<li>openshift 默认是haproxy的ingress（首选建议使用， dns解析， mTLS）</li>
-<li>也可以装nginx ingress</li>
-<li>也可以装istio ingress gateway（4层选， istio ingress gateway）</li>
-</ul>
-</li>
-</ul>
-<h2><span id="paas">PaaS</span><a href="#paas" class="header-anchor">#</a></h2><p> 角色 - RBAC<br> 配置管理 - LimitRanage， Quota<br> 联邦集群 - kubefed </p>
-<h2><span id="对k8s的增强">对K8S的增强</span><a href="#对k8s的增强" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/01/05/k8sOpenShift/enhancement.png" class>
-
-<ul>
-<li>Operator</li>
-<li>Multus多个虚拟网卡（用的多）<br>一个pod有多个虚拟网卡， ovs管理网络 + macvlan网络（性能比较好） </li>
-<li>kube-virt 虚拟机管理</li>
-</ul>
-<img src="/www6vHomeHexo/2022/01/05/k8sOpenShift/openshift-vs-k8s1.png" class>
-
-<img src="/www6vHomeHexo/2022/01/05/k8sOpenShift/openshift-vs-k8s2.png" class>
-
-
-<h2><span id="应用迁移">应用迁移</span><a href="#应用迁移" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/01/05/k8sOpenShift/appMigrate.png" class>
-
-<ul>
-<li>应用改造的难度比较大</li>
-</ul>
-<h2><span id="多云">多云</span><a href="#多云" class="header-anchor">#</a></h2><h5><span id="基于多云的cix2fcd">基于多云的CI&#x2F;CD</span><a href="#基于多云的cix2fcd" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2022/01/05/k8sOpenShift/cicd-multiCluster.png" class>
-<ul>
-<li>基于jenkins<br>容易编写，耗内存</li>
-<li>基于Tekton<br>不容易编写， 不耗内存</li>
-</ul>
-<h5><span id="应用发布到多个集群">应用发布到多个集群</span><a href="#应用发布到多个集群" class="header-anchor">#</a></h5><p>  RHACM 本来是IBM的，后来给了RedHat<br>  RHACM基于CNCF的Open Cluster Management孵化项目 </p>
-<h2><span id="竞品分析">竞品分析</span><a href="#竞品分析" class="header-anchor">#</a></h2><ul>
-<li>占有率30%， 早2018年，<br> 生态做的好（开源项目operator， marketplace， istio， serverlesss）<br> IBM AI，中间件相关的东西挪到OpenShift</li>
-</ul>
-<h2><span id="市场">市场</span><a href="#市场" class="header-anchor">#</a></h2><p>银行， 企业级客户<br><a href="https://quay.io/repository/openshift/okd">社区版本 OKD</a> </p>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p><a href="https://www.bilibili.com/video/BV19p4y1k7yA?spm_id_from=333.880.my_history.page.click&vd_source=f6e8c1128f9f264c5ab8d9411a644036">基于 Red Hat OpenShift 4 构建 Paas、DevOps 平台</a> bilibili<br><a href="https://www.bilibili.com/video/BV1FL4y1c767?spm_id_from=333.880.my_history.page.click&vd_source=f6e8c1128f9f264c5ab8d9411a644036">15分钟搞定 OpenShift 多云管理，并统一部署应用</a><br><a href="https://www.bilibili.com/video/BV1nZ4y1b71F?spm_id_from=333.880.my_history.page.click&vd_source=f6e8c1128f9f264c5ab8d9411a644036">用 Kubernetes Operator 管理 OpenShift 应用生命周期</a></p>
-]]></content>
-      <categories>
-        <category>云原生</category>
-        <category>Kubernetes</category>
-      </categories>
-      <tags>
-        <tag>Kubernetes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>阿里云-混合云HybridCloud</title>
     <url>/www6vHomeHexo/2022/01/04/aliyunHybridCloud/</url>
     <content><![CDATA[<p></p>
@@ -16501,83 +16296,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
       </categories>
       <tags>
         <tag>redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Kubernetes 多租户</title>
-    <url>/www6vHomeHexo/2021/10/18/k8sMultiTenancy/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<h2><span id="一-概念和原则">一. 概念和原则</span><a href="#一-概念和原则" class="header-anchor">#</a></h2><ol>
-<li>租户是指一组拥有访问特定软件资源权限的用户集合，在多租户环境中，它还包括共享的应用、服务、数据和各项配置等。</li>
-<li>多租户集群必须将租户彼此隔离</li>
-<li>集群须在租户之间公平的分配集群资源。</li>
-</ol>
-<h2><span id="二-overview">二. Overview</span><a href="#二-overview" class="header-anchor">#</a></h2><ul>
-<li><p>软隔离：在这种情况下，我们有一个企业，不同的团队访问同一个集群，这需要较少的安全开销，因为用户可以相互信任。</p>
-</li>
-<li><p>硬隔离：当 Kubernetes 暴露给具有独立且完全不受信任的用户的多个企业时，这是必需的。</p>
-</li>
-</ul>
-<img src="/www6vHomeHexo/2021/10/18/k8sMultiTenancy/k8sMultiTenancy1.png" class title="多租户Overview">
-
-
-<ul>
-<li><p>方案B  软隔离 - hierarchical-namespaces<br><a href="https://github.com/kubernetes-sigs/hierarchical-namespaces">https://github.com/kubernetes-sigs/hierarchical-namespaces</a><br><a href="https://icloudnative.io/posts/introducing-hierarchical-namespaces/">Kubernetes 的层级命名空间介绍</a></p>
-</li>
-<li><p>方案C  硬隔离 - virtualcluster<br><a href="https://github.com/kubernetes-sigs/cluster-api-provider-nested/tree/main/virtualcluster">https://github.com/kubernetes-sigs/cluster-api-provider-nested/tree/main/virtualcluster</a></p>
-</li>
-</ul>
-<h2><span id="三-方案b-解决方案">三. 方案B 解决方案</span><a href="#三-方案b-解决方案" class="header-anchor">#</a></h2><h5><span id="1-认证">1. 认证</span><a href="#1-认证" class="header-anchor">#</a></h5><ul>
-<li>识别访问的用户是谁</li>
-<li>K8s可管理2类用户   <ul>
-<li>ServiceAccount<br> 是存在于K8s中的虚拟账户;<br> 原生支持的动态认证;</li>
-<li>用户认证<br> webhook是和企业认证平台集成的重要手段</li>
-</ul>
-</li>
-</ul>
-<h5><span id="2-授权">2. 授权</span><a href="#2-授权" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2021/10/18/k8sMultiTenancy/k8sMultiTenancy.png" class title="授权">
-
-
-<h5><span id="3-隔离">3. 隔离</span><a href="#3-隔离" class="header-anchor">#</a></h5><ul>
-<li><p>节点隔离<br>Taints和Toleration机制<br><a href="https://mp.weixin.qq.com/s/rza4euQCLuMLTI5fHdj67Q">Kubernetes 调度 - 污点和容忍度详解</a><br><a href="https://jimmysong.io/kubernetes-handbook/concepts/taint-and-toleration.html">Taint 和 Toleration（污点和容忍）</a></p>
-</li>
-<li><p>网路隔离<br>NetworkPolicy 网路策略 - 实质上也是iptables规则</p>
-<p>网络策略通过网络插件来实现，所以必须使用一种支持 NetworkPolicy 的网络方案（如 calico）—— 非 Controller 创建的资源，是不起作用的。</p>
-</li>
-<li><p>容器隔离<br>  5种隔离机制</p>
-<ul>
-<li>Mount Namespace 隔离</li>
-<li>PID Namespace 隔离</li>
-<li>Network Namespace 隔离</li>
-<li>IPC Namespace 隔离</li>
-<li>UTS Namespace 隔离<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">4个打破隔离的机制 </span><br><span class="line">   - spec.hostNetwork</span><br><span class="line">   - spec.volumes</span><br><span class="line">   - spec.shareProcessNamespace</span><br><span class="line">   - spec.containers[].securityContext.privileged</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h5><span id="4-配额">4. 配额</span><a href="#4-配额" class="header-anchor">#</a></h5><p>   ResourceQuota  </p>
-<h5><span id="5-开源方案">5. 开源方案</span><a href="#5-开源方案" class="header-anchor">#</a></h5><p><a href="https://github.com/loft-sh/kiosk">kiosk</a><br><a href="https://aws.amazon.com/de/blogs/containers/set-up-soft-multi-tenancy-with-kiosk-on-amazon-elastic-kubernetes-service/">Set up soft multi-tenancy with Kiosk on Amazon Elastic Kubernetes Service</a></p>
-<h3><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h3><ol>
-<li><p><a href="https://mp.weixin.qq.com/s/YBxsZ5a_K6AWnOISTtiX3g">Kubernetes 多租户简介</a><br> <a href="https://static.sched.com/hosted_files/kccnceu19/74/kubecon-eu-multitenancy-wg-deepdive.pdf">https://static.sched.com/hosted_files/kccnceu19/74/kubecon-eu-multitenancy-wg-deepdive.pdf</a><br> 官方 <a href="https://github.com/kubernetes-sigs/multi-tenancy">https://github.com/kubernetes-sigs/multi-tenancy</a></p>
-</li>
-<li><p><a href="https://mp.weixin.qq.com/s/PobybjwmzOdbLcx53onJZQ">解决 K8s 落地难题的方法论提炼</a></p>
-</li>
-<li><p><a href="https://jimmysong.io/kubernetes-handbook/concepts/network-policy.html">NetworkPolicy</a> jimmysong</p>
-</li>
-<li><p><a href="https://mp.weixin.qq.com/s/Y-dUtp1yqRxpd40YwjyE0Q">轻量级 Kubernetes 多租户方案的探索与实践</a> 火山引擎云原生<br>本质上来说 KubeZoo 的方案和 Virtual Cluster 有点类似，是一种 Serverless 的 Kubernetes 方案。</p>
-</li>
-<li><p><a href="https://kubesphere.com.cn/blogs/gitlab-kubesphere/">KubeSphere 多租户与认证鉴权实践：使用 GitLab 账号登陆 KubeSphere</a> 未</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>云原生</category>
-        <category>Kubernetes</category>
-      </categories>
-      <tags>
-        <tag>Kubernetes</tag>
       </tags>
   </entry>
   <entry>
@@ -20171,27 +19889,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
       </tags>
   </entry>
   <entry>
-    <title>Kubenetes RBAC</title>
-    <url>/www6vHomeHexo/2019/11/14/k8sRBAC/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<img src="/www6vHomeHexo/2019/11/14/k8sRBAC/k8sRBAC.jpg" class title="Kubenetes-RBAC">
-
-
-<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li>《深入剖析Kubernetes - 26  基于角色的权限控制：RBAC》    张磊</li>
-</ol>
-]]></content>
-      <categories>
-        <category>云原生</category>
-        <category>Kubernetes</category>
-      </categories>
-      <tags>
-        <tag>Kubernetes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Kubernetes模式</title>
     <url>/www6vHomeHexo/2019/11/13/k8sPattern/</url>
     <content><![CDATA[<p></p>
@@ -23652,8 +23349,8 @@ MySQL MVCC 快照读 vs 当前读 </li>
         <category>serviceMesh</category>
       </categories>
       <tags>
-        <tag>k8s</tag>
         <tag>istio</tag>
+        <tag>k8s</tag>
       </tags>
   </entry>
   <entry>
