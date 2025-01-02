@@ -490,8 +490,8 @@
 <li>数据库<ul>
 <li><a href="/www6vHomeHexo/2021/06/05/tidbTroubleshooting/" title="TiDB  故障排查">TiDB  故障排查</a>   </li>
 <li><a href="/www6vHomeHexo/2020/06/21/mysqlBestPractice/" title="使用MySQL的性能问题和紧急处理手段">使用MySQL的性能问题和紧急处理手段</a></li>
-<li><a href="/www6vHomeHexo/2023/08/15/mysqlDeadLock/" title="MySQL  锁和死锁">MySQL  锁和死锁</a>  ***</li>
-<li><a href="/www6vHomeHexo/2022/08/16/mysqlMasterSlaveDelay/" title="MySQL 主从延迟">MySQL 主从延迟</a></li>
+<li><a href="mysqlDeadLock.md">Go to Page</a>   ***</li>
+<li><a href="mysqlMasterSlaveDelay.md">Go to Page</a></li>
 </ul>
 </li>
 <li><a href="/www6vHomeHexo/2017/02/19/splitBrain/" title="Split Brain">Split Brain</a></li>
@@ -633,27 +633,15 @@
       </tags>
   </entry>
   <entry>
-    <title>关系型数据库 汇总</title>
+    <title>关系型数据库 汇总(archived)</title>
     <url>/www6vHomeHexo/2021/02/09/rmdbSummary/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
 
-<hr>
-<h2><span id="分布式">分布式</span><a href="#分布式" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2022/02/09/distributedDatabase/" title="分布式 数据库 总结">分布式 数据库 总结</a>
-</li>
-<li><a href="/www6vHomeHexo/2022/03/11/distributedDatabaseCompare/" title="分布式 数据库 比较">分布式 数据库 比较</a>
-</li>
-<li><a href="/www6vHomeHexo/2023/04/10/tikvMVCCTransaction/" title="TiKV Transaction-MVCC+TSO">TiKV Transaction-MVCC+TSO</a>
-</li>
-<li><a href="/www6vHomeHexo/2022/04/11/distributedDatabaseGlobalTime/" title="分布式数据库-全局时钟">分布式数据库-全局时钟</a>  
-</li>
-<li><a href="/www6vHomeHexo/2021/05/30/distributedDatabaseJoinQuery/" title="数据库  关联查询">数据库  关联查询</a>
-</li>
-<li><a href="/www6vHomeHexo/2023/06/05/globalSecondaryIndex/" title="全局二级索引-GSI">全局二级索引-GSI</a></li>
-</ul>
-<hr>
+
+
+
 ]]></content>
       <categories>
         <category>汇总</category>
@@ -675,8 +663,6 @@
 
 <ul>
 <li><a href="#redis-%E5%9F%BA%E7%A1%80">Redis 基础</a><ul>
-<li><a href="#overviw">overviw</a></li>
-<li><a href="#arch-redis-cluster">Arch &amp; Redis Cluster</a></li>
 <li><a href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">数据类型</a></li>
 <li><a href="#%E4%BA%8B%E5%8A%A1">事务</a></li>
 <li><a href="#%E6%8C%81%E4%B9%85%E5%8C%96">持久化</a></li>
@@ -693,21 +679,12 @@
 
 </div>
 
-<h1><span id="redis-基础">Redis 基础</span><a href="#redis-基础" class="header-anchor">#</a></h1><h3><span id="overviw">overviw</span><a href="#overviw" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2016/11/12/redis/" title="Redis 总结">Redis 总结</a></li>
-<li><a href="/www6vHomeHexo/2022/01/18/redisIO/" title="Redis 的IO模型">Redis 的IO模型</a></li>
-</ul>
-<h3><span id="arch-amp-redis-cluster">Arch &amp; Redis Cluster</span><a href="#arch-amp-redis-cluster" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2021/05/25/redisArch/" title="Redis 架构">Redis 架构</a></li>
-<li><a href="/www6vHomeHexo/2022/03/28/redisError/" title="Redis Error-MOVED和ASK指令">Redis Error-MOVED和ASK指令</a></li>
-<li><a href="/www6vHomeHexo/2022/07/11/redisCluster/" title="Redis Cluster">Redis Cluster</a>    </li>
-<li><a href="/www6vHomeHexo/2022/07/11/redisClusterSpec/" title="Redis Cluster Spec">Redis Cluster Spec</a>  </li>
-<li><a href="/www6vHomeHexo/2022/07/31/redisHA/" title="Redis 集群  容灾（同城多活）">Redis 集群  容灾（同城多活）</a></li>
-</ul>
+<h1><span id="redis-基础">Redis 基础</span><a href="#redis-基础" class="header-anchor">#</a></h1><hr>
 <h3><span id="数据类型">数据类型</span><a href="#数据类型" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2021/06/20/redisRehash/" title="Redis Rehash机制">Redis Rehash机制</a></li>
 <li><a href="/www6vHomeHexo/2021/05/05/redisDataStructure/" title="Redis数据结构">Redis数据结构</a></li>
 </ul>
+<hr>
 <h3><span id="事务">事务</span><a href="#事务" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2022/01/18/redisTransaction/" title="Redis 事务">Redis 事务</a></li>
 </ul>
@@ -858,7 +835,7 @@
 <li><a href="/www6vHomeHexo/2022/07/14/performancePool/" title="性能优化-池化Pool">性能优化-池化Pool</a></li>
 </ul>
 <h2><span id="mysql">MySQL</span><a href="#mysql" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2019/09/10/mysqlIndex/" title="MySQL的索引和优化">MySQL的索引和优化</a>  ***</li>
+<li><a href="mysqlIndex.md">Go to Page</a>  *** </li>
 <li><a href="/www6vHomeHexo/2020/06/21/mysqlBestPractice/" title="使用MySQL的性能问题和紧急处理手段">使用MySQL的性能问题和紧急处理手段</a>  ***</li>
 </ul>
 <h2><span id="spark">Spark</span><a href="#spark" class="header-anchor">#</a></h2><ul>
@@ -1113,7 +1090,7 @@
 <li><a href="kafkaController.md">Go to Page</a></li>
 </ul>
 <h3><span id="数据服务">数据服务</span><a href="#数据服务" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2020/06/21/mysqlReliability/" title="MySQL的主从 高可用 容灾">MySQL的主从 高可用 容灾</a></li>
+<li><a href="mysqlReliability.md">Go to Page</a></li>
 <li>dbTradeoff</li>
 </ul>
 <h3><span id="k8s-高可用">K8S  高可用</span><a href="#k8s-高可用" class="header-anchor">#</a></h3><ul>
@@ -1588,76 +1565,6 @@
       </tags>
   </entry>
   <entry>
-    <title>全局二级索引-GSI</title>
-    <url>/www6vHomeHexo/2023/06/05/globalSecondaryIndex/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#%E5%9C%BA%E6%99%AF">场景</a></li>
-<li><a href="#%E5%85%A8%E5%B1%80%E7%B4%A2%E5%BC%95-vs-%E5%B1%80%E9%83%A8%E7%B4%A2%E5%BC%95-12">全局索引 vs 局部索引 [1][2]</a></li>
-<li><a href="#polardb-%E5%85%A8%E5%B1%80%E7%B4%A2%E5%BC%95">PolarDB 全局索引</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h2><span id="场景">场景</span><a href="#场景" class="header-anchor">#</a></h2><p>[Claude]<br>分布式数据库的全局二级索引主要有以下几个使用场景:<br>    <strong>加速多表关联查询</strong>:用全局二级索引构建外键索引,可以有效地加速涉及多表关联的查询。<br>    <strong>全表扫描查询</strong>:当需要做全表扫描时,使用全局二级索引可以跳过不需要的行,大幅降低扫描成本。<br>    频繁查询的列上:对于数据库中经常需要根据某列进行查询的情况,建立该列的全局二级索引,可以大幅提高查询效率。<br>    <strong>需要排序的查询</strong>:当需要查询结果按某个列排序时,全局二级索引可以加速排序。<br>    模糊查询优化:通过部分键值匹配,全局二级索引可以优化like查询等模式查询。<br>    <strong>分页查询优化</strong>:结合 Cursor 标记,全局二级索引可以有效的支持分页查询。</p>
-<p>总的来说,对于需要高效查询、排序、混合查询等复杂查询的分布式数据库而言,引入全局二级索引可以大大提高性能。尤其是处理大规模数据时,二级索引发挥的作用更加明显。</p>
-<ul>
-<li><p>全局二级索引能够解决什么问题 [1]<br>如果查询的维度与逻辑表的拆分维度不同，会<strong>产生跨分片查询</strong>。跨分片查询的增加会导致查询卡慢、连接池耗尽等性能问题。<strong>GSI</strong>能够通过增加拆分维度来<strong>减少跨分片查询，消除性能瓶颈</strong>。</p>
-</li>
-<li><p>增加拆分维度 [4]<br>例如，对于在线商城的订单表，假设按照买家用户维度拆分，那么对于卖家查询（例如，查询某个卖家的本月所有订单）就需要扫描所有分区。但是借助全局二级索引，可以仅仅扫描相应卖家所在的索引表分区，快速找到所需的订单信息。</p>
-</li>
-<li><p>全局唯一约束 [4]<br>例如，假设用户表是一张分布式表，按照用户ID分区。若要求用户手机号需要全局唯一，那么本地索引无法满足，必须构建一个按手机号作为索引键（同时也是分区键）的唯一索引。</p>
-</li>
-</ul>
-<h2><span id="全局索引-vs-局部索引-12">全局索引 vs 局部索引 [1][2]</span><a href="#全局索引-vs-局部索引-12" class="header-anchor">#</a></h2><ul>
-<li><p>全局二级索引 [DDIA  基于关键词的二级索引分区]<br>数据行和对应的索引行保存在不同分片上</p>
-<ul>
-<li>分类 [3]<ul>
-<li>全局非分区索引（Global Non-Partitioned Index）</li>
-<li>全局分区索引（Global Partitioned Index）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>局部索引  [DDIA  基于文档的二级索引分区]<br>如果数据行和对应的索引行保存在相同分片上</p>
-</li>
-</ul>
-<h2><span id="polardb-全局索引">PolarDB 全局索引</span><a href="#polardb-全局索引" class="header-anchor">#</a></h2><ul>
-<li><p>PolarDB-X [1]</p>
-<ul>
-<li>XA多写，保证主表与<strong>索引表</strong>数据强一致。[性能会不会慢]</li>
-<li>Online Schema Change，添加GSI不锁主表。</li>
-</ul>
-</li>
-<li><p>PolarDB-X GSI [4]<br>每个GSI对应一张分布式索引表，和其他分布式表一样，按照指定的分区规则水平拆分为多张物理表。PolarDB-X使用分布式事务维护主表和索引表之间数据强一致。</p>
-</li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://help.aliyun.com/document_detail/182179.html">全局二级索引</a>   PolarDB</li>
-<li><a href="https://zhuanlan.zhihu.com/p/384439886">设计数据密集型应用-C6-分区和二级索引</a>  DDIA</li>
-<li><a href="https://www.oceanbase.com/docs/enterprise-oceanbase-database-cn-10000000000376130">二级索引</a>  OB</li>
-<li><a href="https://doc.polardbx.com/features/topics/gsi.html">全局二级索引 </a>  PolarDB</li>
-<li><a href="https://zhuanlan.zhihu.com/p/572156705">PolarDB-X 全局二级索引</a> 未</li>
-<li><a href="https://zhuanlan.zhihu.com/p/440801781">PolarDB-X 数据分布解读（三） ：TPCC与透明分布式</a>  未</li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>二级索引</category>
-      </categories>
-      <tags>
-        <tag>数据库</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>统一模型</title>
     <url>/www6vHomeHexo/2023/05/13/unifyModel/</url>
     <content><![CDATA[<p></p>
@@ -1811,51 +1718,6 @@
       </categories>
       <tags>
         <tag>istio</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>TiKV Transaction-MVCC+TSO</title>
-    <url>/www6vHomeHexo/2023/04/10/tikvMVCCTransaction/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<h1><span id="原理">原理</span><a href="#原理" class="header-anchor">#</a></h1><h3><span id="percolator-1">Percolator  [1]</span><a href="#percolator-1" class="header-anchor">#</a></h3><p>  总体来说就是一个经过<strong>优化的 2PC</strong> 的实现，依赖一个<strong>单点的授时服务 TSO</strong> 来实现单调递增的事务编号生成，提供<strong>SI 的隔离级别</strong>。</p>
-<h3><span id="tikv-的写事务分为两个阶段-1">TiKV 的写事务分为两个阶段  [1]</span><a href="#tikv-的写事务分为两个阶段-1" class="header-anchor">#</a></h3><ul>
-<li><p>1、Prewrite 阶段<br>MVCC 在对应传统 2PC 的第一阶段的 prewrite 流程。<br>首先选出一个 primary row 和其他的 secondary rows，然后对 primary row 进行上锁，再对 secondary rows 进行类似的上锁流程。如果任何一步出错，都会进行回滚。完成 prewrite 阶段后，进入 commit 阶段，当前时间戳为 commitTs，TSO 会保证 commitTs &gt; startTs。</p>
-</li>
-<li><p>2、Commit 阶段<br>MVCC 中的 Commit 流程，包括在 primary 上写入 meta，删除 Lock 标记，以及异步提交 secondaries。如果 primary row 提交失败，则整个事务回滚。如果成功，则标志着整个事务提交成功。</p>
-</li>
-<li><p>Tidb乐观锁 [2]</p>
-<img src="/www6vHomeHexo/2023/04/10/tikvMVCCTransaction/leguan.JPG" class>
-</li>
-<li><p>Tidb悲观锁 [2]</p>
-<img src="/www6vHomeHexo/2023/04/10/tikvMVCCTransaction/beiguan.JPG" class></li>
-</ul>
-<h3><span id="tikv-的读事务-1">TiKV 的读事务  [1]</span><a href="#tikv-的读事务-1" class="header-anchor">#</a></h3><p>  在事务中进行读操作的过程。<br>  <strong>首先，需要检查行是否被锁定，如果被锁定，则需要等待或者清除锁。然后，需要读取最新的数据版本，方法是读取元数据并找到最大的时间戳。</strong> 锁分为两级，Primary和Secondary row，只有Primary row的锁被释放，事务才算提交成功。Secondary row的提交可以异步进行，但在此过程中可能需要清理锁。即使Secondary row提交失败，也可以通过锁找到Primary row，并根据元数据确定事务是回滚还是提交成功。</p>
-<blockquote>
-<p>TiKV 的事务默认隔离级别是 Repeatable Read（SI）, 也对外暴露显式的加锁的 API，用于为客户端实现 SELECT … FOR UPDATE 等隔离级别为 SSI 的语句。</p>
-</blockquote>
-<h3><span id="读写冲突处理-3">读写冲突处理 [3]</span><a href="#读写冲突处理-3" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2023/04/10/tikvMVCCTransaction/write-vs-read.JPG" class>
-
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a href="https://cn.pingcap.com/blog/tidb-transaction-model">TiKV 事务模型概览，Google Spanner 开源实现</a>  *** </li>
-<li>《13 | 隔离性：为什么使用乐观协议的分布式数据库越来越少? 》  分布式数据库30讲</li>
-<li>《11｜隔离性：读写冲突时，快照是最好的办法吗？》 分布式数据库30讲</li>
-<li><a href="https://zhuanlan.zhihu.com/p/149377959">percolator的理解与开源实现分析</a>   未</li>
-<li><a href="https://zhuanlan.zhihu.com/p/261115166">Percolator - 分布式事务的理解与分析</a>   未</li>
-<li>《云原生数据库 原理与实践》 8.1.3   未</li>
-<li><a href="https://cn.pingcap.com/blog/pessimistic-transaction-the-new-features-of-tidb">TiDB 新特性漫谈：悲观事务</a> 未</li>
-<li><a href="/www6vHomeHexo/2022/04/11/distributedDatabaseGlobalTime/" title="分布式数据库-全局时钟">分布式数据库-全局时钟</a>  self</li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>关系型</category>
-        <category>分布式</category>
-      </categories>
-      <tags>
-        <tag>分布式数据库</tag>
       </tags>
   </entry>
   <entry>
@@ -3824,567 +3686,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Redis 集群  容灾（同城多活）</title>
-    <url>/www6vHomeHexo/2022/07/31/redisHA/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#1-%E8%83%8C%E6%99%AF">1. 背景</a></li>
-<li><a href="#2-%E7%9B%AE%E6%A0%87">2. 目标</a></li>
-<li><a href="#3-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">3. 解决方案</a><ul>
-<li><a href="#31-%E6%A0%B8%E5%BF%83%E8%83%BD%E5%8A%9B">3.1 核心能力</a></li>
-<li><a href="#32-%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F">3.2 工作模式</a><ul>
-<li><a href="#321-%E6%96%B9%E6%A1%88%E4%B8%80%E8%B7%A8%E6%9C%BA%E6%88%BF%E6%B7%B7%E5%90%88%E9%83%A8%E7%BD%B2"><strong>3.2.1 方案一：跨机房混合部署</strong></a><ul>
-<li><a href="#3211-%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F"><strong>3.2.1.1 部署方式</strong></a></li>
-<li><a href="#3212-%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><strong>3.2.1.2 工作机制</strong></a></li>
-</ul>
-</li>
-<li><a href="#322-%E6%96%B9%E6%A1%88%E4%BA%8C%E4%BC%AA%E4%BB%8E%E8%8A%82%E7%82%B9%E5%8D%95%E5%90%91%E5%90%8C%E6%AD%A5"><strong>3.2.2 方案二：伪从节点+单向同步</strong></a><ul>
-<li><a href="#3221-%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F"><strong>3.2.2.1 部署方式</strong></a></li>
-<li><a href="#3222-%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><strong>3.2.2.2 工作机制</strong></a></li>
-</ul>
-</li>
-<li><a href="#323-%E6%96%B9%E6%A1%88%E4%B8%89%E4%BC%AA%E4%BB%8E%E8%8A%82%E7%82%B9%E5%8F%8C%E5%90%91%E5%90%8C%E6%AD%A5"><strong>3.2.3 方案三：伪从节点+双向同步</strong></a><ul>
-<li><a href="#3231-%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F"><strong>3.2.3.1 部署方式</strong></a></li>
-<li><a href="#3232-%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><strong>3.2.3.2 工作机制</strong></a></li>
-</ul>
-</li>
-<li><a href="#324-%E6%96%B9%E6%A1%88%E5%9B%9B%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%8F%8C%E5%86%99%E5%86%99%E7%9B%91%E5%90%AC%E6%9C%8D%E5%8A%A1mq%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><strong>3.2.4 方案四：客户端双写+写监听服务+MQ消息队列</strong></a><ul>
-<li><a href="#3241-%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F"><strong>3.2.4.1 部署方式</strong></a></li>
-<li><a href="#3242-%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><strong>3.2.4.2 工作机制</strong></a></li>
-</ul>
-</li>
-<li><a href="#33-%E6%88%90%E6%9C%AC%E6%AF%94%E8%BE%83">3.3 成本比较</a></li>
-<li><a href="#34-%E5%9C%BA%E6%99%AF%E5%BB%BA%E8%AE%AE">3.4 场景建议</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#4-%E9%87%8C%E7%A8%8B%E7%A2%91">4. 里程碑</a></li>
-<li><a href="#5-%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3">5. 相关文档</a></li>
-<li><a href="#6-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">6. 参考资料</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="1-背景">1. 背景</span><a href="#1-背景" class="header-anchor">#</a></h1><ul>
-<li>Redis 集群自身已经具备了高可用的特性，即使几个Redis节点异常或者挂掉，Redis 集群也会实现故障自动转移，对应用方来说也可以在很短时间内恢复故障。</li>
-<li>但是，如果发生了机房故障(断电、断网等极端情况)，Redis集群节点全部挂掉（过半主节点挂掉），会造成集群服务不可用，对于核心业务来说是不可接受的。</li>
-<li>为了应对机房故障情况，保障在这种极端情况下，核心业务仍然可以正常访问 Redis 服务，本文将给出适合我司的 Redis 跨机房高可用解决方案。</li>
-</ul>
-<h1><span id="2-目标">2. 目标</span><a href="#2-目标" class="header-anchor">#</a></h1><ul>
-<li>保障单机房整体故障时 Redis 缓存服务正常运行。</li>
-<li>单机房故障 RTO：30s，RPO：1s</li>
-</ul>
-<h1><span id="3-解决方案">3. 解决方案</span><a href="#3-解决方案" class="header-anchor">#</a></h1><h2><span id="31-核心能力">3.1 核心能力</span><a href="#31-核心能力" class="header-anchor">#</a></h2><ul>
-<li>客户端流量路由：支持按一定的策略，把流量分流到不同机房；机房故障后，流量自动流向其他机房。</li>
-<li>服务端故障转移：支持机房故障后，当前机房原来主节点的从节点，通过选举自动倒换成新的主节点。</li>
-<li>管理平台正常服务：任一机房故障，Renault 管理平台使用不受影响。</li>
-</ul>
-<h2><span id="32-工作模式">3.2 工作模式</span><a href="#32-工作模式" class="header-anchor">#</a></h2><p>组件在机房高可用场景下一般有多种工作模式，典型的有单集群模式及多集群模式。本节描述组件在各种工作模式下的部署方式及工作机制。</p>
-<table>
-<thead>
-<tr>
-<th>部署方案</th>
-<th>方案说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>跨机房混合部署</td>
-<td>将Redis集群主节点平均分配到各个机房，主从节点在不同机房</td>
-</tr>
-<tr>
-<td>各机房独立部署集群 + 数据单向同步</td>
-<td>各机房均独立部署集群，集群为热备模式，写请求均写入同一个集群，然后同步到其他集群</td>
-</tr>
-<tr>
-<td>各机房独立部署集群 + 数据双向同步</td>
-<td>每个机房部署一套Redis集群，同步核心业务写请求</td>
-</tr>
-</tbody></table>
-<p>数据同步方法：</p>
-<table>
-<thead>
-<tr>
-<th>数据同步方案</th>
-<th>方案说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>客户端双写</td>
-<td>客户端同时写入到各个集群</td>
-</tr>
-<tr>
-<td>客户端代理</td>
-<td><a href="https://github.com/Netflix/dynomite">Netflix开源实现的Dynomite</a>，通过代理层接受数据后写入各个需要同步的节点<br><a href="https://github.com/Netflix/dynomite">改造难度大</a><br><a href="https://github.com/Netflix/dynomite">客户端需要优化添加Dyno Client</a><br><a href="https://github.com/Netflix/dynomite">服务端每个节点需要部署Dyno Node</a><br><a href="https://github.com/Netflix/dynomite">read&#x2F;write性能较原生差异较大，</a>主要体现在write上，之间的差异随着node节点数越多越严重</td>
-</tr>
-<tr>
-<td>伪从节点</td>
-<td>基于Redis的Master-Slave复制协议，实现低延时、高可用的Redis多数据中心、跨公网数据复制<br>携程开源系统：<a href="https://github.com/ctripcorp/x-pipe">https://github.com/ctripcorp/x-pipe</a><br>阿里RedisShake同步工具</td>
-</tr>
-<tr>
-<td>写事件监听+MQ跨集群消息同步</td>
-<td>读写在本机房，监听写事件 + MQ消息同步到其他机房<br>需要开启事件通知（PUB），修改Redis配置文件中的 notify-keyspace-events 配置（默认的redis并没有开启这个功能）<br>需要独立服务订阅写事件（SUB），并同步到其他集群<br>依赖MQ组件</td>
-</tr>
-</tbody></table>
-<p>不考虑客户端代理、发布订阅写事件</p>
-<p>下面详细比较如下四种方案</p>
-<ul>
-<li>方案一：跨机房混合部署</li>
-<li>方案二：伪从节点+单向同步</li>
-<li>方案三：伪从节点+双向同步</li>
-<li>方案四：客户端双写+写监听服务+MQ消息队列</li>
-</ul>
-<h3><span id="321-方案一跨机房混合部署"><strong>3.2.1 方案一：跨机房混合部署</strong></span><a href="#321-方案一跨机房混合部署" class="header-anchor">#</a></h3><h5><span id="3211-部署方式"><strong>3.2.1.1 部署方式</strong></span><a href="#3211-部署方式" class="header-anchor">#</a></h5><p>Redis集群主节点平均分配到各个机房，每个机房都有一个分片的副本；单个机房主节点数据占比不能过半。</p>
-<p>[pic]</p>
-<p>跨机房部署注意事项</p>
-<ul>
-<li>从节点选举需要过半主节点投票，因此不适合双机房部署，至少需要3机房</li>
-<li>业务请求访问响应时间会不稳定，同机房请求延迟在0.1ms，跨机房请求在1-3ms</li>
-</ul>
-<h5><span id="3212-工作机制"><strong>3.2.1.2 工作机制</strong></span><a href="#3212-工作机制" class="header-anchor">#</a></h5><ul>
-<li><p>流量路由</p>
-</li>
-<li><ul>
-<li>默认读主节点（ReadFrom：Master）</li>
-<li>读从节点（ReadFrom: Replication）</li>
-<li>随机读主从（ReadFrom: Any）</li>
-<li>优先读本地机房（ReadFrom：LocalDC）— TODO：新增路由策略</li>
-</ul>
-</li>
-<li><p>故障切换</p>
-</li>
-<li><ul>
-<li>机房故障后，Redis 集群高可用机制，会将集群在30s内自动倒换并恢复正常访问</li>
-<li>同城机房间网络传输响应延迟2ms内，几乎不影响集群故障判定</li>
-<li>Redis 集群故障转移后，客户端30s内自动刷新集群拓扑关系</li>
-</ul>
-</li>
-<li><p>故障恢复</p>
-</li>
-<li><ul>
-<li>机房恢复后，故障节点 Redis 会以从节点角色自动启动，并全量同步主节点数据（数据同步流量风暴 – 会在机房间路由器端口上限速控制）</li>
-</ul>
-</li>
-<li><p>迁移方案</p>
-</li>
-<li><ul>
-<li>服务核心业务 Redis 集群将会改造成跨三机房部署模式，不影响客户端正常使用</li>
-<li>业务根据实际情况，可将读请求路由策略修改为优先从本地机房读</li>
-</ul>
-</li>
-</ul>
-<p>Redis 故障恢复机制</p>
-<ul>
-<li><p>投票选主：只有持有槽的主节点才会处理故障选举消息，获得N&#x2F;2+1以上选票的从节点将为新主。</p>
-</li>
-<li><p>替换主节点：取消复制 → clusterDelSlot&#x2F;clusterAddSlot把槽委派给自己 → 向集群广播通知变为主节点并接管了故障主节点的槽信息。</p>
-</li>
-<li><ul>
-<li>全量同步过程</li>
-</ul>
-</li>
-<li><ul>
-<li><ul>
-<li>从服务器连接主服务器，发送SYNC命令；</li>
-<li>主服务器接收到SYNC命名后，开始执行BGSAVE命令生成RDB文件，并使用缓冲区记录此后执行的所有写命令；</li>
-<li>主服务器BGSAVE执行完后，向所有从服务器发送RDB文件；</li>
-<li>从服务器收到快照文件后丢弃所有旧数据，载入收到的RDB快照；</li>
-<li>主服务器快照发送完毕后，开始向从服务器发送缓冲区中的写命令；</li>
-<li>从服务器完成对快照的载入，开始接收命令请求，并执行来自主服务器缓冲区的写命令。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><ul>
-<li>全量同步数据评估，假如100GRedis集群，三机房，一主二从</li>
-</ul>
-</li>
-<li><ul>
-<li><ul>
-<li>根据Renault公共集群统计，8G使用容量的Redis，生成RDB文件大小约3G左右，生成时间75s</li>
-<li>RDB传输，单一机房故障恢复时，将有10台Redis执行主从同步，约有30G流量从其他两个机房流入。</li>
-<li>RDB加载，3G RDB数据加载时间约90s</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3><span id="322-方案二伪从节点单向同步"><strong>3.2.2 方案二：伪从节点+单向同步</strong></span><a href="#322-方案二伪从节点单向同步" class="header-anchor">#</a></h3><h5><span id="3221-部署方式"><strong>3.2.2.1 部署方式</strong></span><a href="#3221-部署方式" class="header-anchor">#</a></h5><p>双机房部署，业务读写默认集群，开发部署 Renault 复制服务（<strong>RRS</strong>, Renault Replicate Service），伪装从节点实时将默认集群数据同步到备用集群。</p>
-<p>[pic]</p>
-<h5><span id="3222-工作机制"><strong>3.2.2.2 工作机制</strong></span><a href="#3222-工作机制" class="header-anchor">#</a></h5><ul>
-<li><p>流量路由</p>
-</li>
-<li><ul>
-<li>双机房独立部署，均访问默认集群（热），故障后访问备用集群（冷）</li>
-</ul>
-</li>
-<li><p>故障切换</p>
-</li>
-<li><ul>
-<li>默认集群故障时，SDK熔断默认集群请求，并将流量切换到备用集群</li>
-</ul>
-</li>
-<li><p>故障恢复</p>
-</li>
-<li><ul>
-<li>机房故障恢复后，原默认集群将被reset，RRS 服务将反向同步</li>
-</ul>
-</li>
-<li><p>迁移方案</p>
-</li>
-<li><ul>
-<li>服务核心业务 Redis 集群将会搭建备用集群，并实时同步默认集群数据</li>
-<li>业务客户端需要升级 SDK，支持自动故障切换功能</li>
-</ul>
-</li>
-</ul>
-<p>DC2机房业务客户端自动故障切换：</p>
-<p>[pic]</p>
-<p>故障恢复后（反向同步）：</p>
-<p>[pic]</p>
-<h3><span id="323-方案三伪从节点双向同步"><strong>3.2.3 方案三：伪从节点+双向同步</strong></span><a href="#323-方案三伪从节点双向同步" class="header-anchor">#</a></h3><h5><span id="3231-部署方式"><strong>3.2.3.1 部署方式</strong></span><a href="#3231-部署方式" class="header-anchor">#</a></h5><p>双机房独立部署，均访问本地集群；开发部署 Renault 复制服务（<strong>RRS</strong>, Renault Replicate Service），伪装从节点实时双向同步。</p>
-<p>[pic]</p>
-<h5><span id="3232-工作机制"><strong>3.2.3.2 工作机制</strong></span><a href="#3232-工作机制" class="header-anchor">#</a></h5><ul>
-<li><p>流量路由</p>
-</li>
-<li><ul>
-<li>双机房独立部署，业务优先访问本地机房集群（TODO：需要开发一种集群选择策略）</li>
-<li>RRS 服务双向同步数据（需要解决双向同步成环问题）</li>
-</ul>
-</li>
-<li><p>故障切换</p>
-</li>
-<li><ul>
-<li>DC1机房集群故障时候，上层流量自动切换到DC2机房，Redis层不需要处理</li>
-</ul>
-</li>
-<li><p>故障恢复</p>
-</li>
-<li><ul>
-<li>DC1机房集群故障恢复，首先通过RRS服务从DC2全量同步数据，之后增量同步</li>
-</ul>
-</li>
-<li><p>迁移方案</p>
-</li>
-<li><ul>
-<li>服务核心业务 Redis 集群将会搭建双活集群，并通过 RRS 服务实时双向同步</li>
-<li>业务客户端需要升级 SDK，支持启动时选择哪个集群</li>
-</ul>
-</li>
-</ul>
-<p>数据库层面的多活，双向同步存在以下困难：</p>
-<ul>
-<li><p><strong>两边都改了如何解决冲突？</strong></p>
-</li>
-<li><ul>
-<li>跨机房双写无法保证缓存的一致性，需要应用侧可以容忍对应的缓存不一致场景</li>
-</ul>
-</li>
-<li><p><strong>RRS复制中断或者故障如何处理？</strong></p>
-</li>
-<li><p><strong>数据同步如何防环？</strong></p>
-</li>
-<li><ul>
-<li>方法1：通常需要应用方配置使用，按业务类型分流（不能为通用解决方案）</li>
-<li>方法2：数据层面添加字段标识数据源（带来一定开销，并且对于数值计算类数据不能添加标识）</li>
-<li>方法3：x-pipe - 定制Redis，在内容分发上做处理，服务端能够识别不同的链接类型，在同步数据之初便加以控制在内容分发上做处理，服务端能够识别不同的链接类型，从而做到有的放矢，在同步数据之初便加以控制</li>
-</ul>
-</li>
-</ul>
-<h3><span id="324-方案四客户端双写写监听服务mq消息队列"><strong>3.2.4 方案四：客户端双写+写监听服务+MQ消息队列</strong></span><a href="#324-方案四客户端双写写监听服务mq消息队列" class="header-anchor">#</a></h3><h5><span id="3241-部署方式"><strong>3.2.4.1 部署方式</strong></span><a href="#3241-部署方式" class="header-anchor">#</a></h5><p>双机房&#x2F;三机房每个独立部署，应用客户端均访问本地集群；借助MQ通过异步双写机制双写同步到其他集群。</p>
-<p>[pic]</p>
-<h5><span id="3242-工作机制"><strong>3.2.4.2 工作机制</strong></span><a href="#3242-工作机制" class="header-anchor">#</a></h5><ul>
-<li><p>流量路由</p>
-</li>
-<li><ul>
-<li>多机房独立部署，业务优先访问本地机房集群（同方案三）</li>
-<li>MQ中间件+写事件监听服务做双写同步</li>
-</ul>
-</li>
-<li><p>故障切换</p>
-</li>
-<li><ul>
-<li>DC1机房集群故障时候，上层流量自动切换到DC2机房，Redis层不需要处理（同方案三）</li>
-</ul>
-</li>
-<li><p>故障恢复</p>
-</li>
-<li><ul>
-<li>DC1机房集群故障恢复，首先通过RRS服务从DC2全量同步数据，之后增量同步（同方案三）</li>
-</ul>
-</li>
-<li><p>迁移方案</p>
-</li>
-<li><ul>
-<li>服务核心业务 Redis 集群将会搭建多活集群，并通过 MQ 发布订阅方式实现多集群间双向同步</li>
-<li>业务客户端需要升级 SDK，支持启动时选择哪个集群</li>
-</ul>
-</li>
-</ul>
-<p>双机房&#x2F;三机房每个独立部署，多活部署主要问题：</p>
-<ul>
-<li><p><strong>两边都改了如何解决冲突？</strong></p>
-</li>
-<li><p>跨机房双写<strong>无法保证缓存的一致性</strong>，需要<strong>应用侧</strong>可以<strong>容忍对应的缓存不一致场景</strong>，应用如果依赖缓存强一致性，则不合适该方案。</p>
-</li>
-<li><ul>
-<li>DC1和DC2两边都写了同一个Key，最终互相覆盖</li>
-</ul>
-</li>
-<li><p>如何保证消息的顺序？如何保证消息成功发送及消费？</p>
-</li>
-</ul>
-<h3><span id="33-成本比较">3.3 成本比较</span><a href="#33-成本比较" class="header-anchor">#</a></h3><table>
-<thead>
-<tr>
-<th></th>
-<th>部署成本</th>
-<th>改造成本</th>
-<th>使用成本</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>方案一：跨机房混合部署</strong></td>
-<td>成本-低<br>适用于三机房及以上<br>2副本，增加50%容量</td>
-<td>改造成本-低<br>只用按照要求部署集群<br>SDK路由-优先读本地机房</td>
-<td>性能有下降<br>本机房访问不受影响，跨机房访问延迟1-3ms</td>
-</tr>
-<tr>
-<td><strong>方案二：伪从节点+单向同步</strong></td>
-<td>成本-中<br>新增备用集群，增加100%容量<br>部署同步服务</td>
-<td>改造成本-中<br>需要开发集群间数据同步服务（已有待完善）<br>读写分离</td>
-<td>性能有下降<br>本机房访问不受影响，跨机房访问延迟1-3ms<br>读可优化成读本地机房，性能不受影响</td>
-</tr>
-<tr>
-<td><strong>方案三：伪从节点+双向同步</strong></td>
-<td>成本-中<br>各机房均新增集群，双机房增加100%容量，三机房增加200%<br>容量部署同步服务</td>
-<td>改造成本-高<br>双向复制成环很难解决，需要定制Redis<br>两边都写，冲突问题难解决<br>需要开发集群间数据同步服务（已有待完善）</td>
-<td>性能不受影响<br>读写本地机房</td>
-</tr>
-<tr>
-<td><strong>方案四：客户端双写+写监听+MQ消息同步</strong></td>
-<td>成本-高<br>各机房均新增集群，双机房增加100%容量，三机房增加200%容量<br>部署写监听服务<br>部署MQ消息集群</td>
-<td>改造成本-中<br>依赖MQ中间件</td>
-<td>性能稍有下降<br>同步写跨机房访问，性能会严重下降<br>异步写性能稍有下降<br>应用能容忍两边不一致场景</td>
-</tr>
-</tbody></table>
-<p>方案选定：</p>
-<ul>
-<li>目前同城多活选用方案一（<strong>跨机房混合部署</strong>）</li>
-<li>未来异地多活再考虑方案三和四</li>
-</ul>
-<h3><span id="34-场景建议">3.4 场景建议</span><a href="#34-场景建议" class="header-anchor">#</a></h3><p>方案一适应场景</p>
-<ul>
-<li>适用于三机房及以上【两机房故障时候无法成功选举】</li>
-<li>要能接受写缓存时间在1-2ms内【不可避免跨集群写数据，目前sh1读写tx1时延约1.3ms，sh1读写sh1时延约0.2ms】</li>
-<li>配置优先读本地机房的话，能接收读数据时延【主从数据同步毫秒级时延】</li>
-</ul>
-<p>其他场景建议</p>
-<ul>
-<li><p>不接受写缓存慢场景、不接受读从节点数据延迟场景</p>
-</li>
-<li><ul>
-<li>服务端：每个机房都要独立部署Redis集群，并且双向同步数，推荐方案三</li>
-<li>SDK改造：需要支持优先读写本地Redis集群路由策略</li>
-<li>业务端：升级SDK版本</li>
-</ul>
-</li>
-</ul>
-<h1><span id="4-里程碑">4. 里程碑</span><a href="#4-里程碑" class="header-anchor">#</a></h1><p><em>描述组件为了达成机房高可用需要做的事情，包括事项、优先级、预期完成时间、负责人等信息。</em></p>
-<p><em>对于中间件，一般有如下重要时间点：</em></p>
-<ul>
-<li><em>服务端机房高可用方案设计完成</em></li>
-<li><em>服务端机房高可用方案在测试集群验证通过</em></li>
-<li><em>客户端机房高可用方案设计开发完成</em></li>
-<li><em>业务集群机房高可用方案验证：明确 RPO 和 RTO</em></li>
-</ul>
-<p>方案一跨机房混合部署改造事项：</p>
-<ul>
-<li><p>管理平台：</p>
-</li>
-<li><ul>
-<li>搭建核心集群</li>
-</ul>
-</li>
-<li><ul>
-<li><ul>
-<li>机器添加机房标识 (Done)，</li>
-<li>机架标识，是否属于同一机架，</li>
-<li>机房高可用校验 （Done）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><ul>
-<li><ul>
-<li><ul>
-<li>主从节点数至少3个，且分布在不同机房</li>
-<li>单机房主节点数不能过半</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><ul>
-<li><ul>
-<li>集群调整，确保核心集群Redis实例机房按大集群要求部署，</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><ul>
-<li>核心应用识别及迁移</li>
-</ul>
-</li>
-<li><ul>
-<li><ul>
-<li>核心缓存标识 - 源于用户？核心应用标识？</li>
-<li>新增核心缓存将绑定到核心集群，非核心缓存绑定到公共集群</li>
-<li>缓存客户端监控（CAT QPS）集成到管理平台 - 便于缓存迁移时，从技术角度判定是否需要迁移 </li>
-<li>核心缓存迁移</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><ul>
-<li><ul>
-<li><ul>
-<li>已迁移（arch-100%，cl-100%）</li>
-<li>待迁移（md、mkt、yw）（需要推动升级客户端并迁移）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>客户端：</p>
-</li>
-<li><ul>
-<li>读写分离，优先读本机房实例 ，</li>
-</ul>
-</li>
-<li><ul>
-<li><ul>
-<li>熟悉Lettuce 读写分离相关源码，确定可行方案（方案可行 - 选择NEAREST或者自定义ReadFrom）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><ul>
-<li><ul>
-<li><ul>
-<li><a href="https://lettuce.io/core/release/reference/">NEAREST：Read from any node of the cluster with the lowest latency. https://lettuce.io/core/release/reference/</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><ul>
-<li><ul>
-<li>自定义ReadFrom，优先从本机房读，本机房无实例则从Master节点读 （done）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><ul>
-<li><ul>
-<li><ul>
-<li>用户在 Apollo 配置读取数据方式（Master&#x2F;Slaver&#x2F;Any&#x2F;Nearest&#x2F;LocalZone）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Redis集群：</p>
-</li>
-<li><ul>
-<li>故障演练，</li>
-</ul>
-</li>
-<li><ul>
-<li><ul>
-<li>repl-timeout 60s适当大小；</li>
-<li>完整操作机房Redis实例下线、Redis实例恢复操作</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><ul>
-<li>缓存恢复时的数据同步抑制方法， （Done，需要时在交换机端口上限速）</li>
-</ul>
-</li>
-<li><ul>
-<li><ul>
-<li>机房故障后，强制下线故障机房Redis实例</li>
-<li>机房恢复后，重新部署Redis实例，逐一添加到集群，并调整合理主从关系</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>ZK &amp; Apollo ， </p>
-</li>
-<li><ul>
-<li>切换演练 </li>
-<li>在线客户端列表对比（老zk的会清零，新zk临时节点数目和原来的一致）</li>
-<li>将线上ZK从zk1切换到zk3</li>
-</ul>
-</li>
-</ul>
-<p>2021-11-30 Redis 集群机房高可用方案整体设计完成</p>
-<p>2021-12-31 客户端路由开发、跨集群测试验证通过</p>
-<p>2022-2-28 推广接入试点，及真实数据故障演练</p>
-<p>2022-3-31 业务集群机房高可用方案验证</p>
-<h1><span id="5-相关文档">5. 相关文档</span><a href="#5-相关文档" class="header-anchor">#</a></h1><ul>
-<li><a href="https://wiki.tuhu.cn/pages/createpage.action?spaceKey=~wangwei18&title=2.+%E6%9C%BA%E6%88%BF%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88&linkCreation=true&fromPageId=250252290">途虎机房高可用方案</a></li>
-<li><a href="https://wiki.tuhu.cn/pages/createpage.action?spaceKey=~wangwei18&title=%E5%90%8C%E5%9F%8E%E5%A4%9A%E6%B4%BB%E8%B5%84%E6%BA%90%E6%88%90%E6%9C%AC%E9%9C%80%E6%B1%82&linkCreation=true&fromPageId=250252290">同城多活资源成本需求调研</a></li>
-</ul>
-<h1><span id="6-参考资料">6. 参考资料</span><a href="#6-参考资料" class="header-anchor">#</a></h1><ul>
-<li><a href="https://tehub.com/a/3Rr1UcvLty">美团KV存储架构及实践</a> *** </li>
-<li><a href="https://support.huaweicloud.com/productdesc-dcs/GlobalDRPolicy.html">华为容灾多活策略</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/96917394">Redis异地多活行业方案</a></li>
-<li><a href="https://github.com/ctripcorp/x-pipe#%E6%9C%BA%E6%88%BF%E5%88%87%E6%8D%A2">携程Redis多数据中心复制管理系统</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/144527180">携程异地多活-MySQL实时双向（多向）复制实践</a></li>
-<li><a href="https://cachecloud.github.io/2016/11/03/Redis%20Cluster%E5%A4%9A%E6%9C%BA%E6%88%BF%E9%AB%98%E5%8F%AF%E7%94%A8%E5%AE%9E%E7%8E%B0/">Redis Cluster多机房高可用实现–基于客户端</a>  </li>
-<li><a href="https://www.modb.pro/db/37775">同城双活-Redis篇</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/34958596">饿了么实时双向复制工具</a></li>
-</ul>
-<hr>
-<ul>
-<li><p><a href="https://zhuanlan.zhihu.com/p/449398741">CKV+异地容灾探索和实践</a> *** 未</p>
-</li>
-<li><p><a href="https://mp.weixin.qq.com/s/jb_NnI6pnvJ2eWO6HUrWHg">干货 | 携程Redis跨IDC多向同步实践</a> 未</p>
-</li>
-<li><p><a href="https://mp.weixin.qq.com/s/54RX6nSGLBZJxQoaADf6Jw">干货 | 五大实例详解，携程 Redis 跨机房双向同步实践</a> 未</p>
-</li>
-<li><p><a href="https://mp.weixin.qq.com/s/trFXXlrel0RmTOCCZjmsWQ">阿里云数据库全新功能Redis读写分离，全维度技术解析</a> 未</p>
-</li>
-<li><p><a href="https://mp.weixin.qq.com/s/LA7EaOnaxKjBSTOoCKJSmQ">企业打开Redis的正确方式，来自阿里云云数据库团队的解读</a> 未<br>Figure 2：Redis异地多活架构方案示意图</p>
-</li>
-<li><p><a href="https://github.com/ctripcorp/x-pipe">https://github.com/ctripcorp/x-pipe</a>  未</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>KV</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>电商 总结</title>
     <url>/www6vHomeHexo/2022/07/24/eCommerce/</url>
     <content><![CDATA[<p></p>
@@ -5163,145 +4464,6 @@
       </categories>
       <tags>
         <tag>DAL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis Cluster Spec</title>
-    <url>/www6vHomeHexo/2022/07/11/redisClusterSpec/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#%E8%AE%BE%E8%AE%A1%E7%9B%AE%E6%A0%87%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86bing">设计目标和基本原理[bing]</a><ul>
-<li><a href="#%E9%AB%98%E6%80%A7%E8%83%BD%E5%92%8C%E7%BA%BF%E6%80%A7%E6%89%A9%E5%B1%95">高性能和线性扩展</a></li>
-<li><a href="#%E5%8F%AF%E6%8E%A5%E5%8F%97%E7%9A%84%E5%86%99%E5%AE%89%E5%85%A8%E6%80%A7">可接受的写安全性</a></li>
-<li><a href="#%E5%8F%AF%E7%94%A8%E6%80%A7">可用性</a></li>
-<li><a href="#%E5%93%88%E5%B8%8C%E6%A7%BD%E5%88%86%E9%85%8D">哈希槽分配</a></li>
-<li><a href="#%E8%8A%82%E7%82%B9%E9%97%B4%E9%80%9A%E4%BF%A1">节点间通信</a></li>
-<li><a href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%87%8D%E5%AE%9A%E5%90%91">客户端重定向</a></li>
-<li><a href="#%E5%93%88%E5%B8%8C%E6%A7%BD%E8%BF%81%E7%A7%BB">哈希槽迁移</a></li>
-<li><a href="#%E6%95%85%E9%9A%9C%E6%A3%80%E6%B5%8B%E5%92%8C%E5%89%AF%E6%9C%AC%E6%8F%90%E5%8D%87">故障检测和副本提升</a></li>
-</ul>
-</li>
-<li><a href="#%E5%89%AF%E6%9C%AC%E9%80%89%E4%B8%BE%E5%92%8C%E9%85%8D%E7%BD%AE%E4%BC%A0%E6%92%AD%E7%9A%84%E6%9C%BA%E5%88%B6bing">副本选举和配置传播的机制[bing]</a><ul>
-<li><a href="#%E5%89%AF%E6%9C%AC%E9%80%89%E4%B8%BE">副本选举</a></li>
-<li><a href="#%E9%85%8D%E7%BD%AE%E4%BC%A0%E6%92%AD">配置传播</a></li>
-<li><a href="#%E8%8A%82%E7%82%B9%E9%87%8D%E7%BD%AE%E5%92%8C%E9%81%97%E5%BF%98">节点重置和遗忘</a></li>
-<li><a href="#%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85">发布订阅</a></li>
-<li><a href="#crc16%E7%AE%97%E6%B3%95">CRC16算法</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="设计目标和基本原理bing">设计目标和基本原理[bing]</span><a href="#设计目标和基本原理bing" class="header-anchor">#</a></h1><h3><span id="高性能和线性扩展">高性能和线性扩展</span><a href="#高性能和线性扩展" class="header-anchor">#</a></h3><p>  Redis集群可以支持到<strong>1000个节点</strong>，使用异步复制和无代理的架构，避免了值合并的开销。</p>
-<h3><span id="可接受的写安全性">可接受的写安全性</span><a href="#可接受的写安全性" class="header-anchor">#</a></h3><p>  Redis集群尽力保留与大多数主节点连接的客户端的写操作，但在<strong>分区窗口期内</strong>可能会<strong>丢失已确认的写操作</strong>。</p>
-<h3><span id="可用性">可用性</span><a href="#可用性" class="header-anchor">#</a></h3><p>  Redis集群可以在大多数主节点可达且每个不可达主节点至少有一个可达副本的情况下存活，并且可以通过副本迁移来提高抗故障能力。</p>
-<h3><span id="哈希槽分配">哈希槽分配</span><a href="#哈希槽分配" class="header-anchor">#</a></h3><p>Redis集群将<strong>16384个哈希槽</strong>分配给不同的主节点，每个主节点负责存储和服务一部分哈希槽。客户端可以通过计算键的CRC16值对16384取模来得到对应的哈希槽。也可以使用哈希标签来强制将多个键分配到同一个哈希槽，以支持多键操作。</p>
-<h3><span id="节点间通信">节点间通信</span><a href="#节点间通信" class="header-anchor">#</a></h3><p>  Redis集群节点之间使用一个TCP端口和一个二进制协议进行通信，称为集群总线。每个节点都与其他所有节点连接，使用<strong>gossip协议</strong>来传播集群的信息，如新节点、故障节点、配置变化等。</p>
-<h3><span id="客户端重定向">客户端重定向</span><a href="#客户端重定向" class="header-anchor">#</a></h3><p>  Redis集群节点不会代理请求，而是根据自己的哈希槽映射表，将客户端重定向到正确的节点。客户端可能收到<strong>MOVED或ASK错误</strong>，表示需要重新发送请求到另一个节点。MOVED表示哈希槽被永久地分配给了另一个节点，ASK表示哈希槽正在被迁移，需要发送ASKING命令后再发送请求。</p>
-<h3><span id="哈希槽迁移">哈希槽迁移</span><a href="#哈希槽迁移" class="header-anchor">#</a></h3><p>  Redis集群支持在运行时添加和删除节点，这是通过将哈希槽从一个节点移动到另一个节点来实现的。迁移过程中，源节点会将接收到的关于该哈希槽的请求重定向到目标节点，或者直接处理已存在键的请求。目标节点会接收到源节点通过MIGRATE命令发送过来的键，并在迁移完成后更新自己的配置。</p>
-<h3><span id="故障检测和副本提升">故障检测和副本提升</span><a href="#故障检测和副本提升" class="header-anchor">#</a></h3><p>  Redis集群使用心跳包和gossip协议来检测节点是否可达，并使用<strong>PFAIL和FAIL</strong>两种标志来表示故障状态。当一个主节点被大多数主节点标记为FAIL时，它的一个副本会发起选举并请求投票。如果获得了大多数主节点的授权，该副本会提升为主节点，并生成一个新的配置版本号（configEpoch）。</p>
-<h1><span id="副本选举和配置传播的机制bing">副本选举和配置传播的机制[bing]</span><a href="#副本选举和配置传播的机制bing" class="header-anchor">#</a></h1><h3><span id="副本选举">副本选举</span><a href="#副本选举" class="header-anchor">#</a></h3><p>  当一个主节点失效时，它的一个副本会尝试发起选举，向其他主节点发送授权请求。如果获得了大多数主节点的回复，它就赢得了选举，并获得了一个新的唯一的配置版本号（configEpoch）。它会开始以主节点的身份广播心跳包，并通知其他节点更新配置。</p>
-<h3><span id="配置传播">配置传播</span><a href="#配置传播" class="header-anchor">#</a></h3><p>  当一个节点收到一个心跳包或UPDATE消息时，它会根据一些规则来更新自己的哈希槽映射表。如果一个哈希槽是未分配的，或者有一个新的节点使用更高的configEpoch来声明它，那么接收者会将该哈希槽绑定到新的节点。这样可以保证最后一次故障转移胜出，并且所有节点最终会达成一致。</p>
-<h3><span id="节点重置和遗忘">节点重置和遗忘</span><a href="#节点重置和遗忘" class="header-anchor">#</a></h3><p>  当一个节点需要从一个集群中移除或加入到另一个集群时，可以使用<strong>CLUSTER RESET</strong>命令来重置它的状态。这个命令有<strong>两种模式：软重置和硬重置</strong>。软重置会保留当前的configEpoch，而硬重置会将其设置为0。当一个节点被移除后，其他节点需要使用<strong>CLUSTER FORGET</strong>命令来删除它在节点表中的条目，并设置一个60秒的禁止期，防止因为gossip协议而重新添加它。</p>
-<h3><span id="发布订阅">发布订阅</span><a href="#发布订阅" class="header-anchor">#</a></h3><p>  Redis集群支持发布订阅功能，客户端可以向任何节点发送SUBSCRIBE或PUBLISH命令。集群会将发布的消息转发到所有其他节点。Redis 7.0及以后版本还支持分片发布订阅功能，其中分片频道根据与键相同的算法分配到哈希槽。分片消息必须发送到拥有该哈希槽的节点，集群会将发布的分片消息转发到该哈希槽所在的分片中的所有节点。</p>
-<h3><span id="crc16算法">CRC16算法</span><a href="#crc16算法" class="header-anchor">#</a></h3><p>  这篇文章最后给出了计算键对应哈希槽的CRC16算法的C语言实现代码。这个算法使用了1021作为多项式，并且不反转输入输出字节。</p>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p><a href="https://redis.io/docs/reference/cluster-spec/">Redis cluster specification</a> ***</p>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>KV</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis Cluster</title>
-    <url>/www6vHomeHexo/2022/07/11/redisCluster/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#cluster-%E5%8A%9F%E8%83%BD-11">Cluster 功能 [1.1]</a></li>
-<li><a href="#slot">Slot</a><ul>
-<li><a href="#%E5%88%86%E7%89%87%E6%96%B9%E5%BC%8F">分片方式</a></li>
-<li><a href="#%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB">映射关系</a></li>
-<li><a href="#slot%E5%88%86%E9%85%8D">slot分配</a></li>
-<li><a href="#%E6%8C%87%E4%BB%A4">指令</a></li>
-<li><a href="#%E6%9C%80%E5%A4%A7%E6%A7%BD%E6%95%B0%E6%98%AF16384%E7%9A%84%E5%8E%9F%E5%9B%A0-13">最大槽数是16384的原因 [1.3]</a></li>
-</ul>
-</li>
-<li><a href="#%E4%B8%80%E8%87%B4%E6%80%A7">一致性</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="cluster-功能-11">Cluster 功能 [1.1]</span><a href="#cluster-功能-11" class="header-anchor">#</a></h1><ul>
-<li><p>Redis Cluster支持多个master，每个master又可以挂载多个slave</p>
-<ul>
-<li>读写分离</li>
-<li>支持数据的高可用</li>
-</ul>
-</li>
-<li><p>故障转移， 高可用<br>由于Cluster自带Sentinel的故障转移机制，内置了高可用的支持， <strong>无需再去使用哨兵功能</strong>  </p>
-</li>
-<li><p>由对应的集群来负责维护节点、插槽和数据之间的关系</p>
-</li>
-</ul>
-<h1><span id="slot">Slot</span><a href="#slot" class="header-anchor">#</a></h1><p>Redis集群有16384个哈希槽每个key通过CRC16校验后对16384取模来决定放置哪个槽，集群的每个节点负责一部分hash槽.</p>
-<h3><span id="分片方式">分片方式</span><a href="#分片方式" class="header-anchor">#</a></h3><ul>
-<li>crc（key）% 16384</li>
-</ul>
-<h3><span id="映射关系">映射关系</span><a href="#映射关系" class="header-anchor">#</a></h3><p>   key （→ CRC） 分片<br>   分片 (→ 映射关系)  实例 </p>
-<h3><span id="slot分配">slot分配</span><a href="#slot分配" class="header-anchor">#</a></h3><ul>
-<li>自动分配slot<br>create() </li>
-<li>手动分配slot<br>meet()<br>addSlot()</li>
-</ul>
-<h3><span id="指令">指令</span><a href="#指令" class="header-anchor">#</a></h3><ul>
-<li>MOVED指令， ASK 指令</li>
-</ul>
-<h3><span id="最大槽数是16384的原因-13">最大槽数是16384的原因 [1.3]</span><a href="#最大槽数是16384的原因-13" class="header-anchor">#</a></h3><p>[ redis 作者解答]<br><a href="https://github.com/redis/redis/issues/2576"> why redis-cluster use 16384 slots? #2576 </a>   antirez </p>
-<p>[中文翻译]<br>正常的心跳数据包带有节点的完整配置，可以用幂等方式用旧的节点替换旧节点，以便更新旧的配置。 这意味着它们包含原始节点的插槽配置，该节点使用2k的空间和16k的插槽，但是会使用8k的空间（使用65k的插槽）。同时，由于其他设计折衷，Redis集群不太可能扩展到1000个以上的主节点。 因此16k处于正确的范围内，以确保每个主机具有足够的插槽，最多可容纳1000个矩阵，但数量足够少，可以轻松地将插槽配置作为原始位图传播。请注意，在小型群集中，位图将难以压缩，因为当N较小时，位图将设置的slot &#x2F; N位占设置位的很大百分比。</p>
-<p>[解读]</p>
-<ul>
-<li><strong>消息头太大， 发送的心跳包过于庞大</strong><br><strong>如果槽位为65536，发送心跳信息的消息头达8k，发送的心跳包过于庞大。</strong></li>
-</ul>
-<p>在消息头中最占空间的是myslots[CLUSTER_SLOTS&#x2F;8]。当槽位为65536时，这块的大小是:65536÷8÷1024&#x3D;8kb</p>
-<p>在消息头中最占空间的是myslots[CLUSTER_SLOTS&#x2F;8]。当槽位为16384时，这块的大小是:16384∶8∶1024&#x3D;2kb</p>
-<p>因为每秒钟，redis节点需要发送一定数量的ping消息作为心跳包，如果槽位为65536，这个ping消息的消息头太大了，浪费带宽。 </p>
-<ul>
-<li><strong>主节点数量上限为1000，无需65536个slot</strong><br>redis的集群主节点数量基本不可能超过个1000个。<br>集群节点越多，心跳包的消息体内携带的数据越多。如果节点过1000个，也会导致网络拥堵。因此redis作者不建议redis cluster节点数量超过1000个。那么，对于节点数在1000以内的redis cluster集群，16384个槽位够用了。没有必要拓展到65536个。</li>
-</ul>
-<h1><span id="一致性">一致性</span><a href="#一致性" class="header-anchor">#</a></h1><ul>
-<li><strong>Redis集群不保证强一致性</strong><br>redis集群不保证强一致性，这意味着在特定的条件下，Redis集群可能会丢掉一些被系统收到的写入请求命令</li>
-</ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a href="https://github.com/www6v/Learning-in-practice/tree/master/Redis/10.Redis%E9%9B%86%E7%BE%A4(cluster)">10.Redis集群(cluster)</a><br>1.1<a href="https://github.com/www6v/Learning-in-practice/blob/master/Redis/10.Redis%E9%9B%86%E7%BE%A4(cluster)/1.Redis%E9%9B%86%E7%BE%A4%E4%BB%8B%E7%BB%8D.md">Redis集群介绍</a><br>1.2 <a href="https://www.bilibili.com/video/BV13R4y1v7sP/?p=76">Redis Cluster</a><br>1.3 <a href="https://www.bilibili.com/video/BV13R4y1v7sP/?p=84">Redis Cluster</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>KV</tag>
       </tags>
   </entry>
   <entry>
@@ -8991,10 +8153,9 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <h3><span id="mysql中的mvcc-3">MySQL中的MVCC [3]</span><a href="#mysql中的mvcc-3" class="header-anchor">#</a></h3><h3><span id="分布式数据库中mvcc5">分布式数据库中MVCC[5]</span><a href="#分布式数据库中mvcc5" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
 <li><a href="https://jiekun.dev/posts/mvcc/">Paper Reading：聊一聊MVCC</a> ***</li>
 <li>[1] Y. Wu, An Empirical Evaluation of In-Memory Multi-Version Concurrency Control. In VLDB 2017.</li>
-<li><a href="/www6vHomeHexo/2020/08/14/mysqlTransactionAndLock/" title="MySQL 事务-隔离性">MySQL 事务-隔离性</a> self 
-MySQL MVCC 快照读 vs 当前读 </li>
+<li><a href="mysqlTransactionAndLock.md">Go to Page</a> self<br>MySQL MVCC 快照读 vs 当前读 </li>
 <li><a href="https://www.zhihu.com/question/27876575">乐观锁和 MVCC 的区别？</a> </li>
-<li><a href="/www6vHomeHexo/2023/04/10/tikvMVCCTransaction/" title="TiKV Transaction-MVCC+TSO">TiKV Transaction-MVCC+TSO</a> self</li>
+<li><a href="tikvMVCCTransaction.md">Go to Page</a>  self</li>
 </ol>
 ]]></content>
       <categories>
@@ -9848,53 +9009,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
       </tags>
   </entry>
   <entry>
-    <title>分布式数据库-全局时钟</title>
-    <url>/www6vHomeHexo/2022/04/11/distributedDatabaseGlobalTime/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#overview-2">Overview [2]</a></li>
-<li><a href="#tso-%E5%92%8C-hlc-%E7%9A%84%E5%8C%BA%E5%88%ABn-ai">TSO 和 HLC 的区别[N AI]</a><br>  * <a href="#%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5">时间同步</a><br>  * <a href="#%E6%97%B6%E9%92%9F%E6%BC%82%E7%A7%BB">时钟漂移</a><br>  * <a href="#%E6%97%B6%E9%97%B4%E7%B2%BE%E5%BA%A6">时间精度</a></li>
-<li><a href="#hlc">HLC</a><br>  * <a href="#hlc%E7%9A%84%E7%89%B9%E7%82%B9%E5%92%8C%E7%BC%BA%E7%82%B9-1">HLC的特点和缺点 [1]</a><br>  * <a href="#hlc%E7%AE%97%E6%B3%952">HLC算法[2]</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="overview-2">Overview [2]</span><a href="#overview-2" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/04/11/distributedDatabaseGlobalTime/globalTime.JPG" class>
-
-<h1><span id="tso-和-hlc-的区别n-ai">TSO 和 HLC 的区别[N AI]</span><a href="#tso-和-hlc-的区别n-ai" class="header-anchor">#</a></h1><p>TSO (Timestamp Ordering) 和 HLC (Hybrid Logical Clock) 都是两种分布式系统中用于解决事件顺序问题的算法。<br>虽然两种算法都是基于时间戳的，但它们也有着一些区别。</p>
-<h5><span id="时间同步">时间同步</span><a href="#时间同步" class="header-anchor">#</a></h5><p>TSO 需要依赖全局的时间同步服务，如 NTP (Network Time Protocol)，保证所有机器的时钟是一致的。而 HLC 可以在没有全局时钟同步服务的情况下，通过增加逻辑时钟来维护全局时钟的顺序。<br>这就使得 <strong>HLC 比 TSO 更加灵活和适用于更多的场景</strong>。</p>
-<h5><span id="时钟漂移">时钟漂移</span><a href="#时钟漂移" class="header-anchor">#</a></h5><p>TSO 可能会受到时钟漂移的影响，当时钟出现漂移时，事件的顺序可能会受到影响。<strong>而 HLC 可以通过逻辑时钟来解决时钟漂移的问题</strong>。这使得 <strong>HLC 更加鲁棒</strong>，并且可以在更长的时间内保持正确的事件顺序。</p>
-<h5><span id="时间精度">时间精度</span><a href="#时间精度" class="header-anchor">#</a></h5><p>TSO 采用 64 位的时间戳，精度为纳秒级别。而 <strong>HLC 采用 64 位的时间戳和 16 位的逻辑时钟</strong>，精度为微秒级别，比 TSO 更高。这意味着 HLC 可以更准确地记录事件发生的顺序。</p>
-<h1><span id="hlc">HLC</span><a href="#hlc" class="header-anchor">#</a></h1><h5><span id="hlc的特点和缺点-1">HLC的特点和缺点 [1]</span><a href="#hlc的特点和缺点-1" class="header-anchor">#</a></h5><p>HLC（Hybrid Logical Clock 混合逻辑时钟）结合了物理时间和逻辑时钟的优点，提供了下面3个特性：</p>
-<ol>
-<li><strong>如果a happened-before b, 则hlc(a) &lt; hlc(b)。不过反之不成立</strong></li>
-<li>HLC的时间戳占用的bit数不变</li>
-<li>误差有上届。（其实就是NTP的最大误差，也就是所有机器的物理时间的最大误差）</li>
-</ol>
-<p>HLC本质上来说还是一个逻辑时钟，所以它只能<strong>提供partial ordering</strong>，而<strong>不能提供total  ordering</strong>。所以2个节点中发生的独立事件a和b，如果他们的timestamp在误差的上届范围内，是无法排序的。</p>
-<h5><span id="hlc算法2">HLC算法[2]</span><a href="#hlc算法2" class="header-anchor">#</a></h5><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a href="https://zhuanlan.zhihu.com/p/265226466">CockRoachDB分布式事务 - HLC和MVCC的相映成趣</a></li>
-<li>《05 | 全局时钟：物理时钟和逻辑时钟你Pick谁？》 分布式数据库30讲  王磊</li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>关系型</category>
-        <category>分布式</category>
-      </categories>
-      <tags>
-        <tag>分布式数据库</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>KV  存储引擎比较[Boltdb Rocksdb]</title>
     <url>/www6vHomeHexo/2022/04/11/kvCompare/</url>
     <content><![CDATA[<p></p>
@@ -10401,43 +9515,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
 <li><a href="https://www.bilibili.com/video/BV1Gb4y187un?zw&vd_source=f6e8c1128f9f264c5ab8d9411a644036">【直播回放】海量并发微服务框架设计</a> V</li>
 <li>《15 | 缓存的使用姿势（三）：缓存穿透了怎么办？》</li>
 </ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis Error-MOVED和ASK指令</title>
-    <url>/www6vHomeHexo/2022/03/28/redisError/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<details><summary>相关代码</summary><p>cluster.c</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* Return the pointer to the cluster node that is able to serve the command.</span></span><br><span class="line"><span class="comment"> * For the function to succeed the command should only target either:</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 1) A single key (even multiple times like LPOPRPUSH mylist mylist).</span></span><br><span class="line"><span class="comment"> * 2) Multiple keys in the same hash slot, while the slot is stable (no</span></span><br><span class="line"><span class="comment"> *    resharding in progress).</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * On success the function returns the node that is able to serve the request.</span></span><br><span class="line"><span class="comment"> * If the node is not &#x27;myself&#x27; a redirection must be perfomed. The kind of</span></span><br><span class="line"><span class="comment"> * redirection is specified setting the integer passed by reference</span></span><br><span class="line"><span class="comment"> * &#x27;error_code&#x27;, which will be set to CLUSTER_REDIR_ASK or</span></span><br><span class="line"><span class="comment"> * CLUSTER_REDIR_MOVED.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * When the node is &#x27;myself&#x27; &#x27;error_code&#x27; is set to CLUSTER_REDIR_NONE.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * If the command fails NULL is returned, and the reason of the failure is</span></span><br><span class="line"><span class="comment"> * provided via &#x27;error_code&#x27;, which will be set to:</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * CLUSTER_REDIR_CROSS_SLOT if the request contains multiple keys that</span></span><br><span class="line"><span class="comment"> * don&#x27;t belong to the same hash slot.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * CLUSTER_REDIR_UNSTABLE if the request contains multiple keys</span></span><br><span class="line"><span class="comment"> * belonging to the same slot, but the slot is not stable (in migration or</span></span><br><span class="line"><span class="comment"> * importing state, likely because a resharding is in progress).</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * CLUSTER_REDIR_DOWN_UNBOUND if the request addresses a slot which is</span></span><br><span class="line"><span class="comment"> * not bound to any node. In this case the cluster global state should be</span></span><br><span class="line"><span class="comment"> * already &quot;down&quot; but it is fragile to rely on the update of the global state,</span></span><br><span class="line"><span class="comment"> * so we also handle it here.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * CLUSTER_REDIR_DOWN_STATE if the cluster is down but the user attempts to</span></span><br><span class="line"><span class="comment"> * execute a command that addresses one or more keys. */</span></span><br><span class="line">clusterNode *<span class="title function_">getNodeByQuery</span><span class="params">(client *c, <span class="keyword">struct</span> redisCommand *cmd, robj **argv, <span class="type">int</span> argc, <span class="type">int</span> *hashslot, <span class="type">int</span> *error_code)</span> &#123;</span><br><span class="line">    clusterNode *n = <span class="literal">NULL</span>;</span><br><span class="line">    robj *firstkey = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="type">int</span> multiple_keys = <span class="number">0</span>;</span><br><span class="line">    multiState *ms, _ms;</span><br><span class="line">    multiCmd mc;</span><br><span class="line">    <span class="type">int</span> i, slot = <span class="number">0</span>, migrating_slot = <span class="number">0</span>, importing_slot = <span class="number">0</span>, missing_keys = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Allow any key to be set if a module disabled cluster redirections. */</span></span><br><span class="line">    <span class="keyword">if</span> (server.cluster_module_flags &amp; CLUSTER_MODULE_FLAG_NO_REDIRECTION)</span><br><span class="line">        <span class="keyword">return</span> myself;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Set error code optimistically for the base case. */</span></span><br><span class="line">    <span class="keyword">if</span> (error_code) *error_code = CLUSTER_REDIR_NONE;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Modules can turn off Redis Cluster redirection: this is useful</span></span><br><span class="line"><span class="comment">     * when writing a module that implements a completely different</span></span><br><span class="line"><span class="comment">     * distributed system. */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* We handle all the cases as if they were EXEC commands, so we have</span></span><br><span class="line"><span class="comment">     * a common code path for everything */</span></span><br><span class="line">    <span class="keyword">if</span> (cmd-&gt;proc == execCommand) &#123;</span><br><span class="line">        <span class="comment">/* If CLIENT_MULTI flag is not set EXEC is just going to return an</span></span><br><span class="line"><span class="comment">         * error. */</span></span><br><span class="line">        <span class="keyword">if</span> (!(c-&gt;flags &amp; CLIENT_MULTI)) <span class="keyword">return</span> myself;</span><br><span class="line">        ms = &amp;c-&gt;mstate;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">/* In order to have a single codepath create a fake Multi State</span></span><br><span class="line"><span class="comment">         * structure if the client is not in MULTI/EXEC state, this way</span></span><br><span class="line"><span class="comment">         * we have a single codepath below. */</span></span><br><span class="line">        ms = &amp;_ms;</span><br><span class="line">        _ms.commands = &amp;mc;</span><br><span class="line">        _ms.count = <span class="number">1</span>;</span><br><span class="line">        mc.argv = argv;</span><br><span class="line">        mc.argc = argc;</span><br><span class="line">        mc.cmd = cmd;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Check that all the keys are in the same hash slot, and obtain this</span></span><br><span class="line"><span class="comment">     * slot and the node associated. */</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; ms-&gt;count; i++) &#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">redisCommand</span> *<span class="title">mcmd</span>;</span></span><br><span class="line">        robj **margv;</span><br><span class="line">        <span class="type">int</span> margc, *keyindex, numkeys, j;</span><br><span class="line"></span><br><span class="line">        mcmd = ms-&gt;commands[i].cmd;</span><br><span class="line">        margc = ms-&gt;commands[i].argc;</span><br><span class="line">        margv = ms-&gt;commands[i].argv;</span><br><span class="line"></span><br><span class="line">        keyindex = getKeysFromCommand(mcmd,margv,margc,&amp;numkeys);</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; numkeys; j++) &#123;</span><br><span class="line">            robj *thiskey = margv[keyindex[j]];</span><br><span class="line">            <span class="type">int</span> thisslot = keyHashSlot((<span class="type">char</span>*)thiskey-&gt;ptr,</span><br><span class="line">                                       sdslen(thiskey-&gt;ptr));</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (firstkey == <span class="literal">NULL</span>) &#123;</span><br><span class="line">                <span class="comment">/* This is the first key we see. Check what is the slot</span></span><br><span class="line"><span class="comment">                 * and node. */</span></span><br><span class="line">                firstkey = thiskey;</span><br><span class="line">                slot = thisslot;</span><br><span class="line">                n = server.cluster-&gt;slots[slot];</span><br><span class="line"></span><br><span class="line">                <span class="comment">/* Error: If a slot is not served, we are in &quot;cluster down&quot;</span></span><br><span class="line"><span class="comment">                 * state. However the state is yet to be updated, so this was</span></span><br><span class="line"><span class="comment">                 * not trapped earlier in processCommand(). Report the same</span></span><br><span class="line"><span class="comment">                 * error to the client. */</span></span><br><span class="line">                <span class="keyword">if</span> (n == <span class="literal">NULL</span>) &#123;</span><br><span class="line">                    getKeysFreeResult(keyindex);</span><br><span class="line">                    <span class="keyword">if</span> (error_code)</span><br><span class="line">                        *error_code = CLUSTER_REDIR_DOWN_UNBOUND;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">/* If we are migrating or importing this slot, we need to check</span></span><br><span class="line"><span class="comment">                 * if we have all the keys in the request (the only way we</span></span><br><span class="line"><span class="comment">                 * can safely serve the request, otherwise we return a TRYAGAIN</span></span><br><span class="line"><span class="comment">                 * error). To do so we set the importing/migrating state and</span></span><br><span class="line"><span class="comment">                 * increment a counter for every missing key. */</span></span><br><span class="line">                <span class="keyword">if</span> (n == myself &amp;&amp;</span><br><span class="line">                    server.cluster-&gt;migrating_slots_to[slot] != <span class="literal">NULL</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    migrating_slot = <span class="number">1</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (server.cluster-&gt;importing_slots_from[slot] != <span class="literal">NULL</span>) &#123;</span><br><span class="line">                    importing_slot = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">/* If it is not the first key, make sure it is exactly</span></span><br><span class="line"><span class="comment">                 * the same key as the first we saw. */</span></span><br><span class="line">                <span class="keyword">if</span> (!equalStringObjects(firstkey,thiskey)) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (slot != thisslot) &#123;</span><br><span class="line">                        <span class="comment">/* Error: multiple keys from different slots. */</span></span><br><span class="line">                        getKeysFreeResult(keyindex);</span><br><span class="line">                        <span class="keyword">if</span> (error_code)</span><br><span class="line">                            *error_code = CLUSTER_REDIR_CROSS_SLOT;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="comment">/* Flag this request as one with multiple different</span></span><br><span class="line"><span class="comment">                         * keys. */</span></span><br><span class="line">                        multiple_keys = <span class="number">1</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">/* Migarting / Improrting slot? Count keys we don&#x27;t have. */</span></span><br><span class="line">            <span class="keyword">if</span> ((migrating_slot || importing_slot) &amp;&amp;</span><br><span class="line">                lookupKeyRead(&amp;server.db[<span class="number">0</span>],thiskey) == <span class="literal">NULL</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                missing_keys++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        getKeysFreeResult(keyindex);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* No key at all in command? then we can serve the request</span></span><br><span class="line"><span class="comment">     * without redirections or errors in all the cases. */</span></span><br><span class="line">    <span class="keyword">if</span> (n == <span class="literal">NULL</span>) <span class="keyword">return</span> myself;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Cluster is globally down but we got keys? We can&#x27;t serve the request. */</span></span><br><span class="line">    <span class="keyword">if</span> (server.cluster-&gt;state != CLUSTER_OK) &#123;</span><br><span class="line">        <span class="keyword">if</span> (error_code) *error_code = CLUSTER_REDIR_DOWN_STATE;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Return the hashslot by reference. */</span></span><br><span class="line">    <span class="keyword">if</span> (hashslot) *hashslot = slot;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* MIGRATE always works in the context of the local node if the slot</span></span><br><span class="line"><span class="comment">     * is open (migrating or importing state). We need to be able to freely</span></span><br><span class="line"><span class="comment">     * move keys among instances in this case. */</span></span><br><span class="line">    <span class="keyword">if</span> ((migrating_slot || importing_slot) &amp;&amp; cmd-&gt;proc == migrateCommand)</span><br><span class="line">        <span class="keyword">return</span> myself;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* If we don&#x27;t have all the keys and we are migrating the slot, send</span></span><br><span class="line"><span class="comment">     * an ASK redirection. */</span></span><br><span class="line">    <span class="keyword">if</span> (migrating_slot &amp;&amp; missing_keys) &#123;</span><br><span class="line">        <span class="keyword">if</span> (error_code) *error_code = CLUSTER_REDIR_ASK;</span><br><span class="line">        <span class="keyword">return</span> server.cluster-&gt;migrating_slots_to[slot];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* If we are receiving the slot, and the client correctly flagged the</span></span><br><span class="line"><span class="comment">     * request as &quot;ASKING&quot;, we can serve the request. However if the request</span></span><br><span class="line"><span class="comment">     * involves multiple keys and we don&#x27;t have them all, the only option is</span></span><br><span class="line"><span class="comment">     * to send a TRYAGAIN error. */</span></span><br><span class="line">    <span class="keyword">if</span> (importing_slot &amp;&amp;</span><br><span class="line">        (c-&gt;flags &amp; CLIENT_ASKING || cmd-&gt;flags &amp; CMD_ASKING))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (multiple_keys &amp;&amp; missing_keys) &#123;</span><br><span class="line">            <span class="keyword">if</span> (error_code) *error_code = CLUSTER_REDIR_UNSTABLE;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> myself;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Handle the read-only client case reading from a slave: if this</span></span><br><span class="line"><span class="comment">     * node is a slave and the request is about an hash slot our master</span></span><br><span class="line"><span class="comment">     * is serving, we can reply without redirection. */</span></span><br><span class="line">    <span class="keyword">if</span> (c-&gt;flags &amp; CLIENT_READONLY &amp;&amp;</span><br><span class="line">        (cmd-&gt;flags &amp; CMD_READONLY || cmd-&gt;proc == evalCommand ||</span><br><span class="line">         cmd-&gt;proc == evalShaCommand) &amp;&amp;</span><br><span class="line">        nodeIsSlave(myself) &amp;&amp;</span><br><span class="line">        myself-&gt;slaveof == n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> myself;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Base case: just return the right node. However if this node is not</span></span><br><span class="line"><span class="comment">     * myself, set error_code to MOVED since we need to issue a rediretion. */</span></span><br><span class="line">    <span class="keyword">if</span> (n != myself &amp;&amp; error_code) *error_code = CLUSTER_REDIR_MOVED;</span><br><span class="line">    <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</details>
-
-
-<p>代码展示了 getNodeByQuery 函数基本执行过程</p>
-<img src="/www6vHomeHexo/2022/03/28/redisError/moved.jpg" class>
-
-
-<h2><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h2><p>Redis Cluster 会因为负载均衡或节点故障等原因而执行数据迁移，而</p>
-<p>这就会导致客户端访问的 key 并不在接收到命令的集群节点上。因此，集群节点在命令执</p>
-<p>行函数 processCommand 中，针对集群模式，就增加了额外的处理逻辑。这主要是包括</p>
-<p>调用 <strong>getNodeByQuery 函数</strong>查询访问的 key 实际所属的节点，以及根据查询结果调用</p>
-<p><strong>clusterRedirectClient 函数</strong>执行请求重定向。</p>
-<p>事实上，对于分布式集群来说，Redis Cluster 设计实现的请求重定向机制是一个不错的参</p>
-<p>考示例。其中，MOVED 和 ASK 两种重定向情况，就充分考虑了数据正在迁移的场景，这</p>
-<p>种设计值得我们学习。而且，getNodeByQuery 函数在查询 key 所属的 slot 和节点时，</p>
-<p>也充分考虑了 Redis 的事务操作，在对命令访问 key 进行查询时，巧妙地使用了<strong>同一个数</strong></p>
-<p><strong>据结构 multiState</strong>，来封装事务涉及的多条命令和常规的单条命令，增加了代码的复用程</p>
-<p>度，这一点也非常值得学习。</p>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>27 | 从MOVED、ASK看集群节点如何处理命令？  蒋德钧</p>
 ]]></content>
       <categories>
         <category>数据库</category>
@@ -11093,114 +10170,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
       </tags>
   </entry>
   <entry>
-    <title>分布式 数据库 比较</title>
-    <url>/www6vHomeHexo/2022/03/11/distributedDatabaseCompare/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-
-<h2><span id="分布式-数据库-比较-1">分布式 数据库 比较 [1]</span><a href="#分布式-数据库-比较-1" class="header-anchor">#</a></h2><table>
-<thead>
-<tr>
-<th></th>
-<th>PolarDB-X</th>
-<th>TiDB</th>
-<th>CockroachDB</th>
-<th>Spanner</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>分布式事务</td>
-<td>MVCC+TSO</td>
-<td>MVCC+TSO [Percolator][5][6]</td>
-<td>MVCC+HLC[2][3][4]</td>
-<td>MVCC+TrueTime API</td>
-</tr>
-<tr>
-<td>存储引擎</td>
-<td>InnoDB&#x2F;x-engine<br> HEX2(列存)</td>
-<td>RocksDB<br>TiFlash(列存)</td>
-<td>RocksDB</td>
-<td>Colossus</td>
-</tr>
-<tr>
-<td>高可用</td>
-<td>计算无状态集群<br>存储Multi-Paxos</td>
-<td>计算无状态集群<br>存储Raft</td>
-<td>计算存储一体化 集群化 <br>存储Raft</td>
-<td>计算存储一体化 集群化 <br>存储Multi-Paxos</td>
-</tr>
-<tr>
-<td>数据分区</td>
-<td>Hash&#x2F;List&#x2F;Range</td>
-<td>Range&#x2F;Hash</td>
-<td>Range&#x2F;Hash</td>
-<td>Range&#x2F;Hash</td>
-</tr>
-<tr>
-<td>全局索引</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-</tr>
-<tr>
-<td>HTAP</td>
-<td>强隔离 强一致<br>MPP并行</td>
-<td>强隔离 强一致<br>Spark</td>
-<td>混合负载<br> MPP并行</td>
-<td>混合负载<br> MPP并行</td>
-</tr>
-<tr>
-<td>生态兼容性</td>
-<td>基本兼容MySQL</td>
-<td>基本兼容MySQL</td>
-<td>基本兼容PGSQL</td>
-<td>非标准SQL</td>
-</tr>
-<tr>
-<td>元数据DDL</td>
-<td>全局一致 + Online</td>
-<td>全局一致 + Online</td>
-<td>全局一致 + Online</td>
-<td>全局一致 + Online</td>
-</tr>
-<tr>
-<td>全局日志</td>
-<td>√</td>
-<td>√</td>
-<td>√（企业版）</td>
-<td>×</td>
-</tr>
-<tr>
-<td>备份恢复</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-</tr>
-</tbody></table>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li>《云数据库架构》 2.3.1</li>
-<li><a href="https://www.modb.pro/db/84156">CockroachDB分布式事务解密(一)：CockroachDB &amp; HLC</a><br>CockroachDB使用了一个软件实现的基于NTP时钟同步的混合逻辑时钟算法(Hybrid Logic Clock)——HLC追踪系统中事务的的hb关系(happen before)。</li>
-<li><a href="https://www.modb.pro/db/84153">CockroachDB事务解密(二)：事务模型</a></li>
-<li><a href="https://github.com/cockroachdb/cockroach/blob/master/pkg/util/hlc/hlc.go">Cockroach  HLC</a></li>
-<li><a href="/www6vHomeHexo/2023/04/10/tikvMVCCTransaction/" title="TiKV Transaction-MVCC+TSO">TiKV Transaction-MVCC+TSO</a></li>
-<li><a href="/www6vHomeHexo/2022/04/11/distributedDatabaseGlobalTime/" title="分布式数据库-全局时钟">分布式数据库-全局时钟</a>  self</li>
-<li><a href="/www6vHomeHexo/2023/06/05/globalSecondaryIndex/" title="全局二级索引-GSI">全局二级索引-GSI</a> self</li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>关系型</category>
-        <category>分布式</category>
-      </categories>
-      <tags>
-        <tag>分布式数据库</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Golang 基础</title>
     <url>/www6vHomeHexo/2022/03/08/golangBasic/</url>
     <content><![CDATA[<p></p>
@@ -11753,7 +10722,7 @@ MySQL MVCC 快照读 vs 当前读 </li>
 </tbody></table>
 <h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
 <li><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/">Patterns of Distributed Systems</a><br><a href="https://github.com/www6v/patterns-of-distributed-systems">《分布式系统模式》中文版</a></li>
-<li><a href="/www6vHomeHexo/2022/04/11/distributedDatabaseGlobalTime/" title="分布式数据库-全局时钟">分布式数据库-全局时钟</a>  self</li>
+<li><a href="distributedDatabaseGlobalTime.md">Go to Page</a>  self</li>
 </ol>
 ]]></content>
       <categories>
@@ -11815,33 +10784,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
       </categories>
       <tags>
         <tag>devops</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>分布式 数据库 总结</title>
-    <url>/www6vHomeHexo/2022/02/09/distributedDatabase/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<img src="/www6vHomeHexo/2022/02/09/distributedDatabase/dDatabase.jpg" class title="分布式数据库">
-
-<img src="/www6vHomeHexo/2022/02/09/distributedDatabase/dDatabase1.jpg" class title="分布式数据库">
-
-
-
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><p>&lt;&lt;分布式数据库30讲&gt;&gt; </p>
-</li>
-<li><a href="/www6vHomeHexo/2022/04/11/distributedDatabaseGlobalTime/" title="分布式数据库-全局时钟">分布式数据库-全局时钟</a>  self</li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>关系型</category>
-        <category>分布式</category>
-      </categories>
-      <tags>
-        <tag>分布式数据库</tag>
       </tags>
   </entry>
   <entry>
@@ -11978,13 +10920,13 @@ MySQL MVCC 快照读 vs 当前读 </li>
 <td>Master-Slave<br>(最终一致性)</td>
 <td></td>
 <td>延迟低，吞吐高<br>主动推送&#x2F;被动拉取</td>
-<td><a href="/www6vHomeHexo/2020/06/21/mysqlReliability/" title="MySQL的主从 高可用 容灾">MySQL的主从 高可用 容灾</a> self</td>
+<td><a href="mysqlReliability.md">Go to Page</a> self</td>
 </tr>
 <tr>
 <td>Master-Master<br>(最终一致性)</td>
 <td><a href="/www6vHomeHexo/2022/05/14/multiMasterCRDT/" title="多主-CRDT">CRDT</a> self</td>
 <td>延迟低，吞吐高</td>
-<td><a href="/www6vHomeHexo/2020/06/21/mysqlReliability/" title="MySQL的主从 高可用 容灾">MySQL的主从 高可用 容灾</a> self</td>
+<td><a href="mysqlReliability.md">Go to Page</a> self</td>
 </tr>
 <tr>
 <td>弱一致性</td>
@@ -12060,7 +11002,7 @@ MySQL MVCC 快照读 vs 当前读 </li>
 <ul>
 <li>PolarDB [7]<br><strong>基于Redo Log物理复制实现的一写多读共享存储集群</strong></li>
 </ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>[1] 《04 | 架构风格：NewSQL和PGXC到底有啥不一样？》  王磊<br>[2]  <a href="https://docs.opengauss.org/zh/docs/3.1.1/docs/Description/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.html">opengauss系统架构</a><br>[3]  PolarDB Serverless: A Cloud Native Database for Disaggregated Data Centers<br>[4]  <a href="https://blog.csdn.net/devcloud/article/details/118360126">GaussDB(for Redis)揭秘：Redis存算分离架构最全解析</a><br>[5] <a href="https://zhuanlan.zhihu.com/p/42754631">阿里推出PolarFS分布式文件系统，存储与计算分开！附论文</a><br>[6] <a href="/www6vHomeHexo/2020/06/21/mysqlReliability/" title="MySQL的主从 高可用 容灾">MySQL的主从 高可用 容灾</a> self<br>[7] &lt;&lt;云原生数据库 原理与实践&gt;&gt; 5.2  5.3<br>[10] VERBITSKI A，GUPTA A，SAHA D，et al. Amazon aurora：design considerations for high throughput cloud-native relational databases ［C］. Proceedings of the 2017 ACM International Conference on Man⁃ agement of Data，2017 ：1041-1052.</p>
+<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>[1] 《04 | 架构风格：NewSQL和PGXC到底有啥不一样？》  王磊<br>[2]  <a href="https://docs.opengauss.org/zh/docs/3.1.1/docs/Description/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.html">opengauss系统架构</a><br>[3]  PolarDB Serverless: A Cloud Native Database for Disaggregated Data Centers<br>[4]  <a href="https://blog.csdn.net/devcloud/article/details/118360126">GaussDB(for Redis)揭秘：Redis存算分离架构最全解析</a><br>[5] <a href="https://zhuanlan.zhihu.com/p/42754631">阿里推出PolarFS分布式文件系统，存储与计算分开！附论文</a><br>[6]  <a href="mysqlReliability.md">Go to Page</a>  self<br>[7] &lt;&lt;云原生数据库 原理与实践&gt;&gt; 5.2  5.3<br>[10] VERBITSKI A，GUPTA A，SAHA D，et al. Amazon aurora：design considerations for high throughput cloud-native relational databases ［C］. Proceedings of the 2017 ACM International Conference on Man⁃ agement of Data，2017 ：1041-1052.</p>
 ]]></content>
       <categories>
         <category>架构</category>
@@ -13096,35 +12038,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
 </tbody></table>
 <p> 【redis  cluster 没有事务】</p>
 <h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><p>31 | 事务机制:Redis能实现ACID属性吗?<br><a href="https://www.liangzl.com/get-article-detail-129391.html">[redis]redis集群不支持事务multi、exec</a>   失效</p>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis 的IO模型</title>
-    <url>/www6vHomeHexo/2022/01/18/redisIO/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<h5><span id="关键词-单线程事件-socket-多路复用">关键词： 单线程，事件， socket， 多路复用</span><a href="#关键词-单线程事件-socket-多路复用" class="header-anchor">#</a></h5><h2><span id="redis-的io模型">Redis 的IO模型</span><a href="#redis-的io模型" class="header-anchor">#</a></h2><p><strong>Redis 是单线程，主要是指 Redis 的网络 IO 和键值对读写是由一个线程来完成的，这也是 Redis 对外提供键值存储服务的主要流程。</strong><br>但 Redis 的其他功能，比如持久化、异步删除、集群数据同步等，其实是由额外的线程执 行的。</p>
-<h5><span id="多路复用">多路复用</span><a href="#多路复用" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2022/01/18/redisIO/redis-multiplex.png" class title="基于多路复用的Redis高性能IO模型">
-
-<p>​                               </p>
-<p>Linux 中的 IO 多路复用机制是指一个线程处理多个 IO 流，就是我们经常听到的 select&#x2F;epoll 机制。简单来说，在 Redis 只运行单线程的情况下，<strong>该机制允许内核中，同 时存在多个监听套接字和已连接套接字</strong>。内核会一直监听这些套接字上的连接请求或数据 请求。一旦有请求到达，就会交给 Redis 线程处理，这就实现了一个 Redis 线程处理多个 IO 流的效果。</p>
-<p>为了在请求到达时能通知到 Redis 线程，<strong>select&#x2F;epoll 提供了基于事件的回调机制，即针 对不同事件的发生，调用相应的处理函数</strong>。</p>
-<h5><span id="epoll的api">epoll的API</span><a href="#epoll的api" class="header-anchor">#</a></h5><p>int epoll_create(int size);<br>int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event);   &#x2F;&#x2F; 事件注册<br>int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout);  &#x2F;&#x2F;  事件分配、事件处理</p>
-<h2><span id="netty-io模型">Netty IO模型</span><a href="#netty-io模型" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/01/18/redisIO/netty-io.jpeg" class title="Netty IO模型">
-
-<h5><span id="channel">channel</span><a href="#channel" class="header-anchor">#</a></h5><p>channel（在socket上的通道） -  event<br>channel - channelPipeline（单线程）</p>
-<h5><span id="reactor">reactor</span><a href="#reactor" class="header-anchor">#</a></h5><p>accept事件（boss线程）<br>read，write事件（work线程）</p>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><p>03 | 高性能IO模型:为什么单线程Redis能那么快?<br><a href="http://ifeve.com/channel-pipeline/">Netty源码解读（三）Channel与Pipeline</a><br><a href="https://www6v.github.io/www6vHomeHexo/2015/08/23/nettySummary/">https://www6v.github.io/www6vHomeHexo/2015/08/23/nettySummary/</a><br><a href="https://www.cnblogs.com/xuewangkai/p/11158576.html">epoll使用详解：epoll_create、epoll_ctl、epoll_wait、close</a></p>
 ]]></content>
       <categories>
         <category>数据库</category>
@@ -15107,48 +14020,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
       </tags>
   </entry>
   <entry>
-    <title>数据库  关联查询</title>
-    <url>/www6vHomeHexo/2021/05/30/distributedDatabaseJoinQuery/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<img src="/www6vHomeHexo/2021/05/30/distributedDatabaseJoinQuery/join.jpg" class>
-
-<h2><span id="tidb-的-join-算法25">TiDB 的 Join 算法[2][5]</span><a href="#tidb-的-join-算法25" class="header-anchor">#</a></h2><ul>
-<li><p>TiDB 的 Join 算法包括如下几类：</p>
-<ul>
-<li>Hash Join</li>
-<li>Merge Join</li>
-<li>Index Hash Join</li>
-<li>Index Merge Join</li>
-</ul>
-</li>
-<li><p>TiDB 目前表 Join 的方式 [3][4]</p>
-<ul>
-<li>Sort Merge Join</li>
-<li>Index Nested Loop Join</li>
-<li>Hash Join</li>
-</ul>
-</li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li>《20 | 关联查询：如何提升多表Join能力？ 》</li>
-<li><a href="https://cn.pingcap.com/blog/tidb-query-optimization-and-tuning-2">TiDB 查询优化及调优系列（二）TiDB 查询计划简介</a>  <strong>查看 Join 的执行计划</strong></li>
-<li><a href="https://cn.pingcap.com/blog/?tag=TiDB%20%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB">TiDB 源码阅读系列</a></li>
-<li><a href="https://cn.pingcap.com/blog/tidb-query-optimization-and-tuning-4">TiDB 查询优化及调优系列（四）查询执行计划的调整及优化原理</a></li>
-<li><a href="https://tidb.net/blog/cf459d89">JOIN 查询的执行计划 比较</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>关系型</category>
-        <category>分布式</category>
-      </categories>
-      <tags>
-        <tag>数据库</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>分库分表</title>
     <url>/www6vHomeHexo/2021/05/26/dbSharding/</url>
     <content><![CDATA[<p></p>
@@ -15312,101 +14183,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
       </categories>
       <tags>
         <tag>分库分表</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis 架构</title>
-    <url>/www6vHomeHexo/2021/05/25/redisArch/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#redis%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B1">Redis架构演进[1]</a></li>
-<li><a href="#%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84">主从架构</a></li>
-<li><a href="#%E5%93%A8%E5%85%B5%E9%9B%86%E7%BE%A4-sentinel">哨兵集群 sentinel</a></li>
-<li><a href="#redis-cluster">Redis cluster</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="redis架构演进1">Redis架构演进[1]</span><a href="#redis架构演进1" class="header-anchor">#</a></h1><ul>
-<li><strong>数据怕丢失</strong> -&gt; 持久化（RDB&#x2F;AOF）</li>
-<li><strong>恢复时间久</strong> -&gt; 主从副本（副本随时可切）</li>
-<li><strong>故障手动切换慢</strong> -&gt; 哨兵集群（自动切换）</li>
-<li><strong>读存在压力</strong> -&gt; 扩容副本（读写分离）</li>
-<li><strong>写存在压力&#x2F;容量瓶颈</strong> -&gt; 分片集群<ul>
-<li><strong>分片集群社区方案</strong> -&gt;  Twemproxy、Codis（Redis 节点之间无通信，需要部署哨兵，可横向扩容）</li>
-<li><strong>分片集群官方方案</strong> -&gt;  Redis Cluster （Redis 节点之间 Gossip 协议，无需部署哨兵，可横向扩容）</li>
-</ul>
-</li>
-<li><strong>业务侧升级困难</strong> -&gt; Proxy + Redis Cluster（不侵入业务侧）</li>
-</ul>
-<h1><span id="主从架构">主从架构</span><a href="#主从架构" class="header-anchor">#</a></h1><ul>
-<li>主从同步<ul>
-<li>异步方式来同步数据<ul>
-<li>最终一致性</li>
-</ul>
-</li>
-<li>分类<ul>
-<li><ol>
-<li>增量同步 （同步的是指令）</li>
-</ol>
-<ul>
-<li>1.指令记录在master本地的内存 buffer</li>
-<li>2.异步将 buffer 中的指令同步到从节点</li>
-<li>类似 AOF</li>
-</ul>
-</li>
-<li><ol start="2">
-<li>快照同步（同步的是内容，全量同步）</li>
-</ol>
-<ul>
-<li>bgsave存磁盘rdb，然后rdb发到slave，slave装载</li>
-<li>优化: 2.8.18 版开始支持无盘复制</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1><span id="哨兵集群-sentinel">哨兵集群 sentinel</span><a href="#哨兵集群-sentinel" class="header-anchor">#</a></h1><p>   master-slave异步复制, 所以会丢消息</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">参数: </span><br><span class="line"># 至少有一个slave复制</span><br><span class="line">min-slaves-to-write 1   </span><br><span class="line"># slave节点最大10s的延迟</span><br><span class="line">min-slaves-max-lag 10   </span><br></pre></td></tr></table></figure>
-
-<h1><span id="redis-cluster">Redis cluster</span><a href="#redis-cluster" class="header-anchor">#</a></h1><p><strong>整体架构</strong></p>
-<ol>
-<li>去中心化的;</li>
-<li>所有数据划分为16384个slots，每个节点负责其中一部分slots;</li>
-</ol>
-<p><strong>容错</strong></p>
-<ol>
-<li>主从容错，主升从。</li>
-<li>PFail（Possibly Fail） -&gt; 临时不可用<br>Fail -&gt; 确定不可用， PFail Count&gt; 集群的1&#x2F;2</li>
-</ol>
-<p><strong>Gossip</strong>协议<br>集群节点采用 Gossip 协议来广播自己的状态以及自己对整个集群认知的改变;<br>可能下线 (PFAIL-Possibly Fail) &amp;&amp; 确定下线 (Fail)</p>
-<p><strong>slot迁移</strong><br>在迁移过程中，客户端访问的流程会有很大的变化。<br>迁移是会影响服务效率的，同样的指令在正常情况下一个 ttl 就能完成，而在迁移中得 3 个 ttl 才能搞定。</p>
-<p><strong>网络抖动</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 表示当某个节点持续 timeout 的时间失联时，才可以认定该节点出现故障</span><br><span class="line">cluster-node-timeout </span><br></pre></td></tr></table></figure>
-
-<p><strong>槽位迁移感知</strong><br>2个error指令<br>1.<strong>MOVED错误</strong>：  用来纠正槽位<br>  槽的负责权已经从一个节点转移到了另一节点<br>2. <strong>ASK错误， ASKING命令</strong>： 用来临时纠正槽位<br>    只是两个节点在迁移槽的过程中使用的一种临时措施</p>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a href="https://zhuanlan.zhihu.com/p/543953543">一文搞懂 Redis 架构演化之路</a> 腾讯 ***</li>
-</ol>
-<p>《Redis 深度历险：核心原理与应用实践》 钱文品<br>3. 原理 8：有备无患 —— 主从同步<br><del>4. 原理 3：未雨绸缪 —— 持久化</del><br>5. 集群 1：李代桃僵 —— Sentinel<br>6. 集群 3：众志成城 —— Cluster</p>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
       </tags>
   </entry>
   <entry>
@@ -21419,7 +20195,7 @@ MySQL MVCC 快照读 vs 当前读 </li>
 </ol>
 <h3><span id="其他">其他</span><a href="#其他" class="header-anchor">#</a></h3><ol start="100">
 <li><a href="https://colin-scott.github.io/personal_website/research/interactive_latency.html">latency</a>  未  </li>
-<li><a href="/www6vHomeHexo/2019/09/10/mysqlIndex/" title="MySQL的索引和优化">MySQL的索引和优化</a>     self 未</li>
+<li><a href="mysqlIndex.md">Go to Page</a>  self 未</li>
 <li><a href="nginxOptimize.md">Go to Page</a>  self 未</li>
 </ol>
 ]]></content>
@@ -22830,128 +21606,6 @@ MySQL MVCC 快照读 vs 当前读 </li>
       </categories>
       <tags>
         <tag>中间件</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis 总结</title>
-    <url>/www6vHomeHexo/2016/11/12/redis/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#%E4%BA%8B%E5%8A%A1">事务</a></li>
-<li><a href="#hash%E5%91%BD%E4%BB%A4">hash命令</a></li>
-<li><a href="#io%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%80%A7%E8%83%BD">IO模型和性能</a></li>
-<li><a href="#%E7%89%B9%E6%80%A7">特性</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<img src="/www6vHomeHexo/2016/11/12/redis/redis.jpg" class title="Redis 总结">
-
-<h2><span id="事务">事务</span><a href="#事务" class="header-anchor">#</a></h2><table>
-<thead>
-<tr>
-<th>-</th>
-<th>原子性</th>
-<th>一致性</th>
-<th>隔离性</th>
-<th>持久性</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>redis</td>
-<td>一定的原子性，但不支持回滚</td>
-<td>×</td>
-<td>√</td>
-<td>通过一定策略可以保证持久性</td>
-</tr>
-<tr>
-<td>redis</td>
-<td>没有进行回滚，不具备原子性.<br>操作之后写AOF日志</td>
-<td>aof可以保证，但从应用层看没有回滚和原子性，所以并不能保证一致性</td>
-<td>单线程天然隔离</td>
-<td>纯内存(×)<br>RDB Bgsave(√) <br> RDB 异步执行(×)</td>
-</tr>
-<tr>
-<td>mysql</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-</tr>
-<tr>
-<td>mysql</td>
-<td>undo log</td>
-<td>锁</td>
-<td>锁</td>
-<td>redo log</td>
-</tr>
-</tbody></table>
-<h2><span id="hash命令">hash命令</span><a href="#hash命令" class="header-anchor">#</a></h2><ul>
-<li><p>redis hash的结构：一维数组+二维链表（和java的hashmap结构一样）</p>
-</li>
-<li><p>redis rehash: 渐进式rehash<br>Java rehash： 一次性将旧数组下挂接的元素全部转移到新数组下面</p>
-</li>
-</ul>
-<h2><span id="io模型和性能">IO模型和性能</span><a href="#io模型和性能" class="header-anchor">#</a></h2><ul>
-<li><p>非阻塞IO： read， write时不阻塞</p>
-</li>
-<li><p>事件轮询和多路复用[8]</p>
-</li>
-<li><p>redis性能<br>最低配置: 4GB， 2核， 链接数2w， QPS 16w</p>
-</li>
-<li><p>redis性能高的原因</p>
-<ul>
-<li>高效的数据结构</li>
-<li>多路复用IO模型</li>
-<li>事件机制<br>总结:Reactor + 队列 [10]</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>大体上可以说 Redis 的工作模式是，reactor 模式配合一个队列，用一个 serverAccept 线程来处理建立请求的链接，<br>并且通过 IO 多路复用模型，让内核来监听这些 socket，一旦某些 socket 的读写事件准备就绪后就对应的事件压入队列中，<br>然后 worker 工作，由文件事件分派器从中获取事件交于对应的处理器去执行，当某个事件执行完成后文件事件分派器才会从队列中获取下一个事件进行处理。<br>可以类比在 netty 中，我们一般会设置 bossGroup 和 workerGroup 默认情况下 bossGroup 为 1，workerGroup &#x3D; 2 * cpu 数量，<br>这样可以由多个线程来处理读写就绪的事件，但是其中不能有比较耗时的操作如果有的话需要将其放入线程池中，不然会降低其吐吞量。<br>在 Redis 中我们可以看做这二者的值都是 1。</p>
-</blockquote>
-<h2><span id="特性">特性</span><a href="#特性" class="header-anchor">#</a></h2><ul>
-<li>Redis 2.6<br>lua, pubsub, Sentinel V1</li>
-<li>Redis 2.8<br>Sentinel V2, ipv6</li>
-<li>Redis 3.0<br><strong>Redis Cluster</strong> </li>
-<li>Redis3.2<br>GEO</li>
-<li>Redis 4.0<br>psync2.0, <strong>lazy-free</strong>, modules<br>RDB-AOF 混合持久化</li>
-<li>Redis 5.0<br>Stream</li>
-<li>Redis 6.0<br><strong>Thread I&#x2F;O</strong><br>SSL, ACL</li>
-<li>Redis 7.0<br>functions, ACL v2<br>sharded-pubsub<br>client-eviction<br><strong>multi-part AOF</strong></li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p>《Redis 深度历险：核心原理与应用实践》 钱文品</p>
-<ol>
-<li>原理 4：雷厉风行 —— 管道</li>
-<li>原理 5：同舟共济 —— 事务</li>
-<li>原理 3：未雨绸缪 —— 持久化</li>
-<li>鞭辟入里 ——— 线程IO模型</li>
-</ol>
-<hr>
-<ol start="5">
-<li>《Redis实战》 黄健宏 3.7 ,4.4, 6.2</li>
-<li><a href="https://mp.weixin.qq.com/s/fO0yoHGqtFH5lpu6688h2w">Redis 数据结构和对象系统，记住这 12 张图就够啦！</a></li>
-<li><a href="https://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&mid=2650780240&idx=1&sn=49fb636a97a3c21fec7d2e2b59bea09f">七问Redis，才知道我与技术大牛的差距在哪里 </a><br>*** 事务，乐观锁watch，持久化， 内存优化，主从复制，过期删除策略</li>
-<li><a href="../../../../2015/02/21/transaction/">Mysql事务总结</a> self</li>
-<li><a href="https://www.cnblogs.com/meituantech/p/9376472.html">美团针对Redis Rehash机制的探索和实践</a> ***</li>
-<li><a href="https://mp.weixin.qq.com/s/QrvUl6Ul9DxYoRZwSsMQZw">为什么 Redis 单线程能达到百万+QPS？</a> ***</li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
       </tags>
   </entry>
   <entry>
