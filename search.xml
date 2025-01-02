@@ -663,9 +663,6 @@
 
 <ul>
 <li><a href="#redis-%E5%9F%BA%E7%A1%80">Redis 基础</a><ul>
-<li><a href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">数据类型</a></li>
-<li><a href="#%E4%BA%8B%E5%8A%A1">事务</a></li>
-<li><a href="#%E6%8C%81%E4%B9%85%E5%8C%96">持久化</a></li>
 <li><a href="#%E8%B5%84%E6%BA%90%E5%9B%9E%E6%94%B6">资源回收</a></li>
 <li><a href="#%E5%85%B6%E4%BB%96">其他</a></li>
 </ul>
@@ -680,22 +677,6 @@
 </div>
 
 <h1><span id="redis-基础">Redis 基础</span><a href="#redis-基础" class="header-anchor">#</a></h1><hr>
-<h3><span id="数据类型">数据类型</span><a href="#数据类型" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2021/06/20/redisRehash/" title="Redis Rehash机制">Redis Rehash机制</a></li>
-<li><a href="/www6vHomeHexo/2021/05/05/redisDataStructure/" title="Redis数据结构">Redis数据结构</a></li>
-</ul>
-<hr>
-<h3><span id="事务">事务</span><a href="#事务" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2022/01/18/redisTransaction/" title="Redis 事务">Redis 事务</a></li>
-</ul>
-<h3><span id="持久化">持久化</span><a href="#持久化" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2021/01/02/redisRDB/" title="Redis RDB">Redis RDB</a></li>
-<li><a href="/www6vHomeHexo/2021/12/08/rdb/" title="Redis RDB源码">Redis RDB源码</a></li>
-<li><a href="/www6vHomeHexo/2022/01/18/redisAOF/" title="Redis AOF">Redis AOF</a></li>
-<li><a href="/www6vHomeHexo/2021/11/21/aofRewrite/" title="Redis AOF Rewrite">Redis AOF Rewrite</a></li>
-<li><a href="/www6vHomeHexo/2023/07/10/redisBothAofAndRDB/" title="Redis 混合持久化">Redis 混合持久化</a></li>
-<li><a href="/www6vHomeHexo/2022/07/10/redisReplica/" title="Redis 主从复制">Redis 主从复制</a></li>
-</ul>
 <h3><span id="资源回收">资源回收</span><a href="#资源回收" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2022/06/01/redisLazyFree/" title="Redis LazyFree">Redis LazyFree</a></li>
 <li><a href="/www6vHomeHexo/2021/06/02/redisDelete/" title="Redis 回收策略">Redis 回收策略</a></li>
@@ -704,6 +685,7 @@
 <h3><span id="其他">其他</span><a href="#其他" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2022/05/14/redisNVM/" title="Redis NVM">Redis NVM</a></li>
 </ul>
+<hr>
 <h1><span id="redis-故障amp优化">Redis 故障&amp;优化</span><a href="#redis-故障amp优化" class="header-anchor">#</a></h1><ul>
 <li><p>常见问题</p>
 <ul>
@@ -1103,7 +1085,7 @@
 </ul>
 <h3><span id="数据容灾">数据容灾</span><a href="#数据容灾" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2022/07/13/aliyunDB/" title="阿里云 数据库">阿里云 数据库</a> </li>
-<li><a href="/www6vHomeHexo/2022/07/31/redisHA/" title="Redis 集群  容灾（同城多活）">Redis 集群  容灾（同城多活）</a></li>
+<li><a href="redisHA.md">Go to Page</a></li>
 </ul>
 <h3><span id="环境容灾">环境容灾</span><a href="#环境容灾" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2022/06/26/aliyunDisasterRecovery/" title="阿里云-容灾恢复DR">阿里云-容灾恢复DR</a></li>
@@ -1166,54 +1148,6 @@
       </categories>
       <tags>
         <tag>汇总</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis 混合持久化</title>
-    <url>/www6vHomeHexo/2023/07/10/redisBothAofAndRDB/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#redis-%E6%B7%B7%E5%90%88%E6%8C%81%E4%B9%85%E5%8C%96">Redis 混合持久化</a><ul>
-<li><a href="#%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D%E9%A1%BA%E5%BA%8F%E5%92%8C%E5%8A%A0%E8%BD%BD%E6%B5%81%E7%A8%8B-23">数据恢复顺序和加载流程 [2][3]</a></li>
-<li><a href="#%E5%BC%80%E5%90%AF">开启</a></li>
-<li><a href="#%E5%8E%9F%E7%90%86-3">原理 [3]</a></li>
-</ul>
-</li>
-<li><a href="#aofrdb%E6%B7%B7%E5%90%881">AOF+RDB混合[1]</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="redis-混合持久化">Redis 混合持久化</span><a href="#redis-混合持久化" class="header-anchor">#</a></h1><h3><span id="数据恢复顺序和加载流程-23">数据恢复顺序和加载流程 [2][3]</span><a href="#数据恢复顺序和加载流程-23" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2023/07/10/redisBothAofAndRDB/mix.jpg" class>
-
-<p>在这种情况下，  <strong>当redis重启的时候会优先载入AOF文件来恢复原始的数据</strong>  ，因为在通常情况下AOF文件保存的数据集要比RDB文件保存的数据集要完整。</p>
-<p>RDB和AOF共存时会优先加载AOF文件</p>
-<p><strong>【主从切换   优先加载  RDB  -&gt;  速度】</strong><br><strong>【redis重启 优先加载 AOF -&gt; 数据完整性】</strong></p>
-<h3><span id="开启">开启</span><a href="#开启" class="header-anchor">#</a></h3>  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">aof-use-rdb-preamble no -&gt; yes</span><br></pre></td></tr></table></figure>
-
-<h3><span id="原理-3">原理 [3]</span><a href="#原理-3" class="header-anchor">#</a></h3><p>RDB镜像做全量持久化，AOF做增量持久化 先使用RDB进行快照存储，然后使用AOF持久化记录所有的写操作，当重写策略满足或手动触发重写的时候，将最新的数据存储为新的RDB记录。<br>这样的话，重启服务的时候会从RDB和AOF两部分恢复数据，既保证了数据完整性，又提高了恢复数据的性能。简单来说:混合持久化方式产生的文件一部分是RDB格式，一部分是AOF格式。</p>
-<h1><span id="aofrdb混合1">AOF+RDB混合[1]</span><a href="#aofrdb混合1" class="header-anchor">#</a></h1><p>而<strong>混合使用 RDB 和 AOF</strong>，正好可以取两者之长，避两者之短，以较小的性能开销保证数据可靠性和性能。</p>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li>《05丨内存快照：宕机后，Redis如何实现快速恢复？》 </li>
-<li><a href="https://www.cnblogs.com/wiseblog/articles/13540042.html">redis++：Redis持久化 rdb &amp; aof 工作原理及流程图 （三）</a></li>
-<li><a href="https://github.com/www6v/Learning-in-practice/blob/master/Redis/4.Redis%E6%8C%81%E4%B9%85%E5%8C%96/9.RDB-AOF%E6%B7%B7%E5%90%88%E6%8C%81%E4%B9%85%E5%8C%96.md">RDB-AOF混合持久化</a><br><a href="https://www.bilibili.com/video/BV13R4y1v7sP/?p=45">尚硅谷Redis零基础到进阶，最强redis7教程，阳哥亲自带练（附redis面试题）</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>KV</tag>
       </tags>
   </entry>
   <entry>
@@ -4464,61 +4398,6 @@
       </categories>
       <tags>
         <tag>DAL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis 主从复制</title>
-    <url>/www6vHomeHexo/2022/07/10/redisReplica/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E6%B5%81%E7%A8%8B">主从复制流程</a><ul>
-<li><a href="#%E4%B8%BB%E4%BB%8E%E5%BA%93%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%90%8C%E6%AD%A5%E7%9A%84%E6%B5%81%E7%A8%8B">主从库第一次同步的流程</a></li>
-<li><a href="#%E4%B8%BB%E4%BB%8E%E5%BA%93%E5%A2%9E%E9%87%8F%E5%A4%8D%E5%88%B6%E6%B5%81%E7%A8%8B">主从库增量复制流程</a></li>
-</ul>
-</li>
-<li><a href="#%E7%BC%BA%E7%82%B9-3">缺点 [3]</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="主从复制流程">主从复制流程</span><a href="#主从复制流程" class="header-anchor">#</a></h1><h3><span id="主从库第一次同步的流程">主从库第一次同步的流程</span><a href="#主从库第一次同步的流程" class="header-anchor">#</a></h3> <img src="/www6vHomeHexo/2022/07/10/redisReplica/r1.jpg" class>   
-
-
-<h3><span id="主从库增量复制流程">主从库增量复制流程</span><a href="#主从库增量复制流程" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/07/10/redisReplica/r2.jpg" class>                          
-
-<p>repl_backlog_buffer 是一个环形缓冲区，<strong>主库会记录自己写到的位置，从库则会记录自己 已经读到的位置</strong>。</p>
-<h1><span id="缺点-3">缺点 [3]</span><a href="#缺点-3" class="header-anchor">#</a></h1><ul>
-<li>主从延迟<ul>
-<li>复制偏移量：master_repl_offset | slave_repl_offset</li>
-</ul>
-</li>
-<li>master挂了怎么办？<ul>
-<li>默认情况下，不会在slave节点中自动选一个master</li>
-<li>每次都要人工干预<br><strong>需要Redis哨兵(sentinel)</strong></li>
-</ul>
-</li>
-</ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li>《06 | 数据同步：主从库如何实现数据一致？》</li>
-<li><a href="https://www.cnblogs.com/niejunlei/p/12904984.html"><strong>redis主从复制、主从延迟知几何</strong></a></li>
-<li><a href="https://github.com/www6v/Learning-in-practice/blob/master/Redis/8.Redis%E5%A4%8D%E5%88%B6(replica)/4.%E5%A4%8D%E5%88%B6%E5%8E%9F%E7%90%86%E5%92%8C%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.md">复制原理和工作流程</a><br><a href="https://www.bilibili.com/video/BV13R4y1v7sP?p=61">61_redis主从复制之工作流程总结</a> V<br><a href="https://www.bilibili.com/video/BV13R4y1v7sP?p=62">62_redis主从复制之痛点和改进需求</a> V</li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>KV</tag>
       </tags>
   </entry>
   <entry>
@@ -8235,7 +8114,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <li>《从Paxos到Zookeeper分布式一致性原理与实践》 倪超 6.1.7节</li>
 <li>Redlock：Redis分布式锁最牛逼的实现 阿飞的博客</li>
 <li><a href="https://mp.weixin.qq.com/s/ahcbgxWVVmRwrH9Y4-gXBA">SOFAJRaft-RheaKV 分布式锁实现剖析 | SOFAJRaft 实现原理</a>   SOFALab 米麒麟 未</li>
-<li><a href="/www6vHomeHexo/2016/11/12/redis/" title="Redis 总结">Redis 总结</a>  self</li>
+<li><a href="redis.md">Go to Page</a>  self</li>
 </ol>
 <hr>
 <ol start="7">
@@ -11913,142 +11792,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
-    <title>Redis AOF</title>
-    <url>/www6vHomeHexo/2022/01/18/redisAOF/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#aof">AOF</a><ul>
-<li><a href="#%E5%AE%9A%E4%B9%891">定义[1]</a></li>
-<li><a href="#%E4%B8%A4%E4%B8%AA%E6%BD%9C%E5%9C%A8%E7%9A%84%E9%A3%8E%E9%99%A9-1">两个潜在的风险 [1]</a></li>
-<li><a href="#%E4%B8%89%E7%A7%8D%E5%86%99%E5%9B%9E%E7%AD%96%E7%95%A5-1">三种写回策略 [1]</a></li>
-<li><a href="#%E5%85%B3%E9%97%ADaof%E8%90%BD%E7%9B%98-2">关闭AOF落盘 [2]</a></li>
-</ul>
-</li>
-<li><a href="#aof-rewrite%E8%BF%87%E7%A8%8B">AOF Rewrite过程</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-                                    
-<h1><span id="aof">AOF</span><a href="#aof" class="header-anchor">#</a></h1><h3><span id="定义1">定义[1]</span><a href="#定义1" class="header-anchor">#</a></h3><ul>
-<li><p>[AOF不是WAL，是先操作，后记录日志。]</p>
-</li>
-<li><p>传统数据库的日志，例如 redo log(重做日志)，记录的是修改后的数据，而AOF里记录的是Redis收到的每一条命令，这些命令是以文本形式保存的。</p>
-</li>
-<li><p><strong>AOF 日志</strong>正好相反，它是<strong>写后日志</strong>，“写后”的意思是 Redis 是先执行命令，把数据写入内存，然后才记录日志。</p>
-</li>
-<li><p>而写后日志这种方式，就是先让系统执行命令，只有命令能执行成功，才会被记录到日志中，否则，系统就会直接向客户端报错。<br>所以，Redis 使用写后日志这一方式的一大好处是，可以避免出现记录错误命令的情况。</p>
-</li>
-<li><p>AOF 还有一个好处：它是在命令执行后才记录日志，所以<strong>不会阻塞当前的写操作</strong>。</p>
-</li>
-</ul>
-<p><strong>AOF 是 写前日志</strong></p>
-<h3><span id="两个潜在的风险-1">两个潜在的风险 [1]</span><a href="#两个潜在的风险-1" class="header-anchor">#</a></h3><ol>
-<li>如果刚执行完一个命令，还没有来得及记日志就宕机了，那么这个命令和相应的数 据就有丢失的风险.</li>
-<li>AOF 日志也是在主线程中执行的，如果在把日志文件写入磁盘时，磁盘写压力大，就 会导致写盘很慢，进而导致后续的操作也无法执行了.</li>
-</ol>
-<h3><span id="三种写回策略-1">三种写回策略 [1]</span><a href="#三种写回策略-1" class="header-anchor">#</a></h3><ul>
-<li>AOF 配置项  -  appendfsync 的三个可选值<ul>
-<li><strong>Always</strong>，同步写回：每个写命令执行完，<strong>立马同步地将日志写回磁盘</strong>；</li>
-<li><strong>Everysec</strong>，每秒写回：每个写命令执行完，只是先把日志写到 AOF 文件的内存缓冲区，<strong>每隔一秒把缓冲区中的内容写入磁盘</strong>；</li>
-<li><strong>No</strong>，操作系统控制的写回：每个写命令执行完，只是先把日志写到 AOF 文件的内存缓冲区，由操作系统决定何时将缓冲区内容写回磁盘。</li>
-</ul>
-</li>
-</ul>
-<img src="/www6vHomeHexo/2022/01/18/redisAOF/aof-1.png" class title="三种写回策略">
-
-<h3><span id="关闭aof落盘-2">关闭AOF落盘 [2]</span><a href="#关闭aof落盘-2" class="header-anchor">#</a></h3><p>AOF落盘会带来一定写性能损耗，如果将Redis实例应用于纯缓存场景中，对数据持久化没有需求，您可以按照本章节的说明，修改appendonly参数的值，关闭AOF落盘。</p>
-<h1><span id="aof-rewrite过程">AOF Rewrite过程</span><a href="#aof-rewrite过程" class="header-anchor">#</a></h1><ul>
-<li><p>功能<br>压缩AOF文件的大小</p>
-</li>
-<li><p>AOF Rewrite过程 [1]<br>非阻塞的重写</p>
-</li>
-<li><p>一个拷贝，两处日志 [1]</p>
-<img src="/www6vHomeHexo/2022/01/18/redisAOF/redisRewrite.png" class title="AOF非阻塞的重写过程 838 398">
-</li>
-<li><p>触发机制 [4]</p>
-<ul>
-<li>手动触发<br>bgrewriteaof 命令</li>
-<li>自动触发<br>AOF文件大小</li>
-</ul>
-</li>
-</ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li>《04 | AOF日志:宕机了，Redis如何避免数据丢失? 》    蒋德钧</li>
-<li><a href="https://help.aliyun.com/knowledge_detail/147408.html?spm=a2c4g.11186623.2.2.7e373f2e7XKCDO">关闭AOF落盘</a></li>
-<li><a href="/www6vHomeHexo/2021/11/21/aofRewrite/" title="Redis AOF Rewrite">Redis AOF Rewrite</a></li>
-<li>《Redis开发与运维》  第5章</li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis 事务</title>
-    <url>/www6vHomeHexo/2022/01/18/redisTransaction/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-
-<ul>
-<li><p>事务的 ACID 属性是我们使用事务进行正确操作的基本要求。</p>
-</li>
-<li><p>Redis 的事务机制可以<strong>保证一致性和隔离性，但是无法保证持久性</strong>。<br>不过，因为 Redis 本身是内存数据库，持久性并不是一个必须的属性，我们更加关注的还是原子性、 一致性和隔离性这三个属性。</p>
-</li>
-<li><p><strong>原子性</strong>的情况比较复杂，只有当事务中使用的命令<strong>语法有误时，原子性得不到保证</strong>，在其它情况下，<strong>事务都可以原子性</strong>执行。</p>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="center">事务</th>
-<th align="center">是否能保证</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">一致性 C</td>
-<td align="center">能保证</td>
-</tr>
-<tr>
-<td align="center">隔离性 I</td>
-<td align="center">能保证</td>
-</tr>
-<tr>
-<td align="center">原子性 A</td>
-<td align="center">能保证(命令语法无误时)</td>
-</tr>
-<tr>
-<td align="center">持久性 D</td>
-<td align="center">不能保证</td>
-</tr>
-</tbody></table>
-<p> 【redis  cluster 没有事务】</p>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><p>31 | 事务机制:Redis能实现ACID属性吗?<br><a href="https://www.liangzl.com/get-article-detail-129391.html">[redis]redis集群不支持事务multi、exec</a>   失效</p>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Kubernetes ApiServer 代码走读</title>
     <url>/www6vHomeHexo/2022/01/15/k8sCodeOfApiServer/</url>
     <content><![CDATA[<p></p>
@@ -13261,67 +13004,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
-    <title>Redis RDB源码</title>
-    <url>/www6vHomeHexo/2021/12/08/rdb/</url>
-    <content><![CDATA[<p hidden></p>
-<span id="more"></span>
-
-
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/// 对应了 Redis 的 save 命 令，会在 save 命令的实现函数 saveCommand(在 rdb.c 文件中)中被调用</span></span><br><span class="line"><span class="comment">/* Save the DB on disk. Return C_ERR on error, C_OK on success. */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">rdbSave</span><span class="params">(<span class="type">char</span> *filename, rdbSaveInfo *rsi)</span> &#123;</span><br><span class="line">    <span class="type">char</span> tmpfile[<span class="number">256</span>];</span><br><span class="line">    <span class="type">char</span> cwd[MAXPATHLEN]; <span class="comment">/* Current working dir path for error messages. */</span></span><br><span class="line">    FILE *fp;</span><br><span class="line">    rio rdb;</span><br><span class="line">    <span class="type">int</span> error = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">snprintf</span>(tmpfile,<span class="number">256</span>,<span class="string">&quot;temp-%d.rdb&quot;</span>, (<span class="type">int</span>) getpid());</span><br><span class="line">    fp = fopen(tmpfile,<span class="string">&quot;w&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (!fp) &#123;</span><br><span class="line">        <span class="type">char</span> *cwdp = getcwd(cwd,MAXPATHLEN);</span><br><span class="line">        serverLog(LL_WARNING,</span><br><span class="line">            <span class="string">&quot;Failed opening the RDB file %s (in server root dir %s) &quot;</span></span><br><span class="line">            <span class="string">&quot;for saving: %s&quot;</span>,</span><br><span class="line">            filename,</span><br><span class="line">            cwdp ? cwdp : <span class="string">&quot;unknown&quot;</span>,</span><br><span class="line">            strerror(errno));</span><br><span class="line">        <span class="keyword">return</span> C_ERR;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    rioInitWithFile(&amp;rdb,fp);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (server.rdb_save_incremental_fsync)</span><br><span class="line">        rioSetAutoSync(&amp;rdb,REDIS_AUTOSYNC_BYTES);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (rdbSaveRio(&amp;rdb,&amp;error,RDB_SAVE_NONE,rsi) == C_ERR) &#123;. <span class="comment">/// 调用 rdbSaveRio 函数(在 rdb.c 文件中)来实际创建 RDB 文件</span></span><br><span class="line">        errno = error;</span><br><span class="line">        <span class="keyword">goto</span> werr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Make sure data will not remain on the OS&#x27;s output buffers */</span></span><br><span class="line">    <span class="keyword">if</span> (fflush(fp) == EOF) <span class="keyword">goto</span> werr;</span><br><span class="line">    <span class="keyword">if</span> (fsync(fileno(fp)) == <span class="number">-1</span>) <span class="keyword">goto</span> werr;</span><br><span class="line">    <span class="keyword">if</span> (fclose(fp) == EOF) <span class="keyword">goto</span> werr;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Use RENAME to make sure the DB file is changed atomically only</span></span><br><span class="line"><span class="comment">     * if the generate DB file is ok. */</span></span><br><span class="line">    <span class="keyword">if</span> (rename(tmpfile,filename) == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="type">char</span> *cwdp = getcwd(cwd,MAXPATHLEN);</span><br><span class="line">        serverLog(LL_WARNING,</span><br><span class="line">            <span class="string">&quot;Error moving temp DB file %s on the final &quot;</span></span><br><span class="line">            <span class="string">&quot;destination %s (in server root dir %s): %s&quot;</span>,</span><br><span class="line">            tmpfile,</span><br><span class="line">            filename,</span><br><span class="line">            cwdp ? cwdp : <span class="string">&quot;unknown&quot;</span>,</span><br><span class="line">            strerror(errno));</span><br><span class="line">        unlink(tmpfile);</span><br><span class="line">        <span class="keyword">return</span> C_ERR;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    serverLog(LL_NOTICE,<span class="string">&quot;DB saved on disk&quot;</span>);</span><br><span class="line">    server.dirty = <span class="number">0</span>;</span><br><span class="line">    server.lastsave = time(<span class="literal">NULL</span>);</span><br><span class="line">    server.lastbgsave_status = C_OK;</span><br><span class="line">    <span class="keyword">return</span> C_OK;</span><br><span class="line"></span><br><span class="line">werr:</span><br><span class="line">    serverLog(LL_WARNING,<span class="string">&quot;Write error saving DB on disk: %s&quot;</span>, strerror(errno));</span><br><span class="line">    fclose(fp);</span><br><span class="line">    unlink(tmpfile);</span><br><span class="line">    <span class="keyword">return</span> C_ERR;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/// 对应 了 Redis 的 bgsave 命令，会在 bgsave 命令的实现函数 bgsaveCommand(在 rdb.c 文 件中)中被调用</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">rdbSaveBackground</span><span class="params">(<span class="type">char</span> *filename, rdbSaveInfo *rsi)</span> &#123;</span><br><span class="line">    <span class="type">pid_t</span> childpid;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> start;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (server.aof_child_pid != <span class="number">-1</span> || server.rdb_child_pid != <span class="number">-1</span>) <span class="keyword">return</span> C_ERR;</span><br><span class="line"></span><br><span class="line">    server.dirty_before_bgsave = server.dirty;</span><br><span class="line">    server.lastbgsave_try = time(<span class="literal">NULL</span>);</span><br><span class="line">    openChildInfoPipe();</span><br><span class="line"></span><br><span class="line">    start = ustime();</span><br><span class="line">    <span class="keyword">if</span> ((childpid = fork()) == <span class="number">0</span>) &#123;  <span class="comment">/// 子进程的代码执行分支</span></span><br><span class="line">        <span class="type">int</span> retval;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Child */</span></span><br><span class="line">        closeClildUnusedResourceAfterFork();</span><br><span class="line">        redisSetProcTitle(<span class="string">&quot;redis-rdb-bgsave&quot;</span>);</span><br><span class="line">        retval = rdbSave(filename,rsi);   <span class="comment">///  调用rdbSave函数创建RDB文件</span></span><br><span class="line">        <span class="keyword">if</span> (retval == C_OK) &#123;</span><br><span class="line">            <span class="type">size_t</span> private_dirty = zmalloc_get_private_dirty(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (private_dirty) &#123;</span><br><span class="line">                serverLog(LL_NOTICE,</span><br><span class="line">                    <span class="string">&quot;RDB: %zu MB of memory used by copy-on-write&quot;</span>,</span><br><span class="line">                    private_dirty/(<span class="number">1024</span>*<span class="number">1024</span>));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            server.child_info_data.cow_size = private_dirty;</span><br><span class="line">            sendChildInfo(CHILD_INFO_TYPE_RDB);</span><br><span class="line">        &#125;</span><br><span class="line">        exitFromChild((retval == C_OK) ? <span class="number">0</span> : <span class="number">1</span>);   <span class="comment">///  子进程退出</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">        <span class="comment">/* Parent */</span>    <span class="comment">//父进程代码执行分支</span></span><br><span class="line">        server.stat_fork_time = ustime()-start;</span><br><span class="line">        server.stat_fork_rate = (<span class="type">double</span>) zmalloc_used_memory() * <span class="number">1000000</span> / server.stat_fork_time / (<span class="number">1024</span>*<span class="number">1024</span>*<span class="number">1024</span>); <span class="comment">/* GB per second. */</span></span><br><span class="line">        latencyAddSampleIfNeeded(<span class="string">&quot;fork&quot;</span>,server.stat_fork_time/<span class="number">1000</span>);</span><br><span class="line">        <span class="keyword">if</span> (childpid == <span class="number">-1</span>) &#123;</span><br><span class="line">            closeChildInfoPipe();</span><br><span class="line">            server.lastbgsave_status = C_ERR;</span><br><span class="line">            serverLog(LL_WARNING,<span class="string">&quot;Can&#x27;t save in background: fork: %s&quot;</span>,</span><br><span class="line">                strerror(errno));</span><br><span class="line">            <span class="keyword">return</span> C_ERR;</span><br><span class="line">        &#125;</span><br><span class="line">        serverLog(LL_NOTICE,<span class="string">&quot;Background saving started by pid %d&quot;</span>,childpid);</span><br><span class="line">        server.rdb_save_time_start = time(<span class="literal">NULL</span>);</span><br><span class="line">        server.rdb_child_pid = childpid;</span><br><span class="line">        server.rdb_child_type = RDB_CHILD_TYPE_DISK;</span><br><span class="line">        updateDictResizePolicy();</span><br><span class="line">        <span class="keyword">return</span> C_OK;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> C_OK; <span class="comment">/* unreached */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/// 这是 Redis server 在采用不落盘方式传输 RDB 文件进行主从复制时，创建 RDB 文件的入 口函数</span></span><br><span class="line"><span class="comment">/// rdbSaveToSlavesSockets 函数是通过网络以字节流的形式，直接发送 RDB 文件的二进制 数据给从节点。</span></span><br><span class="line"><span class="comment">/* Spawn an RDB child that writes the RDB to the sockets of the slaves</span></span><br><span class="line"><span class="comment"> * that are currently in SLAVE_STATE_WAIT_BGSAVE_START state. */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">rdbSaveToSlavesSockets</span><span class="params">(rdbSaveInfo *rsi)</span> &#123;</span><br><span class="line">    <span class="type">int</span> *fds;</span><br><span class="line">    <span class="type">uint64_t</span> *clientids;</span><br><span class="line">    <span class="type">int</span> numfds;</span><br><span class="line">    listNode *ln;</span><br><span class="line">    listIter li;</span><br><span class="line">    <span class="type">pid_t</span> childpid;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> start;</span><br><span class="line">    <span class="type">int</span> pipefds[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (server.aof_child_pid != <span class="number">-1</span> || server.rdb_child_pid != <span class="number">-1</span>) <span class="keyword">return</span> C_ERR;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Before to fork, create a pipe that will be used in order to</span></span><br><span class="line"><span class="comment">     * send back to the parent the IDs of the slaves that successfully</span></span><br><span class="line"><span class="comment">     * received all the writes. */</span></span><br><span class="line">    <span class="keyword">if</span> (pipe(pipefds) == <span class="number">-1</span>) <span class="keyword">return</span> C_ERR;</span><br><span class="line">    server.rdb_pipe_read_result_from_child = pipefds[<span class="number">0</span>];</span><br><span class="line">    server.rdb_pipe_write_result_to_parent = pipefds[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Collect the file descriptors of the slaves we want to transfer</span></span><br><span class="line"><span class="comment">     * the RDB to, which are i WAIT_BGSAVE_START state. */</span></span><br><span class="line">    fds = zmalloc(<span class="keyword">sizeof</span>(<span class="type">int</span>)*listLength(server.slaves));</span><br><span class="line">    <span class="comment">/* We also allocate an array of corresponding client IDs. This will</span></span><br><span class="line"><span class="comment">     * be useful for the child process in order to build the report</span></span><br><span class="line"><span class="comment">     * (sent via unix pipe) that will be sent to the parent. */</span></span><br><span class="line">    clientids = zmalloc(<span class="keyword">sizeof</span>(<span class="type">uint64_t</span>)*listLength(server.slaves));</span><br><span class="line">    numfds = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    listRewind(server.slaves,&amp;li);</span><br><span class="line">    <span class="keyword">while</span>((ln = listNext(&amp;li))) &#123;</span><br><span class="line">        client *slave = ln-&gt;value;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (slave-&gt;replstate == SLAVE_STATE_WAIT_BGSAVE_START) &#123;</span><br><span class="line">            clientids[numfds] = slave-&gt;id;</span><br><span class="line">            fds[numfds++] = slave-&gt;fd;</span><br><span class="line">            replicationSetupSlaveForFullResync(slave,getPsyncInitialOffset());</span><br><span class="line">            <span class="comment">/* Put the socket in blocking mode to simplify RDB transfer.</span></span><br><span class="line"><span class="comment">             * We&#x27;ll restore it when the children returns (since duped socket</span></span><br><span class="line"><span class="comment">             * will share the O_NONBLOCK attribute with the parent). */</span></span><br><span class="line">            anetBlock(<span class="literal">NULL</span>,slave-&gt;fd);</span><br><span class="line">            anetSendTimeout(<span class="literal">NULL</span>,slave-&gt;fd,server.repl_timeout*<span class="number">1000</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Create the child process. */</span></span><br><span class="line">    openChildInfoPipe();</span><br><span class="line">    start = ustime();</span><br><span class="line">    <span class="keyword">if</span> ((childpid = fork()) == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">/* Child */</span></span><br><span class="line">        <span class="type">int</span> retval;</span><br><span class="line">        rio slave_sockets;</span><br><span class="line"></span><br><span class="line">        rioInitWithFdset(&amp;slave_sockets,fds,numfds);</span><br><span class="line">        zfree(fds);</span><br><span class="line"></span><br><span class="line">        closeClildUnusedResourceAfterFork();</span><br><span class="line">        redisSetProcTitle(<span class="string">&quot;redis-rdb-to-slaves&quot;</span>);</span><br><span class="line"></span><br><span class="line">        retval = rdbSaveRioWithEOFMark(&amp;slave_sockets,<span class="literal">NULL</span>,rsi);</span><br><span class="line">        <span class="keyword">if</span> (retval == C_OK &amp;&amp; rioFlush(&amp;slave_sockets) == <span class="number">0</span>)</span><br><span class="line">            retval = C_ERR;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (retval == C_OK) &#123;</span><br><span class="line">            <span class="type">size_t</span> private_dirty = zmalloc_get_private_dirty(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (private_dirty) &#123;</span><br><span class="line">                serverLog(LL_NOTICE,</span><br><span class="line">                    <span class="string">&quot;RDB: %zu MB of memory used by copy-on-write&quot;</span>,</span><br><span class="line">                    private_dirty/(<span class="number">1024</span>*<span class="number">1024</span>));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            server.child_info_data.cow_size = private_dirty;</span><br><span class="line">            sendChildInfo(CHILD_INFO_TYPE_RDB);</span><br><span class="line"></span><br><span class="line">            <span class="comment">/* If we are returning OK, at least one slave was served</span></span><br><span class="line"><span class="comment">             * with the RDB file as expected, so we need to send a report</span></span><br><span class="line"><span class="comment">             * to the parent via the pipe. The format of the message is:</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             * &lt;len&gt; &lt;slave[0].id&gt; &lt;slave[0].error&gt; ...</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             * len, slave IDs, and slave errors, are all uint64_t integers,</span></span><br><span class="line"><span class="comment">             * so basically the reply is composed of 64 bits for the len field</span></span><br><span class="line"><span class="comment">             * plus 2 additional 64 bit integers for each entry, for a total</span></span><br><span class="line"><span class="comment">             * of &#x27;len&#x27; entries.</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             * The &#x27;id&#x27; represents the slave&#x27;s client ID, so that the master</span></span><br><span class="line"><span class="comment">             * can match the report with a specific slave, and &#x27;error&#x27; is</span></span><br><span class="line"><span class="comment">             * set to 0 if the replication process terminated with a success</span></span><br><span class="line"><span class="comment">             * or the error code if an error occurred. */</span></span><br><span class="line">            <span class="type">void</span> *msg = zmalloc(<span class="keyword">sizeof</span>(<span class="type">uint64_t</span>)*(<span class="number">1</span>+<span class="number">2</span>*numfds));</span><br><span class="line">            <span class="type">uint64_t</span> *len = msg;</span><br><span class="line">            <span class="type">uint64_t</span> *ids = len+<span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> j, msglen;</span><br><span class="line"></span><br><span class="line">            *len = numfds;</span><br><span class="line">            <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; numfds; j++) &#123;</span><br><span class="line">                *ids++ = clientids[j];</span><br><span class="line">                *ids++ = slave_sockets.io.fdset.state[j];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">/* Write the message to the parent. If we have no good slaves or</span></span><br><span class="line"><span class="comment">             * we are unable to transfer the message to the parent, we exit</span></span><br><span class="line"><span class="comment">             * with an error so that the parent will abort the replication</span></span><br><span class="line"><span class="comment">             * process with all the childre that were waiting. */</span></span><br><span class="line">            msglen = <span class="keyword">sizeof</span>(<span class="type">uint64_t</span>)*(<span class="number">1</span>+<span class="number">2</span>*numfds);</span><br><span class="line">            <span class="keyword">if</span> (*len == <span class="number">0</span> ||</span><br><span class="line">                write(server.rdb_pipe_write_result_to_parent,msg,msglen)</span><br><span class="line">                != msglen)</span><br><span class="line">            &#123;</span><br><span class="line">                retval = C_ERR;</span><br><span class="line">            &#125;</span><br><span class="line">            zfree(msg);</span><br><span class="line">        &#125;</span><br><span class="line">        zfree(clientids);</span><br><span class="line">        rioFreeFdset(&amp;slave_sockets);</span><br><span class="line">        exitFromChild((retval == C_OK) ? <span class="number">0</span> : <span class="number">1</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">/* Parent */</span></span><br><span class="line">        <span class="keyword">if</span> (childpid == <span class="number">-1</span>) &#123;</span><br><span class="line">            serverLog(LL_WARNING,<span class="string">&quot;Can&#x27;t save in background: fork: %s&quot;</span>,</span><br><span class="line">                strerror(errno));</span><br><span class="line"></span><br><span class="line">            <span class="comment">/* Undo the state change. The caller will perform cleanup on</span></span><br><span class="line"><span class="comment">             * all the slaves in BGSAVE_START state, but an early call to</span></span><br><span class="line"><span class="comment">             * replicationSetupSlaveForFullResync() turned it into BGSAVE_END */</span></span><br><span class="line">            listRewind(server.slaves,&amp;li);</span><br><span class="line">            <span class="keyword">while</span>((ln = listNext(&amp;li))) &#123;</span><br><span class="line">                client *slave = ln-&gt;value;</span><br><span class="line">                <span class="type">int</span> j;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; numfds; j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (slave-&gt;id == clientids[j]) &#123;</span><br><span class="line">                        slave-&gt;replstate = SLAVE_STATE_WAIT_BGSAVE_START;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            close(pipefds[<span class="number">0</span>]);</span><br><span class="line">            close(pipefds[<span class="number">1</span>]);</span><br><span class="line">            closeChildInfoPipe();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            server.stat_fork_time = ustime()-start;</span><br><span class="line">            server.stat_fork_rate = (<span class="type">double</span>) zmalloc_used_memory() * <span class="number">1000000</span> / server.stat_fork_time / (<span class="number">1024</span>*<span class="number">1024</span>*<span class="number">1024</span>); <span class="comment">/* GB per second. */</span></span><br><span class="line">            latencyAddSampleIfNeeded(<span class="string">&quot;fork&quot;</span>,server.stat_fork_time/<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">            serverLog(LL_NOTICE,<span class="string">&quot;Background RDB transfer started by pid %d&quot;</span>,</span><br><span class="line">                childpid);</span><br><span class="line">            server.rdb_save_time_start = time(<span class="literal">NULL</span>);</span><br><span class="line">            server.rdb_child_pid = childpid;</span><br><span class="line">            server.rdb_child_type = RDB_CHILD_TYPE_SOCKET;</span><br><span class="line">            updateDictResizePolicy();</span><br><span class="line">        &#125;</span><br><span class="line">        zfree(clientids);</span><br><span class="line">        zfree(fds);</span><br><span class="line">        <span class="keyword">return</span> (childpid == <span class="number">-1</span>) ? C_ERR : C_OK;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> C_OK; <span class="comment">/* Unreached. */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<img src="/www6vHomeHexo/2021/12/08/rdb/rdb.png" class title="rdb流程">
-
-
-
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><p>18 | 如何生成和解读RDB文件?<br>《Redis源码剖析与实战》</p>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis AOF Rewrite</title>
-    <url>/www6vHomeHexo/2021/11/21/aofRewrite/</url>
-    <content><![CDATA[<p hidden></p>
-<span id="more"></span>
-
-
-<h2><span id="一-aof-重写函数与触发时机">一.   AOF 重写函数与触发时机</span><a href="#一-aof-重写函数与触发时机" class="header-anchor">#</a></h2><p>我们就了解了 AOF 重写的四个触发时机，这里我也给你总结下，方便你回 顾复习。</p>
-<h5><span id="时机一bgrewriteaof-命令被执行">时机一:bgrewriteaof 命令被执行。</span><a href="#时机一bgrewriteaof-命令被执行" class="header-anchor">#</a></h5><h5><span id="时机二主从复制完成-rdb-文件解析和加载无论是否成功">时机二:主从复制完成 RDB 文件解析和加载(无论是否成功)。</span><a href="#时机二主从复制完成-rdb-文件解析和加载无论是否成功" class="header-anchor">#</a></h5><pre><code>而对于 restartAOFAfterSYNC 函数来说，它会在主从节点的复制过程中被调用。简单来 说，就是当主从节点在进行复制时，如果从节点的 AOF 选项被打开，那么在加载解析 RDB 文件时，AOF 选项就会被关闭。然后，无论从节点是否成功加载了 RDB 文件， restartAOFAfterSYNC 函数都会被调用，用来恢复被关闭的 AOF 功能。
-那么在这个过程中，restartAOFAfterSYNC 函数就会调用 startAppendOnly 函数，并进 一步调用 rewriteAppendOnlyFileBackground 函数，来执行一次 AOF 重写。
-</code></pre>
-<h5><span id="时机三aof-重写被设置为待调度执行">时机三:AOF 重写被设置为待调度执行。</span><a href="#时机三aof-重写被设置为待调度执行" class="header-anchor">#</a></h5><h5><span id="时机四aof-被启用同时-aof-文件的大小比例超出阈值以及-aof-文件的大小绝对-值超出阈值">时机四:AOF 被启用，同时 AOF 文件的大小比例超出阈值，以及 AOF 文件的大小绝对 值超出阈值。</span><a href="#时机四aof-被启用同时-aof-文件的大小比例超出阈值以及-aof-文件的大小绝对-值超出阈值" class="header-anchor">#</a></h5><p>auto-aof-rewrite-percentage:AOF 文件大小超出基础大小的比例，默认值为 100%，即超出 1 倍大小。<br>auto-aof-rewrite-min-size:AOF 文件大小绝对值的最小值，默认为 64MB。</p>
-<p>另外，这里你还需要注意，在这四个时机下，其实都不能有正在执行的 RDB 子进程和 AOF 重写子进程，否则的话，AOF 重写就无法执行了。</p>
-<h2><span id="二-aof-重写的基本过程">二.  AOF 重写的基本过程</span><a href="#二-aof-重写的基本过程" class="header-anchor">#</a></h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">rewriteAppendOnlyFileBackground</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">	<span class="keyword">if</span> ((childpid = fork()) == <span class="number">0</span>) &#123; <span class="comment">//创建子进程 </span></span><br><span class="line">         ...</span><br><span class="line">		<span class="comment">//子进程调用rewriteAppendOnlyFile进行AOF重写</span></span><br><span class="line">		<span class="keyword">if</span> (rewriteAppendOnlyFile(tmpfile) == C_OK) &#123;</span><br><span class="line">            <span class="type">size_t</span> private_dirty = zmalloc_get_private_dirty(<span class="number">-1</span>);</span><br><span class="line">            ...</span><br><span class="line">            exitFromChild(<span class="number">0</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            exitFromChild(<span class="number">1</span>);</span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123; <span class="comment">//父进程执行的逻辑 </span></span><br><span class="line">        ...</span><br><span class="line">		server.aof_rewrite_scheduled = <span class="number">0</span>; </span><br><span class="line">		server.aof_rewrite_time_start = time(<span class="literal">NULL</span>); </span><br><span class="line">		server.aof_child_pid = childpid; <span class="comment">//记录重写子进程的进程号 </span></span><br><span class="line">		updateDictResizePolicy(); <span class="comment">//关闭rehash功能</span></span><br><span class="line">        ... </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<img src="/www6vHomeHexo/2021/11/21/aofRewrite/aof-rewrite.png" class title="AOF Rewrite">
-
-
-<p>不过，AOF 重写和 RDB 文件又有两个不同的地方:<br>一是，AOF 文件中是以“命令 + 键值对”的形式，来记录每个键值对的插入操作，而 RDB 文件记录的是键值对数据本身;<br>二是，在 AOF 重写或是创建 RDB 的过程中，主进程仍然可以接收客户端写请求。不 过，因为 RDB 文件只需要记录某个时刻下数据库的所有数据就行，而 AOF 重写则需要 尽可能地把主进程收到的写操作，也记录到重写的日志文件中。所以，AOF 重写子进程 就需要有相应的机制来和主进程进行通信，以此来接收主进程收到的写操作。</p>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>redis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>腾讯云TCP2-云原生应用设计</title>
     <url>/www6vHomeHexo/2021/07/22/tencentTCP2/</url>
     <content><![CDATA[<p></p>
@@ -13705,40 +13387,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>云计算</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis Rehash机制</title>
-    <url>/www6vHomeHexo/2021/06/20/redisRehash/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E8%A7%A6%E5%8F%91-rehash">什么时候触发 rehash？</a></li>
-<li><a href="#rehash-%E6%89%A9%E5%AE%B9%E6%89%A9%E5%A4%9A%E5%A4%A7">rehash 扩容扩多大？</a></li>
-<li><a href="#rehash-%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C">rehash 如何执行？</a></li>
-<li><a href="#dictrehash-%E7%9A%84%E4%B8%BB%E8%A6%81%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B">dictRehash 的主要执行流程</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h3><span id="什么时候触发-rehash">什么时候触发 rehash？</span><a href="#什么时候触发-rehash" class="header-anchor">#</a></h3><p>，_dictExpandIfNeeded 函数中定义了三个扩容条件。<br>下面的代码就展示了 _dictExpandIfNeeded 函数对这三个条件的定义，你可以看下。<br>条件一：ht[0]的大小为 0。<br>条件二：ht[0]承载的元素个数已经超过了 ht[0]的大小，同时 Hash 表可以进行扩容。<br>条件三：ht[0]承载的元素个数，是 ht[0]的大小的 dict_force_resize_ratio 倍，其中，<br><strong>dict_force_resize_ratio 的默认值是 5</strong>。</p>
-<h3><span id="rehash-扩容扩多大">rehash 扩容扩多大？</span><a href="#rehash-扩容扩多大" class="header-anchor">#</a></h3><p>对 Hash表扩容的思路也很简单，就是如果当前表的已用空间大小为 size，<strong>那么就将表扩容到</strong> size*2 <strong>的大小</strong>。</p>
-<h3><span id="rehash-如何执行">rehash 如何执行？</span><a href="#rehash-如何执行" class="header-anchor">#</a></h3><p>其实这是因为，Hash 表在执行 rehash 时，由于 Hash 表空间扩大，原本映射到某一位置<br>的键可能会被映射到一个新的位置上，因此，很多键就需要从原来的位置拷贝到新的位<br>置。<strong>而在键拷贝时，由于 Redis 主线程无法执行其他请求，所以键拷贝会阻塞主线程，这<br>样就会产生 rehash 开销。</strong></p>
-<p><strong>而为了降低 rehash 开销，Redis 就提出了渐进式 rehash 的方法。</strong></p>
-<h3><span id="dictrehash-的主要执行流程">dictRehash 的主要执行流程</span><a href="#dictrehash-的主要执行流程" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2021/06/20/redisRehash/rehash.png" class title="Rehash">]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
       </tags>
   </entry>
   <entry>
@@ -14648,143 +14296,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>异步</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis数据结构</title>
-    <url>/www6vHomeHexo/2021/05/05/redisDataStructure/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<h2><span id="数据结构和实现">数据结构和实现</span><a href="#数据结构和实现" class="header-anchor">#</a></h2><p><img src="/www6vHomeHexo/redisDataStructure.png" alt="redis 数据结构"></p>
-<hr>
-<table>
-<thead>
-<tr>
-<th align="center">数据结构</th>
-<th align="center">基础</th>
-<th align="center">优化</th>
-<th align="center">特点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">String</td>
-<td align="center">SDS</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">List</td>
-<td align="center">双向列表</td>
-<td align="center">压缩列表</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">Hash</td>
-<td align="center">hash表</td>
-<td align="center">压缩列表</td>
-<td align="center">渐进式rehash</td>
-</tr>
-<tr>
-<td align="center">SortedSet</td>
-<td align="center">跳表</td>
-<td align="center">压缩列表</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">Set</td>
-<td align="center">整数数组</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-</tbody></table>
-<hr>
-<p><img src="/www6vHomeHexo/Complex.png" alt="数据结构的时间复杂度"></p>
-<h2><span id="全局hash表-ampamp-渐进式-rehash">全局hash表 &amp;&amp; 渐进式 rehash</span><a href="#全局hash表-ampamp-渐进式-rehash" class="header-anchor">#</a></h2><p><img src="/www6vHomeHexo/globalHash.png" alt="全局Hash表"></p>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><p>02 | 数据结构:快速的Redis有哪些慢操作?</p>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis RDB</title>
-    <url>/www6vHomeHexo/2021/01/02/redisRDB/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#rdb">RDB</a><ul>
-<li><a href="#%E5%8A%9F%E8%83%BD-1">功能 [1]</a></li>
-<li><a href="#%E8%A7%A6%E5%8F%91%E6%9C%BA%E5%88%B6-2">触发机制 [2]</a></li>
-<li><a href="#%E4%BC%98%E7%82%B9%E7%BC%BA%E7%82%B92">优点&#x2F;缺点[2]</a></li>
-<li><a href="#%E5%BB%BA%E8%AE%AE-1">建议 [1]</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="rdb">RDB</span><a href="#rdb" class="header-anchor">#</a></h1><h3><span id="功能-1">功能 [1]</span><a href="#功能-1" class="header-anchor">#</a></h3><ul>
-<li><p>只需要把 <strong>RDB 文件</strong>直接读入内存，可以快速恢复数据库。这就避免了 AOF 需要顺序、逐一重新执行操作命令带来的低效性能问题。</p>
-</li>
-<li><p>Redis 设计了 <strong>bgsave</strong> 和<strong>写时复制</strong>方式，尽可能减少了内存快照对正常读写的影响，但是，频繁快照仍然是不太能接受的。</p>
-</li>
-</ul>
-<p>【 总结: <strong>bgsave 异步 + 写时复制（copy-on-write）</strong>】</p>
-<h3><span id="触发机制-2">触发机制 [2]</span><a href="#触发机制-2" class="header-anchor">#</a></h3><ul>
-<li>手动触发<ul>
-<li>bgsave [3]</li>
-<li><del>save 废弃</del>  [3]</li>
-</ul>
-</li>
-<li>自动触发<ul>
-<li>save的相关配置</li>
-<li>从节点全量复制，主节点执行bgsave生成RDB并发送给从节点</li>
-<li>其他</li>
-</ul>
-</li>
-</ul>
-<h3><span id="优点x2f缺点2">优点&#x2F;缺点[2]</span><a href="#优点x2f缺点2" class="header-anchor">#</a></h3><ul>
-<li>优点<ul>
-<li>加载RDB恢复数据远远快于AOF的方式</li>
-</ul>
-</li>
-<li>缺点<ul>
-<li>没办法做到实时持久化</li>
-</ul>
-</li>
-</ul>
-<h3><span id="建议-1">建议 [1]</span><a href="#建议-1" class="header-anchor">#</a></h3><ul>
-<li><strong>数据不能丢失时</strong>，<strong>内存快照和 AOF 的混合使用</strong>是一个很好的选择；</li>
-<li>如果允许<strong>分钟级别的数据丢失</strong>，可以只使用 <strong>RDB</strong>；</li>
-<li>如果只用 <strong>AOF</strong>，优先使用 <strong>everysec</strong> 的配置选项，因为它在可靠性和性能之间取了一个平衡。</li>
-</ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li>《05丨内存快照：宕机后，Redis如何实现快速恢复？》 </li>
-<li>《redis开发与运维》 第5章</li>
-<li><a href="/www6vHomeHexo/2021/12/08/rdb/" title="Redis RDB源码">Redis RDB源码</a> self</li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
       </tags>
   </entry>
   <entry>
