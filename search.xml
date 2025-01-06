@@ -652,67 +652,14 @@
       </tags>
   </entry>
   <entry>
-    <title>Redis+缓存 汇总</title>
+    <title>Redis+缓存 汇总(archived)</title>
     <url>/www6vHomeHexo/2021/02/07/nosqlRedisSummary/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
 
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
 
-<!-- toc -->
-
-<ul>
-<li><a href="#redis-%E5%9F%BA%E7%A1%80">Redis 基础</a><ul>
-<li><a href="#%E8%B5%84%E6%BA%90%E5%9B%9E%E6%94%B6">资源回收</a></li>
-<li><a href="#%E5%85%B6%E4%BB%96">其他</a></li>
-</ul>
-</li>
-<li><a href="#redis-%E6%95%85%E9%9A%9C%E4%BC%98%E5%8C%96">Redis 故障&amp;优化</a></li>
-<li><a href="#redis-%E5%BA%94%E7%94%A8">Redis 应用</a></li>
-<li><a href="#redis-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90">Redis 学习资源</a></li>
-<li><a href="#%E7%BC%93%E5%AD%98">缓存</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="redis-基础">Redis 基础</span><a href="#redis-基础" class="header-anchor">#</a></h1><hr>
-<h3><span id="资源回收">资源回收</span><a href="#资源回收" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2022/06/01/redisLazyFree/" title="Redis LazyFree">Redis LazyFree</a></li>
-<li><a href="/www6vHomeHexo/2021/06/02/redisDelete/" title="Redis 回收策略">Redis 回收策略</a></li>
-<li><a href="/www6vHomeHexo/2022/07/16/redisLRU/" title="Redis LRU算法">Redis LRU算法</a></li>
-</ul>
-<h3><span id="其他">其他</span><a href="#其他" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2022/05/14/redisNVM/" title="Redis NVM">Redis NVM</a></li>
-</ul>
-<hr>
-<h1><span id="redis-故障amp优化">Redis 故障&amp;优化</span><a href="#redis-故障amp优化" class="header-anchor">#</a></h1><ul>
-<li><p>常见问题</p>
-<ul>
-<li><a href="/www6vHomeHexo/2021/05/21/redisBigKey/" title="Redis 大Key">Redis 大Key</a> </li>
-<li><a href="/www6vHomeHexo/2021/05/24/redisOptimize/" title="Redis 优化建议">Redis 优化建议</a></li>
-<li><a href="/www6vHomeHexo/2022/03/28/redisReliability-1/" title="Redis雪崩、击穿、穿透">Redis雪崩、击穿、穿透</a></li>
-<li><a href="/www6vHomeHexo/2022/02/21/redisDbConsistent/" title="Redis和数据库之间的一致性">Redis和数据库之间的一致性</a></li>
-<li><a href="/www6vHomeHexo/2022/03/25/redisSlowResponse/" title="Redis 慢查询排查">Redis 慢查询排查</a> </li>
-<li><a href="/www6vHomeHexo/2022/06/03/redisHotkey/" title="Redis 热点Hotkey">Redis 热点Hotkey</a></li>
-<li><a href="/www6vHomeHexo/2022/07/31/redisHitRate/" title="Redis  命中率">Redis  命中率</a></li>
-</ul>
-</li>
-<li><a href="/www6vHomeHexo/2022/05/23/redisNodeId/" title="Redis 集群扩容时NodeId问题">Redis 集群扩容时NodeId问题</a></li>
-</ul>
-<h1><span id="redis-应用">Redis 应用</span><a href="#redis-应用" class="header-anchor">#</a></h1><ul>
-<li><a href="/www6vHomeHexo/2021/06/29/redisUseCase/" title="Redis 使用场景UseCase">Redis 使用场景UseCase</a></li>
-<li><a href="/www6vHomeHexo/2022/05/05/redisDistKey/" title="Redis 分布式锁">Redis 分布式锁</a></li>
-<li><a href="/www6vHomeHexo/2022/04/27/redisSLO/" title="Redis SLO">Redis SLO</a></li>
-</ul>
 <h1><span id="redis-学习资源">Redis 学习资源</span><a href="#redis-学习资源" class="header-anchor">#</a></h1><ul>
 <li><a href="/www6vHomeHexo/2021/05/24/redisStudy/" title="Redis 学习资源">Redis 学习资源</a></li>
-</ul>
-<h1><span id="缓存">缓存</span><a href="#缓存" class="header-anchor">#</a></h1><ul>
-<li><a href="/www6vHomeHexo/2021/05/25/cacheConsistent/" title="缓存 一致性">缓存 一致性</a></li>
-<li><a href="/www6vHomeHexo/2019/05/25/cacheMultiLayer/" title="多级缓存(cache)">多级缓存(cache)</a></li>
-<li><a href="/www6vHomeHexo/2018/01/21/cacheSummary/" title="缓存(cache)总结">缓存(cache)总结</a></li>
-<li><a href="/www6vHomeHexo/2017/12/07/cache/" title="缓存(cache)机制">缓存(cache)机制</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -3586,40 +3533,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Redis  命中率</title>
-    <url>/www6vHomeHexo/2022/07/31/redisHitRate/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<h1><span id="命中率不高">命中率不高</span><a href="#命中率不高" class="header-anchor">#</a></h1><p>会增加接口响应时间</p>
-<h1><span id="提高redis命中率-34">提高redis命中率 [3][4]</span><a href="#提高redis命中率-34" class="header-anchor">#</a></h1><ul>
-<li>缓存粒度<br>缓存粒度越小，命中率越高</li>
-<li>合理调整缓存有效期的时间<br>  避免缓存同时失效</li>
-<li>预加载</li>
-<li>防止缓存击穿和穿透[5]</li>
-<li>增加存储容量<br>容量不足时会触发Redis内存淘汰机制<ul>
-<li>清空策略 [6]<br> FIFO(first in first out)<br>LFU(less frequently used)<br>LRU(least recently used)</li>
-</ul>
-</li>
-</ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="3">
-<li><a href="https://segmentfault.com/a/1190000023730820">如何提高redis缓存命中率</a></li>
-<li><a href="https://www.cnblogs.com/chenhaoyu/p/11308753.html">关于如何提高缓存命中率（redis）</a></li>
-<li><a href="/www6vHomeHexo/2022/03/28/redisReliability-1/" title="Redis雪崩、击穿、穿透">Redis雪崩、击穿、穿透</a> self</li>
-<li><a href="https://tech.meituan.com/2017/03/17/cache-about.html">缓存那些事</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>KV</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>电商 总结</title>
     <url>/www6vHomeHexo/2022/07/24/eCommerce/</url>
     <content><![CDATA[<p></p>
@@ -4163,61 +4076,6 @@
       </categories>
       <tags>
         <tag>metric</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis LRU算法</title>
-    <url>/www6vHomeHexo/2022/07/16/redisLRU/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#lru-%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0">LRU 算法的实现</a><ul>
-<li><a href="#%E5%85%A8%E5%B1%80-lru-%E6%97%B6%E9%92%9F%E5%80%BC%E7%9A%84%E8%AE%A1%E7%AE%97">全局 LRU 时钟值的计算</a></li>
-<li><a href="#%E9%94%AE%E5%80%BC%E5%AF%B9-lru-%E6%97%B6%E9%92%9F%E5%80%BC%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%8E%E6%9B%B4%E6%96%B0">键值对 LRU 时钟值的初始化与更新</a></li>
-<li><a href="#%E8%BF%91%E4%BC%BC-lru-%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E9%99%85%E6%89%A7%E8%A1%8C">近似 LRU 算法的实际执行</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="lru-算法的实现">LRU 算法的实现</span><a href="#lru-算法的实现" class="header-anchor">#</a></h1><p>Redis 对近似 LRU 算法的实现分成了三个部分</p>
-<h3><span id="全局-lru-时钟值的计算">全局 LRU 时钟值的计算</span><a href="#全局-lru-时钟值的计算" class="header-anchor">#</a></h3><p>这部分包括，Redis 源码为了实现近似 LRU 算法的效果，是<br>如何计算全局 LRU 时钟值的，以用来判断数据访问的时效性；</p>
-<ol>
-<li><strong>全局 LRU 时钟值就是通过 getLRUClock 函数计算得到的</strong>。</li>
-<li><strong>如果一个数据前后两次访问的时间间隔小于 1 秒，那么这 两次访问的时间戳就是一样的</strong>。</li>
-<li>serverCron 函数作为时间事件的回调函数，本身会按照一定的频率周期性执行，其频率值<br>是由 Redis 配置文件 redis.conf 中的 <strong>hz 配置项</strong>决定的。hz 配置项的默认值是 10，这表<br>示 serverCron 函数会每 100 毫秒（1 秒 &#x2F;10 &#x3D; 100 毫秒）运行一次。</li>
-</ol>
-<p>这样，在 serverCron 函数中，全局 LRU 时钟值就会按照这个函数的执行频率，定期调用<br>getLRUClock 函数进行更新，如下所示：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">serverCron</span><span class="params">(<span class="keyword">struct</span> aeEventLoop *eventLoop, <span class="type">long</span> <span class="type">long</span> id, <span class="type">void</span> *clientData)</span> </span><br><span class="line">... </span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> lruclock = getLRUClock(); <span class="comment">//默认情况下，每100毫秒调用getLRUClock函数更</span></span><br><span class="line">atomicSet(server.lruclock,lruclock); <span class="comment">//设置lruclock变量</span></span><br><span class="line">... </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#hz默认设为10，提高它的值将会占用更多的cpu，当然相应的redis将会更快的处理同时到期的许多key，以及更精确的去处理超时。</span><br><span class="line">#hz的取值范围是1~500，通常不建议超过100，只有在请求延时非常低的情况下可以将值提升到100。</span><br><span class="line">hz 10</span><br></pre></td></tr></table></figure>
-
-<h3><span id="键值对-lru-时钟值的初始化与更新">键值对 LRU 时钟值的初始化与更新</span><a href="#键值对-lru-时钟值的初始化与更新" class="header-anchor">#</a></h3><p>这部分包括，Redis 源码在哪些函数中对每个键值对对应的 LRU 时钟值，进行初始化与更新；</p>
-<h3><span id="近似-lru-算法的实际执行">近似 LRU 算法的实际执行</span><a href="#近似-lru-算法的实际执行" class="header-anchor">#</a></h3><p>这部分包括，Redis 源码具体如何执行近似 LRU 算法，也就是何时触发数据淘汰，以及实际淘汰的机制是怎么实现的。</p>
-<ol>
-<li>何时触发算法执行？</li>
-<li>算法具体如何执行？</li>
-</ol>
-<img src="/www6vHomeHexo/2022/07/16/redisLRU/r-lru.jpg" class>
-
-
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>《15 | 为什么LRU算法原理和代码实现不一样？》</p>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
       </tags>
   </entry>
   <entry>
@@ -6743,51 +6601,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
-    <title>Redis 热点Hotkey</title>
-    <url>/www6vHomeHexo/2022/06/03/redisHotkey/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="hotkey">HotKey</span><a href="#hotkey" class="header-anchor">#</a></h2><ul>
-<li><p>寻找热点Key [2]</p>
-<ul>
-<li>客户端  [1]<br>缺点: 只能统计单个客户端</li>
-<li>代理<br>缺点:  代理端的开发部署成本</li>
-<li>服务端<br>缺点:  monitor命令,  短时间用</li>
-<li>机器<br>packetbeat 抓包<br>缺点:  运维部署和机器成本</li>
-</ul>
-</li>
-<li><p>解决热点key [2]</p>
-<ul>
-<li>拆分复杂数据结构</li>
-<li>迁移热点key</li>
-<li>本地缓存加通知机制  [3]<br>使用二级缓存  [1]</li>
-</ul>
-</li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://mp.weixin.qq.com/s?__biz=MzAxOTY5MDMxNA==&mid=2455759090&idx=1&sn=f9f0b49d7c1916672f9d4f63dab0c2b6">有赞透明多级缓存解决方案（TMC）</a></li>
-<li>《Redis 开发与运维》  12.5</li>
-<li><a href="https://github.com/shiyindaxiaojie/hotkey">京东 Redis 热点数据探测工具镜像</a><br><a href="https://mp.weixin.qq.com/s/xOzEj5HtCeh_ezHDPHw6Jw">京东毫秒级热key探测框架设计与实践，已实战于618大促</a></li>
-<li><a href="https://help.aliyun.com/document_detail/67252.html">热点 Key 问题的发现与解决</a> 阿里 文档  已失效</li>
-</ol>
-<blockquote>
-<p>通常的解决方案主要集中在对<strong>客户端</strong>和<strong>Server端</strong>进行相应的改造。<br>I. 服务端本地缓存.<br>II. 服务端分布式缓存。</p>
-</blockquote>
-<blockquote>
-<p>阿里云方案 (整体看是用中间件 负载均衡 水平扩展)<br>I. 读写分离方案解决热读<br>写 热备; 读 存储水平扩展<br>II. 热点数据解决方案<br>该方案通过主动<strong>发现热点</strong>并对其进行<strong>存储</strong>来解决热点Key的问题。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Kubernetes 安装方式</title>
     <url>/www6vHomeHexo/2022/06/03/k8sSetupSummary/</url>
     <content><![CDATA[<p></p>
@@ -6853,65 +6666,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>Kubernetes</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis LazyFree</title>
-    <url>/www6vHomeHexo/2022/06/01/redisLazyFree/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#%E5%9C%BA%E6%99%AF-1">场景 [1]</a></li>
-<li><a href="#%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE">相关配置</a></li>
-<li><a href="#%E6%BA%90%E4%BB%A3%E7%A0%81">源代码</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-
-<h2><span id="场景-1">场景 [1]</span><a href="#场景-1" class="header-anchor">#</a></h2><ul>
-<li>场景一：客户端执行的<strong>显示删除&#x2F;清除命令</strong>，比如 del，flushdb 等；</li>
-<li>场景二：某些指令带有的隐式删除命令，比如 move , rename 等；</li>
-<li>场景三：到达<strong>过期</strong>时间的数据需要删除；</li>
-<li>场景四：使用内存达到 maxmemory 后被选出来要<strong>淘汰</strong>的数据需要删除；</li>
-<li>场景五：在主从同步全量同步阶段，从库收到主库的 RDB 文件后要先删除现有的数据再加载 RDB 文件；</li>
-</ul>
-<h2><span id="相关配置">相关配置</span><a href="#相关配置" class="header-anchor">#</a></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">惰性删除相 关的配置项</span><br><span class="line"></span><br><span class="line">lazyfree-lazy-eviction：对应缓存淘汰时的数据删除场景。</span><br><span class="line">lazyfree-lazy-expire：对应过期 key 的删除场景。</span><br><span class="line">lazyfree-lazy-server-del：对应会隐式进行删除操作的 server 命令执行场景。</span><br><span class="line">replica-lazy-flush：对应从节点完成全量同步后，删除原有旧数据的场景。</span><br></pre></td></tr></table></figure>
-
-
-<h2><span id="源代码">源代码</span><a href="#源代码" class="header-anchor">#</a></h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">evict.c</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">freeMemoryIfNeeded</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="comment">/*......*/</span></span><br><span class="line">    <span class="comment">/* Finally remove the selected key. */</span></span><br><span class="line">        <span class="keyword">if</span> (bestkey) &#123;</span><br><span class="line">            db = server.db+bestdbid;</span><br><span class="line">            robj *keyobj = createStringObject(bestkey,sdslen(bestkey));</span><br><span class="line">            propagateExpire(db,keyobj,server.lazyfree_lazy_eviction);  ### <span class="number">1</span></span><br><span class="line">            <span class="comment">/* We compute the amount of memory freed by db*Delete() alone.</span></span><br><span class="line"><span class="comment">             * It is possible that actually the memory needed to propagate</span></span><br><span class="line"><span class="comment">             * the DEL in AOF and replication link is greater than the one</span></span><br><span class="line"><span class="comment">             * we are freeing removing the key, but we can&#x27;t account for</span></span><br><span class="line"><span class="comment">             * that otherwise we would never exit the loop.</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             * AOF and Output buffer memory will be freed eventually so</span></span><br><span class="line"><span class="comment">             * we only care about memory used by the key space. */</span></span><br><span class="line">            delta = (<span class="type">long</span> <span class="type">long</span>) zmalloc_used_memory();    <span class="comment">//获取当前内存使用量</span></span><br><span class="line">            latencyStartMonitor(eviction_latency);</span><br><span class="line">            <span class="keyword">if</span> (server.lazyfree_lazy_eviction)   <span class="comment">/////. 如果 lazyfree_lazy_eviction 被设置为 1，也就是启用了缓存淘汰时的惰性删除，</span></span><br><span class="line">                dbAsyncDelete(db,keyobj);        <span class="comment">/////.  那么，删除操作对应的命令就是 UNLINK；</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                dbSyncDelete(db,keyobj);         <span class="comment">/////.  否则的话，命令就是 DEL。</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">/*......*/</span></span><br><span class="line">            delta -= (<span class="type">long</span> <span class="type">long</span>) zmalloc_used_memory();   <span class="comment">///根据当前内存使用量计算数据删除前后释放....</span></span><br><span class="line">            mem_freed += delta;    <span class="comment">//更新已释放的内存量</span></span><br><span class="line">            <span class="comment">/*......*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">db.c ### <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Propagate expires into slaves and the AOF file.</span></span><br><span class="line"><span class="comment"> * When a key expires in the master, a DEL operation for this key is sent</span></span><br><span class="line"><span class="comment"> * to all the slaves and the AOF file if enabled.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * This way the key expiry is centralized in one place, and since both</span></span><br><span class="line"><span class="comment"> * AOF and the master-&gt;slave link guarantee operation ordering, everything</span></span><br><span class="line"><span class="comment"> * will be consistent even if we allow write operations against expiring</span></span><br><span class="line"><span class="comment"> * keys. */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">propagateExpire</span><span class="params">(redisDb *db, robj *key, <span class="type">int</span> lazy)</span> &#123;</span><br><span class="line">    robj *argv[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">    argv[<span class="number">0</span>] = lazy ? shared.unlink : shared.del;    <span class="comment">// 如果server启用了lazyfree-lazy</span></span><br><span class="line">    argv[<span class="number">1</span>] = key;                <span class="comment">//被淘汰的key对象</span></span><br><span class="line">    incrRefCount(argv[<span class="number">0</span>]);</span><br><span class="line">    incrRefCount(argv[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (server.aof_state != AOF_OFF)   <span class="comment">///  是否启用了 AOF 日志 /// 如果启用了AOF日志</span></span><br><span class="line">        feedAppendOnlyFile(server.delCommand,db-&gt;id,argv,<span class="number">2</span>);  <span class="comment">// 把被淘汰 key 的删除操作记录到 AOF 文件中，以保证后续使用 AOF 文件进行 Redis 数据库恢复时，可以和恢复前保持一致</span></span><br><span class="line">    replicationFeedSlaves(server.slaves,db-&gt;id,argv,<span class="number">2</span>);   <span class="comment">//// 把删除操作同步给从节点，以保证主从节点的数据一致</span></span><br><span class="line"></span><br><span class="line">    decrRefCount(argv[<span class="number">0</span>]);</span><br><span class="line">    decrRefCount(argv[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">子操作一</span><br><span class="line"></span><br><span class="line">子操作一：将被淘汰的键值对从哈希表中去除，这里的哈希表既可能是设置了过期 key</span><br><span class="line">的哈希表，也可能是全局哈希表。</span><br><span class="line">子操作二：释放被淘汰键值对所占用的内存空间。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">子操作一</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Search and remove an element. This is an helper function for</span></span><br><span class="line"><span class="comment"> * dictDelete() and dictUnlink(), please check the top comment</span></span><br><span class="line"><span class="comment"> * of those functions. */</span></span><br><span class="line"><span class="type">static</span> dictEntry *<span class="title function_">dictGenericDelete</span><span class="params">(dict *d, <span class="type">const</span> <span class="type">void</span> *key, <span class="type">int</span> nofree)</span> &#123;</span><br><span class="line">... ...</span><br><span class="line"></span><br><span class="line">    h = dictHashKey(d, key);  <span class="comment">//计算key的哈希值 </span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (table = <span class="number">0</span>; table &lt;= <span class="number">1</span>; table++) &#123;</span><br><span class="line">        idx = h &amp; d-&gt;ht[table].sizemask;  <span class="comment">//根据key的哈希值获取它所在的哈希桶编号</span></span><br><span class="line">        he = d-&gt;ht[table].table[idx];   <span class="comment">//获取key所在哈希桶的第一个哈希项</span></span><br><span class="line">        prevHe = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">while</span>(he) &#123;        <span class="comment">//在哈希桶中逐一查找被删除的key是否存在</span></span><br><span class="line">            <span class="keyword">if</span> (key==he-&gt;key || dictCompareKeys(d, key, he-&gt;key)) &#123;</span><br><span class="line">                <span class="comment">/* Unlink the element from the list */</span></span><br><span class="line">                <span class="comment">//如果找见被删除key了，那么将它从哈希桶的链表中去除</span></span><br><span class="line">                <span class="keyword">if</span> (prevHe)</span><br><span class="line">                    prevHe-&gt;next = he-&gt;next;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    d-&gt;ht[table].table[idx] = he-&gt;next;</span><br><span class="line">                <span class="keyword">if</span> (!nofree) &#123;        <span class="comment">//如果要同步删除，那么就释放key和value的内存空间</span></span><br><span class="line">                    dictFreeKey(d, he);     <span class="comment">//调用dictFreeKey释放</span></span><br><span class="line">                    dictFreeVal(d, he);</span><br><span class="line">                    zfree(he);</span><br><span class="line">                &#125;</span><br><span class="line">                d-&gt;ht[table].used--;</span><br><span class="line">                <span class="keyword">return</span> he;</span><br><span class="line">            &#125;</span><br><span class="line">            prevHe = he;</span><br><span class="line">            he = he-&gt;next;           <span class="comment">//当前key不是要查找的key，再找下一个</span></span><br><span class="line">        &#125;</span><br><span class="line">        ......</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Remove an element, returning DICT_OK on success or DICT_ERR if the</span></span><br><span class="line"><span class="comment"> * element was not found. */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">dictDelete</span><span class="params">(dict *ht, <span class="type">const</span> <span class="type">void</span> *key)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> dictGenericDelete(ht,key,<span class="number">0</span>) ? DICT_OK : DICT_ERR;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Remove an element from the table, but without actually releasing</span></span><br><span class="line"><span class="comment"> * the key, value and dictionary entry. The dictionary entry is returned</span></span><br><span class="line"><span class="comment"> * if the element was found (and unlinked from the table), and the user</span></span><br><span class="line"><span class="comment"> * should later call `dictFreeUnlinkedEntry()` with it in order to release it.</span></span><br><span class="line"><span class="comment"> * Otherwise if the key is not found, NULL is returned.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * This function is useful when we want to remove something from the hash</span></span><br><span class="line"><span class="comment"> * table but want to use its value before actually deleting the entry.</span></span><br><span class="line"><span class="comment"> * Without this function the pattern would require two lookups:</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *  entry = dictFind(...);</span></span><br><span class="line"><span class="comment"> *  // Do something with entry</span></span><br><span class="line"><span class="comment"> *  dictDelete(dictionary,entry);</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Thanks to this function it is possible to avoid this, and use</span></span><br><span class="line"><span class="comment"> * instead:</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * entry = dictUnlink(dictionary,entry);</span></span><br><span class="line"><span class="comment"> * // Do something with entry</span></span><br><span class="line"><span class="comment"> * dictFreeUnlinkedEntry(entry); // &lt;- This does not need to lookup again.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">dictEntry *<span class="title function_">dictUnlink</span><span class="params">(dict *ht, <span class="type">const</span> <span class="type">void</span> *key)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> dictGenericDelete(ht,key,<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">子操作二</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">基于异步删除的数据淘汰</span><br><span class="line">dbAsyncDelete</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Delete a key, value, and associated expiration entry if any, from the DB.</span></span><br><span class="line"><span class="comment"> * If there are enough allocations to free the value object may be put into</span></span><br><span class="line"><span class="comment"> * a lazy free list instead of being freed synchronously. The lazy free list</span></span><br><span class="line"><span class="comment"> * will be reclaimed in a different bio.c thread. */</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LAZYFREE_THRESHOLD 64</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">dbAsyncDelete</span><span class="params">(redisDb *db, robj *key)</span> &#123;</span><br><span class="line">    <span class="comment">/* Deleting an entry from the expires dict will not free the sds of</span></span><br><span class="line"><span class="comment">     * the key, because it is shared with the main dictionary. */</span></span><br><span class="line">    <span class="keyword">if</span> (dictSize(db-&gt;expires) &gt; <span class="number">0</span>) dictDelete(db-&gt;expires,key-&gt;ptr);  <span class="comment">/// 在过期 key 的哈希表中同步删除被淘汰的键值对</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* If the value is composed of a few allocations, to free in a lazy way</span></span><br><span class="line"><span class="comment">     * is actually just slower... So under a certain limit we just free</span></span><br><span class="line"><span class="comment">     * the object synchronously. */</span></span><br><span class="line">    dictEntry *de = dictUnlink(db-&gt;dict,key-&gt;ptr);  <span class="comment">/// 在全局哈希表中异步删除被淘汰的键值对</span></span><br><span class="line">    <span class="keyword">if</span> (de) &#123;</span><br><span class="line">        robj *val = dictGetVal(de);</span><br><span class="line">        <span class="type">size_t</span> free_effort = lazyfreeGetFreeEffort(val);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* If releasing the object is too much work, do it in the background</span></span><br><span class="line"><span class="comment">         * by adding the object to the lazy free list.</span></span><br><span class="line"><span class="comment">         * Note that if the object is shared, to reclaim it now it is not</span></span><br><span class="line"><span class="comment">         * possible. This rarely happens, however sometimes the implementation</span></span><br><span class="line"><span class="comment">         * of parts of the Redis core may call incrRefCount() to protect</span></span><br><span class="line"><span class="comment">         * objects, and then call dbDelete(). In this case we&#x27;ll fall</span></span><br><span class="line"><span class="comment">         * through and reach the dictFreeUnlinkedEntry() call, that will be</span></span><br><span class="line"><span class="comment">         * equivalent to just calling decrRefCount(). */</span></span><br><span class="line">        <span class="keyword">if</span> (free_effort &gt; LAZYFREE_THRESHOLD &amp;&amp; val-&gt;refcount == <span class="number">1</span>) &#123; <span class="comment">/// 计算释放被淘汰键值对内存空间的开销///当被淘汰键值对是包含超过 64 个元素的集合类型时</span></span><br><span class="line">            atomicIncr(lazyfree_objects,<span class="number">1</span>);</span><br><span class="line">            bioCreateBackgroundJob(BIO_LAZY_FREE,val,<span class="literal">NULL</span>,<span class="literal">NULL</span>); <span class="comment">/// 会调用 bioCreateBackgroundJob 函数，来实际创建后台任务执行惰性删除</span></span><br><span class="line">            dictSetVal(db-&gt;dict,de,<span class="literal">NULL</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Release the key-val pair, or just the key if we set the val</span></span><br><span class="line"><span class="comment">     * field to NULL in order to lazy free it later. */</span></span><br><span class="line">    <span class="keyword">if</span> (de) &#123;</span><br><span class="line">        dictFreeUnlinkedEntry(db-&gt;dict,de);</span><br><span class="line">        <span class="keyword">if</span> (server.cluster_enabled) slotToKeyDel(key);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Return the amount of work needed in order to free an object.</span></span><br><span class="line"><span class="comment"> * The return value is not always the actual number of allocations the</span></span><br><span class="line"><span class="comment"> * object is compoesd of, but a number proportional to it.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * For strings the function always returns 1.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * For aggregated objects represented by hash tables or other data structures</span></span><br><span class="line"><span class="comment"> * the function just returns the number of elements the object is composed of.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Objects composed of single allocations are always reported as having a</span></span><br><span class="line"><span class="comment"> * single item even if they are actually logical composed of multiple</span></span><br><span class="line"><span class="comment"> * elements.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * For lists the function returns the number of elements in the quicklist</span></span><br><span class="line"><span class="comment"> * representing the list. */</span></span><br><span class="line"><span class="type">size_t</span> <span class="title function_">lazyfreeGetFreeEffort</span><span class="params">(robj *obj)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (obj-&gt;type == OBJ_LIST) &#123;</span><br><span class="line">        quicklist *ql = obj-&gt;ptr;</span><br><span class="line">        <span class="keyword">return</span> ql-&gt;len;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (obj-&gt;type == OBJ_SET &amp;&amp; obj-&gt;encoding == OBJ_ENCODING_HT) &#123;</span><br><span class="line">        dict *ht = obj-&gt;ptr;</span><br><span class="line">        <span class="keyword">return</span> dictSize(ht);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (obj-&gt;type == OBJ_ZSET &amp;&amp; obj-&gt;encoding == OBJ_ENCODING_SKIPLIST)&#123;</span><br><span class="line">        zset *zs = obj-&gt;ptr;</span><br><span class="line">        <span class="keyword">return</span> zs-&gt;zsl-&gt;length;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (obj-&gt;type == OBJ_HASH &amp;&amp; obj-&gt;encoding == OBJ_ENCODING_HT) &#123;</span><br><span class="line">        dict *ht = obj-&gt;ptr;</span><br><span class="line">        <span class="keyword">return</span> dictSize(ht);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (obj-&gt;type == OBJ_STREAM) &#123;</span><br><span class="line">        <span class="type">size_t</span> effort = <span class="number">0</span>;</span><br><span class="line">        stream *s = obj-&gt;ptr;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Make a best effort estimate to maintain constant runtime. Every macro</span></span><br><span class="line"><span class="comment">         * node in the Stream is one allocation. */</span></span><br><span class="line">        effort += s-&gt;rax-&gt;numnodes;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Every consumer group is an allocation and so are the entries in its</span></span><br><span class="line"><span class="comment">         * PEL. We use size of the first group&#x27;s PEL as an estimate for all</span></span><br><span class="line"><span class="comment">         * others. */</span></span><br><span class="line">        <span class="keyword">if</span> (s-&gt;cgroups) &#123;</span><br><span class="line">            raxIterator ri;</span><br><span class="line">            streamCG *cg;</span><br><span class="line">            raxStart(&amp;ri,s-&gt;cgroups);</span><br><span class="line">            raxSeek(&amp;ri,<span class="string">&quot;^&quot;</span>,<span class="literal">NULL</span>,<span class="number">0</span>);</span><br><span class="line">            <span class="comment">/* There must be at least one group so the following should always</span></span><br><span class="line"><span class="comment">             * work. */</span></span><br><span class="line">            serverAssert(raxNext(&amp;ri));</span><br><span class="line">            cg = ri.data;</span><br><span class="line">            effort += raxSize(s-&gt;cgroups)*(<span class="number">1</span>+raxSize(cg-&gt;pel));</span><br><span class="line">            raxStop(&amp;ri);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> effort;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">/* Everything else is a single allocation. */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">子操作二</span><br><span class="line"></span><br><span class="line">基于同步删除的数据淘汰</span><br><span class="line">dbSyncDelete</span><br></pre></td></tr></table></figure>
-
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://blog.csdn.net/LIFE_PLAN/article/details/127786442">redis惰性删除 lazy free 源码剖析，干货满满</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>KV</tag>
       </tags>
   </entry>
   <entry>
@@ -7058,172 +6812,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>学习资源</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis 集群扩容时NodeId问题</title>
-    <url>/www6vHomeHexo/2022/05/23/redisNodeId/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#1-%E8%83%8C%E6%99%AF">1. 背景</a></li>
-<li><a href="#2-redis%E9%9B%86%E7%BE%A4%E6%89%A9%E5%AE%B9%E8%BF%87%E7%A8%8B%E6%A2%B3%E7%90%86">2. Redis集群扩容过程梳理</a><ul>
-<li><a href="#21-%E5%90%AF%E5%8A%A8redis%E5%AE%9E%E4%BE%8B">2.1 启动Redis实例</a></li>
-<li><a href="#22-redis%E9%9B%86%E7%BE%A4%E6%89%80%E6%9C%89%E4%B8%BB%E8%8A%82%E7%82%B9meet%E5%BE%85%E5%8A%A0%E5%85%A5%E8%8A%82%E7%82%B9">2.2 Redis集群所有主节点meet待加入节点</a></li>
-<li><a href="#23-%E7%A1%AE%E5%AE%9A%E4%B8%BB%E4%BB%8E%E8%A7%92%E8%89%B2">2.3 确定主从角色</a></li>
-</ul>
-</li>
-<li><a href="#3-redis%E9%9B%86%E7%BE%A4%E6%89%A9%E5%AE%B9%E6%9C%9F%E9%97%B4%E8%8A%82%E7%82%B9%E7%8A%B6%E6%80%81">3. Redis集群扩容期间节点状态</a><ul>
-<li><a href="#31-%E6%89%A9%E5%AE%B9%E5%89%8D%E9%9B%86%E7%BE%A4%E8%8A%82%E7%82%B9%E7%8A%B6%E6%80%81">3.1 扩容前集群节点状态</a></li>
-<li><a href="#32-redis%E5%90%AF%E5%8A%A8%E5%90%8E%E5%8D%95%E8%BA%AB%E7%8A%B6%E6%80%81">3.2 Redis启动后“单身”状态</a></li>
-<li><a href="#33-meet-redis%E5%AE%9E%E4%BE%8B1">3.3 Meet Redis实例1</a></li>
-<li><a href="#34-meet-redis%E5%AE%9E%E4%BE%8B2">3.4 Meet Redis实例2</a></li>
-<li><a href="#35-%E6%8C%87%E5%AE%9A%E6%96%B0%E5%A2%9E%E5%AE%9E%E4%BE%8B%E4%B8%BB%E4%BB%8E%E5%85%B3%E7%B3%BB">3.5 指定新增实例主从关系</a></li>
-</ul>
-</li>
-<li><a href="#5-%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB">5. 延伸阅读</a><ul>
-<li><a href="#51-redis-%E9%9B%86%E7%BE%A4%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">5.1 Redis 集群数据结构</a></li>
-<li><a href="#52-redis-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B">5.2 Redis 启动过程</a></li>
-<li><a href="#53-cluster-meet%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B">5.3 cluster meet处理过程</a></li>
-<li><a href="#53-%E6%8F%AD%E6%99%93-node_id%E6%98%AF%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E7%9A%84%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%8F%98%E5%8C%96%E5%91%A2">5.3 揭晓 node_id是如何生成的？为什么会变化呢？</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="1-背景">1. 背景</span><a href="#1-背景" class="header-anchor">#</a></h1><p>有一次扩容 Redis 集群，往集群加入节点，这个操作了很多次的功能居然失败了。查看到异常日志：addAppClusterSharding:10.3.28.7:10240:10.3.28.70, result is false<br>观察发现，Redis实例已启动，并且加入到集群，但是主从角色不正确<br>本地调试发现，在从节点执行cluster replicate <master_node_id>报错，提示***，发现命令的<master_node_id>和Redis实例的<node_id>不一致</node_id></master_node_id></master_node_id></p>
-<ul>
-<li>Redis node_id是如何生成的，怎么会变化呢？</li>
-</ul>
-<p>临时查看最近修改代码，<br>com.tuhu.renault.portal.redis.impl.RedisCenterImpl  getNodeId方法<br>原来：<br>从目标Redis实例获取自己的node_id<br>改成了：<br>可以从其他Redis实例获取（因为cluster nodes命令可以拿到集群所有节点信息）<br>原因是：<br>当目标节点挂了，会获取不到node_id，页面操作故障节点下线会失败（用于下线故障节点）<br>修复方法：<br>临时恢复从目标实例获取自己的node_id;下线故障节点时候从其他节点获取node_id</p>
-<img src="/www6vHomeHexo/2022/05/23/redisNodeId/img.png" class>
-
-<p>下文简单梳理 Redis 集群扩容过程，主要关注 Redis node_id 变化及相关源码。</p>
-<h1><span id="2-redis集群扩容过程梳理">2. Redis集群扩容过程梳理</span><a href="#2-redis集群扩容过程梳理" class="header-anchor">#</a></h1><p>Renault管理平台入口：</p>
-<ul>
-<li>com.tuhu.renault.portal.controller.ClusterController   doAddHorizontalNodes 方法<br>主要包括三个步骤：（1）启动 Redis 实例；（2）meet Redis 实例；（3）确定主从角色。</li>
-</ul>
-<h3><span id="21-启动redis实例">2.1 启动Redis实例</span><a href="#21-启动redis实例" class="header-anchor">#</a></h3><ul>
-<li>根据模板生成Redis配置文件，并拷贝到目标机器</li>
-<li>执行：redis-server &#x2F;usr&#x2F;local&#x2F;renault&#x2F;conf&#x2F;redis-cluster-6379.conf</li>
-<li>没有返回值，检测端口被占用则认为成功</li>
-</ul>
-<h3><span id="22-redis集群所有主节点meet待加入节点">2.2 Redis集群所有主节点meet待加入节点</span><a href="#22-redis集群所有主节点meet待加入节点" class="header-anchor">#</a></h3><ul>
-<li>确定Redis实例为”单身”</li>
-<li>执行：cluster meet <ip> <port>，<a href="https://redis.io/commands/cluster-meet">https://redis.io/commands/cluster-meet</a></port></ip></li>
-<li>返回“OK”即成功</li>
-</ul>
-<h3><span id="23-确定主从角色">2.3 确定主从角色</span><a href="#23-确定主从角色" class="header-anchor">#</a></h3><ul>
-<li>获取主节点NodeId</li>
-<li>从节点实例执行：cluster replicate <node_id>，<a href="https://redis.io/commands/cluster-replicate">https://redis.io/commands/cluster-replicate</a></node_id></li>
-<li>返回“OK”即成功</li>
-</ul>
-<h1><span id="3-redis集群扩容期间节点状态">3. Redis集群扩容期间节点状态</span><a href="#3-redis集群扩容期间节点状态" class="header-anchor">#</a></h1><h3><span id="31-扩容前集群节点状态">3.1 扩容前集群节点状态</span><a href="#31-扩容前集群节点状态" class="header-anchor">#</a></h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@work-arch-renault-redis-3 (16:06:02) ~ # redis-cli -p 6436 cluster nodes</span><br><span class="line">798f8791b4e302df6c5e1418466e91899e199546 10.100.140.229:6436@16436 master - 0 1642579573335 66 connected 0-5454</span><br><span class="line">68eab9a2f3bae16afd41ae43970f866c01bebcf0 10.100.140.231:6436@16436 myself,master - 0 1642579573000 69 connected 5455-10923</span><br><span class="line">9a1be71bd5699ecb62b4308212ba1363ea72020f 10.100.140.233:6435@16435 master - 0 1642579575338 67 connected 10924-16383</span><br><span class="line">86107b968a281aedbcddd9267b53dfb4bcaadee4 10.100.140.230:6437@16437 slave 798f8791b4e302df6c5e1418466e91899e199546 0 1642579574337 66 connected</span><br><span class="line">ba7481602474ce44fa964af043c9417670246002 10.100.140.232:6437@16437 slave 68eab9a2f3bae16afd41ae43970f866c01bebcf0 0 1642579573000 69 connected</span><br><span class="line">ad0cc373957d84ba9e37114feee68a8414408bf6 10.100.140.234:6436@16436 slave 9a1be71bd5699ecb62b4308212ba1363ea72020f 0 1642579572335 67 connected</span><br></pre></td></tr></table></figure>
-<p>每行的组成结构：<code>&lt;id&gt; &lt;ip:port&gt; &lt;flags&gt; &lt;master&gt; &lt;ping-sent&gt; &lt;pong-recv&gt; &lt;config-epoch&gt; &lt;link-state&gt; &lt;slot&gt; &lt;slot&gt; ... &lt;slot&gt;</code><br>每项的含义如下:</p>
-<ul>
-<li>1.id: 节点ID</li>
-<li>2.ip:port：客户端与节点通信使用的地址</li>
-<li>3.flags：逗号分割的标记位，可能的值如下 <ul>
-<li>a. myself：当前连接的节点</li>
-<li>b. master：节点是master</li>
-<li>c. slave：节点是slave</li>
-<li>d. fail?：节点处于PFAIL 状态。 当前节点无法联系，但逻辑上是可达的 (非 FAIL 状态)</li>
-<li>e. fail：节点处于FAIL 状态. 大部分节点都无法与其取得联系将会将改节点由 PFAIL 状态升级至FAIL状态</li>
-<li>f. handshake：还未取得信任的节点，当前正在与其进行握手</li>
-<li>g. noaddr：没有地址的节点</li>
-<li>h. noflags：连个标记都没有</li>
-</ul>
-</li>
-<li><ol start="4">
-<li>master_id：如果节点是slave，并且已知master节点，则这里列出master节点ID,否则的话这里列出”-“</li>
-</ol>
-</li>
-<li><ol start="5">
-<li>ping-sent：最近一次发送ping的时间，这个时间是一个unix毫秒时间戳，0代表没有发送过</li>
-</ol>
-</li>
-<li><ol start="6">
-<li>pong-recv：最近一次收到pong的时间，使用unix时间戳表示</li>
-</ol>
-</li>
-<li><ol start="7">
-<li>config-epoch：节点的epoch值（从节点值随主节点）</li>
-</ol>
-<ul>
-<li>a. 每当节点发生失败切换时，都会创建一个新的，独特的，递增的epoch</li>
-<li>b. 如果多个节点竞争同一个哈希槽时，epoch值更高的节点会抢夺到</li>
-</ul>
-</li>
-<li><ol start="8">
-<li>link-state：node-to-node集群总线使用的链接的状态，我们使用这个链接与集群中其他节点进行通信</li>
-</ol>
-<ul>
-<li>a. 值可以是 connected 和 disconnected</li>
-</ul>
-</li>
-<li><ol start="9">
-<li>slot：哈希槽值或者一个哈希槽范围，代表当前节点可以提供服务的哈希槽值</li>
-</ol>
-</li>
-</ul>
-<h3><span id="32-redis启动后单身状态">3.2 Redis启动后“单身”状态</span><a href="#32-redis启动后单身状态" class="header-anchor">#</a></h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@work-arch-docker-3 (16:14:17) ~ # redis-cli -p 6379 cluster nodes</span><br><span class="line">77199f3d3b63360117c352f51f0262627a53d215 :6379@16379 myself,master - 0 0 0 connected</span><br><span class="line">root@work-arch-docker-3 (16:14:30) ~ #</span><br><span class="line">root@work-arch-docker-3 (16:14:30) ~ # redis-cli -p 6380 cluster nodes</span><br><span class="line">60445f6231213b2285f216eac53f67408bdeae28 :6380@16380 myself,master - 0 0 0 connected</span><br></pre></td></tr></table></figure>
-
-<h3><span id="33-meet-redis实例1">3.3 Meet Redis实例1</span><a href="#33-meet-redis实例1" class="header-anchor">#</a></h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@work-arch-docker-3 (16:15:16) ~ # redis-cli -p 6379 cluster nodes</span><br><span class="line">ba7481602474ce44fa964af043c9417670246002 10.100.140.232:6437@16437 slave 68eab9a2f3bae16afd41ae43970f866c01bebcf0 0 1642580117000 69 connected</span><br><span class="line">86107b968a281aedbcddd9267b53dfb4bcaadee4 10.100.140.230:6437@16437 slave 798f8791b4e302df6c5e1418466e91899e199546 0 1642580117750 66 connected</span><br><span class="line">ad0cc373957d84ba9e37114feee68a8414408bf6 10.100.140.234:6436@16436 slave 9a1be71bd5699ecb62b4308212ba1363ea72020f 0 1642580115000 67 connected</span><br><span class="line">798f8791b4e302df6c5e1418466e91899e199546 10.100.140.229:6436@16436 master - 0 1642580115742 66 connected 0-5454</span><br><span class="line">68eab9a2f3bae16afd41ae43970f866c01bebcf0 10.100.140.231:6436@16436 master - 0 1642580115000 69 connected 5455-10923</span><br><span class="line">9a1be71bd5699ecb62b4308212ba1363ea72020f 10.100.140.233:6435@16435 master - 0 1642580117000 67 connected 10924-16383</span><br><span class="line">77199f3d3b63360117c352f51f0262627a53d215 10.100.140.152:6379@16379 myself,master - 0 1642580115000 0 connected</span><br></pre></td></tr></table></figure>
-
-<h3><span id="34-meet-redis实例2">3.4 Meet Redis实例2</span><a href="#34-meet-redis实例2" class="header-anchor">#</a></h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@work-arch-docker-3 (16:15:22) ~ # redis-cli -p 6380 cluster nodes</span><br><span class="line">86107b968a281aedbcddd9267b53dfb4bcaadee4 10.100.140.230:6437@16437 slave 798f8791b4e302df6c5e1418466e91899e199546 0 1642580129887 66 connected</span><br><span class="line">ba7481602474ce44fa964af043c9417670246002 10.100.140.232:6437@16437 slave 68eab9a2f3bae16afd41ae43970f866c01bebcf0 0 1642580132000 69 connected</span><br><span class="line">ad0cc373957d84ba9e37114feee68a8414408bf6 10.100.140.234:6436@16436 slave 9a1be71bd5699ecb62b4308212ba1363ea72020f 0 1642580130000 67 connected</span><br><span class="line">798f8791b4e302df6c5e1418466e91899e199546 10.100.140.229:6436@16436 master - 0 1642580130590 66 connected 0-5454</span><br><span class="line">68eab9a2f3bae16afd41ae43970f866c01bebcf0 10.100.140.231:6436@16436 master - 0 1642580133595 69 connected 5455-10923</span><br><span class="line">9a1be71bd5699ecb62b4308212ba1363ea72020f 10.100.140.233:6435@16435 master - 0 1642580132593 67 connected 10924-16383</span><br><span class="line">77199f3d3b63360117c352f51f0262627a53d215 10.100.140.152:6379@16379 master - 0 1642580131592 0 connected</span><br><span class="line">60445f6231213b2285f216eac53f67408bdeae28 10.100.140.152:6380@16380 myself,master - 0 1642580133000 73 connected</span><br></pre></td></tr></table></figure>
-
-<h3><span id="35-指定新增实例主从关系">3.5 指定新增实例主从关系</span><a href="#35-指定新增实例主从关系" class="header-anchor">#</a></h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@work-arch-docker-3 (16:16:55) ~ # redis-cli -p 6379 cluster nodes</span><br><span class="line">ba7481602474ce44fa964af043c9417670246002 10.100.140.232:6437@16437 slave 68eab9a2f3bae16afd41ae43970f866c01bebcf0 0 1642580214980 69 connected</span><br><span class="line">86107b968a281aedbcddd9267b53dfb4bcaadee4 10.100.140.230:6437@16437 slave 798f8791b4e302df6c5e1418466e91899e199546 0 1642580215985 66 connected</span><br><span class="line">60445f6231213b2285f216eac53f67408bdeae28 10.100.140.152:6380@16380 slave 77199f3d3b63360117c352f51f0262627a53d215 0 1642580213000 73 connected</span><br><span class="line">ad0cc373957d84ba9e37114feee68a8414408bf6 10.100.140.234:6436@16436 slave 9a1be71bd5699ecb62b4308212ba1363ea72020f 0 1642580212000 67 connected</span><br><span class="line">798f8791b4e302df6c5e1418466e91899e199546 10.100.140.229:6436@16436 master - 0 1642580212000 66 connected 0-5454</span><br><span class="line">68eab9a2f3bae16afd41ae43970f866c01bebcf0 10.100.140.231:6436@16436 master - 0 1642580213578 69 connected 5455-10923</span><br><span class="line">9a1be71bd5699ecb62b4308212ba1363ea72020f 10.100.140.233:6435@16435 master - 0 1642580214000 67 connected 10924-16383</span><br><span class="line">77199f3d3b63360117c352f51f0262627a53d215 10.100.140.152:6379@16379 myself,master - 0 1642580214000 0 connected</span><br></pre></td></tr></table></figure>
-
-<h1><span id="5-延伸阅读">5. 延伸阅读</span><a href="#5-延伸阅读" class="header-anchor">#</a></h1><h3><span id="51-redis-集群数据结构">5.1 Redis 集群数据结构</span><a href="#51-redis-集群数据结构" class="header-anchor">#</a></h3><p>初始化 cluster 中有三个重要数据结构：</p>
-<ul>
-<li>clusterState：记录当前节点视角下，集群目前的状态</li>
-<li>clusterNode：记录节点的状态</li>
-<li>clusterLink：为clusterNode的属性，记录了连接该节点所需的有关信息<br>源码文件：cluster.h cluster.c<br><strong>struct clusterState</strong> 展开源码<br><strong>struct clusterNode</strong> 展开源码<br><strong>struct clusterLink</strong> 展开源码</li>
-</ul>
-<h3><span id="52-redis-启动过程">5.2 Redis 启动过程</span><a href="#52-redis-启动过程" class="header-anchor">#</a></h3><p>5.2.1 启动流程</p>
-<img src="/www6vHomeHexo/2022/05/23/redisNodeId/img1.jpg" class>
-
-<p>5.2.2 启动日志<br>Redis实例1日志<br> 展开源码<br>Redis实例2日志<br> 展开源码</p>
-<h3><span id="53-cluster-meet处理过程">5.3 cluster meet处理过程</span><a href="#53-cluster-meet处理过程" class="header-anchor">#</a></h3><p>5.3.1 meet 命令处理<br>大致分为 3 个阶段：</p>
-<ul>
-<li>A 通过 meet msg 的 pong 回包，更改 A 对 B 的认识</li>
-<li>B 通过 ping msg 的 pong 回包，更改 B 对 A 的认识</li>
-<li>来自 A 的 ping or pong msg， B 更新自己看到的 A 的 slot 信息</li>
-</ul>
-<img src="/www6vHomeHexo/2022/05/23/redisNodeId/img2.png" class>
-
-<p>5.3.2 Gossip消息结构（MEET、PING、PONG）<br><strong>MEET PING PNG message</strong> 展开源码</p>
-<h3><span id="53-揭晓-node_id是如何生成的为什么会变化呢">5.3 揭晓 node_id是如何生成的？为什么会变化呢？</span><a href="#53-揭晓-node_id是如何生成的为什么会变化呢" class="header-anchor">#</a></h3><p>5.3.1 node_id 如何生成?<br>新建 redis 节点时候生成，几乎不会改变，除非执行：cluster reset hard</p>
-<ul>
-<li>cluster.c  line462 随机40字节字符串，这个值在节点启动的时候，从节点配置文件获取或者创建<ul>
-<li><code>clusterLoadConfig  /* Load or create a new nodes configuration. */</code> </li>
-<li><code>getRandomHexChars(node-&gt;name, CLUSTER_NAMELEN);</code></li>
-</ul>
-</li>
-<li>cluster.c  line532  <strong>Only for hard reset: a new Node ID is generated.</strong><ul>
-<li>hard reset多用于测试</li>
-</ul>
-</li>
-<li>cluster reset 命令说明：<a href="http://www.redis.cn/commands/cluster-reset.html">http://www.redis.cn/commands/cluster-reset.html</a><br>5.3.2 Redis 集群扩容时候 node_id 为什么会变化?</li>
-<li>其实 Redis 节点的 node_id 是没有变化的</li>
-<li>扩容期间，meet 新节点后，立刻从其他节点获取该新节点的 nodei_id，可能拿到的是随机生成的 node_id (不认识的时候是随机生成node_id，认识之后再更新次node_id）</li>
-</ul>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
       </tags>
   </entry>
   <entry>
@@ -7854,36 +7442,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
-    <title>Redis NVM</title>
-    <url>/www6vHomeHexo/2022/05/14/redisNVM/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<h2><span id="特点">特点</span><a href="#特点" class="header-anchor">#</a></h2><ul>
-<li>能持久化保存数据</li>
-<li>读写速度和 DRAM 接近</li>
-<li>容量大</li>
-</ul>
-<h2><span id="intel-optane-aep-内存条简称-aep-内存">Intel Optane AEP 内存条(简称 AEP 内存)</span><a href="#intel-optane-aep-内存条简称-aep-内存" class="header-anchor">#</a></h2><ul>
-<li><p>Memory 模式<br>软件系统能使用到 的内存空间，就是 AEP 内存条的空间容量。<br>在 Memory 模式时，Redis 可以利用 NVM 容量大的特点，实现大容量实例，保存更 多数据。</p>
-</li>
-<li><p>App Direct 模式<br>使用了 App Direct 模式的 AEP 内存，也叫 做持久化内存(Persistent Memory，PM)。</p>
-<p>Redis 可以直接在持久化内存上进行数据读写，在这 种情况下，Redis 不用再使用 RDB 或 AOF 文件了，数据在机器掉电后也不会丢失。<br>而且，实例可以直接使用持久化内存上的数据进行恢复，恢复速度特别快。</p>
-</li>
-</ul>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><p>40 | Redis的下一步:基于NVM内存的实践</p>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>多主-CRDT</title>
     <url>/www6vHomeHexo/2022/05/14/multiMasterCRDT/</url>
     <content><![CDATA[<p></p>
@@ -8088,50 +7646,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>云计算</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis 分布式锁</title>
-    <url>/www6vHomeHexo/2022/05/05/redisDistKey/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<h2><span id="一-基于redis的分布式锁">一. 基于redis的分布式锁</span><a href="#一-基于redis的分布式锁" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/05/05/redisDistKey/distributedLock-redis.jpg" class title="图1.redis分布式锁">
-<img src="/www6vHomeHexo/2022/05/05/redisDistKey/redis-lock.jpg" class title="图2.redis分布式锁">
-
-
-<h2><span id="锁的特性">锁的特性:</span><a href="#锁的特性" class="header-anchor">#</a></h2><ol>
-<li>排它性</li>
-<li>超时释放锁<br>redis expire</li>
-<li>高可用，锁集群容错[图2]，<br>安全性[7]，</li>
-<li>可重入锁, 避免死锁[8]</li>
-<li>乐观锁, 悲观锁[10][图2]</li>
-</ol>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://tech.meituan.com/2016/09/29/distributed-system-mutually-exclusive-idempotence-cerberus-gtis.html">分布式系统互斥性与幂等性问题的分析与解决</a> 点评 蒋谞 </li>
-<li>漫画：什么是分布式锁？ 程序员小灰</li>
-<li>《从Paxos到Zookeeper分布式一致性原理与实践》 倪超 6.1.7节</li>
-<li>Redlock：Redis分布式锁最牛逼的实现 阿飞的博客</li>
-<li><a href="https://mp.weixin.qq.com/s/ahcbgxWVVmRwrH9Y4-gXBA">SOFAJRaft-RheaKV 分布式锁实现剖析 | SOFAJRaft 实现原理</a>   SOFALab 米麒麟 未</li>
-<li><a href="redis.md">Go to Page</a>  self</li>
-</ol>
-<hr>
-<ol start="7">
-<li><a href="https://www.jianshu.com/p/31e85a18a9e7">分布式服务总结 分布式锁</a><br>通过栅栏(fencing)使得锁更安全, fencing token<br><a href="http://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html">How to do distributed locking</a> Martin Kleppmann  </li>
-<li><a href="https://www.jianshu.com/p/1c5c1a592088">Redis实现分布式锁，以及可重入锁思路</a><br>唯一id I. uuid  II. 分布式线程中标识唯一线程：MAC地址 + jvm进程ID + 线程ID  </li>
-<li><a href="https://www.cnblogs.com/jasonZh/p/9522772.html">Redis分布式锁实现秒杀业务(乐观锁、悲观锁)</a>  最后<br>乐观锁: jedis的watch方法</li>
-</ol>
-<hr>
-<p>from redis<br>《Redis 深度历险：核心原理与应用实践》 钱文品<br>3. 应用 1：千帆竞发 —— 分布式锁<br>4. 拓展 3：拾遗漏补 —— 再谈分布式锁</p>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
       </tags>
   </entry>
   <entry>
@@ -8611,48 +8125,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>sre</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis SLO</title>
-    <url>/www6vHomeHexo/2022/04/27/redisSLO/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="slo">SLO</span><a href="#slo" class="header-anchor">#</a></h2><ul>
-<li>命中率 Hit Ratio<ul>
-<li>每秒命中数量   </li>
-<li>每秒未命中数量</li>
-</ul>
-</li>
-<li>吞吐 Throughput<ul>
-<li>操作数</li>
-</ul>
-</li>
-<li>延迟<ul>
-<li>命令执行平均耗时</li>
-</ul>
-</li>
-<li>容量 <ul>
-<li>expiring&#x2F;not expiring   keys</li>
-<li>expired&#x2F;evicted keys</li>
-</ul>
-</li>
-<li>内存使用率 Memory Utilization</li>
-<li>活动连接数 Active Connections</li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://blog.51cto.com/wutengfei/6026334">部署一个redis exporter监控所有的Redis实例</a></li>
-<li><a href="https://scalegrid.io/blog/6-crucial-redis-monitoring-metrics/">6 Crucial Redis Monitoring Metrics You Need To Watch</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
       </tags>
   </entry>
   <entry>
@@ -9320,126 +8792,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>flink</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis雪崩、击穿、穿透</title>
-    <url>/www6vHomeHexo/2022/03/28/redisReliability-1/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#%E9%97%AE%E9%A2%98%E6%96%B9%E6%A1%88-1">问题&amp;方案 [1]</a><ul>
-<li><a href="#%E6%9C%89%E6%8D%9F%E6%96%B9%E6%A1%88">“有损”方案</a></li>
-<li><a href="#%E9%A2%84%E9%98%B2%E5%BC%8F%E6%96%B9%E6%A1%88">预防式方案</a></li>
-</ul>
-</li>
-<li><a href="#%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF">缓存击穿</a><ul>
-<li><a href="#%E5%8E%9F%E5%9B%A0">原因</a></li>
-<li><a href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">解决方案</a></li>
-</ul>
-</li>
-<li><a href="#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F">缓存穿透</a><ul>
-<li><a href="#%E5%8E%9F%E5%9B%A0-1">原因</a></li>
-<li><a href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1">解决方案</a></li>
-</ul>
-</li>
-<li><a href="#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F-%E7%8B%97%E6%A1%A9%E6%95%88%E5%BA%943">缓存穿透-狗桩效应[3]</a><ul>
-<li><a href="#%E5%8E%9F%E5%9B%A0-2">原因</a></li>
-<li><a href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-2">解决方案</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="问题amp方案-1">问题&amp;方案 [1]</span><a href="#问题amp方案-1" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/03/28/redisReliability-1/redisReliability-1.jpg" class title="Redis雪崩、击穿、穿透">
-
-<h3><span id="有损方案">“有损”方案</span><a href="#有损方案" class="header-anchor">#</a></h3><ul>
-<li>服务熔断、服务降级、请求限流这些方法都是属于<strong>“有损”方案</strong>，在保证数据库和整体系统稳定的同时，会对业务应用带来负面影响。</li>
-</ul>
-<h3><span id="预防式方案">预防式方案</span><a href="#预防式方案" class="header-anchor">#</a></h3><ul>
-<li>建议是，尽量使用<strong>预防式方案</strong><ul>
-<li>针对缓存雪崩，合理地设置数据过期时间，以及搭建高可靠缓存集群；</li>
-<li>针对缓存击穿，在缓存访问非常频繁的热点数据时，不要设置过期时间；</li>
-<li>针对缓存穿透，提前在入口前端实现恶意请求检测，或者规范数据库的数据删除操作，避免误删除。</li>
-</ul>
-</li>
-</ul>
-<h1><span id="缓存击穿">缓存击穿</span><a href="#缓存击穿" class="header-anchor">#</a></h1><ul>
-<li>缓存击穿</li>
-</ul>
-<h3><span id="原因">原因</span><a href="#原因" class="header-anchor">#</a></h3><p>热点数据过期<br>大量并发请求</p>
-<h3><span id="解决方案">解决方案</span><a href="#解决方案" class="header-anchor">#</a></h3><p>唯一DB请求，共享结果<br>分布式锁</p>
-<h1><span id="缓存穿透">缓存穿透</span><a href="#缓存穿透" class="header-anchor">#</a></h1><h3><span id="原因">原因</span><a href="#原因" class="header-anchor">#</a></h3><p>  指缓存和数据库中都没有的数据，而用户不断发起请求，如发起为id为“-1”的数据或id为特别大不存在的数据。<br>  提交不在数据库中的查询，会击穿缓存，直接到达数据库。</p>
-<h3><span id="解决方案">解决方案</span><a href="#解决方案" class="header-anchor">#</a></h3><ol>
-<li>回种空值</li>
-<li>使用bloomfilter</li>
-</ol>
-<h1><span id="缓存穿透-狗桩效应3">缓存穿透-狗桩效应[3]</span><a href="#缓存穿透-狗桩效应3" class="header-anchor">#</a></h1><h3><span id="原因">原因</span><a href="#原因" class="header-anchor">#</a></h3><p>当有一个极热点的缓存项，它一旦失效会有大量请求穿透到数据库，这会对数据库造成瞬时极大的压力，我们把这个场景叫做<strong>“dog-pile effect”（狗桩效应）</strong></p>
-<h3><span id="解决方案">解决方案</span><a href="#解决方案" class="header-anchor">#</a></h3><ul>
-<li><p>后台线程定时加载<br>在代码中，控制在某一个热点缓存项失效之后<strong>启动一个后台线程，穿透到数据库，将数<br>据加载到缓存中</strong>，在缓存未加载之前，所有访问这个缓存的请求都不再穿透而直接返回。</p>
-</li>
-<li><p>设置分布式锁<br>通过在 Memcached 或者 Redis 中设置<strong>分布式锁</strong>，只有获取到锁的请求才能够穿透到数<br>据库。</p>
-</li>
-</ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li>《26丨缓存异常（下）：如何解决缓存雪崩、击穿、穿透难题？》</li>
-<li><a href="https://www.bilibili.com/video/BV1Gb4y187un?zw&vd_source=f6e8c1128f9f264c5ab8d9411a644036">【直播回放】海量并发微服务框架设计</a> V</li>
-<li>《15 | 缓存的使用姿势（三）：缓存穿透了怎么办？》</li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis 慢查询排查</title>
-    <url>/www6vHomeHexo/2022/03/25/redisSlowResponse/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<h1><span id="慢查询-排查">慢查询 排查</span><a href="#慢查询-排查" class="header-anchor">#</a></h1><ul>
-<li><p>获取 Redis 实例在当前环境下的基线性能。</p>
-</li>
-<li><p>是否用了慢查询命令？<br>如果是的话，就使用其他命令替代慢查询命令，或者把聚合计算命令放在客户端做。</p>
-</li>
-<li><p>是否对过期 key 设置了相同的过期时间？<br>对于批量删除的 key，可以在每个 key 的过期时间上加一个随机数，避免同时删除。</p>
-</li>
-<li><p>是否存在 bigkey？<br>对于 bigkey 的删除操作，如果你的 Redis 是 4.0 及以上的版本，可以直接利用异步线程机制减少主线程阻塞；如果是 Redis 4.0 以前的版本，可以使用SCAN 命令迭代删除；对于 bigkey 的集合查询和聚合操作，可以使用 SCAN 命令在客户端完成。</p>
-</li>
-<li><p><strong>Redis AOF 配置级别是什么？业务层面是否的确需要这一可靠性级别？</strong><br><strong>如果我们需要高性能，同时也允许数据丢失，可以将配置项 no-appendfsync-on-rewrite 设置为  yes，避免 AOF 重写和 fsync 竞争磁盘 IO 资源，导致 Redis 延迟增加。<br>如果既需要高性能又需要高可靠性，最好使用高速固态盘作为 AOF 日志的写入盘。</strong></p>
-</li>
-<li><p>Redis 实例的内存使用是否过大？发生 swap 了吗？<br>如果是的话，就增加机器内存，或者是使用 Redis 集群，分摊单机 Redis 的键值对数量和内存压力。同时，要避免出现Redis 和其他内存需求大的应用共享机器的情况。</p>
-</li>
-<li><p>在 Redis 实例的运行环境中，是否启用了透明大页机制？<br>如果是的话，直接关闭内存大页机制就行了。</p>
-</li>
-<li><p>是否运行了 Redis 主从集群？<br>如果是的话，把主库实例的数据量大小控制在 2~4GB，以免主从复制时，从库因加载大的 RDB 文件而阻塞。</p>
-</li>
-<li><p>是否使用了多核 CPU 或 NUMA 架构的机器运行 Redis 实例？<br>使用多核 CPU 时，可以给 Redis 实例绑定物理核；使用 NUMA 架构时，注意把 Redis 实例和网络中断处理程序运行在同一个 CPU Socket 上。</p>
-</li>
-</ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><p>19 | 波动的响应延迟：如何应对变慢的Redis？（下）<br><a href="https://redis.io/topics/latency">Diagnosing latency issues</a></p>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
       </tags>
   </entry>
   <entry>
@@ -10610,29 +9962,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>分布式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis和数据库之间的一致性</title>
-    <url>/www6vHomeHexo/2022/02/21/redisDbConsistent/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<h3><span id="数据的一致性含义"><strong>“数据的一致性”</strong>含义</span><a href="#数据的一致性含义" class="header-anchor">#</a></h3><p>  <strong>缓存中有数据，那么，缓存的数据值需要和数据库中的值相同；<br>  缓存中本身没有数据，那么，数据库中的值必须是最新值。</strong></p>
-<h3><span id="对于读写缓存的情况">对于“读写缓存”的情况</span><a href="#对于读写缓存的情况" class="header-anchor">#</a></h3><p>  如果我们采用同步写回策略，那么可以保证缓存和数据库中的数据一致。<br>  所以，我们要在业务应用中使用<strong>事务机制</strong>，来保证缓存和数据库的更新具有<strong>原子性</strong>，<br>  也就是说，两者要不一起更新，要不都不更新，返回错误信息，进行重试。否则，我们就无法实现同步直写。</p>
-<h3><span id="对于只读缓存的情况">对于”只读缓存”的情况</span><a href="#对于只读缓存的情况" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/02/21/redisDbConsistent/redis-db-consist.png" class title="Redis和数据库之间的一致性">
-
-
-<h3><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h3><p>25丨缓存异常（上）：如何解决缓存和数据库的数据不一致问题？</p>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
       </tags>
   </entry>
   <entry>
@@ -13265,37 +12594,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
-    <title>Redis 使用场景UseCase</title>
-    <url>/www6vHomeHexo/2021/06/29/redisUseCase/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<ul>
-<li>缓存</li>
-<li>分布式锁</li>
-<li>计数器</li>
-<li>限流</li>
-<li>购物车</li>
-<li>用户消息时间线timeline</li>
-<li>消息队列</li>
-<li>点赞、签到、打卡</li>
-<li>商品标签</li>
-<li>用户关注、推荐模型</li>
-<li>排行榜</li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p><a href="https://blog.csdn.net/gp_911014/article/details/124744869">Redis 16 个常见的使用场景</a></p>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>重构</title>
     <url>/www6vHomeHexo/2021/06/28/refactor/</url>
     <content><![CDATA[<p></p>
@@ -13614,60 +12912,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
-    <title>Redis 回收策略</title>
-    <url>/www6vHomeHexo/2021/06/02/redisDelete/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="回收策略">回收策略</span><a href="#回收策略" class="header-anchor">#</a></h2><table>
-<thead>
-<tr>
-<th align="center">回收策略</th>
-<th align="center">redis</th>
-<th align="center">kafka</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">基于时间</td>
-<td align="center">过期删除策略 <br>1. 定时删除(对内存最友好， 对CPU时间最不友好) <br>2. 惰性删除(对CPU时间最友好， 对内存最不友好) <br>3.定期删除(整合和折中)</td>
-<td align="center"><img src="https://user-images.githubusercontent.com/5608425/66014513-cab37f80-e501-11e9-9b2c-917838d91a4d.png" alt="kafka-time"></td>
-</tr>
-<tr>
-<td align="center">基于大小</td>
-<td align="center">内存淘汰策略 <br>1. noeviction <br>2.lru <br>3. random <br>4. ttl</td>
-<td align="center"><img src="https://user-images.githubusercontent.com/5608425/66014512-ca1ae900-e501-11e9-93d7-840409a862c5.png" alt="kafka-size"></td>
-</tr>
-<tr>
-<td align="center">其他</td>
-<td align="center">x</td>
-<td align="center"><img src="https://user-images.githubusercontent.com/5608425/66014514-cab37f80-e501-11e9-9be8-a247690b5f9f.png" alt="kafka-offset"></td>
-</tr>
-</tbody></table>
-<ul>
-<li>近似LRU算法[11]</li>
-</ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="7">
-<li><p><a href="https://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&mid=2650780240&idx=1&sn=49fb636a97a3c21fec7d2e2b59bea09f">七问Redis，才知道我与技术大牛的差距在哪里 </a> ***</p>
-</li>
-<li><p><a href="https://mp.weixin.qq.com/s/gkkjJu04sS2qtRdd-yB5DQ">经典面试题：Redis 内存满了怎么办？</a></p>
-</li>
-</ol>
-<h3><span id="回收策略">回收策略</span><a href="#回收策略" class="header-anchor">#</a></h3><ol start="10">
-<li><a href="http://mp.weixin.qq.com/s?__biz=MjM5ODI5Njc2MA==&mid=2655826994&idx=2&sn=c7efe2b7cdd350f1b3c6fb72cc8c1cd7">Redis内存回收机制，把我整懵了…</a></li>
-<li><a href="https://blog.csdn.net/u013256816/article/details/80418297">Kafka日志清理之Log Deletion</a></li>
-<li>《Redis 开发与运维》  8.2.3  未</li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>KV</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>分库分表</title>
     <url>/www6vHomeHexo/2021/05/26/dbSharding/</url>
     <content><![CDATA[<p></p>
@@ -13834,178 +13078,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
-    <title>缓存 一致性</title>
-    <url>/www6vHomeHexo/2021/05/25/cacheConsistent/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#%E5%85%B3%E9%94%AE%E8%AF%8D">关键词</a></li>
-<li><a href="#%E5%A4%B1%E6%95%88%E7%AD%96%E7%95%A5%E7%BC%93%E5%AD%98%E6%9B%B4%E6%96%B0-9">失效策略(缓存更新) [9]</a><ul>
-<li><a href="#readwrite-through%E6%A8%A1%E5%BC%8F">Read&#x2F;Write Through模式</a></li>
-<li><a href="#cache-aside-%E6%A8%A1%E5%BC%8F">Cache Aside 模式</a></li>
-<li><a href="#write-behind%E6%A8%A1%E5%BC%8F">Write Behind模式</a></li>
-</ul>
-</li>
-<li><a href="#%E5%A4%B1%E6%95%88%E7%AD%96%E7%95%A5">失效策略</a></li>
-<li><a href="#%E7%BC%93%E5%AD%98%E7%9A%84%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F">缓存的应用模式</a></li>
-<li><a href="#cache%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7">Cache与数据库的一致性</a></li>
-<li><a href="#%E7%BC%93%E5%AD%98%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5-%E4%B8%80%E8%87%B4%E6%80%A7">缓存与数据库的数据同步 一致性</a></li>
-<li><a href="#%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5">过期策略</a><ul>
-<li><a href="#%E8%A2%AB%E5%8A%A8%E8%BF%87%E6%9C%9F-%E4%B8%80%E8%87%B4%E6%80%A7%E4%BD%8E-%E7%BC%93%E5%AD%98%E8%B6%85%E6%97%B6">被动过期 （一致性低， 缓存超时）</a></li>
-<li><a href="#%E4%B8%BB%E5%8A%A8%E8%BF%87%E6%9C%9F%E4%B8%80%E8%87%B4%E6%80%A7%E9%AB%98-%E4%BA%8B%E4%BB%B6%E8%BF%87%E6%9C%9F-%E5%BC%82%E6%AD%A5%E8%BF%87%E6%9C%9F-%E5%8F%98%E5%8C%96%E4%BA%8B%E4%BB%B6">主动过期（一致性高， 事件过期， 异步过期，  变化事件）</a></li>
-<li><a href="#%E5%9F%BA%E4%BA%8E%E7%89%88%E6%9C%AC%E7%9A%84%E8%BF%87%E6%9C%9F%E6%96%B9%E5%BC%8F">基于版本的过期方式</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="关键词">关键词</span><a href="#关键词" class="header-anchor">#</a></h1><p> 失效策略(缓存更新)、  缓存与数据库的一致性</p>
-<h1><span id="失效策略缓存更新-9">失效策略(缓存更新) [9]</span><a href="#失效策略缓存更新-9" class="header-anchor">#</a></h1><h3><span id="readx2fwrite-through模式">Read&#x2F;Write Through模式</span><a href="#readx2fwrite-through模式" class="header-anchor">#</a></h3>
-<p>Read Through : 被动失效<br>Write Through ： 主动失效</p>
-<h3><span id="cache-aside-模式">Cache Aside 模式</span><a href="#cache-aside-模式" class="header-anchor">#</a></h3><p>Cache Aside 模式和上面的 Read&#x2F;Write Through 模式非常像，它们处理读请求的逻辑是完全一样的，唯一的一个小差别就是，Cache Aside 模式在更新数据的时候，并不去尝试更新缓存，而是去删除缓存。</p>
-
-<p><strong>普遍使用这种方式</strong></p>
-<p>场景：<br>订单服务收到更新数据请求之后，先更新数据库，如果更新成功了，再尝试去删除缓存中订 单，如果缓存中存在这条订单就删除它，如果不存在就什么都不做，然后返回更新成功。这 条更新后的订单数据将在下次被访问的时候加载到缓存中。使用 Cache Aside 模式来更新 缓存，可以非常有效地避免并发读写导致的脏数据问题。</p>
-<h3><span id="write-behind模式">Write Behind模式</span><a href="#write-behind模式" class="header-anchor">#</a></h3><p>linux page cache: dirty page刷盘。<br>kafka使用page cache异步刷盘。</p>
-<h1><span id="失效策略">失效策略</span><a href="#失效策略" class="header-anchor">#</a></h1><ul>
-<li>失效策略<ul>
-<li>被动失效<ul>
-<li>有空窗期问题</li>
-</ul>
-</li>
-<li>主动更新【1】<ul>
-<li>无空窗期问题</li>
-<li>有并发更新问题。并发写，数据覆盖一致性问题【2】<ul>
-<li>锁控制,少有这样做的<ul>
-<li>客户端读写锁</li>
-<li>服务端加锁</li>
-</ul>
-</li>
-<li>版本控制<ul>
-<li>单版本机制【3】</li>
-<li>多版本机制<ul>
-<li>类似向量时钟， NoSQL使用</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>消息机制【3,4】<ul>
-<li>增量db数据通过消息来异步变更缓存的数据</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1><span id="缓存的应用模式">缓存的应用模式</span><a href="#缓存的应用模式" class="header-anchor">#</a></h1><ul>
-<li>缓存的应用模式<ul>
-<li>Cache-Aside<ul>
-<li>业务代码直接维护缓存</li>
-<li>有并发更新问题【2】</li>
-</ul>
-</li>
-<li>Cache-As-SoR<ul>
-<li>Read-Through</li>
-<li>Write-Through<ul>
-<li>同步写</li>
-</ul>
-</li>
-<li>Write-Behind<ul>
-<li>异步写</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1><span id="cache与数据库的一致性">Cache与数据库的一致性</span><a href="#cache与数据库的一致性" class="header-anchor">#</a></h1><ul>
-<li>Cache与数据库的一致性<ul>
-<li>读操作<ul>
-<li>先读缓存，再读数据库</li>
-</ul>
-</li>
-<li>写操作<ul>
-<li>先写数据库，在写缓存</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1><span id="缓存与数据库的数据同步-一致性">缓存与数据库的数据同步  一致性</span><a href="#缓存与数据库的数据同步-一致性" class="header-anchor">#</a></h1><p>  在应用层， 可以根据业务场景对一致性的要求不同， 给数据分配不同的队列，即<br>一致性分级队列。 强一致性的场景如自己发布的评论， 自己应该及时看到。 而别人看到我的评论属于会话一致性， 一致性要求比较弱。 这样可以把一致性要求高的业务分配更多资源， 做到快速同步。<br>  缓存与数据库同步的异步化也是提高响应度的方式， 在write-behind的方式中，所有的数据的操作都在缓存中， 更新的数据并不会立即传到数据库。相反，在缓存中一旦进行更新操作，缓存就会跟踪脏记录列表，并定期将当前的脏记录集刷新到数据库中。</p>
-<p>  <del>在DAO层的hibernate针对一致性的要求提出了类似DBMS的事务级别的4个配置项。 非严格读写型(nonstrict-read-write)策略提供弱一致性，不保证缓存与数据库中数据的一致性。如果存在两个事务同时访问缓存中相同数据的可能，必须为该数据配置一个很短的数据过期时间，从而尽量避免脏读。对于极少被修改，并且允许偶尔脏读的数据，可以采用这种并发访问策略。 事务策略(transactional )只可用于托管环境，如有必要，它还保证完全的事务隔离级别直到可重复读。事务策略可以用在强一致性的场景中。</del></p>
-<h1><span id="过期策略">过期策略</span><a href="#过期策略" class="header-anchor">#</a></h1><h3><span id="被动过期-一致性低-缓存超时">被动过期 （一致性低， 缓存超时）</span><a href="#被动过期-一致性低-缓存超时" class="header-anchor">#</a></h3><p>对一致性要求较低的系统，可以采用常规的缓存超时策略，此类策略属于被动过期。<br>存放数据时，永不过期的数据不要与有过期策略的数据放在一起， 早期的版本memcache曾经有一个这样的bug， 永不过期的数据被有过期策略的数据踢走了。不要把所有的数据的过期时间设为同一个时间， 这样可能造成大规模的数据同时过期，hit rate变小， 对数据库的查询数瞬时变大，造成数据库的压力。 </p>
-<h3><span id="主动过期一致性高-事件过期-异步过期-变化事件">主动过期（一致性高， 事件过期， 异步过期，  变化事件）</span><a href="#主动过期一致性高-事件过期-异步过期-变化事件" class="header-anchor">#</a></h3><p>对一致性要求较高的系统，可以采用事件过期策略，此类策略属于主动过期。<br>      某个组件的结构发生变化，或者某个业务对象状态发生变化，把组件id或业务对象id放入过期队列中， 缓存节点异步读取这些数据， 将对应cache的对象移除。亦可把变化封装成事件放入过期队列中， 由代理处理这个事件， 异步的移除相应的缓存。         </p>
-<h3><span id="基于版本的过期方式">基于版本的过期方式</span><a href="#基于版本的过期方式" class="header-anchor">#</a></h3><p>在存储空间较大的前提下，借鉴mvcc的概念，每次更改数据时增加一个副本，并带版本号元数据。 然后由一个代理定时的删除低版本的过期的数据。</p>
-<p><del>## 服务端缓存</del></p>
-<p><del>缓存服务端常用的有memcache。 Nosql的解决方案有Redies，Redies在作为cache时往往配置为无持久化的形式 。两者数据模型都是key-value的。 Redies比老牌的memcache能提供更好的性能， 更快的速度。 Memcache 没有自建的replicaion 机制, 可靠性需要在客户端以双写支持。 Redies可以看成自带持久化机制的Write-back缓存，在write-behind缓存中，数据的读取和更新通过缓存进行，与write-through缓存不同，更新的数据并不会立即持久化。相反，在缓存中一旦进行更新操作，缓存就会跟踪脏记录列表，并定期将当前的脏记录集刷新到外部存储中， 在Redies中这种机制叫做AOF</del></p>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a href="https://www.geek-share.com/detail/2615401101.html">应用系统数据缓存设计</a> 淘宝技术部 *** 失效</li>
-<li>Local Cache的小TIP  阿里 放翁（文初）</li>
-<li><a href="https://www.csdn.net/article/1970-01-01/2825234">阿里云分布式缓存OCS与DB之间的数据一致性</a> 杨成虎</li>
-<li><a href="https://developer.aliyun.com/article/55842">缓存失效竟然可以这么解？</a> serana_cai</li>
-<li>xxx</li>
-<li>《亿级流量网站架构核心技术》 第9章 张开涛</li>
-<li>xxx</li>
-<li><a href="https://coolshell.cn/articles/17416.html">缓存更新的套路</a>  coolshell ***</li>
-<li>《后端存储实战课 - MySQL如何应对高并发（一）：使用缓存保护MySQL》  李玥</li>
-<li><a href="https://zhuanlan.zhihu.com/p/554879252">浅谈缓存最终一致性的解决方案</a>   腾讯 未</li>
-</ol>
-]]></content>
-      <categories>
-        <category>中间件</category>
-        <category>缓存</category>
-      </categories>
-      <tags>
-        <tag>缓存</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis 优化建议</title>
-    <url>/www6vHomeHexo/2021/05/24/redisOptimize/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="优化建议">优化建议</span><a href="#优化建议" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2021/05/24/redisOptimize/redis-suggest.jpg" class width="450" height="300">
-
-<h2><span id="优化建议2">优化建议[2]</span><a href="#优化建议2" class="header-anchor">#</a></h2><ul>
-<li><p>对象内存优化</p>
-</li>
-<li><p>客户端缓冲优化</p>
-</li>
-<li><p>碎片优化</p>
-</li>
-<li><p>子进程内存优化</p>
-</li>
-<li><p>序列化 + 压缩<br>Renault（序列化： Json or Hession，压缩： Hession自带压缩 ）</p>
-</li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li>加餐（六）| Redis的使用规范小建议</li>
-<li><a href="https://zhuanlan.zhihu.com/p/506470564">Redis 内存优化在 vivo 的探索与实践</a> vivo</li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Redis 学习资源</title>
     <url>/www6vHomeHexo/2021/05/24/redisStudy/</url>
     <content><![CDATA[<p></p>
@@ -14017,134 +13089,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <li><p>优化<br><a href="https://zhuanlan.zhihu.com/p/382677486">十亿级流量下，我与Redis时延小突刺的战斗史</a><br><a href="https://zhuanlan.zhihu.com/p/422659513">Redis大集群扩容性能优化实践</a></p>
 </li>
 </ul>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>KV</category>
-        <category>Redis</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis 大Key</title>
-    <url>/www6vHomeHexo/2021/05/21/redisBigKey/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#redis-%E5%A4%A7key">Redis 大Key</a><ul>
-<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF-bigkey-5">什么是 Bigkey [5]</a></li>
-<li><a href="#%E9%97%AE%E9%A2%98">问题</a></li>
-<li><a href="#%E5%BB%BA%E8%AE%AE-6">建议 [6]</a></li>
-<li><a href="#%E6%9F%A5%E6%89%BE-%E5%A4%A7key">查找 大Key</a></li>
-<li><a href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-3">解决方案 [3]</a></li>
-<li><a href="#scan%E5%91%BD%E4%BB%A4">scan命令</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="redis-大key">Redis 大Key</span><a href="#redis-大key" class="header-anchor">#</a></h1><h3><span id="什么是-bigkey-5">什么是 Bigkey [5]</span><a href="#什么是-bigkey-5" class="header-anchor">#</a></h3><p>【字符串类型】： 单个string类型的value值超过1MB，就可以认为是Bigkey。<br>【非字符串类型】：哈希、列表、集合、有序集合等， 它们的元素个数超过2000个，就可以认为是Bigkey。</p>
-<h3><span id="问题">问题</span><a href="#问题" class="header-anchor">#</a></h3><p>问题1 [1] </p>
-<ul>
-<li>大key在数据迁移[遇到过]、扩容、删除[遇到过]时会有卡顿。</li>
-</ul>
-<p>问题2 [3]</p>
-<ul>
-<li>执行大key命令的客户端本身，耗时明显增加，甚至超时</li>
-<li>执行大key相关读取或者删除操作时，会严重占用带宽和CPU，影响其他客户端</li>
-<li>大key本身的存储带来分布式系统中分片数据不平衡，CPU使用率也不平衡</li>
-<li>大key有时候也是热key，读取操作频繁，影响面会很大</li>
-<li>执行大key删除时，在低版本redis中可能阻塞线程   [遇到过]</li>
-</ul>
-<h3><span id="建议-6">建议 [6]</span><a href="#建议-6" class="header-anchor">#</a></h3><ul>
-<li><p>bigKey 容量</p>
-<ul>
-<li>string类型控制在10KB以内</li>
-<li>hash、list、set、zset元素个数不要超过5000</li>
-</ul>
-</li>
-<li><p><strong>非字符串的bigkey</strong>，不要使用del删除，<strong>使用hscan、sscan、zscan方式渐进式删除</strong></p>
-</li>
-<li><p><strong>防止bigkey过期时间自动删除问题</strong>(例如一个200万的zset设置1小时过期，会触发del操作，造成阻塞，而且该操作不会不出现在慢查询中(latency可查))，查找方法和删除方法</p>
-</li>
-</ul>
-<h3><span id="查找-大key">查找 大Key</span><a href="#查找-大key" class="header-anchor">#</a></h3><ul>
-<li>–bigkeys参数,   用scan扫描大key  [1][2][5]<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">redis-cli --bigkeys</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Scanning the entire keyspace to find biggest keys as well as</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">average sizes per key <span class="built_in">type</span>.  You can use -i 0.1 to <span class="built_in">sleep</span> 0.1 sec</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">per 100 SCAN commands (not usually needed).</span></span><br><span class="line">[00.00%] Biggest zset   found so far &#x27;testzset&#x27; with 129 members</span><br><span class="line">[00.00%] Biggest hash   found so far &#x27;h2&#x27; with 513 fields</span><br><span class="line">[00.00%] Biggest set    found so far &#x27;si1&#x27; with 5 members</span><br><span class="line">[00.00%] Biggest hash   found so far &#x27;h4&#x27; with 514 fields</span><br><span class="line">[00.00%] Biggest string found so far &#x27;key&#x27; with 9 bytes</span><br><span class="line">-------- summary -------</span><br><span class="line">Sampled 9 keys in the keyspace!</span><br><span class="line">Total key length in bytes is 27 (avg len 3.00)</span><br><span class="line">Biggest string found &#x27;key&#x27; has 9 bytes</span><br><span class="line">Biggest    set found &#x27;si1&#x27; has 5 members</span><br><span class="line">Biggest   hash found &#x27;h4&#x27; has 514 fields</span><br><span class="line">Biggest   zset found &#x27;testzset&#x27; has 129 members</span><br><span class="line">1 strings with 9 bytes (11.11% of keys, avg size 9.00)</span><br><span class="line">0 lists with 0 items (00.00% of keys, avg size 0.00)</span><br><span class="line">2 sets with 8 members (22.22% of keys, avg size 4.00)</span><br><span class="line">4 hashs with 1541 fields (44.44% of keys, avg size 385.25)</span><br><span class="line">2 zsets with 132 members (22.22% of keys, avg size 66.00)</span><br><span class="line">0 streams with 0 entries (00.00% of keys, avg size 0.00)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>注意点<ul>
-<li><strong>建议在slave节点执行</strong>，因为–Bigkeys也是通过scan完成的，可能会对节点造成阻塞。</li>
-<li><strong>建议在节点本机执行</strong>，这样可以减少网络开销。</li>
-<li>如果没有从节点，<strong>可以使用–i参数</strong>，例如(–i 0.1 代表100毫秒执行一次)。</li>
-<li>–Bigkeys只能计算每种数据结构的top1，如果有些数据结构有比较多的Bigkey，是查找不出来的。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p><strong>–bigkeys的不足</strong> [7]<br>  想查询大于10kb的所有key， –bigkeys参数就无能为力了。需要用到memory usage命令来计算每个键值的字节数</p>
-</blockquote>
-<ul>
-<li><p>MEMORY USAGE key</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">SET cento 01234567890123456789012345678901234567890123</span></span><br><span class="line">45678901234567890123456789012345678901234567890123456789</span><br><span class="line">OK</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">MEMORY USAGE cento</span></span><br><span class="line">(integer) 153</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>离线分析RDB [3]<br>使用redis-rdb-tools离线分析工具来扫描RDB持久化文件</p>
-<p><a href="https://github.com/sripathikrishnan/redis-rdb-tools">redis-rdb-tools</a></p>
-</li>
-</ul>
-<h3><span id="解决方案-3">解决方案 [3]</span><a href="#解决方案-3" class="header-anchor">#</a></h3><ul>
-<li><p>可删除</p>
-<ul>
-<li>渐进式删除&lt;4.0版本<br><a href="#scan%E5%91%BD%E4%BB%A4">scan命令</a>  <strong>游标式迭代扫描</strong><br>使用 hscan、sscan、zscan 方式渐进式删除 [4]</li>
-<li>惰性删除&gt;4.0版本  [7][8]<br><strong>unlink命令  异步惰性非阻塞删除</strong> <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">unlink &lt;keyName&gt; </span><br></pre></td></tr></table></figure>
- <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">lazyfree-lazy-server-del：Yes(default no)</span><br><span class="line">replica-lazy-flush：Yes(default no)</span><br><span class="line"></span><br><span class="line">lazyfree-lazy-user-del: Yes(default no) （6.0 新增）</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>不可删除</p>
-<ul>
-<li>拆分<ul>
-<li>字符串类型<br>比如商品信息，根据的类别拆分 key。</li>
-<li>集合类元素<br>按照日期拆分，key20220101、key20220102</li>
-</ul>
-</li>
-<li>压缩 Value 数据<br>使用序列化、压缩算法将 Key 的大小控制在合理范围内，但是需要注意，序列化、反序列化都会带来一定的消耗</li>
-</ul>
-</li>
-</ul>
-<h3><span id="scan命令">scan命令</span><a href="#scan命令" class="header-anchor">#</a></h3><ul>
-<li>scan命令[1]<ul>
-<li>zset -&gt; zscan<br>ZSCAN：命令用于迭代  zset 中的元素（包括元素成员和元素分值）。</li>
-<li>hash -&gt; hscan<br>HSCAN：命令用于迭代 hash 中的键值对。</li>
-<li>set -&gt; sscan<br>SSCAN：命令用于迭代 set 中的元素。</li>
-<li>key of hash -&gt; scan<br>SCAN：命令用于迭代 数据库键。</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; keys *</span><br><span class="line">1) &quot;db_number&quot;</span><br><span class="line">2) &quot;key1&quot;</span><br><span class="line">3) &quot;myKey&quot;</span><br><span class="line">127.0.0.1:6379&gt; scan 0 MATCH * COUNT 1</span><br><span class="line">1) &quot;2&quot;</span><br><span class="line">2) 1) &quot;db_number&quot;</span><br><span class="line">127.0.0.1:6379&gt; scan 2 MATCH * COUNT 1</span><br><span class="line">1) &quot;1&quot;</span><br><span class="line">2) 1) &quot;myKey&quot;</span><br><span class="line">127.0.0.1:6379&gt; scan 1 MATCH * COUNT 1</span><br><span class="line">1) &quot;3&quot;</span><br><span class="line">2) 1) &quot;key1&quot;</span><br><span class="line">127.0.0.1:6379&gt; scan 3 MATCH * COUNT 1</span><br><span class="line">1) &quot;0&quot;</span><br><span class="line">2) (empty list or set)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Hash删除: hscan + hdel [6]<br>先删除hash里的每个field，最后再删除hash<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">delBigHash</span><span class="params">(String host, <span class="type">int</span> port, String password, String bigHashKey)</span> &#123;</span><br><span class="line">    <span class="type">Jedis</span> <span class="variable">jedis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Jedis</span>(host, port);</span><br><span class="line">    <span class="keyword">if</span> (password != <span class="literal">null</span> &amp;&amp; !<span class="string">&quot;&quot;</span>.equals(password)) &#123;</span><br><span class="line">        jedis.auth(password);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">ScanParams</span> <span class="variable">scanParams</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ScanParams</span>().count(<span class="number">100</span>);</span><br><span class="line">    <span class="type">String</span> <span class="variable">cursor</span> <span class="operator">=</span> <span class="string">&quot;0&quot;</span>;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        ScanResult&lt;Entry&lt;String, String&gt;&gt; scanResult = jedis.hscan(bigHashKey, cursor, scanParams);</span><br><span class="line">        List&lt;Entry&lt;String, String&gt;&gt; entryList = scanResult.getResult();</span><br><span class="line">        <span class="keyword">if</span> (entryList != <span class="literal">null</span> &amp;&amp; !entryList.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">for</span> (Entry&lt;String, String&gt; entry : entryList) &#123;</span><br><span class="line">                jedis.hdel(bigHashKey, entry.getKey());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cursor = scanResult.getStringCursor();</span><br><span class="line">    &#125; <span class="keyword">while</span> (!<span class="string">&quot;0&quot;</span>.equals(cursor));</span><br><span class="line">    <span class="comment">//删除bigkey</span></span><br><span class="line">    jedis.del(bigHashKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li>《Redis 深度历险：核心原理与应用实践》 钱文品<br>大海捞针—scan  </li>
-<li><a href="https://segmentfault.com/a/1190000018193214?utm_source=tag-newest">Redis中查找大key</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/473930220">解决了Redis大key问题</a>  ***<br><a href="https://mp.weixin.qq.com/s/0WS7_9EIQqpYlUNWgZZJog">解决了Redis大key问题</a></li>
-<li><a href="https://blog.csdn.net/qq_34827674/article/details/126225192">Redis 大 key 要如何处理？</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/584594738">Bigkey问题的解决思路与方式探索</a> vivo team *** </li>
-<li><a href="https://developer.aliyun.com/article/846851">一份完整的阿里云 Redis 开发规范，值得收藏！</a>  ***</li>
-<li><a href="https://www.bilibili.com/video/BV13R4y1v7sP/?p=106">尚硅谷Redis零基础到进阶，最强redis7教程，阳哥亲自带练（附redis面试题）</a> V</li>
-<li><a href="/www6vHomeHexo/2022/06/01/redisLazyFree/" title="Redis LazyFree">Redis LazyFree</a> self</li>
-</ol>
 ]]></content>
       <categories>
         <category>数据库</category>
@@ -18696,117 +17640,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
-    <title>多级缓存(cache)</title>
-    <url>/www6vHomeHexo/2019/05/25/cacheMultiLayer/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#overview">Overview</a></li>
-<li><a href="#%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98-5">多级缓存 [5?]</a><ul>
-<li><a href="#%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%E8%BF%9C%E7%A8%8B%E7%BC%93%E5%AD%98">二级缓存（本地缓存+远程缓存）</a></li>
-</ul>
-</li>
-<li><a href="#%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%E6%9F%A5%E8%AF%A2-2">多级缓存查询 [2]</a></li>
-<li><a href="#%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%E6%9B%B4%E6%96%B0-2">多级缓存更新 [2]</a></li>
-<li><a href="#%E7%BC%93%E5%AD%98%E5%88%86%E5%B1%82-%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98">缓存分层 多级缓存</a><ul>
-<li><a href="#%E8%BE%B9%E7%BC%98cache">边缘cache</a></li>
-<li><a href="#%E9%A1%B5%E9%9D%A2%E7%BA%A7%E7%BC%93%E5%AD%98">页面级缓存</a></li>
-<li><a href="#%E8%AE%A1%E7%AE%97%E7%BB%93%E6%9E%9C%E7%9A%84%E7%BC%93%E5%AD%98">计算结果的缓存</a></li>
-<li><a href="#%E6%95%B0%E6%8D%AE%E6%BA%90%E7%BA%A7%E7%BC%93%E5%AD%98-%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%E6%BA%90%E7%BB%93%E6%9E%9C%E9%9B%86">数据源级缓存： 缓存数据源结果集</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="overview">Overview</span><a href="#overview" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2019/05/25/cacheMultiLayer/arch.jpg" class>
-
-<h1><span id="多级缓存-5">多级缓存 [5?]</span><a href="#多级缓存-5" class="header-anchor">#</a></h1><h3><span id="二级缓存本地缓存远程缓存">二级缓存（本地缓存+远程缓存）</span><a href="#二级缓存本地缓存远程缓存" class="header-anchor">#</a></h3><ul>
-<li>二级缓存（本地缓存+远程缓存）<ul>
-<li>远端Cache推全量或者部分的数据到本地cache，并设置过期时间【初始化】</li>
-<li>查询流程<ul>
-<li>先从本地缓存拿，如果有数据且有效，就直接返回</li>
-<li>如果没有命中<ul>
-<li>1.本地查询远端服务，并拿到结果</li>
-<li>2.本地更新远端缓存</li>
-<li>3.更新本地缓存</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>本地cache失效+更新流程,本地防穿透【1】<ul>
-<li>同步更新缓存<ul>
-<li>访问同一个key的业务线程只有一个线程穿透到远端Cache，其他线程等待穿透线程的返回结果[加锁]</li>
-</ul>
-</li>
-<li>异步更新缓存<ul>
-<li>1.过期时间到了后，产生过期事件，延长数据有效期，返回旧的数据</li>
-<li><ol start="2">
-<li>检查过期事件，后台线程池更新缓存数据，并重新设置有效时间</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>eg. Google LoadingCache 以上两种方式都有</li>
-</ul>
-</li>
-<li>远端cache，防穿透<ul>
-<li>远端cache访穿透采用永久缓存数据，每次查询都能查到值.</li>
-<li>通过辅助信息判断逻辑过期, 再从远端服务异步拉数据刷新远端cache。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1><span id="多级缓存查询-2">多级缓存查询 [2]</span><a href="#多级缓存查询-2" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2019/05/25/cacheMultiLayer/query.png" class>
-
-<h1><span id="多级缓存更新-2">多级缓存更新 [2]</span><a href="#多级缓存更新-2" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2019/05/25/cacheMultiLayer/update.png" class>
-
-<h1><span id="缓存分层-多级缓存">缓存分层  多级缓存</span><a href="#缓存分层-多级缓存" class="header-anchor">#</a></h1><h3><span id="边缘cache">边缘cache</span><a href="#边缘cache" class="header-anchor">#</a></h3><p>可用CDN实现，往往是服务器端缓存，存静态数据。<br>可以存Html页面， 脚本， 样式， 图片，页面片段等。</p>
-<h3><span id="页面级缓存">页面级缓存</span><a href="#页面级缓存" class="header-anchor">#</a></h3><p>往往是本地缓存， 数据相对动态。</p>
-<h3><span id="计算结果的缓存">计算结果的缓存</span><a href="#计算结果的缓存" class="header-anchor">#</a></h3><p>可以存储索引聚合数据，比如  BI里的数据聚合表。也可以存储耗时查询数据 ，比如搜索的结果。也可以存储业务相关数据， 比如对象模型的有向图可以整个缓存起来。在微博系统中，所有@你的微博是相对耗时， 可以 考虑作为逻辑缓存。</p>
-<h3><span id="数据源级缓存-缓存数据源结果集">数据源级缓存： 缓存数据源结果集</span><a href="#数据源级缓存-缓存数据源结果集" class="header-anchor">#</a></h3><p><del>比如Hibernate缓存中的QueryCache用来缓存查询语句, 及查询结果集中对象的Id与Type. 当再次使用已缓存的Query时, 就可以通过对象的Id与Type在二级缓存中查找实际的对象.</del></p>
-<p><del>Hibernate提供了短生命周期的缓存， 也叫事务级别的缓存。长生命周期的缓存，也叫应用级别的缓存。</del></p>
-<p>  缓存分层之间的失效方式： 1. 映射关系  2. 日志 ＋ 重试</p>
-<p><del>## 缓存对象的粒度</del>  </p>
-<p><del>有一种缓存的误用是缓存大量的数据集合，而读取其中一部分。 在很多时候，我们往往会缓存一个对象的集合，但是，我们在读取的时候，只是每次读取其中一部分。 在更新缓存时， 读出整个集合， 改变其中一部分后， 在存回去， 这样序列化与反序列化的代价相当大</del></p>
-<p><del>针对这个情况， jboss cache提供了两种粒度的对象存储：核心缓存（粗粒度的），POJO 缓存（细粒度的）</del></p>
-<p><del>核心缓存会直接把您传递给它的数据存储在一个树型结构中。键／值对被存储在树的节点上，出于复制或持续性的需要它们都被序列化了。</del></p>
-<p><del>POJO 缓存则采用比较复杂的机制——利用字节码编织来内省（introspecting）用户类，并向用户类的域添加侦听器，一旦域值有任何变化，侦听器会立刻 通知缓存。例如，如果要在POJO缓存中存储一个庞大、复杂的对象，会导致POJO缓存内省对象的字节码，最终只把该对象的原始域存储到树结构中。一旦域 值有所变化，缓存只复制这个改变了的域值而不会去复制整个用户类，这是高效的细粒度复制。</del></p>
-<p><del>在缓存了细粒度的对象后， 造成的一个问题是数据的冗余。 例如查询条件1的返回的是model1, model2, model3, 查询条件2返回的是model2, model3, model4. model2, model3在缓存里就存了两份， 造成了冗余。这时可以分离出一个索引层，索引层存储缓存对象的地址， 这样可以节约大量的存储空间。 例如可以存储model1- model4的索引， 再从缓存中取得到实际的model.  在数据库中， 这种方式叫look up table. 如果系统更复杂， 可以采取缓存的partition加多级索引的方式</del></p>
-<p><del>## 缓存与一致性</del></p>
-<p>  <del>缓存多副本之间的同步：</del><br>  <del>可分为replication和invalidaiton机制。 Replication机制表示一旦有数据的更新， 其余副本都会同步复制一份更新后的数据。Replication机制复制时slave会对master节点有拖累， 这时可以考虑采取invalidation机制。 Invalidation机制在jboss cache里已有实现, 一旦有更新， 广播消息， 失效所有其他的副本，让其重新去获得该值。 可通过这种方式缓存大对象以减少在实例中复制对象的代价。根据用户在一定时间段内上网地点固定不变的规律，用户始终都是访问同一个机房， 针对主节点的本地缓存在有更新时可以异步发invalidation消息，副本节点可以慢慢的再加载回这个大对象， 这样可以提高用户响应度。这种方式也可用在边缘缓存中。对于无法分组的数据， 比如在某时间段的用户认证数据需要保证副本同步，最好的方式是清除相应的副本， 让它在下次使用时初始化</del></p>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><p><a href="https://blog.csdn.net/lee_nacl/article/details/127860463">多级缓存架构</a><br>《架构实战营-第25节课：计算架构模式之多级缓存架构》 V</p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/497029871">解析分布式系统的缓存设计</a></p>
-</li>
-<li><p>《移动选购线缓存实践》 赵思奇 *** </p>
-</li>
-<li><p><a href="http://wed.xjx100.cn/news/154282.html">jetcache：阿里这款多级缓存框架一定要掌握</a> 未</p>
-</li>
-<li><p><a href="https://blog.51cto.com/u_15989526/6287632">聊聊微服务架构中的多级缓存设计（建议收藏）</a> 未</p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/606469614">Java分布式缓存一篇文章让你明白你多级缓存的分层架构原理分析</a> 未</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>中间件</category>
-        <category>缓存</category>
-      </categories>
-      <tags>
-        <tag>缓存</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>IDC网络互通</title>
     <url>/www6vHomeHexo/2019/05/15/netConnection/</url>
     <content><![CDATA[<p></p>
@@ -20509,126 +19342,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>CQRS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>缓存(cache)总结</title>
-    <url>/www6vHomeHexo/2018/01/21/cacheSummary/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>  
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2018/01/21/cacheSummary/cacheSummary.jpg" class title="cache总结">
-
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a href="https://www.geek-share.com/detail/2615401101.html">应用系统数据缓存设计</a> 淘宝技术部 *** 失效</li>
-<li>Local Cache的小TIP  阿里 放翁（文初）</li>
-<li>xxx</li>
-<li>xxx</li>
-<li>xxx</li>
-<li>xxx</li>
-<li>cache 58沈剑</li>
-</ol>
-]]></content>
-      <categories>
-        <category>中间件</category>
-        <category>缓存</category>
-      </categories>
-      <tags>
-        <tag>cache</tag>
-        <tag>中间件</tag>
-        <tag>一致性</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>缓存(cache)机制</title>
-    <url>/www6vHomeHexo/2017/12/07/cache/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E6%A8%A1%E5%BC%8F">缓存数据分布模式</a><br>- <a href="#%E5%88%86%E7%89%87%E6%A8%A1%E5%BC%8F-sharding">分片模式 （sharding）</a><br>- <a href="#%E5%A4%8D%E5%88%B6%E6%A8%A1%E5%BC%8F">复制模式</a></li>
-<li><a href="#%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98">本地缓存</a></li>
-<li><a href="#%E7%BC%93%E5%AD%98%E4%B8%8E%E5%9C%BA%E6%99%AF">缓存与场景</a><ul>
-<li><a href="#1-%E9%9D%9E%E5%85%B1%E6%80%A7%E6%95%B0%E6%8D%AE%E7%BC%93%E5%AD%98-eg-%E5%BE%AE%E5%8D%9A-%E5%8D%9A%E5%AE%A2%E4%B8%AA%E4%BA%BA%E9%A6%96%E9%A1%B5">1. 非共性数据缓存 eg. 微博， 博客个人首页</a><ul>
-<li><a href="#i-%E7%83%AD%E7%82%B9%E7%BC%93%E5%AD%98">I. 热点缓存。</a></li>
-<li><a href="#ii-%E9%9D%9E%E7%83%AD%E7%82%B9%E6%95%B0%E6%8D%AE">II. 非热点数据，</a></li>
-<li><a href="#iii-read-only%E7%BC%93%E5%AD%98">III. read-only缓存</a></li>
-</ul>
-</li>
-<li><a href="#2-%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9B%B4%E6%96%B0%E5%9C%BA%E6%99%AF">2. 高并发更新场景</a><ul>
-<li><a href="#i-%E6%82%B2%E8%A7%82%E9%94%81%E6%96%B9%E6%A1%88">I. 悲观锁方案</a></li>
-<li><a href="#ii-%E4%B9%90%E8%A7%82%E9%94%81%E6%96%B9%E6%A1%88">II. 乐观锁方案</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#redies%E4%BD%9C%E4%B8%BA%E7%BC%93%E5%AD%98%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">Redies作为缓存的最佳实践</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-
-<h2><span id="缓存数据分布模式">缓存数据分布模式</span><a href="#缓存数据分布模式" class="header-anchor">#</a></h2><h5><span id="分片模式-sharding">分片模式 （sharding）</span><a href="#分片模式-sharding" class="header-anchor">#</a></h5><p>数据正交分散到大量机器， 可以做到线性的可伸缩性， 但是实现可用性比较困难。还有一个好处是可以通过集群做负载均衡来实现数据的管理。<br>根据CAP理论， 在高可用的场景下， 数据分区的容忍性需要牺牲一定的一致性。 相应各个副本的同步策略也有不同， 主要可分为同步和异步方式。由客户端做一致性hash把数据分片存放到服务端。</p>
-<h5><span id="复制模式">复制模式</span><a href="#复制模式" class="header-anchor">#</a></h5><p>数据在集群中存在多个副本。 在本地缓存的集群中，数据会复制到所有的节点中，没有网络延迟和等待时间的集群成员都是可用的。 多副本通过低延迟访问来提供高性能。<br>在修改数据时需要复制新的版本数据到所有的副本， 在高并发修改的场景下会限制系统的可伸缩性， 副本数不会调的太高。</p>
-<h2><span id="本地缓存">本地缓存</span><a href="#本地缓存" class="header-anchor">#</a></h2><p>   在同一机房内的， 需要适量考虑本地cache， 数据压缩传输等以节省内网数据传输量 。<br>跨机房的缓存有地域区分，用户往往访问同一机房， 这样可以做本地的cache。 机房之间通过队列的方式进行异步和压缩传输，以提高用户请求的相应度。</p>
-<h2><span id="缓存与场景">缓存与场景</span><a href="#缓存与场景" class="header-anchor">#</a></h2><h3><span id="1-非共性数据缓存-eg-微博-博客个人首页">1. 非共性数据缓存 eg. 微博， 博客个人首页</span><a href="#1-非共性数据缓存-eg-微博-博客个人首页" class="header-anchor">#</a></h3><p>  问题：缓存所有的数据性价比不高，　命中率不高<br>  解决方案：</p>
-<h5><span id="i-热点缓存">I.                   热点缓存。</span><a href="#i-热点缓存" class="header-anchor">#</a></h5><p>  只缓存那些热点的数据。可以缓存在线的用户，　缓存热销的商品，　缓存热点用户的数据。热点规则表示如何匹配到一个热点，即这个查询请求是否请求了热点数据。 根据2&#x2F;8原则，小部分的数据占用了大部分的访问量。 这也就是twitter  page cache  是40%，而不是90%的原因。
-　</p>
-<h5><span id="ii-非热点数据">II.  非热点数据，</span><a href="#ii-非热点数据" class="header-anchor">#</a></h5><p>  可以采用nosql技术（redies），可以把它看成可持久化的缓存。<br>   原理类似虚拟内存，理论上不受内存大小的限制。使用NoSQL来做缓存，我们可以把一些不常访问、不怎么更新的数据也缓存起来。比如论坛、新闻的老数据、数据列表的靠后的页面，虽然用户访问不多，但是搜索引擎爬虫会访问，也可能导致系统负载上升。<br>  从外存拿数据减少了计算的开销 ，由于其数据库结构的简单，从磁盘获取一次数 据也比从数据库一次耗时的查询划算很多。</p>
-<h5><span id="iii-read-only缓存">III. read-only缓存</span><a href="#iii-read-only缓存" class="header-anchor">#</a></h5><p>   缓存是read-only的， 如果有cache数据的更新， 把cache置为失效的。 如果有多个副本，这样做能够减少replication更新数据的开销， 只需要发送置失效的消息即可。</p>
-<h3><span id="2-高并发更新场景">2. 高并发更新场景</span><a href="#2-高并发更新场景" class="header-anchor">#</a></h3><h5><span id="i-悲观锁方案">I. 悲观锁方案</span><a href="#i-悲观锁方案" class="header-anchor">#</a></h5><p>高并发更新， 缓存会超时的场景可以使用mutex锁。如<br>首页top 10, 由数据库加载到memcache缓存n分钟<br>微博中名人的content cache, 一旦不存在会大量请求不能命中并加载数据库<br>在加载数据库之前先增加一个mutex key作为锁， 成功之后再去做加载数据库， 如果加锁失败则sleep，之后重试读取原cache数据。为了防止死锁，锁也需要设置过期时间。</p>
-<h5><span id="ii-乐观锁方案">II. 乐观锁方案</span><a href="#ii-乐观锁方案" class="header-anchor">#</a></h5><p>MVCC是后验性的，读不阻塞写，写也不阻塞读，等到提交的时候才检验是否有冲突，由于没有锁，所以读写不会相互阻塞，从而大大提升了并发性能。修改过的副本带着版本号元数据， 多个副本在合并时， 根据版本检测冲突， 并合并数据。</p>
-<p>Memcache 通过客户端cas命令实现乐观锁。 Jboss在3.0实现了mvcc。 MVCC 提供了非阻塞 (non-blocking) 读操作 ( 它并不会去阻塞 wirter threads) ，在避免死锁的同时也提供了更高级的并发机制。它采用了 fail-fast 机制，如果写操作得到了一个 write lock ，那么它们也是依次进行，不允许重叠。</p>
-<h2><span id="redies作为缓存的最佳实践">Redies作为缓存的最佳实践</span><a href="#redies作为缓存的最佳实践" class="header-anchor">#</a></h2><ol>
-<li>对于全局公用的，构建成本比较低的数据， 可以采用一致性hash， 无复制， 无持久化的方案。 如果缓存crash了，可以快速重新构建。</li>
-<li>对于与用户相关的， 一致性要求比较低的， 构建成本较低的， 可以采用多对一的复制方式，多个小容量的节点复制到同一个大容量的节点， 但不提供持久化， 提供较高的可用性。</li>
-<li>对于与用户相关的，一致性要求比较高的， 构建成本比较高，但存储占用量不高的场景下， 需要持久化， 并且一对一的复制方式， 提供最高的可用性。</li>
-</ol>
-<blockquote>
-<p><strong>案例： Twitter缓存体系</strong><br>  Twitter:<br>     逻辑缓存<br>        －  page cache    api<br>        － fragment cache    1. 原始数据的冗余 2. 结构上的冗余<br>     数据源cache<br>        － vector cache<br>        － Row cache </p>
-</blockquote>
-<ul>
-<li>Page， fragment － 全局与局部的分离， api， 业务逻辑</li>
-<li>Vector, row cache – 索引与内容的分离</li>
-<li>Google gfs cache</li>
-</ul>
-<blockquote>
-<p><strong>缓存类型：</strong><br>   Read-through  读贯穿<br>   Write-trrough  写贯穿<br>   Write-behind</p>
-</blockquote>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="http://www.infoq.com/cn/news/2011/03/nosql-architecture-practice-3">NoSQL架构实践（三）——以NoSQL为缓存</a>   </li>
-<li><a href="http://wenku.baidu.com/view/018e3f2d7375a417866f8fbc.html">大型网站架构系列之五,缓存策略设计概要</a>  失效</li>
-<li><a href="http://timyang.net/programming/memcache-mutex/">Memcache mutex设计模式</a> </li>
-<li><a href="http://superleo.iteye.com/blog/265823">深入理解JBoss Cache3.0——Naga</a>  *</li>
-<li><a href="http://www.infoq.com/cn/articles/write-behind-caching">极端事务处理模式：Write-behind缓存</a>   </li>
-<li><a href="http://coolshell.cn/articles/6790.html">多版本并发控制(MVCC)在分布式系统中的应用</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>中间件</category>
-        <category>缓存</category>
-      </categories>
-      <tags>
-        <tag>cache</tag>
-        <tag>中间件</tag>
       </tags>
   </entry>
   <entry>
@@ -24882,7 +23595,7 @@ table th:first-of-type {
 <p>如前所述，Safari版本将完整执行作为动画电影呈现，而打印和所有其他数字格式使用一系列静态关键帧序列，这些关键帧提供了管道如何随时间推移的进展的感觉。在这两种情况下，我们还提供指向*<a href="http://www.streamingbook.net/">www.streamingbook.net</a>*上完全动画版本的URL。</p>
 <p>每个图表在两个维度上绘制输入和输出：事件时间（x轴）和处理时间（y轴）。因此，由管道观察到的实时时间从底部向上推进，如处理时间轴中上升的粗黑线所示。输入是圆圈，圆圈内的数字表示特定记录的值。它们开始是浅灰色的，并随着管道观察到它们而变暗。</p>
 <p>当管道观察到值时，它会在其中间状态中累积它们，并最终将聚合结果实现为输出。状态和输出由矩形表示（灰色为状态，蓝色为输出），聚合值靠近顶部，并且由矩形覆盖的区域表示积累到结果的事件时间和处理时间的部分。对于示例2-1中的管道，在经典批处理引擎上执行时，它看起来像图2-3所示。</p>
-<div id="dplayer0" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer0"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0203.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer15" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer15"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0203.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图2-3.经典批处理</em></p>
 <p>因为这是批处理管道，所以它会累积状态，直到看到所有输入为止（由顶部的虚线绿线表示），此时它会产生其单个输出为48。在这个示例中，我们正在计算事件时间的所有总和，因为我们没有应用任何特定的窗口转换；因此，状态和输出的矩形覆盖了整个x轴。但是，如果我们想要处理无限数据源，则经典批处理将不足够；我们无法等待输入结束，因为它实际上永远不会结束。我们想要的概念之一是窗口，这是我们在第1章中介绍的。<del>因此，在我们的第二个问题“事件时间的<em><strong>哪里</strong></em>计算结果？”的上下文中，我们现在将简要重新访问窗口。</del> 因此，在我们的第二个问题“事件时间<strong>在哪里</strong>计算结果？”的背景下，我们现在将简要重温窗口化。</p>
 <h3><span id="何地where-窗口"><u><em><strong>何地(Where)</strong></em>: 窗口 </u></span><a href="#何地where-窗口" class="header-anchor">#</a></h3><p><u>如第1章所述，窗口是沿时间边界切分数据源的过程。常见的窗口策略包括固定窗口、滑动窗口和会话窗口，如图2-4所示。</u></p>
@@ -24892,7 +23605,7 @@ table th:first-of-type {
 <p><u><em>示例2-2.窗口化的求和代码</em></u></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team，Integer&gt;&gt; totals = input</span><br><span class="line">  .apply（Window.into（FixedWindows.of（TWO_MINUTES）））</span><br><span class="line">  .apply（Sum.integersPerKey（））;</span><br></pre></td></tr></table></figure>
 <p><u>请记住，Beam提供了一个统一的模型，可以在批处理和流处理中使用，因为从语义上讲，批处理实际上只是流处理的一个子集。因此，让我们首先在批处理引擎上执行此管道；机制更加简单，当我们切换到流引擎时，它将为我们提供直接比较的内容。图2-5呈现了结果。</u></p>
-<div id="dplayer1" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer1"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0205.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer16" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer16"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0205.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图2-5.在批处理引擎上的分段求和</em></p>
 <p>与以前一样，输入会在状态中累积，直到完全消耗，此后才会产生输出。但是，在这种情况下，我们不仅仅得到一个输出，而是得到四个输出：每个相关的两分钟事件时间窗口的单个输出。</p>
 <p>到目前为止，我们已经重新访问了我在第1章中介绍的两个主要概念：事件时间和处理时间域之间的关系以及窗口。如果我们想继续，我们将需要开始添加本节开头提到的新概念：触发器、水位线和累积。</p>
@@ -24911,7 +23624,7 @@ table th:first-of-type {
 <p><em>示例2-3。每个记录都会重复触发</em></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team，Integer&gt;&gt; totals = input</span><br><span class="line">  .apply(Window.into(FixedWindows.of(TWO_MINUTES))</span><br><span class="line">               .triggering(Repeatedly(AfterCount(1))));</span><br><span class="line">  .apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
 <p>如果我们在流式引擎上运行这个新管道，结果会像图2-6所示。</p>
-<div id="dplayer2" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer2"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0206.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer17" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer17"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0206.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><u><em>图2-6.在流处理引擎上的单个记录触发</em> </u></p>
 <p>您可以看到我们现在为每个窗口获得多个输出（窗格）：每个对应输入的一次。当输出流被写入某种表以便您可以简单地轮询结果时，这种触发模式工作得很好。每当您查看表时，您将看到给定窗口的最新值，这些值随着时间的推移会趋于正确。</p>
@@ -24921,7 +23634,7 @@ table th:first-of-type {
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team，Integer&gt;&gt; totals = input</span><br><span class="line">  .apply(Window.into(FixedWindows.of(TWO_MINUTES))</span><br><span class="line">               .triggering(Repeatedly(AlignedDelay(TWO_MINUTES)))</span><br><span class="line">  .apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
 
 
-<div id="dplayer3" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer3"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0207.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer18" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer18"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0207.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><u><em>图2-7。两分钟对齐的延迟触发器（即，微批处理）</em></u></p>
 <p><u>这种对齐延迟触发器实际上类似于Spark Streaming之类的微批处理流系统。它的好处在于可预测性;您在相同时间内获得所有修改的窗口的定期更新。这也是缺点：所有更新都同时发生，这会导致爆发式的工作负载，通常需要更大的峰值配额来正确处理负载。另一种选择是使用不对齐的延迟。这在Beam中可能类似于示例2-5，其结果如图2-8所示。</u></p>
@@ -24930,7 +23643,7 @@ table th:first-of-type {
 
 
 
-<div id="dplayer4" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer4"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0208.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer19" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer19"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0208.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><u><em>图2-8。两分钟不对齐的延迟触发器</em></u></p>
 <p>将图2-8中的不对齐延迟与图2-6中的对齐延迟进行对比，可以很容易地看出不对齐延迟如何更均匀地分布负载。对于任何给定窗口涉及的实际延迟在两者之间有所不同，有时更多，有时更少，但最终平均延迟将基本保持不变。从这个角度来看，对于大规模处理，不对齐的延迟通常是更好的选择，因为它们会导致时间上更均匀的负载分布。</p>
@@ -24954,7 +23667,7 @@ table th:first-of-type {
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</span><br><span class="line">  .apply(Window.into(FixedWindows.of(TWO_MINUTES))</span><br><span class="line">              .triggering(AfterWatermark()))</span><br><span class="line">  .apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
 <p>水位线的一个有趣的特点是它们是一类函数，这意味着有多个不同的函数<em>F</em>(<em>P</em>)→<em>E</em>满足水位线的属性，成功程度不同。正如我之前所指出的，对于您拥有输入数据的情况，可能可以构建完美的水位线，这是理想的情况。但是对于缺乏输入的完美知识或计算完美水位线的计算成本太高的情况，您可能会选择使用启发式来定义您的水位线。我想在这里强调的一点是，使用的水位线算法独立于管道本身。我们不会在这里详细讨论实施水位线的含义（Slava在第3章中介绍），但是为了帮助加强这个想法，即一组给定的输入可以应用不同的水位线，让我们看一下在相同的数据集上运行示例2-6的管道，但使用两个不同的水位线实现（图2-10）：在左侧，完美的水位线；在右侧，启发式水位线。</p>
 <p>在两种情况下，窗口在水位线通过窗口结束时实现。如您所预期的，完美水位线完美地捕获了管道随着时间的推移的事件时间完整性。相比之下，右侧启发式水位线使用的特定算法未考虑9的值，这大大改变了材料化输出的形状，无论是在输出延迟还是正确性方面（如为[12:00,12:02)窗口提供的不正确答案5所示）。水位线触发器与图2-9中所示的重复更新触发器之间的最大区别是，水位线使我们有一种方法来推断我们的输入的完整性。在系统为给定窗口实现输出之前，我们知道系统尚未认为输入已完成。这对于希望推断输入中缺少数据或缺少数据的用例尤其重要。</p>
-<div id="dplayer5" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer5"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0210.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer20" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer20"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0210.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图2-10. 具有完美（左）和启发式（右）水位线的流式引擎上的窗口求和</em></p>
 <p>缺少数据用例的一个很好的例子是外连接。没有像水位线这样的完整性概念，您如何知道何时放弃发出部分连接而不是继续等待该连接完成？你不知道。在缺乏真正的水位线支持的流式系统中，将该决定基于处理时间延迟并不安全，因为我们在第1章中所说的事件时间偏差的可变性：只要偏差保持小于所选处理时间延迟，缺少数据的结果将是正确的，但是任何时候偏差超过该延迟，它们将突然变得不正确。从这个角度来看，事件时间水位线是许多必须推断输入中缺少数据（例如外连接，异常检测等）的实际流用例的关键部分。</p>
 <p>现在，话虽如此，这些水位线示例也突出了水位线（和任何其他完整性概念）的两个缺点，具体而言，它们可能是以下两者之一：</p>
@@ -24979,7 +23692,7 @@ table th:first-of-type {
 <p><em>Example 2-7.通过早期&#x2F;准时&#x2F;延迟API进行早期、准时和延迟触发</em></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</span><br><span class="line">   .apply(Window.into(FixedWindows.of(TWO_MINUTES))</span><br><span class="line">               .triggering(AfterWatermark()</span><br><span class="line">                         .withEarlyFirings(AlignedDelay(ONE_MINUTE))</span><br><span class="line">                         .withLateFirings(AfterCount(1))))</span><br><span class="line">   .apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
 
-<div id="dplayer6" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer6"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0211.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer21" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer21"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0211.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>Figure 2-11.带有早期、准时和延迟触发的流式引擎的窗口求和</em></p>
 <p>这个版本比Figure 2-9有两个明显的改进：</p>
 <ul>
@@ -25001,7 +23714,7 @@ table th:first-of-type {
 <li>当水位线通过窗口的延迟范围时，该窗口关闭，这意味着窗口的所有状态都会被丢弃。我保留了一个虚线矩形，显示窗口关闭时它覆盖的时间范围（在两个域中），并带有一个小尾巴向右延伸，以与水位线进行对比。</li>
 <li>仅在此图表中，我添加了一个额外的晚到数据（第一个值为6的窗口）。6是晚到的，但仍然在允许的延迟时间范围内，因此与值11的更新结果合并。然而，9在延迟时间范围之外到达，因此被简单地丢弃。</li>
 </ul>
-<div id="dplayer7" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer7"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0212.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer22" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer22"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0212.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图2-12。允许早期&#x2F;按时&#x2F;晚期触发</em></p>
 <p>关于延迟时间范围，最后有两个侧面需要注意：</p>
 <ul>
@@ -25077,13 +23790,13 @@ table th:first-of-type {
 <p><em>示例2-9.早期&#x2F;按时&#x2F;迟到触发的丢弃模式版本</em></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team，Integer&gt;&gt; totals = input</span><br><span class="line">   .apply（Window.into（FixedWindows.of（TWO_MINUTES））</span><br><span class="line">                .triggering（</span><br><span class="line">                  AfterWatermark（）</span><br><span class="line">                   .withEarlyFirings（AlignedDelay（ONE_MINUTE））</span><br><span class="line">                   .withLateFirings（AtCount（1）））</span><br><span class="line">                .discardingFiredPanes（））</span><br><span class="line">    .apply（Sum.integersPerKey（））;</span><br></pre></td></tr></table></figure>
 <p>在启用启发式水位线的流引擎上重新运行会产生如图2-13所示的输出。</p>
-<div id="dplayer8" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer8"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0213.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer23" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer23"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0213.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图2-13。流引擎上的早期&#x2F;按时&#x2F;迟到触发的丢弃模式版本</em></p>
 <p>即使整体输出的形状与图2-11中的累加模式版本相似，但请注意，此丢弃版本中的窗格都不重叠。因此，每个输出都与其他输出无关。<br>如果我们想查看撤回的操作，更改将类似，如示例2-10所示。 ???描述了结果。</p>
 <p><em>示例2-10.早期&#x2F;按时&#x2F;迟到触发的累加和撤回模式版本</em></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team，Integer&gt;&gt; totals = input</span><br><span class="line">  .apply（Window.into（FixedWindows.of（TWO_MINUTES））</span><br><span class="line">               .triggering（</span><br><span class="line">                 AfterWatermark（）</span><br><span class="line">                  .withEarlyFirings（AlignedDelay（ONE_MINUTE））</span><br><span class="line">                  .withLateFirings（AtCount（1）））</span><br><span class="line">               .accumulatingAndRetractingFiredPanes（））</span><br><span class="line">  .apply（Sum.integersPerKey（））;</span><br></pre></td></tr></table></figure>
 
-<div id="dplayer9" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer9"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0214.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer24" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer24"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/17/streamingSystemChapter2/stsy_0214.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p>在流引擎上运行早期&#x2F;按时&#x2F;迟到触发的累加和撤回模式版本</p>
 <p>由于每个窗口的窗格都重叠，因此很难清晰地看到撤回。撤回以红色表示，与重叠的蓝色窗格相结合，形成了略带紫色的颜色。我还略微水平移了给定窗格内两个输出的值（并用逗号分隔它们），以使它们更容易区分。</p>
 <p>图2-14组合了图2-9、2-11（仅启发式）和并排的最终帧，提供了三种模式的良好视觉对比。</p>
@@ -27187,7 +25900,7 @@ table th:first-of-type {
 <p>另一种直观但最终不正确的方法是考虑管道处理的消息速率。虽然这是一个有趣的指标，但速率可能会因输入变化、预期结果的变化、可用于处理的资源等因素而任意变化。更重要的是，速率无法帮助回答完整性的根本问题。具体而言，速率无法告诉我们何时看到了特定时间间隔的所有消息。在现实世界的系统中，会有消息无法通过系统进行进展的情况。这可能是暂时性错误（例如崩溃、网络故障、机器停机）的结果，也可能是需要更改应用逻辑或其他手动干预的应用级故障的结果。当然，如果发生大量故障，则处理速率指标可能是检测到这种情况的良好代理。但是，速率指标永远无法告诉我们单个消息未能通过管道进行进展。然而，即使单个这样的消息，也可能会任意影响输出结果的正确性。</p>
 <p>我们需要更可靠的进展度量。为了到达那里，我们对我们的流数据做出一个基本假设：每个消息都有一个关联的逻辑事件时间戳。在不断到达的无界数据的上下文中，这种假设是合理的，因为这意味着输入数据的持续生成。在大多数情况下，我们可以将原始事件发生的时间作为其逻辑事件时间戳。由于所有输入消息都包含事件时间戳，因此我们可以检查任何管道中这些时间戳的分布。这样的管道可能被分布在许多代理上并以并行方式处理，并且没有保证单个分片之间的顺序。因此，此管道中正在进行的活动消息的事件时间戳集将形成分布，如图3-1所示。</p>
 <p>消息被管道摄取、处理，最终被标记为已完成。每个消息都是“运行中”的，表示已经接收但尚未完成，还是“已完成”的，表示不需要在此消息上执行更多处理。如果我们按事件时间检查消息的分布，它将看起来像图3-1。随着时间的推移，“运行中”分布的右侧将添加更多的消息，“运行中”部分的消息将被完成并移动到“已完成”分布。</p>
-<div id="dplayer10" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer10"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/15/streamingSystemChapter3/stsy_0301.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer0" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer0"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/15/streamingSystemChapter3/stsy_0301.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><em>图3-1.流水线中的运行中和完成的消息事件时间分布。新消息作为输入到达并保持“运行中”，直到为它们完成处理为止。在任何给定时刻，“运行中”分布的最左侧边缘对应于最旧的未处理元素。</em></p>
 <p>在此分布中有一个关键点，位于“运行中”分布的最左边缘，对应于我们管道中任何未处理消息的最旧事件时间戳。我们使用此值来定义水位线：</p>
@@ -27200,7 +25913,7 @@ table th:first-of-type {
 </li>
 </ul>
 <h1><span id="源水位线的创建">源水位线的创建</span><a href="#源水位线的创建" class="header-anchor">#</a></h1><p>这些水位线从哪里来？为了为数据源建立水位线，我们必须为从该源进入管道的每个消息分配逻辑事件时间戳。正如第2章所述，所有水位线创建都属于以下两个广泛类别之一：<em>完美</em>或<em>启发式</em>。为了提醒我们完美和启发式水位线之间的区别，让我们看一下第2章中的窗口求和示例的图3-2。</p>
-<div id="dplayer11" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer11"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/15/streamingSystemChapter3/stsy_0302.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer1" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer1"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/15/streamingSystemChapter3/stsy_0302.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图3-2。完美（左）和启发式（右）水位线的窗口求和</em></p>
 <p>请注意，区别的特点在于完美的水位线确保水位线考虑到<em>所有</em>数据，而启发式水位线则允许一些后到数据元素。</p>
 <p>水位线创建为完美或启发式后，水位线将在整个管道中保持不变。至于是什么使水位线创建完美还是启发式，这在很大程度上取决于正在使用的源的性质。为了看到原因，让我们看一下每种类型的水位线创建的一些示例。</p>
@@ -27260,7 +25973,7 @@ table th:first-of-type {
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">PCollection&lt;Double&gt; mobileSessions = IO.read(<span class="keyword">new</span> <span class="title class_">MobileInputSource</span>())</span><br><span class="line">.apply(Window.into(Sessions.withGapDuration(Duration.standardMinutes(<span class="number">1</span>)))            .triggering(AtWatermark())</span><br><span class="line">             .discardingFiredPanes())</span><br><span class="line">.apply(CalculateWindowLength());</span><br><span class="line"></span><br><span class="line">PCollection&lt;Double&gt; consoleSessions = IO.read(<span class="keyword">new</span> <span class="title class_">ConsoleInputSource</span>())</span><br><span class="line">.apply(Window.into(Sessions.withGapDuration(Duration.standardMinutes(<span class="number">1</span>)))            .triggering(AtWatermark())</span><br><span class="line">             .discardingFiredPanes())</span><br><span class="line">.apply(CalculateWindowLength());</span><br></pre></td></tr></table></figure>
 
 <p>在这里，我们独立读取每个输入，而不是之前按团队键入我们的集合，在这个示例中，我们按用户键入。之后，对于每个管道的第一阶段，我们窗口进入会话，然后调用名为CalculateWindowLength的自定义PTransform。这个PTransform仅通过键（即用户）进行分组，然后通过将当前窗口的大小视为该窗口的值来计算每个用户会话长度。在这种情况下，我们对默认触发器（AtWatermark）和累积模式（discardingFiredPanes）设置感到满意，但是为了完整起见，我已经列出了它们。两个特定用户的每个管道的输出可能看起来像图3-4。</p>
-<div id="dplayer12" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer12"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/15/streamingSystemChapter3/stsy_0304.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script>
+<div id="dplayer2" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer2"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/15/streamingSystemChapter3/stsy_0304.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script>
 <p><em>图3-4。两个不同输入管道中的每个用户会话长度</em></p>
 <p>因为我们需要跨多个阶段跟踪数据，所以我们将与Mobile Scores相关的一切都记录为红色，与Console Scores相关的一切都记录为蓝色，而Figure 3-5中的平均会话长度的水位线和输出为黄色。</p>
 <p>我们已经回答了计算单个会话长度的“什么”，“何地”，“何时”和“如何”这四个问题。接下来，我们将再次回答这些问题，将这些会话长度转换为固定时间窗口内的全局会话长度平均值。这需要我们首先将两个数据源展平为一个，然后重新窗口进入固定窗口；我们已经捕捉到会话中重要的本质，在我们计算的会话长度值中，我们现在想在一天中的一致时间窗口内计算这些会话的全局平均值。示例3-2显示了此代码。</p>
@@ -27268,7 +25981,7 @@ table th:first-of-type {
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PCollection&lt;Double&gt; mobileSessions = IO.read(new MobileInputSource())</span><br><span class="line">.apply(Window.into(Sessions.withGapDuration(Duration.standardMinutes(1)))            .triggering(AtWatermark())</span><br><span class="line">             .discardingFiredPanes())</span><br><span class="line">.apply(CalculateWindowLength());</span><br><span class="line"></span><br><span class="line">PCollection&lt;Double&gt; consoleSessions = IO.read(new ConsoleInputSource())</span><br><span class="line">.apply(Window.into(Sessions.withGapDuration(Duration.standardMinutes(1)))            .triggering(AtWatermark())</span><br><span class="line">             .discardingFiredPanes())</span><br><span class="line">.apply(CalculateWindowLength());</span><br><span class="line"></span><br><span class="line">PCollection&lt;Float&gt; averageSessionLengths = PCollectionList</span><br><span class="line">  .of(mobileSessions).and(consoleSessions)</span><br><span class="line">  .apply(Flatten.pCollections())</span><br><span class="line">  .apply(Window.into(FixedWindows.of(Duration.standardMinutes(2)))</span><br><span class="line">               .triggering(AtWatermark())</span><br><span class="line">  .apply(Mean.globally());</span><br></pre></td></tr></table></figure>
 
 <p>如果我们看到这个管道在运行，它看起来会像图3-5。与以前一样，两个输入管道正在计算移动和控制台玩家的单个会话长度。然后，这些会话长度进入管道的第二个阶段，在其中计算了固定窗口内的全局会话长度平均值。</p>
-<div id="dplayer13" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer13"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/15/streamingSystemChapter3/stsy_0305.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer3" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer3"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/15/streamingSystemChapter3/stsy_0305.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图3-5。移动和控制台游戏会话的平均会话长度</em></p>
 <p>鉴于这里发生了很多事情，让我们走一遍这个例子。这里的两个重要点是：</p>
 <ul>
@@ -27294,7 +26007,7 @@ table th:first-of-type {
 <p><em>示例3-3。平均会话长度管道，设置为最早元素的会话窗口输出时间戳</em></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PCollection&lt;Double&gt; mobileSessions = IO.read(new MobileInputSource())`</span><br><span class="line">.apply(Window.into(Sessions.withGapDuration(Duration.standardMinutes(1)))             .triggering(AtWatermark())</span><br><span class="line">              .withTimestampCombiner(EARLIEST)</span><br><span class="line">              .discardingFiredPanes())</span><br><span class="line">.apply(CalculateWindowLength());</span><br><span class="line"></span><br><span class="line">PCollection&lt;Double&gt; consoleSessions = IO.read(new ConsoleInputSource())</span><br><span class="line">.apply(Window.into(Sessions.withGapDuration(Duration.standardMinutes(1)))            .triggering(AtWatermark())</span><br><span class="line">             .withTimestampCombiner(EARLIEST)</span><br><span class="line">             .discardingFiredPanes())</span><br><span class="line">.apply(CalculateWindowLength());</span><br><span class="line"></span><br><span class="line">PCollection&lt;Float&gt; averageSessionLengths = PCollectionList</span><br><span class="line">  .of(mobileSessions).and(consoleSessions)</span><br><span class="line">  .apply(Flatten.pCollections())</span><br><span class="line">  .apply(Window.into(FixedWindows.of(Duration.standardMinutes(2)))</span><br><span class="line">               .triggering(AtWatermark())</span><br><span class="line">  .apply(Mean.globally());</span><br></pre></td></tr></table></figure>
 
-<div id="dplayer14" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer14"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/15/streamingSystemChapter3/stsy_0306.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer4" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer4"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/15/streamingSystemChapter3/stsy_0306.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图3-6。以最早元素的时间戳为输出时间戳的会话平均长度</em></p>
 <p>为了突出输出时间戳选择的影响，请查看第一阶段中的虚线，显示每个阶段的输出水位线被保持的时间。由于我们选择了时间戳，输出水位线后移，与图3-7和3-8相比，在这些示例中，输出时间戳被选择为窗口结束时间。从这个图表中，您可以看出第二个阶段的输入水位线因此也被推迟了。</p>
 <img src="/www6vHomeHexo/2000/03/15/streamingSystemChapter3/stsy_0307.png" class>
@@ -27334,7 +26047,7 @@ table th:first-of-type {
 <img src="/www6vHomeHexo/2000/03/15/streamingSystemChapter3/stsy_0310.png" class>
 <p><em>图3-10. 含有异常值的水位线直方图</em></p>
 <p>图3-11展示了使用分位数水位线绘制两分钟固定窗口边界的示例。我们可以基于到达数据的时间戳的分位数，通过百分位数水位线绘制早期边界。</p>
-<div id="dplayer15" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer15"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/15/streamingSystemChapter3/stsy_0311.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer5" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer5"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/15/streamingSystemChapter3/stsy_0311.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图3-11. 百分位数水位线变化的影响。随着百分位数的增加，窗口中包含更多的事件：但是，材料化窗口的处理时间延迟也会增加。</em></p>
 <p>图3-11展示了33百分位数、66百分位数和100百分位数（全）水位线，跟踪数据分布中的相应时间戳百分位数。如预期的那样，这些允许绘制较早的边界，而不是跟踪完整的100百分位数水位线。请注意，33百分位数和66百分位数水位线都允许较早的窗口触发，但以更多的数据被标记为延迟为代价。例如，对于第一个窗口[12:00，12:02)，基于33百分位数水位线关闭的窗口只包括四个事件，并在12:06的处理时间材料化结果。如果我们使用66百分位数水位线，则相同的事件时间窗口将包括七个事件，并在12:07的处理时间材料化。使用100百分位数水位线包括所有十个事件，并推迟材料化结果，直到12:08的处理时间。因此，百分位数水位线提供了一种调整材料化结果的延迟和精度之间权衡的方法。</p>
 <h1><span id="处理时间水位线">处理时间水位线</span><a href="#处理时间水位线" class="header-anchor">#</a></h1><p>到目前为止，我们一直在看水位线与流经我们系统的数据有关的情况。我们已经看到了查看水位线如何帮助我们识别最旧数据和实时数据之间的总延迟。然而，这还不足以区分旧数据和延迟的系统。换句话说，仅仅通过我们迄今为止定义的事件时间水位线来检查，我们无法区分正在快速处理一小时前的数据和被延迟一个小时的实时数据的系统。</p>
@@ -28199,11 +26912,11 @@ table th:first-of-type {
 <p>请注意，这两种方法或多或少是等效的，尽管它们在多阶段流水线的情况下略有不同：在触发器版本中，多阶段流水线将独立地在每个阶段切片处理时间“窗口”，因此例如，一个阶段的窗口<em>N</em>中的数据可能会在下一个阶段中代替窗口<em>N</em>-1或<em>N</em>+1;在进入时间版本中，在将数据合并到窗口<em>N</em>后，由于通过水位线（在Cloud Dataflow情况下）、微批边界（在Spark Streaming情况下）或其他协调因素在引擎级别涉及的进展同步，它将在整个流水线的持续时间内保留在窗口<em>N</em>中。</p>
 <p>正如我一再指出的那样，处理时间窗口的一个重大缺点是当输入的观察顺序发生变化时，窗口的内容也会发生变化。为了更具体地说明这一点，我们将查看以下三种用例：<em>事件时间</em>窗口、通过触发器的<em>处理时间</em>窗口和通过进入时间的<em>处理时间</em>窗口。</p>
 <p>每个将应用于两个不同的输入集（因此总共有六个变体）。两个输入集将是完全相同的事件（即相同的值，在相同的事件时间发生），但是观察顺序不同。第一个集将是我们一直看到的观察顺序，标为白色；第二个则将所有值在处理时间轴上向右移动，如图4-1所示，标为紫色。您可以简单地想象，如果风从东边吹而不是从西边吹（即底层的复杂分布式系统以稍微不同的顺序进行了处理），那么紫色示例就是另一种现实可能发生的方式。</p>
-<div id="dplayer16" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer16"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0401.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer6" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer6"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0401.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><em>图4-1。在处理时间中移动输入观察顺序，保持值和事件时间不变</em></p>
 <h3><span id="事件时间窗口">事件时间窗口</span><a href="#事件时间窗口" class="header-anchor">#</a></h3><p>为了建立一个基准，让我们先比较事件时间中固定窗口和基于启发式水位线的两种观察顺序。我们将重用示例2-7&#x2F;图2-10中的早期&#x2F;晚期代码，以获得图4-2中所示的结果。左边实质上是我们之前看到的；右边是第二个观察顺序的结果。这里需要注意的重要事情是，即使输出的总体形状不同（由于处理时间中的不同观察顺序），<em>四个窗口的最终结果仍然相同</em>：14、18、3和12。</p>
-<div id="dplayer17" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer17"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0402.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer7" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer7"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0402.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><em>图4-2. 对相同输入的两个不同处理时间顺序的事件时间窗口</em></p>
 <h3><span id="触发器的处理时间窗口">触发器的处理时间窗口</span><a href="#触发器的处理时间窗口" class="header-anchor">#</a></h3><p>现在，我们将此与刚刚描述的两种处理时间方法进行比较。首先，我们将尝试触发器方法。 实现处理时间“窗口化”的方式有三个方面：|</p>
@@ -28225,7 +26938,7 @@ table th:first-of-type {
 <li>因为处理时间窗口对输入数据的遇到顺序很敏感，所以每个“窗口”的结果对于两个观察顺序中的每一个都不同，尽管事件本身在每个版本中都在技术上相同时发生。</li>
 </ul>
 <p>在左侧，我们得到12、18、18，而在右侧，我们得到7、36、5。</p>
-<div id="dplayer18" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer18"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0403.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer8" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer8"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0403.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 
 <p><em>图4-3. 通过触发器的处理时间“窗口”，针对相同输入数据的两种不同处理时间排序</em></p>
 <h3><span id="通过进入时间进行处理时间窗口化">通过进入时间进行处理时间窗口化 |</span><a href="#通过进入时间进行处理时间窗口化" class="header-anchor">#</a></h3><p>最后，让我们看一下通过将输入数据的事件时间映射为它们的进入时间来实现的处理时间窗口。在代码方面，这里有四个值得一提的方面：</p>
@@ -28252,7 +26965,7 @@ table th:first-of-type {
 <ul>
 <li>由于在使用进入时间时可以获得完美的水位线，因此实际水位线与理想水位线匹配，向右上方以1的斜率上升。</li>
 </ul>
-<div id="dplayer19" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer19"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0404.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer9" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer9"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0404.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图4-4。通过使用进入时间进行处理时间窗口，在相同输入的两个不同处理时间顺序上</em></p>
 <p>虽然看到了不同实现处理时间窗口的方法是有趣的，但其中的重要教训自第一章以来一直是我一直在强调的：事件时间窗口是无序的，至少在极限情况下（在输入完成之前，实际窗格可能会有所不同）；处理时间窗口则不是。<strong>如果您关心事件实际发生的时间，您必须使用事件时间窗口，否则您的结果将毫无意义。</strong>现在我将结束我的演讲。</p>
 <h1><span id="何地会话窗口">何地：会话窗口</span><a href="#何地会话窗口" class="header-anchor">#</a></h1><p>处理时间窗口已经够了。现在我们回到了经过验证的事件时间窗口，但现在我们将看看我最喜欢的动态数据驱动窗口之一：<em>会话</em>。</p>
@@ -28276,7 +26989,7 @@ table th:first-of-type {
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team，Integer&gt;&gt;  totals=input</span><br><span class="line">  .apply（Window.into（Sessions.withGapDuration（ONE_MINUTE）)</span><br><span class="line">                .triggering（</span><br><span class="line">                 AfterWatermark（）</span><br><span class="line">                   .withEarlyFirings（AlignedDelay（ONE_MINUTE））</span><br><span class="line">                   .withLateFirings（AfterCount（1））））</span><br><span class="line">  .apply（Sum.integersPerKey（））;</span><br></pre></td></tr></table></figure>
 
 <p>在流引擎上执行，您将获得类似于图4-7所示的内容（请注意，我已经留下了用虚线黑线注释的预期最终会话以供参考）。</p>
-<div id="dplayer20" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer20"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0407.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script>
+<div id="dplayer10" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer10"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0407.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script>
 <p><em>图4-7。使用会话窗口和缩回的早期和后期引发的流引擎</em></p>
 <p>这里有很多事情要做，所以我会向您介绍一些：</p>
 <ul>
@@ -28318,7 +27031,7 @@ table th:first-of-type {
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</span><br><span class="line">  .apply(Window.into(FixedWindows.of(TWO_MINUTES))</span><br><span class="line">                .triggering(AfterWatermark()))</span><br><span class="line">  .apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
 
 <p>但在这种情况下，我们将并行查看来自相同数据集的两个不同键（见图4-8）。我们将看到这两个键的输出都对齐，因为窗口在所有键上都是对齐的。因此，每次水位线通过窗口的末尾时，我们就会获得<em>N</em>个窗格的实现，其中<em>N</em>是在该窗口中有更新的键的数量。在这个例子中，当<em>N</em>开始以千计、百万或更多来排序时，这种同步的突发性可能会变得有问题。</p>
-<div id="dplayer21" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer21"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0408.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer11" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer11"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0408.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图4-8. 对齐的固定窗口</em></p>
 <p>在不需要跨窗口比较的情况下，通常更希望在时间上均匀地分布窗口完成负载。这使系统负载更可预测，可以减少处理峰值负载的资源预配要求。然而，在大多数系统中，如果系统不支持它们，非对齐的固定窗口是不可用的。但是，通过自定义窗口支持，将默认固定窗口实现进行相对简单的修改即可提供非对齐的固定窗口支持。我们想要做的是继续保证所有被分组在一起的元素的窗口（即具有相同键的元素）具有相同的对齐方式，同时放宽跨不同键的对齐限制。默认的固定窗口策略的代码更改如示例4-6所示。</p>
 <p><em>示例4-6. 简略的UnalignedFixedWindows实现</em></p>
@@ -28329,7 +27042,7 @@ table th:first-of-type {
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</span><br><span class="line">  .apply(Window.into(UnalignedFixedWindows.of(TWO_MINUTES))</span><br><span class="line">               .triggering(AfterWatermark()))</span><br><span class="line">  .apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
 
 <p>然后，您可以通过比较与之前相同数据集的不同固定窗口对齐方式来查看图4-9的结果（在这种情况下，我选择了两个对齐之间的最大相位移，以最清楚地说明好处，因为在大量键的随机选择相位将产生类似的效果）。</p>
-<div id="dplayer22" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer22"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0409.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer12" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer12"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0409.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图4-9. 非对齐的固定窗口</em></p>
 <p>请注意，我们没有在同时发出多个键的多个窗格的情况。相反，窗格以更均匀的节奏单独到达。这是另一个例子，在用例允许的情况下，在一个维度上进行权衡（跨键比较的能力）以换取另一个维度上的好处（减少峰值资源预配要求）。当您试图尽可能高效地处理大量数据时，这种灵活性至关重要。</p>
 <p>现在让我们看一下固定窗口的第二个变体，它与正在处理的数据更紧密地联系在一起。</p>
@@ -28344,7 +27057,7 @@ table th:first-of-type {
 <p><em>示例4-9。单个水位线触发器的每个元素固定窗口大小</em></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</span><br><span class="line">  .apply(Window.into(PerElementFixedWindows.of(TWO_MINUTES))</span><br><span class="line">               .triggering(AfterWatermark()))</span><br><span class="line">  .apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
 <p>然后查看此管道的实际执行情况（图4-10），很容易看出键A的元素都具有两分钟的窗口大小，而键B的元素具有一分钟的窗口大小。</p>
-<div id="dplayer23" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer23"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0410.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer13" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer13"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0410.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图4-10。每个键的自定义大小固定窗口</em></p>
 <p>这确实不是您可以合理期望系统为您提供的东西；窗口大小偏好存储的性质对于尝试构建到标准API中来说过于特定于用例，因此不合理。尽管如此，正如该客户的需求所展示的那样，这样的用例确实存在。这就是自定义分窗提供的灵活性如此强大的原因。</p>
 <hr>
@@ -28369,7 +27082,7 @@ table th:first-of-type {
 <p><em>示例4-12。通过早期&#x2F;准时&#x2F;延迟API进行早期、准时和延迟触发</em></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PCollection&lt;KV&lt;Team, Integer&gt;&gt; totals = input</span><br><span class="line">  .apply(Window.into(BoundedSessions</span><br><span class="line">                       .withGapDuration(ONE_MINUTE)</span><br><span class="line">                       .withMaxSize(THREE_MINUTES))</span><br><span class="line">               .triggering(</span><br><span class="line">                 AfterWatermark()</span><br><span class="line">                   .withEarlyFirings(AlignedDelay(ONE_MINUTE))</span><br><span class="line">                   .withLateFirings(AfterCount(1))))</span><br><span class="line">   .apply(Sum.integersPerKey());</span><br></pre></td></tr></table></figure>
 <p>并在我们的运行示例上执行，它可能看起来像图4-11。</p>
-<div id="dplayer24" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer24"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0411.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
+<div id="dplayer14" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer14"),"loop":"yes","screenshot":"yes","video":{"url":"/www6vHomeHexo/2000/03/14/streamingSystemChapter4/stsy_0411.mp4"},"danmaku":{"api":"https://api.prprpr.me/dplayer/"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> 
 <p><em>图4-11。每个键的自定义大小的固定窗口</em></p>
 <p>请注意，值为36且跨越[12:00.26,12:05.20)的大会话，在未经界限的会话实现中从图2-7中现在被分成两个较短的长度为2分钟和2分53秒的会话。</p>
 <p>鉴于目前很少有系统提供自定义窗口支持，值得指出的是，如果使用仅支持无界会话实现的系统来实现这样的东西，将需要更多的工作量。您唯一的真正手段就是编写会话分组逻辑之后的代码，该代码查看生成的会话并在超过长度限制时将其切分。这将需要在事后分解会话的能力，这将取消增量聚合的好处（我们在第7章中更详细地查看），增加成本。它还会消除任何希望通过限制会话长度获得的垃圾邮件保护好处，因为会话首先需要增长到其完整大小，然后才能被切割或截断。</p>
