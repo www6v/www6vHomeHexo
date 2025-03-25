@@ -389,7 +389,7 @@
 <h2><span id="故障模型-ampamp-故障排查">故障模型 &amp;&amp; 故障排查</span><a href="#故障模型-ampamp-故障排查" class="header-anchor">#</a></h2><h5><span id="java-core-ampamp-应用">Java Core &amp;&amp; 应用</span><a href="#java-core-ampamp-应用" class="header-anchor">#</a></h5><ul>
 <li><a href="/www6vHomeHexo/2018/10/27/faultModel1/" title="故障模型-应用层">故障模型-应用层</a>
 <ul>
-<li><a href="/www6vHomeHexo/2014/02/02/javaMemoryLeak/" title="Java内存泄漏的案例和解决方案">Java内存泄漏的案例和解决方案</a> </li>
+<li><a href="javaMemoryLeak.md">Go to Page</a></li>
 <li><a href="/www6vHomeHexo/2014/07/21/twoGCcase/" title="两个GC案例">两个GC案例</a></li>
 <li><a href="/www6vHomeHexo/2017/08/09/interrupted/" title="关于任务取消相关异常的排查">关于任务取消相关异常的排查</a></li>
 <li><a href="/www6vHomeHexo/2014/09/06/classloader/" title="Classloader相关的故障排查">Classloader相关的故障排查</a></li>
@@ -589,9 +589,9 @@
 <li><a href="/www6vHomeHexo/2019/08/07/tcpUdpControlCongestion/" title="TCP流控和拥塞控制">TCP流控和拥塞控制</a></li>
 </ul>
 <h2><span id="java和应用">Java和应用</span><a href="#java和应用" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2017/11/27/optimize/" title="JVM性能调优">JVM性能调优</a>  内存 *** </li>
+<li><a href="optimize.md">Go to Page</a>  内存 ***</li>
 <li><a href="/www6vHomeHexo/2015/12/05/async/" title="异步化 总结">异步化 总结</a>  ***</li>
-<li><a href="/www6vHomeHexo/2014/07/02/threadNum/" title="线程池最佳线程数">线程池最佳线程数</a>  线程  ***</li>
+<li><a href="threadNum.md">Go to Page</a>  线程  *** </li>
 <li><a href="cache.md">Go to Page</a>  内存</li>
 <li><a href="/www6vHomeHexo/2014/03/05/falseSharing/" title="伪共享 FalseSharing">伪共享 FalseSharing</a>  内存</li>
 <li><a href="/www6vHomeHexo/2022/07/14/performancePool/" title="性能优化-池化Pool">性能优化-池化Pool</a></li>
@@ -16933,7 +16933,8 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 
 <h1><span id="关键词">关键词</span><a href="#关键词" class="header-anchor">#</a></h1><p>锁优化，池化，数据库优化，架构优化， 系统优化，性能测试， 监控 </p>
 <h1><span id="应用优化">应用优化</span><a href="#应用优化" class="header-anchor">#</a></h1><ul>
-<li>应用<ul>
+<li><p>应用</p>
+<ul>
 <li>锁 【4】<ul>
 <li>粒度<ul>
 <li>粗化</li>
@@ -17011,7 +17012,8 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 </li>
 </ul>
 <h1><span id="算法优化">算法优化</span><a href="#算法优化" class="header-anchor">#</a></h1><ul>
-<li>算法<ul>
+<li><p>算法</p>
+<ul>
 <li>算法调优<ul>
 <li>分而治之 【6】<ul>
 <li>fork-join【2】</li>
@@ -17065,7 +17067,8 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 </li>
 </ul>
 <h1><span id="通用优化">通用优化</span><a href="#通用优化" class="header-anchor">#</a></h1><ul>
-<li>通用方法<ul>
+<li><p>通用方法</p>
+<ul>
 <li>异步化  【8】<ul>
 <li>消息<ul>
 <li>进程内<br> Eg.  Disruptor, EventBus</li>
@@ -17099,7 +17102,8 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <li>乐观锁</li>
 </ul>
 <h1><span id="架构x2f系统优化">架构&#x2F;系统优化</span><a href="#架构x2f系统优化" class="header-anchor">#</a></h1><ul>
-<li>架构&#x2F;系统优化<ul>
+<li><p>架构&#x2F;系统优化</p>
+<ul>
 <li>弹性&#x2F;伸缩<ul>
 <li>资源调度 Eg. k8s</li>
 <li>资源扩容</li>
@@ -17140,7 +17144,8 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 </li>
 </ul>
 <h1><span id="linux系统优化">Linux系统优化</span><a href="#linux系统优化" class="header-anchor">#</a></h1><ul>
-<li>系统<ul>
+<li><p>系统</p>
+<ul>
 <li>文件系统<ul>
 <li>pageCache, 预读<br>Eg. Rocketmq</li>
 <li>顺序写，随机读</li>
@@ -17181,7 +17186,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>   self  重复的 deleted</li>
 <li>xxx</li>
 <li><a href="https://coolshell.cn/articles/7490.html/comment-page-1">性能调优攻略</a>  coolshell  *** </li>
-<li><a href="/www6vHomeHexo/2014/07/02/threadNum/" title="线程池最佳线程数">线程池最佳线程数</a>  self</li>
+<li><a href="threadNum.md">Go to Page</a>   self</li>
 <li><a href="http://www.codeceo.com/article/algorithm-complexity-table.html">每个程序员都应该收藏的算法复杂度速查表</a></li>
 <li>《编程珠玑 第2版》 </li>
 <li><a href="https://yq.aliyun.com/articles/25487">wordcount设计与优化</a>  竞赛题</li>
@@ -17248,7 +17253,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
             解决：对比Fullgc后的相同对象的数量、大小
     + 堆外Native
 </code></pre>
-<p>参考:<br>3. <a href="/www6vHomeHexo/2014/07/16/gc/" title="垃圾收集GC总结">垃圾收集GC总结</a>  self<br>10. 如何排查Java内存泄露(内附各种排查工具介绍) 不闻<br>11. <a href="https://hllvm-group.iteye.com/group/topic/28379">生产环境下持久带满导致FullGC，如何跟踪</a><br>12. <a href="/www6vHomeHexo/2017/11/27/optimize/" title="JVM性能调优">JVM性能调优</a>  self</p>
+<p>参考:<br>3. <a href="gc.md">Go to Page</a>  self<br>10. 如何排查Java内存泄露(内附各种排查工具介绍) 不闻<br>11. <a href="https://hllvm-group.iteye.com/group/topic/28379">生产环境下持久带满导致FullGC，如何跟踪</a><br>12. <a href="optimize.md">Go to Page</a>   self</p>
 <h3><span id="应用性能变差">应用性能变差</span><a href="#应用性能变差" class="header-anchor">#</a></h3><pre><code>    + 原因
         - 锁  
         - heap
@@ -17260,7 +17265,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
         - gc停顿长
             解决：【12 case3，13】
 </code></pre>
-<p>参考:<br>3. <a href="/www6vHomeHexo/2014/07/16/gc/" title="垃圾收集GC总结">垃圾收集GC总结</a>  self<br>12. <a href="/www6vHomeHexo/2017/11/27/optimize/" title="JVM性能调优">JVM性能调优</a>  self<br>13. <a href="https://blog.csdn.net/github_32521685/article/details/89953050">听阿里巴巴JVM工程师为你分析常见Java故障案例</a>  ***</p>
+<p>参考:<br>3. <a href="gc.md">Go to Page</a>  self<br>12. <a href="optimize.md">Go to Page</a>  self<br>13. <a href="https://blog.csdn.net/github_32521685/article/details/89953050">听阿里巴巴JVM工程师为你分析常见Java故障案例</a>  ***</p>
 <h3><span id="load过高">Load过高</span><a href="#load过高" class="header-anchor">#</a></h3><pre><code>    + cpu load高【13】
         - 启动阶段
             原因：JIT编译器
@@ -17300,7 +17305,7 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
         - 解决：blockingQueue.offer（time超时机制）+限制队列长度
         - 最佳实践：生产上线程池的core Size和poolSize设置的一样，请求不在队列里排队
 </code></pre>
-<p>参考：<br>4. <a href="/www6vHomeHexo/2014/07/02/threadNum/" title="线程池最佳线程数">线程池最佳线程数</a>  self<br>14. <a href="http://hellojava.info/?p=464">从一个故障说说Java的三个BlockingQueue  阿里毕玄</a></p>
+<p>参考：<br>4. <a href="threadNum.md">Go to Page</a>  self<br>14. <a href="http://hellojava.info/?p=464">从一个故障说说Java的三个BlockingQueue  阿里毕玄</a></p>
 <h3><span id="流控不合理">流控不合理</span><a href="#流控不合理" class="header-anchor">#</a></h3><h3><span id="其他-数据收集">其他-数据收集</span><a href="#其他-数据收集" class="header-anchor">#</a></h3><pre><code>    + 1.Heap dump
     + 2. GC 日志
     + 3. core dump
