@@ -385,7 +385,7 @@
 <li><a href="mysqlMasterSlaveDelay.md">Go to Page</a></li>
 </ul>
 </li>
-<li><a href="/www6vHomeHexo/2017/02/19/splitBrain/" title="Split Brain">Split Brain</a></li>
+<li><a href="splitBrain.md">Go to Page</a></li>
 </ul>
 </li>
 </ul>
@@ -529,10 +529,7 @@
 <h1><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h1><h3><span id="稳定性">稳定性</span><a href="#稳定性" class="header-anchor">#</a></h3><h3><span id="系统架构">系统架构</span><a href="#系统架构" class="header-anchor">#</a></h3><ul>
 <li><a href="../../../../categories/%E6%9E%B6%E6%9E%84/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/">系统架构</a>  category</li>
 </ul>
-<h1><span id="sre">SRE</span><a href="#sre" class="header-anchor">#</a></h1><h3><span id="sre">SRE</span><a href="#sre" class="header-anchor">#</a></h3><h3><span id="故障模型">故障模型</span><a href="#故障模型" class="header-anchor">#</a></h3><h3><span id="容量保障">容量保障</span><a href="#容量保障" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2022/03/13/capacityGuarantee/" title="容量保障与全链路压测">容量保障与全链路压测</a></li>
-</ul>
-<h3><span id="混沌工程">混沌工程</span><a href="#混沌工程" class="header-anchor">#</a></h3><ul>
+<h1><span id="sre">SRE</span><a href="#sre" class="header-anchor">#</a></h1><h3><span id="sre">SRE</span><a href="#sre" class="header-anchor">#</a></h3><h3><span id="故障模型">故障模型</span><a href="#故障模型" class="header-anchor">#</a></h3><h3><span id="容量保障">容量保障</span><a href="#容量保障" class="header-anchor">#</a></h3><h3><span id="混沌工程">混沌工程</span><a href="#混沌工程" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2019/09/24/chaosEngineering/" title="混沌工程">混沌工程</a></li>
 </ul>
 <h3><span id="可观测">可观测</span><a href="#可观测" class="header-anchor">#</a></h3><ul>
@@ -691,7 +688,7 @@
 
 <h1><span id="高可用">高可用</span><a href="#高可用" class="header-anchor">#</a></h1><h3><span id="overview">Overview</span><a href="#overview" class="header-anchor">#</a></h3><ul>
 <li>xxx<ul>
-<li><a href="/www6vHomeHexo/2017/02/19/splitBrain/" title="Split Brain">Split Brain</a></li>
+<li><a href="splitBrain.md">Go to Page</a></li>
 </ul>
 </li>
 <li><a href="/www6vHomeHexo/2022/01/25/tencentTCP3/" title="腾讯云TCP3-构建腾讯云上高可用架构">腾讯云TCP3-构建腾讯云上高可用架构</a></li>
@@ -2648,50 +2645,6 @@
         <category>架构</category>
         <category>应用架构</category>
         <category>电商</category>
-      </categories>
-      <tags>
-        <tag>应用架构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>整洁架构</title>
-    <url>/www6vHomeHexo/2022/07/22/cleanCode/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<h1><span id="整洁架构-clean-architecture">整洁架构 Clean Architecture</span><a href="#整洁架构-clean-architecture" class="header-anchor">#</a></h1><ul>
-<li><p>核心观点 [7][8]</p>
-<ul>
-<li>不与框架绑定<br>java-spring, Quarkus</li>
-<li>可测试<br>mock- gomock, Testify</li>
-<li>不与UI绑定</li>
-<li>不与数据库绑定<br>DDD 中的Repo</li>
-<li>不依赖任何外部代理</li>
-</ul>
-</li>
-<li><p>Go的实现 [9][10]</p>
-</li>
-</ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol start="7">
-<li><p>《24 直播：框架之上的业务分层》  体系课_Go高级工程师实战营(完结)</p>
-</li>
-<li><p><a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">The Clean Architecture</a></p>
-</li>
-<li><p><a href="https://github.com/eminetto/clean-architecture-go-v2">clean-architecture-go-v2</a> git</p>
-</li>
-<li><p><a href="https://github.com/bxcodec/go-clean-arch">go-clean-arch</a></p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/454054072">Golang 简洁架构实战</a>  未</p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/608097903">Go整洁架构实践</a> 未</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>架构</category>
-        <category>应用架构</category>
-        <category>整洁架构</category>
       </categories>
       <tags>
         <tag>应用架构</tag>
@@ -6759,117 +6712,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
-    <title>容量保障与全链路压测</title>
-    <url>/www6vHomeHexo/2022/03/13/capacityGuarantee/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-
-<h2><span id="容量保障overview2">容量保障Overview[2]</span><a href="#容量保障overview2" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/03/13/capacityGuarantee/capacityGuarantee.JPG" class>
-
-<ul>
-<li>大促容量保障的三项重点工作：<ul>
-<li><a href="#%E5%AE%B9%E9%87%8F%E9%A2%84%E6%B5%8B">大促流量预估</a></li>
-<li><a href="#%E5%85%A8%E9%93%BE%E8%B7%AF%E5%8E%8B%E6%B5%8B">大促容量测试</a></li>
-<li>大促容量保障预案</li>
-</ul>
-</li>
-</ul>
-<h2><span id="容量预测">容量预测</span><a href="#容量预测" class="header-anchor">#</a></h2><h5><span id="容量预测1">容量预测[1]</span><a href="#容量预测1" class="header-anchor">#</a></h5><ul>
-<li><p>我首先给出了<strong>“皮尔逊相关系数”</strong>这个工具，对服务 TPS 和 CPU 利用率之间的相关度进<br>行了定量分析，根据相关度的强弱，分别采取不同策略。其中，重点讲到了在两者弱相关<br>时的应对策略，如果能够穷举出尽可能多的相关特征，可以通过特征选取的方式对服务进<br>行画像，提升预测准确率；如果特征非常难找，那么可以依靠概率表的方式曲线救国。</p>
-</li>
-<li><p>随着服务不断迭代，容量也在不断变化，我与你分析的第二个问题，就是如何平衡好服务<br>迭代和容量预测频率的关系。根据服务发布窗口（或其他变更时间点）建立滑动窗口机<br>制，既保证了在服务变更后能够尽快地更新模型，又不至于带来大量的计算量，是一个不<br>错的实践方式。</p>
-</li>
-<li><p>业务场景变化也会导致容量变化，针对这个问题，我结合之前提到的全链路压测工作，通<br>过建立全链路压测和容量预测双向校准的机制，提前对变化的业务场景进行预测，识别容<br>量风险。</p>
-</li>
-</ul>
-<h2><span id="全链路压测">全链路压测</span><a href="#全链路压测" class="header-anchor">#</a></h2><h5><span id="核心功能4">核心功能[4]</span><a href="#核心功能4" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2022/03/13/capacityGuarantee/stressTest.png" class title="全链路压测">
-
-<h5><span id="压测-部署架构">压测-部署架构</span><a href="#压测-部署架构" class="header-anchor">#</a></h5><ul>
-<li><p>施压机的分布[3]</p>
-<ul>
-<li>大部分仍然是跟线上系统在<strong>同机房内</strong>，少量会在公有云节点上</li>
-<li>以将全球（主要是国内）的 <strong>CDN 节点</strong>作为施压机<ul>
-<li>更加真实地模拟真实用户从全球节点进入的真实访问流量</li>
-<li>成本过高，技术条件和细节难</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>压测的读写流量[3]</p>
-<ul>
-<li>读流量</li>
-<li>写流量 <ul>
-<li>对压测的写请求做专门的<strong>标记</strong>。 </li>
-<li>当请求要写数据库时，由分布式数据库的<strong>中间件框架中的逻辑来判断这个请求是否是压测请求</strong>，如果是压测写请求则路由到对应的<strong>影子库</strong>中，而不是直接写到线上正式的库中。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5><span id="改造-全链路压测5">改造 全链路压测[5]</span><a href="#改造-全链路压测5" class="header-anchor">#</a></h5><ul>
-<li>数据隔离<br> 物理隔离  vs. 逻辑隔离 [见表1]     </li>
-<li>中间件改造<br>  eg. MQ改造<br> ​     Producer:  判断请求带压测标识，转换到数据体（msg）中<br> ​     Consumer:  判断数据（msg）中有压测标识，  恢复压测标识至请求中 </li>
-<li>应用服务改造<ul>
-<li>绕开限制逻辑</li>
-<li>数据隔离前置</li>
-<li>Mock 逻辑</li>
-</ul>
-</li>
-</ul>
-<p>​                                                                              <strong>表1   逻辑隔离 vs. 物理隔离</strong></p>
-<table>
-<thead>
-<tr>
-<th>隔离类型</th>
-<th>逻辑隔离</th>
-<th>物理隔离</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>中间件改造</td>
-<td>小，几乎不需要改造</td>
-<td>大，需要保证压测流量标识能一路透传不丢失</td>
-</tr>
-<tr>
-<td>业务侵入性</td>
-<td>大，会影响表结构设计</td>
-<td>小， 对数据实体没有侵入</td>
-</tr>
-<tr>
-<td>数据清洗难度</td>
-<td>大， 需根据每个数据实体的标识单独定制清洗规则</td>
-<td>小，压测数据都在影子表</td>
-</tr>
-<tr>
-<td>可扩展性</td>
-<td>弱， 新数据实体均需要设计新的压测标识</td>
-<td>强， 流量标识为统一形式， 且与数据无关</td>
-</tr>
-<tr>
-<td>安全性</td>
-<td>弱， 与真实数据写入同一张表， 一旦隔离逻辑有疏漏， 会影响真实用户</td>
-<td>强， 与真实数据分开存储， 即便考虑不周 ，也不会影响真实数据</td>
-</tr>
-</tbody></table>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li>《09 | 容量预测（下）：为不同服务“画像”，提升容量预测准确性》  吴骏龙</li>
-<li>《 13 | 大促容量保障体系建设：怎样做好大促活动的容量保障工作（下）》 吴骏龙   </li>
-<li><a href="https://zhuanlan.zhihu.com/p/149538568">稳定性实践：容量规划之压测系统建设</a>  极客时间？</li>
-<li><a href="https://blog.csdn.net/u013256816/article/details/123414839">全链路压测体系建设方案的思考与实践</a>  阿里 *** </li>
-<li>《05 | 全链路压测：系统整体容量保障的“核武器”（上）》 吴骏龙</li>
-</ol>
-]]></content>
-      <categories>
-        <category>稳定性</category>
-        <category>容量保障</category>
-      </categories>
-      <tags>
-        <tag>容量保障</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>安全产品</title>
     <url>/www6vHomeHexo/2022/03/12/cyberSecurityTool/</url>
     <content><![CDATA[<p></p>
@@ -6985,214 +6827,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>认证</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>分布式系统 模式</title>
-    <url>/www6vHomeHexo/2022/03/01/distributedSystemPattern/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h3><span id="fault-tolerant-consensus">Fault Tolerant Consensus</span><a href="#fault-tolerant-consensus" class="header-anchor">#</a></h3><table>
-<thead>
-<tr>
-<th>英文</th>
-<th>中文</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/paxos.html">Paxos</a></td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/paxos.md">Paxos</a></td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/quorum.html">Quorum</a> ***</td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/quorum.md">Quorum</a></td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/generation.html">Generation Clock</a> ***</td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/generation-clock.md">世代时钟（Generation Clock）</a></td>
-</tr>
-</tbody></table>
-<h3><span id="pattern-sequence-for-implementing-replicated-log">Pattern Sequence for implementing replicated log</span><a href="#pattern-sequence-for-implementing-replicated-log" class="header-anchor">#</a></h3><table>
-<thead>
-<tr>
-<th>英文</th>
-<th>中文</th>
-<th>Example &amp; 扩展</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/replicated-log.html">Replicated Log</a> ***</td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/replicated-log.md">复制日志（Replicated Log）</a></td>
-<td>Raft</td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/wal.html">Write-Ahead Log</a> ***</td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/write-ahead-log.md">预写日志（Write-Ahead Log）</a></td>
-<td>MySQL redo log<br>HBase WAL<br>Redis aof</td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/low-watermark.html">Low-Water Mark</a> ***</td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/low-water-mark.md">低水位标记（Low-Water Mark）</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/high-watermark.html">High-Water Mark</a> ***</td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/high-water-mark.md">高水位标记（High-Water Mark）</a></td>
-<td>kafka HW <br><a href="/www6vHomeHexo/2022/03/29/streamingFlinkWatermarkWindow/" title="Flink-Watermark &amp; Window">Flink-Watermark &amp; Window</a></td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/heartbeat.html">HeartBeat</a> ***</td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/heartbeat.md">心跳（HeartBeat）</a></td>
-<td><a href="/www6vHomeHexo/2019/10/12/crashDetect/" title="宕机检测-Lease、心跳">宕机检测-Lease、心跳</a></td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/leader-follower.html">Leader and Followers</a> ***<br>leader election</td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/leader-and-followers.md">领导者和追随者（Leader and Followers）</a></td>
-<td><a href="kafkaElection.md">Go to Page</a> <br> <a href="raft.md">Go to Page</a> <br><a href="/www6vHomeHexo/2015/11/29/zookeeperZab/" title="Zookeeper-Zab">Zookeeper-Zab</a><br>es 选主[todo]</td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/follower-reads.html">Follower Reads</a> ***</td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/follower-reads.md">追随者读取（Follower Reads）</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/log-segmentation.html">Segmented Log</a> ***</td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/segmented-log.md">分段日志（Segmented Log）</a></td>
-<td>Kafka segment</td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/request-pipeline.html">Request Pipeline</a></td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/request-pipeline.md">请求管道（Request Pipeline）</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/singular-update-queue.html">Singular Update Queue</a></td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/singular-update-queue.md">单一更新队列（Singular Update Queue）</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/single-socket-channel.html">Single Socket Channel</a></td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/single-socket-channel.md">单一 Socket 通道（Single Socket Channel）</a></td>
-<td></td>
-</tr>
-</tbody></table>
-<h3><span id="atomic-commit">Atomic Commit</span><a href="#atomic-commit" class="header-anchor">#</a></h3><table>
-<thead>
-<tr>
-<th>英文</th>
-<th>中文</th>
-<th>Example &amp; 扩展</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/two-phase-commit.html">Two Phase Commit</a></td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/two-phase-commit.md">两阶段提交（Two Phase Commit）</a></td>
-<td>两阶段变种</td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/fixed-partitions.html">Fixed Partitions</a></td>
-<td>&#x2F;</td>
-<td></td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/key-range-partitions.html">Key-Range Partitions</a></td>
-<td>&#x2F;</td>
-<td></td>
-</tr>
-</tbody></table>
-<h3><span id="kubernetes-or-kafka-control-plane">Kubernetes or Kafka Control Plane</span><a href="#kubernetes-or-kafka-control-plane" class="header-anchor">#</a></h3><table>
-<thead>
-<tr>
-<th>英文</th>
-<th>中文</th>
-<th>Example &amp; 扩展</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/time-bound-lease.html">Lease</a> ***</td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/lease.md">租约（Lease）</a></td>
-<td><a href="/www6vHomeHexo/2019/10/12/crashDetect/" title="宕机检测-Lease、心跳">宕机检测-Lease、心跳</a> <br>ETCD  Lease <br>K8s Lease<br>Eureka Lease</td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/state-watch.html">State Watch</a> ***</td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/state-watch.md">状态监控（State Watch）</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/idempotent-receiver.html">Idempotent Receiver</a></td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/idempotent-receiver.md">幂等接收者（Idempotent Receiver）</a></td>
-<td></td>
-</tr>
-</tbody></table>
-<h3><span id="logical-timestamp-usage">Logical Timestamp usage</span><a href="#logical-timestamp-usage" class="header-anchor">#</a></h3><table>
-<thead>
-<tr>
-<th>英文</th>
-<th>中文</th>
-<th>Example &amp; 扩展</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/lamport-clock.html">Lamport Clock</a></td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/lamport-clock.md">Lamport 时钟（Lamport Clock）</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/versioned-value.html">Versioned Value</a> ***</td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/versioned-value.md">有版本的值（Versioned Values）</a></td>
-<td>tikv mvcc[TSO]<br><a href="https://www.cockroachlabs.com/docs/stable/">CockroachDB</a> mvcc[HLC]<br></td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/hybrid-clock.html">Hybrid Clock</a> ***</td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/hybrid-clock.md">混合时钟（Hybrid Clock）</a></td>
-<td><a href="https://www.cockroachlabs.com/docs/stable/">CockroachDB</a></td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/gossip-dissemination.html">Gossip Dissemination</a> ***</td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/gossip-dissemination.md">Gossip 传播（Gossip Dissemination）</a></td>
-<td>Redis Gossip</td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/consistent-core.html">Consistent Core</a></td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/consistent-core.md">一致性内核（Consistent Core）</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/version-vector.html">Version Vector</a></td>
-<td><a href="https://github.com/www6v/patterns-of-distributed-systems/blob/master/content/version-vector.md">版本向量（Version Vector）</a></td>
-<td></td>
-</tr>
-</tbody></table>
-<h3><span id="others">Others</span><a href="#others" class="header-anchor">#</a></h3><ul>
-<li><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/request-batch.html">Request Batch</a></li>
-<li><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/clock-bound.html">Clock-Bound Wait</a></li>
-<li><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/emergent-leader.html">Emergent Leader</a></li>
-<li><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/request-waiting-list.html">Request Waiting List</a></li>
-</ul>
-<h2><span id="self">Self</span><a href="#self" class="header-anchor">#</a></h2><table>
-<thead>
-<tr>
-<th></th>
-<th>Example &amp; 扩展</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>time wheel</td>
-<td><a href="/www6vHomeHexo/2017/01/05/timedTask/" title="延迟消息 时间轮">延迟消息 时间轮</a></td>
-</tr>
-</tbody></table>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://martinfowler.com/articles/patterns-of-distributed-systems/">Patterns of Distributed Systems</a><br><a href="https://github.com/www6v/patterns-of-distributed-systems">《分布式系统模式》中文版</a></li>
-<li><a href="distributedDatabaseGlobalTime.md">Go to Page</a>  self</li>
-</ol>
-]]></content>
-      <categories>
-        <category>分布式</category>
-        <category>模式</category>
-      </categories>
-      <tags>
-        <tag>分布式</tag>
       </tags>
   </entry>
   <entry>
@@ -14341,69 +13975,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>幂等</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Split Brain</title>
-    <url>/www6vHomeHexo/2017/02/19/splitBrain/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<p><strong>关键词</strong>: 脑裂, fence, Quorums , epoch</p>
-<p><strong>脑裂</strong>： 类似 CAP中的P<br><strong>Partition tolerance(分区容错性)</strong>: 网络分区发生时，一致性和可用性两难全</p>
-<h2><span id="一-通用解决方案">一. 通用解决方案</span><a href="#一-通用解决方案" class="header-anchor">#</a></h2><ol>
-<li>Quorums</li>
-<li>Redundant communications，冗余通信的方式</li>
-<li>Fencing</li>
-</ol>
-<h2><span id="二-系统">二. 系统</span><a href="#二-系统" class="header-anchor">#</a></h2><table>
-<thead>
-<tr>
-<th align="center">&#x2F;</th>
-<th align="center">现象</th>
-<th align="center">解决方案</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">kafka</td>
-<td align="center">kafka脑裂现象:1. 存在多个controller <br> 2. consumer的splitBrain</td>
-<td align="center">controller使用epoch来避免脑裂</td>
-</tr>
-<tr>
-<td align="center">elastic search</td>
-<td align="center"></td>
-<td align="center">配置discovery.zen.minimum_master_nodes，类似Quorums</td>
-</tr>
-<tr>
-<td align="center">zookeeper</td>
-<td align="center">两个leader[3]</td>
-<td align="center">Quorums <br>leader单调递增的epoch</td>
-</tr>
-<tr>
-<td align="center">raft脑裂</td>
-<td align="center">两个majority</td>
-<td align="center">[2] Quorums + term</td>
-</tr>
-</tbody></table>
-<p>redis脑裂、mysql脑裂 </p>
-<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://www.cnblogs.com/yjmyzz/p/redis-split-brain-analysis.html">redis 脑裂等极端情况分析</a><blockquote>
-<p>Redis Cluster is not able to guarantee strong consistency. &#x2F; In general Redis + Sentinel as a whole are a an eventually consistent system</p>
-</blockquote>
-</li>
-<li><a href="../../../../2019/06/21/raft/">raft协议</a> self</li>
-<li><a href="https://www.cnblogs.com/nicerblog/p/11232531.html">脑裂是什么？Zookeeper是如何解决的？</a></li>
-</ol>
-<p>​	</p>
-<p>​	<br>​</p>
-]]></content>
-      <categories>
-        <category>稳定性</category>
-        <category>SplitBrain</category>
-      </categories>
-      <tags>
-        <tag>一致性</tag>
-        <tag>稳定性</tag>
       </tags>
   </entry>
   <entry>
