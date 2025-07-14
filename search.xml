@@ -346,8 +346,7 @@
 
 
 <h2><span id="故障模型-ampamp-故障排查">故障模型 &amp;&amp; 故障排查</span><a href="#故障模型-ampamp-故障排查" class="header-anchor">#</a></h2><h5><span id="java-core-ampamp-应用">Java Core &amp;&amp; 应用</span><a href="#java-core-ampamp-应用" class="header-anchor">#</a></h5><ul>
-<li><a href="/www6vHomeHexo/2018/10/27/faultModel1/" title="故障模型-应用层">故障模型-应用层</a>
-<ul>
+<li><a href="faultModel1.md">Go to Page</a><ul>
 <li><a href="javaMemoryLeak.md">Go to Page</a></li>
 <li><a href="/www6vHomeHexo/2014/07/21/twoGCcase/" title="两个GC案例">两个GC案例</a></li>
 <li><a href="/www6vHomeHexo/2017/08/09/interrupted/" title="关于任务取消相关异常的排查">关于任务取消相关异常的排查</a></li>
@@ -359,8 +358,7 @@
 </li>
 </ul>
 <h5><span id="中间件">中间件</span><a href="#中间件" class="header-anchor">#</a></h5><ul>
-<li><a href="/www6vHomeHexo/2018/05/03/faultModel2/" title="故障模型-中间件层">故障模型-中间件层</a>
-<ul>
+<li><a href="faultModel2.md">Go to Page</a><ul>
 <li>微服务<ul>
 <li><a href="/www6vHomeHexo/2019/07/06/findProblem/" title="故障排查的流程和方法">故障排查的流程和方法</a></li>
 <li><a href="/www6vHomeHexo/2017/10/17/slowRT/" title="服务慢响应超时排查">服务慢响应超时排查</a> </li>
@@ -392,8 +390,7 @@
 </li>
 </ul>
 <h5><span id="infra">Infra</span><a href="#infra" class="header-anchor">#</a></h5><ul>
-<li><a href="/www6vHomeHexo/2018/05/03/faultModel3/" title="故障模型-基础设施层">故障模型-基础设施层</a>
-<ul>
+<li><a href="faultModel3.md">Go to Page</a><ul>
 <li><a href="/www6vHomeHexo/2022/01/11/haproxyTcpdump/" title="HAProxy抓包">HAProxy抓包</a>   网络</li>
 <li><a href="/www6vHomeHexo/2020/08/09/tcpTimewait/" title="TIME_WAIT和优化">TIME_WAIT和优化</a> ***</li>
 <li><a href="/www6vHomeHexo/2020/08/16/linuxPerformance-cpu/" title="Linux性能优化 之 cpu优化">Linux性能优化 之 cpu优化</a></li>
@@ -501,7 +498,7 @@
       </tags>
   </entry>
   <entry>
-    <title></title>
+    <title>稳定性 汇总</title>
     <url>/www6vHomeHexo/2019/09/22/stableSummary/</url>
     <content><![CDATA[<p></p>
 <span id="more"></span>
@@ -529,30 +526,10 @@
 
 </div>
 
-<h1><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h1><h3><span id="稳定性">稳定性</span><a href="#稳定性" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a></li>
-</ul>
-<h3><span id="系统架构">系统架构</span><a href="#系统架构" class="header-anchor">#</a></h3><ul>
+<h1><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h1><h3><span id="稳定性">稳定性</span><a href="#稳定性" class="header-anchor">#</a></h3><h3><span id="系统架构">系统架构</span><a href="#系统架构" class="header-anchor">#</a></h3><ul>
 <li><a href="../../../../categories/%E6%9E%B6%E6%9E%84/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/">系统架构</a>  category</li>
 </ul>
-<h1><span id="sre">SRE</span><a href="#sre" class="header-anchor">#</a></h1><h3><span id="sre">SRE</span><a href="#sre" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2022/03/13/sre/" title="SRE 总结">SRE 总结</a>
-
-</li>
-<li><a href="/www6vHomeHexo/2023/02/01/sreWorkbook/" title="《SRE 工作手册》">《SRE 工作手册》</a>
-<ul>
-<li><a href="/www6vHomeHexo/2022/04/27/sreWorkbookBasic/" title="SRE 五大根基">SRE 五大根基</a> </li>
-<li><a href="/www6vHomeHexo/2022/05/02/sreWorkbookBasicSLO/" title="SRE 五大根基-SLO">SRE 五大根基-SLO</a> </li>
-<li><a href="/www6vHomeHexo/2022/05/02/sreWorkbookBasicAlert/" title="SRE 五大根基-报警">SRE 五大根基-报警</a></li>
-</ul>
-</li>
-</ul>
-<h3><span id="故障模型">故障模型</span><a href="#故障模型" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2018/10/27/faultModel1/" title="故障模型-应用层">故障模型-应用层</a> </li>
-<li><a href="/www6vHomeHexo/2018/05/03/faultModel2/" title="故障模型-中间件层">故障模型-中间件层</a> </li>
-<li><a href="/www6vHomeHexo/2018/05/03/faultModel3/" title="故障模型-基础设施层">故障模型-基础设施层</a></li>
-</ul>
-<h3><span id="容量保障">容量保障</span><a href="#容量保障" class="header-anchor">#</a></h3><ul>
+<h1><span id="sre">SRE</span><a href="#sre" class="header-anchor">#</a></h1><h3><span id="sre">SRE</span><a href="#sre" class="header-anchor">#</a></h3><h3><span id="故障模型">故障模型</span><a href="#故障模型" class="header-anchor">#</a></h3><h3><span id="容量保障">容量保障</span><a href="#容量保障" class="header-anchor">#</a></h3><ul>
 <li><a href="/www6vHomeHexo/2022/03/13/capacityGuarantee/" title="容量保障与全链路压测">容量保障与全链路压测</a></li>
 </ul>
 <h3><span id="混沌工程">混沌工程</span><a href="#混沌工程" class="header-anchor">#</a></h3><ul>
@@ -1201,25 +1178,6 @@
       </categories>
       <tags>
         <tag>消息系统</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《SRE 工作手册》</title>
-    <url>/www6vHomeHexo/2023/02/01/sreWorkbook/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<img src="/www6vHomeHexo/2023/02/01/sreWorkbook/sre-workbook.jpg" class title="SRE 知识体系脑图">
-
-
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><p><a href="https://martinliu.cn/blog/sre-knowedge-body-mind-map-live-show/">SRE 实践的知识体系梳理</a></p>
-]]></content>
-      <categories>
-        <category>稳定性</category>
-        <category>sre</category>
-      </categories>
-      <tags>
-        <tag>sre</tag>
       </tags>
   </entry>
   <entry>
@@ -4065,9 +4023,9 @@
 <hr>
 <ol start="3">
 <li><a href="https://coolshell.cn/articles/17381.html">性能测试应该怎么做？</a> </li>
-<li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>  self</li>
+<li><a href="stability.md">Go to Page</a>  self</li>
 <li><a href="http://blog.jobbole.com/88958/">关于容量预估&#x2F;性能压测的思考</a> 失效</li>
-<li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>   self  重复的</li>
+<li><a href="stability.md">Go to Page</a>  self  重复的</li>
 <li>《性能之巅：洞悉系统、企业与云计算》 </li>
 <li><a href="https://github.com/davecheney/httpstat"> httpstat</a>  go<br>  <a href="https://github.com/reorx/httpstat"> httpstat</a> python</li>
 </ol>
@@ -5685,149 +5643,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
-    <title>SRE 五大根基-报警</title>
-    <url>/www6vHomeHexo/2022/05/02/sreWorkbookBasicAlert/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-
-<h3><span id="告警设定考量">告警设定考量</span><a href="#告警设定考量" class="header-anchor">#</a></h3><ul>
-<li>精准率<br>减少误告警</li>
-<li>查全率<br>减少漏告警<img src="/www6vHomeHexo/2022/05/02/sreWorkbookBasicAlert/precision-recall.JPG" class></li>
-</ul>
-<ul>
-<li>检测用时<br>过长  影响错误预算</li>
-<li>重置用时<br>过长  增长内存和IO开销</li>
-</ul>
-<h3><span id="告警设定方法">告警设定方法</span><a href="#告警设定方法" class="header-anchor">#</a></h3><ul>
-<li>基础<ul>
-<li>方法1  目标错误率 &gt;&#x3D; SLO阈值</li>
-</ul>
-</li>
-<li>window<ul>
-<li>方法2  延长报警时间窗口</li>
-<li>方法3  延长告警触发前的持续时间</li>
-</ul>
-</li>
-<li>燃烧率   <ul>
-<li>方法4 根据燃烧率发出告警</li>
-<li>方法5 基于多个燃烧率的告警</li>
-<li>方法6 基于多个窗口 多个燃烧率的告警</li>
-</ul>
-</li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://www.bilibili.com/video/BV1ov4y197N1/">《Google SRE工作手册》第四期基于SLO的告警配置及实践分享</a> V</li>
-<li>《Google SRE工作手册》  第5章</li>
-</ol>
-]]></content>
-      <categories>
-        <category>稳定性</category>
-        <category>sre</category>
-      </categories>
-      <tags>
-        <tag>sre</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SRE 五大根基-SLO</title>
-    <url>/www6vHomeHexo/2022/05/02/sreWorkbookBasicSLO/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#sre-%E4%BA%94%E5%A4%A7%E6%A0%B9%E5%9F%BA-%E4%B9%8B-slo1">SRE 五大根基 之 SLO[1]</a><ul>
-<li><a href="#%E6%AD%A5%E9%AA%A41-%E5%88%B6%E5%AE%9Aslo">步骤1. 制定SLO</a><ul>
-<li><a href="#%E6%9C%8D%E5%8A%A1%E7%9A%84slo">服务的SLO</a></li>
-<li><a href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E7%9A%84slo">数据服务的SLO</a></li>
-<li><a href="#sli">SLI</a></li>
-</ul>
-</li>
-<li><a href="#%E6%AD%A5%E9%AA%A42-%E8%8E%B7%E5%BE%97%E5%B9%B2%E7%B3%BB%E4%BA%BA%E8%AE%A4%E5%90%8C">步骤2. 获得干系人认同</a><ul>
-<li><a href="#slo-%E4%BB%AA%E8%A1%A8%E6%9D%BF%E8%B6%8B%E5%8A%BF">SLO 仪表板[趋势]</a></li>
-</ul>
-</li>
-<li><a href="#%E6%AD%A5%E9%AA%A43-%E6%8C%81%E7%BB%AD%E7%9B%91%E6%8E%A7-%E6%94%B9%E8%BF%9Bslo">步骤3. 持续监控 改进SLO</a></li>
-<li><a href="#%E6%AD%A5%E9%AA%A44-%E9%94%99%E8%AF%AF%E9%A2%84%E7%AE%97-slo%E5%86%B3%E7%AD%96">步骤4. 错误预算  SLO决策</a><ul>
-<li><a href="#%E5%9F%BA%E4%BA%8Eslo%E5%92%8C%E9%94%99%E8%AF%AF%E9%A2%84%E7%AE%97%E7%9A%84%E5%86%B3%E7%AD%96">基于SLO和错误预算的决策</a></li>
-</ul>
-</li>
-<li><a href="#%E6%AD%A5%E9%AA%A45-%E8%BF%9B%E9%98%B6">步骤5. 进阶</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="sre-五大根基-之-slo1">SRE 五大根基 之 SLO[1]</span><a href="#sre-五大根基-之-slo1" class="header-anchor">#</a></h1><h3><span id="步骤1-制定slo">步骤1.  制定SLO</span><a href="#步骤1-制定slo" class="header-anchor">#</a></h3><h5><span id="服务的slo">服务的SLO</span><a href="#服务的slo" class="header-anchor">#</a></h5><ul>
-<li>VALET[Home Depot]<ul>
-<li>Volume</li>
-<li>Avail</li>
-<li>Latency</li>
-<li>Errors</li>
-<li>Ticket</li>
-</ul>
-</li>
-</ul>
-<h5><span id="数据服务的slo">数据服务的SLO</span><a href="#数据服务的slo" class="header-anchor">#</a></h5><ul>
-<li><a href="redisSLO.md">Go to Page</a></li>
-<li><a href="/www6vHomeHexo/2022/06/16/kafkaSLO/" title="Kafka SLO">Kafka SLO</a></li>
-</ul>
-<h5><span id="sli">SLI</span><a href="#sli" class="header-anchor">#</a></h5><table>
-<thead>
-<tr>
-<th>服务类型</th>
-<th>SLI类型</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>请求驱动</td>
-<td>可用性，延迟，质量</td>
-</tr>
-<tr>
-<td>流水线</td>
-<td>时效性，正确率，覆盖率</td>
-</tr>
-<tr>
-<td>存储</td>
-<td>持久性</td>
-</tr>
-</tbody></table>
-<h3><span id="步骤2-获得干系人认同">步骤2.  获得干系人认同</span><a href="#步骤2-获得干系人认同" class="header-anchor">#</a></h3><h5><span id="slo-仪表板趋势">SLO 仪表板[趋势]</span><a href="#slo-仪表板趋势" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2022/05/02/sreWorkbookBasicSLO/slo-trend.JPG" class>
-
-<h3><span id="步骤3-持续监控-改进slo">步骤3. 持续监控 改进SLO</span><a href="#步骤3-持续监控-改进slo" class="header-anchor">#</a></h3><ul>
-<li>变更SLO</li>
-<li>变更SLI实现</li>
-<li>着手于现实的SLO</li>
-<li>迭代</li>
-</ul>
-<h3><span id="步骤4-错误预算-slo决策">步骤4. 错误预算  SLO决策</span><a href="#步骤4-错误预算-slo决策" class="header-anchor">#</a></h3><h5><span id="基于slo和错误预算的决策">基于SLO和错误预算的决策</span><a href="#基于slo和错误预算的决策" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2022/05/02/sreWorkbookBasicSLO/slo-decision.JPG" class>
-
-<h3><span id="步骤5-进阶">步骤5. 进阶</span><a href="#步骤5-进阶" class="header-anchor">#</a></h3><ul>
-<li>用户旅程建模 </li>
-<li>依赖关系建模</li>
-</ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a href="https://www.bilibili.com/video/BV1ZK41127WY/">《Google SRE工作手册》第二期SRE五大根基之一：SLO</a>  V ***</li>
-<li>《Google SRE工作手册》 第二章</li>
-</ol>
-]]></content>
-      <categories>
-        <category>稳定性</category>
-        <category>sre</category>
-      </categories>
-      <tags>
-        <tag>sre</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>AWS 三层架构</title>
     <url>/www6vHomeHexo/2022/05/01/awsArch/</url>
     <content><![CDATA[<p></p>
@@ -6012,46 +5827,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>云计算</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SRE 五大根基</title>
-    <url>/www6vHomeHexo/2022/04/27/sreWorkbookBasic/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#sre%E4%BA%94%E5%A4%A7%E6%A0%B9%E5%9F%BA">SRE五大根基</a><ul>
-<li><a href="#%E5%AE%9E%E8%B7%B5slo">实践SLO</a></li>
-<li><a href="#%E7%9B%91%E6%8E%A7">监控</a></li>
-<li><a href="#%E5%91%8A%E8%AD%A6">告警</a></li>
-<li><a href="#%E5%87%8F%E5%B0%91%E7%90%90%E4%BA%8B">减少琐事</a></li>
-<li><a href="#%E7%AE%80%E5%8D%95%E5%8C%96">简单化</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="sre五大根基">SRE五大根基</span><a href="#sre五大根基" class="header-anchor">#</a></h1><h3><span id="实践slo">实践SLO</span><a href="#实践slo" class="header-anchor">#</a></h3><h3><span id="监控">监控</span><a href="#监控" class="header-anchor">#</a></h3><h3><span id="告警">告警</span><a href="#告警" class="header-anchor">#</a></h3><h3><span id="减少琐事">减少琐事</span><a href="#减少琐事" class="header-anchor">#</a></h3><h3><span id="简单化">简单化</span><a href="#简单化" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a href="https://www.bilibili.com/video/BV1ZK41127WY/">《Google SRE工作手册》第二期SRE五大根基之一：SLO</a>  V ***</li>
-<li><a href="https://www.bilibili.com/video/BV1JY411o7AS/">《Google SRE工作手册》第二期SRE五大根基之二：监控</a>  V *** </li>
-<li><a href="/www6vHomeHexo/2023/02/01/sreWorkbook/" title="《SRE 工作手册》">《SRE 工作手册》</a> self</li>
-<li><a href="/www6vHomeHexo/2022/05/02/sreWorkbookBasicSLO/" title="SRE 五大根基-SLO">SRE 五大根基-SLO</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>稳定性</category>
-        <category>sre</category>
-      </categories>
-      <tags>
-        <tag>sre</tag>
       </tags>
   </entry>
   <entry>
@@ -6981,84 +6756,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>阿里云</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SRE 总结</title>
-    <url>/www6vHomeHexo/2022/03/13/sre/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="sre-1">SRE [1]</span><a href="#sre-1" class="header-anchor">#</a></h2><ul>
-<li>SRE &#x3D; PE（Production Engineer） + 工具平台开发 + 稳定性平台开发<ul>
-<li>工具平台团队，负责效能工具的研发，比如实现 CMDB、运维自动化、持续交付流水线以<br>及部分技术运营报表的实现，为基础运维和应用运维提供效率平台支持。</li>
-<li>稳定性平台团队，负责稳定性保障相关的标准和平台，比如监控、服务治理相关的限流降<br>级、全链路跟踪、容量压测和规划。</li>
-</ul>
-</li>
-</ul>
-<h2><span id="组织架构图-1">组织架构图 [1]</span><a href="#组织架构图-1" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2022/03/13/sre/rolesInCompany.JPG" class title="组织架构图"> 
-
-<h2><span id="故障复盘-2">故障复盘 [2]</span><a href="#故障复盘-2" class="header-anchor">#</a></h2><ul>
-<li>黄金三问<ul>
-<li>第一问：故障原因有哪些？</li>
-<li>第二问：我们做什么，怎么做才能确保下次不会再出现类似故障？</li>
-<li>第三问：当时如果我们做了什么，可以用更短的时间恢复业务？</li>
-</ul>
-</li>
-<li>故障判定的三原则<ul>
-<li>健壮性原则。</li>
-<li>第三方默认无责。  </li>
-<li>分段判定原则。</li>
-</ul>
-</li>
-<li>5W 分析法</li>
-</ul>
-<h2><span id="google-sre-principle-5">Google SRE Principle [5]</span><a href="#google-sre-principle-5" class="header-anchor">#</a></h2><ul>
-<li>运营是软件问题 </li>
-<li>服务水平目标SLO</li>
-<li>减少琐事<br>用自动化的方式减少琐事</li>
-<li>自动化 <ul>
-<li>** 统一环境， IaC CaC，  **<br>IaC: Terraform, Ansible, Pulumi</li>
-<li>生产环境中进行测试</li>
-<li><strong>统一</strong> 版本管理，制品库，cmdb</li>
-<li>可观测性</li>
-</ul>
-</li>
-<li>降低失败成本<br>复盘  从失败中学习</li>
-<li>共享所有权<br>个人安全，责任共担</li>
-<li>拥抱风险 +<br>错误预算</li>
-</ul>
-<h2><span id="google-sre-实践总结-5">Google SRE 实践总结 [5]</span><a href="#google-sre-实践总结-5" class="header-anchor">#</a></h2><ul>
-<li>确保长期关注研发工作 </li>
-<li><strong>在保障SLO的前提下</strong>最大化迭代速度 </li>
-<li>监控系统 +<br>insight，根因</li>
-<li>应急事件处理 </li>
-<li>变更管理<br>ITIL</li>
-<li>需求预测和容量规划 +<br>AIOps</li>
-<li>资源部署 </li>
-<li>效率与性能</li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li>《09｜案例：互联网典型的SRE组织架构是怎样的？》  赵成</li>
-<li>《08｜故障复盘：黄金三问与判定三原则》  赵成</li>
-<li>xxx</li>
-<li><a href="https://www.kawabangga.com/posts/4481">SRE 的工作介绍</a>   SRE大佬  未 </li>
-<li><a href="https://www.bilibili.com/video/BV1i84y147Xe/">SRE核心概念与可观测性介绍</a>   中国DevOps社区 刘峰</li>
-</ol>
-<p>+《SRE google 运维解密》</p>
-<ul>
-<li><a href="https://cloud.tencent.com/developer/article/2010397">《SRE google 运维解密》读书笔记 （一）</a> 未</li>
-<li><a href="https://cloud.tencent.com/developer/article/2010401">《SRE google 运维解密》读书笔记 （二）</a> 未</li>
-<li><a href="https://cloud.tencent.com/developer/article/2010405">《SRE google 运维解密》读书笔记 （三）</a></li>
-<li><a href="https://cloud.tencent.com/developer/article/2010408">《SRE google 运维解密》读书笔记 （四）</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>稳定性</category>
-        <category>sre</category>
-      </categories>
-      <tags>
-        <tag>sre</tag>
       </tags>
   </entry>
   <entry>
@@ -14271,9 +13968,9 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
 <li><a href="http://dwz.cn/4SrP4L">高性能高并发系统的稳定性保障</a> 京东</li>
 <li><a href="https://time.geekbang.org/column/intro/140">Linux性能优化实战</a>  极客时间</li>
 <li><a href="https://coolshell.cn/articles/17381.html">性能测试应该怎么做？</a>  coolshell  deleted</li>
-<li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>  self  deleted</li>
+<li><a href="stability.md">Go to Page</a>   self  deleted</li>
 <li><a href="http://blog.jobbole.com/88958/">关于容量预估&#x2F;性能压测的思考</a>  deleted  失效</li>
-<li><a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>   self  重复的 deleted</li>
+<li><a href="stability.md">Go to Page</a>  self  重复的 deleted</li>
 <li>xxx</li>
 <li><a href="https://coolshell.cn/articles/7490.html/comment-page-1">性能调优攻略</a>  coolshell  *** </li>
 <li><a href="threadNum.md">Go to Page</a>   self</li>
@@ -14295,128 +13992,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
         <tag>基础</tag>
         <tag>性能</tag>
         <tag>性能优化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>故障模型-应用层</title>
-    <url>/www6vHomeHexo/2018/10/27/faultModel1/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#%E6%95%85%E9%9A%9C%E6%A8%A1%E5%9E%8B-application-data">故障模型-Application &amp; Data</a><ul>
-<li><a href="#oom">OOM</a></li>
-<li><a href="#%E5%BA%94%E7%94%A8%E6%80%A7%E8%83%BD%E5%8F%98%E5%B7%AE">应用性能变差</a></li>
-<li><a href="#load%E8%BF%87%E9%AB%98">Load过高</a></li>
-<li><a href="#%E8%BF%9B%E7%A8%8Bhang">进程Hang</a></li>
-<li><a href="#%E8%BF%9B%E7%A8%8B%E8%A2%AB%E6%9D%80-jvm-crash">进程被杀， JVM crash</a></li>
-<li><a href="#%E5%BC%82%E5%B8%B8">异常</a></li>
-<li><a href="#cicd">CI&#x2F;CD</a></li>
-<li><a href="#%E7%B3%BB%E7%BB%9F%E5%8D%95%E7%82%B9">系统单点</a></li>
-<li><a href="#%E5%BC%82%E6%AD%A5%E9%98%BB%E5%A1%9E%E5%90%8C%E6%AD%A5">异步阻塞同步</a></li>
-<li><a href="#%E4%BE%9D%E8%B5%96%E8%B6%85%E6%97%B6%E4%BE%9D%E8%B5%96%E5%BC%82%E5%B8%B8">依赖超时，依赖异常</a></li>
-<li><a href="#%E4%B8%9A%E5%8A%A1%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%BB%A1">业务线程池满</a></li>
-<li><a href="#%E6%B5%81%E6%8E%A7%E4%B8%8D%E5%90%88%E7%90%86">流控不合理</a></li>
-<li><a href="#%E5%85%B6%E4%BB%96-%E6%95%B0%E6%8D%AE%E6%94%B6%E9%9B%86">其他-数据收集</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
-<li><a href="#%E5%A4%A7%E7%BA%B2">大纲</a></li>
-<li><a href="#application-data">Application &amp; Data</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="故障模型-application-amp-data">故障模型-Application &amp; Data</span><a href="#故障模型-application-amp-data" class="header-anchor">#</a></h1><h3><span id="oom">OOM</span><a href="#oom" class="header-anchor">#</a></h3><pre><code>    + 堆内 【10】
-        - PermGen
-            + 原因：反射类多
-            + 解决
-              先jmap，后btrace【11、12 case2】
-        - heap
-            解决：对比Fullgc后的相同对象的数量、大小
-    + 堆外Native
-</code></pre>
-<p>参考:<br>3. <a href="gc.md">Go to Page</a>  self<br>10. 如何排查Java内存泄露(内附各种排查工具介绍) 不闻<br>11. <a href="https://hllvm-group.iteye.com/group/topic/28379">生产环境下持久带满导致FullGC，如何跟踪</a><br>12. <a href="optimize.md">Go to Page</a>   self</p>
-<h3><span id="应用性能变差">应用性能变差</span><a href="#应用性能变差" class="header-anchor">#</a></h3><pre><code>    + 原因
-        - 锁  
-        - heap
-            + fullgc后没有空间
-                原因：内存泄露
-                工具：heap dump
-            + fullgc后有空间
-                解决：设置门槛，过滤大量短生命周期对象【12 case1，13】
-        - gc停顿长
-            解决：【12 case3，13】
-</code></pre>
-<p>参考:<br>3. <a href="gc.md">Go to Page</a>  self<br>12. <a href="optimize.md">Go to Page</a>  self<br>13. <a href="https://blog.csdn.net/github_32521685/article/details/89953050">听阿里巴巴JVM工程师为你分析常见Java故障案例</a>  ***</p>
-<h3><span id="load过高">Load过高</span><a href="#load过高" class="header-anchor">#</a></h3><pre><code>    + cpu load高【13】
-        - 启动阶段
-            原因：JIT编译器
-            解决：分层编译
-        - 运行阶段
-            原因：有热点方法
-            工具：MAT
-        - 解决
-            工具【8、9】
-            数据收集  4、5
-</code></pre>
-<p>参考:<br>不正当使用HashMap导致cpu 100%的问题追究 王宏江<br><a href="http://www.cnblogs.com/study-everyday/p/7426862.html">一个由正则表达式引发的血案</a>   CPU飚高<br>8. <a href="https://github.com/vipshop/vjtools">vjtools</a><br>9. <a href="https://github.com/oldratlee/useful-scripts">useful-scripts</a><br>13. <a href="https://blog.csdn.net/github_32521685/article/details/89953050">听阿里巴巴JVM工程师为你分析常见Java故障案例</a>  ***</p>
-<h3><span id="进程hang">进程Hang</span><a href="#进程hang" class="header-anchor">#</a></h3><h3><span id="进程被杀-jvm-crash">进程被杀， JVM crash</span><a href="#进程被杀-jvm-crash" class="header-anchor">#</a></h3><pre><code>    + 原因：
-      JNI 
-      Unsafe
-    + 工具：core dump
-</code></pre>
-<h3><span id="异常">异常</span><a href="#异常" class="header-anchor">#</a></h3><pre><code>    + 启动异常
-    + 心跳异常
-</code></pre>
-<h3><span id="cix2fcd">CI&#x2F;CD</span><a href="#cix2fcd" class="header-anchor">#</a></h3><pre><code>+ 环境错误
-+ 部署包错误
-+ 配置错误，误删
-</code></pre>
-<h3><span id="系统单点">系统单点</span><a href="#系统单点" class="header-anchor">#</a></h3><pre><code>    + 原因: 设计问题
-    + 解决：服务去状态，多实例部署
-</code></pre>
-<h3><span id="异步阻塞同步">异步阻塞同步</span><a href="#异步阻塞同步" class="header-anchor">#</a></h3><h3><span id="依赖超时依赖异常">依赖超时，依赖异常</span><a href="#依赖超时依赖异常" class="header-anchor">#</a></h3><pre><code>    + 解决【15,16】
-        - 区分强弱依赖
-        - 压测 + 容量规划
-        - 熔断 &amp;&amp; 降级
-</code></pre>
-<p>参考:<br>15. <a href="soaTolerateFramework.md">Go to Page</a> self<br>16. <a href="/www6vHomeHexo/2017/05/09/stability/" title="稳定性总结">稳定性总结</a>  self</p>
-<h3><span id="业务线程池满">业务线程池满</span><a href="#业务线程池满" class="header-anchor">#</a></h3><pre><code>    + 最佳实践:【4】
-    + 案例：【14】
-        - 问题：使用blockingQueue.put
-        - 解决：blockingQueue.offer（time超时机制）+限制队列长度
-        - 最佳实践：生产上线程池的core Size和poolSize设置的一样，请求不在队列里排队
-</code></pre>
-<p>参考：<br>4. <a href="threadNum.md">Go to Page</a>  self<br>14. <a href="http://hellojava.info/?p=464">从一个故障说说Java的三个BlockingQueue  阿里毕玄</a></p>
-<h3><span id="流控不合理">流控不合理</span><a href="#流控不合理" class="header-anchor">#</a></h3><h3><span id="其他-数据收集">其他-数据收集</span><a href="#其他-数据收集" class="header-anchor">#</a></h3><pre><code>    + 1.Heap dump
-    + 2. GC 日志
-    + 3. core dump
-    + 4. 线程stack
-    + 5.os进程信息
-</code></pre>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="大纲">大纲</span><a href="#大纲" class="header-anchor">#</a></h3><ol>
-<li><a href="https://developer.aliyun.com/article/105551">超全总结 | 阿里如何应对电商故障？神秘演练细节曝光</a> 阿里巴巴  周洋</li>
-</ol>
-<h3><span id="application-amp-data">Application &amp; Data</span><a href="#application-amp-data" class="header-anchor">#</a></h3><ol start="5">
-<li><a href="https://mp.weixin.qq.com/s/QA_BTF1D3GJJ7_nYQ6oAzQ">如何检测 Web 服务请求丢失问题</a>  Nginx tracing + Tomcat tracing</li>
-<li><a href="https://www.infoq.cn/article/system_failure_modeling/">系统中的故障场景建模</a>  应用层</li>
-<li>大方法 codecache</li>
-</ol>
-]]></content>
-      <categories>
-        <category>稳定性</category>
-        <category>故障模型</category>
-      </categories>
-      <tags>
-        <tag>故障模型</tag>
       </tags>
   </entry>
   <entry>
@@ -14674,106 +14249,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
-    <title>故障模型-基础设施层</title>
-    <url>/www6vHomeHexo/2018/05/03/faultModel3/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="故障模型-基础设施层">故障模型-基础设施层</span><a href="#故障模型-基础设施层" class="header-anchor">#</a></h2><ul>
-<li>故障模型-Virtualization&amp;Storage&amp;Networking<ul>
-<li>服务器宕机&amp;假死</li>
-<li>断电<ul>
-<li>解决：异地多活</li>
-</ul>
-</li>
-<li>超卖</li>
-<li>混和部署【3】</li>
-<li>存储【2】<ul>
-<li>磁盘满，坏</li>
-<li>不可写，不可读</li>
-</ul>
-</li>
-<li>网络【1】<ul>
-<li>网络抖动、丢包、超时</li>
-<li>网卡满</li>
-<li>DNS故障</li>
-<li>断网</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="virtualization-amp-storage-amp-networking">Virtualization &amp; Storage &amp; Networking</span><a href="#virtualization-amp-storage-amp-networking" class="header-anchor">#</a></h3><ol>
-<li><a href="https://tencentcloudcontainerteam.github.io/2019/08/12/troubleshooting-with-kubernetes-network/">Kubernetes 网络疑难杂症排查分享</a>  腾讯云 ***</li>
-<li><a href="https://tencentcloudcontainerteam.github.io/2019/06/08/kubernetes-best-practice-handle-disk-full/">kubernetes 最佳实践：处理容器数据磁盘被写满</a> 腾讯云</li>
-<li><a href="https://www.infoq.cn/article/aEut*ZAIffp0q4MSKDSg">百度大规模战略性混部系统演进</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>稳定性</category>
-        <category>故障模型</category>
-      </categories>
-      <tags>
-        <tag>故障模型</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>故障模型-中间件层</title>
-    <url>/www6vHomeHexo/2018/05/03/faultModel2/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="故障模型-中间件层">故障模型-中间件层</span><a href="#故障模型-中间件层" class="header-anchor">#</a></h2><ul>
-<li>故障模型-Runtime&amp;Middleware&amp;OS<ul>
-<li>负载均衡失效</li>
-<li>数据库<ul>
-<li>数据库热点</li>
-<li>数据库连接满</li>
-<li>数据库宕机</li>
-<li>数据库同步延迟</li>
-<li>数据库主备延迟【参考2】</li>
-</ul>
-</li>
-<li>缓存<ul>
-<li>缓存热点【参考1】</li>
-<li>缓存限流</li>
-</ul>
-</li>
-<li>OS资源<ul>
-<li>CPU抢占<ul>
-<li>案例 : HashMap并发访问，CPU100%【参考1】</li>
-<li>案例：正则表达式回溯，CPU100%</li>
-</ul>
-</li>
-<li>内存抢占<ul>
-<li>案例：OOM killer</li>
-</ul>
-</li>
-<li>上下文切换</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="大纲">大纲</span><a href="#大纲" class="header-anchor">#</a></h3><ol>
-<li><a href="https://developer.aliyun.com/article/105551">超全总结 | 阿里如何应对电商故障？神秘演练细节曝光</a> 阿里巴巴  周洋</li>
-</ol>
-<h3><span id="runtime-amp-middleware-amp-os">Runtime &amp; Middleware &amp; OS</span><a href="#runtime-amp-middleware-amp-os" class="header-anchor">#</a></h3><ol>
-<li><p><a href="redisHotkey.md">Go to Page</a>  self</p>
-</li>
-<li><p><a href="https://www.admin5.com/article/20190404/902952.shtml">UCloud高可用数据库UDB主从复制延时的解决</a></p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>稳定性</category>
-        <category>故障模型</category>
-      </categories>
-      <tags>
-        <tag>故障模型</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>服务慢响应超时排查</title>
     <url>/www6vHomeHexo/2017/10/17/slowRT/</url>
     <content><![CDATA[<p></p>
@@ -14891,34 +14366,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>故障排查</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>稳定性总结</title>
-    <url>/www6vHomeHexo/2017/05/09/stability/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<p><strong>关键词</strong>:  容量规划, 压测, 强弱依赖,<br><strong>关键词</strong>:  故障模型, 故障演练, 故障注入</p>
-<h2><span id="稳定性总结">稳定性总结</span><a href="#稳定性总结" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2017/05/09/stability/stability.jpg" class title="稳定性总结">
-
-
-
-
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://developer.aliyun.com/article/105551">超全总结 | 阿里如何应对电商故障？神秘演练细节曝光   阿里巴巴-周洋（花名中亭）</a> 故障注入， 故障演练</li>
-<li><a href="http://jm.taobao.org/2012/10/31/stability-considerations-dependent-strength/">稳定性思考-强弱依赖</a>  阿里中间件团队博客   </li>
-<li><a href="http://jm.taobao.org/2012/10/31/stability-considerations-dependent-strength-2/">稳定性思考-强弱依赖2</a>  阿里中间件团队博客</li>
-<li><a href="https://developer.aliyun.com/article/25419/">中间件技术及双十一实践·稳定性平台篇</a>  阿里中间件（Aliware）<br>强弱依赖， 容量规划   </li>
-<li>&lt;&lt;尽在双11阿里巴巴技术演进与超越&gt;&gt;</li>
-</ol>
-]]></content>
-      <categories>
-        <category>稳定性</category>
-        <category>总结</category>
-      </categories>
-      <tags>
-        <tag>稳定性</tag>
       </tags>
   </entry>
   <entry>
