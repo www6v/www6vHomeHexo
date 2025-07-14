@@ -498,53 +498,6 @@
       </tags>
   </entry>
   <entry>
-    <title>稳定性 汇总</title>
-    <url>/www6vHomeHexo/2019/09/22/stableSummary/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#%E6%80%BB%E7%BB%93">总结</a><ul>
-<li><a href="#%E7%A8%B3%E5%AE%9A%E6%80%A7">稳定性</a></li>
-<li><a href="#%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84">系统架构</a></li>
-</ul>
-</li>
-<li><a href="#sre">SRE</a><ul>
-<li><a href="#sre-1">SRE</a></li>
-<li><a href="#%E6%95%85%E9%9A%9C%E6%A8%A1%E5%9E%8B">故障模型</a></li>
-<li><a href="#%E5%AE%B9%E9%87%8F%E4%BF%9D%E9%9A%9C">容量保障</a></li>
-<li><a href="#%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B">混沌工程</a></li>
-<li><a href="#%E5%8F%AF%E8%A7%82%E6%B5%8B">可观测</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h1><h3><span id="稳定性">稳定性</span><a href="#稳定性" class="header-anchor">#</a></h3><h3><span id="系统架构">系统架构</span><a href="#系统架构" class="header-anchor">#</a></h3><ul>
-<li><a href="../../../../categories/%E6%9E%B6%E6%9E%84/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/">系统架构</a>  category</li>
-</ul>
-<h1><span id="sre">SRE</span><a href="#sre" class="header-anchor">#</a></h1><h3><span id="sre">SRE</span><a href="#sre" class="header-anchor">#</a></h3><h3><span id="故障模型">故障模型</span><a href="#故障模型" class="header-anchor">#</a></h3><h3><span id="容量保障">容量保障</span><a href="#容量保障" class="header-anchor">#</a></h3><h3><span id="混沌工程">混沌工程</span><a href="#混沌工程" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2019/09/24/chaosEngineering/" title="混沌工程">混沌工程</a></li>
-</ul>
-<h3><span id="可观测">可观测</span><a href="#可观测" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2018/07/17/observabilitySummary/" title="可观察性  汇总(archived)">可观察性  汇总(archived)</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>汇总</category>
-        <category>稳定性</category>
-      </categories>
-      <tags>
-        <tag>稳定性</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>网络/内存/存储 汇总</title>
     <url>/www6vHomeHexo/2019/08/31/brief/</url>
     <content><![CDATA[<p></p>
@@ -658,61 +611,6 @@
       </tags>
   </entry>
   <entry>
-    <title>高可用+容灾  汇总</title>
-    <url>/www6vHomeHexo/2019/04/28/haSummary/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#%E9%AB%98%E5%8F%AF%E7%94%A8">高可用</a><ul>
-<li><a href="#overview">Overview</a></li>
-<li><a href="#%E4%B8%AD%E9%97%B4%E4%BB%B6">中间件</a></li>
-<li><a href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1">数据服务</a></li>
-<li><a href="#k8s-%E9%AB%98%E5%8F%AF%E7%94%A8">K8S 高可用</a></li>
-</ul>
-</li>
-<li><a href="#%E5%AE%B9%E7%81%BE%E5%A4%9A%E6%B4%BB">容灾&amp;多活</a><ul>
-<li><a href="#%E6%9C%8D%E5%8A%A1%E5%BA%94%E7%94%A8%E5%AE%B9%E7%81%BE">服务&amp;应用容灾</a></li>
-<li><a href="#%E6%95%B0%E6%8D%AE%E5%AE%B9%E7%81%BE">数据容灾</a></li>
-<li><a href="#%E7%8E%AF%E5%A2%83%E5%AE%B9%E7%81%BE">环境容灾</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="高可用">高可用</span><a href="#高可用" class="header-anchor">#</a></h1><h3><span id="overview">Overview</span><a href="#overview" class="header-anchor">#</a></h3><ul>
-<li>xxx<ul>
-<li><a href="splitBrain.md">Go to Page</a></li>
-</ul>
-</li>
-<li><a href="/www6vHomeHexo/2022/01/25/tencentTCP3/" title="腾讯云TCP3-构建腾讯云上高可用架构">腾讯云TCP3-构建腾讯云上高可用架构</a></li>
-</ul>
-<h3><span id="中间件">中间件</span><a href="#中间件" class="header-anchor">#</a></h3><h3><span id="数据服务">数据服务</span><a href="#数据服务" class="header-anchor">#</a></h3><ul>
-<li>dbTradeoff</li>
-</ul>
-<h3><span id="k8s-高可用">K8S  高可用</span><a href="#k8s-高可用" class="header-anchor">#</a></h3><h1><span id="容灾amp多活">容灾&amp;多活</span><a href="#容灾amp多活" class="header-anchor">#</a></h1><h3><span id="服务amp应用容灾">服务&amp;应用容灾</span><a href="#服务amp应用容灾" class="header-anchor">#</a></h3><h3><span id="数据容灾">数据容灾</span><a href="#数据容灾" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2022/07/13/aliyunDB/" title="阿里云 数据库">阿里云 数据库</a></li>
-</ul>
-<h3><span id="环境容灾">环境容灾</span><a href="#环境容灾" class="header-anchor">#</a></h3><ul>
-<li><a href="/www6vHomeHexo/2022/06/26/aliyunDisasterRecovery/" title="阿里云-容灾恢复DR">阿里云-容灾恢复DR</a></li>
-<li><a href="/www6vHomeHexo/2022/01/04/aliyunHybridCloud/" title="阿里云-混合云HybridCloud">阿里云-混合云HybridCloud</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>汇总</category>
-        <category>HA</category>
-      </categories>
-      <tags>
-        <tag>汇总</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>安全 汇总</title>
     <url>/www6vHomeHexo/2019/03/12/securitySummary/</url>
     <content><![CDATA[<p></p>
@@ -788,6 +686,50 @@
       </tags>
   </entry>
   <entry>
+    <title>稳定性 汇总(archived)</title>
+    <url>/www6vHomeHexo/2000/09/22/stableSummary/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a><ul>
+<li><a href="#%E7%A8%B3%E5%AE%9A%E6%80%A7">稳定性</a></li>
+<li><a href="#%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84">系统架构</a></li>
+</ul>
+</li>
+<li><a href="#sre">SRE</a><ul>
+<li><a href="#sre-1">SRE</a></li>
+<li><a href="#%E6%95%85%E9%9A%9C%E6%A8%A1%E5%9E%8B">故障模型</a></li>
+<li><a href="#%E5%AE%B9%E9%87%8F%E4%BF%9D%E9%9A%9C">容量保障</a></li>
+<li><a href="#%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B">混沌工程</a></li>
+<li><a href="#%E5%8F%AF%E8%A7%82%E6%B5%8B">可观测</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h1><h3><span id="稳定性">稳定性</span><a href="#稳定性" class="header-anchor">#</a></h3><h3><span id="系统架构">系统架构</span><a href="#系统架构" class="header-anchor">#</a></h3><ul>
+<li><a href="../../../../categories/%E6%9E%B6%E6%9E%84/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/">系统架构</a>  category</li>
+</ul>
+<h1><span id="sre">SRE</span><a href="#sre" class="header-anchor">#</a></h1><h3><span id="sre">SRE</span><a href="#sre" class="header-anchor">#</a></h3><h3><span id="故障模型">故障模型</span><a href="#故障模型" class="header-anchor">#</a></h3><h3><span id="容量保障">容量保障</span><a href="#容量保障" class="header-anchor">#</a></h3><h3><span id="混沌工程">混沌工程</span><a href="#混沌工程" class="header-anchor">#</a></h3><h3><span id="可观测">可观测</span><a href="#可观测" class="header-anchor">#</a></h3><ul>
+<li><a href="/www6vHomeHexo/2018/07/17/observabilitySummary/" title="可观察性  汇总(archived)">可观察性  汇总(archived)</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>汇总</category>
+        <category>稳定性</category>
+      </categories>
+      <tags>
+        <tag>稳定性</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Service Mesh 汇总（archived）</title>
     <url>/www6vHomeHexo/2000/06/07/istioSummary/</url>
     <content><![CDATA[<p></p>
@@ -802,6 +744,61 @@
       </categories>
       <tags>
         <tag>istio</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>高可用+容灾  汇总(archived)</title>
+    <url>/www6vHomeHexo/2000/04/28/haSummary/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E9%AB%98%E5%8F%AF%E7%94%A8">高可用</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#%E4%B8%AD%E9%97%B4%E4%BB%B6">中间件</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1">数据服务</a></li>
+<li><a href="#k8s-%E9%AB%98%E5%8F%AF%E7%94%A8">K8S 高可用</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%B9%E7%81%BE%E5%A4%9A%E6%B4%BB">容灾&amp;多活</a><ul>
+<li><a href="#%E6%9C%8D%E5%8A%A1%E5%BA%94%E7%94%A8%E5%AE%B9%E7%81%BE">服务&amp;应用容灾</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%AE%B9%E7%81%BE">数据容灾</a></li>
+<li><a href="#%E7%8E%AF%E5%A2%83%E5%AE%B9%E7%81%BE">环境容灾</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="高可用">高可用</span><a href="#高可用" class="header-anchor">#</a></h1><h3><span id="overview">Overview</span><a href="#overview" class="header-anchor">#</a></h3><ul>
+<li>xxx<ul>
+<li><a href="splitBrain.md">Go to Page</a></li>
+</ul>
+</li>
+<li><a href="/www6vHomeHexo/2022/01/25/tencentTCP3/" title="腾讯云TCP3-构建腾讯云上高可用架构">腾讯云TCP3-构建腾讯云上高可用架构</a></li>
+</ul>
+<h3><span id="中间件">中间件</span><a href="#中间件" class="header-anchor">#</a></h3><h3><span id="数据服务">数据服务</span><a href="#数据服务" class="header-anchor">#</a></h3><ul>
+<li>dbTradeoff</li>
+</ul>
+<h3><span id="k8s-高可用">K8S  高可用</span><a href="#k8s-高可用" class="header-anchor">#</a></h3><h1><span id="容灾amp多活">容灾&amp;多活</span><a href="#容灾amp多活" class="header-anchor">#</a></h1><h3><span id="服务amp应用容灾">服务&amp;应用容灾</span><a href="#服务amp应用容灾" class="header-anchor">#</a></h3><h3><span id="数据容灾">数据容灾</span><a href="#数据容灾" class="header-anchor">#</a></h3><ul>
+<li><a href="/www6vHomeHexo/2022/07/13/aliyunDB/" title="阿里云 数据库">阿里云 数据库</a></li>
+</ul>
+<h3><span id="环境容灾">环境容灾</span><a href="#环境容灾" class="header-anchor">#</a></h3><ul>
+<li><a href="/www6vHomeHexo/2022/06/26/aliyunDisasterRecovery/" title="阿里云-容灾恢复DR">阿里云-容灾恢复DR</a></li>
+<li><a href="/www6vHomeHexo/2022/01/04/aliyunHybridCloud/" title="阿里云-混合云HybridCloud">阿里云-混合云HybridCloud</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>汇总</category>
+        <category>HA</category>
+      </categories>
+      <tags>
+        <tag>汇总</tag>
       </tags>
   </entry>
   <entry>
@@ -11123,45 +11120,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>knative</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>混沌工程</title>
-    <url>/www6vHomeHexo/2019/09/24/chaosEngineering/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="混沌工程实践12">混沌工程实践[1,2]</span><a href="#混沌工程实践12" class="header-anchor">#</a></h2><h5><span id="原则">原则</span><a href="#原则" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2019/09/24/chaosEngineering/priciple.jpg" class title="原则">
-
-<h5><span id="成熟度">成熟度</span><a href="#成熟度" class="header-anchor">#</a></h5><img src="/www6vHomeHexo/2019/09/24/chaosEngineering/mature.jpg" class title="成熟度"> 
-
-<h5><span id="混沌工程实施步骤">混沌工程实施步骤</span><a href="#混沌工程实施步骤" class="header-anchor">#</a></h5><ul>
-<li>制订混沌实验计划</li>
-<li>定义系统稳态指标</li>
-<li>做出系统容错行为假设</li>
-<li>执行混沌实验</li>
-<li>检查系统稳态指标</li>
-<li>记录&amp;恢复混沌实验</li>
-<li>修复发现的问题</li>
-<li>自动化持续进行验证</li>
-</ul>
-<h2><span id="混沌工程产品">混沌工程产品</span><a href="#混沌工程产品" class="header-anchor">#</a></h2><ul>
-<li>相关产品ChaosBlade<br>故障注入</li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://blog.csdn.net/xxscj/article/details/96840307">分布式服务架构下的混沌工程实践</a> 阿里 穹谷 ***</li>
-<li><a href="https://github.com/StabilityMan/StabilityGuide/blob/master/docs/prevention/resilience/%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%AE%9E%E8%B7%B5.md">混沌工程介绍与实践</a>  阿里 穹谷</li>
-<li><a href="https://www.infoq.cn/article/jjp0c2bR4*Ulld0wb88r">Netflix 混沌工程手册 Part 1：混沌工程简介</a></li>
-<li><a href="https://www.infoq.cn/article/AsN34J2T9QDXB0s-t9JN">Netflix 混沌工程手册 Part 2：混沌工程原则</a></li>
-<li><a href="https://www.infoq.cn/article/M3EktXxYGRYYm*t5vKga">Netflix 混沌工程手册 Part 3：实践方法</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>稳定性</category>
-        <category>混沌工程</category>
-      </categories>
-      <tags>
-        <tag>混沌工程</tag>
       </tags>
   </entry>
   <entry>
