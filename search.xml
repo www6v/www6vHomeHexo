@@ -292,7 +292,6 @@
 <li>io_uring<br>linux 5.1引入的异步io接口，适合io密集型应用</li>
 </ul>
 <h2><span id="network">Network</span><a href="#network" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2019/08/07/tcpUdpControlCongestion/" title="TCP流控和拥塞控制">TCP 阻塞</a>  self</li>
 <li><a href="/www6vHomeHexo/2022/01/30/linuxNetwork/" title="Linux 协议栈">Linux 协议栈</a> self</li>
 <li>epoll</li>
 </ul>
@@ -392,8 +391,6 @@
 <h5><span id="infra">Infra</span><a href="#infra" class="header-anchor">#</a></h5><ul>
 <li><a href="faultModel3.md">Go to Page</a><ul>
 <li><a href="/www6vHomeHexo/2022/01/11/haproxyTcpdump/" title="HAProxy抓包">HAProxy抓包</a>   网络</li>
-<li><a href="/www6vHomeHexo/2020/08/09/tcpTimewait/" title="TIME_WAIT和优化">TIME_WAIT和优化</a> ***</li>
-<li><a href="/www6vHomeHexo/2020/08/16/linuxPerformance-cpu/" title="Linux性能优化 之 cpu优化">Linux性能优化 之 cpu优化</a></li>
 </ul>
 </li>
 </ul>
@@ -402,11 +399,7 @@
 <li><a href="/www6vHomeHexo/2022/04/03/k8sProblem/" title="Kubernetes问题排查-troubleshooting">Kubernetes问题排查-troubleshooting</a>      ***</li>
 <li><a href="/www6vHomeHexo/2022/01/23/k8sBestPractice/" title="Kubernetes最佳实践-BestPractice">Kubernetes最佳实践-BestPractice</a>   ***</li>
 </ul>
-<h5><span id="basic">Basic</span><a href="#basic" class="header-anchor">#</a></h5><ul>
-<li><a href="/www6vHomeHexo/2020/08/08/tcpFault/" title="TCP故障模式">TCP故障模式</a></li>
-<li><a href="/www6vHomeHexo/2019/10/12/crashDetect/" title="宕机检测-Lease、心跳">宕机检测-Lease、心跳</a></li>
-</ul>
-]]></content>
+<h5><span id="basic">Basic</span><a href="#basic" class="header-anchor">#</a></h5>]]></content>
       <categories>
         <category>汇总</category>
         <category>故障排查</category>
@@ -442,62 +435,6 @@
       </tags>
   </entry>
   <entry>
-    <title>性能和优化 汇总</title>
-    <url>/www6vHomeHexo/2019/09/22/performanceOptimizeSummary/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2018/11/21/performance/" title="性能优化总结">性能优化总结</a>  ***</li>
-<li><a href="/www6vHomeHexo/2022/06/16/performanceAnalysis/" title="性能分析">性能分析</a></li>
-<li><a href="/www6vHomeHexo/2022/06/15/performanceTest/" title="性能测试">性能测试</a></li>
-</ul>
-<h2><span id="linux">Linux</span><a href="#linux" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2019/08/08/linuxPerformance/" title="Linux性能优化">Linux性能优化</a>   cpu， memory， io</li>
-<li><a href="/www6vHomeHexo/2018/12/26/linuxProfile/" title="Linux性能分析">Linux性能分析</a>   method and tools</li>
-<li><a href="/www6vHomeHexo/2020/08/16/linuxPerformance-cpu/" title="Linux性能优化 之 cpu优化">Linux性能优化 之 cpu优化</a>  ***</li>
-<li><a href="linuxKernelParam.md">Go to Page</a></li>
-<li><a href="/www6vHomeHexo/2022/01/25/linuxDPDK/" title="DPDK">DPDK</a></li>
-</ul>
-<h2><span id="网络-net">网络 Net</span><a href="#网络-net" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2020/08/09/tcpTimewait/" title="TIME_WAIT和优化">TIME_WAIT和优化</a>  *** </li>
-<li><a href="/www6vHomeHexo/2019/08/07/tcpUdpControlCongestion/" title="TCP流控和拥塞控制">TCP流控和拥塞控制</a></li>
-</ul>
-<h2><span id="java和应用">Java和应用</span><a href="#java和应用" class="header-anchor">#</a></h2><ul>
-<li><a href="optimize.md">Go to Page</a>  内存 ***</li>
-<li><a href="async.md">Go to Page</a>  ***</li>
-<li><a href="threadNum.md">Go to Page</a>  线程  *** </li>
-<li><a href="cache.md">Go to Page</a>  内存</li>
-<li><a href="/www6vHomeHexo/2014/03/05/falseSharing/" title="伪共享 FalseSharing">伪共享 FalseSharing</a>  内存</li>
-<li><a href="/www6vHomeHexo/2022/07/14/performancePool/" title="性能优化-池化Pool">性能优化-池化Pool</a></li>
-</ul>
-<h2><span id="mysql">MySQL</span><a href="#mysql" class="header-anchor">#</a></h2><ul>
-<li><a href="mysqlIndex.md">Go to Page</a>  *** </li>
-<li><a href="/www6vHomeHexo/2020/06/21/mysqlBestPractice/" title="使用MySQL的性能问题和紧急处理手段">使用MySQL的性能问题和紧急处理手段</a>  ***</li>
-</ul>
-<h2><span id="spark">Spark</span><a href="#spark" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2022/05/19/streamingSparkPerformance/" title="Spark 性能优化">Spark 性能优化</a>   ***</li>
-<li><a href="/www6vHomeHexo/2019/03/10/streamingSparkTrain/" title="Spark公司内部培训">Spark公司内部培训</a></li>
-</ul>
-<h2><span id="中间件">中间件</span><a href="#中间件" class="header-anchor">#</a></h2><ul>
-<li><a href="redisOptimize.md">Go to Page</a></li>
-<li><a href="kafkaZeroCopy.md">Go to Page</a></li>
-<li><a href="nginxOptimize.md">Go to Page</a></li>
-</ul>
-<h2><span id="serverless">Serverless</span><a href="#serverless" class="header-anchor">#</a></h2><ul>
-<li><a href="/www6vHomeHexo/2022/06/03/serverlessOptimize/" title="Serverless 优化">Serverless 优化</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>汇总</category>
-        <category>性能</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
-        <tag>优化</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>网络/内存/存储 汇总</title>
     <url>/www6vHomeHexo/2019/08/31/brief/</url>
     <content><![CDATA[<p></p>
@@ -518,7 +455,6 @@
 
 <h2><span id="网络总结">网络总结</span><a href="#网络总结" class="header-anchor">#</a></h2><h5><span id="linux网络">Linux网络</span><a href="#linux网络" class="header-anchor">#</a></h5><ul>
 <li><a href="../../../../2019/08/19/iptables/">iptables总结</a></li>
-<li><a href="../../../../2019/08/07/tcpUdpControlCongestion/">TCP流控和拥塞控制</a></li>
 <li><a href="../../../../2015/04/25/tcp/">TCP总结</a></li>
 <li><a href="../../../../2019/08/25/linux-socket/">Socket总结</a></li>
 </ul>
@@ -683,6 +619,49 @@
       </categories>
       <tags>
         <tag>可观察性</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>性能和优化 汇总(archived)</title>
+    <url>/www6vHomeHexo/2000/09/22/performanceOptimizeSummary/</url>
+    <content><![CDATA[<p></p>
+<span id="more"></span>
+
+<h2><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h2><h2><span id="linux">Linux</span><a href="#linux" class="header-anchor">#</a></h2><ul>
+<li><a href="linuxKernelParam.md">Go to Page</a></li>
+<li><a href="/www6vHomeHexo/2022/01/25/linuxDPDK/" title="DPDK">DPDK</a></li>
+</ul>
+<h2><span id="网络-net">网络 Net</span><a href="#网络-net" class="header-anchor">#</a></h2><h2><span id="java和应用">Java和应用</span><a href="#java和应用" class="header-anchor">#</a></h2><ul>
+<li><a href="optimize.md">Go to Page</a>  内存 ***</li>
+<li><a href="async.md">Go to Page</a>  ***</li>
+<li><a href="threadNum.md">Go to Page</a>  线程  *** </li>
+<li><a href="cache.md">Go to Page</a>  内存</li>
+<li><a href="/www6vHomeHexo/2014/03/05/falseSharing/" title="伪共享 FalseSharing">伪共享 FalseSharing</a>  内存</li>
+</ul>
+<h2><span id="mysql">MySQL</span><a href="#mysql" class="header-anchor">#</a></h2><ul>
+<li><a href="mysqlIndex.md">Go to Page</a>  *** </li>
+<li><a href="/www6vHomeHexo/2020/06/21/mysqlBestPractice/" title="使用MySQL的性能问题和紧急处理手段">使用MySQL的性能问题和紧急处理手段</a>  ***</li>
+</ul>
+<h2><span id="spark">Spark</span><a href="#spark" class="header-anchor">#</a></h2><ul>
+<li><a href="/www6vHomeHexo/2022/05/19/streamingSparkPerformance/" title="Spark 性能优化">Spark 性能优化</a>   ***</li>
+<li><a href="/www6vHomeHexo/2019/03/10/streamingSparkTrain/" title="Spark公司内部培训">Spark公司内部培训</a></li>
+</ul>
+<h2><span id="中间件">中间件</span><a href="#中间件" class="header-anchor">#</a></h2><ul>
+<li><a href="redisOptimize.md">Go to Page</a></li>
+<li><a href="kafkaZeroCopy.md">Go to Page</a></li>
+<li><a href="nginxOptimize.md">Go to Page</a></li>
+</ul>
+<h2><span id="serverless">Serverless</span><a href="#serverless" class="header-anchor">#</a></h2><ul>
+<li><a href="/www6vHomeHexo/2022/06/03/serverlessOptimize/" title="Serverless 优化">Serverless 优化</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>汇总</category>
+        <category>性能</category>
+      </categories>
+      <tags>
+        <tag>性能</tag>
+        <tag>优化</tag>
       </tags>
   </entry>
   <entry>
@@ -2847,80 +2826,6 @@
       </tags>
   </entry>
   <entry>
-    <title>性能优化-池化Pool</title>
-    <url>/www6vHomeHexo/2022/07/14/performancePool/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%BC%98%E5%8C%96">连接池优化</a><ul>
-<li><a href="#%E5%88%86%E7%B1%BB">分类</a></li>
-<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0">数据库连接池</a></li>
-</ul>
-</li>
-<li><a href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0">线程池</a><ul>
-<li><a href="#jdk%E7%BA%BF%E7%A8%8B%E6%B1%A0">JDK线程池</a></li>
-<li><a href="#tomcat%E7%BA%BF%E7%A8%8B%E6%B1%A0">Tomcat线程池</a></li>
-<li><a href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">最佳实践</a></li>
-</ul>
-</li>
-<li><a href="#%E5%AF%B9%E8%B1%A1%E6%B1%A0">对象池</a><ul>
-<li><a href="#netty-%E5%AF%B9%E8%B1%A1%E6%B1%A0-12">Netty 对象池 [1][2]</a></li>
-<li><a href="#tomcat%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%B1%A0-3">Tomcat中的对象池 [3]</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="连接池优化">连接池优化</span><a href="#连接池优化" class="header-anchor">#</a></h1><h3><span id="分类">分类</span><a href="#分类" class="header-anchor">#</a></h3><ul>
-<li>数据库连接池 </li>
-<li>redis连接池 </li>
-<li>http连接池</li>
-</ul>
-<h3><span id="数据库连接池">数据库连接池</span><a href="#数据库连接池" class="header-anchor">#</a></h3><ul>
-<li>最小连接数， 最大连接数<br> 建议<strong>最小连接数控制在 10 左右</strong>，<strong>最大连接数控制在 20～30 左右</strong></li>
-<li>连接的可用性<br> 使用连接发送<strong>“select 1”</strong>的命令给数据库看是否会抛出异常，如果抛出异常则将这个连接从连接池中移除，并且尝试关闭.</li>
-</ul>
-<h1><span id="线程池">线程池</span><a href="#线程池" class="header-anchor">#</a></h1><h3><span id="jdk线程池">JDK线程池</span><a href="#jdk线程池" class="header-anchor">#</a></h3><p>重要参数： <strong>coreThreadCount</strong> 和 <strong>maxThreadCount</strong>，</p>
-<img src="/www6vHomeHexo/2022/07/14/performancePool/jdk-threadpool.PNG" class title="JDK线程池">
-
-<p>[chat]<br>当大量请求进入线程池时，ThreadPoolExecutor 会根据其内部的线程池参数来处理请求。具体来说，当请求进入线程池时，ThreadPoolExecutor 会首先尝试将请求放入工作队列中，如果工作队列已满，则会根据线程池的配置来执行饱和策略，例如抛出异常、直接拒绝请求、阻塞等待或调用调用者运行等待任务。</p>
-<ul>
-<li>线程池中的线程会根据核心线程数和最大线程数的设置进行扩缩容。<ul>
-<li><strong>当有新的任务提交到线程池时，如果当前线程数小于核心线程数，线程池会创建新的线程来处理该任务。</strong></li>
-<li><strong>如果当前线程数已经达到核心线程数，线程池会将任务放入工作队列中，如果工作队列已满，则线程池会创建新的线程来处理该任务，直到达到最大线程数为止。</strong></li>
-<li>当线程池中的线程数量超过核心线程数时，空闲的线程会根据线程空闲时间的超时时间来自动销毁，以保证线程池中的线程数量不会无限制增长。</li>
-</ul>
-</li>
-</ul>
-<p>需要注意的是，在ThreadPoolExecutor中，线程池的线程数应该设置为适当的值，如果<strong>设置过小</strong>，则可能会导致线程饱和，影响任务的处理效率；如果<strong>设置过大</strong>，则会浪费系统资源，同时可能会导致线程竞争和锁的争用，影响系统的性能。因此，在使用ThreadPoolExecutor时，需要根据系统的负载和任务特性来合理地设置线程池的参数，以达到最佳的性能和效率。<br>[&#x2F;chat]</p>
-<h3><span id="tomcat线程池">Tomcat线程池</span><a href="#tomcat线程池" class="header-anchor">#</a></h3><p>Tomcat 使用的线程池就不是 JDK 原生的线程池，而是做了一些改造，<strong>当线程数超过 coreThreadCount 之后会优先创建线程，直到线程数到达maxThreadCount</strong>，这样就比较适合于 Web 系统<strong>大量 IO 操作的场景</strong>了。</p>
-<h3><span id="最佳实践">最佳实践</span><a href="#最佳实践" class="header-anchor">#</a></h3><p>大量的任务堆积会占用大量的内存空间，一旦内存空间被占满就会<strong>频繁地触发 Full GC</strong>，造成服务不可用，我之前排查过的一次 GC 引起的宕机，起因就是系统中的一个<strong>线程池使用了无界队列</strong>.</p>
-<h1><span id="对象池">对象池</span><a href="#对象池" class="header-anchor">#</a></h1><h3><span id="netty-对象池-12">Netty 对象池 [1][2]</span><a href="#netty-对象池-12" class="header-anchor">#</a></h3><p>netty为了避免过多的创建对象和频繁的gc使用了对象池，在需要创建ByteBuf的时候，从对象池中找，如果没有才会去创建一个新的ByteBuf。</p>
-<h3><span id="tomcat中的对象池-3">Tomcat中的对象池 [3]</span><a href="#tomcat中的对象池-3" class="header-anchor">#</a></h3><p>Tomcat 和 Jetty 都用到了对象池技术，这是因为处理一次 HTTP 请求的时间比较短，但是<br>这个过程中又需要创建大量复杂对象。</p>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a href="https://blog.csdn.net/qq_27785239/article/details/105827771">Netty的对象池</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/379687050?utm_id=0">Netty对象池</a></li>
-<li>《20 | 总结：Tomcat和Jetty中的对象池技术》</li>
-<li>《 07 | 池化技术：如何减少频繁创建数据库连接的性能损耗？》 唐扬</li>
-</ol>
-]]></content>
-      <categories>
-        <category>性能</category>
-        <category>Pool</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>阿里云 数据库</title>
     <url>/www6vHomeHexo/2022/07/13/aliyunDB/</url>
     <content><![CDATA[<p></p>
@@ -3698,251 +3603,6 @@
       </categories>
       <tags>
         <tag>Kafka</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>性能分析</title>
-    <url>/www6vHomeHexo/2022/06/16/performanceAnalysis/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#%E6%96%B9%E6%B3%95">方法</a><ul>
-<li><a href="#%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90-7%E6%AD%A5%E6%B3%95-1">性能分析 7步法 [1]</a></li>
-<li><a href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%9C%BA%E6%99%AF-2">性能测试场景 [2]</a></li>
-</ul>
-</li>
-<li><a href="#%E5%B7%A5%E5%85%B7">工具</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="方法">方法</span><a href="#方法" class="header-anchor">#</a></h1><h3><span id="性能分析-7步法-1">性能分析 7步法 [1]</span><a href="#性能分析-7步法-1" class="header-anchor">#</a></h3><p>第一步：压力场景数据。<br>第二步：分析架构图。<br>第三步：拆分响应时间。<br>第四步：全局监控分析。 [3]<br>第五步：定向监控分析。 [3]<br>第六步：判断性能瓶颈点。<br>第七步：确定解决方案。</p>
-<h3><span id="性能测试场景-2">性能测试场景 [2]</span><a href="#性能测试场景-2" class="header-anchor">#</a></h3><p>基准场景<br>容量场景<br>稳定性场景<br>异常场景</p>
-<img src="/www6vHomeHexo/2022/06/16/performanceAnalysis/p1.png" class width="100" height="50">
-
-<h1><span id="工具">工具</span><a href="#工具" class="header-anchor">#</a></h1><ul>
-<li>Java性能分析<ul>
-<li>工具<ul>
-<li>btrace， 慢响应，生产用</li>
-<li>排查占cpu最多的线程</li>
-<li>JVM 工具</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li>《03 | 核心分析逻辑：所有的性能分析，靠这七步都能搞定》    高楼</li>
-<li>《10 | 设计基准场景需要注意哪些关键点？ 》 高楼</li>
-<li>《15丨性能测试场景：如何进行监控设计？》  ***  高楼 </li>
-<li>06丨倾囊相授：我毕生所学的性能分析思路都在这里了   高楼 未</li>
-</ol>
-]]></content>
-      <categories>
-        <category>性能</category>
-        <category>性能测试</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>性能测试</title>
-    <url>/www6vHomeHexo/2022/06/15/performanceTest/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#tps%E5%92%8C%E5%93%8D%E5%BA%94%E6%97%B6%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB1">TPS和响应时间的关系[1]</a></li>
-<li><a href="#%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87%E7%9A%84%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F-2">性能指标的计算方式 [2]</a></li>
-<li><a href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95">性能测试</a></li>
-<li><a href="#%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7">性能监控</a></li>
-<li><a href="#%E5%8E%8B%E6%B5%8B%E5%B7%A5%E5%85%B7">压测工具</a><ul>
-<li><a href="#%E7%BD%91%E7%BB%9C">网络</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="tps和响应时间的关系1">TPS和响应时间的关系[1]</span><a href="#tps和响应时间的关系1" class="header-anchor">#</a></h1><img src="/www6vHomeHexo/2022/06/15/performanceTest/performance1.jpg" class>
-
-<p>在这个图中，定义了三条曲线、三个区域、两个点以及三个状态描述。</p>
-<ol>
-<li>三条曲线：吞吐量的曲线（紫色）、使用率 &#x2F; 用户数曲线（绿色）、响应时间曲线（深<br>蓝色）。</li>
-<li>三个区域：轻负载区（Light Load）、重负载区（Heavy Load）、塌陷区（Buckle<br>Zone）。</li>
-<li>两个点：最优并发用户数（The Optimum Number of Concurrent Users）、最大并发<br>用户数（The Maximum Number of Concurrent Users）。</li>
-<li>三个状态描述：资源饱和（Resource Saturated）、吞吐下降（Throughput<br>Falling）、用户受影响（End Users Effected）。</li>
-</ol>
-<h1><span id="性能指标的计算方式-2">性能指标的计算方式 [2]</span><a href="#性能指标的计算方式-2" class="header-anchor">#</a></h1><p>公式（1）：<br>并发用户数计算的通用公式：<em>C</em> &#x3D; <em>nL&#x2F;T</em><br>其中 C 是平均的并发用户数；n 是 login session 的数量；L 是 login session 的平均长<br>度；T 指考察的时间段长度。</p>
-<p>公式（2）：<br>并发用户数峰值： </p>
-<img src="/www6vHomeHexo/2022/06/15/performanceTest/performance5.png" class>
-<p>C’指并发用户数的峰值，C 就是公式（1）中得到的平均的并发用户数。该公式是假设用<br>户的 login session 产生符合泊松分布而估算得到的。</p>
-<p>仔细搜索之后发现会发现这两个公式的出处是 2004 年一个叫 Eric Man Wong 的人写的一篇名叫《Method for Estimating the Number of Concurrent Users》的文章。中英文我都反复看到很多篇。同时也会网上看到有些文章中把这个文章描述成“业界公认”的计算方法。</p>
-<h1><span id="性能测试">性能测试</span><a href="#性能测试" class="header-anchor">#</a></h1><ul>
-<li>性能测试<ul>
-<li>环境假设<ul>
-<li>负载模型【4，5】<ul>
-<li><ol>
-<li>人为模拟请求</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>复制线上流量</li>
-</ol>
-</li>
-<li><ol start="3">
-<li>引流</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>故障模拟【6】<ul>
-<li>Eg. tcpkill</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>结果分析<ul>
-<li>瓶颈分析</li>
-<li>热点  【5】<ul>
-<li>20%代码影响了80%</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>类型【5】<ul>
-<li>benchmark</li>
-<li>性能测试，负载测试，压力测试</li>
-<li>稳定性测试</li>
-</ul>
-</li>
-<li>流程 [参考3]<ul>
-<li><ol>
-<li>定义响应时间，TP99</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>这个响应时间的限制下，找到最高的吞吐量（负载测试）</li>
-</ol>
-</li>
-<li><ol start="3">
-<li>二步测试得到的吞吐量连续7天的不间断的压测系统（稳定性测试）</li>
-</ol>
-</li>
-<li><ol start="4">
-<li>找到系统的极限值（压力测试，抗峰值 peek）</li>
-</ol>
-</li>
-<li><ol start="5">
-<li>Burst Test</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>注意点<ul>
-<li>平均值不靠谱，TP才靠谱(百分比分布统计)<ul>
-<li>平均值</li>
-<li>标准方差</li>
-<li>百分位数</li>
-<li>中位数</li>
-</ul>
-</li>
-<li>关系<ul>
-<li>响应时间要和吞吐量挂钩<ul>
-<li>不同的吞吐量会有不同的响应时间</li>
-</ul>
-</li>
-<li>响应时间&#x2F;吞吐量要和成功率挂钩</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>应用程序Profile<ul>
-<li>问题：让程序运行的性能变低</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1><span id="性能监控">性能监控</span><a href="#性能监控" class="header-anchor">#</a></h1><ul>
-<li>性能优化<ul>
-<li>监控<ul>
-<li>分层<ul>
-<li>链路跟踪，APM</li>
-<li>中间件监控<br>  Eg.Tomcat 线程池</li>
-<li>基础设施监控<br>  Eg. cpu使用率，负载</li>
-</ul>
-</li>
-<li>数据可视化，可观察性<ul>
-<li>折线图</li>
-<li>散点图</li>
-<li>热图</li>
-</ul>
-</li>
-<li>告警通知<ul>
-<li>阈值 Eg. 比如大于TP99%</li>
-</ul>
-</li>
-<li>性能指标<ul>
-<li>响应时间，吞吐量，成功率【5】</li>
-<li>低延迟，会有高吞吐</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>方法论【7-&gt;2.5节】<ul>
-<li>工具法</li>
-<li>USE，识别系统瓶颈<ul>
-<li>Utilization(使用率)</li>
-<li>Saturation(饱和度, 负载)</li>
-<li>Errors(错误)</li>
-</ul>
-</li>
-<li>工作负载特征归纳</li>
-<li>延迟分析</li>
-<li>静态性能调整</li>
-<li>缓存调优</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1><span id="压测工具">压测工具</span><a href="#压测工具" class="header-anchor">#</a></h1><p>ab<br>Jmeter<br>wrk</p>
-<h3><span id="网络">网络</span><a href="#网络" class="header-anchor">#</a></h3><p>httpstat [20]</p>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li>02丨性能综述：TPS和响应时间之间是什么关系？  高楼</li>
-<li>03丨性能综述：怎么理解TPS、QPS、RT、吞吐量这些性能指标？ 高楼</li>
-</ol>
-<hr>
-<ol start="3">
-<li><a href="https://coolshell.cn/articles/17381.html">性能测试应该怎么做？</a> </li>
-<li><a href="stability.md">Go to Page</a>  self</li>
-<li><a href="http://blog.jobbole.com/88958/">关于容量预估&#x2F;性能压测的思考</a> 失效</li>
-<li><a href="stability.md">Go to Page</a>  self  重复的</li>
-<li>《性能之巅：洞悉系统、企业与云计算》 </li>
-<li><a href="https://github.com/davecheney/httpstat"> httpstat</a>  go<br>  <a href="https://github.com/reorx/httpstat"> httpstat</a> python</li>
-</ol>
-]]></content>
-      <categories>
-        <category>性能</category>
-        <category>性能测试</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
       </tags>
   </entry>
   <entry>
@@ -6417,163 +6077,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>云计算</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Seata 总结</title>
-    <url>/www6vHomeHexo/2022/03/24/transactionSeata/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="seata-模式3">Seata 模式[3]</span><a href="#seata-模式3" class="header-anchor">#</a></h2><table>
-<thead>
-<tr>
-<th>功能名称</th>
-<th>特点</th>
-<th>基本原理</th>
-<th>使用场景</th>
-<th>存在问题</th>
-<th>性能</th>
-<th>复杂度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>AT 模式<br><a href="https://seata.io/zh-cn/docs/dev/mode/at-mode.html">AT模式官方文档 1</a></td>
-<td>自动补偿事务</td>
-<td>代理数据源，一阶段解析sql将数据写入undo_log表，二阶段根据undo_log表进行回滚</td>
-<td><strong>支持 ACID 事务的关系型数据库</strong></td>
-<td>开发时需注意：脏读</td>
-<td>性能较高</td>
-<td>开发简单</td>
-</tr>
-<tr>
-<td>TCC 模式<br><a href="https://seata.io/zh-cn/docs/dev/mode/tcc-mode.html">TCC模式官方文档</a></td>
-<td>手动补偿事务</td>
-<td>代理数据源，一阶段执行prepare方法，二阶段执行commit或rollback方法</td>
-<td><strong>不支持 ACID 事务的数据库</strong></td>
-<td>开发时需注意：空回滚、幂等、悬挂</td>
-<td>性能高</td>
-<td>开发复杂</td>
-</tr>
-<tr>
-<td>Saga 模式<br><a href="https://seata.io/zh-cn/docs/user/saga.html">SAGA模式官方文档</a></td>
-<td></td>
-<td>基于状态机引擎实现，用户设计状态图，开发rollback方法，状态机根据状态图 json 调用相关方法</td>
-<td><strong>业务流程长、业务流程多</strong> <br>参与者包含其它公司或遗留系统服务，<strong>无法提供 TCC 模式要求的三个接口</strong></td>
-<td>除了额外开发方法，需设计开发状态图 json</td>
-<td>性能高</td>
-<td>开发复杂</td>
-</tr>
-<tr>
-<td>XA 模式<br><a href="https://seata.io/zh-cn/docs/dev/mode/xa-mode.html">XA模式官方文档</a></td>
-<td>满足全局数据一致性. <br>AT、TCC、Saga 都是补偿型，无法做到真正的全局一致性.</td>
-<td>由数据库XA协议完成提交、回滚</td>
-<td>支持XA 事务的数据库</td>
-<td>性能较低</td>
-<td>性能较低</td>
-<td>开发简单</td>
-</tr>
-</tbody></table>
-<h3><span id="at模式-1">AT模式 [1]</span><a href="#at模式-1" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2022/03/24/transactionSeata/AT.jpg" class title="AT模式">
-
-<ul>
-<li>典型的分布式事务过程：<ul>
-<li>TM 向 TC 申请开启一个全局事务，全局事务创建成功并生成一个全局唯一的 XID；</li>
-<li>XID 在微服务调用链路的上下文中传播；</li>
-<li>RM 向 TC 注册分支事务，将其纳入 XID 对应全局事务的管辖；</li>
-<li>TM 向 TC 发起针对 XID 的全局提交或回滚决议；</li>
-<li>TC 调度 XID 下管辖的全部分支事务完成提交或回滚请求。</li>
-</ul>
-</li>
-</ul>
-<h3><span id="at模式-示例-4">AT模式 示例 [4]</span><a href="#at模式-示例-4" class="header-anchor">#</a></h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="meta">@GlobalTransactional</span>   <span class="comment">///  TM</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> OperationResponse <span class="title function_">placeOrder</span><span class="params">(PlaceOrderRequestVO placeOrderRequestVO)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 扣减库存</span></span><br><span class="line">        DynamicDataSourceContextHolder.setDataSourceKey(DataSourceKey.STOCK);</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">operationStockResult</span> <span class="operator">=</span> stockService.reduceStock(placeOrderRequestVO.getProductId(), amount);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 扣减余额</span></span><br><span class="line">        DynamicDataSourceContextHolder.setDataSourceKey(DataSourceKey.PAY);</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">operationBalanceResult</span> <span class="operator">=</span> payService.reduceBalance(placeOrderRequestVO.getUserId(), price);</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PayServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">PayService</span> &#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 事务传播特性设置为 REQUIRES_NEW 开启新的事务</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> userId 用户 ID</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> price  扣减金额</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRES_NEW)</span>   <span class="comment">/// RM</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">reduceBalance</span><span class="params">(Long userId, Integer price)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        log.info(<span class="string">&quot;开始扣减用户 &#123;&#125; 余额&quot;</span>, userId);</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">record</span> <span class="operator">=</span> accountDao.reduceBalance(price);</span><br><span class="line">        log.info(<span class="string">&quot;扣减用户 &#123;&#125; 余额结果:&#123;&#125;&quot;</span>, userId, record &gt; <span class="number">0</span> ? <span class="string">&quot;操作成功&quot;</span> : <span class="string">&quot;扣减余额失败&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> record &gt; <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2><span id="seata-同类产品">Seata 同类产品</span><a href="#seata-同类产品" class="header-anchor">#</a></h2><ul>
-<li><p>TCC 模式</p>
-<p>Eg: 支付宝DTS #3<br>蚂蚁 XTS(内部)&#x2F;DTX(蚂蚁金融云) #3 <br></p>
-</li>
-<li><p>两阶段</p>
-<p>阿里 TXC(内部)&#x2F;GTS(阿里云) <br><strong>非入侵性</strong> <br><a href="https://github.com/seata/seata/wiki/AT-Mode">AT Mode</a> 基于 支持本地 ACID 事务 的 “关系型数据库” <br><a href="https://github.com/seata/seata/wiki/MT-Mode">MT Mode</a> 支持把”自定义”的分支事务纳入到全局事务的管理中</p>
-</li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><p><a href="https://mp.weixin.qq.com/s?__biz=MzU3MDAzNDg1MA==&mid=2247499421&idx=1&sn=a55797652284bafd9216ea981f4125e0">对比7种分布式事务方案，还是偏爱阿里开源的Seata，真香！(原理+实战)</a>  ***</p>
-</li>
-<li><p><a href="https://seata.io/zh-cn/docs/dev/mode/at-mode.html">Seata AT 模式</a>  官方文档</p>
-</li>
-<li><p><a href="http://koca.szkingdom.com/forum/t/topic/322"><a href="http://koca.szkingdom.com/forum/t/topic/322">Seata 使用调研</a></a></p>
-</li>
-<li><p><a href="https://github.com/www6v/seata-samples/tree/master/multiple-datasource">Seata AT模式-多数据源</a></p>
-</li>
-<li><p><a href="https://blog.csdn.net/abcd930704/article/details/121650029">seata的AT模式</a></p>
-<p>早期</p>
-</li>
-<li><p>分布式事务之TCC事务 梁钟霖</p>
-</li>
-<li><p>分布式事务之TCC服务设计和实现注意事项 绍辉</p>
-</li>
-<li><p><a href="https://github.com/www6v/tcc-transaction">https://github.com/www6v/tcc-transaction</a></p>
-</li>
-<li><p><a href="https://mp.weixin.qq.com/s/S0touTyVWfolEqgFaAjLxg">更开放的分布式事务 | Fescar 品牌升级，更名为 Seata</a></p>
-</li>
-<li><p><a href="https://mp.weixin.qq.com/s/XTCZEZdmToWrETbR1GtR4g">关于开源分布式事务中间件Fescar，我们总结了开发者关心的13个问题</a></p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>中间件</category>
-        <category>Seata</category>
-      </categories>
-      <tags>
-        <tag>Seata</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>gRPC</title>
-    <url>/www6vHomeHexo/2022/03/21/grpc/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<h2><span id="grpc">gRPC</span><a href="#grpc" class="header-anchor">#</a></h2><h5><span id="通信1">通信[1]</span><a href="#通信1" class="header-anchor">#</a></h5><ul>
-<li>基于HTTP2连接，发送消息</li>
-<li>protobuf做消息序列化</li>
-</ul>
-<h5><span id="http2-2">HTTP2 [2]</span><a href="#http2-2" class="header-anchor">#</a></h5><ul>
-<li>优点<ul>
-<li>头部压缩、多路复用   </li>
-<li>stream,  frame</li>
-</ul>
-</li>
-</ul>
-<h5><span id="grpc的通信模式-1">gRPC的通信模式 [1]</span><a href="#grpc的通信模式-1" class="header-anchor">#</a></h5><ul>
-<li>一元RPC模式</li>
-<li>服务端 流式RPC模式</li>
-<li>客户端 流式RPC模式</li>
-<li>双向流RPC模式</li>
-</ul>
-<h2><span id="grpc">gRPC</span><a href="#grpc" class="header-anchor">#</a></h2><h5><span id="grpc-java-1">grpc-java [1]</span><a href="#grpc-java-1" class="header-anchor">#</a></h5><h5><span id="grpc-go-34">gRPC-go [3][4]</span><a href="#grpc-go-34" class="header-anchor">#</a></h5><details><summary>gRPC-go</summary><p><a href="https://github.com/grpc/grpc-go/blob/master/examples/route_guide/server/server.go">grpc-go server.go</a><br>&#x2F;&#x2F; Package main implements a simple gRPC server that demonstrates how to use gRPC-Go libraries<br>&#x2F;&#x2F; to perform unary, client streaming, server streaming and full duplex RPCs.</p>
-</details>
-
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://space.bilibili.com/359351574/channel/collectiondetail?sid=412936">IT老齐的gRPC实战课</a></li>
-<li>《透视HTTP协议》《33 | 我应该迁移到HTTP&#x2F;2吗？》</li>
-<li><a href="https://github.com/grpc/grpc-go/tree/master/examples">grpc-go examples</a></li>
-<li><a href="https://www.bilibili.com/video/BV1ht41187Wh/">#17 grpc 开发及 grpcp 的源码分析 【 Go 夜读 】</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>分布式</category>
-        <category>基础</category>
-        <category>rpc</category>
-      </categories>
-      <tags>
-        <tag>异步</tag>
       </tags>
   </entry>
   <entry>
@@ -9665,76 +9168,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
-    <title>事件 Event</title>
-    <url>/www6vHomeHexo/2020/08/23/event/</url>
-    <content><![CDATA[<p hidden></p>
-<span id="more"></span>
-
-<h2><span id="事件">事件</span><a href="#事件" class="header-anchor">#</a></h2><ul>
-<li><p>K8s<br>Kubernetes Events<br><a href="https://github.com/AliyunContainerService/kube-eventer">AliyunContainerService&#x2F;kube-eventer</a><br>Informer + Queue</p>
-</li>
-<li><p>Flink<br>CEP 复杂事件处理<br>EventTime， IngestTime，ProcessingTime</p>
-</li>
-<li><p>Redis<br>文件事件<br>时间事件</p>
-</li>
-<li><p>Servlet规范<br>Listener 时间监听器</p>
-</li>
-<li><p>DDD<br><a href="https://martinfowler.com/eaaDev/DomainEvent.html">领域事件</a> Martin Fowler<br>事件驱动架构（EDA）<br>Event Source</p>
-</li>
-<li><p>EIP 企业集成模式<br>apache camel</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>分布式</category>
-        <category>基础</category>
-        <category>事件</category>
-      </categories>
-      <tags>
-        <tag>事件</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux性能优化 之 cpu优化</title>
-    <url>/www6vHomeHexo/2020/08/16/linuxPerformance-cpu/</url>
-    <content><![CDATA[<p hidden></p>
-
-<span id="more"></span>
-
-<h2><span id="一-工具与指标">一. 工具与指标</span><a href="#一-工具与指标" class="header-anchor">#</a></h2><img src="/www6vHomeHexo/2020/08/16/linuxPerformance-cpu/metric2tool.JPG" class title="从指标找工具">
-
-<img src="/www6vHomeHexo/2020/08/16/linuxPerformance-cpu/tool2metric.JPG" class title="从工具找指标">
-
-<h2><span id="二-最常用的cpu工具">二. 最常用的cpu工具</span><a href="#二-最常用的cpu工具" class="header-anchor">#</a></h2><div style="width:60%; height:60%; text-align: center;">
-    
-<p><img src="https://user-images.githubusercontent.com/5608425/65083664-b6d52d00-d9db-11e9-918c-2a99c5708189.jpg" alt="最常用的cpu工具"><br>最常用的cpu工具 工具中指标之间的关系</p>
-</div>
-
-<h2><span id="三-cpu优化案例">三. cpu优化案例</span><a href="#三-cpu优化案例" class="header-anchor">#</a></h2><h3><span id="1-上下文切换的案例">1. 上下文切换的案例。</span><a href="#1-上下文切换的案例" class="header-anchor">#</a></h3><p><strong>自愿上下文切换</strong>，是指<strong>进程无法获取所需资源</strong>，导致的上下文切换。比如说， I&#x2F;O、内存等系统资源不足时，就会发生自愿上下文切换。<br><strong>非自愿上下文切换</strong>，则是指进程由于<strong>时间片已到等原因</strong>，被系统强制调度，进而发生的上下文切换。比如说，大量进程都在争抢 CPU 时，就容易发生非自愿上下文切换。</p>
-<blockquote>
-<p>先用 vmstat ，查看了系统的上下文切换次数和中断次数；然后通过pidstat ，观察了进程的自愿上下文切换和非自愿上下文切换情况；最后通过 pidstat ，观察了线程的上下文切换情况，找出了上下文切换次数增多的根源，也就是我们的基准测试工具 sysbench。</p>
-</blockquote>
-<h3><span id="2-进程-cpu-使用率升高的案例">2. 进程 CPU 使用率升高的案例</span><a href="#2-进程-cpu-使用率升高的案例" class="header-anchor">#</a></h3><p>可能代码里有死循环</p>
-<h3><span id="3-不可中断进程和僵尸进程的案例">3. 不可中断进程和僵尸进程的案例</span><a href="#3-不可中断进程和僵尸进程的案例" class="header-anchor">#</a></h3><blockquote>
-<p>先用 top 观察到了 <strong>iowait 升高</strong>的问题，并发现了大量的不可中断进程和僵尸进程；接着用 dstat 发现是这是由磁盘读导致的，于是又通过 pidstat 找出了相关的进程。但我们用 strace 查看进程系统调用却失败了，最终还是用 perf 分析进程调用链，才发现根源在于<strong>磁盘直接 I&#x2F;O</strong> 。<br>僵尸进程是因为父进程没有回收子进程的资源而出现的，那么，要解决掉它们，就要找到它们的根儿，也就是找出父进程，然后在父进程里解决。</p>
-</blockquote>
-<h3><span id="4软中断的案例">4.软中断的案例。</span><a href="#4软中断的案例" class="header-anchor">#</a></h3><blockquote>
-<p>通过 top 观察到，系统的软中断 CPU 使用率升高；接着查看&#x2F;proc&#x2F;softirqs， 找到了几种变化速率较快的软中断；然后通过 sar 命令，发现是网络小包的问题，最后再用 tcpdump ，找出网络帧的类型和来源，确定是一个<strong>SYN FLOOD 攻击</strong>导致的。</p>
-</blockquote>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li>&lt;&lt;Linux性能优化实战 - 11 - 套路篇：如何迅速分析出系统CPU的瓶颈在哪里？&gt;&gt; 倪朋飞</li>
-<li>&lt;&lt;Linux性能优化实战 - 04讲基础篇：经常说的CPU上下文切换是什么意思（下）&gt;&gt; 倪朋飞</li>
-</ol>
-]]></content>
-      <categories>
-        <category>linux</category>
-        <category>性能优化</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Rocketmq中的事务</title>
     <url>/www6vHomeHexo/2020/08/12/mqRocketmqTransaction/</url>
     <content><![CDATA[<p></p>
@@ -9788,156 +9221,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>消息系统</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>TIME_WAIT和优化</title>
-    <url>/www6vHomeHexo/2020/08/09/tcpTimewait/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#%E6%95%85%E9%9A%9C%E7%8E%B0%E8%B1%A1">故障现象</a></li>
-<li><a href="#time_wait%E6%A6%82%E5%BF%B5%E5%92%8C%E4%BD%9C%E7%94%A8">TIME_WAIT概念和作用</a><ul>
-<li><a href="#%E6%A6%82%E5%BF%B5">概念</a></li>
-<li><a href="#%E4%BD%9C%E7%94%A8">作用</a></li>
-</ul>
-</li>
-<li><a href="#time_wait%E7%9A%84%E5%89%AF%E4%BD%9C%E7%94%A8%E5%92%8C%E4%BC%98%E5%8C%96">TIME_WAIT的副作用和优化</a><ul>
-<li><a href="#tcp%E5%92%8Ctime_wait">TCP和TIME_WAIT</a></li>
-<li><a href="#%E5%89%AF%E4%BD%9C%E7%94%A8%E5%92%8C%E4%BC%98%E5%8C%96">副作用和优化</a></li>
-</ul>
-</li>
-<li><a href="#%E5%A4%A7%E9%87%8Ftime_wait%E7%9A%84%E9%97%AE%E9%A2%98gpt">大量TIME_WAIT的问题[gpt]</a><ul>
-<li><a href="#%E9%97%AE%E9%A2%98">问题</a></li>
-<li><a href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">解决方案</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h2><span id="故障现象">故障现象</span><a href="#故障现象" class="header-anchor">#</a></h2><p>让我们先从一例线上故障说起。在一次升级线上应用服务之后，我们发现该服务的可用性变<br>得时好时坏，<strong>一段时间可以对外提供服务，一段时间突然又不可以，</strong> 大家都百思不得其解。<br>运维同学登录到服务所在的主机上，使用 netstat 命令查看后才发现，主机上有成千上万处<br>于 TIME_WAIT 状态的连接。</p>
-<p>经过层层剖析后，我们发现罪魁祸首就是 TIME_WAIT。为什么呢？我们这个应用服务需要<br>通过发起 TCP 连接对外提供服务。<strong>每个连接会占用一个本地端口，当在高并发的情况下，<br>TIME_WAIT 状态的连接过多，多到把本机可用的端口耗尽，应用服务对外表现的症状，就<br>是不能正常工作了。当过了一段时间之后，处于 TIME_WAIT 的连接被系统回收并关闭<br>后，释放出本地端口可供使用，应用服务对外表现为，可以正常工作。这样周而复始，便会<br>出现了一会儿不可以，过一两分钟又可以正常工作的现象。</strong></p>
-<h2><span id="time_wait概念和作用">TIME_WAIT概念和作用</span><a href="#time_wait概念和作用" class="header-anchor">#</a></h2><h3><span id="概念">概念</span><a href="#概念" class="header-anchor">#</a></h3><ul>
-<li><strong>只有发起连接终止的一方会进入 TIME_WAIT 状态</strong>。</li>
-<li><strong>TIME_WAIT</strong>停留持续时间是固定的，是最长分节生命期 MSL（maximumsegment lifetime）的两倍（<strong>2MSL</strong>）。Linux系统里有一个硬编码的字段，名称为TCP_IMEWAIT_LEN，其值为 60 秒。也就是说，<strong>Linux 系统停留在 TIME_WAIT 的时间为固定的 60 秒</strong>。</li>
-</ul>
-<h3><span id="作用">作用</span><a href="#作用" class="header-anchor">#</a></h3><ul>
-<li>这样做是为了<strong>确保最后的 ACK 能让被动关闭方接收</strong>（可能丢失ACK后<strong>重传ACK</strong>），从而帮助其<strong>正常关闭</strong>。</li>
-<li>第二个理由和连接“化身”和报文迷走有关系，为了让旧连接的重复分节在网络中自然消失。</li>
-</ul>
-<h2><span id="time_wait的副作用和优化">TIME_WAIT的副作用和优化</span><a href="#time_wait的副作用和优化" class="header-anchor">#</a></h2><h3><span id="tcp和time_wait">TCP和TIME_WAIT</span><a href="#tcp和time_wait" class="header-anchor">#</a></h3><p>当连接的一方主动关闭连接，在接收到对端的 FIN 报文之后，<strong>主动关闭连接的一方</strong>会在 TIME_WAIT 这个状态里停留一段时间，这个时间大约为 2MSL。</p>
-<p><strong>主动关闭连接的一方可以是客户端，也可以是服务端；</strong><br><strong>副作用1 主动关闭连接的一方 是客户端；</strong><br><strong>副作用2 主动关闭连接的一方 是服务端；</strong></p>
-<h3><span id="副作用和优化">副作用和优化</span><a href="#副作用和优化" class="header-anchor">#</a></h3><ul>
-<li><p>副作用1 <strong>对端口资源的占用，一个 TCP 连接至少消耗一个本地端口</strong></p>
-</li>
-<li><p>副作用1 优化<br> <strong>net.ipv4.tcp_tw_reuse（推荐）</strong><br>  从协议角度理解如果是安全可控的，可以<strong>复用</strong>处于 TIME_WAIT 的套接字为新的<strong>连接</strong>所用.</p>
-</li>
-</ul>
-<ol>
-<li>只适用于连接<strong>发起方</strong>（C&#x2F;S 模型中的客户端）；</li>
-<li>对应的 TIME_WAIT 状态的连接创建时间超过 1 秒才可以被复用。</li>
-</ol>
-<p> <strong>net.ipv4.tcp_max_tw_buckets（不推荐）</strong><br>  这个值默认为 18000，当系统中处于TIME_WAIT 的连接一旦超过这个值时，系统就会将所有的 TIME_WAIT 连接状态重置.<br>  这个方法过于暴力，而且治标不治本，带来的问题远比解决的问题多，不推荐使用。</p>
-<p> <strong>SO_LINGER（不推荐）</strong><br>  不要试图使用SO_LINGER设置套接字选项，跳过 TIME_WAIT；</p>
-<ul>
-<li><p>副作用2  <strong>服务器端程序重启时，地址被占用 -&gt; Address already in use 异常</strong><br>通过服务器端发起的关闭连接操作，引起了一个已有的 TCP 连接处于 <strong>TME_WAIT 状态</strong>，正是这个 TIME_WAIT 的连接，使得服务器重启时，<strong>继续绑定在127.0.0.1地址和xxxx端口上的操作</strong>，返回了Address already in use的错误。</p>
-</li>
-<li><p>副作用2  优化<br>服务器端程序，都应该设置 <strong>SO_REUSEADDR 套接字选项</strong>，以便服务端程序可以在极短时间内<strong>复用同一个端口启动</strong>。</p>
-</li>
-</ul>
-<h2><span id="大量time_wait的问题gpt">大量TIME_WAIT的问题[gpt]</span><a href="#大量time_wait的问题gpt" class="header-anchor">#</a></h2><h3><span id="问题">问题</span><a href="#问题" class="header-anchor">#</a></h3><p>  RPC客户端A调用服务端C有很多time-wait，客户端B调用服务端C会有什么问题 </p>
-<h3><span id="解决方案">解决方案</span><a href="#解决方案" class="header-anchor">#</a></h3><p>在RPC客户端A调用服务端C时出现多个TIME_WAIT状态的情况下，如果RPC客户端B也调用相同的服务端C，可能会面临以下<strong>问题</strong>：<br>    1. <strong>端口耗尽</strong>：每个TCP连接会占用一个本地端口号，如果RPC客户端A和B同时发起大量的请求，由于TIME_WAIT状态的存在，可能会导致本地端口耗尽，无法建立新的连接。<br>    2. <strong>连接超时</strong>：由于服务端C处于TIME_WAIT状态，即使RPC客户端B发起请求，也需要等待TIME_WAIT状态消失后才能建立连接，这会导致连接的延迟增加，可能会触发连接超时，导致B无法正常与服务端C建立连接。<br>    3. <strong>并发性能下降</strong>：当RPC客户端A和B同时发起大量请求时，如果每个请求都需要等待TIME_WAIT状态消失后才能建立连接，会导致连接的建立速度变慢，从而降低系统的并发性能。</p>
-<p>为了避免这些问题，可以采取以下<strong>措施</strong>：<br>    1. 避免端口耗尽：可以通过增加可用端口数、增加端口重用的时间等方式来缓解端口耗尽的问题。在操作系统级别上，可以通过调整端口范围或增加可用端口的数量来解决。<br>    2. 优化连接复用：可以使用连接池来管理TCP连接，以便复用连接，避免频繁地创建和关闭连接。这样可以减少TIME_WAIT状态的产生，并提高连接的复用率和性能。<br>    3. 调整TIME_WAIT时间：可以在服务端C上调整TIME_WAIT状态的时间，在合理的范围内降低TIME_WAIT状态的持续时间，从而缩短等待时间，提高连接的可用性和性能。</p>
-<p>  总结: 最佳的解决方案取决于具体的应用场景和系统配置，需要综合考虑性能、资源消耗和可维护性等因素来做出合理的决策。</p>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href>网络编程实战 - 10 | TIME_WAIT：隐藏在细节下的魔鬼</a> 盛延敏  </li>
-<li><a href>网络编程实战 - 15 | 怎么老是出现“地址已经被使用”？</a> 盛延敏</li>
-</ol>
-]]></content>
-      <categories>
-        <category>linux</category>
-        <category>网络</category>
-        <category>TCP</category>
-      </categories>
-      <tags>
-        <tag>网络</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>TCP故障模式</title>
-    <url>/www6vHomeHexo/2020/08/08/tcpFault/</url>
-    <content><![CDATA[<p hidden></p>
-<span id="more"></span>
-
-<h2><span id="一-故障模式">一. 故障模式</span><a href="#一-故障模式" class="header-anchor">#</a></h2><h3><span id="对端无fin包发送">对端无FIN包发送</span><a href="#对端无fin包发送" class="header-anchor">#</a></h3><ul>
-<li>网络中断<br>read <strong>TIMEOUT</strong>（setsockopt）<br>先write再read， 持续重传直至<strong>TIMEOUT</strong>。 之后再<strong>write()<strong>， 返回</strong>SIGPIPE信号（Broken Pipe）</strong>。<br>write Unreachable</li>
-<li>系统奔溃（如断电）<br>read()或者write()持续重传直至<strong>TIMEOUT</strong><br>对端重启，read()或者write()返回RST。 <strong>read（）</strong>调用返回<strong>Connection Reset</strong>。<strong>write()<strong>返回</strong>SIGPIPE信号（Broken Pipe）</strong>。</li>
-</ul>
-<h3><span id="对端有fin包发送如程序奔溃">对端有FIN包发送（如程序奔溃）</span><a href="#对端有fin包发送如程序奔溃" class="header-anchor">#</a></h3><ul>
-<li><p>read直接感知FIN  </p>
-</li>
-<li><p>没有read<br>如果不read没办法得到TCP对端的响应.</p>
-<p>通过write()产生RST， <strong>read（）</strong>感知<strong>RST（Connection reset by peer）</strong>。 </p>
-<img src="/www6vHomeHexo/2020/08/08/tcpFault/tcp-write-read.JPG" class>
-
-<p><strong>向一个关闭连接连续写导致SIGPIPE信号（Broken Pipe）</strong>。</p>
-<img src="/www6vHomeHexo/2020/08/08/tcpFault/tcp-write.JPG" class></li>
-</ul>
-<h2><span id="二-java对应的错误">二. Java对应的错误</span><a href="#二-java对应的错误" class="header-anchor">#</a></h2><h3><span id="javanetsockettimeoutexception">java.net.SocketTimeoutException</span><a href="#javanetsockettimeoutexception" class="header-anchor">#</a></h3><h3><span id="javanetsocketexception-connection-resetx2fconnect-reset-by-peer-socket-write-error">java.net.SocketException: Connection reset&#x2F;Connect reset by peer: Socket write error</span><a href="#javanetsocketexception-connection-resetx2fconnect-reset-by-peer-socket-write-error" class="header-anchor">#</a></h3><p>指连接被重置。这里有两种情况，分别对应两种错误：第一种情况是通信的一方已经将Socket 关闭，可能是主动关闭或者是因为异常退出，<br>这时如果通信的另一方还在<strong>写数据</strong>，就会触发这个异常<strong>（Connect reset by peer）</strong>；<br>如果对方还在尝试从 TCP 连接中<strong>读数据</strong>，则会抛出 <strong>Connection reset</strong> 异常。</p>
-<blockquote>
-<p>为了避免这些异常发生，在编写网络通信程序时要确保：<br>程序退出前要主动关闭所有的网络连接。<br>检测通信的另一方的关闭连接操作，当发现另一方关闭连接后自己也要关闭该连接。</p>
-</blockquote>
-<h3><span id="javanetsocketexception-broken-pipe">java.net.SocketException: Broken pipe</span><a href="#javanetsocketexception-broken-pipe" class="header-anchor">#</a></h3><p>指通信管道已坏。发生这个异常的场景是，通信的一方在<strong>收到“Connect reset by peer:Socket write error”后</strong>，如果再继续<strong>写数据</strong>则会抛出 <strong>Broken pipe</strong> 异常，解决方法同上。</p>
-<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href>网络编程实战 - 17 | TCP并不总是“可靠”的？</a> 盛延敏   操作系统的视角</li>
-<li><a href>深入拆解Tomcat &amp; Jetty -  38 | Tomcat拒绝连接原因分析及网络优化</a> 李号双  Java的视角</li>
-</ol>
-]]></content>
-      <categories>
-        <category>稳定性</category>
-        <category>故障模型</category>
-        <category>TCP故障</category>
-      </categories>
-      <tags>
-        <tag>稳定性</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Tomcat总结</title>
-    <url>/www6vHomeHexo/2020/08/08/tomcat/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="tomcat-架构">Tomcat 架构</span><a href="#tomcat-架构" class="header-anchor">#</a></h2><div style="text-align: center; width: 60%">
-
-<p><img src="https://user-images.githubusercontent.com/5608425/64508350-cedbeb00-d30f-11e9-8c01-9f7e5abffcba.png" alt="tomcat组件"><br>tomcat组件</p>
-</div>
-
-<img src="/www6vHomeHexo/2020/08/08/tomcat/container.JPG" class title="tomcat系统架构-多层容器">
-<img src="/www6vHomeHexo/2020/08/08/tomcat/valve.JPG" class title="Valve是Tomcat的私有机制">
-
-
-<h2><span id="servlet规范">Servlet规范</span><a href="#servlet规范" class="header-anchor">#</a></h2><ul>
-<li>Servlet</li>
-<li>Filter<br>每个请求生成一个Filter链</li>
-<li>Listener<br>定制自己的监听器来监听 <strong>Tomcat 内部发生的各种事件</strong>：包括 Web 应用级别的、Session 级别的和请求级别的</li>
-</ul>
-<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><p><a href="https://www.iteye.com/blog/onlyor-1689344">tomcat 组件 Top level view</a><br><a href>深入拆解Tomcat &amp; Jetty - 06 | Tomcat系统架构（下）：聊聊多层容器的设计</a> 李号双<br><a href>深入拆解Tomcat &amp; Jetty - 26 | Context容器（下）：Tomcat如何实现Servlet规范？</a> 李号双</p>
-]]></content>
-      <categories>
-        <category>中间件</category>
-        <category>Tomcat</category>
-      </categories>
-      <tags>
-        <tag>Tomcat</tag>
       </tags>
   </entry>
   <entry>
@@ -10056,27 +9339,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>云原生</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Mybatis Plugin Inteceptor</title>
-    <url>/www6vHomeHexo/2020/06/11/mybatisInteceptor/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="三类mybatis-plugin-inteceptor">三类Mybatis Plugin Inteceptor</span><a href="#三类mybatis-plugin-inteceptor" class="header-anchor">#</a></h2><ol>
-<li><a href="https://github.com/www6v/jDemo/blob/master/src/main/java/javacore/interceptor/sqlinterceptor/SqlInterceptor.java">动态增强sql的（推荐）</a></li>
-<li><a href="https://github.com/www6v/jDemo/blob/master/src/main/java/javacore/interceptor/ResultTypeInterceptor.java">改ReturnType的 （推荐）</a></li>
-<li><a href="https://github.com/www6v/jDemo/blob/master/src/main/java/javacore/interceptor/DataAuthorityInterceptor.java">改整个sql语句的</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>Java基础</category>
-        <category>Mybatis</category>
-      </categories>
-      <tags>
-        <tag>Java基础</tag>
-        <tag>Mybatis</tag>
       </tags>
   </entry>
   <entry>
@@ -10483,34 +9745,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>分布式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>宕机检测-Lease、心跳</title>
-    <url>/www6vHomeHexo/2019/10/12/crashDetect/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-<h2><span id="lease">Lease</span><a href="#lease" class="header-anchor">#</a></h2><div style="text-align: center;">
-
-<p><img src="https://user-images.githubusercontent.com/5608425/66694573-605fc380-ece7-11e9-8213-9fd6cfe8ae1c.jpg" alt="lease"></p>
-</div>
-
-<p>Kubernetes: 引入了一个新的 build-in Lease API[2]</p>
-<h2><span id="心跳">心跳</span><a href="#心跳" class="header-anchor">#</a></h2><p> 模式： ping-ping模式, ping-pong模式<br> raft： 心跳选主</p>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://www.cnblogs.com/gaowenbin/archive/2012/07/08/2581948.html">【分布式系统工程实现】如何检测一台机器是否宕机？</a>  阿里中间件  ***</li>
-<li><a href="https://mp.weixin.qq.com/s/skjNwU6Rdsn2qWN2KHU9zg">当 K8s 集群达到万级规模，阿里巴巴如何解决系统各组件性能问题？</a>  曾凡松（逐灵） ***</li>
-<li><a href>《面向模式的软件架构-卷4》</a>   20.15节</li>
-</ol>
-]]></content>
-      <categories>
-        <category>稳定性</category>
-        <category>宕机</category>
-      </categories>
-      <tags>
-        <tag>宕机</tag>
       </tags>
   </entry>
   <entry>
@@ -11419,33 +10653,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
-    <title>HTTP和HTTPS总结</title>
-    <url>/www6vHomeHexo/2019/08/14/https/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<div style="width: 70%; height: 70%">
-<img src="/www6vHomeHexo/2019/08/14/https/https.jpg" class>
-<img src="/www6vHomeHexo/2019/08/14/https/https1.jpg" class title="HTTPS总结">
-</div>
-
-
-<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li>&lt;&lt;趣谈网络协议 - 第15讲 HTTPS协议：点外卖的过程原来这么复杂&gt;&gt; 刘超</li>
-<li><a href="https://github.com/bagder/http2-explained/">http2</a>  未</li>
-<li><a href="https://github.com/bagder/http3-explained/">http3</a> 未</li>
-</ol>
-]]></content>
-      <categories>
-        <category>分布式</category>
-        <category>基础</category>
-        <category>http</category>
-      </categories>
-      <tags>
-        <tag>http</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Kubernetes开放接口</title>
     <url>/www6vHomeHexo/2019/08/11/k8sInterface/</url>
     <content><![CDATA[<p></p>
@@ -11478,65 +10685,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>Kubernetes</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux性能优化</title>
-    <url>/www6vHomeHexo/2019/08/08/linuxPerformance/</url>
-    <content><![CDATA[<p hidden></p>
-
-<span id="more"></span>
-
-<h3><span id="最常用的cpu工具">最常用的cpu工具</span><a href="#最常用的cpu工具" class="header-anchor">#</a></h3><img src="/www6vHomeHexo/2019/08/08/linuxPerformance/cpu-tool.jpg" class title="最常用的cpu工具">
-
-<h3><span id="memory-tool">memory tool</span><a href="#memory-tool" class="header-anchor">#</a></h3><p><img src="https://user-images.githubusercontent.com/5608425/65083667-b76dc380-d9db-11e9-8e74-3e80c8692fa8.jpg" alt="memory"></p>
-<h3><span id="io-tool">IO tool</span><a href="#io-tool" class="header-anchor">#</a></h3><p><img src="https://user-images.githubusercontent.com/5608425/65083666-b6d52d00-d9db-11e9-9b57-e6a9f74235be.JPG" alt="io"></p>
-<blockquote>
-<p>Buffer是对磁盘数据的缓存，而Cache是文件数据的缓存，它们既会用在读请求中，也会用在写请求中。</p>
-</blockquote>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li>&lt;&lt;Linux性能优化实战  11 - 套路篇：如何迅速分析出系统CPU的瓶颈在哪里？&gt;&gt; 倪朋飞</li>
-<li>&lt;&lt;Linux性能优化实战  21 - 套路篇：如何“快准狠”找到系统内存的问题？&gt;&gt; 倪朋飞</li>
-<li>&lt;&lt;Linux性能优化实战  30 - 套路篇：如何迅速分析出系统IO的瓶颈在哪里？&gt;&gt; 倪朋飞</li>
-<li>&lt;&lt;Linux性能优化实战  16 - 基础篇：怎么理解内存中的Buffer和Cache？&gt;&gt; 倪朋飞</li>
-</ol>
-]]></content>
-      <categories>
-        <category>linux</category>
-        <category>性能优化</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>TCP流控和拥塞控制</title>
-    <url>/www6vHomeHexo/2019/08/07/tcpUdpControlCongestion/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<img src="/www6vHomeHexo/2019/08/07/tcpUdpControlCongestion/tcp&udp.jpg" class title="TCP流控和拥塞控制">
-
-<h3><span id="tcp拥塞控制">TCP拥塞控制</span><a href="#tcp拥塞控制" class="header-anchor">#</a></h3><p><img src="https://user-images.githubusercontent.com/5608425/63579884-31ba4c00-c5c6-11e9-97d1-28defaa3286f.jpg" alt="TCP拥塞控制">   </p>
-<h3><span id="tcp拥塞控制-快速重传">TCP拥塞控制-快速重传</span><a href="#tcp拥塞控制-快速重传" class="header-anchor">#</a></h3><p><img src="https://user-images.githubusercontent.com/5608425/63579883-31ba4c00-c5c6-11e9-83ca-78a892b3243d.jpg" alt="TCP拥塞控制-快速重传">   </p>
-<h3><span id="快速重传">快速重传</span><a href="#快速重传" class="header-anchor">#</a></h3><p><img src="https://user-images.githubusercontent.com/5608425/63579882-3121b580-c5c6-11e9-8483-c53b4ec03fe6.jpg" alt="快速重传">  </p>
-<blockquote>
-<p>拥塞窗口是为了怕把网络塞满，在出现丢包的时候减少发送速度.<br>  滑动窗口就是为了怕把接收方塞满，而控制发送速度.</p>
-</blockquote>
-<h2><span id="参考">参考:</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://coolshell.cn/articles/11609.html">TCP 的那些事儿（下）</a></li>
-<li><a href="https://www.kancloud.cn/digest/wireshark/62473">（四）：网络性能排查之TCP重传与重复ACK</a></li>
-<li><a href="http://www.dataguru.cn/article-12653-1.html">怎么让不可靠的UDP可靠？</a></li>
-<li><a href>趣谈Linux操作系统 - 45-发送网络包（上）：如何表达我们想让合作伙伴做什么？</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>linux</category>
-        <category>网络</category>
-        <category>TCP</category>
-      </categories>
-      <tags>
-        <tag>网络</tag>
       </tags>
   </entry>
   <entry>
@@ -12875,382 +12023,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
-    <title>Linux性能分析</title>
-    <url>/www6vHomeHexo/2018/12/26/linuxProfile/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#linux-observability-tools-linux-%E6%80%A7%E8%83%BD%E8%A7%82%E6%B5%8B%E5%B7%A5%E5%85%B7">Linux observability tools | Linux 性能观测工具</a></li>
-<li><a href="#%E5%BF%AB%E9%80%9F%E6%80%A7%E8%83%BD%E8%AF%8A%E6%96%AD%E5%BF%AB%E9%80%9F%E4%BD%93%E6%A3%80">快速性能诊断(快速体检)</a><ul>
-<li><a href="#1-%E7%B3%BB%E7%BB%9F%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD">1. 系统平均负载</a></li>
-<li><a href="#2-dmesg-tail-%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF-%E5%AF%BC%E8%87%B4%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E7%9A%84%E9%94%99%E8%AF%AF">2. dmesg | tail : 系统信息  导致性能问题的错误</a></li>
-<li><a href="#3-vmstat-1-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98">3. vmstat 1  : 虚拟内存</a></li>
-<li><a href="#4-mpstat-p-all-1-cpu%E5%88%86%E8%A7%A3%E6%97%B6%E9%97%B4">4. mpstat -P ALL 1 :  CPU分解时间</a></li>
-<li><a href="#5-pidstat-1-%E6%AF%8F%E4%B8%AA%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%BB%9F%E8%AE%A1%E6%91%98%E8%A6%81">5. pidstat 1 ： 每个进程的统计摘要</a></li>
-<li><a href="#6-iostat-xz-1-%E7%A3%81%E7%9B%98">6. iostat -xz 1 ： 磁盘</a></li>
-<li><a href="#7-free-m-%E5%86%85%E5%AD%98">7. free -m ： 内存</a></li>
-<li><a href="#8-sar-n-dev-1-%E7%BD%91%E8%B7%AF%E5%90%9E%E5%90%90">8. sar -n DEV 1 : 网路吞吐</a></li>
-<li><a href="#9-sar-n-tcpetcp-1-tcp%E6%8C%87%E6%A0%87">9. sar -n TCP,ETCP 1 :  TCP指标</a></li>
-<li><a href="#10-top-%E5%8F%98%E5%8C%96%E7%9A%84%E8%B4%9F%E8%BD%BD%E7%9A%84%E6%B1%87%E6%80%BB">10. top ： 变化的负载的汇总</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
-<li><a href="#%E6%80%A7%E8%83%BD">性能</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="linux-observability-tools-linux-性能观测工具">Linux observability tools | Linux 性能观测工具</span><a href="#linux-observability-tools-linux-性能观测工具" class="header-anchor">#</a></h1><div style="text-align: center;">
-
-<p><img src="https://user-images.githubusercontent.com/5608425/65083384-fe0eee00-d9da-11e9-9b5f-c3361a273b67.jpg" alt="linux_observe_tools"><br>Linux性能观测工具</p>
-</div>
-
-
-<h1><span id="快速性能诊断快速体检">快速性能诊断(快速体检)</span><a href="#快速性能诊断快速体检" class="header-anchor">#</a></h1><h3><span id="1-系统平均负载">1. 系统平均负载</span><a href="#1-系统平均负载" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> # 0.25- 1分钟负载 ， 0.22-5分钟负载， 0.23-15分钟负载</span><br><span class="line"> [root@10-25-3-55 /]# uptime</span><br><span class="line"> 23:02:19 up 285 days, 11:37,  1 user,  load average: 0.25, 0.22, 0.23</span><br><span class="line"></span><br><span class="line"># 如果cpu个数是4， 则平均负载4是合理的。</span><br><span class="line">[root@10-23-25-248]$grep &#x27;model name&#x27; /proc/cpuinfo | wc -l</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>平均负载:<br>单位时间内，系统处于可运行状态和不可中断状态的平均进程数，也就是单位时间内的活跃进程数。</p>
-</li>
-<li><p>场景<br>CPU 密集型进程，使用大量 CPU 会导致平均负载升高，此时这两者是一致的；<br>I&#x2F;O 密集型进程，等待 I&#x2F;O 也会导致平均负载升高，但 CPU 使用率不一定很高；<br>大量等待 CPU 的进程调度也会导致平均负载升高，此时的CPU使用率也会比较高。</p>
-</li>
-</ul>
-<h3><span id="2-dmesg-tail-系统信息-导致性能问题的错误">2. dmesg | tail : 系统信息  导致性能问题的错误</span><a href="#2-dmesg-tail-系统信息-导致性能问题的错误" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[9927609.690053] ffmpeg invoked oom-killer: gfp_mask=0x201da, order=0, oom_score_adj=0</span><br><span class="line">[9927609.690106]  [&lt;ffffffff81184c7e&gt;] oom_kill_process+0x24e/0x3c0</span><br><span class="line">[9927609.690109]  [&lt;ffffffff8118471d&gt;] ? oom_unkillable_task+0xcd/0x120</span><br></pre></td></tr></table></figure>
-<h3><span id="3-vmstat-1-虚拟内存">3. vmstat 1  : 虚拟内存</span><a href="#3-vmstat-1-虚拟内存" class="header-anchor">#</a></h3><p>   进程(饱和度)   内存    CPU  </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----</span><br><span class="line"> r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st</span><br><span class="line"> 8  0      0 402204 303208 8686376    0    0     2    10    0    0  5  6 89  0  0</span><br></pre></td></tr></table></figure>
-<h3><span id="4-mpstat-p-all-1-cpu分解时间">4. mpstat -P ALL 1 :  CPU分解时间</span><a href="#4-mpstat-p-all-1-cpu分解时间" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">11:08:02 PM  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle</span><br><span class="line">11:08:03 PM  all   28.68    0.00   60.85    0.00    0.00    0.00    0.00    0.00    0.00   10.47</span><br><span class="line">11:08:03 PM    0   28.43    0.00   60.78    0.00    0.00    0.00    0.00    0.00    0.00   10.78</span><br><span class="line">11:08:03 PM    1   28.71    0.00   61.39    0.00    0.00    0.00    0.00    0.00    0.00    9.90</span><br><span class="line">11:08:03 PM    2   29.00    0.00   59.00    0.00    0.00    0.00    0.00    0.00    0.00   12.00</span><br><span class="line">11:08:03 PM    3   28.71    0.00   61.39    0.00    0.00    0.00    0.00    0.00    0.00    9.90</span><br></pre></td></tr></table></figure>
-<h3><span id="5-pidstat-1-每个进程的统计摘要">5. pidstat 1 ： 每个进程的统计摘要</span><a href="#5-pidstat-1-每个进程的统计摘要" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">11:11:14 PM   UID       PID    %usr %system  %guest    %CPU   CPU  Command</span><br><span class="line">11:11:15 PM     0      8715    1.00    0.00    0.00    1.00     3  pidstat</span><br><span class="line">11:11:15 PM     0     27930    0.00    1.00    0.00    1.00     2  java</span><br><span class="line">11:11:15 PM     0     28042    1.00    0.00    0.00    1.00     1  java</span><br><span class="line">11:11:15 PM     0     28044    1.00    0.00    0.00    1.00     1  java</span><br><span class="line"></span><br><span class="line">Average:      UID       PID    %usr %system  %guest    %CPU   CPU  Command</span><br><span class="line">Average:        0        23    0.00    0.07    0.00    0.07     -  ksoftirqd/3</span><br><span class="line">Average:       38       531    0.00    0.07    0.00    0.07     -  ntpd</span><br><span class="line">Average:        0      2642    0.07    0.00    0.00    0.07     -  aliyun-service</span><br><span class="line">Average:       27      2784    0.00    0.07    0.00    0.07     -  mysqld</span><br><span class="line">Average:        0      7462    0.73    0.20    0.00    0.93     -  java</span><br></pre></td></tr></table></figure>
-<h3><span id="6-iostat-xz-1-磁盘">6. iostat -xz 1 ： 磁盘</span><a href="#6-iostat-xz-1-磁盘" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">avg-cpu:  %user   %nice %system %iowait  %steal   %idle</span><br><span class="line">          29.15    0.00   59.30    0.25    0.00   11.31</span><br><span class="line"></span><br><span class="line">Device:         rrqm/s   wrqm/s     r/s     w/s    rkB/s    wkB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util</span><br><span class="line">vda               0.00     0.00    1.00    1.00     8.00     4.00    12.00     0.05   26.50   53.00    0.00  26.50   5.30</span><br></pre></td></tr></table></figure>
-<h3><span id="7-free-m-内存">7. free -m ： 内存</span><a href="#7-free-m-内存" class="header-anchor">#</a></h3><pre><code>buffer， cache， Swap
-</code></pre>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">             total        used        free      shared  buff/cache   available</span><br><span class="line">Mem:          32013       22842         391           1        8779        8723</span><br><span class="line">Swap:             0           0           0</span><br></pre></td></tr></table></figure>
-<h3><span id="8-sar-n-dev-1-网路吞吐">8. sar -n DEV 1 : 网路吞吐</span><a href="#8-sar-n-dev-1-网路吞吐" class="header-anchor">#</a></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Average:        IFACE   rxpck/s   txpck/s    rxkB/s    txkB/s   rxcmp/s   txcmp/s  rxmcst/s</span><br><span class="line">Average:    vethd4593b4      0.00      0.00      0.00      0.00      0.00      0.00      0.00</span><br><span class="line">Average:         eth0      1.67      1.52      0.17      1.66      0.00      0.00      0.00</span><br><span class="line">Average:         eth1      2.74     75.08      0.16      8.86      0.00      0.00      0.00</span><br><span class="line">Average:           lo      4.86      4.86      0.71      0.71      0.00      0.00      0.00</span><br><span class="line">Average:      docker0      0.00      0.00      0.00      0.00      0.00      0.00      0.00</span><br></pre></td></tr></table></figure>
-<h3><span id="9-sar-n-tcpetcp-1-tcp指标">9. sar -n TCP,ETCP 1 :  TCP指标</span><a href="#9-sar-n-tcpetcp-1-tcp指标" class="header-anchor">#</a></h3><p><img src="https://user-images.githubusercontent.com/5608425/65831070-f5c28700-e2e7-11e9-9fe7-51ccdf43451b.png" alt="sar-tcp"></p>
-<h3><span id="10-top-变化的负载的汇总">10. top ： 变化的负载的汇总</span><a href="#10-top-变化的负载的汇总" class="header-anchor">#</a></h3><h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h3><span id="性能">性能</span><a href="#性能" class="header-anchor">#</a></h3><ol>
-<li><a href="https://mp.weixin.qq.com/s/yhSJF6Il6iJamYCosVgXYQ">超全整理！Linux性能分析工具汇总合集</a></li>
-<li><a href="https://www.oschina.net/translate/linux-performance-analysis-in-60s?print">60,000毫秒内对Linux的性能诊断</a></li>
-<li><a href="https://coolshell.cn/articles/7829.html">28个UNIX&#x2F;LINUX的命令行神器</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>linux</category>
-        <category>性能分析</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>性能优化总结</title>
-    <url>/www6vHomeHexo/2018/11/21/performance/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#%E5%85%B3%E9%94%AE%E8%AF%8D">关键词</a></li>
-<li><a href="#%E5%BA%94%E7%94%A8%E4%BC%98%E5%8C%96">应用优化</a></li>
-<li><a href="#%E7%AE%97%E6%B3%95%E4%BC%98%E5%8C%96">算法优化</a></li>
-<li><a href="#%E9%80%9A%E7%94%A8%E4%BC%98%E5%8C%96">通用优化</a></li>
-<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96">数据库优化</a></li>
-<li><a href="#%E6%9E%B6%E6%9E%84%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96">架构&#x2F;系统优化</a></li>
-<li><a href="#linux%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96">Linux系统优化</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a><ul>
-<li><a href="#%E5%85%B6%E4%BB%96">其他</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="关键词">关键词</span><a href="#关键词" class="header-anchor">#</a></h1><p>锁优化，池化，数据库优化，架构优化， 系统优化，性能测试， 监控 </p>
-<h1><span id="应用优化">应用优化</span><a href="#应用优化" class="header-anchor">#</a></h1><ul>
-<li><p>应用</p>
-<ul>
-<li>锁 【4】<ul>
-<li>粒度<ul>
-<li>粗化</li>
-</ul>
-</li>
-<li>最小化锁范围<ul>
-<li>Eg， 单线程写文件</li>
-</ul>
-</li>
-<li>锁拆分，分散锁<ul>
-<li>减少竞争，race condition</li>
-<li>eg. ConcurrentHashMap，LongAdder</li>
-</ul>
-</li>
-<li>分离锁<ul>
-<li>读写锁<ul>
-<li>读多写少的场景</li>
-</ul>
-</li>
-<li>队头队尾， 两把锁</li>
-</ul>
-</li>
-<li>乐观锁<ul>
-<li>CAS</li>
-</ul>
-</li>
-</ul>
-<p>	  </p>
-</li>
-<li>并行  【1】<ul>
-<li>多线程<ul>
-<li>fork-join模式【2】</li>
-<li>本地化 Eg. ThreadLocal</li>
-</ul>
-</li>
-<li>Actor<ul>
-<li>Eg. Akka</li>
-</ul>
-</li>
-<li>CSP<ul>
-<li>Eg. Goroutie</li>
-</ul>
-</li>
-<li>函数式范性<ul>
-<li>不可变对象</li>
-</ul>
-</li>
-<li>单核单线程<ul>
-<li>Eg. Redis, Nginx</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>池化(重用)<ul>
-<li>Eg. 线程池，数据库连接池</li>
-</ul>
-</li>
-<li>代码调优<ul>
-<li>字符串操作</li>
-<li>多线程调优<ul>
-<li>锁 【4】</li>
-<li>线程个数【9】</li>
-</ul>
-</li>
-<li>异步操作  【8】</li>
-<li>简化代码</li>
-<li>热点优化  【5】</li>
-<li>数值精度<ul>
-<li>Eg. 双精度 单精度</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1><span id="算法优化">算法优化</span><a href="#算法优化" class="header-anchor">#</a></h1><ul>
-<li><p>算法</p>
-<ul>
-<li>算法调优<ul>
-<li>分而治之 【6】<ul>
-<li>fork-join【2】</li>
-<li>Map-Reduce</li>
-</ul>
-</li>
-<li>哈希算法</li>
-<li>预处理<ul>
-<li>提前计算(预处理)，最后合并</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>算法和数据结构<ul>
-<li>算法复杂度 大O表示【10】<ul>
-<li>时间复杂度<ul>
-<li>O(1)<ul>
-<li>数组访问</li>
-<li>栈、链表的插入&#x2F;删除</li>
-<li>Hash Table</li>
-</ul>
-</li>
-<li>O(log(n))<ul>
-<li>二叉搜索树<ul>
-<li>自平衡二叉搜索树<br>  AVL树<br>  红黑树</li>
-</ul>
-</li>
-<li>B树(多路树)</li>
-</ul>
-</li>
-<li>O(n log(n))<ul>
-<li>快排、归并、堆<br>  快排(分治算法【6】)</li>
-</ul>
-</li>
-<li>O(n)</li>
-<li>O(n^2)<ul>
-<li>选择、插入、冒泡</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>数据结构<ul>
-<li>树，链表，栈，队列</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1><span id="通用优化">通用优化</span><a href="#通用优化" class="header-anchor">#</a></h1><ul>
-<li><p>通用方法</p>
-<ul>
-<li>异步化  【8】<ul>
-<li>消息<ul>
-<li>进程内<br> Eg.  Disruptor, EventBus</li>
-<li>Broker</li>
-</ul>
-</li>
-<li>事件<br>Eg. EventSource</li>
-<li>服务异步化<br>Eg. 异步网关</li>
-</ul>
-</li>
-<li>Batch<ul>
-<li>Eg. redis pipeline</li>
-<li>buffer io</li>
-</ul>
-</li>
-<li>Copy on Write<ul>
-<li>Eg. mysql MVCC, CopyOnWriteArrayList</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1><span id="数据库优化">数据库优化</span><a href="#数据库优化" class="header-anchor">#</a></h1><ul>
-<li>索引优化</li>
-<li>大表优化<ul>
-<li>水平拆分</li>
-<li>垂直拆分</li>
-</ul>
-</li>
-<li>慢SQL优化</li>
-<li>乐观锁</li>
-</ul>
-<h1><span id="架构x2f系统优化">架构&#x2F;系统优化</span><a href="#架构x2f系统优化" class="header-anchor">#</a></h1><ul>
-<li><p>架构&#x2F;系统优化</p>
-<ul>
-<li>弹性&#x2F;伸缩<ul>
-<li>资源调度 Eg. k8s</li>
-<li>资源扩容</li>
-</ul>
-</li>
-<li>可扩展<ul>
-<li>垂直拆分</li>
-<li>水平拆分</li>
-</ul>
-</li>
-<li>分布式<ul>
-<li>并行 【1】</li>
-<li>延迟<br>Eg.  跨IDC网络延迟 上海&lt;-&gt;北京  50ms</li>
-</ul>
-</li>
-<li>节省空间&#x2F;时间换空间【8、11】<ul>
-<li>不存储，重新计算</li>
-<li>稀疏数据结构<br>  Eg. 稀疏矩阵</li>
-<li>数据压缩传输<br>  RSYNC 的核心算法<br>  Huffman 编码压缩算法</li>
-<li>动态分配策略<br>  Eg. ArrayList(10)，HashMap(16)的动态扩展</li>
-<li>垃圾回收</li>
-</ul>
-</li>
-<li>空间换时间<ul>
-<li>缓存</li>
-<li>数据冗余，replication</li>
-</ul>
-</li>
-<li>系统结构<ul>
-<li>大型系统分解成模块<br>“粗略估算”，性能分析</li>
-</ul>
-</li>
-<li>系统软件<ul>
-<li>替换更快的操作系统、中间件、数据库、编译器</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1><span id="linux系统优化">Linux系统优化</span><a href="#linux系统优化" class="header-anchor">#</a></h1><ul>
-<li><p>系统</p>
-<ul>
-<li>文件系统<ul>
-<li>pageCache, 预读<br>Eg. Rocketmq</li>
-<li>顺序写，随机读</li>
-<li>大块读优于小块读</li>
-</ul>
-</li>
-<li>CPU<ul>
-<li>CPU绑定</li>
-<li>CPU上下文切换<ul>
-<li>Eg. Redis单线程<br>CPU不是Redis的瓶颈，<br>瓶颈可能是内存的大小或者网络带宽</li>
-</ul>
-</li>
-<li>CPU缓存<ul>
-<li>问题：伪共享<br>解决：cacheline padding</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>网络I&#x2F;O<ul>
-<li>NIO,非阻塞I&#x2F;O，epoll</li>
-<li>协议调优<br>TCP参数</li>
-</ul>
-</li>
-<li>内存<ul>
-<li>zeroCopy</li>
-<li>HugePage</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a href="http://dwz.cn/4SrP4L">高性能高并发系统的稳定性保障</a> 京东</li>
-<li><a href="https://time.geekbang.org/column/intro/140">Linux性能优化实战</a>  极客时间</li>
-<li><a href="https://coolshell.cn/articles/17381.html">性能测试应该怎么做？</a>  coolshell  deleted</li>
-<li><a href="stability.md">Go to Page</a>   self  deleted</li>
-<li><a href="http://blog.jobbole.com/88958/">关于容量预估&#x2F;性能压测的思考</a>  deleted  失效</li>
-<li><a href="stability.md">Go to Page</a>  self  重复的 deleted</li>
-<li>xxx</li>
-<li><a href="https://coolshell.cn/articles/7490.html/comment-page-1">性能调优攻略</a>  coolshell  *** </li>
-<li><a href="threadNum.md">Go to Page</a>   self</li>
-<li><a href="http://www.codeceo.com/article/algorithm-complexity-table.html">每个程序员都应该收藏的算法复杂度速查表</a></li>
-<li>《编程珠玑 第2版》 </li>
-<li><a href="https://yq.aliyun.com/articles/25487">wordcount设计与优化</a>  竞赛题</li>
-</ol>
-<h3><span id="其他">其他</span><a href="#其他" class="header-anchor">#</a></h3><ol start="100">
-<li><a href="https://colin-scott.github.io/personal_website/research/interactive_latency.html">latency</a>  未  </li>
-<li><a href="mysqlIndex.md">Go to Page</a>  self 未</li>
-<li><a href="nginxOptimize.md">Go to Page</a>  self 未</li>
-</ol>
-]]></content>
-      <categories>
-        <category>性能</category>
-        <category>总结</category>
-      </categories>
-      <tags>
-        <tag>基础</tag>
-        <tag>性能</tag>
-        <tag>性能优化</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>AWS 汇总</title>
     <url>/www6vHomeHexo/2018/10/04/awsSummary/</url>
     <content><![CDATA[<p></p>
@@ -13646,78 +12418,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </tags>
   </entry>
   <entry>
-    <title>延迟消息 时间轮</title>
-    <url>/www6vHomeHexo/2017/01/05/timedTask/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<p>关键词：延迟消息, 时间轮, Time Wheel</p>
-<img src="/www6vHomeHexo/2017/01/05/timedTask/timedTask.jpg" class title="延迟消息">
-
-
-
-<h2><span id="时钟轮的应用">时钟轮的应用</span><a href="#时钟轮的应用" class="header-anchor">#</a></h2><h5><span id="kafka中的应用-1">Kafka中的应用 [1]</span><a href="#kafka中的应用-1" class="header-anchor">#</a></h5><p>   存在大量的延迟操作，比如<strong>延迟生产</strong>、<strong>延迟拉取</strong>以及<strong>延迟删除</strong>等</p>
-<h5><span id="rpc中的应用-6">RPC中的应用 [6]</span><a href="#rpc中的应用-6" class="header-anchor">#</a></h5><ul>
-<li>每次创建一个 Future，我们都记录这个 Future 的创建时间与这个 Future 的超时时间，并且有一个定时任务进行检测，当这个 Future 到达超时时间并且没有被处理时，我们就对这个 Future 执行超时逻辑。<br>每发一次请求，都创建一个<strong>处理请求超时的定时任务</strong>放到时钟轮里。</li>
-<li><strong>调用端与服务端启动超时</strong>也可以应用到时钟轮。<br>可以在调用端启动时创建一个处理启动超时的定时任务，放到时钟轮里。</li>
-<li>RPC 框架调用端定时向服务端发送心跳，来维护连接状态，我们可以将<strong>心跳的逻辑</strong>封装为一个<strong>心跳任务</strong>，放到时钟轮里。<br>在定时任务的执行逻辑的最后，我们可以重设这个任务的执行时间，把它重新丢回到时钟轮里。</li>
-</ul>
-<h2><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li><a href="https://blog.csdn.net/u013256816/article/details/80697456">Kafka解惑之时间轮（TimingWheel）</a>  朱忠华</li>
-<li><a href="https://mp.weixin.qq.com/s/mvFwjgxliwx808Hn_9ruEA?ptlang=2052&ADUIN=1024616676&ADSESSION=1489673030&ADTAG=CLIENT.QQ.5497_.0&ADPUBNO=26661">10w定时任务，如何高效触发超时</a> 58沈剑</li>
-<li><a href="https://www.cnblogs.com/hzmark/p/mq-delay-msg.html">如何在MQ中实现支持任意延迟的消息？</a></li>
-<li><a href="https://www.cnblogs.com/haoxinyue/p/6663720.html">延迟任务的实现总结</a>  nick hao</li>
-<li><a href="https://www.jianshu.com/p/33aa208ea058">rocketMq-延迟消息介绍</a>   晴天哥_王志 *</li>
-<li>《20 | 详解时钟轮在RPC中的应用》 何小锋</li>
-<li><a href="https://zhuanlan.zhihu.com/p/488730353">时间轮原理及其在框架中的应用</a>  未<br>Dubbo 心跳检测</li>
-</ol>
-]]></content>
-      <categories>
-        <category>中间件</category>
-        <category>定时调度</category>
-      </categories>
-      <tags>
-        <tag>调度</tag>
-        <tag>消息</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>分布式ID生成 发号器</title>
-    <url>/www6vHomeHexo/2016/08/15/id/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-<img src="/www6vHomeHexo/2016/08/15/id/id.jpg" class title="分布式id生成">
-
-<h2><span id="一-uuid">一. UUID</span><a href="#一-uuid" class="header-anchor">#</a></h2><h3><span id="缺点">缺点</span><a href="#缺点" class="header-anchor">#</a></h3><ul>
-<li>没有业务含义</li>
-<li>不是自增的， 某些场景需要按id排序， 不适合做数据库主键。<br> ID 有序也会提升数据的写入性能， 数据库索引B+树的插入。</li>
-</ul>
-<h2><span id="二-snowflake">二. Snowflake</span><a href="#二-snowflake" class="header-anchor">#</a></h2><p><a href="https://github.com/www6v/jDemo/blob/master/src/main/java/middleware/snowflake/SnowflakeIdWorker.java">Snowflake算法实现</a></p>
-<h3><span id="实现方式">实现方式：</span><a href="#实现方式" class="header-anchor">#</a></h3><ul>
-<li>嵌入在服务器中</li>
-<li>独立的分布式id服务器</li>
-</ul>
-<h3><span id="缺点">缺点</span><a href="#缺点" class="header-anchor">#</a></h3><p>最大的<strong>缺点</strong>就是它<strong>依赖于系统的时间戳</strong>，一旦系统时间不准，就有可能生成重复的 ID。<br>所以如果我们发现系统时钟不准，就可以<strong>让发号器暂时拒绝发号，直到时钟准确为止</strong>。<br>可以使用<strong>ntp服务器</strong>同步服务的系统时间。</p>
-<h3><span id="优化">优化</span><a href="#优化" class="header-anchor">#</a></h3><ul>
-<li>时间戳不记录毫秒而是<strong>记录秒</strong>，这样在一个时间区间里可以多发出几个号，避免出现分库分表时数据分配不均。 <strong>批量id</strong></li>
-</ul>
-<h2><span id="参考">参考：</span><a href="#参考" class="header-anchor">#</a></h2><ol>
-<li>Leaf——美团点评分布式ID生成系统 照东</li>
-<li>服务化框架－分布式Unique ID的生成方法一览 江南白衣</li>
-<li><a href="https://tech.meituan.com/2019/03/07/open-source-project-leaf.html">Leaf：美团分布式ID生成服务开源</a></li>
-<li><a href>发号器：如何保证分库分表后ID的全局唯一性？</a>  唐扬</li>
-</ol>
-]]></content>
-      <categories>
-        <category>中间件</category>
-        <category>id生成</category>
-      </categories>
-      <tags>
-        <tag>中间件</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>消息可靠性总结(已废弃)</title>
     <url>/www6vHomeHexo/2016/03/17/reliabilityOfMsg/</url>
     <content><![CDATA[<p></p>
@@ -13860,9 +12560,9 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
         <category>Netty</category>
       </categories>
       <tags>
-        <tag>中间件</tag>
         <tag>网络</tag>
         <tag>Netty</tag>
+        <tag>中间件</tag>
       </tags>
   </entry>
   <entry>
@@ -13927,73 +12627,6 @@ CSE 则通过将一个应用的多个实例启动后，共享相同的指令数�
       </categories>
       <tags>
         <tag>网络</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Zookeeper-总结</title>
-    <url>/www6vHomeHexo/2015/03/26/zookeeper/</url>
-    <content><![CDATA[<p></p>
-<span id="more"></span>
-
-
-
-
-<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#%E8%AF%BB%E5%86%99%E6%B5%81%E7%A8%8B-1">读&#x2F;写流程 [1]</a><ul>
-<li><a href="#%E5%86%99%E6%B5%81%E7%A8%8B">写流程</a></li>
-<li><a href="#%E8%AF%BB%E6%B5%81%E7%A8%8B">读流程</a></li>
-</ul>
-</li>
-<li><a href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-2">应用场景 [2]</a><ul>
-<li><a href="#%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86">元数据管理</a></li>
-<li><a href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E8%B0%83">分布式协调</a></li>
-<li><a href="#master%E9%80%89%E4%B8%BE-ha%E6%9E%B6%E6%9E%84">Master选举 -&gt; HA架构</a></li>
-<li><a href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81">分布式锁</a></li>
-</ul>
-</li>
-<li><a href="#%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%8F%AF%E7%94%A8-2">实现高可用 [2]</a><ul>
-<li><a href="#%E4%B8%BB%E5%A4%87%E5%88%87%E6%8D%A2">主备切换</a></li>
-<li><a href="#%E9%9B%86%E7%BE%A4%E9%80%89%E4%B8%BE">集群选举</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><span id="读x2f写流程-1">读&#x2F;写流程 [1]</span><a href="#读x2f写流程-1" class="header-anchor">#</a></h1><h3><span id="写流程">写流程</span><a href="#写流程" class="header-anchor">#</a></h3><ul>
-<li>写Leader</li>
-<li>写Follower&#x2F;Observer<br>将写请求转发给Leader处理</li>
-</ul>
-<h3><span id="读流程">读流程</span><a href="#读流程" class="header-anchor">#</a></h3><ul>
-<li>Leader&#x2F;Follower&#x2F;Observer都可直接处理读请求，从本地内存中读取数据并返回给客户端即可。</li>
-</ul>
-<h1><span id="应用场景-2">应用场景 [2]</span><a href="#应用场景-2" class="header-anchor">#</a></h1><h3><span id="元数据管理">元数据管理</span><a href="#元数据管理" class="header-anchor">#</a></h3><p>Dubbo， HBase</p>
-<h3><span id="分布式协调">分布式协调</span><a href="#分布式协调" class="header-anchor">#</a></h3><p>kafka controller</p>
-<h3><span id="master选举-gt-ha架构">Master选举 -&gt; HA架构</span><a href="#master选举-gt-ha架构" class="header-anchor">#</a></h3><p>HDFS NameNode HA</p>
-<h3><span id="分布式锁">分布式锁</span><a href="#分布式锁" class="header-anchor">#</a></h3><p>案例比较少</p>
-<h1><span id="实现高可用-2">实现高可用 [2]</span><a href="#实现高可用-2" class="header-anchor">#</a></h1><h3><span id="主备切换">主备切换</span><a href="#主备切换" class="header-anchor">#</a></h3><h3><span id="集群选举">集群选举</span><a href="#集群选举" class="header-anchor">#</a></h3><ul>
-<li>最小节点获胜</li>
-<li>抢建唯一节点</li>
-<li>法官判决</li>
-</ul>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><ol>
-<li><a href="http://www.jasongj.com/zookeeper/fastleaderelection/">深入浅出Zookeeper（一） Zookeeper架构及FastLeaderElection机制 </a> *** </li>
-<li><a href="https://www.jianshu.com/p/9ce2600dd139">浅析如何基于ZooKeeper实现高可用架构｜得物技术</a> </li>
-<li><a href="https://zhuanlan.zhihu.com/p/571732977">ZooKeeper 核心通识</a> 未</li>
-</ol>
-]]></content>
-      <categories>
-        <category>中间件</category>
-        <category>Zookeeper</category>
-      </categories>
-      <tags>
-        <tag>Zookeeper</tag>
       </tags>
   </entry>
   <entry>
