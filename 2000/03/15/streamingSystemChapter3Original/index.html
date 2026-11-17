@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/www6vHomeHexo/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/www6vHomeHexo/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/www6vHomeHexo/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/www6vHomeHexo/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/www6vHomeHexo/css/main.css">
+
+
+<link rel="stylesheet" href="/www6vHomeHexo/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www6v.github.io","root":"/www6vHomeHexo/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="《Streaming System》-Chapter 3. Watermarks[完整]">
+<meta property="og:url" content="https://www6v.github.io/www6vHomeHexo/2000/03/15/streamingSystemChapter3Original/index.html">
+<meta property="og:site_name" content="分布式 blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2000-03-15T03:48:05.000Z">
+<meta property="article:modified_time" content="2025-07-15T05:00:34.000Z">
+<meta property="article:author" content="Wang Wei">
+<meta property="article:tag" content="Streaming System">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www6v.github.io/www6vHomeHexo/2000/03/15/streamingSystemChapter3Original/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>《Streaming System》-Chapter 3. Watermarks[完整] | 分布式 blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/www6vHomeHexo/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">分布式 blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录技术点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/www6vHomeHexo/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/www6vHomeHexo/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/www6vHomeHexo/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/www6vHomeHexo/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www6v.github.io/www6vHomeHexo/2000/03/15/streamingSystemChapter3Original/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/www6vHomeHexo/images/avatar.gif">
+      <meta itemprop="name" content="Wang Wei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="分布式 blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          《Streaming System》-Chapter 3. Watermarks[完整]
+        </h1>
+
+        <div class="post-meta">
+
+
+
+
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2000-03-15 11:48:05" itemprop="dateCreated datePublished" datetime="2000-03-15T11:48:05+08:00">2000-03-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-07-15 13:00:34" itemprop="dateModified" datetime="2025-07-15T13:00:34+08:00">2025-07-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/www6vHomeHexo/categories/Streaming-System/" itemprop="url" rel="index"><span itemprop="name">Streaming System</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p></p>
+<span id="more"></span>
+
+<h2><span id="目录">目录</span><a href="#目录" class="header-anchor">#</a></h2><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#definition"><strong>Definition</strong></a></li>
+<li><a href="#source-watermark-creation"><strong>Source Watermark Creation</strong></a><ul>
+<li><a href="#perfect-watermark-creation"><strong>Perfect Watermark Creation</strong></a></li>
+<li><a href="#heuristic-watermark-creation"><strong>Heuristic Watermark Creation</strong></a></li>
+</ul>
+</li>
+<li><a href="#watermark-propagation"><strong>Watermark Propagation</strong></a><ul>
+<li><a href="#understanding-watermark-propagation"><strong>Understanding Watermark Propagation</strong></a></li>
+<li><a href="#watermark-propagation-and-output-timestamps"><strong>Watermark Propagation and Output Timestamps</strong></a></li>
+<li><a href="#the-tricky-case-of-overlapping-windows"><strong>The Tricky Case of Overlapping Windows</strong></a></li>
+</ul>
+</li>
+<li><a href="#percentile-watermarks"><strong>Percentile Watermarks</strong></a></li>
+<li><a href="#processing-time-watermarks"><strong>Processing-Time Watermarks</strong></a></li>
+<li><a href="#case-studies"><strong>Case Studies</strong></a><ul>
+<li><a href="#case-study-watermarks-in-google-cloud-dataflow"><strong>Case Study: Watermarks in Google Cloud Dataflow</strong></a></li>
+<li><a href="#case-study-watermarks-in-apache-flink"><strong>Case Study: Watermarks in Apache Flink</strong></a></li>
+<li><a href="#case-study-source-watermarks-for-google-cloud-pubsub"><strong>Case Study: Source Watermarks for Google Cloud Pub&#x2F;Sub</strong></a></li>
+</ul>
+</li>
+<li><a href="#summary"><strong>Summary</strong></a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<p>Page 73</p>
+<details><summary>点击 原文</summary><p>So far, we have been looking at stream processing from the perspective of the</p>
+<p>pipeline author or data scientist. Chapter 2 introduced watermarks as part of</p>
+<p>the answer to the fundamental questions of <em>where</em> in event-time processing is</p>
+<p>taking place and <em>when</em> in processing time results are materialized. In this</p>
+<p>chapter, we approach the same questions, but instead from the perspective of</p>
+<p>the underlying mechanics of the stream processing system. Looking at these</p>
+<p>mechanics will help us motivate, understand, and apply the concepts around</p>
+<p>watermarks. We discuss how watermarks are created at the point of data</p>
+<p>ingress, how they propagate through a data processing pipeline, and how they</p>
+<p>affect output timestamps. We also demonstrate how watermarks preserve the</p>
+<p>guarantees that are necessary for answering the questions of <em>where</em> in event</p>
+<p>time data are processed and <em>when</em> it is materialized, while dealing with</p>
+<p>unbounded data.</p>
+</details>
+
+
+
+<details><summary>点击 原文</summary><h1><span id="definition"><strong>Definition</strong></span><a href="#definition" class="header-anchor">#</a></h1><p>Consider any pipeline that ingests data and outputs results continuously. We</p>
+<p>wish to solve the general problem of when it is safe to call an event-time</p>
+<p>window closed, meaning that the window does not expect any more data. To</p>
+<p>do so we would like to characterize the progress that the pipeline is making</p>
+<p>relative to its unbounded input.</p>
+<p>One naive approach for solving the event-time windowing problem would be</p>
+<p>to simply base our event-time windows on the current processing time. As we</p>
+<p>saw in Chapter 1, we quickly run into trouble—data processing and transport</p>
+<p>is not instantaneous, so processing and event times are almost never equal.</p>
+<p>Any hiccup or spike in our pipeline might cause us to incorrectly assign</p>
+<p>messages to windows. Ultimately, this strategy fails because we have no</p>
+<p>robust way to make any guarantees about such windows.</p>
+<p>Another intuitive, but ultimately incorrect, approach would be to consider the</p>
+<p>rate of messages processed by the pipeline. Although this is an interesting</p>
+<p>metric, the rate may vary arbitrarily with changes in input, variability of</p>
+<p>expected results, resources available for processing, and so on. Even more</p>
+<p>important, rate does not help answer the fundamental questions of</p>
+<p>completeness. Specifically, rate does not tell us when we have seen all of the</p>
+<p>messages for a particular time interval. In a real-world system, there will be</p>
+<p>situations in which messages are not making progress through the system.</p>
+<p>This could be the result of transient errors (such as crashes, network failures,</p>
+<p>machine downtime), or the result of persistent errors such as application-level</p>
+<p>failures that require changes to the application logic or other manual</p>
+<p>intervention to resolve. Of course, if lots of failures are occurring, a rate-of</p>
+<p>processing metric might be a good proxy for detecting this. However a rate</p>
+<p>metric could never tell us that a single message is failing to make progress</p>
+<p>through our pipeline. Even a single such message, however, can arbitrarily</p>
+<p>affect the correctness of the output results.</p>
+<p>We require a more robust measure of progress. To arrive there, we make one</p>
+<p>fundamental assumption about our streaming data: <em>each message has an</em></p>
+<p><em>associated logical event timestamp</em>. This assumption is reasonable in the</p>
+<p>context of continuously arriving unbounded data because this implies the</p>
+<p>continuous generation of input data. In most cases, we can take the time of the</p>
+<p>original event’s occurrence as its logical event timestamp. With all input</p>
+<p>messages containing an event timestamp, we can then examine the</p>
+<p>distribution of such timestamps in any pipeline. Such a pipeline might be</p>
+<p>distributed to process in parallel over many agents and consuming input</p>
+<p>messages with no guarantee of ordering between individual shards. Thus, the</p>
+<p>set of event timestamps for active in-flight messages in this pipeline will form</p>
+<p>a distribution, as illustrated in Figure 3-1.</p>
+<p>Messages are ingested by the pipeline, processed, and eventually marked</p>
+<p>completed. Each message is either “in-flight,” meaning that it has been</p>
+<p>received but not yet completed, or “completed,” meaning that no more</p>
+<p>processing on behalf of this message is required. If we examine the</p>
+<p>distribution of messages by event time, it will look something like Figure 3-1.</p>
+<p>As time advances, more messages will be added to the “in-flight” distribution</p>
+<p>on the right, and more of those messages from the “in-flight” part of the</p>
+<p>distribution will be completed and moved into the “completed” distribution.</p>
+<p><em>Figure 3-1. Distribution of in-flight and completed message event times within a streaming pipeline.</em></p>
+<p><em>New messages arrive as input and remain “in-flight” until processing for them completes. The leftmost</em></p>
+<p><em>edge of the “in-flight” distribution corresponds to the oldest unprocessed element at any given moment.</em></p>
+<p>There is a key point on this distribution, located at the leftmost edge of the</p>
+<p>“in-flight” distribution, corresponding to the oldest event timestamp of any</p>
+<p>unprocessed message of our pipeline. We use this value to define the</p>
+<p>watermark:</p>
+<p><em>The watermark is a monotonically increasing timestamp of the oldest work</em></p>
+<p><em>not yet completed.</em></p>
+<p>There are two fundamental properties that are provided by this definition that</p>
+<p>make it useful:</p>
+<ul>
+<li>Completeness</li>
+</ul>
+<p>If the watermark has advanced past some timestamp <em>T</em>, we are guaranteed</p>
+<p>by its monotonic property that no more processing will occur for on-time</p>
+<p>(nonlate data) events at or before <em>T</em>. Therefore, we can correctly emit any</p>
+<p>aggregations at or before <em>T</em>. In other words, the watermark allows us to</p>
+<p>know when it is correct to close a window.</p>
+<ul>
+<li>Visibility</li>
+</ul>
+<p>If a message is stuck in our pipeline for any reason, the watermark cannot</p>
+<p>advance. Furthermore, we will be able to find the source of the problem</p>
+<p>by examining the message that is preventing the watermark from</p>
+<p>advancing.</p>
+</details>
+
+
+
+<details><summary>点击 原文</summary><h1><span id="source-watermark-creation"><strong>Source Watermark Creation</strong></span><a href="#source-watermark-creation" class="header-anchor">#</a></h1><p>Where do these watermarks come from? To establish a watermark for a data</p>
+<p>source, we must assign a logical event timestamp to every message entering</p>
+<p>the pipeline from that source. As Chapter 2 informs us, all watermark creation</p>
+<p>falls into one of two broad categories: <em>perfect</em> or <em>heuristic</em>. To remind</p>
+<p>ourselves about the difference between perfect and heuristic watermarks, let’s</p>
+<p>look at Figure 3-2, which presents the windowed summation example from</p>
+<p>Chapter 2.</p>
+<p><em>Figure 3-2. Windowed summation with perfect (left) and heuristic (right) watermarks</em></p>
+<p>Notice that the distinguishing feature is that perfect watermarks ensure that</p>
+<p>the watermark accounts for <em>all</em> data, whereas heuristic watermarks admit</p>
+<p>some late-data elements.</p>
+<p>After the watermark is created as either perfect or heuristic, watermarks</p>
+<p>remain so throughout the rest of the pipeline. As to what makes watermark</p>
+<p>creation perfect or heuristic, it depends a great deal on the nature of the source</p>
+<p>that’s being consumed. To see why, let’s look at a few examples of each type</p>
+<p>of watermark creation.</p>
+<h3><span id="perfect-watermark-creation"><strong>Perfect Watermark Creation</strong></span><a href="#perfect-watermark-creation" class="header-anchor">#</a></h3><p>Perfect watermark creation assigns timestamps to incoming messages in such</p>
+<p>a way that the resulting watermark is a <em>strict guarantee</em> that no data with</p>
+<p>event times less than the watermark will ever be seen again from this source.</p>
+<p>Pipelines using perfect watermark creation never have to deal with late data;</p>
+<p>that is, data that arrive after the watermark has advanced past the event times</p>
+<p>of newly arriving messages. However, perfect watermark creation requires</p>
+<p>perfect knowledge of the input, and thus is impractical for many real-world</p>
+<p>distributed input sources. Here are a couple of examples of use cases that can</p>
+<p>create perfect watermarks:</p>
+<ul>
+<li>Ingress timestamping</li>
+</ul>
+<p>A source that assigns ingress times as the event times for data entering the</p>
+<p>system can create a perfect watermark. In this case, the source watermark</p>
+<p>simply tracks the current processing time as observed by the pipeline.</p>
+<p>This is essentially the method that nearly all streaming systems supporting</p>
+<p>windowing prior to 2016 used.</p>
+<p>Because event times are assigned from a single, monotonically increasing</p>
+<p>source (actual processing time), the system thus has perfect knowledge</p>
+<p>about which timestamps will come next in the stream of data. As a result,</p>
+<p>event-time progress and windowing semantics become vastly easier to</p>
+<p>reason about. The downside, of course, is that the watermark has no</p>
+<p>correlation to the event times of the data themselves; those event times</p>
+<p>were effectively discarded, and the watermark instead merely tracks the</p>
+<p>progress of data relative to its arrival in the system.</p>
+<ul>
+<li>Static sets of time-ordered logs</li>
+</ul>
+<p>A statically sized input source of time-ordered logs (e.g., an Apache</p>
+<p>Kafka topic with a static set of partitions, where each partition of the</p>
+<p>source contains monotonically increasing event times) would be relatively</p>
+<p>straightforward source atop which to create a perfect watermark. To do so,</p>
+<p>the source would simply track the minimum event time of unprocessed</p>
+<p>data across the known and static set of source partitions (i.e., the</p>
+<p>minimum of the event times of the most recently read record in each of</p>
+<p>the partitions).</p>
+<p>Similar to the aforementioned ingress timestamps, the system has perfect</p>
+<p>knowledge about which timestamps will come next, thanks to the fact that</p>
+<p>event times across the static set of partitions are known to increase</p>
+<p>monotonically. This is effectively a form of bounded out-of-order</p>
+<p>processing; the amount of disorder across the known set of partitions is</p>
+<p>bounded by the minimum observed event time among those partitions.</p>
+<p>Typically, the only way you can guarantee monotonically increasing</p>
+<p>timestamps within partitions is if the timestamps within those partitions</p>
+<p>are assigned as data are written to it; for example, by web frontends</p>
+<p>logging events directly into Kafka. Though still a limited use case, this is</p>
+<p>definitely a much more useful one than ingress timestamping upon arrival</p>
+<p>at the data processing system because the watermark tracks meaningful</p>
+<p>event times of the underlying data.</p>
+<h3><span id="heuristic-watermark-creation"><strong>Heuristic Watermark Creation</strong></span><a href="#heuristic-watermark-creation" class="header-anchor">#</a></h3><p>Heuristic watermark creation, on the other hand, creates a watermark that is</p>
+<p>merely an <em>estimate</em> that no data with event times less than the watermark will</p>
+<p>ever be seen again. Pipelines using heuristic watermark creation might need</p>
+<p>to deal with some amount of <em>late data</em>. Late data is any data that arrives after</p>
+<p>the watermark has advanced past the event time of this data. Late data is only</p>
+<p>possible with heuristic watermark creation. If the heuristic is a reasonably</p>
+<p>good one, the amount of late data might be very small, and the watermark</p>
+<p>remains useful as a completion estimate. The system still needs to provide a</p>
+<p>way for the user to cope with late data if it’s to support use cases requiring</p>
+<p>correctness (e.g., things like billing).</p>
+<p>For many real-world, distributed input sources, it’s computationally or</p>
+<p>operationally impractical to construct a perfect watermark, but still possible to</p>
+<p>build a highly accurate heuristic watermark by taking advantage of structural</p>
+<p>features of the input data source. Following are two example for which</p>
+<p>heuristic watermarks (of varying quality) are possible:</p>
+<ul>
+<li>Dynamic sets of time-ordered logs</li>
+</ul>
+<p>Consider a dynamic set of structured log files (each individual file</p>
+<p>containing records with monotonically increasing event times relative to</p>
+<p>other records in the same file but with no fixed relationship of event times</p>
+<p>between files), where the full set of expected log files (i.e., partitions, in</p>
+<p>Kafka parlance) is not known at runtime. Such inputs are often found in</p>
+<p>global-scale services constructed and managed by a number of</p>
+<p>independent teams. In such a use case, creating a perfect watermark over</p>
+<p>the input is intractable, but creating an accurate heuristic watermark is</p>
+<p>quite possible.</p>
+<p>By tracking the minimum event times of unprocessed data in the existing</p>
+<p>set of log files, monitoring growth rates, and utilizing external information</p>
+<p>like network topology and bandwidth availability, you can create a</p>
+<p>remarkably accurate watermark, even given the lack of perfect knowledge</p>
+<p>of all the inputs. This type of input source is one of the most common</p>
+<p>types of unbounded datasets found at Google, so we have extensive</p>
+<p>experience with creating and analyzing watermark quality for such</p>
+<p>scenarios and have seen them used to good effect across a number of use</p>
+<p>cases.</p>
+<ul>
+<li>Google Cloud Pub&#x2F;Sub</li>
+</ul>
+<p>Cloud Pub&#x2F;Sub is an interesting use case. Pub&#x2F;Sub currently makes no</p>
+<p>guarantees on in-order delivery; even if a single publisher publishes two</p>
+<p>messages in order, there’s a chance (usually small) that they might be</p>
+<p>delivered out of order (this is due to the dynamic nature of the underlying</p>
+<p>architecture, which allows for transparent scaling up to very high levels of</p>
+<p>throughput with zero user intervention). As a result, there’s no way to</p>
+<p>guarantee a perfect watermark for Cloud Pub&#x2F;Sub. The Cloud Dataflow</p>
+<p>team has, however, built a reasonably accurate heuristic watermark by</p>
+<p>taking advantage of what knowledge <em>is</em> available about the data in Cloud</p>
+<p>Pub&#x2F;Sub. The implementation of this heuristic is discussed at length as a</p>
+<p>case study later in this chapter.</p>
+<p>Consider an example where users play a mobile game, and their scores are</p>
+<p>sent to our pipeline for processing: you can generally assume that for any</p>
+<p>source utilizing mobile devices for input it will be generally impossible to</p>
+<p>provide a perfect watermark. Due to the problem of devices that go offline for</p>
+<p>extended periods of time, there’s just no way to provide any sort of</p>
+<p>reasonable estimate of absolute completeness for such a data source. You can,</p>
+<p>however, imagine building a watermark that accurately tracks input</p>
+<p>completeness for devices that are currently online, similar to the Google</p>
+<p>Pub&#x2F;Sub watermark described a moment ago. Users who are actively online</p>
+<p>are likely the most relevant subset of users from the perspective of providing</p>
+<p>low-latency results anyway, so this often isn’t as much of a shortcoming as</p>
+<p>you might initially think.</p>
+<p>With heuristic watermark creation, broadly speaking, the more that is known</p>
+<p>about the source, the better the heuristic, and the fewer late data items will be</p>
+<p>seen. There is no one-size-fits-all solution, given that the types of sources,</p>
+<p>distributions of events, and usage patterns will vary greatly. But in either case</p>
+<p>(perfect or heuristic), after a watermark is created at the input source, the</p>
+<p>system can propagate the watermark through the pipeline perfectly. This</p>
+<p>means perfect watermarks will remain perfect downstream, and heuristic</p>
+<p>watermarks will remain strictly as heuristic as they were when established.</p>
+<p>This is the benefit of the watermark approach: you can reduce the complexity</p>
+<p>of tracking completeness in a pipeline entirely to the problem of creating a</p>
+<p>watermark at the source.</p>
+</details>
+
+
+
+
+
+<details><summary>点击 原文</summary><h1><span id="watermark-propagation"><strong>Watermark Propagation</strong></span><a href="#watermark-propagation" class="header-anchor">#</a></h1><p>So far, we have considered only the watermark for the inputs within the</p>
+<p>context of a single operation or stage. However, most real-world pipelines</p>
+<p>consist of multiple stages. Understanding how watermarks propagate across</p>
+<p>independent stages is important in understanding how they affect the pipeline</p>
+<p>as a whole and the observed latency of its results.</p>
+<p><strong>PIPELINE STAGES</strong></p>
+<p>Different stages are typically necessary every time your pipeline groups</p>
+<p>data together by some new dimension. For example, if you had a pipeline</p>
+<p>that consumed raw data, computed some per-user aggregates, and then</p>
+<p>used those per-user aggregates to compute some per-team aggregates,</p>
+<p>you’d likely end up with a three-stage pipeline:</p>
+<p>One consuming the raw, ungrouped data</p>
+<p>One grouping the data by user and computing per-user aggregates</p>
+<p>One grouping the data by team and computing per-team</p>
+<p>aggregates</p>
+<p>We learn more about the effects of grouping on pipeline shapes in</p>
+<p>Chapter 6.</p>
+<p>Watermarks are created at input sources, as discussed in the preceding</p>
+<p>section. They then conceptually flow through the system as data progress</p>
+<p>through it. You can track watermarks at varying levels of granularity. For</p>
+<p>pipelines comprising multiple distinct stages, each stage likely tracks its own</p>
+<p>watermark, whose value is a function of all the inputs and stages that come</p>
+<p>before it. Therefore, stages that come later in the pipeline will have</p>
+<p>watermarks that are further in the past (because they’ve seen less of the</p>
+<p>overall input).</p>
+<p>We can define watermarks at the boundaries of any single operation, or stage,</p>
+<p>in the pipeline. This is useful not only in understanding the relative progress</p>
+<p>that each stage in the pipeline is making, but for dispatching timely results</p>
+<p>independently and as soon as possible for each individual stage. We give the</p>
+<p>following definitions for the watermarks at the boundaries of stages:</p>
+<ul>
+<li>An <em>input watermark</em>, which captures the progress of everything</li>
+</ul>
+<p>upstream of that stage (i.e., how complete the input is for that stage).</p>
+<p>For sources, the input watermark is a source-specific function</p>
+<p>creating the watermark for the input data. For nonsource stages, the</p>
+<p>input watermark is defined as the minimum of the output watermarks</p>
+<p>of all shards&#x2F;partitions&#x2F;instances of all of its upstream sources and</p>
+<p>stages.</p>
+<ul>
+<li>An <em>output watermark</em>, which captures the progress of the stage itself,</li>
+</ul>
+<p>and is essentially defined as the minimum of the stage’s input</p>
+<p>watermark and the event times of all nonlate data active messages</p>
+<p>within the stage. Exactly what “active” encompasses is somewhat</p>
+<p>dependent upon the operations a given stage actually performs, and</p>
+<p>the implementation of the stream processing system. It typically</p>
+<p>includes data buffered for aggregation but not yet materialized</p>
+<p>downstream, pending output data in flight to downstream stages, and</p>
+<p>so on.</p>
+<p>One nice feature of defining an input and output watermark for a specific</p>
+<p>stage is that we can use these to calculate the amount of event-time latency</p>
+<p>introduced by a stage. Subtracting the value of a stage’s output watermark</p>
+<p>from the value of its input watermark gives the amount of event-time latency</p>
+<p>or <em>lag</em> introduced by the stage. This lag is the notion of how far delayed</p>
+<p>behind real time the output of each stage will be. As an example, a stage</p>
+<p>performing 10-second windowed aggregations will have a lag of 10 seconds</p>
+<p>or more, meaning that the output of the stage will be at least that much</p>
+<p>delayed behind the input and real time. Definitions of input and output</p>
+<p>watermarks provide a recursive relationship of watermarks throughout a</p>
+<p>pipeline. Each subsequent stage in a pipeline delays the watermark as</p>
+<p>necessary, based on event-time lag of the stage.</p>
+<p>Processing within each stage is also not monolithic. We can segment the</p>
+<p>processing within one stage into a flow with several conceptual components,</p>
+<p>each of which contributes to the output watermark. As mentioned previously,</p>
+<p>the exact nature of these components depends on the operations the stage</p>
+<p>performs and the implementation of the system. Conceptually, each such</p>
+<p>component serves as a buffer where active messages can reside until some</p>
+<p>operation has completed. For example, as data arrives, it is buffered for</p>
+<p>processing. Processing might then write the data to state for later delayed</p>
+<p>aggregation. Delayed aggregation, when triggered, might write the results to</p>
+<p>an output buffer awaiting consumption from a downstream stage, as shown in</p>
+<p>Figure 3-3.</p>
+<p><em>Figure 3-3. Example system components of a streaming system stage, containing buffers of in-flight</em></p>
+<p><em>data. Each will have associated watermark tracking, and the overall output watermark of the stage will be the minimum of the watermarks across all such buffers.</em></p>
+<p>We can track each such buffer with its own watermark. The minimum of the</p>
+<p>watermarks across the buffers of each stage forms the output watermark of</p>
+<p>the stage. Thus the output watermark could be the minimum of the following:</p>
+<ul>
+<li><em>Per-source</em> watermark—for each sending stage.</li>
+<li><em>Per-external input</em> watermark—for sources external to the pipeline</li>
+<li><em>Per-state component</em> watermark—for each type of state that can be</li>
+</ul>
+<p>written</p>
+<ul>
+<li><em>Per-output buffer</em> watermark—for each receiving stage</li>
+</ul>
+<p>Making watermarks available at this level of granularity also provides better</p>
+<p>visibility into the behavior of the system. The watermarks track locations of</p>
+<p>messages across various buffers in the system, allowing for easier diagnosis</p>
+<p>of stuckness.</p>
+<h3><span id="understanding-watermark-propagation"><strong>Understanding Watermark Propagation</strong></span><a href="#understanding-watermark-propagation" class="header-anchor">#</a></h3><p>To get a better sense for the relationship between input and output</p>
+<p>watermarks and how they affect watermark propagation, let’s look at an</p>
+<p>example. Let’s consider gaming scores, but instead of computing sums of</p>
+<p>team scores, we’re going to take a stab at measuring user engagement levels.</p>
+<p>We’ll do this by first calculating per-user session lengths, under the</p>
+<p>assumption that the amount of time a user stays engaged with the game is a</p>
+<p>reasonable proxy for how much they’re enjoying it. After answering our four</p>
+<p>questions once to calculate sessions lengths, we’ll then answer them a second</p>
+<p>time to calculate average session lengths within fixed periods of time.</p>
+<p>To make our example even more interesting, lets say that we are working</p>
+<p>with two datasets, one for Mobile Scores and one for Console Scores. We</p>
+<p>would like to perform identical score calculations via integer summation in</p>
+<p>parallel over these two independant datasets. One pipeline is calculating</p>
+<p>scores for users playing on mobile devices, whereas the other is for users</p>
+<p>playing on home gaming consoles, perhaps due to different data collection</p>
+<p>strategies employed for the different platforms. The important point is that</p>
+<p>these two stages are performing the same operation but over different data,</p>
+<p>and thus with very different output watermarks.</p>
+<p>To begin, let’s take a look at Example 3-1 to see what the abbreviated code</p>
+<p>for what the first section of this pipeline might be like.</p>
+<p><em>Example 3-1. Calculating session lengths</em></p>
+<p><code>PCollection&lt;Double&gt; mobileSessions = IO.read(new MobileInputSource())</code></p>
+<p><code>.apply(Window.into(Sessions.withGapDuration(Duration.standardMinutes(1)))</code></p>
+<p><code>.triggering(AtWatermark())</code></p>
+<p><code>.discardingFiredPanes())</code></p>
+<p><code>.apply(CalculateWindowLength());</code></p>
+<p><code>PCollection&lt;Double&gt; consoleSessions = IO.read(new ConsoleInputSource())</code></p>
+<p><code>.apply(Window.into(Sessions.withGapDuration(Duration.standardMinutes(1)))</code></p>
+<p><code>.triggering(AtWatermark())</code></p>
+<p><code>.discardingFiredPanes())</code></p>
+<p><code>.apply(CalculateWindowLength());</code></p>
+<p>Here, we read in each of our inputs independently, and whereas previously we</p>
+<p>were keying our collections by team, in this example we key by user. After</p>
+<p>that, for the first stage of each pipeline, we window into sessions and then call</p>
+<p>a custom PTransform named CalculateWindowLength. This PTransform</p>
+<p>simply groups by key (i.e., User) and then computes the per-user session</p>
+<p>length by treating the size of the current window as the value for that window.</p>
+<p>In this case, we’re fine with the default trigger (AtWatermark) and</p>
+<p>accumulation mode (discardingFiredPanes) settings, but I’ve listed them</p>
+<p>explicitly for completeness. The output for each pipeline for two particular</p>
+<p>users might look something like Figure 3-4.</p>
+<p><em>Figure 3-4. Per-user session lengths across two different input pipelines</em></p>
+<p>Because we need to track data across multiple stages, we track everything</p>
+<p>related to Mobile Scores in red, everything related to Console Scores in blue,</p>
+<p>while the watermark and output for Average Session Lengths in Figure 3-5</p>
+<p>are yellow.</p>
+<p>We have answered the four questions of <em>what</em>, <em>where</em>, <em>when</em>, and <em>how</em> to</p>
+<p>compute individual session lengths. Next we’ll answer them a second time to</p>
+<p>transform those session lengths into global session-length averages within</p>
+<p>fixed windows of time. This requires us to first flatten our two data sources</p>
+<p>into one, and then re-window into fixed windows; we’ve already captured the</p>
+<p>important essence of the session in the session-length value we computed, and</p>
+<p>we now want to compute a global average of those sessions within consistent</p>
+<p>windows of time over the course of the day. Example 3-2 shows the code for</p>
+<p>this.</p>
+<p><em>Example 3-2. Calculating session lengths</em></p>
+<p><code>PCollection&lt;Double&gt; mobileSessions = IO.read(new MobileInputSource())</code></p>
+<p><code>.apply(Window.into(Sessions.withGapDuration(Duration.standardMinutes(1)))</code></p>
+<p><code>.triggering(AtWatermark())</code></p>
+<p><code>.discardingFiredPanes())</code></p>
+<p><code>.apply(CalculateWindowLength());</code></p>
+<p><code>PCollection&lt;Double&gt; consoleSessions = IO.read(new ConsoleInputSource())</code></p>
+<p><code>.apply(Window.into(Sessions.withGapDuration(Duration.standardMinutes(1)))</code></p>
+<p><code>.triggering(AtWatermark())</code></p>
+<p><code>.discardingFiredPanes())</code></p>
+<p><code>.apply(CalculateWindowLength());</code></p>
+<p><code>PCollection&lt;Float&gt; averageSessionLengths = PCollectionList</code></p>
+<p><code>.of(mobileSessions).and(consoleSessions)</code></p>
+<p><code>.apply(Flatten.pCollections())</code></p>
+<p><code>.apply(Window.into(FixedWindows.of(Duration.standardMinutes(2)))</code></p>
+<p><code>.triggering(AtWatermark())</code></p>
+<p><code>.apply(Mean.globally());</code></p>
+<p>If we were to see this pipeline in action, it would look something like</p>
+<p>Figure 3-5. As before, the two input pipelines are computing individual</p>
+<p>session lengths for mobile and console players. Those session lengths then</p>
+<p>feed into the second stage of the pipeline, where global session-length</p>
+<p>averages are computed in fixed windows.</p>
+<p><em>Figure 3-5. Average session lengths of mobile and console gaming sessions</em></p>
+<p>Let’s walk through some of this example, given that there’s a lot going on.</p>
+<p>The two important points here are:</p>
+<ul>
+<li>The <em>output watermark</em> for each of the Mobile Sessions and Console</li>
+</ul>
+<p>Sessions stages is at least as old as the corresponding input</p>
+<p>watermark of each, and in reality a little bit older. This is because in</p>
+<p>a real system computing answers takes time, and we don’t allow the</p>
+<p>output watermark to advance until processing for a given input has</p>
+<p>completed.</p>
+<ul>
+<li>The <em>input watermark</em> for the Average Session Lengths stage is the</li>
+</ul>
+<p>minimum of the output watermarks for the two stages directly</p>
+<p>upstream.</p>
+<p>The result is that the downstream input watermark is an alias for the minimum</p>
+<p>composition of the upstream output watermarks. Note that this matches the</p>
+<p>definitions for those two types of watermarks earlier in the chapter. Also</p>
+<p>notice how watermarks further downstream are further in the past, capturing</p>
+<p>the intuitive notion that upstream stages are going to be further ahead in time</p>
+<p>than the stages that follow them.</p>
+<p>One observation worth making here is just how cleanly we were able to ask</p>
+<p>the questions again in Example 3-1 to substantially alter the results of the</p>
+<p>pipeline. Whereas before we simply computed per-user session lengths, we</p>
+<p>now compute two-minute global session-length averages. This provides a</p>
+<p>much more insightful look into the overall behaviors of the users playing our</p>
+<p>games and gives you a tiny glimpse of the difference between simple data</p>
+<p>transformations and real data science.</p>
+<p>Even better, now that we understand the basics of how this pipeline operates,</p>
+<p>we can look more closely at one of the more subtle issues related to asking the</p>
+<p>four questions over again: <em>output timestamps</em>.</p>
+<h3><span id="watermark-propagation-and-output-timestamps"><strong>Watermark Propagation and Output Timestamps</strong></span><a href="#watermark-propagation-and-output-timestamps" class="header-anchor">#</a></h3><p>In Figure 3-5, I glossed over some of the details of output timestamps. But if</p>
+<p>you look closely at the second stage in the diagram, you can see that each of</p>
+<p>the outputs from the first stage was assigned a timestamp that matched the</p>
+<p>end of its window. Although that’s a fairly natural choice for output</p>
+<p>timestamps, it’s not the only valid choice. As you know from earlier in this</p>
+<p>chapter, watermarks are never allowed to move backward. Given that</p>
+<p>restriction, you can infer that the range of valid timestamps for a given</p>
+<p>window begins with the timestamp of the earliest nonlate record in the</p>
+<p>window (because only nonlate records are guaranteed to hold a watermark up)</p>
+<p>and extends all the way to positive infinity. That’s quite a lot of options. In</p>
+<p>practice, however, there tend to be only a few choices that make sense in most</p>
+<p>circumstances:</p>
+<ul>
+<li>End of the window</li>
+</ul>
+<p>Using the end of the window is the only safe choice if you want the output</p>
+<p>timestamp to be representative of the window bounds. As we’ll see in a</p>
+<p>moment, it also allows the smoothest watermark progression out of all of</p>
+<p>the options.</p>
+<ul>
+<li>Timestamp of first nonlate element</li>
+</ul>
+<p>Using the timestamp of the first nonlate element is a good choice when</p>
+<p>you want to keep your watermarks as conservative as possible. The trade</p>
+<p>off, however, is that watermark progress will likely be more hindered, as</p>
+<p>we’ll also see shortly.</p>
+<ul>
+<li>Timestamp of a specific element</li>
+</ul>
+<p>For certain use cases, the timestamp of some other arbitrary (from the</p>
+<p>system’s perspective) element is the right choice. Imagine a use case in</p>
+<p>which you’re joining a stream of queries to a stream of clicks on results</p>
+<p>for that query. After performing the join, some systems will find the</p>
+<p>timestamp of the query to be more useful; others will prefer the timestamp</p>
+<p>of the click. Any such timestamp is valid from a watermark correctness</p>
+<p>perspective, as long as it corresponded to an element that did not arrive</p>
+<p>late.</p>
+<p>Having thought a bit about some alternate options for output timestamps, let’s</p>
+<p>look at what effects the choice of output timestamp can have on the overall</p>
+<p>pipeline. To make the changes as dramatic as possible, in Example 3-3 and</p>
+<p>Figure 3-6, we’ll switch to using the earliest timestamp possible for the</p>
+<p>window: the timestamp of the first nonlate element as the timestamp for the</p>
+<p>window.</p>
+<p><em>Example 3-3. Average session lengths pipeline, that output timestamps for</em></p>
+<p><em>session windows set at earliest element</em></p>
+<p><code>PCollection&lt;Double&gt; mobileSessions = IO.read(new MobileInputSource())</code></p>
+<p><code>.apply(Window.into(Sessions.withGapDuration(Duration.standardMinutes(1)))</code></p>
+<p><code>.triggering(AtWatermark())</code></p>
+<p><code>.withTimestampCombiner(EARLIEST)</code></p>
+<p><code>.discardingFiredPanes())</code></p>
+<p><code>.apply(CalculateWindowLength());</code></p>
+<p><code>PCollection&lt;Double&gt; consoleSessions = IO.read(new ConsoleInputSource())</code></p>
+<p><code>.apply(Window.into(Sessions.withGapDuration(Duration.standardMinutes(1)))</code></p>
+<p><code>.triggering(AtWatermark())</code></p>
+<p><code>.withTimestampCombiner(EARLIEST)</code></p>
+<p><code>.discardingFiredPanes())</code></p>
+<p><code>.apply(CalculateWindowLength());</code></p>
+<p><code>PCollection&lt;Float&gt; averageSessionLengths = PCollectionList</code></p>
+<p><code>.of(mobileSessions).and(consoleSessions)</code></p>
+<p><code>.apply(Flatten.pCollections())</code></p>
+<p><code>.apply(Window.into(FixedWindows.of(Duration.standardMinutes(2)))</code></p>
+<p><code>.triggering(AtWatermark())</code></p>
+<p><code>.apply(Mean.globally());</code></p>
+<p><em>Figure 3-6. Average session lengths for sessions that are output at the timestamp of the earliest element</em></p>
+<p>To help call out the effect of the output timestamp choice, look at the dashed</p>
+<p>lines in the first stages showing what the output watermark for each stage is</p>
+<p>being held to. The output watermark is delayed by our choice of timestamp,</p>
+<p>as compared to Figures 3-7 and 3-8, in which the output timestamp was</p>
+<p>chosen to be the end of the window. You can see from this diagram that the</p>
+<p>input watermark of the second stage is thus subsequently also delayed.</p>
+<p><em>Figure 3-7. Comparison of watermarks and results with different choice of window outout timestamps.</em></p>
+<p><em>The watermarks in this figure correspond to output timestamps at the end of the session windows (i.e.,</em></p>
+<p><em>Figure 3-5).</em></p>
+<p><em>Figure 3-8. In this figure, the watermarks are at the beginning of the session windows (i.e., Figure 3-6).</em></p>
+<p><em>We can see that the watermark line in this figure is more delayed, and the resulting average session</em></p>
+<p><em>lengths are different.</em></p>
+<p>As far as differences in this version compared to Figure 3-7, two are worth</p>
+<p>noting:</p>
+<ul>
+<li>Watermark delay</li>
+</ul>
+<p>Compared to Figure 3-5, the watermark proceeds much more slowly in</p>
+<p>Figure 3-6. This is because the output watermark for the first stage is held</p>
+<p>back to the timestamp of the first element in every window until the input</p>
+<p>for that window becomes complete. Only after a given window has been</p>
+<p>materialized is the output watermark (and thus the downstream input</p>
+<p>watermark) allowed to advance.</p>
+<ul>
+<li>Semantic differences</li>
+</ul>
+<p>Because the session timestamps are now assigned to match the earliest</p>
+<p>nonlate element in the session, the individual sessions often end up in</p>
+<p>different fixed window buckets when we then calculate the session-length</p>
+<p>averages in the next stage. There’s nothing inherently right or wrong</p>
+<p>about either of the two options we’ve seen so far; they’re just different.</p>
+<p>But it’s important to understand that they <em>will</em> be different as well as have</p>
+<p>an intuition for the way in which they’ll be different so that you can make</p>
+<p>the correct choice for your specific use case when the time comes.</p>
+<h3><span id="the-tricky-case-of-overlapping-windows"><strong>The Tricky Case of Overlapping Windows</strong></span><a href="#the-tricky-case-of-overlapping-windows" class="header-anchor">#</a></h3><p>One additional subtle but important issue regarding output timestamps is how</p>
+<p>to handle sliding windows. The naive approach of setting the output</p>
+<p>timestamp to the earliest element can very easily lead to delays downstream</p>
+<p>due to watermarks being (correctly) held back. To see why, consider an</p>
+<p>example pipeline with two stages, each using the same type of sliding</p>
+<p>windows. Suppose that each element ends up in three successive windows. As</p>
+<p>the input watermark advances, the desired semantics for sliding windows in</p>
+<p>this case would be as follows:</p>
+<ul>
+<li>The first window completes in the first stage and is emitted</li>
+</ul>
+<p>downstream.</p>
+<ul>
+<li>The first window then completes in the second stage and can also be</li>
+</ul>
+<p>emitted downstream.</p>
+<ul>
+<li>Some time later, the second window completes in the first stage…</li>
+</ul>
+<p>and so on.</p>
+<p>However, if output timestamps are chosen to be the timestamp of the first</p>
+<p>nonlate element in the pane, what actually happens is the following:</p>
+<ul>
+<li>The first window completes in the first stage and is emitted</li>
+</ul>
+<p>downstream.</p>
+<ul>
+<li>The first window in the second stage remains unable to complete</li>
+</ul>
+<p>because its input watermark is being held up by the output</p>
+<p>watermark of the second and third windows upstream. Those</p>
+<p>watermarks are rightly being held back because the earliest element</p>
+<p>timestamp is being used as the output timestamp for those windows.</p>
+<ul>
+<li>The second window completes in the first stage and is emitted</li>
+</ul>
+<p>downstream.</p>
+<ul>
+<li>The first and second windows in the second stage remain unable to</li>
+</ul>
+<p>complete, held up by the third window upstream.</p>
+<ul>
+<li>The third window completes in the first stage and is emitted</li>
+</ul>
+<p>downstream.</p>
+<ul>
+<li>The first, second, and third windows in the second stage are now all</li>
+</ul>
+<p>able to complete, finally emitting all three in one swoop.</p>
+<p>Although the results of this windowing are correct, this leads to the results</p>
+<p>being materialized in an unnecessarily delayed way. Because of this, Beam</p>
+<p>has special logic for overlapping windows that ensures the output timestamp</p>
+<p>for window <em>N</em>+1 is always greater than the end of window <em>N</em>.</p>
+</details>
+
+
+
+<details><summary>点击 原文</summary><h1><span id="percentile-watermarks"><strong>Percentile Watermarks</strong></span><a href="#percentile-watermarks" class="header-anchor">#</a></h1><p>So far, we have concerned ourselves with watermarks as measured by the</p>
+<p>minimum event time of active messages in a stage. Tracking the minimum</p>
+<p>allows the system to know when all earlier timestamps have been accounted</p>
+<p>for. On the other hand, we could consider the entire distribution of event</p>
+<p>timestamps for active messages and make use of it to create finer-grained</p>
+<p>triggering conditions.</p>
+<p>Instead of considering the minimum point of the distribution, we could take</p>
+<p>any percentile of the distribution and say that we are guaranteed to have</p>
+<p>processed this percentage of all events with earlier timestamps.</p>
+<p>What is the advantage of this scheme? If for the business logic “mostly”</p>
+<p>correct is sufficient, percentile watermarks provide a mechanism by which the</p>
+<p>watermark can advance more quickly and more smoothly than if we were</p>
+<p>tracking the minimum event time by discarding outliers in the long tail of the</p>
+<p>distribution from the watermark. Figure 3-9 shows a compact distribution of</p>
+<p>event times where the 90th percentile watermark is close to the 100th</p>
+<p>percentile. Figure 3-10 demonstrates a case where the outlier is further</p>
+<p>behind, so the 90th percentile watermark is significantly ahead of the 100th</p>
+<p>percentile. By discarding the outlier data from the watermark, the percentile</p>
+<p>watermark can still keep track of the bulk of the distribution without being</p>
+<p>delayed by the outliers.</p>
+<p><em>Figure 3-9. Normal-looking watermark histogram</em></p>
+<p><em>Figure 3-10. Watermark histogram with outliers</em></p>
+<p>Figure 3-11 shows an example of percentile watermarks used to draw window</p>
+<p>boundaries for two-minute fixed windows. We can draw early boundaries</p>
+<p>based on the percentile of timestamps of arrived data as tracked by the</p>
+<p>percentile watermark.</p>
+<p><em>Figure 3-11. Effects of varying watermark percentiles. As the percentile increases, more events are</em></p>
+<p><em>included in the window: however, the processing time delay to materialize the window also increases.</em></p>
+<p>Figure 3-11 shows the 33rd percentile, 66th percentile, and 100th percentile</p>
+<p>(full) watermark, tracking the respective timestamp percentiles in the data</p>
+<p>distribution. As expected, these allow boundaries to be drawn earlier than</p>
+<p>tracking the full 100th percentile watermark. Notice that the 33rd and 66th</p>
+<p>percentile watermarks each allow earlier triggering of windows but with the</p>
+<p>trade-off of marking more data as late. For example, for the first window,</p>
+<p>[12:00, 12:02), a window closed based on the 33rd percentile watermark</p>
+<p>would include only four events and materialize the result at 12:06 processing</p>
+<p>time. If we use the 66th percentile watermark, the same event-time window</p>
+<p>would include seven events, and materialize at 12:07 processing time. Using</p>
+<p>the 100th percentile watermark includes all ten events and delays</p>
+<p>materializing the results until 12:08 processing time. Thus, percentile</p>
+<p>watermarks provide a way to tune the trade-off between latency of</p>
+<p>materializing results and precision of the results.</p>
+<h1><span id="processing-time-watermarks"><strong>Processing-Time Watermarks</strong></span><a href="#processing-time-watermarks" class="header-anchor">#</a></h1><p>Until now, we have been looking at watermarks as they relate to the data</p>
+<p>flowing through our system. We have seen how looking at the watermark can</p>
+<p>help us identify the overall delay between our oldest data and real time.</p>
+<p>However, this is not enough to distinguish between old data and a delayed</p>
+<p>system. In other words, by only examining the event-time watermark as we</p>
+<p>have defined it up until now, we cannot distinguish between a system that is</p>
+<p>processing data from an hour ago quickly and without delay, and a system</p>
+<p>that is attempting to process real-time data and has been delayed for an hour</p>
+<p>while doing so.</p>
+<p>To make this distinction, we need something more: processing-time</p>
+<p>watermarks. We have already seen that there are two time domains in a</p>
+<p>streaming system: processing time and event time. Until now, we have</p>
+<p>defined the watermark entirely in the event-time domain, as a function of</p>
+<p>timestamps of the data flowing through the system. This is an event-time</p>
+<p>watermark. We will now apply the same model to the processing-time domain</p>
+<p>to define a processing-time watermark.</p>
+<p>Our stream processing system is constantly performing operations such as</p>
+<p>shuffling messages between stages, reading or writing messages to persistent</p>
+<p>state, or triggering delayed aggregations based on watermark progress. All of</p>
+<p>these operations are performed in response to previous operations done at the</p>
+<p>current or upstream stage of the pipeline. Thus, just as data elements “flow”</p>
+<p>through the system, a cascade of operations involved in processing these</p>
+<p>elements also “flows” through the system.</p>
+<p>We define the processing-time watermark in the exact same way as we have</p>
+<p>defined the event-time watermark, except instead of using the event-time</p>
+<p>timestamp of oldest work not yet completed, we use the processing-time</p>
+<p>timestamp of the oldest operation not yet completed. An example of delay to</p>
+<p>the processing-time watermark could be a stuck message delivery from one</p>
+<p>stage to another, a stuck I&#x2F;O call to read state or external data, or an exception</p>
+<p>while processing that prevents processing from completing.</p>
+<p>The processing-time watermark, therefore, provides a notion of processing</p>
+<p>delay separate from the data delay. To understand the value of this distinction,</p>
+<p>consider the graph in Figure 3-12 where we look at the event-time watermark</p>
+<p>delay.</p>
+<p>We see that the data delay is monotonically increasing, but there is not</p>
+<p>enough information to distinguish between the cases of a stuck system and</p>
+<p>stuck data. Only by looking at the processing-time watermark, shown in</p>
+<p>Figure 3-13, can we distinguish the cases.</p>
+<p><em>Figure 3-12. Event-time watermark increasing. It is not possible to know from this information whether this is due to data buffering or system processing delay.</em></p>
+<p><em>Figure 3-13. Processing-time watermark also increasing. This indicates that the system processing is</em></p>
+<p><em>delayed.</em></p>
+<p>In the first case (Figure 3-12), when we examine the processing-time</p>
+<p>watermark delay we see that it too is increasing. This tells us that an operation</p>
+<p>in our system is stuck, and the stuckness is also causing the data delay to fall</p>
+<p>behind. Some real-world examples of situations in which this might occur are</p>
+<p>when there is a network issue preventing message delivery between stages of</p>
+<p>a pipeline or if a failure has occurred and is being retried. In general, a</p>
+<p>growing processing-time watermark indicates a problem that is preventing</p>
+<p>operations from completing that are necessary to the system’s function, and</p>
+<p>often involves user or administrator intervention to resolve.</p>
+<p>In this second case, as seen in Figure 3-14, the processing-time watermark</p>
+<p>delay is small. This tells us that there are no stuck operations. The event-time</p>
+<p>watermark delay is still increasing, which indicates that we have some</p>
+<p>buffered state that we are waiting to drain. This is possible, for example, if we</p>
+<p>are buffering some state while waiting for a window boundary to emit an</p>
+<p>aggregation, and corresponds to a normal operation of the pipeline, as in</p>
+<p>Figure 3-15.</p>
+<p><em>Figure 3-14. Event-time watermark delay increasing, processing-time watermark stable. This is an</em></p>
+<p><em>indication that data are buffered in the system and waiting to be processed, rather than an indication</em></p>
+<p><em>that a system operation is preventing data processing from completing.</em></p>
+<p><em>Figure 3-15. Watermark delay for fixed windows. The event-time watermark delay increases as</em></p>
+<p><em>elements are buffered for each window, and decreases as each window’s aggregate is emitted via an</em></p>
+<p><em>on-time trigger, whereas the processing-time watermark simply tracks system-level delays (which</em></p>
+<p><em>remain relatively steady in a healthy pipeline).</em></p>
+<p>Therefore, the processing-time watermark is a useful tool in distinguishing</p>
+<p>system latency from data latency. In addition to visibility, we can use the</p>
+<p>processing-time watermark at the system-implementation level for tasks such</p>
+<p>as garbage collection of temporary state (Reuven talks more about an example</p>
+<p>of this in Chapter 5).</p>
+</details>
+
+
+
+<details><summary>点击 原文</summary><h1><span id="case-studies"><strong>Case Studies</strong></span><a href="#case-studies" class="header-anchor">#</a></h1><p>Now that we’ve laid the groundwork for how watermarks ought to behave,</p>
+<p>it’s time to take a look at some real systems to understand how different</p>
+<p>mechanisms of the watermark are implemented. We hope that these shed</p>
+<p>some light on the trade-offs that are possible between latency and correctness</p>
+<p>as well as scalability and availability for watermarks in real-world systems.</p>
+<h3><span id="case-study-watermarks-in-google-cloud-dataflow"><strong>Case Study: Watermarks in Google Cloud Dataflow</strong></span><a href="#case-study-watermarks-in-google-cloud-dataflow" class="header-anchor">#</a></h3><p>There are many possible approaches to implementing watermarks in a stream</p>
+<p>processing system. Here, we present a quick survey of the implementation in</p>
+<p>Google Cloud Dataflow, a fully managed service for executing Apache Beam</p>
+<p>pipelines. Dataflow includes SDKs for defining data processing workflows,</p>
+<p>and a Cloud Platform managed service to run those workflows on Google</p>
+<p>Cloud Platform resources.</p>
+<p>Dataflow stripes (shards) each of the data processing steps in its data</p>
+<p>processing graph across multiple physical workers by splitting the available</p>
+<p>keyspace of each worker into key ranges and assigning each range to a</p>
+<p>worker. Whenever a GroupByKey operation with distinct keys is encountered,</p>
+<p>data must be shuffled to corresponding keys.</p>
+<p>Figure 3-16 depicts a logical representation of the processing graph with a</p>
+<p>GroupByKey.</p>
+<p><em>Figure 3-16. A GroupByKey step consumes data from another DoFn. This means that there is a data</em></p>
+<p><em>shuffle between the keys of the first step and the keys of the second step.</em></p>
+<p>Whereas the physical assignment of key ranges to workers might look</p>
+<p>Figure 3-17.</p>
+<p><em>Figure 3-17. Key ranges of both steps are assigned (striped) across the available workers.</em></p>
+<p>In the watermark propagation section, we discussed that the watermark is</p>
+<p>maintained for multiple subcomponents of each step. Dataflow keeps track of</p>
+<p>the per-range watermarks of each of these components. Watermark</p>
+<p>aggregation then involves computing the minimum of each watermark across</p>
+<p>all ranges, ensuring that the following guarantees are met:</p>
+<ul>
+<li>All ranges must be reporting a watermark. If a watermark is not</li>
+</ul>
+<p>present for a range, we cannot advance the watermark, because a</p>
+<p>range not reporting must be treated as unknown.</p>
+<ul>
+<li>Ensure that the watermark is monotonically increasing. Because late</li>
+</ul>
+<p>data is possible, we must not update the watermark if it would cause</p>
+<p>the watermark to move backward.</p>
+<p>Google Cloud Dataflow performs aggregation via a centralized aggregator</p>
+<p>agent. We can shard this agent for efficiency. From a correctness standpoint,</p>
+<p>the watermark aggregator serves as a “single source of truth” about the</p>
+<p>watermark.</p>
+<p>Ensuring correctness in distributed watermark aggregation poses certain</p>
+<p>challenges. It is paramount that watermarks are not advanced prematurely</p>
+<p>because advancing the watermark prematurely will turn on-time data into late</p>
+<p>data. Specifically, as physical assignments are actuated to workers, the</p>
+<p>workers maintain leases on the persistent state attached to the key ranges,</p>
+<p>ensuring that only a single worker may mutate the persistent state for a key.</p>
+<p>To guarantee watermark correctness, we must ensure that each watermark</p>
+<p>update from a worker process is admitted into the aggregate only if the</p>
+<p>worker process still maintains a lease on its persistent state; therefore, the</p>
+<p>watermark update protocol must take state ownership lease validation into</p>
+<p>account.</p>
+</details>
+
+
+
+
+
+<details><summary>点击 原文</summary><h3><span id="case-study-watermarks-in-apache-flink"><strong>Case Study: Watermarks in Apache Flink</strong></span><a href="#case-study-watermarks-in-apache-flink" class="header-anchor">#</a></h3><p>Apache Flink is an open source stream processing framework for distributed,</p>
+<p>high-performing, always-available, and accurate data streaming applications.</p>
+<p>It is possible to run Beam programs using a Flink runner. In doing so, Beam</p>
+<p>relies on the implementation of stream processing concepts such as</p>
+<p>watermarks within Flink. Unlike Google Cloud Dataflow, which implements</p>
+<p>watermark aggregation via a centralized watermark aggregator agent, Flink</p>
+<p>performs watermark tracking and aggregation in-band.</p>
+<p>To understand how this works, let’s look at a Flink pipeline, as shown in</p>
+<p>Figure 3-18.</p>
+<p><em>Figure 3-18. A Flink pipeline with two sources and event-time watermarks propagating in-band</em></p>
+<p>In this pipeline data is generated at two sources. These sources also both</p>
+<p>generate watermark “checkpoints” that are sent synchronously in-band with</p>
+<p>the data stream. This means that when a watermark checkpoint from source A</p>
+<p>for timestamp “53” is emitted, it guarantees that no nonlate data messages</p>
+<p>will be emitted from source A with timestamp behind “53”. The downstream</p>
+<p>“keyBy” operators consume the input data and the watermark checkpoints. As</p>
+<p>new watermark checkpoints are consumed, the downstream operators’ view</p>
+<p>of the watermark is advanced, and a new watermark checkpoint for</p>
+<p>downstream operators can be emitted.</p>
+<p>This choice to send watermark checkpoints in-band with the data stream</p>
+<p>differs from the Cloud Dataflow approach that relies on central aggregation</p>
+<p>and leads to a few interesting trade-offs.</p>
+<p>Following are some advantages of in-band watermarks:</p>
+<ul>
+<li>Reduced watermark propagation latency, and very low-latency watermarks</li>
+</ul>
+<p>Because it is not necessary to have watermark data traverse multiple hops</p>
+<p>and await central aggregation, it is possible to achieve very low latency</p>
+<p>more easily with the in-band approach.</p>
+<ul>
+<li>No single point of failure for watermark aggregation</li>
+</ul>
+<p>Unavailability in the central watermark aggregation agent will lead to a</p>
+<p>delay in watermarks across the entire pipeline. With the in-band approach,</p>
+<p>unavailability of part of the pipeline cannot cause watermark delay to the</p>
+<p>entire pipeline.</p>
+<ul>
+<li>Inherent scalability</li>
+</ul>
+<p>Although Cloud Dataflow scales well in practice, more complexity is</p>
+<p>needed to achieve scalability with a centralized watermark aggregation</p>
+<p>service versus implicit scalability with in-band watermarks.</p>
+<p>Here are some advantages of out-of-band watermark aggregation:</p>
+<ul>
+<li>Single source of “truth”</li>
+</ul>
+<p>For debuggability, monitoring, and other applications such as throttling</p>
+<p>inputs based on pipeline progress, it is advantageous to have a service that</p>
+<p>can vend the values of watermarks rather than having watermarks implicit</p>
+<p>in the streams, with each component of the system having its own partial</p>
+<p>view.</p>
+<ul>
+<li>Source watermark creation</li>
+</ul>
+<p>Some source watermarks require global information. For example,</p>
+<p>sources might be temprarily idle, have low data rates, or require out-of</p>
+<p>band information about the source or other system components to</p>
+<p>generate the watermarks. This is easier to achieve in a central service. For</p>
+<p>an example see the case study that follows on source watermarks for</p>
+<p>Google Cloud Pub&#x2F;Sub.</p>
+</details>
+
+
+
+
+
+<details><summary>点击 原文</summary><h3><span id="case-study-source-watermarks-for-google-cloud-pubx2fsub"><strong>Case Study: Source Watermarks for Google Cloud Pub&#x2F;Sub</strong></span><a href="#case-study-source-watermarks-for-google-cloud-pubx2fsub" class="header-anchor">#</a></h3><p>Google Cloud Pub&#x2F;Sub is a fully managed real-time messaging service that</p>
+<p>allows you to send and receive messages between independent applications.</p>
+<p>Here, we discuss how to create a reasonable heuristic watermark for data sent</p>
+<p>into a pipeline via Cloud Pub&#x2F;Sub.</p>
+<p>First, we need to describe a little about how Pub&#x2F;Sub works. Messages are</p>
+<p>published on Pub&#x2F;Sub <em>topics</em>. A particular topic can be subscribed to by any</p>
+<p>number of Pub&#x2F;Sub <em>subscriptions</em>. The same messages are delivered on all</p>
+<p>subscriptions subscribed to a given topic. The method of delivery is for</p>
+<p>clients to <em>pull</em> messages off the subscription, and to ack the receipt of</p>
+<p>particular messages via provided IDs. Clients do not get to choose which</p>
+<p>messages are pulled, although Pub&#x2F;Sub does attempt to provide oldest</p>
+<p>messages first, with no hard guarantees around this.</p>
+<p>To build a heuristic, we make some assumptions about the source that is</p>
+<p>sending data into Pub&#x2F;Sub. Specifically, we assume that the timestamps of the</p>
+<p>original data are “well behaved”; in other words, we expect a bounded</p>
+<p>amount of out-of-order timestamps on the source data, before it is sent to</p>
+<p>Pub&#x2F;Sub. Any data that are sent with timestamps outside the allowed out-of</p>
+<p>order bounds will be considered late data. In our current implementation, this</p>
+<p>bound is at least 10 seconds, meaning reordering of timestamps up to 10</p>
+<p>seconds before sending to Pub&#x2F;Sub will not create late data. We call this value</p>
+<p>the <em>estimation band</em>. Another way to look at this is that when the pipepline is</p>
+<p>perfectly caught up with the input, the watermark will be 10 seconds behind</p>
+<p>real time to allow for possible reorderings from the source. If the pipeline is</p>
+<p>backlogged, all of the backlog (not just the 10-second band) is used for</p>
+<p>estimating the watermark.</p>
+<p>What are the challenges we face with Pub&#x2F;Sub? Because Pub&#x2F;Sub does not</p>
+<p>guarantee ordering, we must have some kind of additional metadata to know</p>
+<p>enough about the backlog. Luckily, Pub&#x2F;Sub provides a measurement of</p>
+<p>backlog in terms of the “oldest unacknowledged publish timestamp.” This is</p>
+<p>not the same as the event timestamp of our message, because Pub&#x2F;Sub is</p>
+<p>agnostic to the application-level metadata being sent through it; instead, this</p>
+<p>is the timestamp of when the message was ingested by Pub&#x2F;Sub.</p>
+<p>This measurement is not the same as an event-time watermark. It is in fact the</p>
+<p>processing-time watermark for Pub&#x2F;Sub message delivery. The Pub&#x2F;Sub</p>
+<p>publish timestamps are not equal to the event timestamps, and in the case that</p>
+<p>historical (past) data are being sent, it might be arbitrarily far away. The</p>
+<p>ordering on these timestamps might also be different because, as mentioned</p>
+<p>earlier, we allow a limited amount of reordering.</p>
+<p>However, we can use this as a measure of backlog to learn enough</p>
+<p>information about the event timestamps present in the backlog so that we can</p>
+<p>create a reasonable watermark as follows.</p>
+<p>We create two subscriptions to the topic containing the input messages: a</p>
+<p><em>base subscription</em> that the pipeline will actually use to read the data to be</p>
+<p>processed, and a <em>tracking subscription</em>, which is used for metadata only, to</p>
+<p>perform the watermark estimation.</p>
+<p>Taking a look at our base subscription in Figure 3-19, we see that messages</p>
+<p>might arrive out of order. We label each message with its Pub&#x2F;Sub publish</p>
+<p>timestamp “pt” and its event-time timestamp “et.” Note that the two time</p>
+<p>domains can be unrelated.</p>
+<p><em>Figure 3-19. Processing-time and event-time timestamps of messages arriving on a Pub&#x2F;Sub</em></p>
+<p><em>subscription</em></p>
+<p>Some messages on the base subscription are unacknowledged forming a</p>
+<p>backlog. This might be due to them not yet being delivered or they might</p>
+<p>have been delivered but not yet processed. Remember also that pulls from this</p>
+<p>subscription are distributed across multiple shards. Thus, it is not possible to</p>
+<p>say just by looking at the base subscription what our watermark should be.</p>
+<p>The tracking subscription, seen in Figure 3-20, is used to effectively inspect</p>
+<p>the backlog of the base subscription and take the minimum of the event</p>
+<p>timestamps in the backlog. By maintaining little or no backlog on the tracking</p>
+<p>subscription, we can inspect the messages ahead of the base subsciption’s</p>
+<p>oldest unacknowledged message.</p>
+<p><em>Figure 3-20. An additional “tracking” subscription receiving the same messages as the “base”</em></p>
+<p><em>subscription</em></p>
+<p>We stay caught up on the tracking subscription by ensuring that pulling from</p>
+<p>this subscription is computationally inexpensive. Conversely, if we fall</p>
+<p>sufficiently behind on the tracking subscription, we will stop advancing the</p>
+<p>watermark. To do so, we ensure that at least one of the following conditions is</p>
+<p>met:</p>
+<ul>
+<li>The tracking subscription is sufficiently ahead of the base</li>
+</ul>
+<p>subscription. Sufficiently ahead means that the tracking subscription</p>
+<p>is ahead by at least the estimation band. This ensures that any</p>
+<p>bounded reorder within the estimation band is taken into account.</p>
+<ul>
+<li>The tracking subscription is sufficiently close to real time. In other</li>
+</ul>
+<p>words, there is no backlog on the tracking subscription.</p>
+<p>We acknowledge the messages on the tracking subscription as soon as</p>
+<p>possible, after we have durably saved metadata about the publish and event</p>
+<p>timestamps of the messages. We store this metadata in a sparse histogram</p>
+<p>format to minimize the amount of space used and the size of the durable</p>
+<p>writes.</p>
+<p>Finally, we ensure that we have enough data to make a reasonable watermark</p>
+<p>estimate. We take a band of event timestamps we’ve read from our tracking</p>
+<p>subscription with publish timestamps newer than the oldest unacknowledged</p>
+<p>of the base subscription, or the width of the estimation band. This ensures that</p>
+<p>we consider all event timestamps in the backlog, or if the backlog is small, the</p>
+<p>most recent estimation band, to make a watermark estimate.</p>
+<p>Finally, the watermark value is computed to be the minimum event time in</p>
+<p>the band.</p>
+<p>This method is correct in the sense that all timestamps within the reordering</p>
+<p>limit of 10 seconds at the input will be accounted for by the watermark and</p>
+<p>not appear as late data. However, it produces possibly an overly conservative</p>
+<p>watermark, one that advances “too slowly” in the sense described in</p>
+<p>Chapter 2. Because we consider all messages ahead of the base subscription’s</p>
+<p>oldest unacknowledged message on the tracking subscription, we can include</p>
+<p>event timestamps in the watermark estimate for messages that have already</p>
+<p>been acknowledged.</p>
+<p>Additionally, there are a few heuristics to ensure progress. This method works</p>
+<p>well in the case of dense, frequently arriving data. In the case of sparse or</p>
+<p>infrequent data, there might not be enough recent messages to build a</p>
+<p>reasonable estimate. In the case that we have not seen data on the subscription</p>
+<p>in more than two minutes (and there’s no backlog), we advance the</p>
+<p>watermark to near real time. This ensures that the watermark and the pipeline</p>
+<p>continue to make progress even if no more messages are forthcoming.</p>
+<p>All of the above ensures that as long as source data-event timestamp</p>
+<p>reordering is within the estimation band, there will be no additional late data.</p>
+</details>
+
+
+
+<details><summary>点击 原文</summary><h1><span id="summary"><strong>Summary</strong></span><a href="#summary" class="header-anchor">#</a></h1><p>At this point, we have explored how we can use the event times of messages</p>
+<p>to give a robust definition of progress in a stream processing system. We saw</p>
+<p>how this notion of progress can subsequently help us answer the question of</p>
+<p><em>where</em> in event time processing is taking place and <em>when</em> in processing time</p>
+<p>results are materialized. Specifically, we looked at how watermarks are</p>
+<p>created at the sources, the points of data ingestion into a pipeline, and then</p>
+<p>propagated throughout the pipeline to preserve the essential guarantees that</p>
+<p>allow the questions of <em>where</em> and <em>when</em> to be answered. We also looked at the</p>
+<p>implications of changing the output window timestamps on watermarks.</p>
+<p>Finally, we explored some real-world system considerations when building</p>
+<p>watermarks at scale.</p>
+<p>Now that we have a firm footing in how watermarks work under the covers,</p>
+<p>we can take a dive into what they can do for us as we use windowing and</p>
+<p>triggering to answer more complex queries in Chapter 4.</p>
+</details>
+
+
+
+
+
+<details><summary>点击 原文</summary><ol>
+<li>Note the additional mention of monotonicity; we have not yet discussed</li>
+</ol>
+<p>how to achieve this. Indeed the discussion thus far makes no mention of</p>
+<p>monotonicity. If we considered exclusively the oldest in-flight event time, the</p>
+<p>watermark would not always be monotonic, as we have made no assumptions</p>
+<p>about our input. We return to this discussion later on.</p>
+<ol start="2">
+<li>To be precise, it’s not so much that the number of logs need be static as it is</li>
+</ol>
+<p>that the number of logs at any given time be known a priori by the system. A</p>
+<p>more sophisticated input source composed of a dynamically chosen number</p>
+<p>of inputs logs, such as Pravega, could just as well be used for constructing a</p>
+<p>perfect watermark. It’s only when the number of logs that exist in the</p>
+<p>dynamic set at any given time is unknown (as in the example in the next</p>
+<p>section) that one must fall back on a heuristic watermark.</p>
+<ol start="3">
+<li>Note that by saying “flow through the system,” I don’t necessarily imply</li>
+</ol>
+<p>they flow along the same path as normal data. They might (as in Apache</p>
+<p>Flink), but they might also be transmitted out-of-band (as in MillWheel&#x2F;Cloud</p>
+<p>Dataflow).</p>
+<ol start="4">
+<li>The <em>start</em> of the window is not a safe choice from a watermark correctness</li>
+</ol>
+<p>perspective because the first element in the window often comes <em>after</em> the</p>
+<p>beginning of the window itself, which means that the watermark is not</p>
+<p>guaranteed to have been held back as far as the start of the window.</p>
+<ol start="5">
+<li>The percentile watermark triggering scheme described here is not currently</li>
+</ol>
+<p>implemented by Beam; however, other systems such as MillWheel implement</p>
+<p>this.</p>
+<ol start="6">
+<li>For more information on Flink watermarks, see the Flink documentation on</li>
+</ol>
+<p>the subject.</p>
+</details>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Wang Wei
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www6v.github.io/www6vHomeHexo/2000/03/15/streamingSystemChapter3Original/" title="《Streaming System》-Chapter 3. Watermarks[完整]">https://www6v.github.io/www6vHomeHexo/2000/03/15/streamingSystemChapter3Original/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/www6vHomeHexo/tags/Streaming-System/" rel="tag"># Streaming System</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2000/03/15/streamingSystemChapter3/" rel="prev" title="《Streaming System》-第三章：水位线[完整]">
+      <i class="fa fa-chevron-left"></i> 《Streaming System》-第三章：水位线[完整]
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/www6vHomeHexo/2000/03/16/streamingSystemChapter5/" rel="next" title="《Streaming System》-第五章：精确一次和副作用 [完整]">
+      《Streaming System》-第五章：精确一次和副作用 [完整] <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wang Wei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/www6vHomeHexo/archives/">
+        
+          <span class="site-state-item-count">223</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/www6vHomeHexo/categories/">
+          
+        <span class="site-state-item-count">157</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/www6vHomeHexo/tags/">
+          
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/www6v" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;www6v" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:www6v@126.com" title="E-Mail → mailto:www6v@126.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Wei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/www6vHomeHexo/lib/anime.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.min.js"></script>
+  <script src="/www6vHomeHexo/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/www6vHomeHexo/js/utils.js"></script>
+
+<script src="/www6vHomeHexo/js/motion.js"></script>
+
+
+<script src="/www6vHomeHexo/js/schemes/muse.js"></script>
+
+
+<script src="/www6vHomeHexo/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/www6vHomeHexo/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
